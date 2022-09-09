@@ -10,11 +10,12 @@ using EnServiciosMicroformas;
 using ApiServiciosMicroformas.Recursos;
 using System.Net;
 using System.Net.Http;
+using ApiServiciosMicroformas.Controllers;
 
 namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
 {
     [Route("api/archivo-central/seccion")]
-    public class SeccionController : ControllerBase
+    public class SeccionController : BaseApiController
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
 
@@ -22,8 +23,6 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
         {
             this._ConfigurationManager = ConfigurationManager;
         }
-
-
 
         [HttpPost]
         [Route("listar")]
@@ -37,8 +36,8 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                     auditoria.OBJETO = repositorio.Seccion_Listar(entidad, ref auditoria);
                     if (!auditoria.EJECUCION_PROCEDIMIENTO)
                     {
-                        string CodigoLog = Recursos.Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Recursos.Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
+                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
                     }
                 }
             }
@@ -51,31 +50,7 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
             return Ok(auditoria);
         }
 
-        //[HttpPost]
-        //[Route("seccion-insertar")]
-        //public ActionResult Seccion_Insertar(enSeccion entidad)
-        //{
-        //    enAuditoria auditoria = new enAuditoria();
-        //    try
-        //    {
-        //        using (SeccionRepositorio repositorio = new SeccionRepositorio(_ConfigurationManager))
-        //        {
-        //            auditoria.OBJETO = repositorio.Seccion_Listar(entidad, ref auditoria);
-        //            if (!auditoria.EJECUCION_PROCEDIMIENTO)
-        //            {
-        //                string CodigoLog = Recursos.Css_Log.Guardar(auditoria.ERROR_LOG);
-        //                auditoria.MENSAJE_SALIDA = Recursos.Css_Log.Mensaje(CodigoLog);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        auditoria.Error(ex);
-        //        auditoria.MENSAJE_SALIDA = ex.Message;
-        //        auditoria.CODE = (int)HttpStatusCode.InternalServerError;
-        //    }
-        //    return Content(HttpStatusCode.OK.ToString(), auditoria);
-        //}
+       
 
     }
 }
