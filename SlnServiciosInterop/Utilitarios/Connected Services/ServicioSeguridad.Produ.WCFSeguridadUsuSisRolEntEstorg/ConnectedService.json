@@ -1,0 +1,16 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://svc.mincetur.gob.pe:8010/servicioSeguridad/Services/WCFSeguridadUsuSisRolEntEstorg.svc?wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServicioSeguridad.Produ.WCFSeguridadUsuSisRolEntEstorg"
+    ],
+    "targetFramework": "net5.0",
+    "typeReuseMode": "None"
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\ApiServiciosInteropMigraciones\\ApiServiciosInteropMigraciones.csproj": {}
+  },
+  "projects": {
+    "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\ApiServiciosInteropMigraciones\\ApiServiciosInteropMigraciones.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\ApiServiciosInteropMigraciones\\ApiServiciosInteropMigraciones.csproj",
+        "projectName": "ApiServiciosInteropMigraciones",
+        "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\ApiServiciosInteropMigraciones\\ApiServiciosInteropMigraciones.csproj",
+        "packagesPath": "C:\\Users\\cvallejos\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\ApiServiciosInteropMigraciones\\obj\\publish\\win-x64\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cvallejos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosInterop.csproj": {
+                "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosInterop.csproj"
+              },
+              "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj": {
+                "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosInterop.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosInterop.csproj",
+        "projectName": "EnServiciosInterop",
+        "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosInterop.csproj",
+        "packagesPath": "C:\\Users\\cvallejos\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cvallejos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosInterop.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosInterop.csproj",
+        "projectName": "NeServiciosInterop",
+        "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosInterop.csproj",
+        "packagesPath": "C:\\Users\\cvallejos\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\NeServiciosInterop\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cvallejos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosInterop.csproj": {
+                "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosInterop.csproj"
+              },
+              "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj": {
+                "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    },
+    "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
+        "projectName": "Utilitarios",
+        "projectPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
+        "packagesPath": "C:\\Users\\cvallejos\\.nuget\\packages\\",
+        "outputPath": "D:\\Workspace\\srvsourcesafe\\AplServiciosInterop\\SlnServiciosInterop\\Utilitarios\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cvallejos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "System.ServiceModel.Duplex": {
+              "target": "Package",
+              "version": "[4.8.*, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.8.*, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.8.*, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.8.*, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

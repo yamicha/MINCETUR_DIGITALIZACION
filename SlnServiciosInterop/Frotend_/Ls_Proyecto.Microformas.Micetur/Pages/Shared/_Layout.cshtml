@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="@Url.Content("~/favicon.ico")" rel="icon">
+    <title>.: MICROFORMAS MINCETUR :.</title>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/font-awesome/css/font-awesome.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/fonts/style.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/jquery.alert.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/main.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/main-responsive.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css")" />
+    <link href="@Url.Content("~/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/jqGrid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.css")" />
+    <link rel="stylesheet" type="text/css" id="skin_color" href="@Url.Content("~/assets/css/theme_light.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/general.css")" />
+    <link href="~/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="background-color: white; vertical-align: middle; padding-right: 0px;">
+            <div class="navbar-header" style="float: left; height: 0px; vertical-align: middle;">
+                <img src="~/assets/images/logo_mef.jpg" style="float: left; width: 240px; margin-right: 20px; padding: 5px;" />
+                <label style="font-size: 24px; font-weight: 500; line-height: 1.1; color: #575556; margin-top: 20px; margin-left: -10px;">MICROFORMAS - MEF</label>
+            </div>
+
+            <div class="navbar-tools">
+                <ul class="nav navbar-right">
+
+                    <li class="dropdown" style="border-left: 1px solid #c8c7cc;">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#" aria-expanded="false" style="padding: 5px; background-color: unset !important; cursor: default; margin-left: 5px;">
+                            <i class="clip-tag"></i>
+                            <label style="margin-bottom: 0px;">
+                                Perfil:
+                            </label>
+                            @*@Html.DropDownList("SelectPerfiles", new SelectList((System.Collections.IEnumerable)ViewData["Seg_Perfiles"], "ID_PERFIL", "DESC_PERFIL"), new { @class = "form-control", @style = "margin-top:0px", @ID = "SelectPerfiles" })*@
+                            <input type="hidden" id="inputHddid_perfil" value="@ViewBag.id_perfil" />
+                        </a>
+                    </li>
+
+                    <li class="dropdown current-user" style="border-left: 1px solid #c8c7cc;">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#" aria-expanded="false" style="display: inline-flex">
+                            <span>
+                                <img src="~/assets/images/avatar-1-small.jpg" class="circle-img" alt="" style="margin-top: 4px;">
+                            </span>
+                            <span class="pr-lg-1 d-none d-lg-block">
+                                <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
+                                    <strong class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 16px">@ViewBag.Usuario_Nombre</strong>
+                                </span>
+                                <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
+                                    <small class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 13px" id="small_unidad">Unidad Orgánica: @ViewBag.Desc_Oficina</small>
+                                </span>
+                            </span>
+
+                            @*<input type="hidden" id="inputHddcod_usuario" value="@ViewBag.Usuario_Codigo" />
+                                <input type="hidden" id="inputHddNombre_Sistema" value="@System.Configuration.ConfigurationManager.AppSettings["Nombre_Sistema"].ToString()" />
+                                <input type="hidden" id="input_hd_CodAdmin" value="@System.Configuration.ConfigurationManager.AppSettings["Codigo_Administrador"].ToString()" />*@
+                            <i class="clip-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a onclick="CerrarSesion()" style="cursor: pointer">
+                                    <i class="clip-exit"></i>&nbsp;Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="navbar-content">
+            <div class="main-navigation navbar-collapse collapse" id="menuPrincipal" style="margin-top: -2px;">
+                <ul class="main-navigation-menu">
+                    <li><a><i class="clip-list"></i><span class="title">Menú </span></a></li>
+
+                    <li id="liProceso" class="active open">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-file-pdf"></i><span class="title"> Proceso Digitalización</span><i class="icon-arrow"></i><span class="selected"></span></a><ul class="sub-menu" style="display: block;">
+                            <li id="liRecepcion" style=""> <a id="aRecepcion" asp-page="ArchivoCentral/Index" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Recepción</span></a></li>
+                            <li id="liDigitalizacion" style=""> <a id="aDigitalizacion" asp-page="DocumentoAprobado/Index" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Digitalización</span></a></li>
+                            <li id="liControlCalidad" style=""> <a id="aControlCalidad" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Calidad</span></a></li>
+                            <li id="liReproceso" style=""> <a id="aReproceso" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reproceso</span></a></li>
+                            <li id="liFedatario" style=""> <a id="aFedatario" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Fedatario</span></a></li>
+                            <li id="liControlMicroformas" style=""> <a id="aControlMicroformas" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Microformas</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li id="liAdministracion">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-cog-2"></i><span class="title"> Tablas Maestras</span><i class="icon-arrow"></i><span class="selected"></span></a>
+                        <ul class="sub-menu" style="display: block;">
+                            <li id="liFondo" style=""> <a id="aFondo" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Fondo</span></a></li>
+                            <li id="liSeccion" style=""> <a id="aSeccion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Sección</span></a></li>
+                            <li id="liSubSeccion" style=""> <a id="aSubSeccion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">SubSección</span></a></li>
+                            <li id="liSerie" style=""> <a id="aSerie" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Serie</span></a></li>
+                            <li id="liTipoDoc" style=""> <a id="aTipoDoc" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Documento</span></a></li>
+                            <li id="liTipoObservacion" style=""> <a id="aTipoObservacion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Observación</span></a></li>
+                            <li id="liTipoSoporte" style=""> <a id="aTipoSoporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Soporte</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li id="liReportes">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-stats"></i><span class="title"> Reportes</span><i class="icon-arrow"></i><span class="selected"></span></a>
+                        <ul class="sub-menu" style="display: block;">
+                            <li id="liReporte" style=""> <a id="aReporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reportes</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="divMantenimiento">
+                    </div>
+                </div>
+            </div>
+            <div id="Div_MasterPage" class="container" style="margin-left: 0px">
+                <div class="row" style="margin-left: 0px">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="clip-home-3"></i>
+                                <a href="#">
+                                    <label id="lbNombreMenuPrincipal">Home</label>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <label id="lbNombreMenuSecundario">Inicio</label>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="side-app" id="divProceso" onmousemove="resetCounter();" style="margin-left: 0px">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        @*@RenderBody()
+            <div id="Frm_General" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
+                <h5>
+                    <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
+                    Generando menú de la oficina...
+                </h5>
+            </div>*@
+    </div>
+    <div class="footer clearfix">
+        <div class="footer-inner">
+            &copy; MICROFORMA
+        </div>
+        <div class="footer-items">
+            <span class="go-top"><i class="clip-chevron-up"></i></span>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-migrate-1.0.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui.datepicker-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/jqGrid/js/i18n/grid.locale-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JSLINQ.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SICA.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Autorizacion.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/blockUI/jquery.blockUI.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/inicializacion.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/perfect-scrollbar/src/jquery.mousewheel.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/less/less-1.5.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/jquery-cookie/jquery.cookie.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js")" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.allowchars.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.alphanumeric.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/js/main.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/js/index.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/linksoft.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.alerts.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootbox.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Js/General.js")" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <input type="hidden" id="hdfcounter" />
+    <script type="text/javascript">
+        var baseUrl = '@Url.Content("~")';
+
+    </script>
+</body>
+</html>
+

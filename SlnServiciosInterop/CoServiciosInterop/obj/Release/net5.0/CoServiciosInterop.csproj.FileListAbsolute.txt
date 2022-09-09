@@ -1,0 +1,12 @@
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\bin\Release\net5.0\CoServiciosInterop.deps.json
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\bin\Release\net5.0\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\bin\Release\net5.0\ref\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\bin\Release\net5.0\CoServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.csproj.AssemblyReference.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.AssemblyInfoInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.AssemblyInfo.cs
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.csproj.CoreCompileInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\ref\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\CoServiciosInterop\obj\Release\net5.0\CoServiciosInterop.pdb

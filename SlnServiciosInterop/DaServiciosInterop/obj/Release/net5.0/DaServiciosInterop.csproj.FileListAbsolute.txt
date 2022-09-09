@@ -1,0 +1,17 @@
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\DaServiciosInterop.deps.json
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\DaServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\ref\DaServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\DaServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\EnServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\CoServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\bin\Release\net5.0\EnServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.csproj.AssemblyReference.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.AssemblyInfoInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.AssemblyInfo.cs
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.csproj.CoreCompileInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.csproj.CopyComplete
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\ref\DaServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\DaServiciosInterop\obj\Release\net5.0\DaServiciosInterop.pdb

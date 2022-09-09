@@ -1,0 +1,15 @@
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\EnServiciosInterop.deps.json
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\EnServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\ref\EnServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\EnServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.csproj.AssemblyReference.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.GeneratedMSBuildEditorConfig.editorconfig
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.AssemblyInfoInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.AssemblyInfo.cs
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.csproj.CoreCompileInputs.cache
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\ref\EnServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\CoServiciosInterop.dll
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\bin\Release\net5.0\CoServiciosInterop.pdb
+D:\Workspace\srvsourcesafe\AplServiciosInterop\SlnServiciosInterop\EnServiciosInterop\obj\Release\net5.0\EnServiciosInterop.csproj.CopyComplete
