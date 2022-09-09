@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\Ls_Proyecto.Microformas.Micetur.csproj",
+      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\Ls_Proyecto.Microformas.Micetur.csproj",
       "projectName": "Ls_Proyecto.Microformas.Micetur",
-      "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\Ls_Proyecto.Microformas.Micetur.csproj",
+      "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\Ls_Proyecto.Microformas.Micetur.csproj",
       "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\obj\\",
+      "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend_\\Ls_Proyecto.Microformas.Micetur\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"

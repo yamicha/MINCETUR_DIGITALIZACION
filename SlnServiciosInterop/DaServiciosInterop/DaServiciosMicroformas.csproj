@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Mincetur.Administracion.ServiciosInterop.DaServiciosInterop</RootNamespace>
+    <RootNamespace>DaServiciosMicroformas</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

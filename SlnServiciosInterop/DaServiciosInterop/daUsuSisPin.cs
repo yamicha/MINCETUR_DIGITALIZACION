@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using CoServiciosMicroformas;
 using EnServiciosMicroformas;
-
+ 
 namespace DaServiciosMicroformas
 {
     public class daUsuSisPin : daBase

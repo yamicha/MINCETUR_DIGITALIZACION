@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj",
+      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj",
       "projectName": "CoServiciosMicroformas",
-      "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj",
+      "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj",
       "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\CoServiciosInterop\\obj\\",
+      "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\CoServiciosInterop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"

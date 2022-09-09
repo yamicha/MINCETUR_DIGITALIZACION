@@ -11,3 +11,15 @@ C:\Users\Miguel\Desktop\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcore
 C:\Users\Miguel\Desktop\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.csproj.CopyComplete
 C:\Users\Miguel\Desktop\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.dll
 C:\Users\Miguel\Desktop\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\bin\Debug\netcoreapp3.1\EnServiciosMicroformas.deps.json
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\bin\Debug\netcoreapp3.1\EnServiciosMicroformas.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\bin\Debug\netcoreapp3.1\EnServiciosMicroformas.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\bin\Debug\netcoreapp3.1\CoServiciosMicroformas.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\bin\Debug\netcoreapp3.1\CoServiciosMicroformas.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.csprojAssemblyReference.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.AssemblyInfoInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.AssemblyInfo.cs
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.csproj.CoreCompileInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.csproj.CopyComplete
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\EnServiciosInterop\obj\Debug\netcoreapp3.1\EnServiciosMicroformas.pdb

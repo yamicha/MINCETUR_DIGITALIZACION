@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Gy/TqNR9lH3WLzq1iXtMKj6i38X0cDnU98r/nNuMsM0uECz17OXi5dSG1FLIZ6PIfI60QjRhir2/Ha6+Pzu4Rw==",
+  "dgSpecHash": "aw+0kKkW6Y+1YMb4pD1E8U3+kctRNaWQV3dOxzcl8udrOVIjV0+lzVfZmy33oGCyfNQTdCNPS685RKTVsa8w4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
+  "projectFilePath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.4\\microsoft.netcore.platforms.5.0.4.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",

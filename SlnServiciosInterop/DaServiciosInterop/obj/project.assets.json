@@ -993,11 +993,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
+      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
       "projectName": "DaServiciosMicroformas",
-      "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
+      "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\DaServiciosInterop\\DaServiciosMicroformas.csproj",
       "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\DaServiciosInterop\\obj\\",
+      "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\DaServiciosInterop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
@@ -1019,11 +1019,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj": {
-              "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj"
+            "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj": {
+              "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\CoServiciosInterop\\CoServiciosMicroformas.csproj"
             },
-            "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj": {
-              "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj"
+            "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj": {
+              "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj"
             }
           }
         }

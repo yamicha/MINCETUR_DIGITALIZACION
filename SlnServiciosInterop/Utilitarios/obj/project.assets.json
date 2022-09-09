@@ -1202,11 +1202,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
+      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
       "projectName": "Utilitarios",
-      "projectPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
+      "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
       "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\Utilitarios\\obj\\",
+      "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"

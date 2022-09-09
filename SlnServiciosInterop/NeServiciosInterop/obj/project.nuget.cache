@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ztlX3klWE8RVEKQvnaGaPnAXMxaBgQDWtS73WroLxbfTP87fsqarvFQvO47Ess7EVkIMD1El3CIHWHsIhaRDpw==",
+  "dgSpecHash": "GEfOC8YG4JA3ShdtXFIY3SoEOTbtAhg1RpF/9OlF63K6ibpyovO+AQs7wLzCB2ipDBb8csskXAU0rYwnbofwPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ivans\\OneDrive\\Escritorio\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosMicroformas.csproj",
+  "projectFilePath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\NeServiciosInterop\\NeServiciosMicroformas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.objectpool\\5.0.10\\microsoft.extensions.objectpool.5.0.10.nupkg.sha512",
