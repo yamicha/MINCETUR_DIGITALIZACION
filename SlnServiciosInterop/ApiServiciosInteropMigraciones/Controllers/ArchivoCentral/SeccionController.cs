@@ -26,7 +26,7 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
 
         [HttpPost]
         [Route("listar")]
-        public ActionResult Seccion_Listar(enSeccion entidad)
+        public IActionResult Seccion_Listar(enSeccion entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -37,6 +37,7 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                     if (!auditoria.EJECUCION_PROCEDIMIENTO)
                     {
                         string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
+                        auditoria.CODE = (int)HttpStatusCode.InternalServerError;
                         auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
                     }
                 }
@@ -47,7 +48,7 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                 auditoria.MENSAJE_SALIDA = ex.Message;
                 auditoria.CODE = (int)HttpStatusCode.InternalServerError;
             }
-            return Ok(auditoria);
+            return StatusCode(auditoria.CODE,auditoria);
         }
 
        

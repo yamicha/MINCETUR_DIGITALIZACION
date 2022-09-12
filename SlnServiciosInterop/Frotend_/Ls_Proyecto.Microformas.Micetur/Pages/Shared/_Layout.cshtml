@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Ls_Proyecto.Microformas.Micetur.Helpers
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
     <meta charset="utf-8" />
@@ -193,7 +194,7 @@
     <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <input type="hidden" id="hdfcounter" />
     <script type="text/javascript">
-        var baseUrl = '@Url.Content("~")';
+        var baseUrl = "@AppSettingsHelper.baseUrlApi"; 
 
     </script>
 </body>

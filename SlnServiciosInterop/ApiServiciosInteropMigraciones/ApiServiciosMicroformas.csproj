@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Utilitarios\Utilitarios.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Recursos\Log\" />
+  </ItemGroup>
+
 </Project>

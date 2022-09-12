@@ -1,0 +1,12 @@
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-12514: TNS:el listener no conoce actualmente el servicio solicitado en el descriptor de conexión
+ ---> OracleInternal.Network.NetworkException (0x000030E2): ORA-12514: TNS:el listener no conoce actualmente el servicio solicitado en el descriptor de conexión
+   at OracleInternal.Network.OracleCommunication.DoConnect(String tnsDescriptor)
+   at OracleInternal.Network.OracleCommunication.Connect(String tnsDescriptor, Boolean doNAHandshake, String IName, ConnectionOption CO)
+   at OracleInternal.ServiceObjects.OracleConnectionImpl.Connect(ConnectionString cs, Boolean bOpenEndUserSession, OracleConnection connRefForCriteria, String instanceName)
+   at OracleInternal.ConnectionPool.PoolManager`3.Get(ConnectionString csWithDiffOrNewPwd, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
+   at OracleInternal.ConnectionPool.OraclePoolManager.Get(ConnectionString csWithNewPassword, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
+   at OracleInternal.ConnectionPool.OracleConnectionDispenser`3.Get(ConnectionString cs, PM conPM, ConnectionString pmCS, SecureString securedPassword, SecureString securedProxyPassword, OracleConnection connRefForCriteria)
+   at Oracle.ManagedDataAccess.Client.OracleConnection.Open()
+   at DaServiciosMicroformas.Archivo_Central.DaSeccion.Seccion_Listar(enSeccion objenSeccion, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\ArchivoCentral\DaSeccion.cs:line 31
+   at NeServiciosMicroformas.ArchivoCentral.neSeccion.Seccion_Listar(enSeccion objEnSeccion, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\NeServiciosInterop\ArchivoCentral\neSeccion.cs:line 23
+   at ApiServiciosMicroformas.resource.ArchivoCentral.SeccionRepositorio.Seccion_Listar(enSeccion entidad, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\ApiServiciosInteropMigraciones\resource\ArchivoCentral\SeccionRepositorio.cs:line 37
