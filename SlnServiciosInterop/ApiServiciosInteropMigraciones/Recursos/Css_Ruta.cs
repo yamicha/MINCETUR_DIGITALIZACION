@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using Utilitarios.Helpers;
 
 namespace ApiServiciosMicroformas.Recursos
 {
@@ -10,7 +11,7 @@ namespace ApiServiciosMicroformas.Recursos
     {
         public static string Ruta_Temporal()
         {
-            string ruta = ConfigurationManager.AppSettings["Servidor_Temporal"].ToString();
+            string ruta = AppSettingsHelper.RutaTemporal;
             if (ruta == "")
                 ruta = AppDomain.CurrentDomain.BaseDirectory + @"Recursos\Temporales\";
 
@@ -19,7 +20,7 @@ namespace ApiServiciosMicroformas.Recursos
 
         public static string Ruta_Repositorio()
         {
-            string ruta = ConfigurationManager.AppSettings["Servidor_Repositorio"].ToString();
+            string ruta = AppSettingsHelper.RutaRepositorio;
             if (ruta == "")
                 ruta = AppDomain.CurrentDomain.BaseDirectory + "Recursos/Repositorio/";
 

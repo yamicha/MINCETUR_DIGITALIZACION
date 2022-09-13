@@ -27,3 +27,5 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\obj\Debug\netcoreapp3.1\DaServiciosMicroformas.csproj.CopyComplete
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\obj\Debug\netcoreapp3.1\DaServiciosMicroformas.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\obj\Debug\netcoreapp3.1\DaServiciosMicroformas.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\bin\Debug\netcoreapp3.1\Utilitarios.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\DaServiciosInterop\bin\Debug\netcoreapp3.1\Utilitarios.pdb

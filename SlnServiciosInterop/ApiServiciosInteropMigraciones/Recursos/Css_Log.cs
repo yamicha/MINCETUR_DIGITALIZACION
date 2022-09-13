@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Configuration;
-using ApiServiciosMicroformas.Helpers; 
+using Utilitarios.Helpers;
+
 namespace ApiServiciosMicroformas.Recursos
 {
     public class Css_Log

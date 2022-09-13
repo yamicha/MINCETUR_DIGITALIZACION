@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoServiciosInterop\CoServiciosMicroformas.csproj" />
     <ProjectReference Include="..\EnServiciosInterop\EnServiciosMicroformas.csproj" />
+    <ProjectReference Include="..\Utilitarios\Utilitarios.csproj" />
   </ItemGroup>
 
 </Project>

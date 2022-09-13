@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace EnServiciosMicroformas
@@ -36,11 +37,12 @@ namespace EnServiciosMicroformas
             RECHAZAR = false;
             AUTORIZADO = true;
             EJECUCION_PROCEDIMIENTO = true;
-            CODE = 200; 
+            CODE = (int)HttpStatusCode.OK; 
         }
 
         public void Rechazar(String mensaje)
         {
+            CODE = (int)HttpStatusCode.NotFound;
             OBJETO = null;
             MENSAJE_SALIDA = mensaje;
             ERROR_LOG = mensaje;
@@ -53,6 +55,7 @@ namespace EnServiciosMicroformas
         {
             OBJETO = null;
             MENSAJE_SALIDA = ex.Message;
+            CODE = (int)HttpStatusCode.InternalServerError;
             ERROR_LOG = ex.ToString();
             RECHAZAR = true;
             AUTORIZADO = true;

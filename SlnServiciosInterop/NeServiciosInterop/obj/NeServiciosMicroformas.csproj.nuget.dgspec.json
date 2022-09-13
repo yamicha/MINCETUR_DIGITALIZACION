@@ -97,6 +97,9 @@
               },
               "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj": {
                 "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\EnServiciosInterop\\EnServiciosMicroformas.csproj"
+              },
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj"
               }
             }
           }
@@ -311,6 +314,18 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "System.ServiceModel.Duplex": {
               "target": "Package",
               "version": "[4.10.0, )"

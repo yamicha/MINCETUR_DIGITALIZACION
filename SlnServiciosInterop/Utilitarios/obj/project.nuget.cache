@@ -1,11 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "6F65CvJmq7JL9g3YLA8he6khjwUPgVSE18sqpnzePFpkSJbIiKMfWS04flUNa32uZ2iL726XFmBnL5sU64KDdQ==",
+  "dgSpecHash": "fRwpXkJI2YUFlgpuqKLtwbvw35C2knF6ERQWJr5594T+Oy3fIbrvlkulQbQfkUDG0BMZlW2NeR8BptbgK1vaeg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Utilitarios\\Utilitarios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\6.0.0\\microsoft.extensions.configuration.fileextensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.configuration.json\\6.0.0\\microsoft.extensions.configuration.json.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\6.0.0\\microsoft.extensions.fileproviders.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\6.0.0\\microsoft.extensions.fileproviders.physical.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\6.0.0\\microsoft.extensions.filesystemglobbing.6.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.objectpool\\5.0.10\\microsoft.extensions.objectpool.5.0.10.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
@@ -13,6 +21,7 @@
     "C:\\Users\\ivans\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.private.servicemodel\\4.10.0\\system.private.servicemodel.4.10.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.reflection.dispatchproxy\\4.7.1\\system.reflection.dispatchproxy.4.7.1.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.security.cryptography.cng\\5.0.0\\system.security.cryptography.cng.5.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.security.cryptography.pkcs\\5.0.0\\system.security.cryptography.pkcs.5.0.0.nupkg.sha512",
@@ -24,6 +33,8 @@
     "C:\\Users\\ivans\\.nuget\\packages\\system.servicemodel.nettcp\\4.10.0\\system.servicemodel.nettcp.4.10.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.servicemodel.primitives\\4.10.0\\system.servicemodel.primitives.4.10.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.servicemodel.security\\4.10.0\\system.servicemodel.security.4.10.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\ivans\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\ivans\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
   "logs": []

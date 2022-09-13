@@ -1,0 +1,100 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\fonts\fonts\clip-font.svg" />
+    <None Include="wwwroot\assets\fonts\lte-ie7.js" />
+    <None Include="wwwroot\assets\Icons\fonts\untitled-font-1.svg" />
+    <None Include="wwwroot\assets\images\Thumbs.db" />
+    <None Include="wwwroot\assets\jqGrid\js\i18n\grid.locale-es.js" />
+    <None Include="wwwroot\assets\jqGrid\js\jquery.jqGrid.min.js" />
+    <None Include="wwwroot\assets\js\index.js" />
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\TreeView\bootstrap-hover-dropdown.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\bootstrap-treeview.js" />
+    <None Include="wwwroot\assets\js\TreeView\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\contextmenu\jquery.contextMenu-custom.js" />
+    <None Include="wwwroot\assets\js\TreeView\icheck.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery-ui.custom.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery-ui.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery.cookie.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery.dynatree.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery\jquery-ui.custom.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery\jquery-ui.custom.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery\jquery.cookie.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery\jquery.js" />
+    <None Include="wwwroot\assets\js\TreeView\jquery\jquery.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\main.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\Otros\prettify.js" />
+    <None Include="wwwroot\assets\js\TreeView\Otros\sample.js" />
+    <None Include="wwwroot\assets\js\TreeView\perfect-scrollbar.jquery.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\src\jquery.dynatree.js" />
+    <None Include="wwwroot\assets\js\TreeView\sweetalert.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\ui-treeview.min.js" />
+    <None Include="wwwroot\assets\js\TreeView\v.js" />
+    <None Include="wwwroot\assets\js\ui-modals.js" />
+    <None Include="wwwroot\assets\plugins\blockUI\jquery.blockUI.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-colorpalette\js\bootstrap-colorpalette.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-fileupload\bootstrap-fileupload.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-fileupload\bootstrap-fileupload.min.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-hover-dropdown\bootstrap-hover-dropdown.min.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-modal\js\bootstrap-modal.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-modal\js\bootstrap-modalmanager.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.min.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\plugins\bootstrap\js\bootstrap-alert.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap\js\modBase.js" />
+    <None Include="wwwroot\assets\plugins\DataTables\media\js\DT_bootstrap.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.pie.js" />
+    <None Include="wwwroot\assets\plugins\flot\jquery.flot.resize.min.js" />
+    <None Include="wwwroot\assets\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\bordered-pulled.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\core.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\fixed-width.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\font-awesome.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\icons.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\larger.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\list.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\mixins.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\path.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\rotated-flipped.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\spinning.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\stacked.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\less\variables.less" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\font-awesome.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_path.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_spinning.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\assets\plugins\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\assets\plugins\jquery-cookie\jquery.cookie.js" />
+    <None Include="wwwroot\assets\plugins\jquery-ui\jquery-ui-1.10.1.custom.min.js" />
+    <None Include="wwwroot\assets\plugins\jquery-ui\jquery-ui-1.10.2.custom.min.js" />
+    <None Include="wwwroot\assets\plugins\less\less-1.5.0.min.js" />
+    <None Include="wwwroot\assets\plugins\perfect-scrollbar\src\jquery.mousewheel.js" />
+    <None Include="wwwroot\assets\plugins\perfect-scrollbar\src\perfect-scrollbar.js" />
+    <None Include="wwwroot\assets\switch\bootstrap-switch.min.js" />
+    <None Include="wwwroot\assets\switch\ladda.min.js" />
+    <None Include="wwwroot\assets\switch\spin.min.js" />
+    <None Include="wwwroot\assets\switch\ui-buttons.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+</Project>
