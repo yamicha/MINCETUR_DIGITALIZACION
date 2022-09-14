@@ -1,0 +1,12 @@
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.deps.json
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.csprojAssemblyReference.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.AssemblyInfoInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.AssemblyInfo.cs
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.csproj.CoreCompileInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.csproj.CopyComplete
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\2.EnServiciosDigitalizacion\obj\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb

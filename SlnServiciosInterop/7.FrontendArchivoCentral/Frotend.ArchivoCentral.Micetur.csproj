@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Frotend.ArchivoCentral.Micetur</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\2.EnServiciosDigitalizacion\EnServiciosDigitalizacion.csproj" />
+    <ProjectReference Include="..\6.UtilitariosDigitalizacion\Utilitarios.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Recursos\Log\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

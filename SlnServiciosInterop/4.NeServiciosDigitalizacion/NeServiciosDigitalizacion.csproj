@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>NeServiciosDigitalizacion</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\1.CoDigitalizacion\CoServiciosDigitalizacion.csproj" />
+    <ProjectReference Include="..\2.EnServiciosDigitalizacion\EnServiciosDigitalizacion.csproj" />
+    <ProjectReference Include="..\3.DaServiciosDigitalizacion\DaServiciosDigitalizacion.csproj" />
+    <ProjectReference Include="..\6.UtilitariosDigitalizacion\Utilitarios.csproj" />
+  </ItemGroup>
+
+</Project>
