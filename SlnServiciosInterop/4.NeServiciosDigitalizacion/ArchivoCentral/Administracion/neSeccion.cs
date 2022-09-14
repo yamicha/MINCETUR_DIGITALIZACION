@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CoServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using EnServiciosDigitalizacion;
-using DaServiciosDigitalizacion.Archivo_Central;
+using DaServiciosDigitalizacion.Archivo_Central.Administracion; 
 
-namespace NeServiciosDigitalizacion.ArchivoCentral
+namespace NeServiciosDigitalizacion.ArchivoCentral.Administracion
 {
     public class neSeccion : neBase
     {

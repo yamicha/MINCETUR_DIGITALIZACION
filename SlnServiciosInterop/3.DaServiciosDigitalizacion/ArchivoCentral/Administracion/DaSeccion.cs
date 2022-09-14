@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using Utilitarios.Helpers;
 
-namespace DaServiciosDigitalizacion.Archivo_Central
+namespace DaServiciosDigitalizacion.Archivo_Central.Administracion
 {
     public class DaSeccion : daBase
     {

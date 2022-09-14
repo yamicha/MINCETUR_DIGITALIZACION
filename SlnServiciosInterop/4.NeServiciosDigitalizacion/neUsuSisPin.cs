@@ -20,7 +20,7 @@ namespace NeServiciosDigitalizacion
         public enResultadoEnListaUsuSisPin listar(enUsuSisPin objEnUsuSisPin)
         {
             if (objEnUsuSisPin == null) objEnUsuSisPin = new enUsuSisPin();
-            if (string.IsNullOrEmpty(objEnUsuSisPin.OPR)) objEnUsuSisPin.OPR = "1";
+            //if (string.IsNullOrEmpty(objEnUsuSisPin.OPR)) objEnUsuSisPin.OPR = "1";
             return this._objDaUsuSisPin.listar(objEnUsuSisPin);
         }
     }

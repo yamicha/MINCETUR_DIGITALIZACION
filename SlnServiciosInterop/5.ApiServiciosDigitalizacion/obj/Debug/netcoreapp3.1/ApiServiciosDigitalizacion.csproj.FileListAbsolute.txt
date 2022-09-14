@@ -1,3 +1,8 @@
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.csprojAssemblyReference.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.AssemblyInfoInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.AssemblyInfo.cs
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.csproj.CoreCompileInputs.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\.filenesting.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\appsettings.json
@@ -91,12 +96,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\DaServiciosDigitalizacion.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.csprojAssemblyReference.cache
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.AssemblyInfoInputs.cache
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.AssemblyInfo.cs
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\staticwebassets\ApiServiciosDigitalizacion.StaticWebAssets.Manifest.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\staticwebassets\ApiServiciosDigitalizacion.StaticWebAssets.xml
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\scopedcss\bundle\ApiServiciosDigitalizacion.styles.css

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Net;
 using ApiServiciosDigitalizacion.Recursos;
-using ApiServiciosDigitalizacion.resource.ArchivoCentral;
+using ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion; 
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using Microsoft.AspNetCore.Mvc;
 using ApiServiciosDigitalizacion.Models.ArchivoCentral;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
 
-namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral
+namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
     [EnableCors("ReglasCors")]
     [Route("api/archivo-central/seccion")]

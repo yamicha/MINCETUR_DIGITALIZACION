@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EnServiciosDigitalizacion.ArchivoCentral;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using EnServiciosDigitalizacion;
-using NeServiciosDigitalizacion.ArchivoCentral;
+using NeServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using CoServiciosDigitalizacion;
 
-namespace ApiServiciosDigitalizacion.resource.ArchivoCentral
+namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
 {
     public class SeccionRepositorio : IDisposable
     {

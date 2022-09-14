@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EnServiciosDigitalizacion.ArchivoCentral
+namespace EnServiciosDigitalizacion.ArchivoCentral.Administracion
 {
    public  class enSeccion
     {
