@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
-using EnServiciosDigitalizacion.ArchivoCentral;
-using EnServiciosDigitalizacion; 
 using Frotend.ArchivoCentral.Micetur.Helpers;
-using Frotend.ArchivoCentral.Micetur.Recursos; 
+using Frotend.ArchivoCentral.Micetur.Recursos;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
