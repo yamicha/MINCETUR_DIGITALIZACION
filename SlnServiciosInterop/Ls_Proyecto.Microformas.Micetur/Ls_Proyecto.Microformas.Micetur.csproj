@@ -8,4 +8,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EnServiciosInterop\EnServiciosMicroformas.csproj" />
+    <ProjectReference Include="..\Utilitarios\Utilitarios.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Recursos\Log\" />
+  </ItemGroup>
+
 </Project>

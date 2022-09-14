@@ -1,7 +1,41 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewBag.Title = "Secciones";
 }
-
-<h2>Index seccion 3</h2>
-
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/Switch_Toggle.css")"/>
+<script  src="@Url.Content("~/Scripts/js/Remove.js")" defer type="text/javascript"></script>
+<script  src="@Url.Content("~/Scripts/js/Administracion/Seccion.js")" defer type="text/javascript"></script>
+<div class="modal fade" id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="tab-content">
+    <div id="panel_tab_directorio" class="tab-pane active">
+        <div class="col-sm-12 inline-container-Group" style=" margin-bottom: 10px;">
+            <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Criterios de búsqueda: </p>
+            <fieldset style="width: 100%;">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; margin-top: 5px; text-align: right;">Descripción Larga:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" id="SECCION_DESCRIPCION" name="SECCION_DESCRIPCION" maxlength="150" class="form-control" style="width: 100%" />
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="SECCION_BTN_BUSCAR" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                        <button id="SECCION_BTN_LIMPIAR" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <br />
+            <br />
+            <div class="col-sm-7">
+                <button id="SECCION_BTN_NUEVO" class="btn btn-red" type="button" data-toggle="modal" data-target="#myModalNuevo"><i class="clip-file-plus"></i> Nueva Sección</button>
+            </div>
+            <div class="col-sm-12" style="margin-top: 10px">
+                <div class="Seccion_jqGrid">
+                    <table id="Seccion_grilla"></table>
+                    <div id="Seccion_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,7 @@
 ﻿var Tamanio_Valido = 20971520;
 var MiTamanioReal = $("#Div_MasterPage").height() - 200;
 
-$(document).ready(function () {
-    clearInterval(Digitalizar_Int_Documento);
-});
+
 
 function Ver_Leyenda(Modal_Ver_Leyenda) {
     jQuery(Modal_Ver_Leyenda).html('');

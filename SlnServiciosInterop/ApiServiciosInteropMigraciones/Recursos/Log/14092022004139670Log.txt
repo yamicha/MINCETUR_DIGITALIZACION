@@ -1,0 +1,2 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiServiciosMicroformas.Controllers.ArchivoCentral.SeccionController.Seccion_Actualizar(SeccionModel entidad) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\ApiServiciosInteropMigraciones\Controllers\ArchivoCentral\SeccionController.cs:line 129

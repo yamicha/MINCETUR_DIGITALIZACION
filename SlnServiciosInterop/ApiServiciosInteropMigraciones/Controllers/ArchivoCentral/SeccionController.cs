@@ -6,10 +6,14 @@ using EnServiciosMicroformas;
 using EnServiciosMicroformas.ArchivoCentral;
 using Microsoft.AspNetCore.Mvc;
 using ApiServiciosMicroformas.Models.ArchivoCentral;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
+
 namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
 {
+    [EnableCors("ReglasCors")]
     [Route("api/archivo-central/seccion")]
-    public class SeccionController : BaseApiController
+    public class SeccionController : ControllerBase
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
         public SeccionController(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
@@ -19,31 +23,31 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
 
         [HttpPost]
         [Route("listar")]
-        public IActionResult Seccion_Listar(SeccionModel entidad)
+        public IActionResult Seccion_Listar([FromBody] SeccionModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
             {
                 using (SeccionRepositorio repositorio = new SeccionRepositorio(_ConfigurationManager))
                 {
-                    auditoria.OBJETO = repositorio.Seccion_Listar(new enSeccion
+                    auditoria.Objeto = repositorio.Seccion_Listar(new enSeccion
                     {
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
                         FLG_ESTADO = entidad.FlgEstado
                     }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                auditoria.MENSAJE_SALIDA = ex.Message;
+                auditoria.MensajeSalida = ex.Message;
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
 
@@ -56,32 +60,32 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
             {
                 using (SeccionRepositorio repositorio = new SeccionRepositorio(_ConfigurationManager))
                 {
-                    auditoria.OBJETO = repositorio.Seccion_ListarUno(new enSeccion
+                    auditoria.Objeto = repositorio.Seccion_ListarUno(new enSeccion
                     {
                         ID_SECCION = id
                     }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                     else
-                       if (auditoria.OBJETO == null)
-                         auditoria.CODE = (int)HttpStatusCode.NotFound;
+                       if (auditoria.Objeto == null)
+                         auditoria.Code = (int)HttpStatusCode.NotFound;
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
         [HttpPost]
         [Route("insertar")]
-        public IActionResult Seccion_Insertar(SeccionModel entidad)
+        public IActionResult Seccion_Insertar([FromBody] SeccionModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -92,30 +96,31 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                     {
                         DES_LARGA_SECCION = entidad.DescCortaSeccion,
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
+                        IP_CREACION = Css_IP.ObtenerIP(),
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                     else
-                        auditoria.CODE = (int)HttpStatusCode.Created;
+                        auditoria.Code = (int)HttpStatusCode.Created;
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
 
         [HttpPut]
-        [Route("actualizar")]
-        public IActionResult Seccion_Actualizar(SeccionModel entidad)
+        [Route("actualizar/{id:int}")]
+        public IActionResult Seccion_Actualizar(int id, [FromBody]SeccionModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -124,35 +129,35 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                 {
                     repositorio.Seccion_Actualizar(new enSeccion
                     {
-                        ID_SECCION = entidad.IdSeccion,
+                        ID_SECCION = id,
                         DES_LARGA_SECCION = entidad.DescCortaSeccion,
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                     else
                     {
-                        if (!auditoria.RECHAZAR)
-                            auditoria.CODE = (int)HttpStatusCode.NoContent;
+                        if (auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.NoContent;
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
         [HttpPut]
-        [Route("estado")]
-        public IActionResult Seccion_Estado(SeccionModel entidad)
+        [Route("estado/{id:int}")]
+        public IActionResult Seccion_Estado(int id, [FromBody] SeccionModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -163,22 +168,23 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                     {
                         ID_SECCION = entidad.IdSeccion,
                         FLG_ESTADO = entidad.FlgEstado,
+                        IP_MODIFICACION = Css_IP.ObtenerIP(),
                         USU_MODIFICACION = entidad.UsuModificacion
-                    }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    }, ref auditoria); ;
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
         [HttpDelete]
@@ -194,20 +200,20 @@ namespace ApiServiciosMicroformas.Controllers.ArchivoCentral
                     {
                         ID_SECCION = id
                     }, ref auditoria);
-                    if (!auditoria.EJECUCION_PROCEDIMIENTO)
+                    if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                        auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ERROR_LOG);
-                auditoria.MENSAJE_SALIDA = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
             }
-            return StatusCode(auditoria.CODE, auditoria);
+            return StatusCode(auditoria.Code, auditoria);
         }
 
 

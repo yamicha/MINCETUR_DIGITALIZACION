@@ -20,7 +20,7 @@ namespace ApiServiciosMicroformas.Models.ArchivoCentral
         [DataMember(Name = "strUsuarioCreacion", Order = 5)]
         public string UsuCreacion { get; set; }
 
-        [DataMember(Name = "strUsuarioCreacion", Order = 6)]
+        [DataMember(Name = "strUsuarioModificacion", Order = 6)]
         public string UsuModificacion { get; set; }
 
     }

@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaServiciosMicroformas", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07. Frontend_", "07. Frontend_", "{D0400140-FEF6-4F58-A54E-5347B1A1C4E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ls_Proyecto.Microformas.Micetur", "Ls_Proyecto.Microformas.Micetur\Ls_Proyecto.Microformas.Micetur.csproj", "{6CE467CB-F1B5-4E95-BBE8-0D9CB74B4A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ls_Proyecto.Microformas.Micetur", "Ls_Proyecto.Microformas.Micetur\Ls_Proyecto.Microformas.Micetur.csproj", "{6CE467CB-F1B5-4E95-BBE8-0D9CB74B4A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

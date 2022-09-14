@@ -7,59 +7,53 @@ namespace EnServiciosMicroformas
 {
    public class enAuditoria
     {
-        public object OBJETO { get; set; }
-        public string MENSAJE_SALIDA { get; set; }
-        public int CODE { get; set; }
-        public string ERROR_LOG { get; set; }
-        public bool EJECUCION_PROCEDIMIENTO { get; set; }
-        public bool AUTORIZADO { get; set; }
+        public object Objeto { get; set; }
+        public string MensajeSalida { get; set; }
+        public int Code { get; set; }
+        public string ErrorLog { get; set; }
+        public bool EjecucionProceso { get; set; }
         public string URL { get; set; }
 
-        public bool RECHAZAR { get; set; } // Auxiliar
-        public bool RECHAZAR2 { get; set; } // Auxiliar
+        public bool Rechazo { get; set; } // Auxiliar
 
         public void NoAutorizado(string URL_)
         {
-            OBJETO = null;
+            Objeto = null;
             URL = URL_;
-            MENSAJE_SALIDA = "";
-            ERROR_LOG = "";
-            AUTORIZADO = false;
-            RECHAZAR = false;
-            EJECUCION_PROCEDIMIENTO = true;
+            MensajeSalida = "";
+            ErrorLog = "";
+            Rechazo = false;
+            EjecucionProceso = true;
         }
 
         public void Limpiar()
         {
-            OBJETO = null;
-            MENSAJE_SALIDA = "";
-            ERROR_LOG = "";
-            RECHAZAR = false;
-            AUTORIZADO = true;
-            EJECUCION_PROCEDIMIENTO = true;
-            CODE = (int)HttpStatusCode.OK; 
+            Objeto = null;
+            MensajeSalida = "";
+            ErrorLog = "";
+            Rechazo = false;
+            EjecucionProceso = true;
+            Code = (int)HttpStatusCode.OK; 
         }
 
         public void Rechazar(String mensaje)
         {
-            CODE = (int)HttpStatusCode.NotFound;
-            OBJETO = null;
-            MENSAJE_SALIDA = mensaje;
-            ERROR_LOG = mensaje;
-            RECHAZAR = true;
-            AUTORIZADO = true;
-            EJECUCION_PROCEDIMIENTO = true;
+            Code = (int)HttpStatusCode.NotFound;
+            Objeto = null;
+            MensajeSalida = mensaje;
+            ErrorLog = mensaje;
+            Rechazo = true;
+            EjecucionProceso = true;
         }
 
         public void Error(Exception ex)
         {
-            OBJETO = null;
-            MENSAJE_SALIDA = ex.Message;
-            CODE = (int)HttpStatusCode.InternalServerError;
-            ERROR_LOG = ex.ToString();
-            RECHAZAR = true;
-            AUTORIZADO = true;
-            EJECUCION_PROCEDIMIENTO = false;
+            Objeto = null;
+            MensajeSalida = ex.Message;
+            Code = (int)HttpStatusCode.InternalServerError;
+            ErrorLog = ex.ToString();
+            Rechazo = true;
+            EjecucionProceso = false;
         }
     }
 }

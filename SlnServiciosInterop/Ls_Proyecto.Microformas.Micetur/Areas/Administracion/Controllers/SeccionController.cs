@@ -4,86 +4,61 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Ls_Proyecto.Microformas.Micetur.Areas.Administracion.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
+using EnServiciosMicroformas.ArchivoCentral;
+using EnServiciosMicroformas; 
+using Ls_Proyecto.Microformas.Micetur.Helpers;
+using Ls_Proyecto.Microformas.Micetur.Recursos; 
 
 namespace Ls_Proyecto.Microformas.Micetur.Areas.Administracion.Controllers
 {
     [Area("Administracion")]
-    [Route("[controller]")]
+    [Route("[action]")]
     public class SeccionController : Controller
     {
         // GET: SeccionController
+        [HttpGet, Route("~/Administracion/Seccion")]
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: SeccionController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet, Route("~/Administracion/Seccion/Mantenimiento")]
+        public async Task<ActionResult> Mantenimiento(int id, string Accion)
         {
-            return View();
-        }
-
-        // GET: SeccionController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SeccionController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
+            enAuditoria auditoria = new enAuditoria();
+            SeccionModelView model = new SeccionModelView
+            {
+                ACCION = Accion,
+                ID_SECCION = id
+            };
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (Accion == "M")
+                {
+                 
+                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/seccion/get-seccion/{id}");
+                    if (!respuestapi.EjecucionProceso)
+                    {
+                        if (respuestapi.Rechazo)
+                            Css_Log.Guardar(respuestapi.ErrorLog);
+                    }
+                    else
+                    {
+                        enSeccion item = JsonConvert.DeserializeObject<enSeccion>(respuestapi.Objeto.ToString());
+                        model.DESC_CORTA_SECCION = item.DES_CORTA_SECCION;
+                        model.DESC_LARGA_SECCION = item.DES_LARGA_SECCION;
+                    }
+                }
             }
-            catch
-            {
-                return View();
+            catch (Exception ex) {
+                auditoria.Error(ex); 
             }
+            return View(model);
         }
 
-        // GET: SeccionController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SeccionController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: SeccionController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: SeccionController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
