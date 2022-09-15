@@ -25,3 +25,9 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csprojAssemblyReference.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.CopyComplete
