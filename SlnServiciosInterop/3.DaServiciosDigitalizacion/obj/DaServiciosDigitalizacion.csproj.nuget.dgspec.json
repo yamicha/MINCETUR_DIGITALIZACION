@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {}
+    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
         "projectName": "CoServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,21 +59,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
         "projectName": "EnServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,14 +85,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               }
             }
           }
@@ -112,21 +122,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
+    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
         "projectName": "DaServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -134,20 +148,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
-                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
               }
             }
           }
@@ -182,21 +197,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
         "projectName": "Utilitarios",
-        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
-        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -204,6 +223,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -278,7 +298,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -16,3 +16,4 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csprojAssemblyReference.cache

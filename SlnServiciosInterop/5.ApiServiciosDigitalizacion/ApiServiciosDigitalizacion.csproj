@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Recursos\Log\" />
     <Folder Include="Recursos\Temporales\" />
   </ItemGroup>
