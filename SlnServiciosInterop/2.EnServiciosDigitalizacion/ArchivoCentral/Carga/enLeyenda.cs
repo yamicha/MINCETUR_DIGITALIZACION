@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EnServiciosDigitalizacion.Carga
+namespace EnServiciosDigitalizacion.ArchivoCentral.Carga
 {
-    public class Leyenda : enBase 
+    public class enLeyenda : enBase 
     {
         public long ID_LEYENDA { get; set; }
         public long ID_TABLA { get; set; }

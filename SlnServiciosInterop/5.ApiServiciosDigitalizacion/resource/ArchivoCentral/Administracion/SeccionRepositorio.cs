@@ -14,7 +14,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
 
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
         private  coConexionDb _objCoConexionDb;
-        private neSeccion _rule = null; 
+        private neControlCarga _rule = null; 
 
         public SeccionRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
         {

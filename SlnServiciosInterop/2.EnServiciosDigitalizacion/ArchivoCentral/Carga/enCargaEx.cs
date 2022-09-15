@@ -1,8 +1,8 @@
 ﻿using System.Data;
 
-namespace EnServiciosDigitalizacion.Carga
+namespace EnServiciosDigitalizacion.ArchivoCentral.Carga
 {
-    public class CargaEx
+    public class enCargaEx
     {
         public int CANTIDAD_COLUMNAS { get; set; }
         public int CANTIDAD_FILAS { get; set; }

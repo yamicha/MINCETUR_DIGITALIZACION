@@ -9,7 +9,7 @@ namespace Utilitarios.Recursos
         {
             string ruta = AppSettingsHelper.RutaTemporal;
             if (ruta == "")
-                ruta = Directory.GetCurrentDirectory() + @"Recursos\Temporales\";
+                ruta = Directory.GetCurrentDirectory() + @"\Recursos\Temporales\";
 
             return ruta;
         }
@@ -18,7 +18,7 @@ namespace Utilitarios.Recursos
         {
             string ruta = AppSettingsHelper.RutaRepositorio;
             if (ruta == "")
-                ruta = Directory.GetCurrentDirectory() + "Recursos/Repositorio/";
+                ruta = Directory.GetCurrentDirectory() + @"\Recursos\Repositorio\";
 
             return ruta;
         }

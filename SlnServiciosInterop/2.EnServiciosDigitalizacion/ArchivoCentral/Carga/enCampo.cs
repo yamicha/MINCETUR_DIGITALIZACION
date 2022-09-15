@@ -1,6 +1,6 @@
-﻿namespace EnServiciosDigitalizacion.Carga
+﻿namespace EnServiciosDigitalizacion.ArchivoCentral.Carga
 {
-    public  class Campo : enBase
+    public  class enCampo : enBase
     {
         public long ID_CAMPO { get; set; }
         public long ID_TABLA { get; set; }
