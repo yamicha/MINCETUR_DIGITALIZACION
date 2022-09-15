@@ -105,6 +105,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.genruntimeconfig.cache
+<<<<<<< HEAD
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\.filenesting.json
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\appsettings.json
@@ -213,3 +214,13 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.dll
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.pdb
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.genruntimeconfig.cache
+=======
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\NPOI.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+>>>>>>> 6b279dfaa3b7481a8088bc3858ab0c35662ceb0b

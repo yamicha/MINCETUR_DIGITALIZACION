@@ -209,7 +209,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -222,6 +226,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -233,6 +241,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.6, )"
             },
             "System.ServiceModel.Duplex": {
               "target": "Package",
