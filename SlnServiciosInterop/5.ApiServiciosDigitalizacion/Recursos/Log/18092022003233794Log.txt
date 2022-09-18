@@ -1,2 +1,0 @@
-ORA-02373: Error al analizar la sentencia de inserción para la tabla INSDBA.CDA9DOCUMENTO.
-ORA-00904: "OBSEVACION": identificador no válido

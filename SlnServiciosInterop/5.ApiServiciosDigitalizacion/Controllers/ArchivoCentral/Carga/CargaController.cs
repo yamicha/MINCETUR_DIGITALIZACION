@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using ApiServiciosDigitalizacion.Recursos;
+using ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
-using ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga;
-using EnServiciosDigitalizacion.Carga;
+using EnServiciosDigitalizacion.ArchivoCentral.Carga.Vistas;
+using EnServiciosDigitalizacion.Base;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Excel;
+using Utilitarios.Helpers;
 using Utilitarios.Recursos;
-using ApiServiciosDigitalizacion.Recursos;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
 {
@@ -422,36 +426,71 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             return auditoria;
         }
 
-        //public enAuditoria Carga_ErrorRegistrar(long ID_CONTROL_CARGA, string DESCRIPCION_ERROR, string USU_CREACION, string IP_CREACION, int NRO_LINEA, enAuditoria auditoria)
-        //{
-        //    enErrorCarga cls_Ent_Error_Carga = _cls_Serv_Error_Carga.Registrar(new enErrorCarga
-        //    {
-        //        ID_CONTROL_CARGA = ID_CONTROL_CARGA,
-        //        DESCRIPCION_ERROR = DESCRIPCION_ERROR,
-        //        NRO_LINEA = NRO_LINEA,
-        //        USU_CREACION = USU_CREACION,
-        //        IP_CREACION = IP_CREACION
-        //    }, ref auditoria);
+        [HttpGet]
+        [Route("get-carga/{IdControlCarga}")]
+        public IActionResult Carga_ListarUno(long IdControlCarga)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+            {
+                auditoria.Objeto = repositorio.Carga_ControlCargaListarUno(IdControlCarga, ref auditoria);
+            }
+            if (!auditoria.EjecucionProceso)
+            {
+                Log.Guardar(auditoria.ErrorLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
 
-        //    return auditoria;
-        //}
+        [HttpGet]
+        [Route("get-errores/{IdControlCarga}")]
+        public IActionResult Carga_ErroresListar(long IdControlCarga)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            byte[] ByteFile = null;
+            List<enErrorCarga> lista = new List<enErrorCarga>();
+            try
+            {
+                using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+                {
+                    lista = repositorio.Carga_ErrorCargaListar(IdControlCarga, ref auditoria);
+                    if (auditoria.Rechazo)
+                        return StatusCode(auditoria.Code, auditoria); 
+                }
+                if (!auditoria.EjecucionProceso)
+                {
+                    Log.Guardar(auditoria.ErrorLog);
+                }
+                else
+                {
+                    if (!auditoria.Rechazo)
+                    {
+                        Titulo _Titulo = new Titulo
+                        {
+                            TITULO = "MINCETUR - Errores del proceso de carga N° " + IdControlCarga,
+                            TITULO_CELDA = "F",
+                            TITULO_INT = 3,
+                            RUTA_LOGO = Directory.GetCurrentDirectory() + @"/assets/img/logo-mincetur.png",
+                        };
+                        string CODIGO_TEMPORAL = GenerarCodigo.GenerarCodigoTemporal();
+                        string RUTA_TEMPORAL = Rutas.Ruta_Temporal();
+                        string RUTA_ARCHIVO_TEMPORAL = string.Format("{0}/{1}_{2}", RUTA_TEMPORAL, IdControlCarga, CODIGO_TEMPORAL + ".xlsx");
 
-        //[HttpGet]
-        //[Route("get-carga/{IdControlCarga}")]
-        //public IActionResult Carga_Listar_Uno(long IdControlCarga)
-        //{
-        //    enAuditoria auditoria = new enAuditoria();
-        //    VControlCarga entidad = _cls_Serv_V_Control_Carga.Listar_Uno(IdControlCarga, ref auditoria);
-        //    if (!auditoria.EJECUCION_PROCEDIMIENTO)
-        //    {
-        //        Log.Guardar(auditoria.ErrorLog);
-        //    }
-        //    else
-        //    {
-        //        auditoria.Objeto = entidad;
-        //    }
-        //    return StatusCode(auditoria.Code, auditoria);
-        //}
-
+                        List<Columnas> columnas = new List<Columnas>();
+                        columnas.Add(new Columnas { ID_COLUMNA = "NRO_LINEA", DESCRIPCION_COLUMNA = "N° de Fila", CELDA_INICIO = "A", CELDA_FIN = "A", INT_CELDAS = 1 });
+                        columnas.Add(new Columnas { ID_COLUMNA = "DES_ERROR", DESCRIPCION_COLUMNA = "Descripción de Error", CELDA_INICIO = "B", CELDA_FIN = "F", INT_CELDAS = 4 });
+                        CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, _Titulo, false, "ErrorCarga", columnas);
+                        ByteFile = System.IO.File.ReadAllBytes(RUTA_ARCHIVO_TEMPORAL);
+                        if (System.IO.File.Exists(RUTA_ARCHIVO_TEMPORAL))
+                            System.IO.File.Delete(RUTA_ARCHIVO_TEMPORAL);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+            }
+            return File(ByteFile, "application/vnd.ms-excel", "ErroresCarga.xlsx");
+        }
     }
 }

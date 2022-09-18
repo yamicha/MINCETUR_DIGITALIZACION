@@ -1,3 +1,0 @@
-ORA-02291: restricción de integridad (INSDBA.FK_CC_ID_TABLA) violada - clave principal no encontrada
-ORA-06512: en "INSDBA.PACK_CDACARGAMANT", línea 22
-ORA-06512: en línea 1

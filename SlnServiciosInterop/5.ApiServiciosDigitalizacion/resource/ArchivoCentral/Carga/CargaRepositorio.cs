@@ -4,6 +4,7 @@ using System.Data;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
+using EnServiciosDigitalizacion.ArchivoCentral.Carga.Vistas;
 using NeServiciosDigitalizacion.ArchivoCentral.Carga; 
 namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
 {
@@ -64,6 +65,16 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
         {
             _rule.Carga_Validar(ID_CONTROL_CARGA, ID_TABLA, ref auditoria);
         }
+        public enControlCarga Carga_ControlCargaListarUno(long ID_CONTROLCARGA, ref enAuditoria auditoria)
+        {
+           return _rule.Carga_ControlCargaListarUno(ID_CONTROLCARGA, ref auditoria);
+        }
+
+        public List<enErrorCarga> Carga_ErrorCargaListar(long ID_CONTROLCARGA, ref enAuditoria auditoria)
+        {
+            return _rule.Carga_ErrorCargaListar(ID_CONTROLCARGA, ref auditoria);
+        }
+       
 
         public void Dispose()
         {

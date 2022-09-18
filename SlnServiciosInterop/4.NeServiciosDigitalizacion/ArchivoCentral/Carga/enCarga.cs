@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
+using EnServiciosDigitalizacion.ArchivoCentral.Carga.Vistas;
 using EnServiciosDigitalizacion;
 using DaServiciosDigitalizacion.Archivo_Central.Carga;
 using System.Data;
@@ -42,6 +43,16 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Carga
         public void Ejecutar_Query(string _Query, ref enAuditoria auditoria)
         {
             this._objDa.Ejecutar_Query(_Query, ref auditoria);
+        }
+
+        public enControlCarga Carga_ControlCargaListarUno(long ID_CONTROLCARGA, ref enAuditoria auditoria)
+        {
+            return this._objDa.Carga_ControlCargaListarUno(ID_CONTROLCARGA, ref auditoria);
+        }
+
+        public List<enErrorCarga> Carga_ErrorCargaListar(long ID_CONTROLCARGA, ref enAuditoria auditoria)
+        {
+            return this._objDa.Carga_ErrorCargaListar(ID_CONTROLCARGA, ref auditoria);
         }
 
     }

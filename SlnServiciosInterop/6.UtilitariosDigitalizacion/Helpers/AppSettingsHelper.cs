@@ -10,8 +10,8 @@ namespace Utilitarios.Helpers
     public class AppSettingsHelper
     {
         public static int AppId => Convert.ToInt16(GetAppSetting("IdSis"));
-        public static string Pack_AdminConsulta => GetAppSetting("Pack_AdminConsulta");
-        public static string Pack_AdminMant => GetAppSetting("Pack_AdminMant");
+        public static string PackAdminConsulta => GetAppSetting("Pack_AdminConsulta");
+        public static string PackAdminMant => GetAppSetting("Pack_AdminMant");
         public static string PackCargaMant => GetAppSetting("PackCargaMant");
         public static string PackCargaCons => GetAppSetting("PackCargaConst");
         public static string MensajeLog => GetAppSetting("MensajeLog");
