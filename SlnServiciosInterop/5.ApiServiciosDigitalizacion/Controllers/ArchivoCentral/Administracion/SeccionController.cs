@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
-    [EnableCors("ReglasCors")]
+    [EnableCors("AccesoCors")]
     [Route("api/archivo-central/seccion")]
     public class SeccionController : ControllerBase
     {
@@ -94,7 +94,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     repositorio.Seccion_Insertar(new enSeccion
                     {
-                        DES_LARGA_SECCION = entidad.DescCortaSeccion,
+                        DES_LARGA_SECCION = entidad.DescLargaSeccion,
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
                         IP_CREACION = Css_IP.ObtenerIP(),
                         USU_CREACION = entidad.UsuCreacion
