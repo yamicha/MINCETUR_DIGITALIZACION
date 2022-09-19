@@ -91,7 +91,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 
                 //var jsonResult = Json(generic.Value, JsonRequestBehavior.AllowGet);
                 //jsonResult.MaxJsonLength = int.MaxValue;
-                //return jsonResult;
+                return null;
                 //return StatusCode(auditoria.Code, generic.Value);
             }
             catch (Exception ex)
