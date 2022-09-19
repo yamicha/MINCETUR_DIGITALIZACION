@@ -6,8 +6,9 @@ using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion; 
 using Microsoft.AspNetCore.Mvc;
 using ApiServiciosDigitalizacion.Models.ArchivoCentral;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
+using Utilitarios.Helpers;
+using Utilitarios.Recursos;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
@@ -37,8 +38,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                 }
             }
@@ -66,8 +67,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                     else
                        if (auditoria.Objeto == null)
@@ -77,8 +78,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
             }
             return StatusCode(auditoria.Code, auditoria);
         }
@@ -96,13 +97,13 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     {
                         DES_LARGA_SECCION = entidad.DescLargaSeccion,
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
-                        IP_CREACION = Css_IP.ObtenerIP(),
+                        IP_CREACION = IPUser.ObtenerIP(),
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                     else
                         auditoria.Code = (int)HttpStatusCode.Created;
@@ -111,8 +112,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
             }
             return StatusCode(auditoria.Code, auditoria);
         }
@@ -136,8 +137,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                     else
                     {
@@ -149,8 +150,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
             }
             return StatusCode(auditoria.Code, auditoria);
         }
@@ -168,21 +169,21 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     {
                         ID_SECCION = entidad.IdSeccion,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = Css_IP.ObtenerIP(),
+                        IP_MODIFICACION = IPUser.ObtenerIP(),
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
             }
             return StatusCode(auditoria.Code, auditoria);
         }
@@ -202,16 +203,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
-                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                 }
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
             }
             return StatusCode(auditoria.Code, auditoria);
         }

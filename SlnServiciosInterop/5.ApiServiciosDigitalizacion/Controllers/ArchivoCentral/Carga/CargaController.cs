@@ -271,8 +271,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                                     repositorio.Ejecutar_Query(campo.QUERY_CAMPO, ref auditoria);
                                                     if (!auditoria.EjecucionProceso)
                                                     {
-                                                        string CodigoLog = Css_Log.Guardar(auditoria.ErrorLog);
-                                                        auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                                                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                                                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                                                     }
                                                     else
                                                         valor = (long)auditoria.Objeto;
@@ -492,5 +492,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             }
             return File(ByteFile, "application/vnd.ms-excel", "ErroresCarga.xlsx");
         }
+
+
+
     }
 }
