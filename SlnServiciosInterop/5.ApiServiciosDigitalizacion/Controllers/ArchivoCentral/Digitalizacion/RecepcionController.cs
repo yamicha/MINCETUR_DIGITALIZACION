@@ -1,22 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using ApiServiciosDigitalizacion.Recursos;
-using ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga;
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral.Carga;
-using EnServiciosDigitalizacion.ArchivoCentral.Carga.Vistas;
-using EnServiciosDigitalizacion.Base;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Utilitarios.Excel;
-using Utilitarios.Helpers;
 using Utilitarios.Recursos;
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 {
@@ -33,7 +18,6 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 grid.page = (grid.page == 0) ? 1 : grid.page;
                 grid.rows = (grid.rows == 0) ? 100 : grid.rows;
-
                 var @where = (Recursos.Paginacion.Css_Paginacion.GetWhere(grid.filters, grid.rules));
                 if (!string.IsNullOrEmpty(@where))
                 {
@@ -45,7 +29,6 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 }
 
                 //IList<Cls_V_Documento_Temporal> lista = _cls_Serv_V_Documento_Temporal.Documento_Temporal_Listar_Todo(grid.sidx, grid.sord, grid.rows, grid.page, /*grid._search, grid.searchField, grid.searchOper, grid.searchString,*/ @where, ref auditoria);
-
                 //var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista); // BuscarPaginador<OrdenLogic, ORDENCAB>(grid, OrdenLogic.Instancia, "OrdenExpedienteCount", "OrdenExpedienteBuscar");
 
                 //generic.Value.rows = generic.List.Select(item => new Recursos.Paginacion.Css_Row

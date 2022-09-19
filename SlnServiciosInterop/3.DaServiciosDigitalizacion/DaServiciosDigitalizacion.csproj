@@ -22,4 +22,8 @@
     <ProjectReference Include="..\6.UtilitariosDigitalizacion\Utilitarios.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ArchivoCentral\Digitalizacion\" />
+  </ItemGroup>
+
 </Project>
