@@ -12,10 +12,10 @@ using System.Data;
 
 namespace NeServiciosDigitalizacion.ArchivoCentral.Carga
 {
-    public class enCarga : neBase
+    public class neCarga : neBase
     {
         DaCarga _objDa = null;
-        public enCarga(coConexionDb objCoConexionDb) : base(objCoConexionDb)
+        public neCarga(coConexionDb objCoConexionDb) : base(objCoConexionDb)
         {
             _objDa = new DaCarga(objCoConexionDb);
         }

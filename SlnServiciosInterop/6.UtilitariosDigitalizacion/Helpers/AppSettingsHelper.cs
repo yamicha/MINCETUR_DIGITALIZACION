@@ -14,12 +14,11 @@ namespace Utilitarios.Helpers
         public static string PackAdminMant => GetAppSetting("Pack_AdminMant");
         public static string PackCargaMant => GetAppSetting("PackCargaMant");
         public static string PackCargaCons => GetAppSetting("PackCargaConst");
+        public static string PackDigitalCons => GetAppSetting("PackDigitalCons");
+        public static string PackDigitalMant => GetAppSetting("PackDigitalMant");
         public static string MensajeLog => GetAppSetting("MensajeLog");
-
         public static string RutaTemporal => GetAppSetting("RutaTemporal");
-
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
-
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();

@@ -27,7 +27,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                 using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
                 {
                     cn.Open();
-                    using (var bulkCopy = new OracleBulkCopy(cn, OracleBulkCopyOptions.Default)) //OracleBulkCopyOptions.Default  //UseInternalTransaction
+                    using (var bulkCopy = new OracleBulkCopy(cn, OracleBulkCopyOptions.Default)) //
                     {
                         bulkCopy.DestinationTableName = COD_TABLA_TEMPORAL;
                         // set the destination table name  
@@ -39,8 +39,6 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 bulkCopy.ColumnMappings.Add(mapMumber);
                             }
                         }
-                        //  SqlBulkCopyOptions.KeepNulls
-                        //bulkCopy.BulkCopyOptions = OracleBulkCopyOptions.UseInternalTransaction;
                         bulkCopy.BulkCopyTimeout = 1200;
                         bulkCopy.WriteToServer(dt);
                     }

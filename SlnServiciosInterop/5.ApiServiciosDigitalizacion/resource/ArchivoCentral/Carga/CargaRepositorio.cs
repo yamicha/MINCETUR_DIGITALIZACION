@@ -12,7 +12,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
         private coConexionDb _objCoConexionDb;
-        private enCarga _rule = null;
+        private neCarga _rule = null;
         public CargaRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
         {
             this._ConfigurationManager = ConfigurationManager;
@@ -23,7 +23,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
                 PassCnx = this._ConfigurationManager.Value.AppSettings.PassCnx,
                 TNS_ADMIN = this._ConfigurationManager.Value.ConnectionStrings.Tns_Admin
             };
-            _rule = new enCarga(_objCoConexionDb);
+            _rule = new neCarga(_objCoConexionDb);
         }
         public enTabla Carga_TablaListarUno(enTabla objtabla, ref enAuditoria auditoria)
         {

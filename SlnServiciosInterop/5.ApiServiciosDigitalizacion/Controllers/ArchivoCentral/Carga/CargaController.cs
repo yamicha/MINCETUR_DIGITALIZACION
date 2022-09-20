@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using ApiServiciosDigitalizacion.Recursos;
 using ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
@@ -16,7 +12,6 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Excel;
-using Utilitarios.Helpers;
 using Utilitarios.Recursos;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
