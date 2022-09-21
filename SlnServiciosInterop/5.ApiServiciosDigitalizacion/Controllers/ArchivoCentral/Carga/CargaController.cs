@@ -471,6 +471,22 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             return File(ByteFile, "application/vnd.ms-excel", "ErroresCarga.xlsx");
         }
 
+        [HttpGet]
+        [Route("listar/{IdUsuario}")]
+        public IActionResult Carga_Listar(long IdControlCarga)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+            {
+                auditoria.Objeto = repositorio.Carga_ControlCargaListarUno(IdControlCarga, ref auditoria);
+            }
+            if (!auditoria.EjecucionProceso)
+            {
+                Log.Guardar(auditoria.ErrorLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
 
     }

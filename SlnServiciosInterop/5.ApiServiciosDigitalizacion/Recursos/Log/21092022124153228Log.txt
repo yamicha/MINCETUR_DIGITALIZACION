@@ -1,0 +1,4 @@
+System.IndexOutOfRangeException: No se ha encontrado la columna especificada en el juego de resultados
+   at OracleInternal.ServiceObjects.OracleDataReaderImpl.GetColumnOrdinal(String colName)
+   at Oracle.ManagedDataAccess.Client.OracleDataReader.GetOrdinal(String name)
+   at DaServiciosDigitalizacion.Archivo_Central.Carga.DaCarga.Carga_ControlCargaListarUno(Int64 ID_CONTROLCARGA, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Carga\DaCarga.cs:line 326

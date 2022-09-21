@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilitarios", "6.Utilitario
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frotend.ArchivoCentral.Micetur", "7.FrontendArchivoCentral\Frotend.ArchivoCentral.Micetur.csproj", "{57B97D41-1084-4956-A131-3BACA4591F8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frotend.Ventanilla.Micetur", "Frotend.Ventanilla.Micetur\Frotend.Ventanilla.Micetur.csproj", "{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{57B97D41-1084-4956-A131-3BACA4591F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57B97D41-1084-4956-A131-3BACA4591F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57B97D41-1084-4956-A131-3BACA4591F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{5D163846-2BF6-4BAA-89AE-450826483E56} = {616055AB-304A-480D-A8CF-86815FCDF7A2}
 		{E4AF20C5-1A3F-4AE1-906F-ED7641D0A8C1} = {22E904FD-335E-4F3D-A551-42CECCC990BB}
 		{57B97D41-1084-4956-A131-3BACA4591F8E} = {D0400140-FEF6-4F58-A54E-5347B1A1C4E9}
+		{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE} = {AC7E0EDC-F689-441D-89F1-4AAB10A18A29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E68A3A0A-EE34-4B76-BBE2-A677A95A8903}

@@ -84,7 +84,5 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
   
         }
 
-
-
     }
 }
