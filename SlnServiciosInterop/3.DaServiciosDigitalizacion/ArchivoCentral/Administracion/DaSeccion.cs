@@ -184,8 +184,8 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Administracion
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SECCION", OracleDbType.Int32)).Value = entidad.ID_SECCION;
                 cmd.Parameters.Add(new OracleParameter("XIN_DES_CORTA_SECCION", OracleDbType.Varchar2)).Value = entidad.DES_CORTA_SECCION;
                 cmd.Parameters.Add(new OracleParameter("XIN_DES_LARGA_SECCION", OracleDbType.Varchar2)).Value = entidad.DES_LARGA_SECCION;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
-                cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
+                cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
