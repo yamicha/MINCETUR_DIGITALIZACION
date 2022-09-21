@@ -21,7 +21,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
         [HttpPost]
         [Route("documento-temporal-paginado")]
-        public IActionResult Documento_TemporalListar(Recursos.Paginacion.GridTable grid)
+        public IActionResult Documento_TemporalListar([FromBody] Recursos.Paginacion.GridTable grid)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -37,23 +37,29 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                         @where = @where + " and ";
                     }
                 }
+                else
+                    @where = "1=1";
+
                 using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                 {
-                    IList<enDocumentoTemporal> lista = repositorio.DocumentoTemporal_Paginado(grid.sidx, grid.sord, grid.rows, grid.page, /*grid._search, grid.searchField, grid.searchOper, grid.searchString,*/ @where, ref auditoria);
-                    var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista); // BuscarPaginador<OrdenLogic, ORDENCAB>(grid, OrdenLogic.Instancia, "OrdenExpedienteCount", "OrdenExpedienteBuscar");
-
-                    generic.Value.rows = generic.List.Select(item => new Recursos.Paginacion.Css_Row
+                    IList<enDocumentoTemporal> lista = repositorio.DocumentoTemporal_Paginado(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
+                    if (auditoria.EjecucionProceso)
                     {
-                        id = item.ID_DOCUMENTO.ToString(),
-                        cell = new string[] {
+                        var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista);
+
+                        generic.Value.rows = generic.List.Select(item => new Recursos.Paginacion.Css_Row
+                        {
+                            id = item.ID_DOCUMENTO.ToString(),
+                            cell = new string[] {
                             item.ID_DOCUMENTO.ToString(),
                             item.ID_CONTROL_CARGA.ToString(),
                             item.ID_FONDO,
                             item.ID_SECCION,
                             item.ID_SERIE,
+                            item.DES_FONDO, 
+                            item.NOM_DOCUMENTO,
                             item.DES_LARGA_SECCION,
                             item.DES_SERIE,
-                            item.NOM_DOCUMENTO,
                             item.DESCRIPCION,
                             item.ANIO,
                             item.FOLIOS,
@@ -63,11 +69,11 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
                       }
-                    }).ToArray();
-
-                    //var jsonResult = Json(generic.Value, JsonRequestBehavior.AllowGet);
-                    //jsonResult.MaxJsonLength = int.MaxValue;
-                    return StatusCode(auditoria.Code, generic.Value);
+                        }).ToArray();
+                        return StatusCode(auditoria.Code, generic.Value);
+                    }
+                    else
+                        return StatusCode(auditoria.Code, auditoria);
                 }
             }
             catch (Exception ex)
@@ -75,8 +81,10 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 Log.Guardar(ex.ToString());
                 return StatusCode(auditoria.Code, auditoria);
             }
-          
-
+  
         }
+
+
+
     }
 }

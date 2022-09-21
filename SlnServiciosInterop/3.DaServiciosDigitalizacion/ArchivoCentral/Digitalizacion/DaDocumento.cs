@@ -31,7 +31,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
             cmd.Parameters.Add("XIN_ORDEN", ORDEN);
             cmd.Parameters.Add("XIN_WHERE", @WHERE);
-            cmd.Parameters.Add("XOUT_CUENTA", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("XOUT_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();

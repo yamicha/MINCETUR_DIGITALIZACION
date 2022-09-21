@@ -112,19 +112,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                                                     {
                                                                         if (!auditoria.Rechazo)
                                                                         {
-                                                                            //int Lista_cargada = _cls_Serv_Documento_Temporal.Documento_Temporal_Cuenta(enControlCarga.ID_CONTROL_CARGA, ref auditoria);
-                                                                            //if (auditoria.EjecucionProceso)
-                                                                            //{
-                                                                            //    if (!auditoria.Rechazo)
-                                                                            //    {
-                                                                            //        if (Lista_cargada != cls_Ent_Carga.CANTIDAD_FILAS)
-                                                                            //        {
-                                                                            //            VALIDO = false;
-                                                                            //            MENSAJE_ERROR = "La cantidad de archivos cargados no se subieron correctamente por error de configuración - Consulte con el encargado de sistemas si este error aparece";
-                                                                            //            auditoria = this.Carga_ErrorRegistrar(enControlCarga.ID_CONTROL_CARGA, MENSAJE_ERROR, USU_CREACION, IP_CREACION, 0, auditoria);
-                                                                            //        }
-                                                                            //        if (VALIDO)
-                                                                            //        {
+
                                                                             auditoria.Limpiar();
                                                                             try
                                                                             {
@@ -144,11 +132,6 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                                                                 MENSAJE_ERROR = auditoria.MensajeSalida;
                                                                                 //auditoria = this.Carga_ErrorRegistrar(enControlCarga.ID_CONTROL_CARGA, MENSAJE_ERROR, USU_CREACION, IP_CREACION, 0, auditoria);
                                                                             }
-
-
-                                                                            //        }
-                                                                            //    }
-                                                                            //}
                                                                         }
                                                                     }
                                                                 }
