@@ -862,14 +862,14 @@ SICA = {
                 },
                 datatype: function (postdata) {
                     var migrilla = new Object();
-                    migrilla.page = postdata.page;
-                    migrilla.rows = postdata.rows;
+                    migrilla.page = parseInt(postdata.page);
+                    migrilla.rows = parseInt(postdata.rows);
                     migrilla.sidx = postdata.sortField;
                     migrilla.sord = postdata.sortOrder;
                     migrilla._search = postdata.isSearch;
                     migrilla.filters = postdata.filters;
                     if (opciones.rules != false) {
-                        migrilla.Rules = GetRules(grilla);
+                       migrilla.Rules = GetRules(grilla);
                     }
 
                     if (migrilla._search == true) {
@@ -877,12 +877,11 @@ SICA = {
                         migrilla.searchOper = postdata.searchOper;
                         migrilla.searchString = postdata.searchString;
                     }
-
-                    var params = { grid: migrilla };
+                    var params = migrilla; 
 
                     $.ajax({
                         url: urlListar,
-                        type: 'post',
+                        type: 'POST',
                         contentType: 'application/json; charset=utf-8',
                         data: JSON.stringify(params),
                         async: false,

@@ -5,7 +5,7 @@
         public long ID_CAMPO { get; set; }
         public long ID_TABLA { get; set; }
         public string COD_CAMPO { get; set; }
-        public string DESCRIPCION_CAMPO { get; set; }
+        public string DES_CAMPO { get; set; }
         public int NRO_CAMPO { get; set; }
         public string TIPO_DATO { get; set; }
         public string TIPO { get; set; }
@@ -19,6 +19,9 @@
         public string FLG_AUTOINCREMENT { get; set; }
         public string QUERY_CAMPO { get; set; }
         public string TIPO_CAMPO { get; set; }
+
+        public string FLG_VALIDA_PK { get; set; }
+        
 
     }
 }

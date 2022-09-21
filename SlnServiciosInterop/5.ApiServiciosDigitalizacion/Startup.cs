@@ -13,7 +13,7 @@ namespace ApiServiciosDigitalizacion
         {
             Configuration = configuration;
         }
-        private string misReglasCors = "ReglasCors";
+        private string misReglasCors = "AccesoCors";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.

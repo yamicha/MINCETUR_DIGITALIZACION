@@ -10,16 +10,15 @@ namespace Utilitarios.Helpers
     public class AppSettingsHelper
     {
         public static int AppId => Convert.ToInt16(GetAppSetting("IdSis"));
-        public static string Pack_AdminConsulta => GetAppSetting("Pack_AdminConsulta");
-        public static string Pack_AdminMant => GetAppSetting("Pack_AdminMant");
+        public static string PackAdminConsulta => GetAppSetting("Pack_AdminConsulta");
+        public static string PackAdminMant => GetAppSetting("Pack_AdminMant");
         public static string PackCargaMant => GetAppSetting("PackCargaMant");
         public static string PackCargaCons => GetAppSetting("PackCargaConst");
+        public static string PackDigitalCons => GetAppSetting("PackDigitalCons");
+        public static string PackDigitalMant => GetAppSetting("PackDigitalMant");
         public static string MensajeLog => GetAppSetting("MensajeLog");
-
         public static string RutaTemporal => GetAppSetting("RutaTemporal");
-
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
-
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
