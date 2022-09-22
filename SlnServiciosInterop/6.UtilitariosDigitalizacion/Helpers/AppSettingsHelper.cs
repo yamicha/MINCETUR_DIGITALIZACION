@@ -11,7 +11,7 @@ namespace Utilitarios.Helpers
     {
         public static int AppId => Convert.ToInt16(GetAppSetting("IdSis"));
         public static string PackAdminConsulta => GetAppSetting("Pack_AdminConsulta");
-        public static string PackAdminMant => GetAppSetting("Pack_AdminMant");
+        public static string PackAdminMant => GetAppSetting("PackAdminMant");
         public static string PackCargaMant => GetAppSetting("PackCargaMant");
         public static string PackCargaCons => GetAppSetting("PackCargaConst");
         public static string PackDigitalCons => GetAppSetting("PackDigitalCons");

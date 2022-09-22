@@ -10,7 +10,7 @@ using Utilitarios.Helpers;
 
 namespace Frotend.ArchivoCentral.Micetur.Recursos
 {
-    public class Css_Log
+    public class Log
     {
         public static string Guardar(string texto)
         {

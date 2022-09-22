@@ -22,7 +22,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             List<enFondo> lista = new List<enFondo>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.Pack_AdminConsulta + ".PRC_CDAFondo_LISTAR";
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFondo_LISTAR";
             //cmd.Parameters.Add("XIN_DES_SECCION", validarNulo(objenSubSerie.DES_CORTA_SECCION));
             cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
@@ -89,7 +89,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.Pack_AdminMant, "PROC_CDAFONDO_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
@@ -123,7 +123,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.Pack_AdminMant, "PROC_CDAFONDO_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
@@ -157,7 +157,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.Pack_AdminMant, "PROC_CDAFONDO_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
@@ -192,7 +192,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.Pack_AdminMant, "PROC_CDAFONDO_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
