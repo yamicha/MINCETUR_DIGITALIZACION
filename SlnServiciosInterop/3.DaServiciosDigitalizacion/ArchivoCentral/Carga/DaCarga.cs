@@ -259,7 +259,6 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                 }
             }
         }
-
         public void Carga_Validar(long ID_CONTROL_CARGA, long ID_TABLA, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -286,7 +285,6 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                 }
             }
         }
-
         public enControlCarga Carga_ControlCargaListarUno(long ID_CONTROLCARGA, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -323,8 +321,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                             int intStrFlgCarga = drReader.GetOrdinal("STR_FLG_CARGA");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intStrCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
-                            int intUsuModificion = drReader.GetOrdinal("USU_MODIFICACION");
-                            int intStrFecModificacion = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -336,8 +333,6 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 if (!drReader.IsDBNull(intFlgCarga)) temp.STR_FLG_CARGA = arrResult[intFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intStrCreacion)) temp.STR_FEC_CREACION = arrResult[intStrCreacion].ToString();
-                                if (!drReader.IsDBNull(intUsuModificion)) temp.USU_MODIFICACION = arrResult[intUsuModificion].ToString();
-                                if (!drReader.IsDBNull(intStrFecModificacion)) temp.STR_FEC_MODIFICACION = arrResult[intStrFecModificacion].ToString();
                             }
                             drReader.Close();
                         }
@@ -357,7 +352,74 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             }
             return temp;
         }
+        public List<enControlCarga> Carga_ControlCargaListar(long IdUsuario, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enControlCarga> Lista = new List<enControlCarga>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDACONTROLCARGA_LISTAR");
+            cmd.Parameters.Add("XIN_ID_USUARIO", IdUsuario);
+            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("XOUT_VALIDO", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        int PO_VALIDO = int.Parse(cmd.Parameters["XOUT_VALIDO"].Value.ToString());
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == 0)
+                            auditoria.Rechazar(PO_MENSAJE);
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enControlCarga temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdControlCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
+                            int intIdtabla = drReader.GetOrdinal("ID_TABLA");
+                            int intIusuario = drReader.GetOrdinal("ID_USUARIO");
+                            int intNroRegistro = drReader.GetOrdinal("NRO_REGISTROS");
+                            int intFlgCarga = drReader.GetOrdinal("FLG_CARGA");
+                            int intStrFlgCarga = drReader.GetOrdinal("STR_FLG_CARGA");
+                            int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intStrCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enControlCarga();
+                                if (!drReader.IsDBNull(intIdControlCarga)) temp.ID_CONTROL_CARGA = int.Parse(arrResult[intIdControlCarga].ToString());
+                                if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
+                                if (!drReader.IsDBNull(intIusuario)) temp.ID_USUARIO = int.Parse(arrResult[intIusuario].ToString());
+                                if (!drReader.IsDBNull(intNroRegistro)) temp.NRO_REGISTROS = int.Parse(arrResult[intNroRegistro].ToString());
+                                if (!drReader.IsDBNull(intFlgCarga)) temp.STR_FLG_CARGA = arrResult[intFlgCarga].ToString();
+                                if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
+                                if (!drReader.IsDBNull(intStrCreacion)) temp.STR_FEC_CREACION = arrResult[intStrCreacion].ToString();
+                                Lista.Add(temp); 
 
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    Lista = new List<enControlCarga>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return Lista;
+        }
         public List<enErrorCarga> Carga_ErrorCargaListar(long ID_CONTROLCARGA, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

@@ -74,8 +74,11 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
         {
             return _rule.Carga_ErrorCargaListar(ID_CONTROLCARGA, ref auditoria);
         }
-       
 
+        public List<enControlCarga> Carga_ControlCargaListar(long IdUsuario, ref enAuditoria auditoria)
+        {
+            return _rule.Carga_ControlCargaListar(IdUsuario, ref auditoria);
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

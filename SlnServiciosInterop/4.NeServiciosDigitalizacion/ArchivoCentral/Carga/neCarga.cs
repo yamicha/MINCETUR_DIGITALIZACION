@@ -55,5 +55,10 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Carga
             return this._objDa.Carga_ErrorCargaListar(ID_CONTROLCARGA, ref auditoria);
         }
 
+        public List<enControlCarga> Carga_ControlCargaListar(long IdUsuario, ref enAuditoria auditoria)
+        {
+            return this._objDa.Carga_ControlCargaListar(IdUsuario, ref auditoria);
+        }
+
     }
 }

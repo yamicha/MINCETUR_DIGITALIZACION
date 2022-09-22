@@ -405,7 +405,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
         }
 
         [HttpGet]
-        [Route("get-carga/{IdControlCarga}")]
+        [Route("get-carga/{IdControlCarga:int}")]
         public IActionResult Carga_ListarUno(long IdControlCarga)
         {
             enAuditoria auditoria = new enAuditoria();
@@ -421,7 +421,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
         }
 
         [HttpGet]
-        [Route("get-errores/{IdControlCarga}")]
+        [Route("get-errores/{IdControlCarga:int}")]
         public IActionResult Carga_ErroresListar(long IdControlCarga)
         {
             enAuditoria auditoria = new enAuditoria();
@@ -472,13 +472,13 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
         }
 
         [HttpGet]
-        [Route("listar/{IdUsuario}")]
-        public IActionResult Carga_Listar(long IdControlCarga)
+        [Route("listar/{IdUsuario:int}")]
+        public IActionResult Carga_Listar(long IdUsuario)
         {
             enAuditoria auditoria = new enAuditoria();
             using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
             {
-                auditoria.Objeto = repositorio.Carga_ControlCargaListarUno(IdControlCarga, ref auditoria);
+                auditoria.Objeto = repositorio.Carga_ControlCargaListar(IdUsuario, ref auditoria);
             }
             if (!auditoria.EjecucionProceso)
             {

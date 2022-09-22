@@ -3,6 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Owin;
+//using Microsoft.Owin.Security.Cookies;
+using Utilitarios.Helpers.Authorization;
+using System;
+using Owin; 
+
+[assembly: OwinStartup(typeof(Frotend.ArchivoCentral.Micetur.Startup))]
 
 namespace Frotend.ArchivoCentral.Micetur
 {
@@ -19,6 +26,7 @@ namespace Frotend.ArchivoCentral.Micetur
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +42,8 @@ namespace Frotend.ArchivoCentral.Micetur
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-           // app.UseHttpsRedirection();
+           // app.UseCors(Microsoft.Owin.CorsOptions.AllowAll);
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -48,6 +57,18 @@ namespace Frotend.ArchivoCentral.Micetur
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationType = AppAuthenticationType.ApplicationCookie,
+            //    LoginPath = new PathString("/authorization/signin"),
+            //    CookieName = AppAuthenticationType.CookieName,
+            //    CookieHttpOnly = true,
+            //    SlidingExpiration = true,
+            //    ExpireTimeSpan = TimeSpan.FromDays(1)
+            //});
+
+
         }
     }
 }
