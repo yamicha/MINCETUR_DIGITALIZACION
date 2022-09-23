@@ -19,7 +19,7 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Administracion
         }
         public enFondo Fondo_ListarUno(enFondo objEnSubSerie, ref enAuditoria auditoria)
         {
-            return new enFondo(); //this._objDa.Fondo_ListarUno(objEnSubSerie, ref auditoria);
+            return this._objDa.Fondo_ListarUno(objEnSubSerie, ref auditoria);
         }
         public void Fondo_Insertar(enFondo objEnSubSerie, ref enAuditoria auditoria)
         {
