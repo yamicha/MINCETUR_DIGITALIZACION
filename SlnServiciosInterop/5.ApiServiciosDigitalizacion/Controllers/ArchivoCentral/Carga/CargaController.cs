@@ -488,6 +488,23 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
         }
 
 
+        [HttpGet]
+        [Route("lista-formato")]
+        public IActionResult Carga_TablaListar()
+        {
+            enAuditoria auditoria = new enAuditoria();
+            using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+            {
+                auditoria.Objeto = repositorio.Carga_TablaListar(new enTabla(), ref auditoria);
+            }
+            if (!auditoria.EjecucionProceso)
+            {
+                Log.Guardar(auditoria.ErrorLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+
 
     }
 }

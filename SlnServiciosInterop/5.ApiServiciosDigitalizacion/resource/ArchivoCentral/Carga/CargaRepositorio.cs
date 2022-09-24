@@ -37,6 +37,12 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
                 return new enTabla();
             }
         }
+
+        public List<enTabla> Carga_TablaListar(enTabla objtabla, ref enAuditoria auditoria)
+        {
+            return _rule.Carga_TablaListar(objtabla, ref auditoria);
+        }
+
         public List<enCampo> Carga_CamposListar(enCampo objcampo, ref enAuditoria auditoria)
         {
             try

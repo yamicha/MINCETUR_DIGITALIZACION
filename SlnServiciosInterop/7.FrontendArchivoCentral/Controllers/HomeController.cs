@@ -8,12 +8,10 @@ using Utilitarios.Helpers.Authorization;
 
 namespace Frotend.ArchivoCentral.Micetur.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        //[Authorize]
         public IActionResult Index()
         {
-
             return View();
         }
 

@@ -52,7 +52,8 @@
                             </label>
                             @*@Html.DropDownList("SelectPerfiles", new SelectList((System.Collections.IEnumerable)ViewData["Seg_Perfiles"], "ID_PERFIL", "DESC_PERFIL"), new { @class = "form-control", @style = "margin-top:0px", @ID = "SelectPerfiles" })*@
                             <input type="hidden" id="inputHddid_perfil" value="@ViewBag.id_perfil" />
-                            <input type="hidden" id="inputHddCod_usuario" value="iperez" />
+                            <input type="hidden" id="inputHddCod_usuario" value="Iperez" />
+                            <input type="hidden" id="inputHddId_Usuario" value="25" />
                         </a>
                     </li>
 
@@ -63,7 +64,7 @@
                             </span>
                             <span class="pr-lg-1 d-none d-lg-block">
                                 <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
-                                    <strong class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 16px">@ViewBag.Usuario_Nombre</strong>
+                                    <strong class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 16px">@ViewBag.UserName</strong>
                                 </span>
                                 <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
                                     <small class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 13px" id="small_unidad">Unidad Orgánica: @ViewBag.Desc_Oficina</small>

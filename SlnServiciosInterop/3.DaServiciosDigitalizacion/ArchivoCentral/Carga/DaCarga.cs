@@ -55,7 +55,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             enTabla temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDAFORMATO_LISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDAFORMATO_LISTAR_UNO");
             cmd.Parameters.Add("XIN_ID_TABLA", validarNulo(objtabla.ID_TABLA));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -107,6 +107,60 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                 }
             }
             return temp;
+        }
+
+        public List<enTabla> Carga_TablaListar(enTabla objtabla, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enTabla> Lista =new List<enTabla>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDAFORMATO_LISTAR");
+            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enTabla temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdtabla = drReader.GetOrdinal("ID_TABLA");
+                            int intDesTabla = drReader.GetOrdinal("DES_TABLA");
+                            int intCodTablaTemporal = drReader.GetOrdinal("COD_TABLA_TEMPORAL");
+                            int intCodTablaOficial = drReader.GetOrdinal("COD_TABLA_OFICIAL");
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enTabla();
+                                if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
+                                if (!drReader.IsDBNull(intDesTabla)) temp.DESCRIPCION_TABLA = arrResult[intDesTabla].ToString();
+                                if (!drReader.IsDBNull(intCodTablaTemporal)) temp.COD_TABLA_TEMPORAL = arrResult[intCodTablaTemporal].ToString();
+                                if (!drReader.IsDBNull(intCodTablaOficial)) temp.COD_TABLA_OFICIAL = arrResult[intCodTablaOficial].ToString();
+                                Lista.Add(temp); 
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    Lista = new List<enTabla>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return Lista;
         }
         public void Carga_ControlCargaInsertar(enControlCarga entidad, ref enAuditoria auditoria)
         {
@@ -291,7 +345,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             enControlCarga temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDACONTROLCARGA_LISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDACONTROLCARGA_LISTARUNO");
             cmd.Parameters.Add("XIN_ID_CONTROL_CARGA", ID_CONTROLCARGA);
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -330,7 +384,8 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
                                 if (!drReader.IsDBNull(intIusuario)) temp.ID_USUARIO = int.Parse(arrResult[intIusuario].ToString());
                                 if (!drReader.IsDBNull(intNroRegistro)) temp.NRO_REGISTROS = int.Parse(arrResult[intNroRegistro].ToString());
-                                if (!drReader.IsDBNull(intFlgCarga)) temp.STR_FLG_CARGA = arrResult[intFlgCarga].ToString();
+                                if (!drReader.IsDBNull(intFlgCarga)) temp.FLG_CARGA = arrResult[intFlgCarga].ToString();
+                                if (!drReader.IsDBNull(intStrFlgCarga)) temp.STR_FLG_CARGA = arrResult[intStrFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intStrCreacion)) temp.STR_FEC_CREACION = arrResult[intStrCreacion].ToString();
                             }
@@ -396,7 +451,8 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
                                 if (!drReader.IsDBNull(intIusuario)) temp.ID_USUARIO = int.Parse(arrResult[intIusuario].ToString());
                                 if (!drReader.IsDBNull(intNroRegistro)) temp.NRO_REGISTROS = int.Parse(arrResult[intNroRegistro].ToString());
-                                if (!drReader.IsDBNull(intFlgCarga)) temp.STR_FLG_CARGA = arrResult[intFlgCarga].ToString();
+                                if (!drReader.IsDBNull(intFlgCarga)) temp.FLG_CARGA = arrResult[intFlgCarga].ToString();
+                                if (!drReader.IsDBNull(intStrFlgCarga)) temp.STR_FLG_CARGA = arrResult[intStrFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intStrCreacion)) temp.STR_FEC_CREACION = arrResult[intStrCreacion].ToString();
                                 Lista.Add(temp); 

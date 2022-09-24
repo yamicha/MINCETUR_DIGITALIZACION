@@ -16,7 +16,6 @@ namespace Utilitarios.Helpers.Authorization
         public string DesOficina { get; set; }
         public string DesPerfil { get; set; }
         public string NameApellidos { get; set; }
-
         public bool Usuario_Valido { get; set; }
     }
 }

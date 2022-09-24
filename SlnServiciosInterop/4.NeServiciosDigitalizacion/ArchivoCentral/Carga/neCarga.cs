@@ -28,6 +28,12 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Carga
         {
             return this._objDa.Carga_TablaListarUno(objtabla, ref auditoria);
         }
+
+        public List<enTabla> Carga_TablaListar(enTabla objtabla, ref enAuditoria auditoria)
+        {
+            return this._objDa.Carga_TablaListar(objtabla, ref auditoria);
+        }
+
         public void Carga_ControlCargaInsertar(enControlCarga entidad, ref enAuditoria auditoria)
         {
             this._objDa.Carga_ControlCargaInsertar(entidad, ref auditoria);
