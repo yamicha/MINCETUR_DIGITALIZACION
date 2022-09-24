@@ -22,8 +22,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             List<enFondo> lista = new List<enFondo>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFondo_LISTAR";
-            //cmd.Parameters.Add("XIN_DES_SECCION", validarNulo(objenSubSerie.DES_CORTA_SECCION));
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR";
+            cmd.Parameters.Add("XIN_DES_FONDO", validarNulo(objenSubSerie.DESC_FONDO));
             cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -39,9 +39,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                         {
                             enFondo temp = null;
                             arrResult = new object[drReader.FieldCount];
-                            int intIdSeccion = drReader.GetOrdinal("ID_SECCION");
-                            int intDescCorta = drReader.GetOrdinal("DES_CORTA_SECCION");
-                            int intDescLarga = drReader.GetOrdinal("DES_LARGA_SECCION");
+                            int intIdFondo = drReader.GetOrdinal("ID_FONDO");
+                            int intDesFondo = drReader.GetOrdinal("DES_FONDO");
                             int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
@@ -52,14 +51,13 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                                 drReader.GetValues(arrResult);
                                 temp = new enFondo();
 
-                                if (!drReader.IsDBNull(intIdSeccion)) temp.ID_FONDO = int.Parse(arrResult[intIdSeccion].ToString());
-                                //if (!drReader.IsDBNull(intDescCorta)) temp.DES_CORTA_SECCION = arrResult[intDescCorta].ToString();
-                                //if (!drReader.IsDBNull(intDescLarga)) temp.DES_LARGA_SECCION = arrResult[intDescLarga].ToString();
-                                //if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
-                                //if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
-                                //if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
-                                //if (!drReader.IsDBNull(intUsuMoficacion)) temp.USU_MODIFICACION = arrResult[intUsuMoficacion].ToString();
-                                //if (!drReader.IsDBNull(intfecMoficacion)) temp.STR_FEC_MODIFICACION = arrResult[intfecMoficacion].ToString();
+                                if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = int.Parse(arrResult[intIdFondo].ToString());
+                                if (!drReader.IsDBNull(intDesFondo)) temp.DESC_FONDO = arrResult[intDesFondo].ToString();
+                                if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
+                                if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intUsuMoficacion)) temp.USU_MODIFICACION = arrResult[intUsuMoficacion].ToString();
+                                if (!drReader.IsDBNull(intfecMoficacion)) temp.FEC_MODIFICACION = arrResult[intfecMoficacion].ToString();
 
                                 lista.Add(temp);
                             }
@@ -80,6 +78,67 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 }
             }
             return lista;
+        }
+
+        public enFondo Fondo_ListarUno(enFondo objenSubSerie, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            enFondo temp = null;
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR";
+            cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
+            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdFondo = drReader.GetOrdinal("ID_FONDO");
+                            int intDesFondo = drReader.GetOrdinal("DES_FONDO");
+                            //int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
+                            int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intUsuMoficacion = drReader.GetOrdinal("USU_MODIFICACION");
+                            int intfecMoficacion = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enFondo();
+
+                                if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = int.Parse(arrResult[intIdFondo].ToString());
+                                if (!drReader.IsDBNull(intDesFondo)) temp.DESC_FONDO = arrResult[intDesFondo].ToString();
+                                //if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
+                                if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intUsuMoficacion)) temp.USU_MODIFICACION = arrResult[intUsuMoficacion].ToString();
+                                if (!drReader.IsDBNull(intfecMoficacion)) temp.FEC_MODIFICACION = arrResult[intfecMoficacion].ToString();
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    temp = new enFondo();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return temp;
         }
 
         public void Fondo_Insertar(enFondo entidad, ref enAuditoria auditoria)

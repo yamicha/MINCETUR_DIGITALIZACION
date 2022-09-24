@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EnServiciosDigitalizacion.ArchivoCentral.Administracion
+﻿namespace EnServiciosDigitalizacion.ArchivoCentral.Administracion
 {
     public class enFondo
     {

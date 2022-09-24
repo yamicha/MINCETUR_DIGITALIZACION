@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net;
 using ApiServiciosDigitalizacion.Models.ArchivoCentral;
+using ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion;
 using ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
 using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Recursos; 
 
@@ -22,16 +24,18 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
         [HttpPost]
         [Route("listar")]
-        public IActionResult Serie_Listar([FromBody] SeccionModel entidad)
+        public IActionResult Serie_Listar([FromBody] SerieModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
             {
                 using (SerieRepositorio repositorio = new SerieRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Serie_Listar(new enSerie
+                    auditoria.Objeto = repositorio.Serie_Listar(new Vserie
                     {
-                        //DES_CORTA_SECCION = entidad.DescCortaSeccion,
+                        ID_SECCION = entidad.IdSeccion,
+                        COD_SERIE = entidad.DescCodSerie,
+                        DES_SERIE = entidad.DescSerie,
                         FLG_ESTADO = entidad.FlgEstado
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -51,7 +55,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
 
         [HttpGet]
-        [Route("get-seccion/{id}")]
+        [Route("get-serie/{id}")]
         public IActionResult Serie_ListarUno(int id)
         {
             enAuditoria auditoria = new enAuditoria();
@@ -59,9 +63,9 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SerieRepositorio repositorio = new SerieRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Serie_ListarUno(new enSerie
+                    auditoria.Objeto = repositorio.Serie_ListarUno(new Vserie
                     {
-                        ID_SECCION = id
+                        ID_SERIE = id
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -84,7 +88,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
         [HttpPost]
         [Route("insertar")]
-        public IActionResult Serie_Insertar([FromBody] SeccionModel entidad)
+        public IActionResult Serie_Insertar([FromBody] SerieModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -94,7 +98,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     repositorio.Serie_Insertar(new enSerie
                     {
                         ID_SECCION = entidad.IdSeccion,
-                        //DES_SERIE = entidad.de,
+                        COD_SERIE = entidad.DescCodSerie,
+                        DES_SERIE = entidad.DescSerie,
                         IP_CREACION = IPUser.ObtenerIP(),
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
@@ -119,7 +124,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
         [HttpPut]
         [Route("actualizar/{id:int}")]
-        public IActionResult Serie_Actualizar(int id, [FromBody] SeccionModel entidad)
+        public IActionResult Serie_Actualizar(int id, [FromBody] SerieModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -128,10 +133,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     repositorio.Serie_Actualizar(new enSerie
                     {
-                        ID_SECCION = id,
-                        //DES_LARGA_SECCION = entidad.DescCortaSeccion,
-                        //DES_CORTA_SECCION = entidad.DescCortaSeccion,
-                        USU_MODIFICACION = entidad.UsuModificacion
+                        ID_SERIE = id,
+                        ID_SECCION = entidad.IdSeccion,
+                        COD_SERIE = entidad.DescCodSerie,
+                        DES_SERIE = entidad.DescSerie,
+                        USU_MODIFICACION = entidad.UsuModificacion,
+                        IP_MODIFICACION = IPUser.ObtenerIP()
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -156,7 +163,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
         [HttpPut]
         [Route("estado/{id:int}")]
-        public IActionResult Serie_Estado(int id, [FromBody] SeccionModel entidad)
+        public IActionResult Serie_Estado(int id, [FromBody] SerieModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -165,7 +172,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     repositorio.Serie_Estado(new enSerie
                     {
-                        ID_SECCION = entidad.IdSeccion,
+                        ID_SERIE = entidad.IdSerie,
                         FLG_ESTADO = entidad.FlgEstado,
                         IP_MODIFICACION = IPUser.ObtenerIP(),
                         USU_MODIFICACION = entidad.UsuModificacion
@@ -197,7 +204,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     repositorio.Serie_Eliminar(new enSerie
                     {
-                        ID_SECCION = id
+                        ID_SERIE = id
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {

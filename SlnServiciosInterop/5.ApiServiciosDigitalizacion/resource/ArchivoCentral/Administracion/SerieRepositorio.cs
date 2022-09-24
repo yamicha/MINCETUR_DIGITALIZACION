@@ -6,6 +6,7 @@ using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion;
 using NeServiciosDigitalizacion.ArchivoCentral.Administracion;
 using CoServiciosDigitalizacion;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
 
 namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
 {
@@ -29,7 +30,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
             _rule = new neSerie(_objCoConexionDb);
         }
 
-        public List<enSerie> Serie_Listar(enSerie entidad, ref enAuditoria auditoria)
+        public List<Vserie> Serie_Listar(Vserie entidad, ref enAuditoria auditoria)
         {
             try
             {
@@ -38,10 +39,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                return new List<enSerie>();
+                return new List<Vserie>();
             }
         }
-        public enSerie Serie_ListarUno(enSerie entidad, ref enAuditoria auditoria)
+        public Vserie Serie_ListarUno(Vserie entidad, ref enAuditoria auditoria)
         {
             try
             {
@@ -50,7 +51,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-                return new enSerie();
+                return new Vserie();
             }
         }
 

@@ -2,6 +2,7 @@
 using DaServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,13 +16,13 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Administracion
         {
             _objDa = new DaSerie(objCoConexionDb);
         }
-        public List<enSerie> Serie_Listar(enSerie objEnSerie, ref enAuditoria auditoria)
+        public List<Vserie> Serie_Listar(Vserie objEnSerie, ref enAuditoria auditoria)
         {
             return this._objDa.Serie_Listar(objEnSerie, ref auditoria);
         }
-        public enSerie Serie_ListarUno(enSerie objEnSerie, ref enAuditoria auditoria)
+        public Vserie Serie_ListarUno(Vserie objEnSerie, ref enAuditoria auditoria)
         {
-            return new enSerie(); //this._objDa.Serie_ListarUno(objEnSerie, ref auditoria);
+            return this._objDa.Serie_ListarUno(objEnSerie, ref auditoria);
         }
         public void Serie_Insertar(enSerie objEnSerie, ref enAuditoria auditoria)
         {
