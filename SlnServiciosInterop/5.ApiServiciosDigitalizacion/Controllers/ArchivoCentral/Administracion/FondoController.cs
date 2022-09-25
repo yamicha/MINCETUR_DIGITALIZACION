@@ -11,11 +11,12 @@ using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
 using Utilitarios.Recursos;
 using System.Net;
+using Microsoft.AspNetCore.Cors;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [EnableCors("AccesoCors")]
+    [Route("api/archivo-central/fondo")]
     public class FondoController : ControllerBase
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;

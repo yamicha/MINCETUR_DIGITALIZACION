@@ -86,7 +86,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             enFondo temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR";
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR_UNO";
             cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -186,7 +186,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;

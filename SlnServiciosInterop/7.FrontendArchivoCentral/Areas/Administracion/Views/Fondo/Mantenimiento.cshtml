@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+@model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.FondoModelView
+<script type="text/javascript">
+    jQuery('#fondo_btn_grabar').click(function (e) {
+        Fondo_RegistrarDatos();
+    });
+</script>
+@using (Html.BeginForm("Proceso", "Fondo", new { @area = "Administracion" }, FormMethod.Post, false, new { @id = "frmMantenimientoFondo", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #530d0d;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                @{
+                    if (Model.ACCION == "N")
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Nueva Fondo</h4>
+                    }
+                    else
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Mantenimiento  de Fondo</h4>
+                    }
+                }
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.COD_SECCION, new { @class = "col-sm-3 control-label" })
+                            <div class="col-sm-7">
+                                @Html.TextBoxFor(model => model.COD_SECCION, new { @class = "form-control", @maxlength = "50" })
+                                @Html.ValidationMessageFor(model => model.COD_SECCION, string.Empty, new { @class = "cssMessageError" })
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DESC_FONDO, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(model => model.DESC_FONDO, new { @class = "form-control", @maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.DESC_FONDO, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="fondo_btn_grabar" class="btn btn-blue" type="button" data-toggle="modal"><i class="fa fa-save" /> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="fa fa-share-square-o"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_FONDO_ACCION", Model.ACCION)
+    @Html.Hidden("hd_FONDO_ID_FONDO", Model.ID_FONDO)
+}
