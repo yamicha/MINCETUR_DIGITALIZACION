@@ -41,9 +41,10 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                     if (respuestapi.Objeto != null)
                     {
                         List<enControlCarga> Lista = JsonConvert.DeserializeObject<List<enControlCarga>>(respuestapi.Objeto.ToString());
-                        modelo.Lista_ID_CONTROL_CARGA = Lista.Select(x => new SelectListItem()
+                        modelo.Lista_ID_CONTROL_CARGA = Lista.Select(x => new SelectListItem()  
                         {
-                            Text = "N° : " + x.ID_CONTROL_CARGA.ToString() + " | Fecha : " + x.STR_FEC_CREACION + " | N° Registros : " + x.NRO_REGISTROS,
+                            Text = "N° : " + x.ID_CONTROL_CARGA.ToString() + " | Fecha : " +
+                            x.STR_FEC_CREACION + " | N° Registros : " + x.NRO_REGISTROS+ " | N° Folios : " + x.NRO_FOLIOS,
                             Value = x.ID_CONTROL_CARGA.ToString()
                         }).ToList();
                         modelo.Lista_ID_CONTROL_CARGA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });

@@ -371,6 +371,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                             int intIdtabla = drReader.GetOrdinal("ID_TABLA");
                             int intIusuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNroRegistro = drReader.GetOrdinal("NRO_REGISTROS");
+                            int intNroFolios = drReader.GetOrdinal("NRO_FOLIOS");
                             int intFlgCarga = drReader.GetOrdinal("FLG_CARGA");
                             int intStrFlgCarga = drReader.GetOrdinal("STR_FLG_CARGA");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
@@ -384,6 +385,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
                                 if (!drReader.IsDBNull(intIusuario)) temp.ID_USUARIO = int.Parse(arrResult[intIusuario].ToString());
                                 if (!drReader.IsDBNull(intNroRegistro)) temp.NRO_REGISTROS = int.Parse(arrResult[intNroRegistro].ToString());
+                                if (!drReader.IsDBNull(intNroFolios)) temp.NRO_FOLIOS = int.Parse(arrResult[intNroFolios].ToString());
                                 if (!drReader.IsDBNull(intFlgCarga)) temp.FLG_CARGA = arrResult[intFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intStrFlgCarga)) temp.STR_FLG_CARGA = arrResult[intStrFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
@@ -438,7 +440,8 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                             int intIdControlCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
                             int intIdtabla = drReader.GetOrdinal("ID_TABLA");
                             int intIusuario = drReader.GetOrdinal("ID_USUARIO");
-                            int intNroRegistro = drReader.GetOrdinal("NRO_REGISTROS");
+                            int intNroRegistro = drReader.GetOrdinal("NRO_REGISTROS"); 
+                            int intNroFolios= drReader.GetOrdinal("NRO_FOLIOS");
                             int intFlgCarga = drReader.GetOrdinal("FLG_CARGA");
                             int intStrFlgCarga = drReader.GetOrdinal("STR_FLG_CARGA");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
@@ -451,6 +454,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                                 if (!drReader.IsDBNull(intIdtabla)) temp.ID_TABLA = int.Parse(arrResult[intIdtabla].ToString());
                                 if (!drReader.IsDBNull(intIusuario)) temp.ID_USUARIO = int.Parse(arrResult[intIusuario].ToString());
                                 if (!drReader.IsDBNull(intNroRegistro)) temp.NRO_REGISTROS = int.Parse(arrResult[intNroRegistro].ToString());
+                                if (!drReader.IsDBNull(intNroFolios)) temp.NRO_FOLIOS = int.Parse(arrResult[intNroFolios].ToString());
                                 if (!drReader.IsDBNull(intFlgCarga)) temp.FLG_CARGA = arrResult[intFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intStrFlgCarga)) temp.STR_FLG_CARGA = arrResult[intStrFlgCarga].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
