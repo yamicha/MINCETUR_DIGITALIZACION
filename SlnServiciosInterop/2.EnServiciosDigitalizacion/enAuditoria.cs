@@ -38,7 +38,6 @@ namespace EnServiciosDigitalizacion
 
         public void Rechazar(String mensaje)
         {
-            Code = (int)HttpStatusCode.NotFound;
             Objeto = null;
             MensajeSalida = mensaje;
             ErrorLog = mensaje;

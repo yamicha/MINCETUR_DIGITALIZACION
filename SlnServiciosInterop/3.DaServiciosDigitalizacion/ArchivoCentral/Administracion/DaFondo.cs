@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
@@ -88,6 +89,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR_UNO";
             cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
+            cmd.Parameters.Add("XOUT_VALIDO", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -97,10 +100,13 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
+                        int PO_VALIDO = int.Parse(cmd.Parameters["XOUT_VALIDO"].Value.ToString());
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == 0)
+                            auditoria.Rechazar(PO_MENSAJE);
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            
                             arrResult = new object[drReader.FieldCount];
                             int intIdFondo = drReader.GetOrdinal("ID_FONDO");
                             int intDesFondo = drReader.GetOrdinal("DES_FONDO");

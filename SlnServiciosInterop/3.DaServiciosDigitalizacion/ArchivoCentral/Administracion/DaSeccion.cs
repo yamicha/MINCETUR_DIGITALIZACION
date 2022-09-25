@@ -24,7 +24,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Administracion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDASECCION_LISTAR";
-            cmd.Parameters.Add("XIN_DES_SECCION", validarNulo(objenSeccion.DES_CORTA_SECCION));
+            cmd.Parameters.Add("XIN_DES_SECCION", validarNulo(objenSeccion.DES_LARGA_SECCION));
             cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSeccion.FLG_ESTADO));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -91,6 +91,8 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Administracion
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDASECCION_LISTAR_UNO";
             cmd.Parameters.Add("XIN_ID_SECCION", validarNulo(objenSeccion.ID_SECCION));
+            cmd.Parameters.Add("XOUT_VALIDO", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -100,6 +102,10 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Administracion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
+                        int PO_VALIDO = int.Parse(cmd.Parameters["XOUT_VALIDO"].Value.ToString());
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == 0)
+                            auditoria.Rechazar(PO_MENSAJE);
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {

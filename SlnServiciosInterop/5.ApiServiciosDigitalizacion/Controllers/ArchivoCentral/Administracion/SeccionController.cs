@@ -33,7 +33,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     auditoria.Objeto = repositorio.Seccion_Listar(new enSeccion
                     {
-                        DES_CORTA_SECCION = entidad.DescCortaSeccion,
+                        DES_LARGA_SECCION = entidad.DescLargaSeccion,
                         FLG_ESTADO = entidad.FlgEstado
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -106,7 +106,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                         auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                     else
-                        auditoria.Code = (int)HttpStatusCode.Created;
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
                 }
             }
             catch (Exception ex)
@@ -131,7 +136,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     repositorio.Seccion_Actualizar(new enSeccion
                     {
                         ID_SECCION = id,
-                        DES_LARGA_SECCION = entidad.DescCortaSeccion,
+                        DES_LARGA_SECCION = entidad.DescLargaSeccion,
                         DES_CORTA_SECCION = entidad.DescCortaSeccion,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria);
@@ -143,7 +148,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     else
                     {
                         if (auditoria.Rechazo)
-                            auditoria.Code = (int)HttpStatusCode.NoContent;
+                            auditoria.Code = (int)HttpStatusCode.OK;
                     }
                 }
             }

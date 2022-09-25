@@ -109,7 +109,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                         auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
                     else
-                        auditoria.Code = (int)HttpStatusCode.Created;
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
                 }
             }
             catch (Exception ex)
@@ -146,7 +151,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     else
                     {
                         if (auditoria.Rechazo)
-                            auditoria.Code = (int)HttpStatusCode.NoContent;
+                            auditoria.Code = (int)HttpStatusCode.OK;
                     }
                 }
             }

@@ -67,7 +67,6 @@ API = {
             });
     },
     FetchPut: function (type, url, paramters, calback) {
-        debugger; 
         var requestOptions = {
             method: 'PUT',
             headers: {

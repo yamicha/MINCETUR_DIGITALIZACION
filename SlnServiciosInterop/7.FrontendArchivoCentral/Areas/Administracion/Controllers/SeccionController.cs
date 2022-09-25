@@ -7,12 +7,13 @@ using Frotend.ArchivoCentral.Micetur.Helpers;
 using Frotend.ArchivoCentral.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Frotend.ArchivoCentral.Micetur.Controllers; 
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
     [Area("Administracion")]
     [Route("[action]")]
-    public class SeccionController : Controller
+    public class SeccionController : BaseController
     {
         // GET: SeccionController
         [HttpGet, Route("~/Administracion/Seccion")]

@@ -26,8 +26,8 @@ function Seccion_ConfigurarGrilla(_grilla, _barra) {
         '', '', '', '', '',
         'Editar', 'Eliminar', 'Estado',
         'Cod Sección', 'Descripción Corta', 'Descripción Larga',
-        'Usuario Creación', 'Fecha Creación', 'IP Creación',
-        'Usuario Modificación', 'Fecha Modificación', 'IP Modificación'];
+        'Usuario Creación', 'Fecha Creación',
+        'Usuario Modificación', 'Fecha Modificación'];
     var colModels = [
         { name: 'ID_SECCION', index: 'ID_SECCION', align: 'center', hidden: true, width: 0, key: true },
         { name: 'FLG_ELIMINADO', index: 'FLG_ELIMINADO', align: 'center', width: 0, hidden: true },
@@ -44,11 +44,11 @@ function Seccion_ConfigurarGrilla(_grilla, _barra) {
         { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 250, hidden: false },
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 150, hidden: false },
-        { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
-        { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
-        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
-        { name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
+        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        //{ name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false
@@ -139,7 +139,8 @@ function Seccion_Eliminar(id) {
 function Seccion_CargarGrilla(_grilla) {
     var item =
     {
-        descripcion: $("#SECCION_DESCRIPCION").val().toUpperCase()
+        DescLargaSeccion: $("#SecciontxtDescripcionLarga").val(),
+        FlgEstado: $("#SeccionCboEstado").val(),
     };
     var url = "archivo-central/seccion/listar";
     jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
@@ -161,11 +162,9 @@ function Seccion_CargarGrilla(_grilla) {
                             CAMPO2: v.CAMPO2,
                             FLG_ESTADO: v.FLG_ESTADO,
                             USU_CREACION: v.USU_CREACION,
-                            FEC_CREACION: v.FEC_CREACION,
-                            IP_CREACION: v.IP_CREACION,
+                            STR_FEC_CREACION: v.STR_FEC_CREACION,
                             USU_MODIFICACION: v.USU_MODIFICACION,
-                            FEC_MODIFICACION: v.FEC_MODIFICACION,
-                            IP_MODIFICACION: v.IP_MODIFICACION
+                            STR_FEC_MODIFICACION: v. STR_FEC_MODIFICACION,
                         };
                         jQuery("#" + _grilla).jqGrid('addRowData', x, myData);
                     });
@@ -183,7 +182,8 @@ function Seccion_CargarGrilla(_grilla) {
 }
 
 function Seccion_LimpiarCampo() {
-    $("#SECCION_DESCRIPCION").val('');
+    $("#SecciontxtDescripcionLarga").val('');
+    $("#SeccionCboEstado").val('');
     Seccion_CargarGrilla(Seccion_grilla);
 }
 
