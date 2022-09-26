@@ -218,7 +218,7 @@ function Fondo_RegistrarDatos() {
                     };
                     var url = 'archivo-central/fondo/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
-                        debugger;
+                        
                         if (auditoria != null && auditoria != "") {
                             if (auditoria.EjecucionProceso) {
                                 if (!auditoria.Rechazo) {
@@ -255,10 +255,10 @@ function Fondo_ActualizarDatos() {
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {
             if (r) {
-                debugger;
+                
                 var url = `archivo-central/fondo/actualizar/${id}`;
                 API.Fetch("PUT", url, item, function (auditoria) {
-                    debugger;
+                    
                     if (auditoria != null && auditoria != "") {
                         if (auditoria.EjecucionProceso) {
                             if (!auditoria.Rechazo) {

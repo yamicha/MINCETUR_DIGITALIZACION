@@ -504,6 +504,37 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpDelete]
+        [Route("eliminar/{IdControlCarga:int}")]
+        public IActionResult Carga_Eliminar(int IdControlCarga)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+                {
+                    repositorio.Carga_ControlCargaEliminar(new enControlCarga
+                    {
+                        ID_CONTROL_CARGA = IdControlCarga
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+
+        
 
 
     }

@@ -170,7 +170,7 @@ var Login = function () {
                              return false;
                          }
                      }).data("autocomplete")._renderItem = function (ul, item) {
-                         debugger;
+                         
                          return $("<li></li>").data("item.autocomplete", item).append($("<a></a>").html(item.NOMBRE_USUARIO)).appendTo(ul);
                      };
     },

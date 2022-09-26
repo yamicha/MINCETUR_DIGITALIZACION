@@ -108,7 +108,6 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             }
             return temp;
         }
-
         public List<enTabla> Carga_TablaListar(enTabla objtabla, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -201,6 +200,38 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                 }
             }
         }
+        public void Carga_ControlCargaEliminar(enControlCarga entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PROC_CDACONTROLCARGA_ELIMINAR"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XOUT_ID_CONTROL_CARGA", OracleDbType.Varchar2)).Value = entidad.ID_CONTROL_CARGA;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+        
         public List<enCampo> Carga_CamposListar(enCampo objcampo, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

@@ -886,7 +886,7 @@ SICA = {
                         data: JSON.stringify(params),
                         async: false,
                         success: function (data, st) {
-                            //debugger;
+                            //
                             //$(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
                             if (st == 'success') {
                                 var jq = $('#' + grilla)[0];
