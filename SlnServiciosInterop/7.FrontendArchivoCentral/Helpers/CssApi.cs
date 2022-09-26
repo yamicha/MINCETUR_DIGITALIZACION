@@ -21,5 +21,18 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
             return  entidad; 
         }
+
+        public async Task<T> PostApi<T>(string _baseUrl, T param) where T : class
+        {
+            var cliente = new HttpClient();
+            cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
+            var content = new StringContent(JsonConvert.SerializeObject(param), Encoding.UTF8, "application/json");
+            var response = await cliente.PostAsync(_baseUrl, content);
+            var json_respuesta = await response.Content.ReadAsStringAsync();
+
+            var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+            return entidad;
+        }
+
     }
 }
