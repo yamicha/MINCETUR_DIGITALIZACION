@@ -125,8 +125,8 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     $("#" + _grilla).GridUnload();
     var colNames = [
         '0', '1', '2', '3', '4', '5', '6', '7', 
-        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Estado de Documento', 'Código de Documento', 'Fondo', 'Sección', 'Sub-Sección', 'Serie', 'Tipo Documental', 'N° Registro', 'N° Expediente', 'Volumen', 'Desc. A', 'Desc. B', 'Desc. C', 'Fecha Inicio', 'Fecha Fin', 'Folios', 'Imagenes', 'Caja', 'Observación',
-        'Usuario de Creación', 'Fecha de Creación', 'IP de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'IP de Modificación'
+        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Estado de Documento', 'Nombre Documento','Fondo','', 'Sección',
+         'Serie', 'Descripción', 'Anio','Folios','Observación', 'Usuario de Creación', 'Fecha de Creación','Usuario de Modificación', 'Fecha de Modificación'
     ]
     var colModels = [
         { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
@@ -142,16 +142,15 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false }, //9
         { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true }, //10
         { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs }, //11
-        { name: _PREFIJO + '_COD_DOCUMENTO', index: _PREFIJO + '_COD_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso }, //12
+        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso }, //12
         { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false }, // 13
-        { name: _PREFIJO + 'NOM_DOCUMENTO', index: _PREFIJO + 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: false },
+        { name: _PREFIJO + 'NOM_DOCUMENTO', index: _PREFIJO + 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: true }, // 14
         { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false },
         { name: _PREFIJO + 'DES_SERIE', index: _PREFIJO + 'DES_SERIE', align: 'center', width: 150, hidden: false },
         { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO +'DESCRIPCION', align: 'center', width: 200, hidden: false },
         { name: _PREFIJO + 'ANIO', index: _PREFIJO +'ANIO', align: 'center', width: 80, hidden: false },
         { name: _PREFIJO + 'FOLIOS', index: _PREFIJO +'FOLIOS', align: 'center', width: 100, hidden: false },
         { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false },
-
 
         { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false },
         { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
@@ -221,14 +220,14 @@ function Documento_actionVerObs(cellvalue, options, rowObject) {
 }
 
 function Documento_actionEstadoVerObs(cellvalue, options, rowObject) {
-    var _btn = rowObject[9];
+    var _btn = rowObject[7];
     if (rowObject[8] == 6)
         _btn += " <button title='Ver Observaciones' onclick='Documento_Ver_Obs(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'><i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:15px\"></i></button>";
     return _btn;
 }
 
 function Documento_actionCodVerProceso(cellvalue, options, rowObject) {
-    var _btn = rowObject[10];
+    var _btn = rowObject[14];
     if (_ID_MODULO != 2)
         _btn += " <br/> <button title='Ver Movimientos' onclick='Documento_Ver_Proceso(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen' style=\"color:#a01010;font-size:12px\"><i class=\"clip-stack\"></i> Movimientos</button>";
     return _btn;

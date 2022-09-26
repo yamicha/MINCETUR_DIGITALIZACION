@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 
@@ -22,6 +19,18 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion
 
         [DataMember(Name = "strIpModificacion", Order = 4)]
         public string IpModificacion { get; set; }
+
+
+        [DataMember(Name = "strIpCreacion", Order = 5)]
+        public string IpCreacion { get; set; }
+
+        [DataMember(Name = "IntIdUsuario", Order = 6)]
+        public long IdUsuario { get; set; }
+
+        [DataMember(Name = "strUsuCreacion", Order = 7)]
+        public string UsuCreacion { get; set; }
+        [DataMember(Name = "ArrayListDocumentos", Order = 8)]
+        public List<DocumentoModel> ListaIdsDocumento { get; set; }
 
 
     }

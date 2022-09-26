@@ -20,25 +20,29 @@ jQuery('#Asignar_btn_Grabar').click(function (e) {
         jConfirm(" ¿ Desea grabar todas las asignaciones realizadas ? ", "Atención", function (r) {
             if (r) {
                 var item = {
-                    lista: Asignar_ListaDocumentos
+                    ListaIdsDocumento: Asignar_ListaDocumentos,
+                    UsuCreacion: $('#inputHddCod_usuario').val()
                 }
-                var url = baseUrl + "Microforma/Asignar/Documento_Asignar_Registrar";
-                var auditoria = SICA.Ajax(url, item, false);
+                debugger; 
+                var url = "archivo-central/documento/grabar-asignacion";
+                //var auditoria = SICA.Ajax(url, item, false);
+                API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
-                    if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                        if (!auditoria.RECHAZAR) {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
                             jOkas("Documentos asignados correctamente", "Atención");
                             Asignar_buscar();
                             Asignar_ListaDocumentos = new Array();
                         } else {
-                            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                            jAlert(auditoria.MensajeSalida, "Atención");
                         }
                     } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                        jAlert(auditoria.MensajeSalida, "Atención");
                     }
                 } else {
                     jAlert("No se encontraron registros", "Atención");
                 }
+                });
             }
         });
     } else {
@@ -63,13 +67,14 @@ function Asignar_Digitalizador() {
                 const resultado = Asignar_ListaDocumentos.find(x => x.ID_DOCUMENTO === data.Asignar_ID_DOCUMENTO);
 
                 var miitem = {
-                    ID_DOCUMENTO: data.Asignar_ID_DOCUMENTO,
-                    ID_USUARIO: ID_DIGITALIZADOR,
-                    NOMBRE_USUARIO: DESC_DIGITALIZADOR
+                    IdDocumento: parseInt(data.Asignar_ID_DOCUMENTO),
+                    IdUsuario: parseInt(ID_DIGITALIZADOR),
+                    //NOMBRE_USUARIO: DESC_DIGITALIZADOR
                 }
                 if (resultado != undefined) {
                     resultado.ID_USUARIO = ID_DIGITALIZADOR;
                 } else {
+                    debugger; 
                     Asignar_ListaDocumentos.push(miitem);
                 }
             }
