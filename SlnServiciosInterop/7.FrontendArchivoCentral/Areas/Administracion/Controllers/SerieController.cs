@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.Models;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models;
 using Frotend.ArchivoCentral.Micetur.Helpers;
 using Frotend.ArchivoCentral.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
@@ -50,18 +52,25 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                 }
                 else
                 {
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/seccion/listar");
-                    if (!respuestapi.EjecucionProceso)
+                    var paramseccion = new SeccionModel()
                     {
-                        if (respuestapi.Rechazo)
-                            Log.Guardar(respuestapi.ErrorLog);
+                        FlgEstado = "1"
+                    };
+                    enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/seccion/listar", paramseccion);
+                    if (!postseccion.EjecucionProceso)
+                    {
+                        if (postseccion.Rechazo)
+                            Log.Guardar(postseccion.ErrorLog);
                     }
                     else
                     {
-                        if (respuestapi.Objeto != null)
+                        if (postseccion.Objeto != null)
                         {
-                            enSerie item = JsonConvert.DeserializeObject<enSerie>(respuestapi.Objeto.ToString());
-                            model.DES_SERIE = item.DES_SERIE;
+                            List<enSeccion> Lista = JsonConvert.DeserializeObject<List<enSeccion>>(postseccion.Objeto.ToString());
+                            if (Lista != null)
+                            {
+                                // combo
+                            }
                         }
                     }
                 }

@@ -22,7 +22,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             return  entidad; 
         }
 
-        public async Task<T> PostApi<T>(string _baseUrl, T param) where T : class
+        public async Task<T> PostApi<T>(string _baseUrl, object param) where T : class
         {
             var cliente = new HttpClient();
             cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
