@@ -42,7 +42,7 @@ function Remove_RemoverClases(li_seleccionado) {
 }
 
 function ExportJQGridDataToExcel(tableCtrl, excelFilename) {
-    //debugger;
+    //
     //  Export the data from our jqGrid into a (real !) Excel .xlsx file.
     //
     //  We'll build up a (very large?) tab-separated string containing the data to be exported, then POST them 
@@ -68,7 +68,7 @@ function ExportJQGridDataToExcel(tableCtrl, excelFilename) {
 
     for (var headerValue in headerData) {
         //  If this column ISN'T hidden, and DOES have a column-name, then we'll export its data to Excel.
-        //debugger;
+        //
         var column_ = $(tableCtrl).jqGrid("getColProp", headerValue);
         var isColumnHidden = $(tableCtrl).jqGrid("getColProp", headerValue).hidden;
         if (!isColumnHidden && headerValue != null && column_.sortable) {

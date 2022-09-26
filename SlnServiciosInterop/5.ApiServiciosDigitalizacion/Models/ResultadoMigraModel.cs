@@ -11,7 +11,7 @@ namespace ApiServiciosDigitalizacion.Models
         [DataMember(Name = "ResultadoError", Order = 1)]
         public ResultadoErrorModel ResultadoErrorModel { get; set; }
 
-        [DataMember(Name = "RespuestaDocumento", Order = 2)]
-        public RespuestaDocumentoModel RespuestaDocumentoModel { get; set; }
+        //[DataMember(Name = "RespuestaDocumento", Order = 2)]
+        //public RespuestaDocumentoModel RespuestaDocumentoModel { get; set; }
     }
 }

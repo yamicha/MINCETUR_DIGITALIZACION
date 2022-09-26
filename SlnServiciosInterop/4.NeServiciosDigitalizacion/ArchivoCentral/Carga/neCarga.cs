@@ -38,6 +38,13 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Carga
         {
             this._objDa.Carga_ControlCargaInsertar(entidad, ref auditoria);
         }
+
+        public void Carga_ControlCargaEliminar(enControlCarga entidad, ref enAuditoria auditoria)
+        {
+            this._objDa.Carga_ControlCargaEliminar(entidad, ref auditoria);
+        }
+
+
         public List<enCampo> Carga_CamposListar(enCampo objcampo, ref enAuditoria auditoria)
         {
             return this._objDa.Carga_CamposListar(objcampo, ref auditoria);

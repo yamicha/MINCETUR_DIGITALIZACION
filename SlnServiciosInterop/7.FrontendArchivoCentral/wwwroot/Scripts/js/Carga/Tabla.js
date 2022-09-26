@@ -37,8 +37,8 @@ jQuery('#aTabTabla').click(function (e) {
 });
 
 function Tabla_ControlCarga_Listar() {
-    id_usuario = 25; 
-    var url = `archivo-central/carga/listar/${id_usuario}`;
+    ID_USUARIO = $('#inputHddId_Usuario').val();
+    var url = `archivo-central/carga/listar/${ID_USUARIO}`;
     API.FetchGet("GET", url, function (auditoria) {
         var items = "";
         items += "<option value=\"" + "" + "\">" + "--Seleccione--" + "</option>";
@@ -46,7 +46,8 @@ function Tabla_ControlCarga_Listar() {
             if (!auditoria.Rechazo) {
                 if (auditoria.Objeto.length > 0) {
                     $.each(auditoria.Objeto, function (i, item) {
-                        items += "<option value=\"" + item.ID_CONTROL_CARGA + "\">" + item.ID_CONTROL_CARGA + " | Fecha : " + item.STR_FEC_CREACION + " | N° Registros : " + item.NRO_REGISTROS + "</option>";
+                        items += "<option value=\"" + item.ID_CONTROL_CARGA + "\">" + item.ID_CONTROL_CARGA + " | Fecha : " + item.STR_FEC_CREACION;
+                        items += " | N° Registros : " + item.NRO_REGISTROS + " | N° Folios : " + item.NRO_FOLIOS + "</option>";
                     });
                 }
             }
@@ -139,8 +140,9 @@ function Tabla_Procesar() {
             var data = new FormData();
             data.append('fileArchivo', $('#file-upload').prop('files')[0]);
             data.append('IdTabla', ID_TABLA);
-            data.append('IdUsuario',25);
-            data.append('UsuCreacion', "admin");
+            data.append('IdUsuario', $('#inputHddId_Usuario').val());
+            data.append('UsuCreacion', $('#inputHddCod_usuario').val());
+            $("#file-upload").val(null);
             $.ajax({
                 url: url,
                 data: data,
@@ -168,6 +170,9 @@ function Tabla_Procesar() {
                         html = "<i class=\"clip-close\" style='color:#f30203'></i>&nbsp; <span style='color:#f30203'>Carga con errores</span>";
                         $("#lbl_resultado").html(html);
                     }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.status); 
                 }
             });
         }
@@ -176,11 +181,7 @@ function Tabla_Procesar() {
 
 
 function Tabla_Descargar_Errores(ID_CONTROL_CARGA) {
-    jQuery("#myModal_DescargarErrores").html('');
-    jQuery("#myModal_DescargarErrores").load(baseUrl + "Carga/CargaError/CargaError_Descargar?ID_CONTROL_CARGA=" + ID_CONTROL_CARGA, function (responseText, textStatus, request) {
-        $.validator.unobtrusive.parse('#myModal_DescargarErrores');
-        if (request.status != 200) return;
-    });
+    DownloadFile(BaseUrlApi + `archivo-central/carga/get-errores/${ID_CONTROL_CARGA}`);
 }
 
 function Tabla_Descargar_Cargas() {
@@ -197,13 +198,7 @@ function Tabla_Resultados(ID_CONTROL_CARGA, ID_TABLA) {
         html = "<i class=\"clip-notification-2\"></i> <span>No se encontró ninguna carga realizada</span>";
         $("#lbl_resultado").html(html);
     } else {
-        //var item =
-        //{
-        //    ID_CONTROL_CARGA: ID_CONTROL_CARGA,
-        //    ID_TABLA: ID_TABLA
-        //};
         var url = `archivo-central/carga/get-carga/${ID_CONTROL_CARGA}`;
-        //var auditoria = SICA.Ajax(url, item, false);
         API.FetchGet("GET", url, function (auditoria) {
             if (auditoria != null && auditoria != "") {
                 if (auditoria.EjecucionProceso) {
@@ -218,7 +213,8 @@ function Tabla_Resultados(ID_CONTROL_CARGA, ID_TABLA) {
                                     + "<br/> <i class=\"clip-checkmark-2\" style='color:#6f9a37'></i>&nbsp; <span style='color:#6f9a37'> Carga correcta sin errores</span>"
                                     + "<br/> N°               : " + Cls_Ent_Control_Carga.ID_CONTROL_CARGA
                                     + "<br/> Fecha de Carga   : " + Cls_Ent_Control_Carga.STR_FEC_CREACION
-                                    + "<br/> Nro de Registros : " + Cls_Ent_Control_Carga.NRO_REGISTROS;
+                                    + "<br/> Nro de Registros : " + Cls_Ent_Control_Carga.NRO_REGISTROS
+                                    + "<br/> Nro de Folios : " + Cls_Ent_Control_Carga.NRO_FOLIOS;
                                 Tabla_ControlCarga_Listar();
                             } else {
                                 color = "red";
@@ -238,7 +234,7 @@ function Tabla_Resultados(ID_CONTROL_CARGA, ID_TABLA) {
             } else {
                 jAlert("No se encontraron registros", "Atención");
             }
-        }); 
+        });
 
     }
 }
@@ -251,25 +247,28 @@ function Tabla_Grabar() {
             if (r) {
                 var item =
                 {
-                    ID_CONTROL_CARGA: $("#ID_CONTROL_CARGA").val()
+                    IdControlCarga: parseInt($("#ID_CONTROL_CARGA").val()),
+                    UsuModificacion: $("#inputHddCod_usuario").val(),
+                    IpModificacion: '-',
                 };
-                var url = baseUrl + 'Microforma/Documento/Documento_Grabar';
-                var auditoria = SICA.Ajax(url, item, false);
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EjecucionProceso) {
-                        if (!auditoria.Rechazo) {
-                            jOkas("Documentos grabados correctamente", "Atención");
-                            Tabla_ControlCarga_Listar();
-                            Tabla_buscar();
+                var url = 'archivo-central/documento/grabar-documentos';
+                API.Fetch("POST", url, item, function (auditoria) {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                jOkas("Documentos grabados correctamente", "Atención");
+                                Tabla_ControlCarga_Listar();
+                                Tabla_buscar();
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
                         } else {
                             jAlert(auditoria.MensajeSalida, "Atención");
                         }
                     } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
+                        jAlert("No se encontraron registros", "Atención");
                     }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
+                });
             }
         });
     }
@@ -281,27 +280,26 @@ function Tabla_Eliminar() {
     } else {
         jConfirm("¿ Desea eliminar el proceso de carga y sus documentos ?", "Atención", function (r) {
             if (r) {
-                var item =
-                {
-                    ID_CONTROL_CARGA: $("#ID_CONTROL_CARGA").val()
-                };
-                var url = baseUrl + 'Carga/ControlCarga/ControlCarga_Eliminar';
-                var auditoria = SICA.Ajax(url, item, false);
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EjecucionProceso) {
-                        if (!auditoria.Rechazo) {
-                            jOkas("Proceso de carga eliminado correctamente", "Atención");
-                            Tabla_ControlCarga_Listar();
-                            Tabla_buscar();
+                ID_CONTROL_CARGA = $("#ID_CONTROL_CARGA").val();
+                var url = `archivo-central/carga/eliminar/${ID_CONTROL_CARGA}`;
+                //var auditoria = SICA.Ajax(url, item, false);
+                API.FetchGet("DELETE", url, function (auditoria) {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                jOkas("Proceso de carga eliminado correctamente", "Atención");
+                                Tabla_ControlCarga_Listar();
+                                Tabla_buscar();
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
                         } else {
                             jAlert(auditoria.MensajeSalida, "Atención");
                         }
                     } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
+                        jAlert("No se encontraron registros", "Atención");
                     }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
+                });
             }
         });
     }

@@ -11,7 +11,7 @@ Autorizacion = {
             async: async,
             data: JSON.stringify(parameters),
             success: function (response) {
-                debugger;
+                
                 rsp = response; 
                 if (!response.AUTORIZADO) {
                     rsp = null;

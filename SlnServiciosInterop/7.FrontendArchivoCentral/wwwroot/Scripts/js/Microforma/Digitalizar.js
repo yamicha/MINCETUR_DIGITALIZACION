@@ -46,7 +46,7 @@ function Digitalizar_buscar() {
 
 function Digitalizar_Iniciar() {
     Digitalizar_ListaDocumentos = new Array();
-    //debugger;
+    //
     var rowKey = $("#" + Digitalizar_grilla).jqGrid('getGridParam', 'selrow'); // esta opcion permite traer los indices de cada fila seleccionada
     if (rowKey != null) {
         if (rowKey.length != 0) {

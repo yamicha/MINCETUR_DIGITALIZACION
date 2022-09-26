@@ -252,7 +252,7 @@
 		var pageBlockEls = [];
 
 		function install(el, opts) {
-			//debugger;
+			//
 			var css, themedCSS;
 			var full = (el == window);
 			var msg = (opts && opts.message !== undefined ? opts.message : undefined);
@@ -331,7 +331,7 @@
 			lyr3 = $(s);
 
 			// if we have a message, style it
-			debugger;
+			
 			if (msg) {
 				if (opts.theme) {
 					lyr3.css(themedCSS);

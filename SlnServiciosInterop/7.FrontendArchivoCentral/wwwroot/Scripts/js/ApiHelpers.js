@@ -61,7 +61,7 @@ API = {
                 calback(data);
             })
             .catch(function (error) {
-                debugger; 
+                 
                 fetchload.close();
                 alert("request error api", error);
             });
@@ -83,4 +83,8 @@ API = {
     }
 
 
+}
+
+function DownloadFile(Url) {
+    window.location = Url;
 }

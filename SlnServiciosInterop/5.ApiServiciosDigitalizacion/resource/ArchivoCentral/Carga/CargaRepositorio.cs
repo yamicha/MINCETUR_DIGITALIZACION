@@ -63,6 +63,12 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga
         {
             _rule.Carga_ControlCargaInsertar(entidad, ref auditoria);
         }
+
+        public void Carga_ControlCargaEliminar(enControlCarga entidad, ref enAuditoria auditoria)
+        {
+            _rule.Carga_ControlCargaEliminar(entidad, ref auditoria);
+        }
+
         public void Ejecutar_Query(string _Query, ref enAuditoria auditoria)
         {
             _rule.Ejecutar_Query(_Query, ref auditoria);
