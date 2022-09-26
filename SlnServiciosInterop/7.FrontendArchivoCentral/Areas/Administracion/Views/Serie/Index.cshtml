@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Secciones";
+}
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/Switch_Toggle.css")" />
+<script src="@Url.Content("~/Scripts/js/Remove.js")" defer type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Administracion/Serie.js")" defer type="text/javascript"></script>
+
+<div class="modal fade" id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="tab-content">
+    <div id="panel_tab_directorio" class="tab-pane active">
+        <div class="col-sm-12 inline-container-Group" style=" margin-bottom: 10px;">
+            <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Criterios de búsqueda: </p>
+            <fieldset style="width: 100%;">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; margin-top: 5px; text-align: right;">Descripción:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" id="serie_descripcion" name="serie_descripcion" maxlength="150" class="form-control" style="width: 100%" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; margin-top: 5px; text-align: right;">Estado:</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <select id="SerieCboEstado" class="form-control">
+                            <option value="">--Seleccione--</option>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="serie_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                        <button id="serie_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <br />
+            <br />
+            <div class="col-sm-7">
+                <button id="serie_btn_nuevo" class="btn btn-red" type="button" data-toggle="modal" data-target="#myModalNuevo"><i class="clip-file-plus"></i> Nueva Serie</button>
+            </div>
+            <div class="col-sm-12" style="margin-top: 10px">
+                <div class="Serie_jqGrid">
+                    <table id="Serie_Grilla"></table>
+                    <div id="Serie_Barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

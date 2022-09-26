@@ -1,11 +1,29 @@
-﻿var Serie_grilla = 'Serie_grilla';
-var Serie_barra = 'Serie_barra';
+﻿var Serie_grilla = 'Serie_Grilla';
+var Serie_barra = 'Serie_Barra';
 
 $(document).ready(function () {
-
     Serie_ConfigurarGrilla(Serie_grilla, Serie_barra);
     Serie_CargarGrilla(Serie_grilla);
+    Remove_RemoverClases("liSerie");
+
+    $("#serie_btn_limpiar").click(function (e) {
+        Serie_LimpiarCampo();
+    });
+
+    $("#serie_btn_buscar").click(function (e) {
+        Serie_CargarGrilla(Serie_grilla);
+    });
+
+    $("#serie_btn_nuevo").click(function (e) {
+        Serie_MostrarNueva();
+    });
 });
+
+function Serie_LimpiarCampo() {
+    $("#serie_descripcion").val('');
+    $("#SerieCboEstado").val('');
+    Serie_CargarGrilla(Serie_grilla);
+}
 
 function Serie_ConfigurarGrilla(_grilla, _barra) {
     $("#" + _grilla).GridUnload();
@@ -73,26 +91,6 @@ function Serie_estadoAction(cellvalue, options, rowObject) {
     return _btn;
 }
 
-function Serie_Estado(ID, CHECK) {
-    var item = {
-        ID_SERIE: ID,
-        FLG_ESTADO: CHECK.checked == true ? '1' : '0'
-        //USU_MODIFICACION: 'admin2'
-    };
-    var url = baseUrl + 'Administracion/Serie/Serie_Estado';
-    var auditoria = SICA.Ajax(url, item, false);
-    if (auditoria != null && auditoria != "") {
-        if (auditoria.EJECUCION_PROCEDIMIENTO) {
-            if (auditoria.RECHAZAR) {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
-            }
-            Serie_CargarGrilla(Serie_grilla);
-        } else {
-            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
-        }
-    }
-}
-
 function Serie_MostrarEditar(id) {
 
     jQuery("#myModalNuevo").html('');
@@ -102,81 +100,111 @@ function Serie_MostrarEditar(id) {
     });
 }
 
+/*  ----------------------------------
+    |    estado registro           |
+    ---------------------------------- */
+
+function Serie_Estado(ID, CHECK) {
+    var item = {
+        IdSerie: ID,
+        FlgEstado: CHECK.checked == true ? '1' : '0',
+        UsuModificacion: $("#inputHddCod_usuario").val()
+    };
+    var url = `archivo-central/serie/estado/${item.IdFondo}`;
+    API.Fetch("PUT", url, item, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
+
+/*  ----------------------------------
+    |    eliminar registro           |
+    ---------------------------------- */
+
 function Serie_Eliminar(id) {
 
     jConfirm("¿Desea eliminar este registro ?", "Atención", function (r) {
         if (r) {
 
-            var arrayParametro = {
-                ID_SERIE: id
-            };
-            var url = baseUrl + 'Administracion/Serie/Serie_Eliminar';
-            var auditoria = SICA.Ajax(url, arrayParametro, false);
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
-                    Serie_CargarGrilla(Serie_grilla);
-                    jAlert("Registro eliminado", "Proceso");
-                } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+            var url = `archivo-central/serie/eliminar/${id}`;
+            API.FetchGet("DELETE", url, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            Serie_CargarGrilla(Serie_grilla);
+                            jAlert("Registro eliminado", "Proceso");
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
                 }
-            } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
-            }
+            });
 
         }
     });
-
 }
 
+/*  ----------------------------------
+    |    cargar registro           |
+    ---------------------------------- */
 function Serie_CargarGrilla(_grilla) {
     var item =
     {
-        descripcion: $("#SERIE_DESCRIPCION").val().toUpperCase()
+        DescSerie: $("#serie_descripcion").val().toUpperCase(),
+        FlgEstado: $("#SerieCboEstado").val()
     };
-    var url = baseUrl + "Administracion/Serie/Serie_Listar";
-    var auditoria = SICA.Ajax(url, item, false);
+
+    var url = "archivo-central/serie/listar";
     jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
-    if (auditoria != null && auditoria != "") {
-        if (auditoria.EJECUCION_PROCEDIMIENTO) {
-            if (!auditoria.RECHAZAR) {
-                var x = 0;
-                $.each(auditoria.OBJETO, function (i, v) {
-                    x++;
-                    var myData =
-                    {
-                        ID_SERIE: v.ID_SERIE,
-                        ID_SECCION: v.ID_SECCION,
-                        ID_SUBSECCION: v.ID_SUBSECCION,
-                        COD_SERIE: v.COD_SERIE,
-                        DESC_SERIE: v.DESC_SERIE,
-                        FLG_ELIMINADO: v.FLG_ELIMINADO,
-                        CAMPO1: v.CAMPO1,
-                        CAMPO2: v.CAMPO2,
-                        FLG_ESTADO: v.FLG_ESTADO,
-                        USU_CREACION: v.USU_CREACION,
-                        FEC_CREACION: v.FEC_CREACION,
-                        IP_CREACION: v.IP_CREACION,
-                        USU_MODIFICACION: v.USU_MODIFICACION,
-                        FEC_MODIFICACION: v.FEC_MODIFICACION,
-                        IP_MODIFICACION: v.IP_MODIFICACION
-                    };
-                    jQuery("#" + _grilla).jqGrid('addRowData', x, myData);
-                });
-                jQuery("#" + _grilla).trigger("reloadGrid");
+    API.Fetch("POST", url, item, function (auditoria) {
+
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    var x = 0;
+                    $.each(auditoria.Objeto, function (i, v) {
+                        x++;
+                        var myData =
+                        {
+                            ID_SERIE: v.ID_SERIE,
+                            ID_SECCION: v.ID_SECCION,
+                            ID_SUBSECCION: v.ID_SUBSECCION,
+                            COD_SERIE: v.COD_SERIE,
+                            DESC_SERIE: v.DESC_SERIE,
+                            FLG_ELIMINADO: v.FLG_ELIMINADO,
+                            CAMPO1: v.CAMPO1,
+                            CAMPO2: v.CAMPO2,
+                            FLG_ESTADO: v.FLG_ESTADO,
+                            USU_CREACION: v.USU_CREACION,
+                            FEC_CREACION: v.FEC_CREACION,
+                            IP_CREACION: v.IP_CREACION,
+                            USU_MODIFICACION: v.USU_MODIFICACION,
+                            FEC_MODIFICACION: v.FEC_MODIFICACION,
+                            IP_MODIFICACION: v.IP_MODIFICACION
+                        };
+                        jQuery("#" + _grilla).jqGrid('addRowData', x, myData);
+                    });
+                    jQuery("#" + _grilla).trigger("reloadGrid");
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Ocurrio un Error");
+                }
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert(auditoria.MensajeSalida, "Ocurrio un Error");
             }
         } else {
-            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+            jAlert(auditoria.MensajeSalida, "Ocurrio un Error");
         }
-    } else {
-        jAlert("No se encontraron registros", "Atención");
-    }
-}
-
-function Serie_LimpiarCampo() {
-    $("#SERIE_DESCRIPCION").val('');
-    Serie_CargarGrilla(Serie_grilla);
+    });
 }
 
 /*  ----------------------------------
@@ -195,32 +223,33 @@ function Serie_RegistrarDatos() {
                     
                     var item =
                     {
-                        ID_SECCION: $("#ID_SECCION").val(),
-                        ID_SUBSECCION: $("#ID_SUBSECCION").val(),
-                        COD_SERIE: $("#COD_SERIE").val().toUpperCase(),
-                        DESC_SERIE: $("#DESC_SERIE").val().toUpperCase()
-                        //USU_CREACION: "ADMIN"
+                        //IdSerie: $("#ID_SECCION").val(),
+                        IdSeccion: $("#ID_SUBSECCION").val(),
+                        DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
+                        DescSerie: $("#DES_SERIE").val().toUpperCase(),
+                        UsuCreacion: $("#inputHddCod_usuario").val()
                     };
-                    var url = baseUrl + 'Administracion/Serie/Serie_Registrar';
-                    var auditoria = SICA.Ajax(url, item, false);
-                    if (auditoria != null && auditoria != "") {
-                        if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                            if (!auditoria.RECHAZAR) {
-                                Serie_CargarGrilla(Serie_grilla);
-                                $('#myModalNuevo').modal('hide');
-                                jQuery("#myModalNuevo").html('');
-                                jAlert("Datos guardados satisfactoriamente", "Proceso");
+                    var url = 'archivo-central/serie/insertar';
+                    API.Fetch("POST", url, item, function (auditoria) {
+
+                        if (auditoria != null && auditoria != "") {
+                            if (auditoria.EjecucionProceso) {
+                                if (!auditoria.Rechazo) {
+                                    Serie_CargarGrilla(Serie_grilla);
+                                    $('#myModalNuevo').modal('hide');
+                                    jQuery("#myModalNuevo").html('');
+                                    jAlert("Datos guardados satisfactoriamente", "Proceso");
+                                } else {
+                                    jAlert(auditoria.MensajeSalida, "Atención");
+                                }
                             } else {
-                                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                                jAlert(auditoria.MensajeSalida, "Atención");
                             }
-                        } else {
-                            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
                         }
-                    }
+                    });
                 }
             });
         }
-
     }
 }
 
@@ -233,33 +262,34 @@ function Serie_ActualizarDatos() {
         var item =
         {
             
-            ID_SERIE: $("#hd_SERIE_ID_SERIE").val(),
-            ID_SECCION: $("#ID_SECCION").val(),
-            ID_SUBSECCION: $("#ID_SUBSECCION").val(),
-            COD_SERIE: $("#COD_SERIE").val().toUpperCase(),
-            DESC_SERIE: $("#DESC_SERIE").val().toUpperCase()
-            //USU_MODIFICACION: "ADMIN2"
+            IdSerie: $("#hd_SERIE_ID_SERIE").val(),
+            IdSeccion: $("#ID_SECCION").val(),
+            //ID_SUBSECCION: $("#ID_SUBSECCION").val(),
+            DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
+            DescSerie: $("#DES_SERIE").val().toUpperCase(),
+            UsuModificacion: $("#inputHddCod_usuario").val()
         };
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {
             if (r) {
-                var url = baseUrl + 'Administracion/Serie/Serie_Actualizar';
-                var auditoria = SICA.Ajax(url, item, false);
-                if (auditoria != null && auditoria != "") {
+                var url = `archivo-central/serie/actualizar/${id}`;
+                API.Fetch("PUT", url, item, function (auditoria) {
 
-                    if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                        if (!auditoria.RECHAZAR) {
-                            Serie_CargarGrilla(Serie_grilla);
-                            $('#myModalNuevo').modal('hide');
-                            jQuery("#myModalNuevo").html('');
-                            jAlert("Datos actualizados satisfactoriamente", "Proceso");
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                Serie_CargarGrilla(Serie_grilla);
+                                $('#myModalNuevo').modal('hide');
+                                jQuery("#myModalNuevo").html('');
+                                jAlert("Datos actualizados satisfactoriamente", "Proceso");
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
                         } else {
-                            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                            jAlert(auditoria.MensajeSalida, "Atención");
                         }
-                    } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
                     }
-                }
+                });
             }
         });
     }
