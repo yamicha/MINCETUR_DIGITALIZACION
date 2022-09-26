@@ -6,13 +6,14 @@ using ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Recursos; 
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [EnableCors("AccesoCors")]
+    [Route("api/archivo-central/serie")]
     public class SerieController : ControllerBase
     {
 

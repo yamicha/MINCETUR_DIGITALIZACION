@@ -157,7 +157,8 @@ function Fondo_Eliminar(id) {
 function Fondo_CargarGrilla(_grilla) {
     var item =
     {
-        DescFondo: $("#fondo_descripcion").val().toUpperCase()
+        DescFondo: $("#fondo_descripcion").val().toUpperCase(),
+        FlgEstado: $("#FondoCboEstado").val()
     };
     
     var url = "archivo-central/fondo/listar";

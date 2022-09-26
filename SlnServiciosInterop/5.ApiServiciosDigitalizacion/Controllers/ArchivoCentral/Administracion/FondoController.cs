@@ -1,17 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion;
+﻿using ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion;
 using ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
-using EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas;
-using Utilitarios.Recursos;
-using System.Net;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using Utilitarios.Recursos;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
@@ -36,7 +31,6 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     auditoria.Objeto = repositorio.Fondo_Listar(new enFondo
                     {
-                        //ID_FONDO = entidad.IdFondo,
                         DESC_FONDO = entidad.DescFondo,
                         FLG_ESTADO = entidad.FlgEstado
                     }, ref auditoria);
