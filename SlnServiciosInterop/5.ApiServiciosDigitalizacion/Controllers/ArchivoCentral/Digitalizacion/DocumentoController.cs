@@ -216,7 +216,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                                 ID_DOCUMENTO = x.IdDocumento, 
                                 ID_USUARIO = x.IdUsuario
                             }).ToList(),
-                            USU_CREACION = entidad.UsuModificacion,
+                            USU_CREACION = entidad.UsuCreacion,
                             IP_CREACION = entidad.IpCreacion,
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
