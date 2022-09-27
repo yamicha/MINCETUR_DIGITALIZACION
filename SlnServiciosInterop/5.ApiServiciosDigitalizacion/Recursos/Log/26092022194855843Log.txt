@@ -1,0 +1,4 @@
+System.IndexOutOfRangeException: No se ha encontrado la columna especificada en el juego de resultados
+   at OracleInternal.ServiceObjects.OracleDataReaderImpl.GetColumnOrdinal(String colName)
+   at Oracle.ManagedDataAccess.Client.OracleDataReader.GetOrdinal(String name)
+   at DaServiciosDigitalizacion.ArchivoCentral.Administracion.DaFondo.Fondo_Listar(enFondo objenSubSerie, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Administracion\DaFondo.cs:line 47

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models
 {
@@ -15,7 +12,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "(*) Seleccione un sección")]
         public string ID_SECCION { get; set; }
-        List<SelectListItem> CBO_SECCION { get; set; }
+        public List<SelectListItem> CBO_SECCION { get; set; }
 
         [Display(Name = "Código Serie:")]
         [DataType(DataType.Text)]

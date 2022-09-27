@@ -46,6 +46,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                             int intDescCorta = drReader.GetOrdinal("DES_CORTA_SECCION");
                             int intCodSerie = drReader.GetOrdinal("COD_SERIE");
                             int intDesSerie = drReader.GetOrdinal("DES_SERIE");
+                            int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuMoficacion = drReader.GetOrdinal("USU_MODIFICACION");
@@ -59,6 +60,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                                 if (!drReader.IsDBNull(intDescCorta)) temp.DES_CORTA_SECCION = arrResult[intDescCorta].ToString();
                                 if (!drReader.IsDBNull(intCodSerie)) temp.COD_SERIE = arrResult[intCodSerie].ToString();
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
+                                if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intUsuMoficacion)) temp.USU_MODIFICACION = arrResult[intUsuMoficacion].ToString();
@@ -93,6 +95,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDASERIE_LISTAR_UNO";
             cmd.Parameters.Add("XIN_ID_SERIE", validarNulo(objenSeccion.ID_SERIE));
+            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -102,11 +106,17 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
+                        string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == "0")
+                            auditoria.Rechazar(PO_MENSAJE);
+
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
                             arrResult = new object[drReader.FieldCount];
                             int intIdSerie = drReader.GetOrdinal("ID_SERIE");
+                            int intIdSeccion = drReader.GetOrdinal("ID_SECCION");
                             int intDescCorta = drReader.GetOrdinal("DES_CORTA_SECCION");
                             int intCodSerie = drReader.GetOrdinal("COD_SERIE");
                             int intDesSerie = drReader.GetOrdinal("DES_SERIE");
@@ -115,6 +125,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                                 drReader.GetValues(arrResult);
                                 temp = new Vserie();
                                 if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = int.Parse(arrResult[intIdSerie].ToString());
+                                if (!drReader.IsDBNull(intIdSeccion)) temp.ID_SECCION = int.Parse(arrResult[intIdSeccion].ToString());
                                 if (!drReader.IsDBNull(intDescCorta)) temp.DES_CORTA_SECCION = arrResult[intDescCorta].ToString();
                                 if (!drReader.IsDBNull(intCodSerie)) temp.COD_SERIE = arrResult[intCodSerie].ToString();
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();

@@ -44,9 +44,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                             int intDesFondo = drReader.GetOrdinal("DES_FONDO");
                             int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
-                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("FEC_CREACION");
                             int intUsuMoficacion = drReader.GetOrdinal("USU_MODIFICACION");
-                            int intfecMoficacion = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intfecMoficacion = drReader.GetOrdinal("FEC_MODIFICACION");
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -89,7 +89,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR_UNO";
             cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
-            cmd.Parameters.Add("XOUT_VALIDO", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -100,10 +100,11 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
-                        int PO_VALIDO = int.Parse(cmd.Parameters["XOUT_VALIDO"].Value.ToString());
+                        string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
                         string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
-                        if (PO_VALIDO == 0)
+                        if (PO_VALIDO == "0")
                             auditoria.Rechazar(PO_MENSAJE);
+
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
@@ -112,9 +113,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                             int intDesFondo = drReader.GetOrdinal("DES_FONDO");
                             //int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
-                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("FEC_CREACION");
                             int intUsuMoficacion = drReader.GetOrdinal("USU_MODIFICACION");
-                            int intfecMoficacion = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intfecMoficacion = drReader.GetOrdinal("FEC_MODIFICACION");
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);

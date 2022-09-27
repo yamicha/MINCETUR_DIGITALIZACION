@@ -28,16 +28,15 @@ function Serie_LimpiarCampo() {
 function Serie_ConfigurarGrilla(_grilla, _barra) {
     $("#" + _grilla).GridUnload();
     var colNames = [
-        '', '', '',
+        '', '',
         '', '', '', '',
         'Editar', 'Eliminar', 'Estado',
-        'Código Serie', 'Descripción Serie',
+        'Sección', 'Código Serie', 'Descripción Serie',
         'Usuario Creación', 'Fecha Creación', 'IP Creación',
         'Usuario Modificación', 'Fecha Modificación', 'IP Modificación'];
     var colModels = [
         { name: 'ID_SERIE', index: 'ID_SERIE', align: 'center', hidden: true, width: 0, key: true },
         { name: 'ID_SECCION', index: 'ID_SECCION', align: 'center', width: 0, hidden: true },
-        { name: 'ID_SUBSECCION', index: 'ID_SUBSECCION', align: 'center', width: 0, hidden: true },
 
         { name: 'FLG_ELIMINADO', index: 'FLG_ELIMINADO', align: 'center', width: 0, hidden: true },
         { name: 'CAMPO1', index: 'CAMPO1', align: 'center', width: 0, hidden: true, formatter: 'date', formatoptions: { srcformat: 'd/m/Y', newformat: 'd/m/Y' } },
@@ -47,15 +46,16 @@ function Serie_ConfigurarGrilla(_grilla, _barra) {
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: Serie_actionEditar },
         { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: Serie_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: Serie_estadoAction },
-        
+
+        { name: 'DES_CORTA_SECCION', index: 'DES_CORTA_SECCION', align: 'center', width: 100, hidden: false },
         { name: 'COD_SERIE', index: 'COD_SERIE', align: 'center', width: 100, hidden: false },
-        { name: 'DESC_SERIE', index: 'DESC_SERIE', align: 'center', width: 250, hidden: false },
+        { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 250, hidden: false },
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 150, hidden: false },
-        { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false},
         { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
-        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
         { name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
@@ -80,7 +80,7 @@ function Serie_actionEliminar(cellvalue, options, rowObject) {
 }
 
 function Serie_estadoAction(cellvalue, options, rowObject) {
-
+    debugger;
     var check_ = 'check';
     if (rowObject['FLG_ESTADO'] == 1)
         check_ = 'checked';
@@ -110,7 +110,7 @@ function Serie_Estado(ID, CHECK) {
         FlgEstado: CHECK.checked == true ? '1' : '0',
         UsuModificacion: $("#inputHddCod_usuario").val()
     };
-    var url = `archivo-central/serie/estado/${item.IdFondo}`;
+    var url = `archivo-central/serie/estado/${item.IdSerie}`;
     API.Fetch("PUT", url, item, function (auditoria) {
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
@@ -160,6 +160,7 @@ function Serie_Eliminar(id) {
 function Serie_CargarGrilla(_grilla) {
     var item =
     {
+        //IdSeccion: null,
         DescSerie: $("#serie_descripcion").val().toUpperCase(),
         FlgEstado: $("#SerieCboEstado").val()
     };
@@ -178,18 +179,18 @@ function Serie_CargarGrilla(_grilla) {
                         {
                             ID_SERIE: v.ID_SERIE,
                             ID_SECCION: v.ID_SECCION,
-                            ID_SUBSECCION: v.ID_SUBSECCION,
+                            DES_CORTA_SECCION: v.DES_CORTA_SECCION,
                             COD_SERIE: v.COD_SERIE,
-                            DESC_SERIE: v.DESC_SERIE,
+                            DES_SERIE: v.DES_SERIE,
                             FLG_ELIMINADO: v.FLG_ELIMINADO,
                             CAMPO1: v.CAMPO1,
                             CAMPO2: v.CAMPO2,
                             FLG_ESTADO: v.FLG_ESTADO,
                             USU_CREACION: v.USU_CREACION,
-                            FEC_CREACION: v.FEC_CREACION,
+                            STR_FEC_CREACION: v.STR_FEC_CREACION,
                             IP_CREACION: v.IP_CREACION,
                             USU_MODIFICACION: v.USU_MODIFICACION,
-                            FEC_MODIFICACION: v.FEC_MODIFICACION,
+                            STR_FEC_MODIFICACION: v.STR_FEC_MODIFICACION,
                             IP_MODIFICACION: v.IP_MODIFICACION
                         };
                         jQuery("#" + _grilla).jqGrid('addRowData', x, myData);
@@ -220,11 +221,11 @@ function Serie_RegistrarDatos() {
         if ($("#frmMantenimientoSerie").valid()) {
             jConfirm("¿Desea guardar este registro ?", "Atención", function (r) {
                 if (r) {
-                    
+                    debugger;
                     var item =
                     {
                         //IdSerie: $("#ID_SECCION").val(),
-                        IdSeccion: $("#ID_SUBSECCION").val(),
+                        IdSeccion: parseInt($("#ID_SECCION").val()),
                         DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
                         DescSerie: $("#DES_SERIE").val().toUpperCase(),
                         UsuCreacion: $("#inputHddCod_usuario").val()
@@ -259,11 +260,12 @@ function Serie_RegistrarDatos() {
 function Serie_ActualizarDatos() {
 
     if ($("#frmMantenimientoSerie").valid()) {
+        var id = $("#hd_SERIE_ID_SERIE").val();
         var item =
         {
             
-            IdSerie: $("#hd_SERIE_ID_SERIE").val(),
-            IdSeccion: $("#ID_SECCION").val(),
+            //IdSerie: $("#hd_SERIE_ID_SERIE").val(),
+            IdSeccion: parseInt($("#ID_SECCION").val()),
             //ID_SUBSECCION: $("#ID_SUBSECCION").val(),
             DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
             DescSerie: $("#DES_SERIE").val().toUpperCase(),

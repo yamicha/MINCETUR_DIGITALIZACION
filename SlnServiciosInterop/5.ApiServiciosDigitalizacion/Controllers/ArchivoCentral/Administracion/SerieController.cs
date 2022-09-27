@@ -34,7 +34,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     auditoria.Objeto = repositorio.Serie_Listar(new Vserie
                     {
-                        ID_SECCION = entidad.IdSeccion,
+                        //ID_SECCION = entidad.IdSeccion,
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
                         FLG_ESTADO = entidad.FlgEstado
@@ -149,7 +149,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     else
                     {
                         if (auditoria.Rechazo)
-                            auditoria.Code = (int)HttpStatusCode.NoContent;
+                            auditoria.Code = (int)HttpStatusCode.OK;
                     }
                 }
             }

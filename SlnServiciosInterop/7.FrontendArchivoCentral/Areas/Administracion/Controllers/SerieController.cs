@@ -9,6 +9,8 @@ using Frotend.ArchivoCentral.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
@@ -47,30 +49,35 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                         {
                             enSerie item = JsonConvert.DeserializeObject<enSerie>(respuestapi.Objeto.ToString());
                             model.DES_SERIE = item.DES_SERIE;
+                            model.ID_SECCION = item.ID_SECCION.ToString();
+                            model.COD_SERIE = item.COD_SERIE;
                         }
                     }
                 }
+
+                var paramseccion = new SeccionModel()
+                {
+                    FlgEstado = "1"
+                };
+                enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/seccion/listar", paramseccion);
+                if (!postseccion.EjecucionProceso)
+                {
+                    if (postseccion.Rechazo)
+                        Log.Guardar(postseccion.ErrorLog);
+                }
                 else
                 {
-                    var paramseccion = new SeccionModel()
+                    if (postseccion.Objeto != null)
                     {
-                        FlgEstado = "1"
-                    };
-                    enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/seccion/listar", paramseccion);
-                    if (!postseccion.EjecucionProceso)
-                    {
-                        if (postseccion.Rechazo)
-                            Log.Guardar(postseccion.ErrorLog);
-                    }
-                    else
-                    {
-                        if (postseccion.Objeto != null)
+                        List<enSeccion> Lista = JsonConvert.DeserializeObject<List<enSeccion>>(postseccion.Objeto.ToString());
+                        if (Lista != null)
                         {
-                            List<enSeccion> Lista = JsonConvert.DeserializeObject<List<enSeccion>>(postseccion.Objeto.ToString());
-                            if (Lista != null)
+                            model.CBO_SECCION = Lista.Select(x => new SelectListItem
                             {
-                                // combo
-                            }
+                                Value = x.ID_SECCION.ToString(),
+                                Text = x.DES_LARGA_SECCION
+                            }).ToList();
+                            model.CBO_SECCION.Insert(0, new SelectListItem("--SELECCIONE--", ""));
                         }
                     }
                 }

@@ -28,6 +28,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group">
+                        @Html.LabelFor(model => model.CBO_SECCION, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(model => model.ID_SECCION, Model.CBO_SECCION, new { @class = "form-control", @maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.ID_SECCION, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.COD_SERIE, new { @class = "col-sm-3 control-label" })
                         <div class="col-sm-7">
                             @Html.TextBoxFor(model => model.COD_SERIE, new { @class = "form-control", @maxlength = "50" })

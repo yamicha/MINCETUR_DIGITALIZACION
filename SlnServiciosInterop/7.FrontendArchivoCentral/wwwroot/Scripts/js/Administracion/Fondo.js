@@ -21,6 +21,7 @@ $(document).ready(function () {
 
 function Fondo_LimpiarCampo() {
     $("#fondo_descripcion").val('');
+    $("#FondoCboEstado").val('');
     Fondo_CargarGrilla(Fondo_grilla);
 }
 
@@ -45,10 +46,10 @@ function Fondo_ConfigurarGrilla(_grilla, _barra) {
         { name: 'DESC_FONDO', index: 'DESC_FONDO', align: 'center', width: 250, hidden: false },
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false },
-        { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false},
         { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
-        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
         { name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
