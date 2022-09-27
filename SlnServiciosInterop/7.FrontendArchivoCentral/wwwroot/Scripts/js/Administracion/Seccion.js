@@ -116,7 +116,7 @@ function Seccion_MostrarEditar(id) {
 function Seccion_Eliminar(id) {
     jConfirm("¿Desea eliminar este registro ?", "Atención", function (r) {
         if (r) {
-            var url = `archivo-central/seccion/eliminar/${400}`;
+            var url = `archivo-central/seccion/eliminar/${id}`;
             API.FetchGet("DELETE", url, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {

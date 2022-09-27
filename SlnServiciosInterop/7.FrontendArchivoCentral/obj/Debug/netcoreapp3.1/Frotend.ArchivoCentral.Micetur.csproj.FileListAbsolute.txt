@@ -118,6 +118,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.genruntimeconfig.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csprojAssemblyReference.cache
+<<<<<<< HEAD
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.exe
@@ -239,3 +240,6 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.dll
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.genruntimeconfig.cache
+=======
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\Digitalizacion\Index.cshtml.g.cs
+>>>>>>> 9985f63daed008f5270a8add1a4c1f6a743ef31f

@@ -12,7 +12,6 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public long ID_USUARIO { get; set; }
         public long ID_LOTE { get; set; }
         public long ID_ESTADO_DOCUMENTO { get; set; }
-        
         public string DESCRIPCION_ESTADO { get; set; }
         public string NOMBRE_USUARIO { get; set; }
         public long ID_FONDO { get; set; }
@@ -28,5 +27,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string OBSERVACION { get; set; }
         public string STR_FEC_CREACION { get; set; }
         public string STR_FEC_MODIFICACION { get; set; }
-    }
+
+        public List<enDocumento> ListaDocumento  { get; set; }
+}
 }

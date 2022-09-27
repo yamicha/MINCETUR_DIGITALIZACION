@@ -1,7 +1,7 @@
 ﻿var Digitalizar_grilla = 'Digitalizar_grilla';
 var Digitalizar_barra = 'Digitalizar_barra';
 var Digitalizar_ListaDocumentos = new Array();
-
+var Digitalizar_Int_Documento = 0; 
 var Digitalizar_Reloj = false;
 var Digitalizar_Inicio = 0;
 var Digitalizar_intervalo = 0;

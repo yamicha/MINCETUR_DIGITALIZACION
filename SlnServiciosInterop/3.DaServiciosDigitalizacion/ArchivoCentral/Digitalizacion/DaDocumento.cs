@@ -49,7 +49,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             enDocumentoTemporal temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
-                            int intIdcontrolCarga= drReader.GetOrdinal("ID_CONTROL_CARGA");
+                            int intIdcontrolCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
                             int intNroLinea = drReader.GetOrdinal("NRO_LINEA");
                             int intIdFondo = drReader.GetOrdinal("ID_FONDO");
                             int intDesFondo = drReader.GetOrdinal("DES_FONDO");
@@ -143,7 +143,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intIdcontrolCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
                             int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
                             int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
-                            int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO"); 
+                            int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
                             int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
                             int intIdLote = drReader.GetOrdinal("ID_LOTE");
@@ -183,6 +183,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = long.Parse(arrResult[intIdSerie].ToString());
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
                                 if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
+                                if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
@@ -244,5 +245,73 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
+
+        public void Documento_AsignacionInsertar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDALOTES_INSERTAR"), cn);
+                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.Transaction = transaction;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("XIN_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                cmd.Parameters.Add(new OracleParameter("XOUT_ID_LOTE", OracleDbType.Int64)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_ID_LOTE = cmd.Parameters["XOUT_ID_LOTE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                    {
+                        auditoria.Rechazar(PO_MENSAJE);
+                    }
+                    else
+                    {
+                        cmd.Parameters.Clear();
+                        if (entidad.ListaDocumento.Count() > 0)
+                        {
+                            foreach (enDocumento item in entidad.ListaDocumento)
+                            {
+                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCASIGNACION_INSERTAR"), cn);
+                                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;
+                                cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = PO_ID_LOTE;
+                                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = item.ID_USUARIO;
+                                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                                cmd.Parameters.Add(new OracleParameter("XIN_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                                dr = cmd.ExecuteReader();
+                                string PO_VALIDO2 = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                                if (PO_VALIDO2 == "0")
+                                {
+                                    auditoria.Rechazar(PO_MENSAJE);
+                                    transaction.Rollback();
+                                }
+                            }
+                        }
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
     }
 }

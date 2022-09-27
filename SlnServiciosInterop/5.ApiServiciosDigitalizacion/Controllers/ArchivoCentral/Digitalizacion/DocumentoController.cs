@@ -198,5 +198,55 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpPost]
+        [Route("grabar-asignacion")]
+        public IActionResult Documento_AsignacionInsertar([FromBody] DocumentoModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                if (entidad.ListaIdsDocumento.Count > 0)
+                {
+                    using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                    {
+                        repositorio.Documento_AsignacionInsertar(new enDocumento
+                        {
+                            ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento() 
+                            { 
+                                ID_DOCUMENTO = x.IdDocumento, 
+                                ID_USUARIO = x.IdUsuario
+                            }).ToList(),
+                            USU_CREACION = entidad.UsuCreacion,
+                            IP_CREACION = entidad.IpCreacion,
+                        }, ref auditoria);
+                        if (!auditoria.EjecucionProceso)
+                        {
+                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                        }
+                        else
+                        {
+                            if (!auditoria.Rechazo)
+                                auditoria.Code = (int)HttpStatusCode.Created;
+                            else
+                                auditoria.Code = (int)HttpStatusCode.OK;
+                        }
+                    }
+                }
+                else {
+                    auditoria.Rechazar("Ingrese al menos un documento a la lista."); 
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        
+
     }
 }

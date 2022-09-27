@@ -74,9 +74,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 
                 modelo.ListaPersonal = new List<SelectListItem>(); 
                 modelo.ListaPersonal.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
-                modelo.ListaPersonal.Insert(1, new SelectListItem() { Value = "1", Text = "Ivan perez tintaya" });
-                modelo.ListaPersonal.Insert(2, new SelectListItem() { Value = "2", Text = "Julio torres" });
-                modelo.ListaPersonal.Insert(3, new SelectListItem() { Value = "3", Text = "Alejandro yauyo" });
+                modelo.ListaPersonal.Insert(1, new SelectListItem() { Value = "25", Text = "Ivan perez tintaya" });
 
             }
             catch (Exception ex)
