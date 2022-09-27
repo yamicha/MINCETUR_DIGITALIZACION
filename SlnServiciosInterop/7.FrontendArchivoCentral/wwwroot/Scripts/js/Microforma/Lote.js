@@ -1,4 +1,26 @@
-﻿
+﻿//var number = [-2, 4, 6, 7, 8]; 
+//calcular(number, 12); 
+//function calcular(number, rst) {
+//    var resultado = [];
+//    var valido = false; 
+//    for (i = 0; i < number.length; i++) {
+//        var nu = number[i];
+//        if (valido)
+//            break; 
+//        for (j = 0; j < number.length; j++) {
+//            var nu2 = number[j];
+//            if (nu + nu2 == rst) {
+//                resultado.push(nu);
+//                resultado.push(nu2);
+//                valido = true; 
+//                break; 
+//            }
+//        }
+//    }
+//    debugger; 
+//    return resultado;
+//}
+
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
