@@ -8,21 +8,21 @@ using Utilitarios.Helpers;
 
 namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
 {
-    public class DaFondo : daBase
+    public class DaObservacion : daBase
     {
-        public DaFondo(coConexionDb objCoConexionDb) : base(objCoConexionDb)
+        public DaObservacion(coConexionDb objCoConexionDb) : base(objCoConexionDb)
         {
             //Constructor
         }
 
-        public List<enFondo> Fondo_Listar(enFondo objenSubSerie, ref enAuditoria auditoria)
+        public List<enObservacion> Observacion_Listar(enObservacion objenSubSerie, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enFondo> lista = new List<enFondo>();
+            List<enObservacion> lista = new List<enObservacion>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR";
-            cmd.Parameters.Add("XIN_DES_FONDO", validarNulo(objenSubSerie.DESC_FONDO));
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAOBSERVACION_LISTAR";
+            cmd.Parameters.Add("XIN_DESC_OBSERVACION", validarNulo(objenSubSerie.DESC_OBSERVACION));
             cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -36,10 +36,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enFondo temp = null;
+                            enObservacion temp = null;
                             arrResult = new object[drReader.FieldCount];
-                            int intIdFondo = drReader.GetOrdinal("ID_FONDO");
-                            int intDesFondo = drReader.GetOrdinal("DES_FONDO");
+                            int intIdObservacion = drReader.GetOrdinal("ID_OBSERVACION");
+                            int intDesObservacion = drReader.GetOrdinal("DESC_OBSERVACION");
                             int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("FEC_CREACION");
@@ -48,10 +48,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enFondo();
+                                temp = new enObservacion();
 
-                                if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = int.Parse(arrResult[intIdFondo].ToString());
-                                if (!drReader.IsDBNull(intDesFondo)) temp.DESC_FONDO = arrResult[intDesFondo].ToString();
+                                if (!drReader.IsDBNull(intIdObservacion)) temp.ID_OBSERVACION = int.Parse(arrResult[intIdObservacion].ToString());
+                                if (!drReader.IsDBNull(intDesObservacion)) temp.DESC_OBSERVACION = arrResult[intDesObservacion].ToString();
                                 if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -68,7 +68,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enFondo>();
+                    lista = new List<enObservacion>();
                 }
                 finally
                 {
@@ -79,14 +79,14 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             return lista;
         }
 
-        public enFondo Fondo_ListarUno(enFondo objenSubSerie, ref enAuditoria auditoria)
+        public enObservacion Observacion_ListarUno(enObservacion objenSubSerie, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            enFondo temp = null;
+            enObservacion temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR_UNO";
-            cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
+            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAOBSERVACION_LISTAR_UNO";
+            cmd.Parameters.Add("XIN_ID_OBSERVACION", validarNulo(objenSubSerie.ID_OBSERVACION));
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
@@ -107,8 +107,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                         if (drReader.HasRows)
                         {
                             arrResult = new object[drReader.FieldCount];
-                            int intIdFondo = drReader.GetOrdinal("ID_FONDO");
-                            int intDesFondo = drReader.GetOrdinal("DES_FONDO");
+                            int intIdObservacion = drReader.GetOrdinal("ID_OBSERVACION");
+                            int intDesObservacion = drReader.GetOrdinal("DESC_OBSERVACION");
                             //int intFlgEstado = drReader.GetOrdinal("FLG_ESTADO");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("FEC_CREACION");
@@ -117,10 +117,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enFondo();
+                                temp = new enObservacion();
 
-                                if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = int.Parse(arrResult[intIdFondo].ToString());
-                                if (!drReader.IsDBNull(intDesFondo)) temp.DESC_FONDO = arrResult[intDesFondo].ToString();
+                                if (!drReader.IsDBNull(intIdObservacion)) temp.ID_OBSERVACION = int.Parse(arrResult[intIdObservacion].ToString());
+                                if (!drReader.IsDBNull(intDesObservacion)) temp.DESC_OBSERVACION = arrResult[intDesObservacion].ToString();
                                 //if (!drReader.IsDBNull(intFlgEstado)) temp.FLG_ESTADO = arrResult[intFlgEstado].ToString();
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -135,7 +135,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    temp = new enFondo();
+                    temp = new enObservacion();
                 }
                 finally
                 {
@@ -146,16 +146,16 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             return temp;
         }
 
-        public void Fondo_Insertar(enFondo entidad, ref enAuditoria auditoria)
+        public void Observacion_Insertar(enObservacion entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAOBSERVACION_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
+                cmd.Parameters.Add(new OracleParameter("XIN_DESC_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.DESC_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -179,7 +179,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 }
             }
         }
-        public void Fondo_Actualizar(enFondo entidad, ref enAuditoria auditoria)
+        public void Observacion_Actualizar(enObservacion entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
             OracleConnection cn = null;
@@ -187,10 +187,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAOBSERVACION_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
+                cmd.Parameters.Add(new OracleParameter("XIN_DESC_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.DESC_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -214,16 +214,16 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 }
             }
         }
-        public void Fondo_Estado(enFondo entidad, ref enAuditoria auditoria)
+        public void Observacion_Estado(enObservacion entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAOBSERVACION_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
                 cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
@@ -249,16 +249,16 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             }
 
         }
-        public void Fondo_Eliminar(enFondo entidad, ref enAuditoria auditoria)
+        public void Observacion_Eliminar(enObservacion entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAOBSERVACION_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try

@@ -44,10 +44,10 @@ function Seccion_ConfigurarGrilla(_grilla, _barra) {
         { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 250, hidden: false },
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 150, hidden: false },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false },
         //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
-        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION', align: 'center', width: 150, hidden: false, formatter: 'date', formatoptions: { srcformat: 'd/m/Y h:i A', newformat: 'd/m/Y h:i A' } },
+        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
         //{ name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {

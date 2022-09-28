@@ -32,8 +32,8 @@ function Fondo_ConfigurarGrilla(_grilla, _barra) {
         '', '', '',
         'Editar', 'Eliminar', 'Estado',
         'Descripción',
-        'Usuario Creación', 'Fecha Creación', 'IP Creación',
-        'Usuario Modificación', 'Fecha Modificación', 'IP Modificación'];
+        'Usuario Creación', 'Fecha Creación',
+        'Usuario Modificación', 'Fecha Modificación'];
     var colModels = [
         { name: 'ID_FONDO', index: 'ID_FONDO', align: 'center', hidden: true, width: 0, key: true },
         { name: 'FLG_ELIMINADO', index: 'FLG_ELIMINADO', align: 'center', width: 0, hidden: true },
@@ -47,10 +47,10 @@ function Fondo_ConfigurarGrilla(_grilla, _barra) {
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false},
-        { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
+        //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
         { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
-        { name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
+        //{ name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,

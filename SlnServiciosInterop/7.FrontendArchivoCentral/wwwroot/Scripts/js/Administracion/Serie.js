@@ -32,8 +32,8 @@ function Serie_ConfigurarGrilla(_grilla, _barra) {
         '', '', '', '',
         'Editar', 'Eliminar', 'Estado',
         'Sección', 'Código Serie', 'Descripción Serie',
-        'Usuario Creación', 'Fecha Creación', 'IP Creación',
-        'Usuario Modificación', 'Fecha Modificación', 'IP Modificación'];
+        'Usuario Creación', 'Fecha Creación',
+        'Usuario Modificación', 'Fecha Modificación'];
     var colModels = [
         { name: 'ID_SERIE', index: 'ID_SERIE', align: 'center', hidden: true, width: 0, key: true },
         { name: 'ID_SECCION', index: 'ID_SECCION', align: 'center', width: 0, hidden: true },
@@ -53,10 +53,10 @@ function Serie_ConfigurarGrilla(_grilla, _barra) {
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 150, hidden: false },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false},
-        { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
+        //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
         { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
-        { name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
+        //{ name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false
