@@ -313,5 +313,59 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
         }
 
+
+        public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand();
+                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.Transaction = transaction;
+                try
+                {
+                    if (entidad.ListaDocumento.Count() > 0)
+                    {
+
+                        foreach (enDocumento item in entidad.ListaDocumento)
+                        {
+                            cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCASIGN_ACTUALIZAR"), cn);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO_ASIGNADO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = item.ID_USUARIO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
+                            cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                            dr = cmd.ExecuteReader();
+                            string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                            string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                            if (PO_VALIDO == "0")
+                            {
+                                auditoria.Rechazar(PO_MENSAJE);
+                                transaction.Rollback();
+                            }
+                        }
+                        if (!auditoria.Rechazo)
+                            transaction.Commit();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
     }
 }

@@ -44,7 +44,11 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Documento_AsignacionInsertar(entidad, ref auditoria);
         }
-        
+        public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_AsignacionActualizar(entidad, ref auditoria);
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

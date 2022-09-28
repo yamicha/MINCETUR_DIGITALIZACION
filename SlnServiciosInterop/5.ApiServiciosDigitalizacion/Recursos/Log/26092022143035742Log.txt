@@ -1,2 +1,0 @@
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion.SerieController.Serie_Actualizar(Int32 id, SerieModel entidad) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Administracion\SerieController.cs:line 135

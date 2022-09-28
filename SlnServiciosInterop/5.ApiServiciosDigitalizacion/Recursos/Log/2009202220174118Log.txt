@@ -1,3 +1,0 @@
-ORA-00904: "DD"."DES_SECCION": identificador no válido
-ORA-06512: en "INSDBA.PACK_CDACARGAMANT", línea 475
-ORA-06512: en línea 1

@@ -1,8 +1,0 @@
-Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-01400: no se puede realizar una inserción NULL en ("INSDBA"."CDA2DOCUMENTO_ASIGNADO"."FEC_MODIFICACION")
-ORA-06512: en "INSDBA.PCK_CDADIGITMANT", línea 171
-ORA-06512: en línea 1
-   at OracleInternal.ServiceObjects.OracleConnectionImpl.VerifyExecution(Int32& cursorId, Boolean bThrowArrayBindRelatedErrors, SqlStatementType sqlStatementType, Int32 arrayBindCount, OracleException& exceptionForArrayBindDML, Boolean& hasMoreRowsInDB, Boolean bFirstIterationDone)
-   at OracleInternal.ServiceObjects.OracleCommandImpl.ExecuteReader(String commandText, OracleParameterCollection paramColl, CommandType commandType, OracleConnectionImpl connectionImpl, OracleDataReaderImpl& rdrImpl, Int32 longFetchSize, Int64 clientInitialLOBFS, OracleDependencyImpl orclDependencyImpl, Int64[] scnForExecution, Int64[]& scnFromExecution, OracleParameterCollection& bindByPositionParamColl, Boolean& bBindParamPresent, Int64& internalInitialLOBFS, Int64 internalInitialJSONFS, OracleException& exceptionForArrayBindDML, OracleConnection connection, IEnumerable`1 adrianParsedStmt, Boolean isDescribeOnly, Boolean isFromEF)
-   at Oracle.ManagedDataAccess.Client.OracleCommand.ExecuteReader(Boolean requery, Boolean fillRequest, CommandBehavior behavior)
-   at Oracle.ManagedDataAccess.Client.OracleCommand.ExecuteReader()
-   at DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion.DaDocumento.Documento_AsignacionInsertar(enDocumento entidad, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Digitalizacion\DaDocumento.cs:line 291

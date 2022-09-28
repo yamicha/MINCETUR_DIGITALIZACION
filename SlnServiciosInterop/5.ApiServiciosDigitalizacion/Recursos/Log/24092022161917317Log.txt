@@ -1,8 +1,0 @@
-Oracle.ManagedDataAccess.Client.OracleException (0x80004005): Timeout de solicitud de conexión
-   at OracleInternal.ConnectionPool.PoolManager`3.Get(ConnectionString csWithDiffOrNewPwd, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
-   at OracleInternal.ConnectionPool.OraclePoolManager.Get(ConnectionString csWithNewPassword, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
-   at OracleInternal.ConnectionPool.OracleConnectionDispenser`3.Get(ConnectionString cs, PM conPM, ConnectionString pmCS, SecureString securedPassword, SecureString securedProxyPassword, OracleConnection connRefForCriteria)
-   at Oracle.ManagedDataAccess.Client.OracleConnection.Open()
-   at DaServiciosDigitalizacion.Archivo_Central.Administracion.DaSeccion.Seccion_Listar(enSeccion objenSeccion, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Administracion\DaSeccion.cs:line 32
-   at NeServiciosDigitalizacion.ArchivoCentral.Administracion.neSeccion.Seccion_Listar(enSeccion objEnSeccion, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\4.NeServiciosDigitalizacion\ArchivoCentral\Administracion\neSeccion.cs:line 22
-   at ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion.SeccionRepositorio.Seccion_Listar(enSeccion entidad, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\resource\ArchivoCentral\Administracion\SeccionRepositorio.cs:line 36

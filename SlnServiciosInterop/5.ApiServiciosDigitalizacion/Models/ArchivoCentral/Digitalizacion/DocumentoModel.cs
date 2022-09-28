@@ -32,6 +32,12 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion
         [DataMember(Name = "ArrayListDocumentos", Order = 8)]
         public List<DocumentoModel> ListaIdsDocumento { get; set; }
 
+        [DataMember(Name = "IntIdDocumentoAsignado", Order = 9)]
+        public long IdDocumentoAsignado { get; set; }
+
+        [DataMember(Name = "IntIdDocumentoAsignado", Order = 10)]
+        public long IdLaserfiche { get; set; }
+        
 
     }
 

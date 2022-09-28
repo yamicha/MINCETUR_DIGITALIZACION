@@ -40,5 +40,11 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             _objDa.Documento_AsignacionInsertar(entidad, ref auditoria);
         }
 
+        public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Documento_AsignacionActualizar(entidad, ref auditoria);
+        }
+
+        
     }
 }

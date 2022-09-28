@@ -45,6 +45,7 @@ function Digitalizar_buscar() {
 }
 
 function Digitalizar_Iniciar() {
+    $("#Digitalizar_btn_Fin").show();
     Digitalizar_ListaDocumentos = new Array();
     //
     var rowKey = $("#" + Digitalizar_grilla).jqGrid('getGridParam', 'selrow'); // esta opcion permite traer los indices de cada fila seleccionada
@@ -55,8 +56,8 @@ function Digitalizar_Iniciar() {
             // var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey[i]);
             Digitalizar_COD_DOCUMENTO = data.Digitalizar_COD_DOCUMENTO;
             var itemDoc = {
-                ID_DOCUMENTO: data.Digitalizar_ID_DOCUMENTO,
-                ID_DOCUMENTO_ASIGNADO: data.Digitalizar_ID_DOCUMENTO_ASIGNADO,
+                IdDocumento: parseInt(data.Digitalizar_ID_DOCUMENTO),
+                IdDocumentoAsignado: parseInt(data.Digitalizar_ID_DOCUMENTO_ASIGNADO),
                 HORA_INICIO: '',
                 HORA_FIN: ''
             };
@@ -68,7 +69,7 @@ function Digitalizar_Iniciar() {
            // $(".ui-jqgrid-bdiv").css("overflow-y", "hidden");
             panelLoanding('Escaneando documento', Digitalizar_grilla);
             Digitalizar_IniciarReloj();
-            Digitalizar_ValidarDocumento();
+            //Digitalizar_ValidarDocumento();
            // $(".blockUI blockMsg blockElement").css("top", "10%");
         } else {
             jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
@@ -134,9 +135,12 @@ jQuery('#Digitalizar_btn_Fin').click(function (e) {
 
 function Digitalizar_FinalizarPregunta() {
     if (Digitalizar_ListaDocumentos.length > 0) {
-        jConfirm(" ¿ Desea finalizar la digitalización ? ", "Atención", function (r) {
-            if (r) {
-                Digitalizar_Finalizar();
+        jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHER</b> ",0, "Atención", function (val) {
+            if (val != 0 && val != null) {
+                alert(val);
+                //Digitalizar_Finalizar(val);
+            } else {
+                jAlert("El <b>ID LASERFICHER</b> no puede ser (0-vacio).", "Atención");
             }
         });
     } else {
@@ -144,16 +148,11 @@ function Digitalizar_FinalizarPregunta() {
     }
 }
 
-function Digitalizar_Finalizar() {
+function Digitalizar_Finalizar(ID_LASERFICHER) {
     if (Digitalizar_ListaDocumentos.length > 0) {
-
-        //var item = {
-        //    ID_DOCUMENTO: Digitalizar_ListaDocumentos[0].ID_DOCUMENTO,
-        //    ID_DOCUMENTO_ASIGNADO: Digitalizar_ListaDocumentos[0].ID_DOCUMENTO_ASIGNADO
-        //};
-        // Digitalizar_ListaDocumentos.push(itemDoc);
         var item = {
-            lista: Digitalizar_ListaDocumentos
+            ListaIdsDocumento: Digitalizar_ListaDocumentos,
+            IdLaserfiche: ID_LASERFICHER
         }
         var url = baseUrl + "Microforma/Digitalizar/Documento_Asignado_Digitalizar";
         var auditoria = SICA.Ajax(url, item, false);
