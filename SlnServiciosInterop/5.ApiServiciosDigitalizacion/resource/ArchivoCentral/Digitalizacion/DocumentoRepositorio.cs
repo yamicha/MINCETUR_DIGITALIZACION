@@ -34,7 +34,13 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
-        
+
+
+
+        public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            return _rule.Documento_ListarUno(entidad, ref auditoria);
+        }
         public void Documento_Grabar(enDocumento entidad, ref enAuditoria auditoria)
         {
             _rule.Documento_Grabar(entidad, ref auditoria);

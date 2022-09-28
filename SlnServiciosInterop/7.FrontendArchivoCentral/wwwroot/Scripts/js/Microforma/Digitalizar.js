@@ -45,32 +45,36 @@ function Digitalizar_buscar() {
 }
 
 function Digitalizar_Iniciar() {
-    $("#Digitalizar_btn_Fin").show();
+
     Digitalizar_ListaDocumentos = new Array();
-    //
     var rowKey = $("#" + Digitalizar_grilla).jqGrid('getGridParam', 'selrow'); // esta opcion permite traer los indices de cada fila seleccionada
     if (rowKey != null) {
         if (rowKey.length != 0) {
-            //for (var i = 0; i < rowKey.length; i++) {
-            var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey);
-            // var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey[i]);
-            Digitalizar_COD_DOCUMENTO = data.Digitalizar_COD_DOCUMENTO;
-            var itemDoc = {
-                IdDocumento: parseInt(data.Digitalizar_ID_DOCUMENTO),
-                IdDocumentoAsignado: parseInt(data.Digitalizar_ID_DOCUMENTO_ASIGNADO),
-                HORA_INICIO: '',
-                HORA_FIN: ''
-            };
-            Digitalizar_ListaDocumentos.push(itemDoc);
-            //}
-            $('#Digitalizar_btn_Iniciar').attr('disabled', true);
-            $('#Digitalizar_btn_Fin').attr('disabled', false);
-            //$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
-           // $(".ui-jqgrid-bdiv").css("overflow-y", "hidden");
-            panelLoanding('Escaneando documento', Digitalizar_grilla);
-            Digitalizar_IniciarReloj();
-            //Digitalizar_ValidarDocumento();
-           // $(".blockUI blockMsg blockElement").css("top", "10%");
+            jConfirm(" ¿ Desea iniciar el proceso de digitalización ? ", "Atención", function (e) {
+                if (e) {
+                    $("#Digitalizar_btn_Fin").show();
+                    //for (var i = 0; i < rowKey.length; i++) {
+                    var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey);
+                    // var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey[i]);
+                    Digitalizar_COD_DOCUMENTO = data.Digitalizar_COD_DOCUMENTO;
+                    var itemDoc = {
+                        IdDocumento: parseInt(data.Digitalizar_ID_DOCUMENTO),
+                        IdDocumentoAsignado: parseInt(data.Digitalizar_ID_DOCUMENTO_ASIGNADO),
+                        HORA_INICIO: '',
+                        HORA_FIN: ''
+                    };
+                    Digitalizar_ListaDocumentos.push(itemDoc);
+                    //}
+                    $('#Digitalizar_btn_Iniciar').attr('disabled', true);
+                    $('#Digitalizar_btn_Fin').attr('disabled', false);
+                    //$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
+                    // $(".ui-jqgrid-bdiv").css("overflow-y", "hidden");
+                    panelLoanding('Escaneando documento', Digitalizar_grilla);
+                    Digitalizar_IniciarReloj();
+                    //Digitalizar_ValidarDocumento();
+                    // $(".blockUI blockMsg blockElement").css("top", "10%");
+                }
+            }); 
         } else {
             jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
         }
@@ -136,12 +140,12 @@ jQuery('#Digitalizar_btn_Fin').click(function (e) {
 function Digitalizar_FinalizarPregunta() {
     if (Digitalizar_ListaDocumentos.length > 0) {
         jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHER</b> ",0, "Atención", function (val) {
-            if (val != 0 && val != null) {
-                alert(val);
-                //Digitalizar_Finalizar(val);
-            } else {
-                jAlert("El <b>ID LASERFICHER</b> no puede ser (0-vacio).", "Atención");
-            }
+            if (val != null) {
+                if (val != 0 && !isNaN(val))
+                    Digitalizar_Finalizar(val);
+                else 
+                    jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
+            } 
         });
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
@@ -151,28 +155,33 @@ function Digitalizar_FinalizarPregunta() {
 function Digitalizar_Finalizar(ID_LASERFICHER) {
     if (Digitalizar_ListaDocumentos.length > 0) {
         var item = {
-            ListaIdsDocumento: Digitalizar_ListaDocumentos,
-            IdLaserfiche: ID_LASERFICHER
+            IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
+            IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
+            IdLaserfiche: parseInt(ID_LASERFICHER), 
+            HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
+            HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
+            UsuCreacion: $('#inputHddCod_usuario').val()
         }
-        var url = baseUrl + "Microforma/Digitalizar/Documento_Asignado_Digitalizar";
-        var auditoria = SICA.Ajax(url, item, false);
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
-                    jOkas("Documento digitalizado correctamente", "Atención");
+        var url = "archivo-central/digitalizacion/digitalizar-documento";
+        API.Fetch("POST", url, item, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        jOkas("Documento digitalizado correctamente", "Atención");
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                    Digitalizar_ListaDocumentos = new Array();
+                    Digitalizar_LimpiarCronometro();
+                    Digitalizar_RestaurarBotones();
+                    Digitalizar_buscar();
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert(auditoria.MensajeSalida, "Atención");
                 }
-                Digitalizar_ListaDocumentos = new Array();
-                Digitalizar_LimpiarCronometro();
-                Digitalizar_RestaurarBotones();
-                Digitalizar_buscar();
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert("No se encontraron registros", "Atención");
             }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-        }
+        });
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
     }
@@ -186,13 +195,13 @@ function Digitalizar_ValidarDocumento() {
         var url = baseUrl + "Microforma/Documento/Documento_Validar";
         var auditoria = SICA.Ajax(url, item, false);
         if (auditoria != null && auditoria != "") {
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
                     clearInterval(Digitalizar_Int_Documento);
                     Digitalizar_Finalizar();
                 }
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert(auditoria.MensajeSalida, "Atención");
             }
         } else {
             jAlert("No se encontraron registros", "Atención");

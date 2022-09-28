@@ -144,6 +144,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
+                           item.ID_LASERFICHE.ToString()
                       }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);
@@ -159,6 +160,40 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
 
         }
+
+
+        [HttpGet]
+        [Route("get-documento/{idDocumento}")]
+        public IActionResult Documento_ListarUno(int idDocumento)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Documento_ListarUno(new enDocumento
+                    {
+                        ID_DOCUMENTO = idDocumento
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
         [HttpPost]
         [Route("grabar-documentos")]

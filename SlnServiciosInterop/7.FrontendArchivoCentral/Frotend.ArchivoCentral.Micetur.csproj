@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Frotend.ArchivoCentral.Micetur</RootNamespace>
+    <UserSecretsId>2825fdfe-1589-4064-b3e9-e591b6f16dc4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

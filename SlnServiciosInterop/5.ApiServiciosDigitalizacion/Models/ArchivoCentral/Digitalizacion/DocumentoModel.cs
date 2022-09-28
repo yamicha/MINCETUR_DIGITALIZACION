@@ -37,8 +37,13 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion
 
         [DataMember(Name = "IntIdDocumentoAsignado", Order = 10)]
         public long IdLaserfiche { get; set; }
-        
 
+
+        [DataMember(Name = "StrHoraInicio", Order = 11)]
+        public string HoraInicio { get; set; }
+
+        [DataMember(Name = "StrHoraFIn", Order = 12)]
+        public string HoraFIn { get; set; }
     }
 
 }

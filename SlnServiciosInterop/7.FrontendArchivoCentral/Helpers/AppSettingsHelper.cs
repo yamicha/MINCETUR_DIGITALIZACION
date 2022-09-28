@@ -6,11 +6,9 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
 {
     public class AppSettingsHelper
     {
-        public static int AppId => Convert.ToInt16(GetAppSetting("AppId"));
-        public static string MailAvisoIngemmet => GetAppSetting("MailAvisoIngemmet");
+        public static int AppId => Convert.ToInt16(GetAppSetting("IdSis"));
         public static string baseUrlApi => GetAppSetting("baseUrlApi");
-        public static string DefaultStorage => GetAppSetting("DefaultStorage");
-
+        public static string RutaVisorLF => GetAppSetting("RutaVisorLF");
         /// <summary>
         /// Obtiene valor de la configuración del web.config
         /// </summary>

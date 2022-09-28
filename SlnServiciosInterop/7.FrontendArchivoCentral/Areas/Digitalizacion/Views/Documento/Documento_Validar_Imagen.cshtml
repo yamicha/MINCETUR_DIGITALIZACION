@@ -1,0 +1,207 @@
+﻿@model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.DocumentoValidarModelView
+@{
+    Layout = null; 
+}
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CountCharactersControlTxt('VALIDAR_OBSERVACION', 'Documento_Validar_lbl4', 3000);
+        $("#Documento_Validar_iframe").attr("src", '@Url.Content("~/Recursos/Imagenes/SinImagen.png")');
+       if ('@Model.VISOR_LF' != '' || '@Model.VISOR_LF' != null)
+            Documento_Validar_VistaPrevia('@Model.VISOR_LF');
+
+        setTimeout(function () {
+            var clientHeight = document.getElementById('Documento_Validar_Div').clientHeight;
+            $("#Documento_Validar_iframe").css("height", clientHeight);
+        }, 500);
+    });
+
+    function CountCharactersControlTxt(obj, lblObject, max) {
+        try {
+            var total = max;
+            cant = document.getElementById(obj).value.length;
+            total = total - cant
+            if (cant > max) {
+                var aux = document.getElementById(obj).value;
+                document.getElementById(obj).value = aux.substring(0, max);
+                return;
+            }
+            $("#" + lblObject).html("Nº Caracteres: " + cant + " restan " + total);
+        } catch (e) {
+            alert(e.Message);
+        }
+    }
+
+    function Documento_Validar_VistaPrevia(VISOR_LF) {
+        $("#Documento_Validar_iframe").attr("src", VISOR_LF);
+    }
+
+    $('#Documento_Validar_iframe').load(function () {
+        $('#Documento_Validar_iframe').contents().find("html")
+            .append($("<style type='text/css'>  body {text-align: center;} img {margin-top: 100px;} </style>"));
+    });
+
+    jQuery('#Documento_Validar_btn_Evaluar').click(function (e) {
+        Aprobar_Evaluar();
+    });
+    jQuery('#VALIDAR_ID_CONFORME').change(function (e) {
+        var VALIDAR_ID_CONFORME = $("#VALIDAR_ID_CONFORME").val();
+        if (VALIDAR_ID_CONFORME == 1) {
+            $("#VALIDAR_ID_TIPO_OBS").val('');
+            $("#Validar_Div_IDTIPO").hide();
+        } else {
+            $("#Validar_Div_IDTIPO").show();
+        }
+    });
+
+    $('.modal-dialogValidar').draggable({
+        handle: ".modal-header",
+        cursor: "handler"
+    });
+
+</script>
+@{
+    var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
+    var htmlShort = new Dictionary<string, object> { { "style", "width:100px; font-family:verdana; font-size:.8em" } };
+}
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post,false, new { @class = "form-horizontal", @Role = "dialog" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogValidar">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-pictures'></i>&nbsp; Validar imagen digitalizada </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-5" style="padding-right: 0px;">
+                            <iframe id="Documento_Validar_iframe" style="background-color: white; width: 100%; height: 675px;" src=""></iframe>
+                        </div>
+                        <div class="col-sm-7" id="Documento_Validar_Div">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Datos del Documento: </p>
+                                <fieldset style="width: 100%;">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nombre Documento:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.NOM_DOCUMENTO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>                     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fondo:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.DESC_FONDO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Sección:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.DESC_LARGA_SECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Serie:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.DESC_SERIE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Año:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.ANIO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                  
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° Expediente:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.FOLIOS, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Descrpción:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.DESCRIPCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                    </div>
+                            
+                           
+                                    <div class="col-sm-12 inline-container-Group">
+                                        <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
+                                        <fieldset style="width: 100%;">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Conforme ?</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    @Html.DropDownListFor(model => model.VALIDAR_ID_CONFORME, Model.Lista_VALIDAR_ID_CONFORME, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="row" id="Validar_Div_IDTIPO">
+                                                <div class="col-sm-2">
+                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo:</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    @Html.DropDownListFor(model => model.VALIDAR_ID_TIPO_OBS, Model.Lista_VALIDAR_ID_TIPO_OBS, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    @Html.TextAreaFor(model => model.VALIDAR_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Documento_Validar_lbl4', 3000)" })
+                                                    <label id="Documento_Validar_lbl4" style="width: 100%" class="Formato" runat="server" text=""></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Digitalizador:</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    @Html.TextBoxFor(model => model.VALIDAR_NOMBRE_DIGITALIZADOR, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="Documento_Validar_btn_Evaluar" class="btn btn-blue"><i class="fa fa-save"></i> Grabar Evaluación</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_Documento_Validar_ID_DOCUMENTO", Model.ID_DOCUMENTO)
+    @Html.Hidden("hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO", Model.ID_DOCUMENTO_ASIGNADO)
+}
+
+
+
