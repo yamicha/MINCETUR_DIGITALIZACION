@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using EnServiciosDigitalizacion.ArchivoCentral;
 using Newtonsoft.Json;
+using ServiceReference1;
 
 namespace Frotend.ArchivoCentral.Micetur.Helpers
 {
@@ -33,6 +35,16 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
             return entidad;
         }
+
+        public async Task<string> ClientEncriptarIdLaser(long ID_LASER, int cod_usuario) {
+            WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient();
+            string llave = await client.traeLlaveAsync();
+            string COD_ENCRIPTADO = ID_LASER + "|" + AppSettingsHelper.AppId;
+            COD_ENCRIPTADO = await client.encriptarAESAsync(COD_ENCRIPTADO, llave);
+            COD_ENCRIPTADO = HttpUtility.UrlEncode(await client.encriptarAESAsync(COD_ENCRIPTADO, llave)) + "&Cod=" + HttpUtility.UrlEncode(await client.encriptarAESAsync(cod_usuario.ToString(), llave));
+            return COD_ENCRIPTADO; 
+        }
+
 
     }
 }

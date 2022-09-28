@@ -1,3 +1,0 @@
-System.InvalidOperationException: Intento no válido de leer cuando no hay datos presentes
-   at Oracle.ManagedDataAccess.Client.OracleDataReader.GetValues(Object[] values)
-   at DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion.DaRecepcion.Lote_Listar(enLote entidad, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Digitalizacion\DaRecepcion.cs:line 49

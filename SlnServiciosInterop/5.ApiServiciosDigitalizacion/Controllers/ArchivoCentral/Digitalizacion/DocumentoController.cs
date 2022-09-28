@@ -144,6 +144,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
+                           item.ID_LASERFICHE.ToString()
                       }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);
@@ -159,6 +160,40 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
 
         }
+
+
+        [HttpGet]
+        [Route("get-documento/{idDocumento}")]
+        public IActionResult Documento_ListarUno(int idDocumento)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Documento_ListarUno(new enDocumento
+                    {
+                        ID_DOCUMENTO = idDocumento
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
         [HttpPost]
         [Route("grabar-documentos")]
@@ -246,7 +281,58 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpPost]
+        [Route("actualizar-asignacion")]
+        public IActionResult Documento_AsignacionActualizar([FromBody] DocumentoModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                if (entidad.ListaIdsDocumento.Count > 0)
+                {
+                    using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                    {
+                        repositorio.Documento_AsignacionActualizar(new enDocumento
+                        {
+                            ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
+                            {
+                                ID_DOCUMENTO_ASIGNADO = x.IdDocumentoAsignado,
+                                ID_DOCUMENTO = x.IdDocumento,
+                                ID_USUARIO = x.IdUsuario
+                            }).ToList(),
+                            USU_MODIFICACION = entidad.UsuModificacion,
+                            IP_MODIFICACION = entidad.IpModificacion,
+                        }, ref auditoria);
+                        if (!auditoria.EjecucionProceso)
+                        {
+                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                        }
+                        else
+                        {
+                            if (!auditoria.Rechazo)
+                                auditoria.Code = (int)HttpStatusCode.Created;
+                            else
+                                auditoria.Code = (int)HttpStatusCode.OK;
+                        }
+                    }
+                }
+                else
+                {
+                    auditoria.Rechazar("Ingrese al menos un documento a la lista.");
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
         
+
+
 
     }
 }

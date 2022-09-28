@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("2825fdfe-1589-4064-b3e9-e591b6f16dc4")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Frotend.ArchivoCentral.Micetur")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

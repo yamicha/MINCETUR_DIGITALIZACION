@@ -75,7 +75,7 @@ function Lote_CargarGrilla(_grilla, _FLG_FINALIZADO) {
         FLG_FINALIZADO: _FLG_FINALIZADO
     };
     id = 0; 
-    var url =  `archivo-central/recepcion/listar-lotes/${id}`;
+    var url =  `archivo-central/digitalizacion/listar-lotes/${id}`;
     //var auditoria = SICA.Ajax(url, item, false);
     API.FetchGet("GET", url, function (auditoria) {
         jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");

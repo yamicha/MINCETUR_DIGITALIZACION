@@ -11,6 +11,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public long ID_DOCUMENTO_ASIGNADO { get; set; }
         public long ID_USUARIO { get; set; }
         public long ID_LOTE { get; set; }
+        public long ID_LASERFICHE { get; set; }
         public long ID_ESTADO_DOCUMENTO { get; set; }
         public string DESCRIPCION_ESTADO { get; set; }
         public string NOMBRE_USUARIO { get; set; }

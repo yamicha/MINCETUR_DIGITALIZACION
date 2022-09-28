@@ -1,2 +1,0 @@
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion.RecepcionController.Documento_TemporalListar(GridTable grid) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Digitalizacion\RecepcionController.cs:line 45

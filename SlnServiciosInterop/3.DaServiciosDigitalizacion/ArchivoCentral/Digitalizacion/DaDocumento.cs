@@ -59,7 +59,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intDesSerie = drReader.GetOrdinal("DES_SERIE");
                             int intNomDocumento = drReader.GetOrdinal("NOM_DOCUMENTO");
                             int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
-                            int intAnio = drReader.GetOrdinal("ANIO");
+                            int intAnio = drReader.GetOrdinal("ANIO"); 
                             int intFolios = drReader.GetOrdinal("FOLIOS");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
                             int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
@@ -83,7 +83,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
                                 if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = arrResult[intAnio].ToString();
-                                if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = arrResult[intFolios].ToString();
+                                if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = arrResult[intFolios].ToString();                    
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -157,6 +157,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
                             int intAnio = drReader.GetOrdinal("ANIO");
                             int intFolios = drReader.GetOrdinal("FOLIOS");
+                            int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
                             int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
@@ -186,6 +187,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
+                                if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -211,6 +213,94 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
+
+        public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            enDocumento temp = null;
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PROC_CDADOC_LISTARUNO";
+            cmd.Parameters.Add("XIN_ID_DOCUMENTO", validarNulo(entidad.ID_DOCUMENTO));
+            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == "0")
+                            auditoria.Rechazar(PO_MENSAJE);
+
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
+                            int intIdcontrolCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
+                            int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
+                            int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
+                            int intIdFondo = drReader.GetOrdinal("ID_FONDO");
+                            int intDesFondo = drReader.GetOrdinal("DES_FONDO");
+                            int intIdSeccion = drReader.GetOrdinal("ID_SECCION");
+                            int intDesSeccion = drReader.GetOrdinal("DES_LARGA_SECCION");
+                            int intIdSerie = drReader.GetOrdinal("ID_SERIE");
+                            int intDesSerie = drReader.GetOrdinal("DES_SERIE");
+                            int intNomDocumento = drReader.GetOrdinal("NOM_DOCUMENTO");
+                            int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
+                            int intAnio = drReader.GetOrdinal("ANIO");
+                            int intFolios = drReader.GetOrdinal("FOLIOS");
+                            int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
+                            int intObservacion = drReader.GetOrdinal("OBSERVACION");
+                            int intusuAsignado = drReader.GetOrdinal("NOMBRE_USUARIO");
+                            
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enDocumento();
+                                if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
+                                if (!drReader.IsDBNull(intIdcontrolCarga)) temp.ID_CONTROL_CARGA = long.Parse(arrResult[intIdcontrolCarga].ToString());
+                                if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
+                                if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
+                                if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = long.Parse(arrResult[intIdFondo].ToString());
+                                if (!drReader.IsDBNull(intDesFondo)) temp.DES_FONDO = arrResult[intDesFondo].ToString();
+                                if (!drReader.IsDBNull(intIdSeccion)) temp.ID_SECCION = long.Parse(arrResult[intIdSeccion].ToString());
+                                if (!drReader.IsDBNull(intDesSeccion)) temp.DES_LARGA_SECCION = arrResult[intDesSeccion].ToString();
+                                if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = long.Parse(arrResult[intIdSerie].ToString());
+                                if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
+                                if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
+                                if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
+                                if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
+                                if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
+                                if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
+                                if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
+                                if (!drReader.IsDBNull(intusuAsignado)) temp.NOMBRE_USUARIO = arrResult[intusuAsignado].ToString();
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    temp = new enDocumento();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return temp;
+        }
+
 
         public void Documento_Grabar(enDocumento entidad, ref enAuditoria auditoria)
         {
@@ -298,6 +388,60 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             }
                         }
                         transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
+
+        public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand();
+                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.Transaction = transaction;
+                try
+                {
+                    if (entidad.ListaDocumento.Count() > 0)
+                    {
+
+                        foreach (enDocumento item in entidad.ListaDocumento)
+                        {
+                            cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCASIGN_ACTUALIZAR"), cn);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO_ASIGNADO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = item.ID_USUARIO;
+                            cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
+                            cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                            dr = cmd.ExecuteReader();
+                            string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                            string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                            if (PO_VALIDO == "0")
+                            {
+                                auditoria.Rechazar(PO_MENSAJE);
+                                transaction.Rollback();
+                            }
+                        }
+                        if (!auditoria.Rechazo)
+                            transaction.Commit();
+
                     }
                 }
                 catch (Exception ex)

@@ -39,10 +39,10 @@ function Asignados_Digitalizador() {
                     const resultado = Asignados_ListaDocumentos.find(x => x.ID_DOCUMENTO === data.Asignados_ID_DOCUMENTO);
 
                     var miitem = {
-                        ID_DOCUMENTO_ASIGNADO: data.Asignados_ID_DOCUMENTO_ASIGNADO,
-                        ID_DOCUMENTO: data.Asignados_ID_DOCUMENTO,
-                        ID_USUARIO: ID_DIGITALIZADOR,
-                        NOMBRE_USUARIO: DESC_DIGITALIZADOR
+                        IdDocumentoAsignado: parseInt(data.Asignados_ID_DOCUMENTO_ASIGNADO),
+                        IdDocumento: parseInt(data.Asignados_ID_DOCUMENTO),
+                        IdUsuario: parseInt(ID_DIGITALIZADOR),
+                        //IdUsuario: DESC_DIGITALIZADOR
                     }
                     if (resultado != undefined) {
                         resultado.ID_USUARIO = ID_DIGITALIZADOR;
@@ -68,25 +68,27 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
         jConfirm(" ¿ Desea grabar todas las re-asignaciones realizadas ? ", "Atención", function (r) {
             if (r) {
                 var item = {
-                    lista: Asignados_ListaDocumentos
+                    ListaIdsDocumento: Asignados_ListaDocumentos,
+                    UsuModificacion: $('#inputHddCod_usuario').val(),
                 }
-                var url = baseUrl + "Microforma/Asignar/Documento_Reasignar_Actualizar";
-                var auditoria = SICA.Ajax(url, item, false);
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                        if (!auditoria.RECHAZAR) {
-                            jOkas("Documentos re-asignados correctamente", "Atención");
+                var url = "archivo-central/documento/actualizar-asignacion";
+                API.Fetch("POST", url, item, function (auditoria) {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                jOkas("Documentos re-asignados correctamente", "Atención");
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
+                            Asignados_buscar();
+                            Asignados_ListaDocumentos = new Array();
                         } else {
-                            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                            jAlert(auditoria.MensajeSalida, "Atención");
                         }
-                        Asignados_buscar();
-                        Asignados_ListaDocumentos = new Array();
                     } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                        jAlert("No se encontraron registros", "Atención");
                     }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
+                });
             }
         });
     } else {
