@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral.Carga;
-using EnServiciosDigitalizacion.ArchivoCentral.Carga.Vistas;
-using Utilitarios.Helpers;
-using System.Data;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
+using EnServiciosDigitalizacion.Models;
+using Oracle.ManagedDataAccess.Client;
+using Utilitarios.Helpers;
 
 namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
 {
-   public class DaDigitalizacion : daBase
+    public class DaDigitalizacion : daBase
     {
         public DaDigitalizacion(coConexionDb objCoConexionDb) : base(objCoConexionDb)
         {
@@ -186,6 +181,44 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
             return lista;
+        }
+
+        public void Documento_Digitalizado_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCDIGITALIZADO_VALIDA"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = entidad.IdDocumentoAsignado;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = entidad.IdDocumento;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_FLG_CONFORME", OracleDbType.Int64)).Value = entidad.FlgConforme;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_DOCUMENTO", OracleDbType.Varchar2)).Value = entidad.IdEstadoDocumento;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.IdTipoObservacion;
+                cmd.Parameters.Add(new OracleParameter("XIN_COMENTARIO", OracleDbType.Varchar2)).Value = entidad.Comentario;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
         }
     }
 }

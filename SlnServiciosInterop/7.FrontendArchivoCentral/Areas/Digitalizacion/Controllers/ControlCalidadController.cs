@@ -18,6 +18,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             return View();
         }
 
+
+
      
     }
 }

@@ -4,6 +4,7 @@ using System.Data;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
+using EnServiciosDigitalizacion.Models;
 using NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 
 namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
@@ -38,7 +39,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
             return _rule.Documento_Proceso_Listar(entidad, ref auditoria);
         }
 
-
+        public void Documento_Digitalizado_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_Digitalizado_Validar(entidad, ref auditoria);
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

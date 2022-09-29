@@ -2,6 +2,7 @@
 using CoServiciosDigitalizacion;
 using DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.Models; 
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 
 namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
@@ -28,6 +29,9 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return _objDa.Documento_Proceso_Listar(entidad, ref auditoria);
         }
 
-
+        public void Documento_Digitalizado_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Documento_Digitalizado_Validar(entidad, ref auditoria);
+        }
     }
 }
