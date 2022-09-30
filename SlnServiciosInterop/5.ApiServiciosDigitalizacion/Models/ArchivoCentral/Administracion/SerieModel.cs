@@ -10,7 +10,7 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion
         public int IdSerie { get; set; }
 
         [DataMember(Name = "strIdSeccion", Order = 2)]
-        public int IdSeccion { get; set; }
+        public int? IdSeccion { get; set; }
 
         [DataMember(Name = "strDescCodSerie", Order = 3)]
         public string DescCodSerie { get; set; }

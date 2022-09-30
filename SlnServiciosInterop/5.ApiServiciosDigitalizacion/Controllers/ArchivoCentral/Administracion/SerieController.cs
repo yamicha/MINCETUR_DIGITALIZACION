@@ -34,7 +34,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     auditoria.Objeto = repositorio.Serie_Listar(new Vserie
                     {
-                        //ID_SECCION = entidad.IdSeccion,
+                        ID_SECCION = entidad.IdSeccion,
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
                         FLG_ESTADO = entidad.FlgEstado
@@ -98,7 +98,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     repositorio.Serie_Insertar(new enSerie
                     {
-                        ID_SECCION = entidad.IdSeccion,
+                        ID_SECCION = (long)entidad.IdSeccion,
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
                         IP_CREACION = IPUser.ObtenerIP(),
@@ -135,7 +135,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                     repositorio.Serie_Actualizar(new enSerie
                     {
                         ID_SERIE = id,
-                        ID_SECCION = entidad.IdSeccion,
+                        ID_SECCION = (long)entidad.IdSeccion,
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
                         USU_MODIFICACION = entidad.UsuModificacion,

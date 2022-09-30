@@ -7,7 +7,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Administracion.Vistas
     public class Vserie
     {
         public long ID_SERIE { get; set; }
-        public long ID_SECCION { get; set; }
+        public long? ID_SECCION { get; set; }
         public string DES_CORTA_SECCION { get; set; }
         public string COD_SERIE { get; set; }
         public string DES_SERIE { get; set; }
