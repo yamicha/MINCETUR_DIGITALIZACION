@@ -34,6 +34,11 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Documento_Digitalizar(entidad, ref auditoria);
         }
+
+        public void Documento_Reprocesar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_Reprocesar(entidad, ref auditoria);
+        }
         public List<enDocumento_Proceso> Documento_Proceso_Listar(enDocumento_Proceso entidad, ref enAuditoria auditoria)
         {
             return _rule.Documento_Proceso_Listar(entidad, ref auditoria);

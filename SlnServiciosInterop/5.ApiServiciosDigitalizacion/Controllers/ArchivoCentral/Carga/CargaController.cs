@@ -504,6 +504,24 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpGet]
+        [Route("lista-campo/{idtabla:int}")]
+        public IActionResult Carga_CamposListar(int idtabla)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+            {
+                auditoria.Objeto = repositorio.Carga_CamposListar(new enCampo { 
+                 ID_TABLA = idtabla
+                }, ref auditoria);
+            }
+            if (!auditoria.EjecucionProceso)
+            {
+                Log.Guardar(auditoria.ErrorLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
         [HttpDelete]
         [Route("eliminar/{IdControlCarga:int}")]
         public IActionResult Carga_Eliminar(int IdControlCarga)

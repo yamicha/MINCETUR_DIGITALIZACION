@@ -330,7 +330,40 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
             return StatusCode(auditoria.Code, auditoria);
         }
+
+        [HttpGet]
+        [Route("listado-obs-documento/{idDocumento}")]
+        public IActionResult DocumentoObservado_Listar(int idDocumento)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.DocumentoObservado_Listar(new enDocumento_Obs
+                    {
+                        ID_DOCUMENTO = idDocumento
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
         
+
 
 
 

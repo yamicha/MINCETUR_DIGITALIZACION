@@ -89,8 +89,13 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             }
             return View(modelo);
         }
-
-
+        [HttpGet, Route("~/Digitalizacion/formato-ver")]
+        public ActionResult FormatoCarga_Ver(long ID_TABLA)
+        {
+            FormatoModelView modelo = new FormatoModelView();
+            modelo.ID_TABLA = ID_TABLA;
+            return View(modelo);
+        }
 
     }
 }

@@ -303,6 +303,75 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return temp;
         }
 
+        public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enDocumento_Obs> Lista =new List<enDocumento_Obs>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PROC_CDADOCOBS_LISTARUNO";
+            cmd.Parameters.Add("XIN_ID_DOCUMENTO", validarNulo(entidad.ID_DOCUMENTO));
+            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        if (PO_VALIDO == "0")
+                            auditoria.Rechazar(PO_MENSAJE);
+
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdDocumentoObs = drReader.GetOrdinal("ID_DOCUMENTO_OBS");
+                            int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
+                            int intIdTipoObs = drReader.GetOrdinal("ID_TIPO_OBSERVACION");
+                            int intDesctipoObs = drReader.GetOrdinal("DESC_TIPO_OBSERVACION");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intObservacion= drReader.GetOrdinal("OBSERVACION");
+                            
+                            enDocumento_Obs temp = null;
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enDocumento_Obs();
+                                if (!drReader.IsDBNull(intIdDocumentoObs)) temp.ID_DOCUMENTO_OBS = long.Parse(arrResult[intIdDocumentoObs].ToString());
+                                if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
+                                if (!drReader.IsDBNull(intIdTipoObs)) temp.ID_TIPO_OBSERVACION = long.Parse(arrResult[intIdTipoObs].ToString());
+                                if (!drReader.IsDBNull(intDesctipoObs)) temp.DESC_TIPO_OBSERVACION = arrResult[intDesctipoObs].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
+                                if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
+                                Lista.Add(temp); 
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    Lista = new List<enDocumento_Obs>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return Lista;
+        }
+
 
         public void Documento_Grabar(enDocumento entidad, ref enAuditoria auditoria)
         {

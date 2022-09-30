@@ -15,7 +15,7 @@
         setTimeout(function () {
             var clientHeight = document.getElementById('Documento_Validar_Div').clientHeight;
             $("#Documento_Validar_iframe").css("height", clientHeight);
-        }, 500);
+        }, 200);
     });
 
     function CountCharactersControlTxt(obj, lblObject, max) {
@@ -80,10 +80,10 @@
             <div class="modal-body">
                 <fieldset style="width: 100%;">
                     <div class="row">
-                        <div class="col-sm-5" style="padding-right: 0px;">
+                        <div class="col-sm-6" style="padding-right: 0px;">
                             <iframe id="Documento_Validar_iframe" style="background-color: white; width: 100%; height: 675px;" src=""></iframe>
                         </div>
-                        <div class="col-sm-7" id="Documento_Validar_Div">
+                        <div class="col-sm-6" id="Documento_Validar_Div">
                             <div class="col-sm-12 inline-container-Group">
                                 <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Datos del Documento: </p>
                                 <fieldset style="width: 100%;">
@@ -99,37 +99,38 @@
                                         <div class="col-sm-2">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fondo:</label>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
                                             @Html.TextBoxFor(model => model.DESC_FONDO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
-
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-2">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Sección:</label>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
                                             @Html.TextBoxFor(model => model.DESC_LARGA_SECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
-                                    </div>
-                                    <div class="row">
+
                                         <div class="col-sm-2">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Serie:</label>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
                                             @Html.TextBoxFor(model => model.DESC_SERIE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Año:</label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            @Html.TextBoxFor(model => model.ANIO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
                                     </div>
                                     <div class="row">
-
                                         <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° Expediente:</label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Año:</label>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
+                                            @Html.TextBoxFor(model => model.ANIO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
+                                        @*</div>
+                                            <div class="row">*@
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Folios:</label>
+                                        </div>
+                                        <div class="col-sm-10">
                                             @Html.TextBoxFor(model => model.FOLIOS, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
                                     </div>

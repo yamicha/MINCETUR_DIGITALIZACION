@@ -9,7 +9,7 @@ function Formato_ConfigurarGrilla() {
         { name: 'NRO_CAMPO', index: 'NRO_CAMPO', align: 'center', width: 60, hidden: true, key: true },
         { name: 'COD_CAMPO', index: 'COD_CAMPO', align: 'center', width: 100, hidden: true },
         { name: 'TIPO_DATO', index: 'TIPO_DATO', align: 'center', width: 150, hidden: true },
-        { name: 'DESCRIPCION_CAMPO', index: 'DESCRIPCION_CAMPO', align: 'center', width: 300, hidden: false },
+        { name: 'DES_CAMPO', index: 'DES_CAMPO', align: 'center', width: 300, hidden: false },
         { name: 'OBLIGATORIO_MOS', index: 'OBLIGATORIO_MOS', align: 'center', width: 100, hidden: false, formatter: Formato_actionobligatorio },
         { name: 'OBLIGATORIO', index: 'OBLIGATORIO', align: 'center', width: 1, hidden: true },
         { name: 'LONGITUD', index: 'LONGITUD', align: 'center', width: 70, hidden: false },
@@ -41,34 +41,34 @@ function Formato_actionobligatorio(cellvalue, options, rowObject) {
 }
 
 function Formato_CargarGrilla() {
-    var item =
-    {
-        ID_TABLA: $("#hd_Formato_ID_TABLA").val()
-    };
-    var url = baseUrl + 'Carga/Formato/Listar_Todo';
-    var auditoria = SICA.Ajax(url, item, false);
-    jQuery("#" + Formato_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
-    if (auditoria != null && auditoria != "") {
-        if (auditoria.EJECUCION_PROCEDIMIENTO) {
-            $.each(auditoria.OBJETO, function (i, v) {
-                if (v.FLG_CLASIFICACION == 'F') {
-                    var myData =
-                    {
-                        COD_CAMPO: v.COD_CAMPO,
-                        TIPO_DATO: v.TIPO_DATO,
-                        DESCRIPCION_CAMPO: v.DESCRIPCION_CAMPO,
-                        LONGITUD: v.LONGITUD,
-                        DATO_EJEMPLO: v.DATO_EJEMPLO,
-                        OBLIGATORIO: v.OBLIGATORIO,
-                        COD_LEYENDA: v.COD_LEYENDA,
-                        NRO_CAMPO: v.NRO_CAMPO
-                    };
-                    jQuery("#" + Formato_grilla).jqGrid('addRowData', i, myData);
-                }
-            });
-            jQuery("#" + Formato_grilla).trigger("reloadGrid");
+    ID_TABLA = $("#hd_Formato_ID_TABLA").val()
+    //var url = baseUrl + 'Carga/Formato/Listar_Todo';
+    //var auditoria = SICA.Ajax(url, item, false);
+    var url = `archivo-central/carga/lista-campo/${parseInt(ID_TABLA)}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        jQuery("#" + Formato_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                $.each(auditoria.Objeto, function (i, v) {
+                    if (v.FLG_CLASIFICACION == 'F') {
+                        var myData =
+                        {
+                            COD_CAMPO: v.COD_CAMPO,
+                            TIPO_DATO: v.TIPO_DATO,
+                            DES_CAMPO: v.DES_CAMPO,
+                            LONGITUD: v.LONGITUD,
+                            DATO_EJEMPLO: v.DATO_EJEMPLO,
+                            OBLIGATORIO: v.OBLIGATORIO,
+                            COD_LEYENDA: v.COD_LEYENDA,
+                            NRO_CAMPO: v.NRO_CAMPO
+                        };
+                        jQuery("#" + Formato_grilla).jqGrid('addRowData', i, myData);
+                    }
+                });
+                jQuery("#" + Formato_grilla).trigger("reloadGrid");
+            }
         }
-    }
+    });
 }
 
 jQuery('#FormatoVer_btnDescargar').click(function (e) {

@@ -119,7 +119,7 @@ jQuery('#Tabla_btn_Grabar').click(function (e) {
 function Tabla_Mostrar_Formato() {
     var ID_TABLA = $("#ID_TABLA").val();
     jQuery("#myModal_VerFormato").html('');
-    jQuery("#myModal_VerFormato").load(baseUrl + "Carga/Formato/Formato_Ver?ID_TABLA=" + ID_TABLA, function (responseText, textStatus, request) {
+    jQuery("#myModal_VerFormato").load(baseUrl + "Digitalizacion/formato-ver?ID_TABLA=" + ID_TABLA, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_VerFormato');
         if (request.status != 200) return;
     });

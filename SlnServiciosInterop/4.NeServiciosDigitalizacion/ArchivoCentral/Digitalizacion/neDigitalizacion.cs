@@ -24,6 +24,12 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             _objDa.Documento_Digitalizar(entidad, ref auditoria);
         }
+
+        public void Documento_Reprocesar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Documento_Reprocesar(entidad, ref auditoria);
+        }
+        
         public List<enDocumento_Proceso> Documento_Proceso_Listar(enDocumento_Proceso entidad, ref enAuditoria auditoria)
         {
             return _objDa.Documento_Proceso_Listar(entidad, ref auditoria);

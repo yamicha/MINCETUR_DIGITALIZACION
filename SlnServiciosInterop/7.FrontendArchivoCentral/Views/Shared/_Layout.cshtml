@@ -42,19 +42,15 @@
 
             <div class="navbar-tools">
                 <ul class="nav navbar-right">
-
-                    <li class="dropdown" style="border-left: 1px solid #c8c7cc;">
+                    <!--<li class="dropdown" style="border-left: 1px solid #c8c7cc;">
                         <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#" aria-expanded="false" style="padding: 5px; background-color: unset !important; cursor: default; margin-left: 5px;">
                             <i class="clip-tag"></i>
                             <label style="margin-bottom: 0px;">
                                 Perfil:
-                            </label>
+                            </label>-->
                             @*@Html.DropDownList("SelectPerfiles", new SelectList((System.Collections.IEnumerable)ViewData["Seg_Perfiles"], "ID_PERFIL", "DESC_PERFIL"), new { @class = "form-control", @style = "margin-top:0px", @ID = "SelectPerfiles" })*@
-                            <input type="hidden" id="inputHddid_perfil" value="@User.GetUserIdPerfil()" />
-                            <input type="hidden" id="inputHddCod_usuario" value="@User.GetCodUsuario()" />
-                            <input type="hidden" id="inputHddId_Usuario" value="@User.GetUserId()" />
-                        </a>
-                    </li>
+                        <!--</a>
+                    </li>-->
 
                     <li class="dropdown current-user" style="border-left: 1px solid #c8c7cc;">
                         <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#" aria-expanded="false" style="display: inline-flex">
@@ -64,6 +60,9 @@
                             <span class="pr-lg-1 d-none d-lg-block">
                                 <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
                                     <strong class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 16px">@User.GetUserName()</strong>
+                                    <input type="hidden" id="inputHddid_perfil" value="@User.GetUserIdPerfil()" />
+                                    <input type="hidden" id="inputHddCod_usuario" value="@User.GetCodUsuario()" />
+                                    <input type="hidden" id="inputHddId_Usuario" value="@User.GetUserId()" />
                                 </span>
                                 <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
                                     <small class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 13px" id="small_unidad">Unidad Orgánica: @User.GetOffice()</small>
@@ -96,7 +95,7 @@
                     <li id="liProceso" class="active open">
                         <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-file-pdf"></i><span class="title"> Proceso Digitalización</span><i class="icon-arrow"></i><span class="selected"></span></a><ul class="sub-menu">
                             <li id="liRecepcion" style=""> <a id="aRecepcion" href="~/Digitalizacion/recepcion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Recepción</span></a></li>
-                            <li id="liDigitalizacion" style=""> <a id="aDigitalizacion" href="~/Digitalizacion/digitalizar-documento"  style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Digitalización</span></a></li>
+                            <li id="liDigitalizacion" style=""> <a id="aDigitalizacion" href="~/Digitalizacion/digitalizar-documento" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Digitalización</span></a></li>
                             <li id="liControlCalidad" style=""> <a id="aControlCalidad" href="~/Digitalizacion/control-calidad" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Calidad</span></a></li>
                             <li id="liReproceso" style=""> <a id="aReproceso" href="~/Digitalizacion/reproceso" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reproceso</span></a></li>
                             <li id="liFedatario" style=""> <a id="aFedatario" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Fedatario</span></a></li>
@@ -120,12 +119,13 @@
                         </ul>
                     </li>
 
-                    <li id="liReportes">
+                    @*<li id="liReportes">
                         <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-stats"></i><span class="title"> Reportes</span><i class="icon-arrow"></i><span class="selected"></span></a>
                         <ul class="sub-menu">
                             <li id="liReporte" style=""> <a id="aReporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reportes</span></a></li>
                         </ul>
-                    </li>
+                    </li>*@
+
                 </ul>
             </div>
         </div>

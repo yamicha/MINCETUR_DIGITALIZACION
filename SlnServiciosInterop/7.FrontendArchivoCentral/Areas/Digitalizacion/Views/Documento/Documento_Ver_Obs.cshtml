@@ -1,0 +1,55 @@
+﻿@model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.DocumentoVerObsModelView
+@{ 
+    Layout = null; 
+}
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            Documento_Ver_Obs_ConfigurarGrilla();
+            Documento_Ver_Obs_CargarGrilla();
+        });
+
+        $('.modal-dialogDocObs').draggable({
+            handle: ".modal-header",
+            cursor: "handler"
+        });
+
+</script>
+@{
+    var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
+    var htmlShort = new Dictionary<string, object> { { "style", "width:100px; font-family:verdana; font-size:.8em" } };
+}
+@using (Html.BeginForm("N", "Formato", new { @area = "" }, FormMethod.Post,false, new { @class = "form-horizontal", @Role = "dialog" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogDocObs">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" type="button" data-dismiss="modal">× </button>
+                    <h4 class="modal-title"><i class='clip-bubbles-3'></i>&nbsp; Observaciones de la evaluación</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="jqGrid">
+                                <table id="Documento_Ver_Obs_grilla">
+                                </table>
+                                <div id="Documento_Ver_Obs_barra"></div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_Documento_Ver_ID_DOCUMENTO", Model.ID_DOCUMENTO)
+}
+
+

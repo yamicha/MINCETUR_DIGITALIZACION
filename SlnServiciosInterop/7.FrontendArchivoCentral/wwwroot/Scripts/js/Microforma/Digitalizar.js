@@ -202,24 +202,24 @@ function Digitalizar_Finalizar(ID_LASERFICHER) {
     }
 }
 
-function Digitalizar_ValidarDocumento() {
-    Digitalizar_Int_Documento = setInterval(function () {
-        var item = {
-            COD_DOCUMENTO: Digitalizar_COD_DOCUMENTO
-        }
-        var url = baseUrl + "Microforma/Documento/Documento_Validar";
-        var auditoria = SICA.Ajax(url, item, false);
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EjecucionProceso) {
-                if (!auditoria.Rechazo) {
-                    clearInterval(Digitalizar_Int_Documento);
-                    Digitalizar_Finalizar();
-                }
-            } else {
-                jAlert(auditoria.MensajeSalida, "Atención");
-            }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-        }
-    }, 1000);
-}
+//function Digitalizar_ValidarDocumento() {
+//    Digitalizar_Int_Documento = setInterval(function () {
+//        var item = {
+//            COD_DOCUMENTO: Digitalizar_COD_DOCUMENTO
+//        }
+//        var url = baseUrl + "Microforma/Documento/Documento_Validar";
+//        var auditoria = SICA.Ajax(url, item, false);
+//        if (auditoria != null && auditoria != "") {
+//            if (auditoria.EjecucionProceso) {
+//                if (!auditoria.Rechazo) {
+//                    clearInterval(Digitalizar_Int_Documento);
+//                    Digitalizar_Finalizar();
+//                }
+//            } else {
+//                jAlert(auditoria.MensajeSalida, "Atención");
+//            }
+//        } else {
+//            jAlert("No se encontraron registros", "Atención");
+//        }
+//    }, 1000);
+//}

@@ -93,6 +93,47 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpPost]
+        [Route("reprocesar-documento")]
+        public IActionResult Documento_Reprocesar([FromBody] DocumentoModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+                    repositorio.Documento_Reprocesar(new enDocumento_Asignado
+                    {
+                        ID_DOCUMENTO = entidad.IdDocumento,
+                        ID_DOCUMENTO_ASIGNADO = entidad.IdDocumentoAsignado,
+                        ID_LASERFICHE = entidad.IdLaserfiche,
+                        HORA_INICIO = entidad.HoraInicio,
+                        HORA_FIN = entidad.HoraFIn,
+                        USU_CREACION = entidad.UsuCreacion,
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
         [HttpGet]
         [Route("listar-documento-proceso/{idDocumento:int}")]
         public IActionResult Documento_Proceso_Listar(long idDocumento)

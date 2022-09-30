@@ -70,7 +70,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
-
         public void Documento_Digitalizar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -78,7 +77,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCDIGITAL_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOC_DIGITALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = entidad.ID_DOCUMENTO_ASIGNADO;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = entidad.ID_DOCUMENTO;
@@ -107,7 +106,42 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
-
+        public void Documento_Reprocesar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
+        {   
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOC_REPROCESAR"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = entidad.ID_DOCUMENTO_ASIGNADO;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = entidad.ID_DOCUMENTO;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_LASERFICHE", OracleDbType.Int64)).Value = entidad.ID_LASERFICHE;
+                cmd.Parameters.Add(new OracleParameter("XIN_HORA_INICIO", OracleDbType.Varchar2)).Value = entidad.HORA_INICIO;
+                cmd.Parameters.Add(new OracleParameter("XIN_HORA_FIN", OracleDbType.Varchar2)).Value = entidad.HORA_FIN;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
         public List<enDocumento_Proceso> Documento_Proceso_Listar(enDocumento_Proceso entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -182,7 +216,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
-
         public void Documento_Digitalizado_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

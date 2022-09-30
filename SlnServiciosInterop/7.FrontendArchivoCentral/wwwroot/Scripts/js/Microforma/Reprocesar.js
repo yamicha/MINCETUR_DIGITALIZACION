@@ -152,58 +152,59 @@ function Reprocesar_FinalizarPregunta() {
     }
 }
 
-function Reprocesar_Finalizar(ID_LASERFICHER) {
+function Reprocesar_Finalizar(ID_LASERFICHER) {     
     if (Reprocesar_ListaDocumentos.length > 0) {
-        var item = {
-            IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
-            IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
+        var item = {        
+            IdDocumento: parseInt(Reprocesar_ListaDocumentos[0].IdDocumento),
+            IdDocumentoAsignado: parseInt(Reprocesar_ListaDocumentos[0].IdDocumentoAsignado),
             IdLaserfiche: parseInt(ID_LASERFICHER),
-            HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
-            HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
+            HoraInicio: Reprocesar_ListaDocumentos[0].HORA_INICIO,
+            HoraFIn: Reprocesar_ListaDocumentos[0].HORA_FIN,
             UsuCreacion: $('#inputHddCod_usuario').val()
         }
-        var url = baseUrl + "Microforma/Reproceso/Documento_Asignado_Reprocesar";
-        var auditoria = SICA.Ajax(url, item, false);
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
-                    jOkas("Documento reprocesado correctamente", "Atención");
+        var url = "archivo-central/digitalizacion/reprocesar-documento";
+        API.Fetch("POST", url, item, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        jOkas("Documento reprocesado correctamente", "Atención");
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                    Reprocesar_ListaDocumentos = new Array();
+                    Reprocesar_LimpiarCronometro();
+                    Reprocesar_RestaurarBotones();
+                    Reprocesar_buscar();
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert(auditoria.MensajeSalida, "Atención");
                 }
-                Reprocesar_ListaDocumentos = new Array();
-                Reprocesar_LimpiarCronometro();
-                Reprocesar_RestaurarBotones();
-                Reprocesar_buscar();
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert("No se encontraron registros", "Atención");
             }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-        }
+        }); 
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
     }
 }
 
-function Reprocesar_ValidarDocumento() {
-    Reprocesar_Int_Documento = setInterval(function () {
-        var item = {
-            COD_DOCUMENTO: Reprocesar_COD_DOCUMENTO
-        }
-        var url = baseUrl + "Microforma/Documento/Documento_Validar";
-        var auditoria = SICA.Ajax(url, item, false);
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
-                    clearInterval(Reprocesar_Int_Documento);
-                    Reprocesar_Finalizar();
-                }
-            } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
-            }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-        }
-    }, 1000);
-}
+//function Reprocesar_ValidarDocumento() {
+//    Reprocesar_Int_Documento = setInterval(function () {
+//        var item = {
+//            COD_DOCUMENTO: Reprocesar_COD_DOCUMENTO
+//        }
+//        var url = baseUrl + "Microforma/Documento/Documento_Validar";
+//        var auditoria = SICA.Ajax(url, item, false);
+//        if (auditoria != null && auditoria != "") {
+//            if (auditoria.EjecucionProceso) {
+//                if (!auditoria.Rechazo) {
+//                    clearInterval(Reprocesar_Int_Documento);
+//                    Reprocesar_Finalizar();
+//                }
+//            } else {
+//                jAlert(auditoria.MensajeSalida, "Atención");
+//            }
+//        } else {
+//            jAlert("No se encontraron registros", "Atención");
+//        }
+//    }, 1000);
+//}

@@ -244,7 +244,7 @@ function Documento_VerImagen(ID_LF) {
 
 function Documento_Ver_Obs(CODIGO) {
     jQuery("#myModal_Documento_Ver_Imagen").html('');
-    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Microforma/Documento/Documento_Ver_Obs?ID_DOCUMENTO=" + CODIGO, function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/ver-Obs?ID_DOCUMENTO=" + CODIGO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');
         if (request.status != 200) return;
     });
@@ -410,38 +410,37 @@ function GetRules(grilla) {
 }
 
 function Documento_Ver_Obs_CargarGrilla() {
-    var item =
-    {
-        ID_DOCUMENTO: $("#hd_Documento_Ver_ID_DOCUMENTO").val()
-    };
-    var url = baseUrl + 'Microforma/Documento/Documento_Ver_Obs_Listar';
-    var auditoria = SICA.Ajax(url, item, false);
-    jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
-    if (auditoria != null && auditoria != "") {
-        if (auditoria.EjecucionProceso) {
-            if (!auditoria.Rechazo) {
-                $.each(auditoria.Objeto, function (i, v) {
-                    var rowKey = jQuery("#" + Documento_Ver_Obs_grilla).getDataIDs();
-                    var ix = rowKey.length;
-                    ix++;
-                    var myData =
-                    {
-                        CODIGO: ix,
-                        ID_DOCUMENTO_OBS: v.ID_DOCUMENTO_OBS,
-                        ID_DOCUMENTO: v.ID_DOCUMENTO,
-                        ID_TIPO_OBSERVACION: v.ID_TIPO_OBSERVACION,
-                        DESC_TIPO_OBSERVACION: v.DESC_TIPO_OBSERVACION,
-                        OBSERVACION: v.OBSERVACION,
-                        USU_CREACION: v.USU_CREACION,
-                        STR_FEC_CREACION: v.STR_FEC_CREACION,
-                        IP_CREACION: v.IP_CREACION
-                    };
-                    jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('addRowData', ix, myData);
-                });
-                jQuery("#" + Documento_Ver_Obs_grilla).trigger("reloadGrid");
+     ID_DOCUMENTO = $("#hd_Documento_Ver_ID_DOCUMENTO").val()
+    var url = `archivo-central/documento/listado-obs-documento/${ID_DOCUMENTO}`;
+    //var auditoria = SICA.Ajax(url, item, false);
+    API.FetchGet("GET", url, function (auditoria) {
+        jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $.each(auditoria.Objeto, function (i, v) {
+                        var rowKey = jQuery("#" + Documento_Ver_Obs_grilla).getDataIDs();
+                        var ix = rowKey.length;
+                        ix++;
+                        var myData =
+                        {
+                            CODIGO: ix,
+                            ID_DOCUMENTO_OBS: v.ID_DOCUMENTO_OBS,
+                            ID_DOCUMENTO: v.ID_DOCUMENTO,
+                            ID_TIPO_OBSERVACION: v.ID_TIPO_OBSERVACION,
+                            DESC_TIPO_OBSERVACION: v.DESC_TIPO_OBSERVACION,
+                            OBSERVACION: v.OBSERVACION,
+                            USU_CREACION: v.USU_CREACION,
+                            STR_FEC_CREACION: v.STR_FEC_CREACION,
+                            //IP_CREACION: v.IP_CREACION
+                        };
+                        jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('addRowData', ix, myData);
+                    });
+                    jQuery("#" + Documento_Ver_Obs_grilla).trigger("reloadGrid");
+                }
             }
         }
-    }
+    }); 
 }
 
 function Documento_Ver_Obs_ConfigurarGrilla() {
@@ -449,7 +448,7 @@ function Documento_Ver_Obs_ConfigurarGrilla() {
     var colNames = [
         '1', '2', '3', '4',
         'Tipo', 'Observación',
-        'Usuario Creación', 'Fecha Creación', 'IP Creación'];
+        'Usuario Creación', 'Fecha Creación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_DOCUMENTO_OBS', index: 'ID_DOCUMENTO_OBS', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//2
@@ -461,7 +460,7 @@ function Documento_Ver_Obs_ConfigurarGrilla() {
 
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 120, hidden: false, sortable: true },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
-        { name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 120, hidden: false, sortable: true }
+        //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 120, hidden: false, sortable: true }
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,

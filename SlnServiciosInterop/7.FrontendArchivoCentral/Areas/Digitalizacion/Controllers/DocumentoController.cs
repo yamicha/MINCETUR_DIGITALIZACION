@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models;
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.Models;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Frotend.ArchivoCentral.Micetur.Recursos;
-using Frotend.ArchivoCentral.Micetur.Helpers;
-using ServiceReference1;
-using System.Web;
-using Newtonsoft.Json;
+using EnServiciosDigitalizacion.Models;
+using Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models;
 using Frotend.ArchivoCentral.Micetur.Filters;
-using System.IO;
-
+using Frotend.ArchivoCentral.Micetur.Helpers;
+using Frotend.ArchivoCentral.Micetur.Recursos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Frotend.ArchivoCentral.Micetur.Authorization;
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
     [MyAuthorize]
@@ -42,7 +38,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         [HttpGet, Route("~/Digitalizacion/documento/validar-imagen")]
         public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO)
         {
-            int COUSUARIO = 3248;
+            int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             enAuditoria auditoria = new enAuditoria();
             enAuditoria auditoriaAPi = await new CssApi().GetApi<enAuditoria>($"archivo-central/documento/get-documento/{ID_DOCUMENTO}");
@@ -104,8 +100,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             {
                                 //string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(cls_V_Documento.ID_LASERFICHE, COUSUARIO);
                                 //modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
-                                modelo.VISOR_LF = @"~\\Recursos\\Repositorio\\archivo_prueba.pdf";
-                                                                        
+                                modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
+
                             }
 
                         }
@@ -123,7 +119,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         [HttpGet, Route("~/Digitalizacion/documento/ver-imagen")]
         public async Task<ActionResult> Documento_Ver_Imagen(long ID_LASER)
         {
-            int COUSUARIO = 3248;
+            int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoVerModelView modelo = new DocumentoVerModelView();
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
@@ -131,9 +127,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             {
                 if (ID_LASER != 0)
                 {
-                    string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, COUSUARIO);
+                    //string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
                     //modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
-                    modelo.VISOR_LF = @"~\\Recursos\\Repositorio\\archivo_prueba.pdf";
+                    modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
                 }
 
             }
@@ -144,6 +140,14 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                 Log.Guardar(auditoria.ErrorLog);
             }
 
+            return View(modelo);
+        }
+
+        [HttpGet, Route("~/Digitalizacion/documento/ver-Obs")]
+        public ActionResult Documento_Ver_Obs(long ID_DOCUMENTO)
+        {
+            DocumentoVerObsModelView modelo = new DocumentoVerObsModelView();
+            modelo.ID_DOCUMENTO = ID_DOCUMENTO;
             return View(modelo);
         }
     }
