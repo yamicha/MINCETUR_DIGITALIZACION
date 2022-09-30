@@ -24,16 +24,16 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
         public async Task<ActionResult> Mantenimiento(int id, string Accion)
         {
             enAuditoria auditoria = new enAuditoria();
-            FondoModelView model = new FondoModelView
+            ObservacionModelView model = new ObservacionModelView
             {
                 ACCION = Accion,
-                ID_FONDO = id
+                ID_OBSERVACION = id
             };
             try
             {
                 if (Accion == "M")
                 {
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Observacion/get-fondo/{id}");
+                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/observacion/get-observacion/{id}");
                     if (!respuestapi.EjecucionProceso)
                     {
                         if (respuestapi.Rechazo)
@@ -43,8 +43,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                     {
                         if (respuestapi.Objeto != null)
                         {
-                            enFondo item = JsonConvert.DeserializeObject<enFondo>(respuestapi.Objeto.ToString());
-                            model.DESC_FONDO = item.DESC_FONDO;
+                            enObservacion item = JsonConvert.DeserializeObject<enObservacion>(respuestapi.Objeto.ToString());
+                            model.DESC_OBSERVACION = item.DESC_OBSERVACION;
                         }
                     }
                 }

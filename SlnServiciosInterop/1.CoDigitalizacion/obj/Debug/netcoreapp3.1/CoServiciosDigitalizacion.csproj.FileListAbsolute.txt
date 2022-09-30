@@ -1,13 +1,3 @@
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.deps.json
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfoInputs.cache
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfo.cs
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.AssemblyReference.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.deps.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
@@ -16,3 +6,13 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.deps.json
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.AssemblyReference.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfoInputs.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfo.cs
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
