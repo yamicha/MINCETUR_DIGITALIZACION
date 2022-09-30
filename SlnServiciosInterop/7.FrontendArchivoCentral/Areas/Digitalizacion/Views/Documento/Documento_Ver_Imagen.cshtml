@@ -1,10 +1,12 @@
-﻿
+﻿  @{ 
+      Layout = null; 
+  }
     @model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.DocumentoVerModelView
     <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#Documento_Ver_iframeVistaPrevia").attr("src", '@Url.Content("~/Recursos/Imagenes/SinImagen.png")');
+            $("#Documento_Ver_iframeVistaPrevia").attr("src", '@Url.Content("~/assets/sin-IMAGEN.jpg")');
             if ('@Model.VISOR_LF' != '')
                 Documento_Ver_VistaPrevia('@Model.VISOR_LF');
         });

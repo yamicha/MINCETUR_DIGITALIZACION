@@ -11,14 +11,15 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
     [MyAuthorize]
     [Area("Digitalizacion")]
     [Route("[action]")]
-    public class DigitalizacionController : Controller
+    public class ReprocesoController : Controller
     {
-        // GET: DigitalizacionController
-        [HttpGet, Route("~/Digitalizacion/digitalizar-documento")]
+      
+        [HttpGet, Route("~/Digitalizacion/reproceso")]
         public ActionResult Index()
         {
             return View();
         }
 
+        
     }
 }

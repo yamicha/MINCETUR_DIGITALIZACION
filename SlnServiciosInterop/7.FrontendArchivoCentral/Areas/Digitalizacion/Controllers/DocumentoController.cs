@@ -15,9 +15,12 @@ using Frotend.ArchivoCentral.Micetur.Helpers;
 using ServiceReference1;
 using System.Web;
 using Newtonsoft.Json;
+using Frotend.ArchivoCentral.Micetur.Filters;
+using System.IO;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
+    [MyAuthorize]
     [Area("Digitalizacion")]
     [Route("[action]")]
     public class DocumentoController : Controller
@@ -99,8 +102,10 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                         {
                             if (cls_V_Documento.ID_LASERFICHE != 0)
                             {
-                                string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(cls_V_Documento.ID_LASERFICHE, COUSUARIO);
-                                modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                                //string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(cls_V_Documento.ID_LASERFICHE, COUSUARIO);
+                                //modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                                modelo.VISOR_LF = @"~\\Recursos\\Repositorio\\archivo_prueba.pdf";
+                                                                        
                             }
 
                         }
@@ -127,7 +132,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                 if (ID_LASER != 0)
                 {
                     string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, COUSUARIO);
-                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                    //modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                    modelo.VISOR_LF = @"~\\Recursos\\Repositorio\\archivo_prueba.pdf";
                 }
 
             }

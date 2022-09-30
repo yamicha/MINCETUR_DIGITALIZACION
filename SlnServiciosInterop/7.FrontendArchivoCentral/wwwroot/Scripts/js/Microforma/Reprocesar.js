@@ -51,15 +51,17 @@ function Reprocesar_Iniciar() {
     //var rowKey = $("#" + Reprocesar_grilla).jqGrid('getGridParam', 'selarrrow'); // esta opcion permite traer los indices de cada fila seleccionada
     if (rowKey != null) {
         if (rowKey.length != 0) {
+            $("#Reprocesar_btn_Fin").show();
             //for (var i = 0; i < rowKey.length; i++) {
             var data = jQuery("#" + Reprocesar_grilla).jqGrid('getRowData', rowKey);
             // var data = jQuery("#" + Reprocesar_grilla).jqGrid('getRowData', rowKey[i]);
             Reprocesar_COD_DOCUMENTO = data.Reprocesar_COD_DOCUMENTO;
             var itemDoc = {
-                ID_DOCUMENTO: data.Reprocesar_ID_DOCUMENTO,
-                ID_DOCUMENTO_ASIGNADO: data.Reprocesar_ID_DOCUMENTO_ASIGNADO,
+                IdDocumento: data.Reprocesar_ID_DOCUMENTO,
+                IdDocumentoAsignado: data.Reprocesar_ID_DOCUMENTO_ASIGNADO,
                 HORA_INICIO: '',
-                HORA_FIN: ''
+                HORA_FIN: '',
+                ID_LASERFICHER: data.Reprocesar_ID_LASERFICHE,
             };
             Reprocesar_ListaDocumentos.push(itemDoc);
             // }
@@ -67,7 +69,7 @@ function Reprocesar_Iniciar() {
             $('#Reprocesar_btn_Fin').attr('disabled', false);
             panelLoanding('Escaneando documento', Reprocesar_grilla);
             Reprocesar_IniciarReloj();
-            Reprocesar_ValidarDocumento();
+            //Reprocesar_ValidarDocumento();
         } else {
             jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
         }
@@ -137,9 +139,12 @@ jQuery('#Reprocesar_btn_Fin').click(function (e) {
 
 function Reprocesar_FinalizarPregunta() {
     if (Reprocesar_ListaDocumentos.length > 0) {
-        jConfirm(" ¿ Desea finalizar la digitalización ? ", "Atención", function (r) {
-            if (r) {
-                Reprocesar_Finalizar();
+        jPrompt(" ¿ Desea finalizar con la digitalización ?<br/> En caso de ser necesario actualice el <b>ID LASERFICHER</b> ", Reprocesar_ListaDocumentos[0].ID_LASERFICHER, "Atención", function (val) {
+            if (val != null) {
+                if (val != 0 && !isNaN(val))
+                    Reprocesar_Finalizar(val);
+                else
+                    jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
             }
         });
     } else {
@@ -147,10 +152,15 @@ function Reprocesar_FinalizarPregunta() {
     }
 }
 
-function Reprocesar_Finalizar() {
+function Reprocesar_Finalizar(ID_LASERFICHER) {
     if (Reprocesar_ListaDocumentos.length > 0) {
         var item = {
-            lista: Reprocesar_ListaDocumentos
+            IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
+            IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
+            IdLaserfiche: parseInt(ID_LASERFICHER),
+            HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
+            HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
+            UsuCreacion: $('#inputHddCod_usuario').val()
         }
         var url = baseUrl + "Microforma/Reproceso/Documento_Asignado_Reprocesar";
         var auditoria = SICA.Ajax(url, item, false);
