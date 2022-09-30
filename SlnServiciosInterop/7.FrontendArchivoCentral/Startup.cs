@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Owin;
 //using Microsoft.Owin.Security.Cookies;
 using Utilitarios.Helpers.Authorization;
 using System;
-using Owin; 
-
-[assembly: OwinStartup(typeof(Frotend.ArchivoCentral.Micetur.Startup))]
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Frotend.ArchivoCentral.Micetur
 {
@@ -28,11 +26,26 @@ namespace Frotend.ArchivoCentral.Micetur
         {
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
-        
+            // seguridad
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(50);
+            });
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
+            {
+                //config.LoginPath = "/Home/AccesoDenegado";
+                config.AccessDeniedPath = "/Home/AccesoDenegado";
+                config.Cookie.Name = "MinceturSISAR";
+            });
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false).AddSessionStateTempDataProvider();
 
         }
-
-       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,29 +63,24 @@ namespace Frotend.ArchivoCentral.Micetur
 
 
            // app.UseCors(Microsoft.Owin.CorsOptions.AllowAll);
-            // app.UseHttpsRedirection();
+             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions
-            //{
-            //    AuthenticationType = AppAuthenticationType.ApplicationCookie,
-            //    LoginPath = new PathString("/authorization/signin"),
-            //    CookieName = AppAuthenticationType.CookieName,
-            //    CookieHttpOnly = true,
-            //    SlidingExpiration = true,
-            //    ExpireTimeSpan = TimeSpan.FromDays(1)
-            //});
+            app.UseSession();
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Authorization}/{action=Index}/{id?}");
+            });
+    
 
         }
     }

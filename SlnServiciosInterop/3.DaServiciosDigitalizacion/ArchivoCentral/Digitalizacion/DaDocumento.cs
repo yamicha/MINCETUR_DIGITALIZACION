@@ -246,6 +246,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intIdcontrolCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
                             int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
                             int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
+                            int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
                             int intIdFondo = drReader.GetOrdinal("ID_FONDO");
                             int intDesFondo = drReader.GetOrdinal("DES_FONDO");
                             int intIdSeccion = drReader.GetOrdinal("ID_SECCION");
@@ -267,6 +268,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
                                 if (!drReader.IsDBNull(intIdcontrolCarga)) temp.ID_CONTROL_CARGA = long.Parse(arrResult[intIdcontrolCarga].ToString());
                                 if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
+                                if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
                                 if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
                                 if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = long.Parse(arrResult[intIdFondo].ToString());
                                 if (!drReader.IsDBNull(intDesFondo)) temp.DES_FONDO = arrResult[intDesFondo].ToString();

@@ -16,13 +16,13 @@ function Aprobar_buscar() {
 
 function Aprobar_Cerrar() {
     $('#myModal_Documento_Ver_Imagen').modal('hide');
-    jQuery("#myModal_Documento_Ver_Imagen").html(''); 
+    jQuery("#myModal_Documento_Ver_Imagen").html('');
 }
 
 function Aprobar_Evaluar() {
     var _CONFORME = $("#VALIDAR_ID_CONFORME").val();
     var pregunta = "";
-    if (_CONFORME == "") { 
+    if (_CONFORME == "") {
         jAlert("Seleccione su validación", "Atención");
         return;
     }
@@ -40,35 +40,41 @@ function Aprobar_Evaluar() {
     jConfirm(" ¿ Desea " + pregunta + " al documento digitalizado ? ", "Atención", function (r) {
         if (r) {
             var Aprobar_ListaDocumentos = new Array();
-            var itemx = { 
-                FLG_CONFORME: _CONFORME,
-                COD_DOCUMENTO: $("#COD_DOCUMENTO").val(),
-                OBSERVACION: $("#VALIDAR_OBSERVACION").val(),
-                ID_TIPO_OBSERVACION: $("#VALIDAR_ID_TIPO_OBS").val(),
-                ID_DOCUMENTO: $("#hd_Documento_Validar_ID_DOCUMENTO").val(),
-                ID_DOCUMENTO_ASIGNADO: $("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()
-            }
-            Aprobar_ListaDocumentos.push(itemx);
+            var ID_TIPO_OBS = 0; 
+            if ($("#VALIDAR_ID_TIPO_OBS").val() != "")
+                ID_TIPO_OBS = parseInt($("#VALIDAR_ID_TIPO_OBS").val())
             var item = {
-                lista: Aprobar_ListaDocumentos
+                FlgConforme: parseInt(_CONFORME),
+                //COD_DOCUMENTO: $("#COD_DOCUMENTO").val(),
+                Comentario: $("#VALIDAR_OBSERVACION").val(),
+                IdTipoObservacion: ID_TIPO_OBS,
+                IdDocumento: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO").val()),
+                IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
+                UsuCreacion: $('#inputHddCod_usuario').val()
             }
-            var url = baseUrl + "Microforma/ControlCalidad/Documento_Asignado_Validar";
-            var auditoria = SICA.Ajax(url, item, false);
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                    if (!auditoria.RECHAZAR) {
-                        jOkas("Documento evaluado correctamente", "Atención");
-                        Aprobar_Cerrar();
+            //Aprobar_ListaDocumentos.push(itemx);
+            //var item = {
+            //    lista: Aprobar_ListaDocumentos
+            //}
+            debugger; 
+            var url = "archivo-central/digitalizacion/digitalizado-validar";
+            API.Fetch("POST", url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            jOkas("Documento evaluado correctamente", "Atención");
+                            Aprobar_Cerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                        Aprobar_buscar();
                     } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                        jAlert(auditoria.MensajeSalida, "Atención");
                     }
-                    Aprobar_buscar();
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert("No se encontraron registros", "Atención");
                 }
-            } else {
-                jAlert("No se encontraron registros", "Atención");
-            }
+            });
         }
     });
 } 

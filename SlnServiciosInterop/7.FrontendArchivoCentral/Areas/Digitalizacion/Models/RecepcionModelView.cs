@@ -11,7 +11,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public long ID_DIGITALIZADOR2 { get; set; }
         public long ID_CONTROL_CARGA_DEFAULT { get; set; }
         public long ID_TABLA_DEFAULT { get; set; }
-        public List<SelectListItem> ListaPersonal { get; set; }
+        public List<SelectListItem> ListaPersonal = new List<SelectListItem>(); 
 
         public long ID_TABLA { get; set; }
         public List<SelectListItem> Lista_ID_TABLA = new List<SelectListItem>(); 

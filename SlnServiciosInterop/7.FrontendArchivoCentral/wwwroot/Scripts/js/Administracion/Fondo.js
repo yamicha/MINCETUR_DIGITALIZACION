@@ -165,8 +165,7 @@ function Fondo_CargarGrilla(_grilla) {
     var url = "archivo-central/fondo/listar";
     jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
 
-    API.Fetch("POST", url, item, function (auditoria) {
-        
+    API.Fetch("POST", url, item, function (auditoria) {    
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
                 if (!auditoria.Rechazo) {

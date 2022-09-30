@@ -379,11 +379,15 @@
               "target": "Package",
               "version": "[2.18.0, )"
             },
-            "Microsoft.AspNet.Identity.Core": {
+            "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
-              "version": "[2.2.3, )"
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
@@ -398,14 +402,6 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
-            },
-            "Microsoft.Owin": {
-              "target": "Package",
-              "version": "[4.2.2, )"
-            },
-            "Microsoft.Owin.Security": {
-              "target": "Package",
-              "version": "[4.2.2, )"
             },
             "NPOI": {
               "target": "Package",

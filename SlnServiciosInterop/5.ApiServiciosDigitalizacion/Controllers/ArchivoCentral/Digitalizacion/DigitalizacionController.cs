@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Recursos;
 using ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
+using EnServiciosDigitalizacion.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion;
 using System.Net;
+using EnServiciosDigitalizacion.Models;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 {
@@ -118,5 +120,47 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
             return StatusCode(auditoria.Code, auditoria);
         }
+
+
+        [HttpPost]
+        [Route("digitalizado-validar")]
+        public IActionResult Documento_Digitalizado_Validar([FromBody] DocumentoValidarModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                if (entidad.FlgConforme == 1)
+                {
+                    entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme; 
+                }
+                else
+                    entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadNoCondorme;
+
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+                    repositorio.Documento_Digitalizado_Validar(entidad, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+        
     }
 }

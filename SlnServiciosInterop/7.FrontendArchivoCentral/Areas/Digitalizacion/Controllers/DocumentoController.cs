@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models;
 using EnServiciosDigitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion; 
+using EnServiciosDigitalizacion.Models;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Frotend.ArchivoCentral.Micetur.Recursos;
 using Frotend.ArchivoCentral.Micetur.Helpers;
@@ -34,15 +36,13 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             return View(modelo);
         }
 
-
         [HttpGet, Route("~/Digitalizacion/documento/validar-imagen")]
-        public async  Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO)
+        public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO)
         {
             int COUSUARIO = 3248;
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             enAuditoria auditoria = new enAuditoria();
-           enAuditoria auditoriaAPi = await new CssApi().GetApi<enAuditoria>($"archivo-central/documento/get-documento/{ID_DOCUMENTO}");
-            modelo.CODIGO_IMAGEN = "";
+            enAuditoria auditoriaAPi = await new CssApi().GetApi<enAuditoria>($"archivo-central/documento/get-documento/{ID_DOCUMENTO}");
             modelo.Lista_VALIDAR_ID_CONFORME = new List<SelectListItem>();
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(1, new SelectListItem() { Value = "1", Text = "CONFORME" });
@@ -50,24 +50,30 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             modelo.VALIDAR_ID_CONFORME = "";
             modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
 
-            //var lista = _cls_Serv_V_TipoObs.Listar_Todo("1", ref auditoria);
-            //if (auditoria.EjecucionProceso)
-            //{
-            //    if (!auditoria.Rechazo)
-            //    {
-            //        modelo.Lista_VALIDAR_ID_TIPO_OBS = lista.Select(x => new SelectListItem()
-            //        {
-            //            Text = x.DESC_OBSERVACION.ToString(),
-            //            Value = x.ID_OBSERVACION.ToString()
-            //        }).ToList();
-            //        modelo.Lista_VALIDAR_ID_TIPO_OBS.Insert(0, new SelectListItem() { Value = "", Text = "-- Seleccione --" });
-            //    }
-            //}
-            //else
-            //{
-            //    modelo.Lista_VALIDAR_ID_TIPO_OBS.Insert(0, new SelectListItem() { Value = "", Text = "-- Seleccione --" });
-            //    Log.Guardar(auditoria.ErrorLog);
-            //}
+            enAuditoria TipoObservacion = await new CssApi().PostApi<enAuditoria>($"archivo-central/observacion/listar", new parameters
+            {
+                FlgEstado = "1"
+            });
+            if (TipoObservacion.EjecucionProceso)
+            {
+                if (!TipoObservacion.Rechazo)
+                {
+                    List<enObservacion> ListaObservacion = new List<enObservacion>();
+                    if (auditoriaAPi.Objeto != null)
+                        ListaObservacion = JsonConvert.DeserializeObject<List<enObservacion>>(TipoObservacion.Objeto.ToString());
+                    modelo.Lista_VALIDAR_ID_TIPO_OBS = ListaObservacion.Select(x => new SelectListItem()
+                    {
+                        Text = x.DESC_OBSERVACION.ToString(),
+                        Value = x.ID_OBSERVACION.ToString()
+                    }).ToList();
+                    modelo.Lista_VALIDAR_ID_TIPO_OBS.Insert(0, new SelectListItem() { Value = "", Text = "-- Seleccione --" });
+                }
+            }
+            else
+            {
+                modelo.Lista_VALIDAR_ID_TIPO_OBS.Insert(0, new SelectListItem() { Value = "", Text = "-- Seleccione --" });
+                Log.Guardar(auditoria.ErrorLog);
+            }
 
             if (auditoriaAPi.EjecucionProceso)
             {
@@ -88,18 +94,18 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                         modelo.VALIDAR_NOMBRE_DIGITALIZADOR = cls_V_Documento.DESCRIPCION;
                         modelo.OBSERVACION = cls_V_Documento.OBSERVACION;
                         modelo.VALIDAR_NOMBRE_DIGITALIZADOR = cls_V_Documento.NOMBRE_USUARIO;
+                        modelo.ID_DOCUMENTO_ASIGNADO = cls_V_Documento.ID_DOCUMENTO_ASIGNADO;
                         try
                         {
                             if (cls_V_Documento.ID_LASERFICHE != 0)
                             {
                                 string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(cls_V_Documento.ID_LASERFICHE, COUSUARIO);
-                                modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT); 
+                                modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
                             }
-                   
+
                         }
                         catch (Exception ex)
                         {
-                            modelo.CODIGO_IMAGEN = "";
                             auditoria.Error(ex);
                             Log.Guardar(auditoria.ErrorLog);
                         }
@@ -110,20 +116,18 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/ver-imagen")]
-        public ActionResult Documento_Ver_Imagen(long ID_LASER)
+        public async Task<ActionResult> Documento_Ver_Imagen(long ID_LASER)
         {
+            int COUSUARIO = 3248;
             DocumentoVerModelView modelo = new DocumentoVerModelView();
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
-            modelo.CODIGO_IMAGEN = "";
-            string ruta_temporal = "";
-
-            //Cls_V_Documento cls_V_Documento = _cls_Serv_V_Documento.Documento_Listar_Uno(ID_DOCUMENTO, ref auditoria);
             try
             {
                 if (ID_LASER != 0)
                 {
-                    modelo.VISOR_LF = AppSettingsHelper.RutaVisorLF + ID_LASER;
+                    string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, COUSUARIO);
+                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
                 }
 
             }
@@ -133,22 +137,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                 auditoria.Error(ex);
                 Log.Guardar(auditoria.ErrorLog);
             }
-            finally
-            {
-                System.Threading.Thread t2 = new System.Threading.Thread(() =>
-                {
-                    int numberOfSeconds = 0;
-                    while (numberOfSeconds < 10)
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                        numberOfSeconds++;
-                    }
-                    if (System.IO.File.Exists(ruta_temporal))
-                        System.IO.File.Delete(ruta_temporal);
-                });
-                t2.Start();
-                //t2.Join();
-            }
+
             return View(modelo);
         }
     }
