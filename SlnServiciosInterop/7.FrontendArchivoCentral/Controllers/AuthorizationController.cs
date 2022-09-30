@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Security.Claims;
 using EnServiciosDigitalizacion;
+using Frotend.ArchivoCentral.Micetur.Filters;
 using Frotend.ArchivoCentral.Micetur.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -13,7 +14,8 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
 {
     public class AuthorizationController : Controller
     {
-        public IActionResult Index()
+
+        public IActionResult SignIn()
         {
             enAuditoria auditoria = new enAuditoria();
             UserLogin userlogin = new UserLogin
@@ -23,7 +25,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 NameApellidos = "IVAN PEREZ TINTAYA",
                 IdOficina = 20,
                 DesOficina = "MI CASA",
-                IdPerfil = 2, 
+                IdPerfil = 2,
 
             };
             auditoria.Limpiar();
@@ -52,11 +54,15 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             }
 
         }
-
-        [Route("acceso-denegado")]
         public IActionResult AccesoDenegado()
         {
             return View();
+        }
+        [MyAuthorize]
+        public IActionResult SignOut()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("https://www.youtube.com/"); 
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

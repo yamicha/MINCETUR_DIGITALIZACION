@@ -14,15 +14,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
 using Frotend.ArchivoCentral.Micetur.Controllers;
 using Frotend.ArchivoCentral.Micetur.Authorization;
-using Microsoft.AspNetCore.Authorization;
+using Frotend.ArchivoCentral.Micetur.Filters;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
-    [Authorize]
+    [MyAuthorize]
     [Area("Digitalizacion")]
     [Route("[action]")]
-    public class RecepcionController : BaseController
-    {
+    public class RecepcionController : BaseController           
+    {   
 
         // GET: SeccionController
         [HttpGet, Route("~/Digitalizacion/recepcion")]

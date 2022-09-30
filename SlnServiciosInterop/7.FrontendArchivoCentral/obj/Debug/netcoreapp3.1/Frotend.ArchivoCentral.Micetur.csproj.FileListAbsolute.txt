@@ -198,3 +198,5 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Views\Authorization\AccesoDenegado.cshtml.g.cs
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\Reproceso\Index.cshtml.g.cs

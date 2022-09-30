@@ -1,7 +1,7 @@
 ﻿var Digitalizar_grilla = 'Digitalizar_grilla';
 var Digitalizar_barra = 'Digitalizar_barra';
 var Digitalizar_ListaDocumentos = new Array();
-var Digitalizar_Int_Documento = 0; 
+var Digitalizar_Int_Documento = 0;
 var Digitalizar_Reloj = false;
 var Digitalizar_Inicio = 0;
 var Digitalizar_intervalo = 0;
@@ -29,6 +29,19 @@ jQuery('#aTabDigitalizar').click(function (e) {
 jQuery('#Digitalizar_btn_Iniciar').click(function (e) {
     Digitalizar_Iniciar();
 });
+jQuery('#Digitalizar_btn_Cancelar').click(function (e) {
+    Digitalizar_Cancelar();
+});
+
+function Digitalizar_Cancelar() {
+    jConfirm(" ¿ Desea cancelar el proceso de digitalización ? ", "Atención", function (e) {
+        if (e) {
+            Digitalizar_ListaDocumentos = new Array();
+            Digitalizar_LimpiarCronometro();
+            Digitalizar_RestaurarBotones();
+        }
+    });
+}
 
 jQuery('#Digitalizar_Check_Finalizar').change(function (e) {
     var check = $("#Digitalizar_Check_Finalizar:checked").val();
@@ -67,6 +80,7 @@ function Digitalizar_Iniciar() {
                     //}
                     $('#Digitalizar_btn_Iniciar').attr('disabled', true);
                     $('#Digitalizar_btn_Fin').attr('disabled', false);
+                    $('#Digitalizar_btn_Cancelar').show();
                     //$(".ui-jqgrid-bdiv").css("overflow-x", "hidden");
                     // $(".ui-jqgrid-bdiv").css("overflow-y", "hidden");
                     panelLoanding('Escaneando documento', Digitalizar_grilla);
@@ -74,7 +88,7 @@ function Digitalizar_Iniciar() {
                     //Digitalizar_ValidarDocumento();
                     // $(".blockUI blockMsg blockElement").css("top", "10%");
                 }
-            }); 
+            });
         } else {
             jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
         }
@@ -131,6 +145,7 @@ function Digitalizar_RestaurarBotones() {
     $('#Digitalizar_btn_Iniciar').attr('disabled', false);
     $('#Digitalizar_btn_Fin').attr('disabled', true);
     $('#Digitalizar_btn_Fin').hide();
+    $('#Digitalizar_btn_Cancelar').hide();
 }
 
 jQuery('#Digitalizar_btn_Fin').click(function (e) {
@@ -139,13 +154,13 @@ jQuery('#Digitalizar_btn_Fin').click(function (e) {
 
 function Digitalizar_FinalizarPregunta() {
     if (Digitalizar_ListaDocumentos.length > 0) {
-        jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHER</b> ",0, "Atención", function (val) {
+        jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHER</b> ", 0, "Atención", function (val) {
             if (val != null) {
                 if (val != 0 && !isNaN(val))
                     Digitalizar_Finalizar(val);
-                else 
+                else
                     jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
-            } 
+            }
         });
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
@@ -157,7 +172,7 @@ function Digitalizar_Finalizar(ID_LASERFICHER) {
         var item = {
             IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
             IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
-            IdLaserfiche: parseInt(ID_LASERFICHER), 
+            IdLaserfiche: parseInt(ID_LASERFICHER),
             HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
             HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
             UsuCreacion: $('#inputHddCod_usuario').val()

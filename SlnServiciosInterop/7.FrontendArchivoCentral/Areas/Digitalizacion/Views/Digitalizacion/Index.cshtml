@@ -17,6 +17,7 @@
     $(document).ready(function () {
         Remove_RemoverClases("liDigitalizacion");
         $("#Digitalizar_btn_Fin").hide();
+        $("#Digitalizar_btn_Cancelar").hide();
     });
 
 </script>
@@ -57,11 +58,12 @@
                         <legend style="font-size:small;display:block">Iniciar Digitalización</legend>
                         <button id="Digitalizar_btn_Iniciar" title="Iniciar reloj" class="btn btn-blue" type="button" style="margin-left:20px;margin-bottom:10px;"><i class="clip-clock-2"></i> Iniciar</button>
                         <button id="Digitalizar_btn_Fin" title="Detener reloj y finalizar la digitalización" class="btn btn-blue" type="button" style="margin-right:6px;margin-left:6px;margin-bottom:10px;"><i class="clip-stopwatch"></i> Finalizar</button>
+                        <button id="Digitalizar_btn_Cancelar" title="Detener reloj y cancelar la digitalización" class="btn btn-red" type="button" style="margin-right:6px;margin-left:6px;margin-bottom:10px;"><i class="clip-cancel-circle"></i> Cancelar</button>
                         <label id="Digitalizar_lbl_Crono" style="text-align:center;margin-right:6px;margin-left:6px;color:red;font-size:large;">00:00:00</label>
                         @*<label id="Digitalizar_lbl_Check" style="width:40%;text-align:left;margin-right:1px;">
-                            <input id="Digitalizar_Check_Finalizar" type="checkbox" value="0" style="margin-left:35px" />
-                            Mostrar Finalizar
-                        </label>*@
+                                <input id="Digitalizar_Check_Finalizar" type="checkbox" value="0" style="margin-left:35px" />
+                                Mostrar Finalizar
+                            </label>*@
                     </fieldset>
                 </div>
             </div>

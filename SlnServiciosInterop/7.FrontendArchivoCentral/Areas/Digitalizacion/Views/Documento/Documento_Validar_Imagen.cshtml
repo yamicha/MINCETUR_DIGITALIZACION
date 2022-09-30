@@ -1,6 +1,6 @@
 ﻿@model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.DocumentoValidarModelView
 @{
-    Layout = null; 
+    Layout = null;
 }
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
@@ -8,7 +8,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         CountCharactersControlTxt('VALIDAR_OBSERVACION', 'Documento_Validar_lbl4', 3000);
-        $("#Documento_Validar_iframe").attr("src", '@Url.Content("~/Recursos/Imagenes/SinImagen.png")');
+     $("#Documento_Ver_iframeVistaPrevia").attr("src", '@Url.Content("~/assets/sin-IMAGEN.jpg")');
        if ('@Model.VISOR_LF' != '' || '@Model.VISOR_LF' != null)
             Documento_Validar_VistaPrevia('@Model.VISOR_LF');
 
@@ -66,7 +66,7 @@
     var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
     var htmlShort = new Dictionary<string, object> { { "style", "width:100px; font-family:verdana; font-size:.8em" } };
 }
-@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post,false, new { @class = "form-horizontal", @Role = "dialog" }))
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @class = "form-horizontal", @Role = "dialog" }))
 {
     @Html.ValidationSummary(true)
     <div class="modal-dialogValidar">
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="col-sm-10">
                                             @Html.TextBoxFor(model => model.NOM_DOCUMENTO, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
-                                        </div>                     
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-2">
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                  
+
                                         <div class="col-sm-2">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° Expediente:</label>
                                         </div>
@@ -147,8 +147,8 @@
                                             @Html.TextBoxFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
                                     </div>
-                            
-                           
+
+
                                     <div class="col-sm-12 inline-container-Group">
                                         <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
                                         <fieldset style="width: 100%;">

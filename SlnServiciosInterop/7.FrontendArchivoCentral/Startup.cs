@@ -8,6 +8,7 @@ using Utilitarios.Helpers.Authorization;
 using System;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace Frotend.ArchivoCentral.Micetur
 {
@@ -38,9 +39,9 @@ namespace Frotend.ArchivoCentral.Micetur
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
             {
-                //config.LoginPath = "/Home/AccesoDenegado";
-                config.AccessDeniedPath = "/Home/AccesoDenegado";
-                config.Cookie.Name = "MinceturSISAR";
+                //config.LoginPath = new PathString("/authorization/signin");
+                config.AccessDeniedPath = "/Authorization/AccesoDenegado";
+                config.Cookie.Name = "CookMinceturSISAR";
             });
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false).AddSessionStateTempDataProvider();
@@ -56,7 +57,7 @@ namespace Frotend.ArchivoCentral.Micetur
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Authorization/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -70,7 +71,7 @@ namespace Frotend.ArchivoCentral.Micetur
 
             app.UseAuthentication();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); 
 
             app.UseSession();
 
@@ -78,9 +79,9 @@ namespace Frotend.ArchivoCentral.Micetur
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Authorization}/{action=Index}/{id?}");
+                    template: "{controller=Authorization}/{action=SignIn}/{id?}");
             });
-    
+
 
         }
     }
