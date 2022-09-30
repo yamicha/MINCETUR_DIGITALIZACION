@@ -20,7 +20,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             UserLogin userlogin = new UserLogin
             {
                 Codusuario = "IPEREZ",
-                IdUsuario = 3240,
+                IdUsuario = 25,
                 NameApellidos = "IVAN PEREZ TINTAYA",
                 IdOficina = 20,
                 DesOficina = "MI CASA"
