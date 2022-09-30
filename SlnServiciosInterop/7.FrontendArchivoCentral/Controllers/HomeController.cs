@@ -1,21 +1,27 @@
 ﻿using System.Diagnostics;
 using Frotend.ArchivoCentral.Micetur.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.Owin.Security;
-using Utilitarios.Helpers.Authorization;
+using Frotend.ArchivoCentral.Micetur.Authorization;
+using Utilitarios.Helpers.Authorization; 
+using Utilitarios.Recursos; 
+using EnServiciosDigitalizacion;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Frotend.ArchivoCentral.Micetur.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         public IActionResult Index()
-        {
+        {         
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AccesoDenegado()
         {
             return View();
         }

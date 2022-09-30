@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +12,9 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
     public class BaseController : Controller
     {
         // GET: BaseController
+        public ClaimsPrincipal user = new ClaimsPrincipal(); 
         public BaseController() {
-            ValidarSeccion(); 
+            ValidarSeccion();
         }
         UserLogin AdministraSession()
         {
