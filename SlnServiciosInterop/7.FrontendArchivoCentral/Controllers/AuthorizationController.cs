@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-using Frotend.ArchivoCentral.Micetur.Models;
-using Microsoft.AspNetCore.Mvc;
-using Frotend.ArchivoCentral.Micetur.Authorization;
-using Utilitarios.Helpers.Authorization;
-using Utilitarios.Recursos;
+﻿using System;
+using System.Diagnostics;
+using System.Security.Claims;
 using EnServiciosDigitalizacion;
+using Frotend.ArchivoCentral.Micetur.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using Utilitarios.Helpers.Authorization;
+using Utilitarios.Recursos;
 
 namespace Frotend.ArchivoCentral.Micetur.Controllers
 {
@@ -23,7 +22,8 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 IdUsuario = 25,
                 NameApellidos = "IVAN PEREZ TINTAYA",
                 IdOficina = 20,
-                DesOficina = "MI CASA"
+                DesOficina = "MI CASA",
+                IdPerfil = 2, 
 
             };
             auditoria.Limpiar();
@@ -31,7 +31,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             {
                 if (userlogin != null)
                 {
-                    //HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                    HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                     var identity = new Authentication().CreateIdentity(userlogin);
                     ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties

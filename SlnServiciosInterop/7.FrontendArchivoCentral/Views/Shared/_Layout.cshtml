@@ -50,9 +50,9 @@
                                 Perfil:
                             </label>
                             @*@Html.DropDownList("SelectPerfiles", new SelectList((System.Collections.IEnumerable)ViewData["Seg_Perfiles"], "ID_PERFIL", "DESC_PERFIL"), new { @class = "form-control", @style = "margin-top:0px", @ID = "SelectPerfiles" })*@
-                            <input type="hidden" id="inputHddid_perfil" value="@ViewBag.id_perfil" />
-                            <input type="hidden" id="inputHddCod_usuario" value="Iperez" />
-                            <input type="hidden" id="inputHddId_Usuario" value="25" />
+                            <input type="hidden" id="inputHddid_perfil" value="@User.GetUserIdPerfil()" />
+                            <input type="hidden" id="inputHddCod_usuario" value="@User.GetCodUsuario()" />
+                            <input type="hidden" id="inputHddId_Usuario" value="@User.GetUserId()" />
                         </a>
                     </li>
 

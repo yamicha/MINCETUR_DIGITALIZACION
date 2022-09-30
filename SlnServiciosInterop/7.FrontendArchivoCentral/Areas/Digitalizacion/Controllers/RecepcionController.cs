@@ -32,7 +32,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             RecepcionModelView modelo = new RecepcionModelView();
             try
             {
-                enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/carga/listar/{User.GetCodUsuario()}");
+                enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/carga/listar/{User.GetUserId()}");
                 if (respuestapi != null)
                 {
                     if (!respuestapi.EjecucionProceso)
@@ -50,8 +50,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                                 Text = "N° : " + x.ID_CONTROL_CARGA.ToString() + " | Fecha : " +
                                 x.STR_FEC_CREACION + " | N° Registros : " + x.NRO_REGISTROS + " | N° Folios : " + x.NRO_FOLIOS,
                                 Value = x.ID_CONTROL_CARGA.ToString()
-                            }).ToList();
-                            modelo.Lista_ID_CONTROL_CARGA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
+                            }).ToList();     
                         }
                     }
 
@@ -70,22 +69,23 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             {
                                 Text = x.DESCRIPCION_TABLA,
                                 Value = x.ID_TABLA.ToString()
-                            }).ToList();
-                            modelo.Lista_ID_TABLA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
+                            }).ToList();     
                         }
                     }
-
-
-                    modelo.ListaPersonal = new List<SelectListItem>();
-                    modelo.ListaPersonal.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
-                    modelo.ListaPersonal.Insert(1, new SelectListItem() { Value = "25", Text = "Ivan perez tintaya" });
-                    modelo.ListaPersonal.Insert(2, new SelectListItem() { Value = "24", Text = "Yordan Yauyo Carbajal" });
                 }
+                modelo.ListaPersonal = new List<SelectListItem>();
+                modelo.ListaPersonal.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
+                modelo.ListaPersonal.Insert(1, new SelectListItem() { Value = "25", Text = "Ivan perez tintaya" });
+                modelo.ListaPersonal.Insert(2, new SelectListItem() { Value = "24", Text = "Yordan Yauyo Carbajal" });
+
             }
             catch (Exception ex)
             {
                 auditoria.Error(ex);
-
+            }
+            finally{
+                modelo.Lista_ID_CONTROL_CARGA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
+                modelo.Lista_ID_TABLA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
             }
             return View(modelo);
         }
