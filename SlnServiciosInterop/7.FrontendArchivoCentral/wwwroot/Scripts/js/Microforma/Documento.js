@@ -16,9 +16,9 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     var url = BaseUrlApi + 'archivo-central/documento/listado-temporal-paginado';
     $("#" + _grilla).GridUnload();
     var colNames = [
-        '1', '2', '3', '4', '5',
+        '1', '2', '3', '4', '5','Nro Linea',
         'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Anio', 'Folios', 'Obervación',
-        'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación'
+        'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación','FLG_REPETIDO'
     ]
     var colModels = [
         { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //1
@@ -26,7 +26,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'ID_FONDO', index: 'ID_FONDO ', align: 'center', hidden: true }, //3
         { name: 'ID_SECCION', index: 'ID_SECCION ', align: 'center', hidden: true }, //4
         { name: 'ID_SERIE', index: 'ID_SERIE ', align: 'center', hidden: true }, //5
-
+        { name: 'NRO_LINEA', index: 'NRO_LINEA ', align: 'center', width: 150, hidden: false }, //6
         { name: 'DES_FONDO', index: 'DES_FONDO', align: 'center', width: 200, hidden: false },
         { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: false },
         { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false },
@@ -35,16 +35,17 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'ANIO', index: 'ANIO', align: 'center', width: 80, hidden: false },
         { name: 'FOLIOS', index: 'FOLIOS', align: 'center', width: 100, hidden: false },
         { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 300, hidden: false },
-
         { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 140, hidden: false },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false },
         { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false },
+        { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },
+        
     ];
     var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'desc',
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc',
         gridCompleteFunc: function () {
-
+            ConfigurarColor_DocumentoRepetido(_grilla); 
             var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
             if (allJQGridData.length == 0) {
                 $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
@@ -60,7 +61,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
             }
         },
     };
-    SICA.Grilla(_grilla, _barra, '', '400', '', _titulo, url, 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
+    SICA.Grilla(_grilla, _barra, '', '400', '', _titulo, url, 'NRO_LINEA', colNames, colModels, 'NRO_LINEA', opciones);
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".Tabla_jqGrid"));
 

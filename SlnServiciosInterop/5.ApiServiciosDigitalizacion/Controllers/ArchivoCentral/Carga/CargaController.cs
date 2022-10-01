@@ -552,7 +552,57 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
         }
 
 
-        
+
+        [HttpGet]
+        [Route("formato-descargar/{Idtabla:int}")]
+        public IActionResult Carga_FormatoDescargar(long Idtabla)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            byte[] ByteFile = null;
+            List<enCampo> lista = new List<enCampo>();
+            try
+            {
+                using (CargaRepositorio repositorio = new CargaRepositorio(_ConfigurationManager))
+                {
+                    lista  = repositorio.Carga_CamposListar(new enCampo
+                    {
+                        ID_TABLA = Idtabla
+                    }, ref auditoria);
+                    if (auditoria.Rechazo)
+                        return StatusCode(auditoria.Code, auditoria);
+                }
+                if (!auditoria.EjecucionProceso)
+                {
+                    Log.Guardar(auditoria.ErrorLog);
+                }
+                else
+                {
+                    if (!auditoria.Rechazo)
+                    {
+
+                        string CODIGO_TEMPORAL = GenerarCodigo.GenerarCodigoTemporal();
+                        string RUTA_TEMPORAL = Rutas.Ruta_Temporal();
+                        string RUTA_ARCHIVO_TEMPORAL = string.Format("{0}/{1}_{2}", RUTA_TEMPORAL, Idtabla, CODIGO_TEMPORAL + ".xlsx");
+
+                        List<Columnas> columnas = new List<Columnas>();
+                        foreach (enCampo campo in lista)
+                        {
+                            if (campo.FLG_CLASIFICACION == "F")
+                                columnas.Add(new Columnas { ID_COLUMNA = campo.COD_CAMPO, DESCRIPCION_COLUMNA = campo.DES_CAMPO });
+                        }
+                        CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, null, true, "Formatocarga", columnas);
+                        ByteFile = System.IO.File.ReadAllBytes(RUTA_ARCHIVO_TEMPORAL);
+                        if (System.IO.File.Exists(RUTA_ARCHIVO_TEMPORAL))
+                            System.IO.File.Delete(RUTA_ARCHIVO_TEMPORAL);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+            }
+            return File(ByteFile, "application/vnd.ms-excel", "Formatocarga.xlsx");
+        }
 
 
     }

@@ -59,6 +59,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.ID_FONDO,
                             item.ID_SECCION,
                             item.ID_SERIE,
+                            item.NRO_LINEA, 
                             item.DES_FONDO,
                             item.NOM_DOCUMENTO,
                             item.DES_LARGA_SECCION,
@@ -71,6 +72,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
+                            item.FLG_REPETIDO.ToString()
                       }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);

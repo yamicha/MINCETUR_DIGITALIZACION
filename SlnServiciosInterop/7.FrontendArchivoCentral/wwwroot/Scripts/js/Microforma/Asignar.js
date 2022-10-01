@@ -23,7 +23,6 @@ jQuery('#Asignar_btn_Grabar').click(function (e) {
                     ListaIdsDocumento: Asignar_ListaDocumentos,
                     UsuCreacion: $('#inputHddCod_usuario').val()
                 }
-                debugger; 
                 var url = "archivo-central/documento/grabar-asignacion";
                 //var auditoria = SICA.Ajax(url, item, false);
                 API.Fetch("POST", url, item, function (auditoria) {

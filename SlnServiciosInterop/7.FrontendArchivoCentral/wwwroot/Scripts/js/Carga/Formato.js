@@ -76,10 +76,6 @@ jQuery('#FormatoVer_btnDescargar').click(function (e) {
 });
 
 function Formato_Descargar() {
-    jQuery("#myModal_FormatoVer_Descargar").html('');
-    jQuery("#myModal_FormatoVer_Descargar").load(baseUrl + "Carga/Formato/Formato_Descargar?ID_TABLA=" + $("#hd_Formato_ID_TABLA").val(), function (responseText, textStatus, request) {
-        $.validator.unobtrusive.parse('#myModal_FormatoVer_Descargar');
-        if (request.status != 200) return;
-    });
+    DownloadFile(BaseUrlApi + `archivo-central/carga/formato-descargar/${$("#hd_Formato_ID_TABLA").val()}`);
 }
 

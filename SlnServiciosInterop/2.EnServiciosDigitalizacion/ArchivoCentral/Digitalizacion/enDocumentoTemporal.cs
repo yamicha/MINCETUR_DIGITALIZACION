@@ -22,7 +22,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string OBSERVACION { get; set; }
         public string STR_FEC_CREACION { get; set; }
         public string STR_FEC_MODIFICACION { get; set; }
-
+        public int FLG_REPETIDO { get; set; }
         
     }
 }

@@ -66,6 +66,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intFlgRepetido = drReader.GetOrdinal("FLG_REPETIDO");
+                            
 
                             while (drReader.Read())
                             {
@@ -78,6 +80,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = arrResult[intIdFondo].ToString();
                                 if (!drReader.IsDBNull(intDesFondo)) temp.DES_FONDO = arrResult[intDesFondo].ToString();
                                 if (!drReader.IsDBNull(intIdSeccion)) temp.ID_SECCION = arrResult[intIdSeccion].ToString();
+                                if (!drReader.IsDBNull(intFlgRepetido)) temp.FLG_REPETIDO = int.Parse(arrResult[intFlgRepetido].ToString());
                                 if (!drReader.IsDBNull(intDesSeccion)) temp.DES_LARGA_SECCION = arrResult[intDesSeccion].ToString();
                                 if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = arrResult[intIdSerie].ToString();
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
