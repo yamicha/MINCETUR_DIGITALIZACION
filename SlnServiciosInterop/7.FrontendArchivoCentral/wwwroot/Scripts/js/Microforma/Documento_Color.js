@@ -27,7 +27,7 @@ function ConfigurarColor_DocumentoRepetido(_Grilla) {
         var _FLG_REPETIDO = data.FLG_REPETIDO;
         if (_FLG_REPETIDO == 1) {
             valido = false; 
-            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#ed565a",color:"#fff" });
+            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#EE6B6F",color:"#fff" });
             //} else if (_estado == 7 && _ID_MODULO == 12) {
             //    $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgb(35 173 0 / 54%)" });
             //}

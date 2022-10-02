@@ -136,28 +136,28 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'ID_FONDO', index: _PREFIJO + 'ID_FONDO ', align: 'center', hidden: true }, //3
         { name: _PREFIJO + 'ID_SECCION', index: _PREFIJO + 'ID_SECCION ', align: 'center', hidden: true }, //4
         { name: _PREFIJO + 'ID_SERIE', index: _PREFIJO + 'ID_SERIE ', align: 'center', hidden: true }, //5
-        { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true, key: true }, //6
-        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //7
+        { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //6
+        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true}, //7
 
-        { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false }, //8
-        { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false }, //9
+        { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //8
+        { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //9
         { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true }, //10
-        { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs }, //11
-        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso }, //12
-        { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false }, // 13
+        { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //11
+        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false}, //12
+        { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false, sortable: false}, // 13
         { name: _PREFIJO + 'NOM_DOCUMENTO', index: _PREFIJO + 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: true }, // 14
-        { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false },// 15
-        { name: _PREFIJO + 'DES_SERIE', index: _PREFIJO + 'DES_SERIE', align: 'center', width: 150, hidden: false },// 16
-        { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO + 'DESCRIPCION', align: 'center', width: 200, hidden: false },// 17
-        { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false },// 18
-        { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false },// 19
-        { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false },// 20
+        { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false, sortable: false},// 15
+        { name: _PREFIJO + 'DES_SERIE', index: _PREFIJO + 'DES_SERIE', align: 'center', width: 150, hidden: false, sortable: false },// 16
+        { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO + 'DESCRIPCION', align: 'center', width: 200, hidden: false, sortable: false },// 17
+        { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false, sortable: false},// 18
+        { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false},// 19
+        { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false, sortable: false },// 20
 
-        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false },// 21
-        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },// 22
-        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false },// 23
-        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false },// 24
-        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: false },// 25
+        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false},// 21
+        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false },// 22
+        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false },// 23
+        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false },// 24
+        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: false, sortable: false },// 25
     ];
     var opciones = {
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, sort: 'desc',
