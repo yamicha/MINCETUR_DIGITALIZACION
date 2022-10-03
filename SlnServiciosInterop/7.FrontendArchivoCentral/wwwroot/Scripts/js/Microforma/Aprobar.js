@@ -56,8 +56,7 @@ function Aprobar_Evaluar() {
             //var item = {
             //    lista: Aprobar_ListaDocumentos
             //}
-            debugger; 
-            var url = "archivo-central/digitalizacion/digitalizado-validar";
+            var url = "archivo-central/digitalizacion/digitalizado-calidad-validar";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {

@@ -12,7 +12,7 @@ jQuery('#aTabFedatar').click(function (e) {
 
 function Fedatar_buscar() {
     $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Fedatar_grilla + "," + Fedatar_barra + ",\"Listado de documentos aprobados\", true, 10);", 500);
+    setTimeout("Documento_ConfigurarGrilla(" + Fedatar_grilla + "," + Fedatar_barra + ",\"Listado de documentos aprobados\", false, 10);", 500);
 }
 
 function Aprobar_Cerrar() {
@@ -85,35 +85,40 @@ function Aprobar_Evaluar() {
     jConfirm(" ¿ Desea " + pregunta + " al documento digitalizado ? ", "Atención", function (r) {
         if (r) {
             Fedatar_ListaDocumentos = new Array();
+            var ID_TIPO_OBS = 0;
+            if ($("#VALIDAR_ID_TIPO_OBS").val() != "")
+                ID_TIPO_OBS = parseInt($("#VALIDAR_ID_TIPO_OBS").val())
             var itemx = {
-                FLG_CONFORME: _CONFORME,
-                COD_DOCUMENTO: $("#COD_DOCUMENTO").val(),
-                OBSERVACION: $("#VALIDAR_OBSERVACION").val(),
-                ID_TIPO_OBSERVACION: $("#VALIDAR_ID_TIPO_OBS").val(),
-                ID_DOCUMENTO: $("#hd_Documento_Validar_ID_DOCUMENTO").val(),
-                ID_DOCUMENTO_ASIGNADO: $("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()
+                FlgConforme: parseInt(_CONFORME),
+                Comentario: $("#VALIDAR_OBSERVACION").val(),
+                IdTipoObservacion: parseInt(ID_TIPO_OBS),
+                IdDocumento: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO").val()),
+                IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
+                UsuCreacion: $('#inputHddCod_usuario').val()
             }
-            Fedatar_ListaDocumentos.push(itemx);
-            var item = {
-                lista: Fedatar_ListaDocumentos
-            }
-            var url = baseUrl + "Microforma/Fedatario/Documento_Fedatario_Validar";
-            var auditoria = SICA.Ajax(url, item, false);
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                    if (!auditoria.RECHAZAR) {
-                        jOkas("Documento evaluado correctamente", "Atención");
-                        Aprobar_Cerrar();
+            debugger; 
+            //Fedatar_ListaDocumentos.push(itemx);
+            //var item = {
+            //    lista: Fedatar_ListaDocumentos
+            //}
+            var url = "archivo-central/digitalizacion/digitalizado-fedatario-validar";
+            API.Fetch("POST", url, itemx, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            jOkas("Documento evaluado correctamente", "Atención");
+                            Aprobar_Cerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                        Fedatar_buscar();
                     } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                        jAlert(auditoria.MensajeSalida, "Atención");
                     }
-                    Fedatar_buscar();
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert("No se encontraron registros", "Atención");
                 }
-            } else {
-                jAlert("No se encontraron registros", "Atención");
-            }
+            });
         }
     });
 }

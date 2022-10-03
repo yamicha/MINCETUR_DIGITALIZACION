@@ -72,6 +72,11 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
 // _id_tab - Leyenda :
 // 2 : Asignar
 // 3 : Asignados
+function Documento_Detalle_buscar(_Grilla, _Barra) {
+    $("#Recepcion_busqueda").show();
+    setTimeout("Documento_ConfigurarGrilla(" + _Grilla + "," + _Barra + ",\"Listado de documentos\",false,0);", 500);
+}
+
 function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_tab) {
     //$(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
     _ID_MODULO = _id_tab;
@@ -79,6 +84,9 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     var VER_BOTON_OBS = true;
     var NOMBRE_BOTON_IMAGEN = "";
     var url = BaseUrlApi + 'archivo-central/documento/listado-paginado';
+    if (_ID_MODULO == 0) {
+        _PREFIJO = "Detalle_";
+    }
     if (_ID_MODULO == 2) {
         _PREFIJO = "Asignar_";
     } else if (_ID_MODULO == 3) {
@@ -186,12 +194,6 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
                 $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
                 //jQuery("#" + _grilla).trigger("reloadGrid");
             }
-
-            //var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
-            //if (allJQGridData.length == 0) {
-            //    $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
-            //} else
-            //    $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
         },
     };
     SICA.Grilla(_grilla, _barra, '', '500', '', _titulo, url, _PREFIJO + 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
@@ -366,7 +368,6 @@ function GetRules(grilla) {
         { field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
         { field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
         { field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
-
         { field: 'V.USU_CREACION', data: POR + ' || ' + _USU_CREACION + ' || ' + POR, op: " LIKE " },
         { field: 'V.USU_MODIFICACION', data: POR + ' || ' + _USU_MODIFICACION + ' || ' + POR, op: " LIKE " },
 
@@ -376,7 +377,10 @@ function GetRules(grilla) {
     //    if (_ID_MODULO != 2)
     //        rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
     //}
-
+    if (_ID_MODULO == 0) { // detalle
+        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
     }

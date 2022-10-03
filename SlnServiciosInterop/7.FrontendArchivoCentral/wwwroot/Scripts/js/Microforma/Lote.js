@@ -1,26 +1,4 @@
-﻿//var number = [-2, 4, 6, 7, 8]; 
-//calcular(number, 12); 
-//function calcular(number, rst) {
-//    var resultado = [];
-//    var valido = false; 
-//    for (i = 0; i < number.length; i++) {
-//        var nu = number[i];
-//        if (valido)
-//            break; 
-//        for (j = 0; j < number.length; j++) {
-//            var nu2 = number[j];
-//            if (nu + nu2 == rst) {
-//                resultado.push(nu);
-//                resultado.push(nu2);
-//                valido = true; 
-//                break; 
-//            }
-//        }
-//    }
-//    debugger; 
-//    return resultado;
-//}
-
+﻿
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
@@ -29,7 +7,6 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false },
-        //{ name: 'STR_SUB_LOTE_X', index: 'STR_SUB_LOTE_X', align: 'center', width: 150, hidden: false, formatter: Lote_actionVerDocumentos },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
@@ -40,10 +17,9 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
             if (!_multiselect) {
                 var rowKey = parseInt(jQuery("#" + _grilla).getGridParam('selrow'));
                 var data = jQuery("#" + _grilla).jqGrid('getRowData', rowKey);
-
+                _ID_LOTE = data.ID_LOTE;
+                if (data.ID_LOTE == undefined) _ID_LOTE = 0;
                 if (_ID_MODULO == 3) {
-                    _ID_LOTE = data.ID_LOTE;
-                    if (data.ID_LOTE == undefined) _ID_LOTE = 0;
                     Asignados_buscar();
                 }
             }

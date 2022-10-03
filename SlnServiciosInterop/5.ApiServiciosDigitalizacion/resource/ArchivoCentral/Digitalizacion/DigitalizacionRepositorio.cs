@@ -48,6 +48,11 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Documento_Digitalizado_Validar(entidad, ref auditoria);
         }
+        public void Documento_Fedatario_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_Fedatario_Validar(entidad, ref auditoria);
+        }
+        
         public void Dispose()
         {
             GC.SuppressFinalize(this);

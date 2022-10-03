@@ -7,6 +7,8 @@ namespace EnServiciosDigitalizacion.Enums
    public enum EstadoDocumento
     {
         CalidadConforme = 4, 
-        CalidadNoCondorme = 5
+        CalidadObservado = 5, 
+        FedatarioConforme= 7,
+        FedatarObservado = 8
     }
 }

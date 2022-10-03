@@ -8,11 +8,15 @@ function ConfigurarColor(Documento_Color_grilla) {
             _estado = data.Asignados_ID_ESTADO_DOCUMENTO;
         } else if (_ID_MODULO == 12) {
             _estado = data.MicroformaGrabar_ID_ESTADO_DOCUMENTO;
+        } else if (_ID_MODULO == 0) {
+            _estado = data.Detalle_ID_ESTADO_DOCUMENTO;
         }
         if (_estado != "") {
             if (_estado != 1 && _estado != 2 && _ID_MODULO == 3) {
                 $("#" + Documento_Color_grilla).jqGrid('setRowData', rowKey[i], true, { background: "#ffc790" });
             } else if (_estado == 7 && _ID_MODULO == 12) {
+                $("#" + Documento_Color_grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgb(35 173 0 / 54%)" });
+            } else if (_estado == 7 && _ID_MODULO == 0) {
                 $("#" + Documento_Color_grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgb(35 173 0 / 54%)" });
             }
         }
@@ -20,19 +24,16 @@ function ConfigurarColor(Documento_Color_grilla) {
 }
 
 function ConfigurarColor_DocumentoRepetido(_Grilla) {
-    var valido = true; 
+    var valido = true;
     var rowKey = jQuery("#" + _Grilla).getDataIDs();
     for (var i = 0; i < rowKey.length; i++) {
         var data = jQuery("#" + _Grilla).jqGrid('getRowData', rowKey[i]);
         var _FLG_REPETIDO = data.FLG_REPETIDO;
         if (_FLG_REPETIDO == 1) {
-            valido = false; 
-            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#EE6B6F",color:"#fff" });
-            //} else if (_estado == 7 && _ID_MODULO == 12) {
-            //    $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgb(35 173 0 / 54%)" });
-            //}
+            valido = false;
+            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#EE6B6F", color: "#fff" });
         }
     }
     if (!valido)
-        jAlert('Se encontraron documentos repetidos en este proceso de carga, por favor validar.','Atención')
+        jAlert('Se encontraron documentos repetidos en este proceso de carga, por favor validar.', 'Atención')
 }
