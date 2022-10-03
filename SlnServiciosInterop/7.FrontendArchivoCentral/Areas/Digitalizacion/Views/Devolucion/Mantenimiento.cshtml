@@ -9,6 +9,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         CountCharactersControlTxt('OBSERVACION', 'Microforma_Grabar_lbl1', 3000);
+        //$('#ID_AREA').select2(); 
+        $('#Devolver_btn_Grabar').click(function (e) {
+            Devolver_GrabarDevolucion(); 
+        }); 
     });
 </script>
 @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmDevolucion", @class = "form-horizontal" }))

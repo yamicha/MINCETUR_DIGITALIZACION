@@ -1,0 +1,5 @@
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): ORA-01722: número no válido
+   at OracleInternal.ServiceObjects.OracleDataReaderImpl.FetchMoreRows(Int32 noOfRowsToFetch, Boolean fillReader, Boolean returnPSTypes)
+   at Oracle.ManagedDataAccess.Client.OracleDataReader.Read()
+   at Oracle.ManagedDataAccess.Client.OracleDataReader.get_HasRows()
+   at DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion.DaDigitalizacion.Lote_Listar(enLote entidad, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Digitalizacion\DaDigitalizacion.cs:line 38

@@ -52,7 +52,15 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Documento_Fedatario_Validar(entidad, ref auditoria);
         }
-        
+
+        public void Documento_LoteValidar(DevolucionModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_LoteValidar(entidad, ref auditoria);
+        }
+        public void Documento_Devolver(DevolucionModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_Devolver(entidad, ref auditoria);
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

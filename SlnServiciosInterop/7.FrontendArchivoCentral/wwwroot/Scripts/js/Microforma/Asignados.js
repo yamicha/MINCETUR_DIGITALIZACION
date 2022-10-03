@@ -12,7 +12,7 @@ $(document).ready(function () {
 jQuery('#aTabAsignados').click(function (e) {
     _ID_LOTE = 0;
     Asignados_ListaDocumentos = new Array();
-    Lote_CargarGrilla(Asignados_Lote_grilla, 0);
+    Lote_CargarGrilla(Asignados_Lote_grilla,"","0");
     Asignados_buscar();
 });
 

@@ -40,10 +40,10 @@
         </li>
     </ul>
 
-    <div id="panel_tab_1" class="tab-pane show active">
+    <div id="panel_tab_1" class="tab-pane active">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Consulta de lotes pendientes por devolver.</p>
+                <p>Listado de documentos agrupados por lote, que ya han sido digitalizados y aprobados por el Fedatario para devolver.</p>
             </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
@@ -66,5 +66,25 @@
             </div>
         </div>
     </div>
-
+    <div id="panel_tab_2" class="tab-pane">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de documentos agrupados por lote y Devueltos, que ya han sido digitalizados y aprobados por el Fedatario.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="padding-right:0px">
+                    <div class="Asignados_Lote_jqGrid">
+                        <table id="Devueltos_Lote_grilla"></table>
+                    </div>
+                    <div id="Devueltos_Lote_barra"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="Asignados_jqGrid">
+                        <table id="Devueltos_grilla"></table>
+                    </div>
+                    <div id="Devueltos_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

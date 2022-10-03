@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using CoServiciosDigitalizacion;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
@@ -18,10 +20,11 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             auditoria.Limpiar();
             List<enLote> lista = new List<enLote>();
-            OracleCommand cmd = new OracleCommand();
+            OracleCommand cmd = new OracleCommand();                
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PROC_CDALOTES_LISTAR";
-            cmd.Parameters.Add("XIN_ID_LOTE", validarNulo(entidad.ID_LOTE));
+            cmd.Parameters.Add("XIN_ID_FLG_DEVOLUCION", validarNulo(entidad.FLG_DEVOLUCION));
+            cmd.Parameters.Add("XIN_ID_FLG_MICROFORMA", validarNulo(entidad.FLG_MICROFORMA));
             cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -40,6 +43,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intNroLote = drReader.GetOrdinal("NRO_LOTE");
                             int intUsuCrea = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intObsDevolucion = drReader.GetOrdinal("OBS_DEVOLUCION");
+                            int intDesArea = drReader.GetOrdinal("DES_AREA");
+                            int intFecDevolucion = drReader.GetOrdinal("STR_FEC_DEVOLUCION");
+                            int intResponsableDevo = drReader.GetOrdinal("USU_DEVOLUCION");
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -49,6 +56,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intNroLote)) temp.NRO_LOTE = arrResult[intNroLote].ToString();
                                 if (!drReader.IsDBNull(intUsuCrea)) temp.USU_CREACION = arrResult[intUsuCrea].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intObsDevolucion)) temp.OBS_DEVOLUCION = arrResult[intObsDevolucion].ToString();
+                                if (!drReader.IsDBNull(intDesArea)) temp.DES_AREA = arrResult[intDesArea].ToString();
+                                if (!drReader.IsDBNull(intFecDevolucion)) temp.STR_FEC_DEVOLUCION = arrResult[intFecDevolucion].ToString();
+                                if (!drReader.IsDBNull(intResponsableDevo)) temp.USU_DEVOLUCION = arrResult[intResponsableDevo].ToString();
 
                                 lista.Add(temp);
                             }
@@ -253,7 +264,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
-
         public void Documento_Fedatario_Validar(DocumentoValidarModel entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -291,6 +301,90 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
-        
+        public void Documento_LoteValidar(DevolucionModel entidad, ref enAuditoria auditoria)
+        {   
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDADOCLOTE_VALIDAR"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = entidad.IdLote;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
+        public void Documento_Devolver(DevolucionModel entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand();
+                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);  
+                cmd.Transaction = transaction;
+                try
+                {
+                    if (entidad.ListaIdsLotes.Count() > 0)
+                    {
+
+                        foreach (DevolucionModel item  in entidad.ListaIdsLotes)
+                        {
+                            cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCDEVOLUCION_INSERTAR"), cn);
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = item.IdLote;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = entidad.IdUsuario;
+                            cmd.Parameters.Add(new OracleParameter("XIN_ID_AREA", OracleDbType.Int64)).Value = entidad.IdArea;
+                            cmd.Parameters.Add(new OracleParameter("XIN_COMENTARIO", OracleDbType.Varchar2, 200)).Value = entidad.Comentario;
+                            cmd.Parameters.Add(new OracleParameter("XIN_FEC_DEVOLUCION", OracleDbType.Date)).Value = entidad.FecDevolucion;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                            dr = cmd.ExecuteReader();
+                            string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                            string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                            if (PO_VALIDO == "0")
+                            {
+                                auditoria.Rechazar(PO_MENSAJE);
+                                transaction.Rollback();
+                            }
+                        }
+                        if (!auditoria.Rechazo)
+                            transaction.Commit();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
     }
 }

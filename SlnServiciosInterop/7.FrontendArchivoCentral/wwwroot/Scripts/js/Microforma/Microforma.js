@@ -13,8 +13,6 @@ jQuery('#aTabMicroforma').click(function (e) {
     _ID_MODULO = 13;
     _ID_LOTE = 0;
     Microforma_CargarGrilla();
-    //Lote_CargarGrilla(Microforma_Lote_grilla, 1);
-    //Microforma_buscar();
 });
 
 function Microforma_buscar() {

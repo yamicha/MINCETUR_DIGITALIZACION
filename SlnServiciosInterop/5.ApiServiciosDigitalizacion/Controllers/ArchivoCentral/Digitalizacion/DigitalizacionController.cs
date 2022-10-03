@@ -24,9 +24,9 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             this._ConfigurationManager = ConfigurationManager;
         }
 
-        [HttpGet]
-        [Route("listar-lotes/{id:int}")]
-        public IActionResult Lote_Listar(long id)
+        [HttpPost]
+        [Route("listar-lotes")]
+        public IActionResult Lote_Listar([FromBody] LotesModels entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -35,7 +35,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 {
                     auditoria.Objeto = repositorio.Lote_Listar(new enLote
                     {
-                        ID_LOTE = id
+                        FLG_DEVOLUCION = entidad.flgDevuelto,
+                        FLG_MICROFORMA = entidad.flgMicroforma
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -172,7 +173,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 if (entidad.FlgConforme == 1)
                 {
-                    entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme; 
+                    entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme;
                 }
                 else
                     entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadObservado;
@@ -231,6 +232,85 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             auditoria.Code = (int)HttpStatusCode.Created;
                         else
                             auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
+        [Route("devolver-documentos")]
+        public IActionResult Documento_DevolverDocumentos([FromBody] DevolucionModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+                    if (entidad.ListaIdsLotes.Count > 0)
+                    {
+                        entidad.FecDevolucion = DateTime.Now;
+                        repositorio.Documento_Devolver(entidad, ref auditoria);
+                        if (!auditoria.EjecucionProceso)
+                        {
+                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                        }
+                        else
+                        {
+                            if (!auditoria.Rechazo)
+                                auditoria.Code = (int)HttpStatusCode.Created;
+                            else
+                                auditoria.Code = (int)HttpStatusCode.OK;
+                        }
+                    }
+                    else
+                    {
+                        auditoria.Rechazar("Sin lotes para procesar.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
+        [Route("documento-validar-lote")]
+        public IActionResult Documento_ValidarFinalizados([FromBody] DevolucionModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                bool valido = true;
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+                    if (entidad.ListaIdsLotes.Count > 0)
+                    {
+                        foreach (DevolucionModel itemx in entidad.ListaIdsLotes)
+                        {
+                            repositorio.Documento_LoteValidar(itemx, ref auditoria);
+                            if (auditoria.Rechazo)
+                            {
+                                valido = false;
+                                break;
+                            }
+                        }
+                        auditoria.Objeto = valido;
+                    }
+                    else
+                    {
+                        auditoria.Rechazar("Sin lotes para procesar.");
                     }
                 }
             }

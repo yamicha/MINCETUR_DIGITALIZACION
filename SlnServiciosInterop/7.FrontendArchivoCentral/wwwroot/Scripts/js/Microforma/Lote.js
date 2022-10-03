@@ -6,8 +6,8 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
-        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }
+        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
     ];
     var opciones = {
         GridLocal: true, multiselect: _multiselect, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
@@ -27,6 +27,7 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
         //tituloGrupo: 'Sub Lote(s)'
     };
     SICA.Grilla(_grilla, _barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
+
     jqGridResponsive($(".jqGridLote"));
 }
 
@@ -45,15 +46,14 @@ function Lote_VerDocumentos(CODIGO) {
     }
 }
 
-function Lote_CargarGrilla(_grilla, _FLG_FINALIZADO) {
-    var item =
-    {
-        FLG_FINALIZADO: _FLG_FINALIZADO
-    };
-    id = 0; 
-    var url =  `archivo-central/digitalizacion/listar-lotes/${id}`;
-    //var auditoria = SICA.Ajax(url, item, false);
-    API.FetchGet("GET", url, function (auditoria) {
+function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA) {
+    debugger; 
+    var item = {
+        flgDevuelto: _FLG_DEVOLUCION,
+        flgMicroforma: _FLG_MICROFORMA
+    }
+    var url = `archivo-central/digitalizacion/listar-lotes`;
+    API.Fetch("POST", url, item, function (auditoria) {
         jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
@@ -82,6 +82,6 @@ function Lote_CargarGrilla(_grilla, _FLG_FINALIZADO) {
         } else {
             jAlert("No se encontraron registros", "Atención");
         }
-    }); 
+    });
 
 }

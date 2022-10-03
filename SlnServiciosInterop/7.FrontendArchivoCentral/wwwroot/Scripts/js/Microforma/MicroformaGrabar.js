@@ -7,11 +7,54 @@ var MicroformaGrabar_ListaLotes = new Array();
 
 $(document).ready(function () {
     MicroformaGrabar_ListaLotes = new Array();
-    _ID_MODULO = 12;
-    Lote_ConfigurarGrilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, true);
-    Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
-    MicroformaGrabar_buscar();
+    _ID_MODULO = 0;
+    MicroformaLote_ConfigurarGrilla();
+    Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
+    //MicroformaGrabar_buscar();
+    Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
+
+    jQuery('#MicroformaGrabar_btn_Nuevo').click(function (e) {
+        var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+        if (rowKey != null) {
+            if (rowKey.length > 0) {
+                $("#Microforma_Div_validar").show();
+                setTimeout("MicroformaGrabar_IniciarProceso();", 500);
+            }
+            else {
+                jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+            }
+        }
+        else {
+            jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+        }
+    });
 });
+
+function MicroformaLote_ConfigurarGrilla() {
+    $("#" + MicroformaGrabar_Lote_grilla).GridUnload();
+    var colNames = ['1', '2',
+        'Lote', 'Fecha de Creación'];
+    var colModels = [
+        { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
+        { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
+        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
+    ];
+    var opciones = {
+        GridLocal: true, multiselect: true, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
+        grouping: false,
+        selectRowFunc: function () {
+            var rowKey = parseInt(jQuery("#" + MicroformaGrabar_Lote_grilla).getGridParam('selrow'));
+            var data = jQuery("#" + MicroformaGrabar_Lote_grilla).jqGrid('getRowData', rowKey);
+            _ID_LOTE = data.ID_LOTE;
+            if (data.ID_LOTE == undefined) _ID_LOTE = 0;
+            Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
+        },
+    };
+    SICA.Grilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
+
+    jqGridResponsive($(".jqGridLote"));
+}
 
 jQuery('#aTabMicroformaGrabar').click(function (e) {
     _ID_LOTE = 0;
@@ -20,128 +63,105 @@ jQuery('#aTabMicroformaGrabar').click(function (e) {
     MicroformaGrabar_buscar();
 });
 
-function MicroformaGrabar_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + MicroformaGrabar_grilla + "," + MicroformaGrabar_barra + ",\"Listado de documentos\", false, 12);", 500);
-}
-
 function MicroformaGrabar_Cerrar() {
     $('#myModal_Documento_Grabar').modal('hide');
     jQuery("#myModal_Documento_Grabar").html('');
 }
 
-function Documento_MostrarGrabar(ID_LOTE) {
+function Documento_MostrarGrabar() {
     jQuery("#myModal_Documento_Grabar").html('');
-    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Microforma/Microforma/Microforma_Grabar?ID_LOTE=" + ID_LOTE, function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Grabar").modal('show');
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/mantenimiento?accion=N", function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
 }
 
-jQuery('#MicroformaGrabar_btn_Nuevo').click(function (e) {
+
+async function MicroformaGrabar_IniciarProceso() {
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
     if (rowKey != null) {
-        if (rowKey.length > 0) {
-            $("#Microforma_Div_validar").show();
-            setTimeout("MicroformaGrabar_IniciarProceso();", 500);
-        }
-        else {
-            jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
-        }
-    }
-    else {
-        jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
-    }
-});
-
-jQuery('#MicroformaGrabar_btn_X').click(function (e) {
-    Documento_MostrarGrabar(0);
-});
-
-function MicroformaGrabar_IniciarProceso() {
-    var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
-    if (rowKey != null) {
-        if (MicroformaGrabar_ValidarLote()) {
-            jQuery('#MicroformaGrabar_btn_X').click();
-        } else {
-            jAlert("Se detectaron documentos no finalizados en el [sub - lote] seleccionado. ", "Atención");
+        if (await MicroformaGrabar_ValidarLote()) {
+          Documento_MostrarGrabar();
         }
     } else {
         jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
     }
 }
 
-function MicroformaGrabar_ValidarLote() {
+function  MicroformaGrabar_ValidarLote() {
     var VALIDO = false;
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+    return new Promise((valido) => {
     if (rowKey != null) {
         MicroformaGrabar_ListaLotes = new Array();
         for (i_ = 0; i_ < rowKey.length; i_++) {
             var data = jQuery("#" + MicroformaGrabar_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
             var _item = {
-                ID_DOCUMENTO_LOTE: data.ID_DOCUMENTO_LOTE
+                IdLote: parseInt(data.ID_LOTE)
             }
             MicroformaGrabar_ListaLotes.push(_item);
         }
         var item = {
-            lista: MicroformaGrabar_ListaLotes
+            ListaIdsLotes: MicroformaGrabar_ListaLotes
         }
-        var url = baseUrl + "Microforma/Microforma/Microforma_Validar_Lote";
-        var auditoria = SICA.Ajax(url, item, false);
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                if (!auditoria.RECHAZAR) {
-                    VALIDO = auditoria.OBJETO;
+        var url = "archivo-central/digitalizacion/documento-validar-lote";
+        API.Fetch("POST", url, item, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        valido(true); 
+                    } else {
+                        valido(false); 
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                    $("#Microforma_Div_validar").hide();
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                    $("#Microforma_Div_validar").hide();
                 }
-                $("#Microforma_Div_validar").hide();
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert("No se encontraron registros", "Atención");
                 $("#Microforma_Div_validar").hide();
             }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-            $("#Microforma_Div_validar").hide();
-        }
-
+        }); 
     }
-    return VALIDO;
+  });
 }
 
-function MicroformaGrabar_Grabar() { 
+function MicroformaGrabar_Grabar() {
     //if ($("#FrmMicroformaGrabarbnn").valid()) {
-        jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
-            if (r) {
-                var item = {
-                    LOTES: MicroformaGrabar_ListaLotes,
-                    FECHA: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
-                    CODIGO_SOPORTE: $("#MICROFORMA_CODIGO_SOPORTE").val(),
-                    ID_TIPO_SOPORTE: $("#MICROFORMA_ID_TIPO_SOPORTE").val(),
-                    NRO_ACTA: $("#MICROFORMA_ACTA").val(),
-                    NRO_COPIAS: $("#MICROFORMA_COPIAS").val(),
-                    CODIGO_FEDATARIO: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
-                    OBSERVACION: $("#MICROFORMA_OBSERVACION").val()
-                }
-                var url = baseUrl + "Microforma/Microforma/Microforma_Registrar";
-                var auditoria = SICA.Ajax(url, item, false);
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EJECUCION_PROCEDIMIENTO) {
-                        if (!auditoria.RECHAZAR) {
-                            _ID_LOTE = 0;
-                            Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
-                            MicroformaGrabar_buscar();
-                            MicroformaGrabar_Cerrar();
-                        } else {
-                            jAlert(auditoria.MENSAJE_SALIDA, "Atención");
-                        }
+    jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
+        if (r) {
+            var item = {
+                LOTES: MicroformaGrabar_ListaLotes,
+                FECHA: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
+                CODIGO_SOPORTE: $("#MICROFORMA_CODIGO_SOPORTE").val(),
+                ID_TIPO_SOPORTE: $("#MICROFORMA_ID_TIPO_SOPORTE").val(),
+                NRO_ACTA: $("#MICROFORMA_ACTA").val(),
+                NRO_COPIAS: $("#MICROFORMA_COPIAS").val(),
+                CODIGO_FEDATARIO: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
+                OBSERVACION: $("#MICROFORMA_OBSERVACION").val()
+            }
+            var url = baseUrl + "Microforma/Microforma/Microforma_Registrar";
+            var auditoria = SICA.Ajax(url, item, false);
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        _ID_LOTE = 0;
+                        Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
+                        MicroformaGrabar_buscar();
+                        MicroformaGrabar_Cerrar();
                     } else {
-                        jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                        jAlert(auditoria.MensajeSalida, "Atención");
                     }
                 } else {
-                    jAlert("No se encontraron registros", "Atención");
+                    jAlert(auditoria.MensajeSalida, "Atención");
                 }
+            } else {
+                jAlert("No se encontraron registros", "Atención");
             }
-        });
+        }
+    });
     //}
 }

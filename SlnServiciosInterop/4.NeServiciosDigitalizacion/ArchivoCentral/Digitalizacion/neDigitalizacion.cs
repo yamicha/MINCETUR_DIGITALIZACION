@@ -44,7 +44,14 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             _objDa.Documento_Fedatario_Validar(entidad, ref auditoria);
         }
+        public void Documento_LoteValidar(DevolucionModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Documento_LoteValidar(entidad, ref auditoria);
+        }
 
-        
+        public void Documento_Devolver(DevolucionModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Documento_Devolver(entidad, ref auditoria);
+        }
     }
 }
