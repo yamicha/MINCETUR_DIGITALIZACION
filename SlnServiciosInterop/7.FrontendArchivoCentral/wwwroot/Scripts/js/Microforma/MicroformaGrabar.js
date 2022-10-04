@@ -135,19 +135,21 @@ function MicroformaGrabar_Grabar() {
                 ListaIdsLotes: MicroformaGrabar_ListaLotes,
                 Fecha: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
                 CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
-                IdSoporte: $("#MICROFORMA_ID_TIPO_SOPORTE").val(),
+                IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
                 NroActa: $("#MICROFORMA_ACTA").val(),
                 NroCopias: $("#MICROFORMA_COPIAS").val(),
                 CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
-                Observacion: $("#MICROFORMA_OBSERVACION").val()
+                Observacion: $("#MICROFORMA_OBSERVACION").val(),
+                UsuCreacion: $("#inputHddCod_usuario").val(),
             }
-            var url = "archivo-central/digitalizacion/microforma-insertar";
+            var url = "archivo-central/microforma/insertar";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
-                            Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
+                            Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
+                            jOk("Microforma grabada correctamente.", "Atención");
                             //MicroformaGrabar_buscar();
                             MicroformaGrabar_Cerrar();
                         } else {

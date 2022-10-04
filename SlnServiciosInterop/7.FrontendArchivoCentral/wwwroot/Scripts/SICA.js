@@ -749,6 +749,7 @@ SICA = {
                     jQuery("#" + pager_id).remove();
                 },
                 subGridRowExpanded: function (subgrid_id, row_id) {
+                    debugger; 
                     var subGrid = opciones.subGrid;
 
                     var subgrid_table_id, pager_id;
@@ -757,7 +758,7 @@ SICA = {
 
                     $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
 
-                    var parameters = { cDocNro: row_id };
+                    var parameters = { id: row_id };
                     $.ajax({
                         type: "POST",
                         url: subGrid.Url,

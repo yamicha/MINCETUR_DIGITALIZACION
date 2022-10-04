@@ -53,6 +53,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+     
         [HttpPost]
         [Route("digitalizar-documento")]
         public IActionResult Documento_digitalizar([FromBody] DocumentoModel entidad)
@@ -323,45 +324,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
-        [HttpPost]
-        [Route("microforma-insertar")]
-        public IActionResult Microforma_Insertar([FromBody] MicroformaModel entidad)
-        {
-            enAuditoria auditoria = new enAuditoria();
-            try
-            {
-                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
-                {
-                    if (entidad.ListaIdsLotes.Count > 0)
-                    {
-                        repositorio.Microforma_Insertar(entidad, ref auditoria);
-                        if (!auditoria.EjecucionProceso)
-                        {
-                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
-                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
-                        }
-                        else
-                        {
-                            if (!auditoria.Rechazo)
-                                auditoria.Code = (int)HttpStatusCode.Created;
-                            else
-                                auditoria.Code = (int)HttpStatusCode.OK;
-                        }
-                    }
-                    else
-                    {
-                        auditoria.Rechazar("Sin lotes para procesar.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                auditoria.Error(ex);
-                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
-                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
-            }
-            return StatusCode(auditoria.Code, auditoria);
-        }
+
 
     }
 }

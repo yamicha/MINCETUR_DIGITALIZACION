@@ -30,6 +30,9 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Lote_Listar(entidad, ref auditoria);
         }
+
+
+        
         public void Documento_Digitalizar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
         {
             _rule.Documento_Digitalizar(entidad, ref auditoria);
@@ -62,10 +65,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
             _rule.Documento_Devolver(entidad, ref auditoria);
         }
 
-        public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria)
-        {
-            _rule.Microforma_Insertar(entidad, ref auditoria);
-        }
+
         
         public void Dispose()
         {

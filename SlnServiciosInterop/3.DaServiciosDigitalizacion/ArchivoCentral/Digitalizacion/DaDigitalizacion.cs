@@ -81,6 +81,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
+
         public void Documento_Digitalizar(enDocumento_Asignado entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -384,74 +385,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }      
-        public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria)
-        {
-            auditoria.Limpiar();
-            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
-            {
-                cn.Open();
-                OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROFORMA_INSERTAR"), cn);
-                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
-                cmd.Transaction = transaction;
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_ID_MICROFORMA", OracleDbType.Varchar2)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
-                try
-                {
-                    dr = cmd.ExecuteReader();
-                    string PO_ID_MICROFORMA = cmd.Parameters["XOUT_ID_MICROFORMA"].Value.ToString();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
-                    if (PO_VALIDO == "0")
-                    {
-                        auditoria.Rechazar(PO_MENSAJE);
-                    }
-                    else
-                    {
-                        cmd.Parameters.Clear();
-                        if (entidad.ListaIdsLotes.Count() > 0)
-                        {
-                            foreach (MicroformaModel item in entidad.ListaIdsLotes)
-                            {
-                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCLOTE_MICROFORMA"), cn);
-                                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                                cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = item.IdLote;
-                                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = PO_ID_MICROFORMA;
-                                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
-                                dr = cmd.ExecuteReader();
-                                string PO_VALIDO2 = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                                if (PO_VALIDO2 == "0")
-                                {
-                                    auditoria.Rechazar(PO_MENSAJE);
-                                    transaction.Rollback();
-                                }
-                            }
-                        }
-                        transaction.Commit();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    auditoria.Error(ex);
-                }
-                finally
-                {
-                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
-                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
-                }
-            }
-        }
+
 
 
     }

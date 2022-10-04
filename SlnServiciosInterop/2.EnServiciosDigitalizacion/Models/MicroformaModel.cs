@@ -18,7 +18,7 @@ namespace EnServiciosDigitalizacion.Models
 
         public string CodigoFedatario { get; set; }
         public string Observacion { get; set; }
-
+        public string UsuCreacion { get; set; }
         public List<MicroformaModel> ListaIdsLotes { get; set; }
     }
 }
