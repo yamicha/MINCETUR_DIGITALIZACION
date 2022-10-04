@@ -35,6 +35,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Microforma_LotesListar(ID_MICROFORMA, ref auditoria);
         }
+        public enMicroforma Microforma_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
+        {
+            return _rule.Microforma_ListarUno(ID_MICROFORMA, ref auditoria);
+        }
         public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria)
         {
             _rule.Microforma_Insertar(entidad, ref auditoria);

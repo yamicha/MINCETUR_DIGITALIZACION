@@ -74,7 +74,72 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
+        public enMicroforma Microforma_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            enMicroforma temp = null;
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_LISTARUNO");
+            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+            
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdMicro = drReader.GetOrdinal("ID_MICROFORMA");
+                            int intTipoSoporte = drReader.GetOrdinal("ID_TIPO_SOPORTE");
+                            int intDescSoporte = drReader.GetOrdinal("DESC_SOPORTE");
+                            int intCodigoSoporte = drReader.GetOrdinal("CODIGO_SOPORTE");
+                            int intCodfedatario = drReader.GetOrdinal("CODIGO_FEDATARIO");
+                            int intObservacion = drReader.GetOrdinal("OBSERVACION");
+                            int intFecha = drReader.GetOrdinal("FECHA");
+                            int intNroActa = drReader.GetOrdinal("NRO_ACTA");
+                            int intNroCopias = drReader.GetOrdinal("NRO_COPIAS");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enMicroforma();
 
+                                if (!drReader.IsDBNull(intIdMicro)) temp.ID_MICROFORMA = long.Parse(arrResult[intIdMicro].ToString());
+                                if (!drReader.IsDBNull(intTipoSoporte)) temp.ID_TIPO_SOPORTE = long.Parse(arrResult[intTipoSoporte].ToString());
+                                if (!drReader.IsDBNull(intDescSoporte)) temp.DESC_SOPORTE = arrResult[intDescSoporte].ToString();
+                                if (!drReader.IsDBNull(intCodigoSoporte)) temp.CODIGO_SOPORTE = arrResult[intCodigoSoporte].ToString();
+                                if (!drReader.IsDBNull(intCodfedatario)) temp.CODIGO_FEDATARIO = arrResult[intCodfedatario].ToString();
+                                if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
+                                if (!drReader.IsDBNull(intFecha)) temp.FECHA = arrResult[intFecha].ToString();
+                                if (!drReader.IsDBNull(intNroActa)) temp.NRO_ACTA = arrResult[intNroActa].ToString();
+                                if (!drReader.IsDBNull(intNroCopias)) temp.NRO_COPIAS = arrResult[intNroCopias].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    temp = new enMicroforma();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return temp;
+        }
         public List<enLote> Microforma_LotesListar(long ID_MICROFORMA, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -156,7 +221,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
                 cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
                 cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
                 cmd.Parameters.Add(new OracleParameter("XOUT_ID_MICROFORMA", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

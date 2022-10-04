@@ -115,6 +115,29 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
-
+        [HttpGet]
+        [Route("get-microforma/{IdMicroforma:long}")]
+        public IActionResult Microforma_ListarUno(long IdMicroforma)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Microforma_ListarUno(IdMicroforma, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
     }
 }

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using EnServiciosDigitalizacion.Models;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -75,5 +76,78 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 
             return View(model);
         }
+
+        [HttpGet, Route("~/Digitalizacion/microformas/microforma-ver")]
+        public async Task<ActionResult> Microforma_Ver(long ID_MICROFORMA)
+        {
+            MicroformaGrabaModelView model = new MicroformaGrabaModelView();
+            try
+            {
+                var parametessp = new parameters()
+                {
+                    FlgEstado = "1"
+                };
+                enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/soporte/listar", parametessp);
+                if (postseccion != null)
+                {
+                    if (!postseccion.EjecucionProceso)
+                    {
+                        if (postseccion.Rechazo)
+                            Log.Guardar(postseccion.ErrorLog);
+                    }
+                    else
+                    {
+                        if (postseccion.Objeto != null)
+                        {
+                            List<enSoporte> Lista = JsonConvert.DeserializeObject<List<enSoporte>>(postseccion.Objeto.ToString());
+                            if (Lista != null)
+                            {
+                                model.Lista_MICROFORMA_ID_TIPO_SOPORTE = Lista.Select(x => new SelectListItem
+                                {
+                                    Value = x.ID_SOPORTE.ToString(),
+                                    Text = x.DESC_SOPORTE
+                                }).ToList();
+                            }
+                        }
+                    }
+                }
+
+                enAuditoria getmicroforma = await new CssApi().GetApi<enAuditoria>($"archivo-central/microforma/get-microforma/{ID_MICROFORMA}");
+                if (getmicroforma != null)
+                {
+                    if (!getmicroforma.EjecucionProceso)
+                    {
+                        if (getmicroforma.Rechazo)
+                            Log.Guardar(getmicroforma.ErrorLog);
+                    }
+                    else
+                    {
+                        if (getmicroforma.Objeto != null)
+                        {
+                            enMicroforma item = JsonConvert.DeserializeObject<enMicroforma>(getmicroforma.Objeto.ToString());
+                            if (item == null) item = new enMicroforma(); 
+                            model.MICROFORMA_ID_TIPO_SOPORTE = item.ID_TIPO_SOPORTE;
+                            model.MICROFORMA_CODIGO_FEDATARIO = item.CODIGO_FEDATARIO;
+                            model.MICROFORMA_FECHA = item.FECHA;
+                            model.MICROFORMA_ACTA = item.NRO_ACTA;
+                            model.MICROFORMA_COPIAS = item.NRO_COPIAS;
+                            model.MICROFORMA_OBSERVACION = item.OBSERVACION;
+                            model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Guardar(ex.Message.ToString());
+            }
+            finally
+            {
+                model.Lista_MICROFORMA_ID_TIPO_SOPORTE.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+            }
+
+            return View(model);
+        }
+        
     }
 }

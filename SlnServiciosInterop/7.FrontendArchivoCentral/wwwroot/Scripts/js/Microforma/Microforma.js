@@ -60,7 +60,7 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
 
 function Microforma_VerMicroforma(CODIGO) {
     jQuery("#myModal_Documento_Grabar").html('');
-    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Microforma/Microforma/Microforma_Ver?ID_MICROFORMA=" + CODIGO, function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/microforma-ver?ID_MICROFORMA=" + CODIGO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
