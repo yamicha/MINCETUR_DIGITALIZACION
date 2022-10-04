@@ -91,15 +91,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpPost]
-        [Route("lote-microforma")]
-        public IActionResult Microforma_ListarLotes(long id)
+        [Route("lote-microforma")]      
+        public IActionResult Microforma_ListarLotes([FromBody] parameters param)
         {
             enAuditoria auditoria = new enAuditoria();
             try
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Microforma_LotesListar(id, ref auditoria);
+                    auditoria.Objeto = repositorio.Microforma_LotesListar(param.id, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);

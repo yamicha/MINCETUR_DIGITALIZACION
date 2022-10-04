@@ -47,7 +47,6 @@ function Lote_VerDocumentos(CODIGO) {
 }
 
 function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA) {
-    debugger; 
     var item = {
         flgDevuelto: _FLG_DEVOLUCION,
         flgMicroforma: _FLG_MICROFORMA

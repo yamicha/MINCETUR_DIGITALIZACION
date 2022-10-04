@@ -10,13 +10,9 @@ $(document).ready(function () {
         _ID_MODULO = 13;
         _ID_LOTE = 0;
         Microforma_CargarGrilla();
+        Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
     });
 });
-
-function Microforma_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Microforma_grilla + "," + Microforma_barra + ",\"Listado de documentos\", false, 13);", 500);
-}
 
 function Microforma_ConfigurarGrilla() {
     var urlsubgrid = BaseUrlApi+"archivo-central/microforma/lote-microforma"; 
@@ -24,8 +20,8 @@ function Microforma_ConfigurarGrilla() {
     var colNames = ['1', '2', '3', '4',
         'Microforma', 'Fecha de Creación'];
     var colModels = [
-        { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
-        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true },
+        { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1,},
+        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true ,key: true  },
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true },
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 250, hidden: true },
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo },
@@ -38,14 +34,16 @@ function Microforma_ConfigurarGrilla() {
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false },
     ];
     var opcionesSubgrid = {
-        ColNames: colNames_2, Url: urlsubgrid, ColModels: colModels_2, Width: 600, Height: ''
+        ColNames: colNames_2, Url: urlsubgrid, ColModels: colModels_2, Width: 485, Height: '',
+        selectRowFunc: function (rowkey) {
+            if (rowkey == undefined) _ID_LOTE = 0;
+            _ID_LOTE = parseInt(rowkey); 
+            Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
+        }
     }
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
         estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid,
-        subGridRowExpanded: function (subgrid_id, row_id) {
-            alert('hola')
-        },
     };
     SICA.Grilla(Microforma_Lote_grilla, Microforma_Lote_barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
     jqGridResponsive($(".jqGridLote"));
@@ -55,7 +53,7 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     var _btn = rowObject.CODIGO_SOPORTE;
     //if (_ID_MODULO == 13) {
     _btn += "<button title='Ver Microforma' onclick='Microforma_VerMicroforma(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-vynil\" style=\"color:#a01010;font-size:15px\"></i></button>";
-    _btn += "<button title='Ver Documentos' onclick='Microforma_VerDocumentos(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;padding: 5px;\"> <i class=\"clip-search-3\" style=\"color:#a01010;font-size:15px\"></i></button>";
+    //_btn += "<button title='Ver Documentos' onclick='Microforma_VerDocumentos(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;padding: 5px;\"> <i class=\"clip-search-3\" style=\"color:#a01010;font-size:15px\"></i></button>";
     //}
     return _btn;
 }
@@ -96,10 +94,10 @@ function Microforma_CargarGrilla() {
                     });
                     jQuery("#" + Microforma_Lote_grilla).trigger("reloadGrid");
                 } else {
-                    jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                    jAlert(auditoria.MensajeSalida, "Atención");
                 }
             } else {
-                jAlert(auditoria.MENSAJE_SALIDA, "Atención");
+                jAlert(auditoria.MensajeSalida, "Atención");
             }
         } else {
             jAlert("No se encontraron registros", "Atención");

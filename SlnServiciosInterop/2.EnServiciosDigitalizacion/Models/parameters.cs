@@ -6,7 +6,7 @@ namespace EnServiciosDigitalizacion.Models
 {
    public class parameters
     {
-
+        public long id { get; set; }
         public string FlgEstado { get; set; }
 
         public string UsuCreacion { get; set; }
