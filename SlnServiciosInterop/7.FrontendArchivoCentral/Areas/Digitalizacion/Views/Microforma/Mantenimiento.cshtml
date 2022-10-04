@@ -9,7 +9,11 @@
     $(document).ready(function () {
         CountCharactersControlTxt('MICROFORMA_OBSERVACION', 'Microforma_Grabar_lbl1', 3000);
         ValidarNumerosOtros("#MICROFORMA_COPIAS", false, true);
-   
+        $('#Microforma_Grabar_btn_Grabar').click(function (e) {
+            if ($("#FrmMicroformaGrabar").valid()) {
+                MicroformaGrabar_Grabar();
+            }
+        });
     });
 
     function ValidarNumerosOtros(evt) {
@@ -208,11 +212,7 @@
         placeholder: "dd/MM/yyyy"
     });
 
-    jQuery('#Microforma_Grabar_btn_Grabar').click(function (e) {
-        if ($("#FrmMicroformaGrabarbnn").valid()) {
-            MicroformaGrabar_Grabar();
-        }
-    });
+ 
 
     $('.modal-dialogMicroforma').draggable({
         handle: ".modal-header",
@@ -221,8 +221,6 @@
 
 </script>
 <style>
-
-
     .time-picker {
         display: flex;
         justify-content: center;
@@ -298,7 +296,7 @@
         background-color: #FCFCFC;
     }
 </style>
-@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post,false, new { @id = "FrmMicroformaGrabarbnn", @class = "form-horizontal" }))
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post,false, new { @id = "FrmMicroformaGrabar", @class = "form-horizontal" }))
 {
 @Html.ValidationSummary(true)
 <div class="modal-dialogMicroforma">

@@ -53,5 +53,8 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             _objDa.Documento_Devolver(entidad, ref auditoria);
         }
+        public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria) {
+            _objDa.Microforma_Insertar(entidad, ref auditoria);
+        }
     }
 }

@@ -61,6 +61,12 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Documento_Devolver(entidad, ref auditoria);
         }
+
+        public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Microforma_Insertar(entidad, ref auditoria);
+        }
+        
         public void Dispose()
         {
             GC.SuppressFinalize(this);

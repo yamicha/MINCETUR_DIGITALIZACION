@@ -82,86 +82,85 @@ async function MicroformaGrabar_IniciarProceso() {
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
     if (rowKey != null) {
         if (await MicroformaGrabar_ValidarLote()) {
-          Documento_MostrarGrabar();
+            Documento_MostrarGrabar();
         }
     } else {
         jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
     }
 }
 
-function  MicroformaGrabar_ValidarLote() {
-    var VALIDO = false;
+function MicroformaGrabar_ValidarLote() {
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
     return new Promise((valido) => {
-    if (rowKey != null) {
-        MicroformaGrabar_ListaLotes = new Array();
-        for (i_ = 0; i_ < rowKey.length; i_++) {
-            var data = jQuery("#" + MicroformaGrabar_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
-            var _item = {
-                IdLote: parseInt(data.ID_LOTE)
+        if (rowKey != null) {
+            MicroformaGrabar_ListaLotes = new Array();
+            for (i_ = 0; i_ < rowKey.length; i_++) {
+                var data = jQuery("#" + MicroformaGrabar_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
+                var _item = {
+                    IdLote: parseInt(data.ID_LOTE)
+                }
+                MicroformaGrabar_ListaLotes.push(_item);
             }
-            MicroformaGrabar_ListaLotes.push(_item);
-        }
-        var item = {
-            ListaIdsLotes: MicroformaGrabar_ListaLotes
-        }
-        var url = "archivo-central/digitalizacion/documento-validar-lote";
-        API.Fetch("POST", url, item, function (auditoria) {
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EjecucionProceso) {
-                    if (!auditoria.Rechazo) {
-                        valido(true); 
+            var item = {
+                ListaIdsLotes: MicroformaGrabar_ListaLotes
+            }
+            var url = "archivo-central/digitalizacion/documento-validar-lote";
+            API.Fetch("POST", url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            valido(true);
+                        } else {
+                            valido(false);
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                        $("#Microforma_Div_validar").hide();
                     } else {
-                        valido(false); 
                         jAlert(auditoria.MensajeSalida, "Atención");
+                        $("#Microforma_Div_validar").hide();
                     }
-                    $("#Microforma_Div_validar").hide();
                 } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
+                    jAlert("No se encontraron registros", "Atención");
                     $("#Microforma_Div_validar").hide();
                 }
-            } else {
-                jAlert("No se encontraron registros", "Atención");
-                $("#Microforma_Div_validar").hide();
-            }
-        }); 
-    }
-  });
+            });
+        }
+    });
 }
 
 function MicroformaGrabar_Grabar() {
-    //if ($("#FrmMicroformaGrabarbnn").valid()) {
     jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
         if (r) {
             var item = {
-                LOTES: MicroformaGrabar_ListaLotes,
-                FECHA: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
-                CODIGO_SOPORTE: $("#MICROFORMA_CODIGO_SOPORTE").val(),
-                ID_TIPO_SOPORTE: $("#MICROFORMA_ID_TIPO_SOPORTE").val(),
-                NRO_ACTA: $("#MICROFORMA_ACTA").val(),
-                NRO_COPIAS: $("#MICROFORMA_COPIAS").val(),
-                CODIGO_FEDATARIO: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
-                OBSERVACION: $("#MICROFORMA_OBSERVACION").val()
+                ListaIdsLotes: MicroformaGrabar_ListaLotes,
+                Fecha: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
+                CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
+                IdSoporte: $("#MICROFORMA_ID_TIPO_SOPORTE").val(),
+                NroActa: $("#MICROFORMA_ACTA").val(),
+                NroCopias: $("#MICROFORMA_COPIAS").val(),
+                CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
+                Observacion: $("#MICROFORMA_OBSERVACION").val()
             }
-            var url = baseUrl + "Microforma/Microforma/Microforma_Registrar";
-            var auditoria = SICA.Ajax(url, item, false);
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EjecucionProceso) {
-                    if (!auditoria.Rechazo) {
-                        _ID_LOTE = 0;
-                        Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
-                        MicroformaGrabar_buscar();
-                        MicroformaGrabar_Cerrar();
+            var url = "archivo-central/digitalizacion/microforma-insertar";
+            API.Fetch("POST", url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            _ID_LOTE = 0;
+                            Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
+                            //MicroformaGrabar_buscar();
+                            MicroformaGrabar_Cerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
                     } else {
                         jAlert(auditoria.MensajeSalida, "Atención");
                     }
                 } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
+                    jAlert("No se encontraron registros", "Atención");
                 }
-            } else {
-                jAlert("No se encontraron registros", "Atención");
-            }
+            });
         }
     });
-    //}
+
 }
