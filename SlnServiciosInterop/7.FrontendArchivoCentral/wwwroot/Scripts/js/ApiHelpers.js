@@ -36,14 +36,14 @@ API = {
             }
         });
         fetch(request)
-            .then((resp) => resp.json())
+            .then((resp) => resp.json() )
             .then(function (data) {
                 fetchload.close();
                 calback(data);
             })
             .catch(function (error) {
                 fetchload.close();
-                alert("request error api", error);
+                alert("request error api: "+ error.message);
             });
     },
 

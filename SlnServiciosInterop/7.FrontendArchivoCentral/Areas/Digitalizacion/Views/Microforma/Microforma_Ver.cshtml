@@ -120,15 +120,15 @@
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_FECHA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
-                                    @*<div class="row">
+                                    <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora de grabación: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss" })
+                                            @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss" ,disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
-                                    </div>*@
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de medio de soporte: </label>

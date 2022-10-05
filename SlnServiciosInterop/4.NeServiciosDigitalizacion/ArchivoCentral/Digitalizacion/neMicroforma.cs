@@ -27,10 +27,20 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return _objDa.Microforma_LotesListar(ID_MICROFORMA, ref auditoria);
         }
 
-        public void Microforma_Insertar(MicroformaModel entidad, ref enAuditoria auditoria)
+        public void Microforma_Insertar(MicroModel entidad, ref enAuditoria auditoria)
         {
             _objDa.Microforma_Insertar(entidad, ref auditoria);
         }
+
+        public void Microforma_Evaluar(MicroEvaluarModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Microforma_Evaluar(entidad, ref auditoria);
+        }
+        public void Microforma_Reprocesar(MicroModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Microforma_Reprocesar(entidad, ref auditoria);
+        }
+
 
     }
 }

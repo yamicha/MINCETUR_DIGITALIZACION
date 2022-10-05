@@ -9,6 +9,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
 {
     public class MicroformaGrabaModelView
     {
+        public long ID_MICROFORMA { get; set; }
         public long MICROFORMA_ID_LOTE { get; set; }
 
         [Required(ErrorMessage = "[Fecha] Obligatorio")]
@@ -38,5 +39,13 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MICROFORMA_USU_CREACION { get; set; }
         public string MICROFORMA_STR_FEC_CREACION { get; set; }
         public string MICROFORMA_IP_CREACION { get; set; }
+
+
+        //VALIDAR
+        [Required(ErrorMessage = "[Estado de Conformidad] Obligatorio")]
+        public string MICROFORMA_FLG_CONFORME { get; set; }
+        public List<SelectListItem> Lista_MICROFORMA_ID_CONFORME = new List<SelectListItem>();
+        public string MICROFORMA_OBSERVACION_EVALUAR { get; set; }
+        public string Accion { get; set; }
     }
 }

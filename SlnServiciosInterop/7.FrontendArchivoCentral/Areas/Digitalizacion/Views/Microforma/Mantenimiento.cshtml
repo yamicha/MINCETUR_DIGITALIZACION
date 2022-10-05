@@ -11,7 +11,11 @@
         ValidarNumerosOtros("#MICROFORMA_COPIAS", false, true);
         $('#Microforma_Grabar_btn_Grabar').click(function (e) {
             if ($("#FrmMicroformaGrabar").valid()) {
-                MicroformaGrabar_Grabar();
+                if ($('#HDF_ACCION').val() == "N") {
+                    MicroformaGrabar_Grabar();
+                } else {
+                    Microforma_Editar(); 
+                }
             }
         });
     });
@@ -212,7 +216,7 @@
         placeholder: "dd/MM/yyyy"
     });
 
- 
+
 
     $('.modal-dialogMicroforma').draggable({
         handle: ".modal-header",
@@ -296,117 +300,118 @@
         background-color: #FCFCFC;
     }
 </style>
-@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post,false, new { @id = "FrmMicroformaGrabar", @class = "form-horizontal" }))
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroformaGrabar", @class = "form-horizontal" }))
 {
-@Html.ValidationSummary(true)
-<div class="modal-dialogMicroforma">
-    <div class="modal-content" style="width:100%;">
-        <div class="modal-header" style="cursor: move; background-color: #ca2626">
-            <div class="col-sm-14">
-                <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
-                <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Microforma </h4>
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogMicroforma">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Microforma </h4>
+                </div>
             </div>
-        </div>
-        <div class="modal-body">
-            <fieldset style="width: 100%;">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="col-sm-12 inline-container-Group">
-                            <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
-                            <fieldset style="width: 100%;">
-                                <div class="row" hidden="hidden">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro de Lote:</label>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
+                                <fieldset style="width: 100%;">
+                                    <div class="row" hidden="hidden">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro de Lote:</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_ID_LOTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_ID_LOTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha de grabación: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "DD/MM/YYYY", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_FECHA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha de grabación: </label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora de grabación: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_HORA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "DD/MM/YYYY", @autocomplete = "off" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_FECHA, string.Empty, new { @class = "cssMessageError" })
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de medio de soporte: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora de grabación: </label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo de soporte: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, Model.Lista_MICROFORMA_ID_TIPO_SOPORTE, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_HORA, string.Empty, new { @class = "cssMessageError" })
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Acta: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_ACTA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_ACTA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de medio de soporte: </label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Copias: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_COPIAS, new { @class = "form-control", @maxlength = "100", @style = "width:100%", onkeypress = "return ValidarNumerosOtros(event)" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_COPIAS, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de Fedatario: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_FEDATARIO, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_FEDATARIO, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo de soporte: </label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
+                                            <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        @Html.DropDownListFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, Model.Lista_MICROFORMA_ID_TIPO_SOPORTE, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Acta: </label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_ACTA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_ACTA, string.Empty, new { @class = "cssMessageError" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Copias: </label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_COPIAS, new { @class = "form-control", @maxlength = "100", @style = "width:100%", onkeypress = "return ValidarNumerosOtros(event)" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_COPIAS, string.Empty, new { @class = "cssMessageError" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de Fedatario: </label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_FEDATARIO, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_FEDATARIO, string.Empty, new { @class = "cssMessageError" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
-                                        <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
-                                    </div>
-                                </div>
-                            </fieldset>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="Microforma_Grabar_btn_Grabar" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
                 </div>
-            </fieldset>
-            <div class="modal-footer">
-                <button type="button" id="Microforma_Grabar_btn_Grabar" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
-                <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
             </div>
         </div>
     </div>
-</div>
-@Html.Hidden("hd_Microforma_Grabar_MICROFORMA_ID_LOTE", Model.MICROFORMA_ID_LOTE)
+    @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
+    @Html.Hidden("HDF_ACCION", Model.Accion)
 }
 
 

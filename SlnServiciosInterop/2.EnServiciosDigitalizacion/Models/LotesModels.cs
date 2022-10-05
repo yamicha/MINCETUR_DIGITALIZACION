@@ -7,7 +7,6 @@ namespace EnServiciosDigitalizacion.Models
    public class LotesModels
     {
         public string flgDevuelto { get; set; }
-
         public string flgMicroforma { get; set; }
     }
 }

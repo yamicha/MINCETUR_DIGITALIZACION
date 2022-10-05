@@ -71,7 +71,7 @@ function MicroformaGrabar_Cerrar() {
 function Documento_MostrarGrabar() {
     jQuery("#myModal_Documento_Grabar").html('');
     jQuery("#myModal_Documento_Grabar").modal('show');
-    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/mantenimiento?accion=N", function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/mantenimiento?accion=N&ID_MICROFORMA=0", function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
@@ -133,7 +133,8 @@ function MicroformaGrabar_Grabar() {
         if (r) {
             var item = {
                 ListaIdsLotes: MicroformaGrabar_ListaLotes,
-                Fecha: $("#MICROFORMA_FECHA").val() + " " + $("#MICROFORMA_HORA").val(),
+                Fecha: $("#MICROFORMA_FECHA").val() ,
+                Hora : $("#MICROFORMA_HORA").val(),
                 CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
                 IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
                 NroActa: $("#MICROFORMA_ACTA").val(),
@@ -149,7 +150,7 @@ function MicroformaGrabar_Grabar() {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
                             Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
-                            jOk("Microforma grabada correctamente.", "Atención");
+                            jOkas("Microforma grabada correctamente.", "Atención");
                             //MicroformaGrabar_buscar();
                             MicroformaGrabar_Cerrar();
                         } else {

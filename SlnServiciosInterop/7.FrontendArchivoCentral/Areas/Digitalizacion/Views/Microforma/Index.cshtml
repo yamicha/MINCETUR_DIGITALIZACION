@@ -1,20 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Control Microformas";
+    ViewBag.Title = "Microformas";
 }
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Lote.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaGrabar.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaGrabar.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaGrabados.js")" type="text/javascript"></script>
+
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script>
 
     $(document).ready(function () {
         $("#MicroformaGrabar_btn_X").hide();
-        Remove_RemoverClases("liControlMicroformas");
+        Remove_RemoverClases("liMicroformas");
     });
 
 </script>
@@ -47,6 +49,11 @@
         <li class="">
             <a data-toggle="tab" href="#panel_tab_2" id="aTabMicroforma">
                 Microforma
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#panel_tab_3" id="aTabMicroReprocesar">
+                Reprocesar
             </a>
         </li>
     </ul>
@@ -100,5 +107,27 @@
             </div>
         </div>
     </div>
+    <div id="panel_tab_3" class="tab-pane">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de documentos que se encuentran digitalizados y grabados.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="padding-right:0px">
+                    <div class="Microforma_Lote_jqGrid">
+                        <table id="MicroformaRepro_Lote_grilla"></table>
+                    </div>
+                    <div id="MicroformaRepro_Lote_barra"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="Microforma_jqGrid">
+                        <table id="MicroformaRepro_grilla"></table>
+                    </div>
+                    <div id="MicroformaRepro_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 

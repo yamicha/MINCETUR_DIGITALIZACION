@@ -324,7 +324,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
-
+    
 
     }
 }
