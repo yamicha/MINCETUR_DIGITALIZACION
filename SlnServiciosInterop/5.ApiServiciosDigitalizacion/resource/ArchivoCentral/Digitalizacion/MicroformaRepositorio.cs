@@ -31,6 +31,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Microforma_Listar(entidad, ref auditoria);
         }
+        public List<enMicroforma> Microforma_ListarControl(enMicroforma entidad, ref enAuditoria auditoria)
+        {
+            return _rule.Microforma_ListarControl(entidad, ref auditoria);
+        }
         public List<enLote> Microforma_LotesListar(long ID_MICROFORMA, ref enAuditoria auditoria)
         {
             return _rule.Microforma_LotesListar(ID_MICROFORMA, ref auditoria);

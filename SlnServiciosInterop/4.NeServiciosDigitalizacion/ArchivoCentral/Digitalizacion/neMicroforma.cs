@@ -18,6 +18,10 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             return _objDa.Microforma_Listar(entidad, ref auditoria);
         }
+        public List<enMicroforma> Microforma_ListarControl(enMicroforma entidad, ref enAuditoria auditoria)
+        {
+            return _objDa.Microforma_ListarControl(entidad, ref auditoria);
+        }
         public enMicroforma Microforma_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
         {
             return _objDa.Microforma_ListarUno(ID_MICROFORMA, ref auditoria);

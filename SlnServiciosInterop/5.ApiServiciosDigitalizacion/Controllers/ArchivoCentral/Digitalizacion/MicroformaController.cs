@@ -55,6 +55,31 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpPost]
+        [Route("listar-control")]
+        public IActionResult Microforma_ListarControl()
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Microforma_ListarControl(new enMicroforma(), ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
         [Route("insertar")]
         public IActionResult Microforma_Insertar([FromBody] MicroModel entidad)
         {

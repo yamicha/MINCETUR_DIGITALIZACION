@@ -94,7 +94,7 @@ function Devolver_GrabarDevolucion() {
                                 if (!auditoria.Rechazo) {
                                     Devolver_CloseModal(); 
                                     jOkas("Devolución generado correctamente", "Atención");
-                                    Lote_CargarGrilla(Devolver_Lote_grilla, 0);
+                                    Lote_CargarGrilla(Devolver_Lote_grilla, "0", "");
                                     Documento_Detalle_buscar(Devolver_grilla, Devolver_barra);
                                     Devolver_ListaLotes = new Array();
                                 } else {
