@@ -655,6 +655,8 @@ SICA = {
         if (opciones.footerrow == null) { opciones.footerrow = false; }
         if (opciones.multiselect == null) { opciones.multiselect = false; }
         if (opciones.agregarBotones == null) { opciones.agregarBotones = false; }
+        if (opciones.getrules == null) { opciones.getrules = false; }
+
         if (opciones.GridLocal == null) {
             opciones.GridLocal = false;
 
@@ -749,16 +751,17 @@ SICA = {
                     jQuery("#" + pager_id).remove();
                 },
                 subGridRowExpanded: function (subgrid_id, row_id) {
-                    debugger; 
+                    //$('#hdf_id_grilla').val(row_id);
+                    debugger;
+                    //if (opciones.subGrid!=null)
+                    //SubGrid.subGridRowExpandedAnexosHijos(subgrid_id, row_id, opciones.subGrid, 0);
                     var subGrid = opciones.subGrid;
-
                     var subgrid_table_id, pager_id;
                     subgrid_table_id = subgrid_id + "_t";
                     pager_id = "p_" + subgrid_table_id;
-
                     $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
-
-                    var parameters = { id: row_id };
+                    var GridSub = $('#' + subgrid_table_id);
+                    var parameters = { id: parseInt(row_id) };
                     $.ajax({
                         type: "POST",
                         url: subGrid.Url,
@@ -766,26 +769,62 @@ SICA = {
                         dataType: "json",
                         data: JSON.stringify(parameters),
                         success: function (rsp) {
-                            var data = (typeof rsp.d) == 'string' ? eval('(' + rsp.d + ')') : rsp.d;
-                            $("#" + subgrid_table_id).jqGrid({
-                                datatype: "local",
-                                colNames: subGrid.ColNames,
-                                colModel: subGrid.ColModels,
-                                rowNum: 10,
-                                rowList: [10, 20, 50, 100],
-                                sortorder: "desc",
-                                viewrecords: true,
-                                rownumbers: true,
-                                pager: "#" + pager_id,
-                                loadonce: true,
-                                sortable: true,
-                                height: subGrid.Height,
-                                width: subGrid.Width
-                            });
+                            if (rsp != null && rsp.Objeto.length > 0) {
+                                var data = (typeof rsp.d) == 'string' ? eval('(' + rsp.d + ')') : rsp.d;
+                                $("#" + subgrid_table_id).jqGrid({
+                                    datatype: "local",
+                                    colNames: subGrid.ColNames,
+                                    colModel: subGrid.ColModels,
+                                    rowNum: 10,
+                                    rowList: [10, 20, 50, 100],
+                                    sortorder: "desc",
+                                    viewrecords: true,
+                                    rownumbers: true,
+                                    pager: "#" + pager_id,
+                                    loadonce: true,
+                                    sortable: true,
+                                    height: subGrid.Height,
+                                    width: subGrid.Width,
+                                    onSelectRow: function () {
+                                        debugger;
+                                        rowKey = GridSub.getGridParam('selrow');
+                                        if (rowKey != null) {
+                                            $("#" + subgrid_table_id).val(rowKey);
+                                        }
+                                        if (opciones.subGrid.selectRowFunc != null) {
+                                            if (typeof (opciones.subGrid.selectRowFunc) == 'function') {
+                                                opciones.subGrid.selectRowFunc(rowKey)
+                                            }
+                                        }
+                                    }
+                                });
 
-                            for (var i = 0; i <= data.length; i++)
-                                jQuery("#" + subgrid_table_id).jqGrid('addRowData', i + 1, data[i]);
-                            $("#" + subgrid_table_id).trigger("reloadGrid");
+                                //for (var i = 0; i <= data.length; i++)
+                                //    jQuery("#" + subgrid_table_id).jqGrid('addRowData', i + 1, data[i]);
+                                //$("#" + subgrid_table_id).trigger("reloadGrid");
+
+                                jQuery("#" + subgrid_table_id).jqGrid('clearGridData', true).trigger("reloadGrid");
+                                if (rsp.EjecucionProceso) {
+                                    if (!rsp.Rechazo) {
+                                        var max_tamanio = false;
+                                        var count_list = rsp.Objeto.length;
+                                        if (count_list >= 3)
+                                            max_tamanio = true;
+                                        //$.each(rsp.Objeto, function (i, v) {
+                                        for (var i = 0; i <= rsp.Objeto.length; i++) {
+                                            var idgrilla = i + 1;
+                                            jQuery("#" + subgrid_table_id).jqGrid('addRowData', idgrilla, rsp.Objeto[i]);
+                                        }
+                                        jQuery("#" + subgrid_table_id).trigger("reloadGrid");
+                                        //   $('.ui-jqgrid-bdiv').css("height", "400px !important")
+                                        // if(max_tamanio) 
+                                        //jQuery("#" + subgrid_table_id).setGridHeight(400);
+                                    }
+                                } else {
+                                    jAlert(rsp.MensajeSalida, "Atención");
+                                }
+
+                            }
                         },
                         failure: function (msg) {
                             $('#mensajeFalla').show().fadeOut(8000);
@@ -870,7 +909,8 @@ SICA = {
                     migrilla._search = postdata.isSearch;
                     migrilla.filters = postdata.filters;
                     if (opciones.rules != false) {
-                       migrilla.Rules = GetRules(grilla);
+                       //migrilla.Rules = GetRules(grilla);
+                        migrilla.Rules = opciones.getrules
                     }
 
                     if (migrilla._search == true) {
@@ -963,7 +1003,6 @@ SICA = {
                 },
                 subGridRowExpanded: function (subgrid_id, row_id) {
                     //$('#hdf_id_grilla').val(row_id);
-                    debugger;
                     //if (opciones.subGrid!=null)
                     //SubGrid.subGridRowExpandedAnexosHijos(subgrid_id, row_id, opciones.subGrid, 0);
                     var subGrid = opciones.subGrid;
@@ -973,7 +1012,6 @@ SICA = {
                     $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
                     var GridSub = $('#' + subgrid_table_id); 
                     var parameters = { id: parseInt(row_id) };
-                    debugger; 
                     $.ajax({
                         type: "POST",
                         url: subGrid.Url,

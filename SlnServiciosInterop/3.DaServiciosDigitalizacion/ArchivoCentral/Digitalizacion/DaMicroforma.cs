@@ -17,6 +17,75 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public DaMicroforma(coConexionDb objCoConexionDb) : base(objCoConexionDb)
         {
         }
+        public List<enMicroforma> Microforma_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enMicroforma> lista = new List<enMicroforma>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_PAGINACION");
+            cmd.Parameters.Add("XIN_PAGINA", PAGINA);
+            cmd.Parameters.Add("XIN_NROREGISTROS", FILAS);
+            cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
+            cmd.Parameters.Add("XIN_ORDEN", ORDEN);
+            cmd.Parameters.Add("XIN_WHERE", @WHERE);
+            cmd.Parameters.Add("XOUT_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        int CUENTA = int.Parse(cmd.Parameters["XOUT_CUENTA"].Value.ToString());
+                        auditoria.Objeto = CUENTA;
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enMicroforma temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdMicro = drReader.GetOrdinal("ID_MICROFORMA");
+                            int intTipoSoporte = drReader.GetOrdinal("ID_TIPO_SOPORTE");
+                            int intDescSoporte = drReader.GetOrdinal("DESC_SOPORTE");
+                            int intCodigoSoporte = drReader.GetOrdinal("CODIGO_SOPORTE");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intDesEstado = drReader.GetOrdinal("DESC_ESTADO");
+                            int intIdEstado = drReader.GetOrdinal("ID_ESTADO_MICROFORMA");
+
+
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enMicroforma();
+                                if (!drReader.IsDBNull(intIdMicro)) temp.ID_MICROFORMA = long.Parse(arrResult[intIdMicro].ToString());
+                                if (!drReader.IsDBNull(intTipoSoporte)) temp.ID_TIPO_SOPORTE = long.Parse(arrResult[intTipoSoporte].ToString());
+                                if (!drReader.IsDBNull(intDescSoporte)) temp.DESC_SOPORTE = arrResult[intDescSoporte].ToString();
+                                if (!drReader.IsDBNull(intCodigoSoporte)) temp.CODIGO_SOPORTE = arrResult[intCodigoSoporte].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intDesEstado)) temp.DESC_ESTADO = arrResult[intDesEstado].ToString();
+                                if (!drReader.IsDBNull(intIdEstado)) temp.ID_ESTADO = long.Parse(arrResult[intIdEstado].ToString());
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new List<enMicroforma>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
         public List<enMicroforma> Microforma_Listar(enMicroforma entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -51,7 +120,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             {
                                 drReader.GetValues(arrResult);
                                 temp = new enMicroforma();
-
                                 if (!drReader.IsDBNull(intIdMicro)) temp.ID_MICROFORMA = long.Parse(arrResult[intIdMicro].ToString());
                                 if (!drReader.IsDBNull(intTipoSoporte)) temp.ID_TIPO_SOPORTE = long.Parse(arrResult[intTipoSoporte].ToString());
                                 if (!drReader.IsDBNull(intDescSoporte)) temp.DESC_SOPORTE = arrResult[intDescSoporte].ToString();

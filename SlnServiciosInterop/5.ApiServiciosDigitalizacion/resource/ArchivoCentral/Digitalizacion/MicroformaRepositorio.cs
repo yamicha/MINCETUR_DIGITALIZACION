@@ -27,6 +27,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
             _rule = new neMicroforma(_objCoConexionDb);
         }
 
+        public List<enMicroforma> Microforma_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            return _rule.Microforma_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
+        }
         public List<enMicroforma> Microforma_Listar(enMicroforma entidad, ref enAuditoria auditoria)
         {
             return _rule.Microforma_Listar(entidad, ref auditoria);

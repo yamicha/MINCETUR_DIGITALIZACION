@@ -74,6 +74,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
 // 3 : Asignados
 function Documento_Detalle_buscar(_Grilla, _Barra) {
     $("#Recepcion_busqueda").show();
+    _ID_MODULO = 0;
     setTimeout("Documento_ConfigurarGrilla(" + _Grilla + "," + _Barra + ",\"Listado de documentos\",false,0);", 500);
 }
 
@@ -168,7 +169,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: false, sortable: false },// 25
     ];
     var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, sort: 'desc',
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, sort: 'desc', getrules: GetRules(),
         gridCompleteFunc: function () {
             ConfigurarColor(_grilla);
 
@@ -269,7 +270,7 @@ function Documento_ValidarImagen(CODIGO) {
     });
 }
 
-function GetRules(grilla) {
+function GetRules() {
     var rules = new Array();
     var _ID_CONTROL_CARGA = null;
     var _ID_ESTADO_DOCUMENTO = null;

@@ -8,6 +8,7 @@ var MicroformaGrabar_ListaLotes = new Array();
 $(document).ready(function () {
     MicroformaGrabar_ListaLotes = new Array();
     _ID_MODULO = 0;
+    _ID_LOTE = 0;
     MicroformaLote_ConfigurarGrilla();
     Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
     //MicroformaGrabar_buscar();

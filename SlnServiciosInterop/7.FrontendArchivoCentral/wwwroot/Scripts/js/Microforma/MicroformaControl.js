@@ -14,23 +14,19 @@ var MicroFin_Lote_barra = 'MicroFin_Lote_barra';
 
 
 $(document).ready(function () {
-    _MICROMODULO = MicroEstado.Grabado; 
-    Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra);
-    Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra, MicroFin_grilla, MicroFin_barra);
-    MicroformaControl_CargarGrilla(); 
+
+    Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra, MicroModulo.Control);
     Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra);
     jQuery('#aTabMicroformaControl').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MICROMODULO = MicroEstado.Grabado; 
-        MicroformaControl_CargarGrilla(); 
+        Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra, MicroModulo.Control);
         Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra);
     });
     jQuery('#aTabMicroformaFinalizado').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MICROMODULO = 0; 
-        Microforma_CargarGrilla(MicroFin_Lote_grilla, MicroEstado.Conforme);
+        Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra, MicroFin_grilla, MicroFin_barra, MicroModulo.Conforme);
         Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
     });
 
@@ -48,7 +44,7 @@ function MicroformaEvaluar() {
                 var item = {
                     IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
                     FlgConforme: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
-                    Observacion: $("#MICROFORMA_OBSERVACION").val(),
+                    Observacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
                     UsuCreacion: $("#inputHddCod_usuario").val(),
                 }
                 var url = "archivo-central/microforma/evaluar";

@@ -13,22 +13,17 @@ var MicroformaRepro_Lote_grilla = 'MicroformaRepro_Lote_grilla';
 var MicroformaRepro_Lote_barra = 'MicroformaRepro_Lote_barra';
 
 $(document).ready(function () {
-    _MICROMODULO = MicroEstado.Todos; 
-    Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra);
-    Microforma_ConfigurarGrilla(MicroformaRepro_Lote_grilla, MicroformaRepro_Lote_barra, MicroformaRepro_grilla, MicroformaRepro_barra);
     jQuery('#aTabMicroforma').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MICROMODULO = MicroEstado.Todos; 
-        Microforma_CargarGrilla(Microforma_Lote_grilla, 0);
+        Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra, MicroModulo.Detalle);
         Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
     });
 
     jQuery('#aTabMicroReprocesar').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MICROMODULO = MicroEstado.Observado; 
-        Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, MicroEstado.Observado);
+        Microforma_ConfigurarGrilla(MicroformaRepro_Lote_grilla, MicroformaRepro_Lote_barra, MicroformaRepro_grilla, MicroformaRepro_barra, MicroModulo.Reprocesar);
         Documento_Detalle_buscar(MicroformaRepro_grilla, MicroformaRepro_barra);
     });
 });

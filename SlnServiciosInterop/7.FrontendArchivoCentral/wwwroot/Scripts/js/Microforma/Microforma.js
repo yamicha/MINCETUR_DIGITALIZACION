@@ -2,24 +2,33 @@
     Grabado: 1,
     Conforme: 2,
     Observado: 3,
-    Todos : 0, 
+    Detalle : 0, 
+}
+var MicroModulo= {
+    Detalle: 1,
+    Reprocesar: 2,
+    Control: 3,
+    Conforme: 4,
 }
 
 var _MICROMODULO = 0; 
-function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento) {
+function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab) {
+    debugger; 
+    _MICROMODULO = _tab; 
+    var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['1', '2', '3', '4',
         'Microforma', 'Estado', 'Fecha de Creación', 'idestado'];
     var colModels = [
-        { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, },
-        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, key: true },
-        { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true },
-        { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 250, hidden: true },
-        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo },
-        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: false },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false },
-        { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }
+        { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, }, // 0
+        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, key: true },// 1
+        { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 2
+        { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 250, hidden: true }, // 3
+        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo }, // 4
+        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: false }, // 5
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }, // 6
+        { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true } // 7
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
     var colModels_2 = [
@@ -36,22 +45,40 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         }
     }
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
-        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid,
+        GridLocal: false, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
+        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules : true,
     };
-    SICA.Grilla(_Grilla, _Barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
+    SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
     jqGridResponsive($(".jqGridLote"));
 }
 
+
+function GetRulesMicroforma() {
+    var rules = new Array();
+    var POR = "'%'";
+    if (_MICROMODULO == MicroModulo.Reprocesar) { // Reprocesar
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(3)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.Control) { // Reprocesador, grabados
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.Conforme) { // conformes
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+    }
+    return rules;
+}
+
+
+
 function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
-    var _btn = rowObject.CODIGO_SOPORTE;
-    if (_MICROMODULO == 0) {
-        _btn += "<button title='Ver Microforma' onclick='Microforma_VerMicroforma(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-vynil\" style=\"color:#a01010;font-size:15px\"></i></button>";
-    } else if (_MICROMODULO == 1) {
-        _btn += "<button title='Ver Microforma' onclick='Microforma_ValidarMicroforma(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-clipboard\" style=\"color:##ec971f;font-size:16px\"></i></button>";
+    var _btn = rowObject[2];
+    if (_MICROMODULO == 1 || _MICROMODULO == 4) {
+        _btn += "<button title='Ver Microforma' onclick='Microforma_VerMicroforma(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-vynil\" style=\"color:#a01010;font-size:15px\"></i></button>";
     } else if (_MICROMODULO == 3) {
-        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
-        _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject.ID_MICROFORMA + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
+        _btn += "<button title='Ver Microforma' onclick='Microforma_ValidarMicroforma(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-clipboard\" style=\"color:##ec971f;font-size:16px\"></i></button>";
+    } else if (_MICROMODULO == 2) {
+        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[1]  + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
+        _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[1]  + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
     }
     return _btn;
 }
