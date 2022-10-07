@@ -214,3 +214,4 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.genruntimeconfig.cache
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\Microforma\Microforma_Obs.cshtml.g.cs

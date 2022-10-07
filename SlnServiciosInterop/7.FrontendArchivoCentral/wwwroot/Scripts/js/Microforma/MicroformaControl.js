@@ -14,7 +14,7 @@ var MicroFin_Lote_barra = 'MicroFin_Lote_barra';
 
 
 $(document).ready(function () {
-    _MODULOMICRO = 3; 
+    _MICROMODULO = MicroEstado.Grabado; 
     Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra);
     Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra, MicroFin_grilla, MicroFin_barra);
     MicroformaControl_CargarGrilla(); 
@@ -22,15 +22,15 @@ $(document).ready(function () {
     jQuery('#aTabMicroformaControl').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MODULOMICRO = 3; 
+        _MICROMODULO = MicroEstado.Grabado; 
         MicroformaControl_CargarGrilla(); 
         Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra);
     });
     jQuery('#aTabMicroformaFinalizado').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MODULOMICRO = 0; 
-        Microforma_CargarGrilla(MicroFin_Lote_grilla, EstadoMicroforma.Conforme);
+        _MICROMODULO = 0; 
+        Microforma_CargarGrilla(MicroFin_Lote_grilla, MicroEstado.Conforme);
         Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
     });
 
@@ -57,7 +57,7 @@ function MicroformaEvaluar() {
                         if (auditoria.EjecucionProceso) {
                             if (!auditoria.Rechazo) {
                                 _ID_LOTE = 0;
-                                Microforma_CargarGrilla(MicroControl_Lote_grilla, EstadoMicroforma.Grabado);
+                                Microforma_CargarGrilla(MicroControl_Lote_grilla, MicroEstado.Grabado);
                                 Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra);
                                 jOkas("Microforma evaluada correctamente.", "Atención");
                                 MicroformaCerrar();
@@ -93,7 +93,6 @@ function MicroformaControl_CargarGrilla() {
                             CODIGO: x,
                             ID_MICROFORMA: v.ID_MICROFORMA,
                             DESC_SOPORTE: v.DESC_SOPORTE,
-
                             CODIGO_SOPORTE: v.CODIGO_SOPORTE,
                             DESCRIPCION_LOTE: v.DESCRIPCION_LOTE,
                             STR_FEC_CREACION: v.STR_FEC_CREACION,

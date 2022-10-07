@@ -80,6 +80,34 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpPost]
+        [Route("get-procesos")]
+        public IActionResult Microforma_ListarProcesos([FromBody] MicroModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Microforma_ListarProcesos(new enMicroformaProceso { 
+                     ID_MICROFORMA = entidad.IdMicroforma, 
+                     ID_ESTADO_MICROFORMA = entidad.IdEstado
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
         [Route("insertar")]
         public IActionResult Microforma_Insertar([FromBody] MicroModel entidad)
         {

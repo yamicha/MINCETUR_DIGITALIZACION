@@ -6,7 +6,6 @@ var Microforma_Lote_grilla = 'Microforma_Lote_grilla';
 var Microforma_Lote_barra = 'Microforma_Lote_barra';
 
 /// tab2 
-
 var MicroformaRepro_grilla = 'MicroformaRepro_grilla';
 var MicroformaRepro_barra = 'MicroformaRepro_barra';
 
@@ -14,13 +13,13 @@ var MicroformaRepro_Lote_grilla = 'MicroformaRepro_Lote_grilla';
 var MicroformaRepro_Lote_barra = 'MicroformaRepro_Lote_barra';
 
 $(document).ready(function () {
-    _MODULOMICRO = 0; 
+    _MICROMODULO = MicroEstado.Todos; 
     Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra);
     Microforma_ConfigurarGrilla(MicroformaRepro_Lote_grilla, MicroformaRepro_Lote_barra, MicroformaRepro_grilla, MicroformaRepro_barra);
     jQuery('#aTabMicroforma').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MODULOMICRO = 0; 
+        _MICROMODULO = MicroEstado.Todos; 
         Microforma_CargarGrilla(Microforma_Lote_grilla, 0);
         Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
     });
@@ -28,8 +27,8 @@ $(document).ready(function () {
     jQuery('#aTabMicroReprocesar').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        _MODULOMICRO = 1; 
-        Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, EstadoMicroforma.Observado);
+        _MICROMODULO = MicroEstado.Observado; 
+        Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, MicroEstado.Observado);
         Documento_Detalle_buscar(MicroformaRepro_grilla, MicroformaRepro_barra);
     });
 });
@@ -59,7 +58,7 @@ function Microforma_Editar() {
                     if (auditoria.EjecucionProceso) {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
-                            Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, EstadoMicroforma.Observado);
+                            Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, MicroEstado.Observado);
                             jOkas("Microforma reprocesada correctamente.", "Atención");
                             MicroformaGrabar_Cerrar();
                         } else {

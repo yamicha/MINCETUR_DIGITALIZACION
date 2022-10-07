@@ -140,6 +140,69 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
             return lista;
         }
+        public List<enMicroformaProceso> Microforma_ListarProcesos(enMicroformaProceso entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enMicroformaProceso> lista = new List<enMicroformaProceso>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMIRCOPROCESO_LISTAR");
+            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.ID_MICROFORMA;
+            cmd.Parameters.Add(new OracleParameter("XINT_ID_MICROFORMA_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO_MICROFORMA==0? null : entidad.ID_ESTADO_MICROFORMA;
+            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enMicroformaProceso temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdMicroProecso = drReader.GetOrdinal("ID_MICROFORMA_PROCESO");
+                            int intIdestado = drReader.GetOrdinal("ID_ESTADO_MICROFORMA");
+                            int intDesEstado = drReader.GetOrdinal("DESC_ESTADO");
+                            int intObservacion = drReader.GetOrdinal("OBSERVACION");
+                            int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("FEC_CREACION");
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enMicroformaProceso();
+
+                                if (!drReader.IsDBNull(intIdMicroProecso)) temp.ID_MICROFORMA_PROCESO = long.Parse(arrResult[intIdMicroProecso].ToString());
+                                if (!drReader.IsDBNull(intIdestado)) temp.ID_ESTADO_MICROFORMA = long.Parse(arrResult[intIdestado].ToString());
+                                if (!drReader.IsDBNull(intDesEstado)) temp.DESC_ESTADO = arrResult[intDesEstado].ToString();
+                                if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
+                                if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.FEC_CREACION = arrResult[intFecCreacion].ToString();
+
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new List<enMicroformaProceso>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
         public enMicroforma Microforma_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

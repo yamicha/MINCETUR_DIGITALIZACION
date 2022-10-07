@@ -28,8 +28,6 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         {
             return View();
         }
-
-
         [HttpGet, Route("~/Digitalizacion/microformas/mantenimiento")]
         public async Task<ActionResult> Mantenimiento(string accion, long ID_MICROFORMA)
         {
@@ -254,5 +252,15 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 
             return View(model);
         }
+
+        [HttpGet, Route("~/Digitalizacion/microformas/ver-observaciones")]
+        public async Task<ActionResult> Microforma_Obs(long ID_MICROFORMA)
+        {
+            MicroformaGrabaModelView model = new MicroformaGrabaModelView();
+            model.ID_MICROFORMA = ID_MICROFORMA; 
+
+            return View(model);
+        }
+
     }
 }
