@@ -74,7 +74,6 @@ function Fondo_actionEliminar(cellvalue, options, rowObject) {
 }
 
 function Fondo_estadoAction(cellvalue, options, rowObject) {
-
     var check_ = 'check';
     if (rowObject['FLG_ESTADO'] == 1)
         check_ = 'checked';

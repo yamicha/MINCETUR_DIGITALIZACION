@@ -1,0 +1,107 @@
+﻿// tab 1
+var MicroAlmacen_grilla = 'MicroAlmacen_grilla';
+var MicroAlmacen_barra = 'MicroAlmacen_barra';
+
+var MicroAlmacen_Lote_grilla = 'MicroAlmacen_Lote_grilla';
+var MicroAlmacen_Lote_barra = 'MicroAlmacen_Lote_barra';
+
+// tab 2
+var MicroAlmacenFin_grilla = 'MicroAlmacenFin_grilla';
+var MicroAlmacenFin_barra = 'MicroAlmacenFin_barra';
+
+var MicroAlmacenFin_Lote_grilla = 'MicroAlmacenFin_Lote_grilla';
+var MicroAlmacenFin_Lote_barra = 'MicroAlmacenFin_Lote_barra';
+
+$(document).ready(function () {
+    Microforma_ConfigurarGrilla(MicroAlmacen_Lote_grilla, MicroAlmacen_Lote_barra, MicroAlmacen_grilla, MicroAlmacen_barra, MicroModulo.CAlmacen);
+    Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra);
+    jQuery('#aTabMicroformaAlmacen').click(function (e) {
+        _ID_MODULO = 0;
+        _ID_LOTE = 0;
+        Microforma_ConfigurarGrilla(MicroAlmacen_Lote_grilla, MicroAlmacen_Lote_barra, MicroAlmacen_grilla, MicroAlmacen_barra, MicroModulo.CAlmacen);
+        Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra);
+    });
+    jQuery('#aTabMicroAlamcenFinalizado').click(function (e) {
+        _ID_MODULO = 0;
+        _ID_LOTE = 0;
+        Microforma_ConfigurarGrilla(MicroAlmacenFin_Lote_grilla, MicroAlmacenFin_Lote_barra, MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.Conforme);
+        Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
+    });
+});
+
+function Microforma_MicroArchivoGrabar() {
+    jConfirm(" ¿ Desea guardar datos de micro archivo ingresados ? ", "Atención", function (r) {
+        if (r) {
+            var item = {
+                IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
+                TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
+                Direccion: $("#MA_DIRECCION").val(),
+                Observacion: $("#MA_OBSERVACION").val(),
+                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+            }
+            var url = "archivo-central/microforma/evaluar";
+            API.Fetch("POST", url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            _ID_LOTE = 0;
+                            Microforma_CargarGrilla(MicroAlmacen_Lote_grilla, MicroEstado.Grabado);
+                            Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra);
+                            jOkas("Microforma evaluada correctamente.", "Atención");
+                            MicroformaCerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert("No se encontraron registros", "Atención");
+                }
+            });
+        }
+    });
+}
+
+function MicroformaAlmacen_CargarGrilla() {
+    var item = {
+    }
+    var url = "archivo-central/microforma/listar-control";
+    API.Fetch("POST", url, item, function (auditoria) {
+        jQuery("#" + MicroAlmacen_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    var x = 0;
+                    $.each(auditoria.Objeto, function (i, v) {
+                        x++;
+                        var myData =
+                        {
+                            CODIGO: x,
+                            ID_MICROFORMA: v.ID_MICROFORMA,
+                            DESC_SOPORTE: v.DESC_SOPORTE,
+                            CODIGO_SOPORTE: v.CODIGO_SOPORTE,
+                            DESCRIPCION_LOTE: v.DESCRIPCION_LOTE,
+                            STR_FEC_CREACION: v.STR_FEC_CREACION,
+                            DESC_ESTADO: v.DESC_ESTADO,
+                            ID_ESTADO: v.ID_ESTADO
+                        };
+                        jQuery("#" + MicroAlmacen_Lote_grilla).jqGrid('addRowData', x, myData);
+                    });
+                    jQuery("#" + MicroAlmacen_Lote_grilla).trigger("reloadGrid");
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        } else {
+            jAlert("No se encontraron registros", "Atención");
+        }
+    });
+}
+
+//********************************************************** tab finalizados *********************************************************/
+
+
+

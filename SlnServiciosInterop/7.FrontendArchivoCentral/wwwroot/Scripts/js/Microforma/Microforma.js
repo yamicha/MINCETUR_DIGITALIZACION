@@ -2,19 +2,20 @@
     Grabado: 1,
     Conforme: 2,
     Observado: 3,
-    Detalle : 0, 
+    Detalle: 0,
 }
-var MicroModulo= {
+var MicroModulo = {
     Detalle: 1,
     Reprocesar: 2,
     Control: 3,
     Conforme: 4,
+    CAlmacen: 5,
 }
 
-var _MICROMODULO = 0; 
+var _MICROMODULO = 0;
 function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab) {
-    debugger; 
-    _MICROMODULO = _tab; 
+    debugger;
+    _MICROMODULO = _tab;
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
@@ -46,7 +47,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     }
     var opciones = {
         GridLocal: false, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
-        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules : true,
+        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules: true,
     };
     SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
     jqGridResponsive($(".jqGridLote"));
@@ -65,10 +66,11 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
     }
+    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+    }
     return rules;
 }
-
-
 
 function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     var _btn = rowObject[2];
@@ -77,10 +79,20 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     } else if (_MICROMODULO == 3) {
         _btn += "<button title='Ver Microforma' onclick='Microforma_ValidarMicroforma(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-clipboard\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == 2) {
-        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[1]  + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
-        _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[1]  + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
+        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
+        _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
+    } else if (_MICROMODULO == 5) {
+        _btn += "<button title='Ingresar Micro Archivo' onclick='Microforma_MantenimientoMicroArchivo(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-folder-upload\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     }
     return _btn;
+}
+
+function Microforma_MantenimientoMicroArchivo(ID_MICROFORMA) {
+    jQuery("#myModal_Documento_Grabar").html('');
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/mantenimiento-microarchivo?ID_MICROFORMA=" + ID_MICROFORMA, function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
+        if (request.status != 200) return;
+    });
 }
 
 function Microforma_VerMicroforma(CODIGO) {
@@ -116,11 +128,11 @@ function Microforma_VerObs(ID_MICROFORMA) {
 }
 
 function Microforma_Ver_Obs_ConfigurarGrilla() {
-    var Microforma_Ver_Obs_grilla = "Microforma_Ver_Obs_grilla"; 
-    var Microforma_Ver_Obs_barra = "Microforma_Ver_Obs_barra"; 
+    var Microforma_Ver_Obs_grilla = "Microforma_Ver_Obs_grilla";
+    var Microforma_Ver_Obs_barra = "Microforma_Ver_Obs_barra";
     $("#" + Microforma_Ver_Obs_grilla).GridUnload();
     var colNames = [
-        '1', '2','Observación',
+        '1', '2', 'Observación',
         'Usuario Creación', 'Fecha Observación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
@@ -139,10 +151,10 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
 }
 
 function Microforma_Ver_Obs_CargarGrilla() {
-    var _Grilla = "Microforma_Ver_Obs_grilla"; 
+    var _Grilla = "Microforma_Ver_Obs_grilla";
     var item = {
         IdMicroforma: parseInt($('#hd_Microforma_Ver_ID_MICROFORMA').val()),
-        IdEstado: MicroEstado.Observado 
+        IdEstado: MicroEstado.Observado
     }
     var url = `archivo-central/microforma/get-procesos`;
     API.Fetch("POST", url, item, function (auditoria) {
@@ -179,7 +191,7 @@ function Microforma_Ver_Obs_CargarGrilla() {
 
 function Microforma_CargarGrilla(_Grilla, _Estado) {
     var item = {
-        IdEstado: _Estado  
+        IdEstado: _Estado
     }
     var url = "archivo-central/microforma/listar";
     API.Fetch("POST", url, item, function (auditoria) {
