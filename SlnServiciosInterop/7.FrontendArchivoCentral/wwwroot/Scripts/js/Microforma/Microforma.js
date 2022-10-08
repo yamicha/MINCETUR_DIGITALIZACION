@@ -10,20 +10,20 @@ var MicroModulo = {
     Control: 3,
     Conforme: 4,
     CAlmacen: 5,
+    CAlmacenFin: 6,
 }
 
 var _MICROMODULO = 0;
-function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab) {
-    debugger;
+function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab,_select = false) {
     _MICROMODULO = _tab;
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
-    var colNames = ['1', '2', '3', '4',
+    var colNames = ['0', 'Código', '2', '3',
         'Microforma', 'Estado', 'Fecha de Creación', 'idestado'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, }, // 0
-        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, key: true },// 1
+        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 50, hidden: false, key: true },// 1
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 2
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 250, hidden: true }, // 3
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo }, // 4
@@ -46,7 +46,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         }
     }
     var opciones = {
-        GridLocal: false, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
+        GridLocal: false, multiselect: _select, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
         estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules: true,
     };
     SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
@@ -64,10 +64,19 @@ function GetRulesMicroforma() {
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
     }
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
-        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
     }
+    //if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
+    //    rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+    //    rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+    //}
     if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
-        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+        rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+    }
+    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+        rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
     }
     return rules;
 }
@@ -83,8 +92,18 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
         _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == 5) {
         _btn += "<button title='Ingresar Micro Archivo' onclick='Microforma_MantenimientoMicroArchivo(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-folder-upload\" style=\"color:##ec971f;font-size:16px\"></i></button>";
+    } else if (_MICROMODULO == MicroModulo.CAlmacenFin) {
+        _btn += "<button title='Ver Microforma' onclick='Microforma_VerFinalizado(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-vynil\" style=\"color:#a01010;font-size:16px\"></i></button>";
     }
     return _btn;
+}
+
+function Microforma_VerFinalizado(ID_MICROFORMA) {
+    jQuery("#myModal_Documento_Grabar").html('');
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/microformas/microforma-finalizado?ID_MICROFORMA=" + ID_MICROFORMA, function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
+        if (request.status != 200) return;
+    });
 }
 
 function Microforma_MantenimientoMicroArchivo(ID_MICROFORMA) {
@@ -93,6 +112,10 @@ function Microforma_MantenimientoMicroArchivo(ID_MICROFORMA) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
+}
+function Microforma_CloseModal() {
+    jQuery("#myModal_Documento_Grabar").html('');
+    jQuery("#myModal_Documento_Grabar").modal('hide'); 
 }
 
 function Microforma_VerMicroforma(CODIGO) {

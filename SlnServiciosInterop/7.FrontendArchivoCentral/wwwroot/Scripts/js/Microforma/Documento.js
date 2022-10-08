@@ -74,7 +74,6 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
 // 3 : Asignados
 function Documento_Detalle_buscar(_Grilla, _Barra) {
     $("#Recepcion_busqueda").show();
-    _ID_MODULO = 0;
     setTimeout("Documento_ConfigurarGrilla(" + _Grilla + "," + _Barra + ",\"Listado de documentos\",false,0);", 500);
 }
 

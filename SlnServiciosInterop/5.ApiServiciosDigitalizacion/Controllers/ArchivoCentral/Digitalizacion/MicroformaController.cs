@@ -325,6 +325,81 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
             return StatusCode(auditoria.Code, auditoria);
         }
+
+        [HttpPost]
+        [Route("micro-archivo-insertar")]
+        public IActionResult MicroArchivo_Insertar([FromBody] MicroArchivoModels entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    repositorio.Microforma_MicroArchivo(entidad, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
+        [Route("micro-archivo-estado")]
+        public IActionResult MicroArchivo_Estado([FromBody] MicroArchivoModels entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    if (entidad.ListaIdsMicroforma.Count > 0)
+                    {
+                        foreach (MicroArchivoModels item in entidad.ListaIdsMicroforma)
+                        {
+                            repositorio.Microforma_MicroArchivoEstado(item, ref auditoria);
+                        }
+                        if (!auditoria.EjecucionProceso)
+                        {
+                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                        }
+                        else
+                        {
+                            if (!auditoria.Rechazo)
+                                auditoria.Code = (int)HttpStatusCode.Created;
+                            else
+                                auditoria.Code = (int)HttpStatusCode.OK;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+
         
+
     }
 }

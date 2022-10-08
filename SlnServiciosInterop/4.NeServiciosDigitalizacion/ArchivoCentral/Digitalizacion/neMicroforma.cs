@@ -53,6 +53,16 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             _objDa.Microforma_Reprocesar(entidad, ref auditoria);
         }
 
+        public void Microforma_MicroArchivo(MicroArchivoModels entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Microforma_MicroArchivo(entidad, ref auditoria);
+        }
+
+        public void Microforma_MicroArchivoEstado(MicroArchivoModels entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Microforma_MicroArchivoEstado(entidad, ref auditoria);
+        }
+        
 
     }
 }
