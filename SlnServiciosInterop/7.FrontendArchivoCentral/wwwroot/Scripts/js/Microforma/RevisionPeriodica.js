@@ -1,30 +1,31 @@
 ﻿// tab 1
-var MicroAlmacen_grilla = 'MicroAlmacen_grilla';
-var MicroAlmacen_barra = 'MicroAlmacen_barra';
+var MicroPendiente_grilla = 'MicroPendiente_grilla';
+var MicroPendiente_barra = 'MicroPendiente_barra';
 
-var MicroAlmacen_Lote_grilla = 'MicroAlmacen_Lote_grilla';
-var MicroAlmacen_Lote_barra = 'MicroAlmacen_Lote_barra';
+var MicroPendiente_Lote_grilla = 'MicroPendiente_Lote_grilla';
+var MicroPendiente_Lote_barra = 'MicroPendiente_Lote_barra';
 
 // tab 2
-var MicroAlmacenFin_grilla = 'MicroAlmacenFin_grilla';
-var MicroAlmacenFin_barra = 'MicroAlmacenFin_barra';
+var MicroFin_grilla = 'MicroFin_grilla';
+var MicroFin_barra = 'MicroFin_barra';
 
-var MicroAlmacenFin_Lote_grilla = 'MicroAlmacenFin_Lote_grilla';
-var MicroAlmacenFin_Lote_barra = 'MicroAlmacenFin_Lote_barra';
+var MicroFin_Lote_grilla = 'MicroFin_Lote_grilla';
+var MicroFin_Lote_barra = 'MicroFin_Lote_barra';
 var MicroForma_Lista = new Array(); 
 
 $(document).ready(function () {
-    ControlBuscar(); 
-    jQuery('#aTabMicroformaAlmacen').click(function (e) {
+    RevisionPendienteBuscar(); 
+    jQuery('#aTabRevisionPend').click(function (e) {
         _ID_LOTE = 0;
-        ControlBuscar(); 
+        RevisionPendienteBuscar(); 
     });
-    jQuery('#aTabMicroAlamcenFinalizado').click(function (e) {
+    jQuery('#aTabRevisionFin').click(function (e) {
         _ID_LOTE = 0;
-        ControlFinalizadoBuscar(); 
+        RevisionFinalizadoBuscar(); 
     });
+
     $('#Microforma_BtnMicroArchivo').click(function () {
-        var rowKey = $("#" + MicroAlmacenFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+        var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
         if (rowKey != null) {
             if (rowKey.length > 0) {
                 //$("#Microforma_Div_validar").show();
@@ -41,14 +42,14 @@ $(document).ready(function () {
     });   
 });
 
-function ControlBuscar() {
-    Microforma_ConfigurarGrilla(MicroAlmacen_Lote_grilla, MicroAlmacen_Lote_barra, MicroAlmacen_grilla, MicroAlmacen_barra, MicroModulo.CAlmacen);
-    Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra);
+function RevisionPendienteBuscar() {
+    Microforma_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra, MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend);
+    Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra);
 }
-function ControlFinalizadoBuscar() {
-    Microforma_ConfigurarGrilla(MicroAlmacenFin_Lote_grilla, MicroAlmacenFin_Lote_barra,
-        MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.CAlmacenFin, true);
-    Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
+function RevisionFinalizadoBuscar() {
+    Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra,
+        MicroFin_grilla, MicroFin_barra, MicroModulo.CPendienteFin, true);
+    Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
 }
 function Microforma_MicroArchivoGrabar() {
     jConfirm(" ¿ Desea guardar datos de micro archivo ingresados ? ", "Atención", function (r) {
@@ -83,12 +84,12 @@ function Microforma_MicroArchivoGrabar() {
         }
     });
 }
-function MicroformaAlmacen_CargarGrilla() {
+function MicroformaPendiente_CargarGrilla() {
     var item = {
     }
     var url = "archivo-central/microforma/listar-control";
     API.Fetch("POST", url, item, function (auditoria) {
-        jQuery("#" + MicroAlmacen_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
                 if (!auditoria.Rechazo) {
@@ -106,9 +107,9 @@ function MicroformaAlmacen_CargarGrilla() {
                             DESC_ESTADO: v.DESC_ESTADO,
                             ID_ESTADO: v.ID_ESTADO
                         };
-                        jQuery("#" + MicroAlmacen_Lote_grilla).jqGrid('addRowData', x, myData);
+                        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('addRowData', x, myData);
                     });
-                    jQuery("#" + MicroAlmacen_Lote_grilla).trigger("reloadGrid");
+                    jQuery("#" + MicroPendiente_Lote_grilla).trigger("reloadGrid");
                 } else {
                     jAlert(auditoria.MensajeSalida, "Atención");
                 }
@@ -126,9 +127,9 @@ function MicroformaAlmacen_CargarGrilla() {
 function Microforma_VolverGrabarMicroArchivo() {
     jConfirm(" ¿ Desea enviar a pendientes de grabación de micro archivos todos los registros seleccionados  ? ", "Atención", function (r) {
         if (r) {
-            var rowKey = $("#" + MicroAlmacenFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+            var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
             for (i_ = 0; i_ < rowKey.length; i_++) {
-                var data = jQuery("#" + MicroAlmacenFin_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
+                var data = jQuery("#" + MicroFin_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
                 var _item = {
                     IdMicroforma: parseInt(data.ID_MICROFORMA)
                 }

@@ -64,7 +64,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             null,
                             item.DESC_ESTADO,
                             item.STR_FEC_CREACION, 
-                            item.ID_ESTADO.ToString()
+                            item.ID_ESTADO.ToString(),
+                            item.FLG_CONFORME, 
                       }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);

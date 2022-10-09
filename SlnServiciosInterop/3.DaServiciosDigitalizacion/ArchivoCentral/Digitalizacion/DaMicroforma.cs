@@ -53,8 +53,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intDesEstado = drReader.GetOrdinal("DESC_ESTADO");
                             int intIdEstado = drReader.GetOrdinal("ID_ESTADO_MICROFORMA");
-
-
+                            int intFlgConforme = drReader.GetOrdinal("FLG_CONFORME");
+                            
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -66,6 +66,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intDesEstado)) temp.DESC_ESTADO = arrResult[intDesEstado].ToString();
                                 if (!drReader.IsDBNull(intIdEstado)) temp.ID_ESTADO = long.Parse(arrResult[intIdEstado].ToString());
+                                if (!drReader.IsDBNull(intFlgConforme)) temp.FLG_CONFORME = arrResult[intFlgConforme].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();

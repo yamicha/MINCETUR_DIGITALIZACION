@@ -43,7 +43,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         
     ];
     var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc',
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: GetRules(),
         gridCompleteFunc: function () {
             ConfigurarColor_DocumentoRepetido(_grilla); 
             var allJQGridData = $("#" + _grilla).jqGrid('getRowData');

@@ -1,17 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Almacen Almacenamiento";
+    ViewBag.Title = "Revisión Periodica";
 }
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/js/Microforma/ControlAlmacenamiento.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/RevisionPeriodica.js")" type="text/javascript"></script>
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script>
     $(document).ready(function () {
-        Remove_RemoverClases("liControlAlamcenamiento");
+        Remove_RemoverClases("liRevisionPeriodica");
     });
 
 </script>
@@ -34,15 +34,15 @@
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">
         <li class="active">
-            <a data-toggle="tab" href="#panel_tab_1" id="aTabMicroAlmacen">
+            <a data-toggle="tab" href="#panel_tab_1" id="aTabRevisionPend">
                 <i class="fa fa-home"></i>
-                Pendientes
+                Revisión Pendientes
             </a>
         </li>
         <li class="">
-            <a data-toggle="tab" href="#panel_tab_2" id="aTabMicroAlamcenFinalizado">
+            <a data-toggle="tab" href="#panel_tab_2" id="aTabRevisionFin">
                 <i class="clip-checkmark"></i>
-                Microformas Finalizadas
+                Revisión Finalizadas
             </a>
         </li>
     </ul>
@@ -50,19 +50,19 @@
     <div id="panel_tab_1" class="tab-pane active">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Listado de microformas para el control de almacenamiento.</p>
+                <p>Listado de microformas revisados con observaciones y conformes.</p>
             </div>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="MicroformaGrabar_Lote_jqGrid">
-                        <table id="MicroAlmacen_Lote_grilla"></table>
+                        <table id="MicroPendiente_Lote_grilla"></table>
                     </div>
-                    <div id="MicroAlmacen_Lote_barra"></div>
+                    <div id="MicroPendiente_Lote_barra"></div>
                 </div>
                 <div class="col-sm-8">
                     <div class="Tabla_jqGrid">
-                        <table id="MicroAlmacen_grilla"></table>
-                        <div id="MicroAlmacen_barra"></div>
+                        <table id="MicroPendiente_grilla"></table>
+                        <div id="MicroPendiente_barra"></div>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
     <div id="panel_tab_2" class="tab-pane">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Listado de microformas aprobados y finalizados.</p>
+                <p>Listado de microformas revisados con estado conforme.</p>
             </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
@@ -81,15 +81,15 @@
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="Microforma_Lote_jqGrid">
-                        <table id="MicroAlmacenFin_Lote_grilla"></table>
+                        <table id="MicroFin_Lote_grilla"></table>
                     </div>
-                    <div id="MicroAlmacenFin_Lote_barra"></div>
+                    <div id="MicroFin_Lote_barra"></div>
                 </div>
                 <div class="col-sm-8">
-                    <div class="MicroAlmacenFin_jqGrid">
-                        <table id="MicroAlmacenFin_grilla"></table>
+                    <div class="MicroFin_jqGrid">
+                        <table id="MicroFin_grilla"></table>
                     </div>
-                    <div id="MicroAlmacenFin_barra"></div>
+                    <div id="MicroFin_barra"></div>
                 </div>
             </div>
         </div>

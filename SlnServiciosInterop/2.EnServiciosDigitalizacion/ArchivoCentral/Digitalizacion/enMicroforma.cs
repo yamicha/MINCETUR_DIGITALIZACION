@@ -18,6 +18,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string NRO_ACTA { get; set; }
         public string NRO_COPIAS { get; set; }
         public string DESC_ESTADO { get; set; }
+        public string FLG_CONFORME { get; set; }
         public long ID_ESTADO { get; set; }
         public long MA_ID_DOC_CONFORMIDAD { get; set; }
         public long MA_TIPO_ARCHIVO { get; set; }
