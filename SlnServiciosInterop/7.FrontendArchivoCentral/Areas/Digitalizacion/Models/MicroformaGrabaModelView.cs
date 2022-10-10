@@ -19,8 +19,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [RegularExpression(@"^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$", ErrorMessage = "Formato inválido (HH:MM:SS)")]
         public string MICROFORMA_HORA { get; set; }
 
-
-        [Required(ErrorMessage = "[Código] Obligatorio")]
+        [Required(ErrorMessage = "[Volumen] Obligatorio")]
+        public string MICROFORMA_NROVOLUMEN { get; set; }
+        [Required(ErrorMessage = "[Volumen] Obligatorio")]
         public string MICROFORMA_CODIGO_SOPORTE { get; set; }
 
         [Required(ErrorMessage = "[Soporte] Obligatorio")]

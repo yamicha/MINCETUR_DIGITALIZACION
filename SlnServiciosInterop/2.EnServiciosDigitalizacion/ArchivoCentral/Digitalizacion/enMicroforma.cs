@@ -12,6 +12,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string STR_FEC_CREACION { get; set; }
         public long ID_TIPO_SOPORTE { get; set; }
         public string CODIGO_FEDATARIO { get; set; }
+        public string NRO_VOLUMEN { get; set; }
         public string OBSERVACION { get; set; }
         public string FECHA { get; set; }
         public string HORA { get; set; }

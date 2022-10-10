@@ -135,7 +135,8 @@ function MicroformaGrabar_Grabar() {
             var item = {
                 ListaIdsLotes: MicroformaGrabar_ListaLotes,
                 Fecha: $("#MICROFORMA_FECHA").val() ,
-                Hora : $("#MICROFORMA_HORA").val(),
+                Hora: $("#MICROFORMA_HORA").val(),
+                NroVolumen: $("#MICROFORMA_NROVOLUMEN").val(),
                 CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
                 IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
                 NroActa: $("#MICROFORMA_ACTA").val(),

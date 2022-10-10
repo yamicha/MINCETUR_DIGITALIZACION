@@ -13,6 +13,8 @@ namespace EnServiciosDigitalizacion.Models
         public string Fecha { get; set; }
         public string Hora { get; set; }
         public string CodigoSoporte { get; set; }
+        public string NroVolumen { get; set; }
+        
         public string NroActa { get; set; }
         public string NroCopias { get; set; }
         public string CodigoFedatario { get; set; }

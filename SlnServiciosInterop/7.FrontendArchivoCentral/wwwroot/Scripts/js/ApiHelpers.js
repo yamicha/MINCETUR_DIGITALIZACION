@@ -6,7 +6,6 @@
 //}
 
 API = {
-
     Ajax: function (url, parameters, async, type) {
         var rsp;
         $.ajax({
@@ -92,4 +91,38 @@ API = {
 
 function DownloadFile(Url) {
     window.location = Url;
+}
+
+function ProcesarArchivo(input, filename) {
+    debugger; 
+    var file = input.files[0];
+    var nombre = "";
+      $('#' + filename).text(""); 
+    if (file != undefined) {
+        var PesodeArchivo = parseFloat(file.size);
+        var ext = input.files[0].name.split('.').pop();
+         nombre = input.files[0].name;
+        if (nombre.length > 100) {
+            jAlert("El nombre del documento es muy largo", 'Atención');
+            $(this).val('');
+            return false;
+        }
+        else {
+            var valido = false;
+            if (ext.toLowerCase() == "pdf")
+                valido = true;
+            if (PesodeArchivo > Tamanio_Valido || !valido) {
+                $(this).val('');
+                if (!valido)
+                    jAlert("Solo se permite documentos en formato PDF(.pdf", 'Atención');
+                else
+                    jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
+
+                return false;
+            } else {
+                $('#' + filename).text(nombre); 
+                //PedidosGuardarArchivo(input, ID_DETALLE);
+            }
+        }
+    }
 }
