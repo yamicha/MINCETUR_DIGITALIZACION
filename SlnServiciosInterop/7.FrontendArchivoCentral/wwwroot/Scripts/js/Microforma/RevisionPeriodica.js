@@ -24,12 +24,11 @@ $(document).ready(function () {
         RevisionFinalizadoBuscar(); 
     });
 
-    $('#Microforma_BtnMicroArchivo').click(function () {
-        var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+    $('#Microforma_BtnRevision').click(function () {
+        var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
         if (rowKey != null) {
             if (rowKey.length > 0) {
-                //$("#Microforma_Div_validar").show();
-                Microforma_VolverGrabarMicroArchivo(); 
+                Revision_MostrarEvaluar(); 
             }
             else {
                 jAlert("Debe seleccionar por lo menos un registo.", "Atención");
@@ -41,25 +40,30 @@ $(document).ready(function () {
 
     });   
 });
-
 function RevisionPendienteBuscar() {
-    Microforma_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra, MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend);
+    Microforma_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra,
+        MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend, true);
     Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra);
 }
 function RevisionFinalizadoBuscar() {
     Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra,
-        MicroFin_grilla, MicroFin_barra, MicroModulo.CPendienteFin, true);
+        MicroFin_grilla, MicroFin_barra, MicroModulo.RevisionFin, true);
     Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
 }
-function Microforma_MicroArchivoGrabar() {
+function Revision_MostrarEvaluar() {
+    jQuery("#myModal_Documento_Grabar").html('');
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/revision-periodica/evaluar", function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
+        if (request.status != 200) return;
+    });
+}
+function Revision_Grabar() {
     jConfirm(" ¿ Desea guardar datos de micro archivo ingresados ? ", "Atención", function (r) {
         if (r) {
             var item = {
                 IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
-                TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
-                Direccion: $("#MA_DIRECCION").val(),
-                Observacion: $("#MA_OBSERVACION").val(),
-                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                TipoArchivo: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
+                UsuCreacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
                 UsuCreacion: $("#inputHddCod_usuario").val(),
             }
             var url = "archivo-central/microforma/micro-archivo-insertar";
@@ -84,43 +88,43 @@ function Microforma_MicroArchivoGrabar() {
         }
     });
 }
-function MicroformaPendiente_CargarGrilla() {
-    var item = {
-    }
-    var url = "archivo-central/microforma/listar-control";
-    API.Fetch("POST", url, item, function (auditoria) {
-        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EjecucionProceso) {
-                if (!auditoria.Rechazo) {
-                    var x = 0;
-                    $.each(auditoria.Objeto, function (i, v) {
-                        x++;
-                        var myData =
-                        {
-                            CODIGO: x,
-                            ID_MICROFORMA: v.ID_MICROFORMA,
-                            DESC_SOPORTE: v.DESC_SOPORTE,
-                            CODIGO_SOPORTE: v.CODIGO_SOPORTE,
-                            DESCRIPCION_LOTE: v.DESCRIPCION_LOTE,
-                            STR_FEC_CREACION: v.STR_FEC_CREACION,
-                            DESC_ESTADO: v.DESC_ESTADO,
-                            ID_ESTADO: v.ID_ESTADO
-                        };
-                        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('addRowData', x, myData);
-                    });
-                    jQuery("#" + MicroPendiente_Lote_grilla).trigger("reloadGrid");
-                } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
-                }
-            } else {
-                jAlert(auditoria.MensajeSalida, "Atención");
-            }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
-        }
-    });
-}
+//function MicroformaPendiente_CargarGrilla() {
+//    var item = {
+//    }
+//    var url = "archivo-central/microforma/listar-control";
+//    API.Fetch("POST", url, item, function (auditoria) {
+//        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+//        if (auditoria != null && auditoria != "") {
+//            if (auditoria.EjecucionProceso) {
+//                if (!auditoria.Rechazo) {
+//                    var x = 0;
+//                    $.each(auditoria.Objeto, function (i, v) {
+//                        x++;
+//                        var myData =
+//                        {
+//                            CODIGO: x,
+//                            ID_MICROFORMA: v.ID_MICROFORMA,
+//                            DESC_SOPORTE: v.DESC_SOPORTE,
+//                            CODIGO_SOPORTE: v.CODIGO_SOPORTE,
+//                            DESCRIPCION_LOTE: v.DESCRIPCION_LOTE,
+//                            STR_FEC_CREACION: v.STR_FEC_CREACION,
+//                            DESC_ESTADO: v.DESC_ESTADO,
+//                            ID_ESTADO: v.ID_ESTADO
+//                        };
+//                        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('addRowData', x, myData);
+//                    });
+//                    jQuery("#" + MicroPendiente_Lote_grilla).trigger("reloadGrid");
+//                } else {
+//                    jAlert(auditoria.MensajeSalida, "Atención");
+//                }
+//            } else {
+//                jAlert(auditoria.MensajeSalida, "Atención");
+//            }
+//        } else {
+//            jAlert("No se encontraron registros", "Atención");
+//        }
+//    });
+//}
 
 //********************************************************** tab finalizados *********************************************************/
 
