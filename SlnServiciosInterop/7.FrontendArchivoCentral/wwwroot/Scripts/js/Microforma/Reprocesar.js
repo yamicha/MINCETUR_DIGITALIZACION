@@ -142,7 +142,7 @@ function Reprocesar_FinalizarPregunta() {
     if (Reprocesar_ListaDocumentos.length > 0) {
         jPrompt(" ¿ Desea finalizar con la digitalización ?<br/> En caso de ser necesario actualice el <b>ID LASERFICHE</b> ", Reprocesar_ListaDocumentos[0].ID_LASERFICHER, "Atención", function (val) {
             if (val != null) {
-                if (val != 0 && !isNaN(val))
+                if (val != 0 && isNaN(val))
                     Reprocesar_Finalizar(val);
                 else
                     jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");

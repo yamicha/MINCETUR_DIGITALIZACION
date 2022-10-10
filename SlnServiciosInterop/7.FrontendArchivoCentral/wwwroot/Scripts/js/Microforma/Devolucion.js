@@ -25,7 +25,6 @@ $(document).ready(function () {
             jAlert("Debe seleccionar por lo menos un lote.", "Atención");
         }
     });
-
 });
 
 function Devolver_CloseModal() {

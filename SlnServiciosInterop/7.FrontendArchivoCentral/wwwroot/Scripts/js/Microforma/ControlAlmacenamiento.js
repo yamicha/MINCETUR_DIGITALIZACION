@@ -15,7 +15,7 @@ var MicroForma_Lista = new Array();
 
 $(document).ready(function () {
     ControlBuscar(); 
-    jQuery('#aTabMicroformaAlmacen').click(function (e) {
+    jQuery('#aTabMicroAlmacen').click(function (e) {
         _ID_LOTE = 0;
         ControlBuscar(); 
     });

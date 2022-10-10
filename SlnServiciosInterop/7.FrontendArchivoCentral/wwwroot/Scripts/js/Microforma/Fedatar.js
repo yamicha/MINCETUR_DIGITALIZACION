@@ -4,6 +4,20 @@ var Fedatar_ListaDocumentos = new Array();
 
 $(document).ready(function () {
     Fedatar_buscar();
+    $('#Fedatar_btn_Conforme').click(function () {
+        var rowKey = $("#" + Fedatar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+        if (rowKey != null) {
+            if (rowKey.length > 0) {
+                Fedatar_ConformeMasivo();
+            }
+            else {
+                jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+            }
+        }
+        else {
+            jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+        }
+    });
 });
 
 jQuery('#aTabFedatar').click(function (e) {
@@ -12,7 +26,7 @@ jQuery('#aTabFedatar').click(function (e) {
 
 function Fedatar_buscar() {
     $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Fedatar_grilla + "," + Fedatar_barra + ",\"Listado de documentos aprobados\", false, 10);", 500);
+    setTimeout("Documento_ConfigurarGrilla(" + Fedatar_grilla + "," + Fedatar_barra + ",\"Listado de documentos aprobados\", true, 10);", 500);
 }
 
 function Aprobar_Cerrar() {
@@ -96,12 +110,46 @@ function Aprobar_Evaluar() {
                 IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
                 UsuCreacion: $('#inputHddCod_usuario').val()
             }
-            debugger; 
-            //Fedatar_ListaDocumentos.push(itemx);
-            //var item = {
-            //    lista: Fedatar_ListaDocumentos
-            //}
             var url = "archivo-central/digitalizacion/digitalizado-fedatario-validar";
+            API.Fetch("POST", url, itemx, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            jOkas("Documento evaluado correctamente", "Atención");
+                            Aprobar_Cerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                        Fedatar_buscar();
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert("No se encontraron registros", "Atención");
+                }
+            });
+        }
+    });
+}
+
+function Fedatar_ConformeMasivo() {
+    jConfirm(" ¿ Desea dar CONFORME a los documentos seleccionados ? ", "Atención", function (r) {
+        if (r) {
+            Fedatar_ListaDocumentos = new Array();
+            var rowKey = $("#" + Fedatar_grilla).jqGrid('getGridParam', 'selarrrow'); // 
+            for (var i = 0; i < rowKey.length; i++) {
+                var data = jQuery("#" + Fedatar_grilla).jqGrid('getRowData', rowKey[i]);
+                var itemDoc = {
+                    IdDocumento: parseInt(data.Fedatar_ID_DOCUMENTO),
+                    IdDocumentoAsignado: parseInt(data.Fedatar_ID_DOCUMENTO_ASIGNADO),
+                    UsuCreacion: $('#inputHddCod_usuario').val()
+                };
+                Fedatar_ListaDocumentos.push(itemDoc);
+            }
+            var itemx = {
+                LisIdDocumento: Fedatar_ListaDocumentos,
+            }
+            var url = "archivo-central/digitalizacion/fedatario-validar-masivo";
             API.Fetch("POST", url, itemx, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {

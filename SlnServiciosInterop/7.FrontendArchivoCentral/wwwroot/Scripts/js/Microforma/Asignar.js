@@ -56,6 +56,7 @@ jQuery('#Asignar_btnDigitalizador').click(function (e) {
 function Asignar_Digitalizador() {
     var ID_DIGITALIZADOR = $("#ID_DIGITALIZADOR").val();
     if (ID_DIGITALIZADOR != '') {
+        Asignar_ListaDocumentos.pop(); 
         var rowKey = $("#" + Asignar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
         if (rowKey.length > 0) {
             var DESC_DIGITALIZADOR = $("#ID_DIGITALIZADOR option:selected").text();
@@ -73,7 +74,6 @@ function Asignar_Digitalizador() {
                 if (resultado != undefined) {
                     resultado.ID_USUARIO = ID_DIGITALIZADOR;
                 } else {
-                    debugger; 
                     Asignar_ListaDocumentos.push(miitem);
                 }
             }

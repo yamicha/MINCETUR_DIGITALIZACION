@@ -212,16 +212,57 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             enAuditoria auditoria = new enAuditoria();
             try
             {
-                if (entidad.FlgConforme == 1)
-                {
-                    entidad.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;
-                }
-                else
-                    entidad.IdEstadoDocumento = (long)EstadoDocumento.FedatarObservado;
-
                 using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
                 {
+                    if (entidad.FlgConforme == 1)
+                        entidad.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;
+                    else
+                        entidad.IdEstadoDocumento = (long)EstadoDocumento.FedatarObservado;
                     repositorio.Documento_Fedatario_Validar(entidad, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+
+        [HttpPost]
+        [Route("fedatario-validar-masivo")]
+        public IActionResult Documento_Fedatario_validar_masivo([FromBody] DocumentoValidarModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+
+                    if (entidad.LisIdDocumento.Count() > 0)
+                    {
+                        foreach (DocumentoValidarModel item in entidad.LisIdDocumento)
+                        {
+                            item.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;             
+                            repositorio.Documento_Fedatario_Validar(item, ref auditoria);
+                            if (auditoria.Rechazo)
+                                break; 
+                        }
+                    }
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);

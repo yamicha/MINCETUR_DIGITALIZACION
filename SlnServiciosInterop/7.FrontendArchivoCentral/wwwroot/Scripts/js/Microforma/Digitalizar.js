@@ -156,10 +156,10 @@ function Digitalizar_FinalizarPregunta() {
     if (Digitalizar_ListaDocumentos.length > 0) {
         jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHE</b> ", 0, "Atención", function (val) {
             if (val != null) {
-                if (val != 0 && !isNaN(val))
+                debugger; 
+                if (Digitalizar_ValidIdLaser(IdLaserMin, val)) {
                     Digitalizar_Finalizar(val);
-                else
-                    jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
+                }
             }
         });
     } else {

@@ -52,12 +52,14 @@ function RevisionFinalizadoBuscar() {
 }
 function Revision_MostrarEvaluar() {
     jQuery("#myModal_Documento_Grabar").html('');
+    jQuery("#myModal_Documento_Grabar").modal('show');
     jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/revision-periodica/evaluar", function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
 }
 function Revision_Grabar() {
+    MicroForma_Lista.pop(); 
     var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
     if (_CONFORME == "0") {
         pregunta = "darle 'NO CONFORME'";

@@ -166,6 +166,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intNroReprocesados = drReader.GetOrdinal("NRO_REPROCESADOS");
+                            
 
                             while (drReader.Read())
                             {
@@ -190,6 +192,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
+                                if (!drReader.IsDBNull(intNroReprocesados)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroReprocesados].ToString());
                                 if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();

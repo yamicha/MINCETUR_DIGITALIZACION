@@ -419,6 +419,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         foreach (MicroEvaluarModel item in entidad.ListaIdsMicroforma)
                         {
+                            entidad.IdMicroforma = item.IdMicroforma; 
                             repositorio.Microforma_RevisionPeriodica(entidad, ref auditoria);
                         }
                         if (!auditoria.EjecucionProceso)

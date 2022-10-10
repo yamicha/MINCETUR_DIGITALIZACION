@@ -36,30 +36,29 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             {
                 model.NOMBRE_USUARIO = User.GetUserName();
                 model.ListaArea = new List<SelectListItem>();
-
-                var paramseccion = new SeccionModel()
+                var paramarea= new parameters()
                 {
                     FlgEstado = "1"
                 };
-                enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/seccion/listar", paramseccion);
-                if (postseccion != null)
+                enAuditoria postArea = await new CssApi().PostApi<enAuditoria>($"archivo-central/area/listar", paramarea);
+                if (postArea != null)
                 {
-                    if (!postseccion.EjecucionProceso)
+                    if (!postArea.EjecucionProceso)
                     {
-                        if (postseccion.Rechazo)
-                            Log.Guardar(postseccion.ErrorLog);
+                        if (postArea.Rechazo)
+                            Log.Guardar(postArea.ErrorLog);
                     }
                     else
                     {
-                        if (postseccion.Objeto != null)
+                        if (postArea.Objeto != null)
                         {
-                            List<enSeccion> Lista = JsonConvert.DeserializeObject<List<enSeccion>>(postseccion.Objeto.ToString());
+                            List<enArea> Lista = JsonConvert.DeserializeObject<List<enArea>>(postArea.Objeto.ToString());
                             if (Lista != null)
                             {
                                 model.ListaArea = Lista.Select(x => new SelectListItem
                                 {
-                                    Value = x.ID_SECCION.ToString(),
-                                    Text = x.DES_LARGA_SECCION
+                                    Value = x.ID_AREA.ToString(),
+                                    Text = x.DES_AREA
                                 }).ToList();
                             }
                         }

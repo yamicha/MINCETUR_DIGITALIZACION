@@ -18,6 +18,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public long ID_FONDO { get; set; }
         public long ID_SECCION { get; set; }
         public long ID_SERIE { get; set; }
+        public long NRO_REPROCESADOS { get; set; }
         public string NOM_DOCUMENTO { get; set; }
         public string DES_LARGA_SECCION { get; set; }
         public string DES_SERIE { get; set; }

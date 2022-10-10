@@ -132,6 +132,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             null,
                             null, 
                             item.NOMBRE_USUARIO, 
+                            item.NRO_REPROCESADOS.ToString(), 
                             null,
                             null, 
                             item.DES_FONDO,

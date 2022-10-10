@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Frotend.ArchivoCentral.Micetur.Helpers
+@{
     ViewBag.Title = "Reproceso";
 }
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
@@ -11,23 +12,20 @@
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script>
-
+    var IdLaserMin = @AppSettingsHelper.MinIdLaser;
     $(document).ready(function () {
         Remove_RemoverClases("liReproceso");
         $("#Reprocesar_btn_Fin").hide();
     });
 
 </script>
-
 <div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
         <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
         Buscando registros...
     </h5>
 </div>
-
 <div class="modal fade" id="myModal_Documento_Ver_Imagen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">
         <li class="active">
@@ -56,9 +54,9 @@
                         <button id="Reprocesar_btn_Fin" title="Detener reloj y finalizar la digitalización" class="btn btn-blue" type="button" style="margin-right:6px;margin-left:6px;margin-bottom:10px;"><i class="clip-stopwatch"></i> Finalizar</button>
                         <label id="Reprocesar_lbl_Crono" style="text-align:center;margin-right:6px;margin-left:6px;color:red;font-size:large;">00:00:00</label>
                         @*<label id="Reprocesar_lbl_Check" style="width:40%;text-align:left;margin-right:1px;">
-                            <input id="Reprocesar_Check_Finalizar" type="checkbox" value="0" style="margin-left:35px" />
-                            Mostrar Finalizar
-                        </label>*@
+                                <input id="Reprocesar_Check_Finalizar" type="checkbox" value="0" style="margin-left:35px" />
+                                Mostrar Finalizar
+                            </label>*@
                     </fieldset>
                 </div>
             </div>
