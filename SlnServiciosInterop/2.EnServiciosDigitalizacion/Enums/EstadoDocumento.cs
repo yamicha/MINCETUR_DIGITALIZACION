@@ -4,10 +4,11 @@ using System.Text;
 
 namespace EnServiciosDigitalizacion.Enums
 {
-   public enum EstadoMicro
+   public enum EstadoDocumento
     {
-        Grabado = 1, 
-        Conforme = 2, 
-        Observado= 3,
+        CalidadConforme = 4, 
+        CalidadObservado = 5, 
+        FedatarioConforme= 7,
+        FedatarObservado = 8,
     }
 }

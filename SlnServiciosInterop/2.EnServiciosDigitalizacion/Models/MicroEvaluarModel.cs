@@ -11,5 +11,7 @@ namespace EnServiciosDigitalizacion.Models
         public string Observacion { get; set; }
         public long FlgConforme { get; set; }
         public string UsuCreacion { get; set; }
+        public List<MicroEvaluarModel> ListaIdsMicroforma { get; set; }
+
     }
 }

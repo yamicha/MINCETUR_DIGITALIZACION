@@ -62,7 +62,12 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         {
             _objDa.Microforma_MicroArchivoEstado(entidad, ref auditoria);
         }
-        
+
+        public void Microforma_RevisionPeriodica(MicroEvaluarModel entidad, ref enAuditoria auditoria)
+        {
+            _objDa.Microforma_RevisionPeriodica(entidad, ref auditoria);
+        }
+
 
     }
 }

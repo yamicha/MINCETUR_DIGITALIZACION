@@ -58,21 +58,35 @@ function Revision_MostrarEvaluar() {
     });
 }
 function Revision_Grabar() {
-    jConfirm(" ¿ Desea guardar datos de micro archivo ingresados ? ", "Atención", function (r) {
+    var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
+    if (_CONFORME == "0") {
+        pregunta = "darle 'NO CONFORME'";
+    } else {
+        pregunta = "dar un 'CONFORME'";
+    }
+    jConfirm(" ¿ Desea " + pregunta + " a los registros seleccionados  ? ", "Atención", function (r) {
         if (r) {
+            var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+            for (i_ = 0; i_ < rowKey.length; i_++) {
+                var data = jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
+                var _item = {
+                    IdMicroforma: parseInt(data.ID_MICROFORMA)
+                }
+                MicroForma_Lista.push(_item);
+            }
             var item = {
-                IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
-                TipoArchivo: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
-                UsuCreacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
+                ListaIdsMicroforma: MicroForma_Lista,
+                FlgConforme: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
+                Observacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
                 UsuCreacion: $("#inputHddCod_usuario").val(),
             }
-            var url = "archivo-central/microforma/micro-archivo-insertar";
+            var url = "archivo-central/microforma/revision-periodica";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
-                            ControlBuscar(); 
+                            RevisionPendienteBuscar(); 
                             Microforma_CloseModal();
                             jOkas("Datos guardados correctamente.", "Atención");             
                         } else {
@@ -88,43 +102,6 @@ function Revision_Grabar() {
         }
     });
 }
-//function MicroformaPendiente_CargarGrilla() {
-//    var item = {
-//    }
-//    var url = "archivo-central/microforma/listar-control";
-//    API.Fetch("POST", url, item, function (auditoria) {
-//        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
-//        if (auditoria != null && auditoria != "") {
-//            if (auditoria.EjecucionProceso) {
-//                if (!auditoria.Rechazo) {
-//                    var x = 0;
-//                    $.each(auditoria.Objeto, function (i, v) {
-//                        x++;
-//                        var myData =
-//                        {
-//                            CODIGO: x,
-//                            ID_MICROFORMA: v.ID_MICROFORMA,
-//                            DESC_SOPORTE: v.DESC_SOPORTE,
-//                            CODIGO_SOPORTE: v.CODIGO_SOPORTE,
-//                            DESCRIPCION_LOTE: v.DESCRIPCION_LOTE,
-//                            STR_FEC_CREACION: v.STR_FEC_CREACION,
-//                            DESC_ESTADO: v.DESC_ESTADO,
-//                            ID_ESTADO: v.ID_ESTADO
-//                        };
-//                        jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('addRowData', x, myData);
-//                    });
-//                    jQuery("#" + MicroPendiente_Lote_grilla).trigger("reloadGrid");
-//                } else {
-//                    jAlert(auditoria.MensajeSalida, "Atención");
-//                }
-//            } else {
-//                jAlert(auditoria.MensajeSalida, "Atención");
-//            }
-//        } else {
-//            jAlert("No se encontraron registros", "Atención");
-//        }
-//    });
-//}
 
 //********************************************************** tab finalizados *********************************************************/
 

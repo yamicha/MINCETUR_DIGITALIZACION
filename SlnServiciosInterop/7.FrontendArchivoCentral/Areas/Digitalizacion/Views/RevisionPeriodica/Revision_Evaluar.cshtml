@@ -7,8 +7,10 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script>
     $(function () {
-        $('#Microforma_Grabar_btn_Evaluar').click(function () {
-            MicroformaEvaluar();
+        $('#Microforma_Revision_Evaluar').click(function () {
+            if ($('#FrmEvaluarRevision').valid()) {
+                Revision_Grabar();
+            }
         });
         $('#MICROFORMA_FLG_CONFORME').change(function () {
             if ($(this).val() == 1) {
@@ -33,7 +35,7 @@
                     <div class="col-sm-12">
                             @*<p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>*@
                             <fieldset style="width: 100%;">              
-                                @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroEvaluar", @class = "form-horizontal" }))
+                                @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmEvaluarRevision", @class = "form-horizontal" }))
                                 {
                                     @Html.ValidationSummary(true)
 

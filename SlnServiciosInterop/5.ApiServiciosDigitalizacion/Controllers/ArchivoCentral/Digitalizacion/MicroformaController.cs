@@ -399,8 +399,52 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpPost]
+        [Route("revision-periodica")]
+        public IActionResult Microforma_RevisionPeriodica([FromBody] MicroEvaluarModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                if (entidad.FlgConforme == 1)
+                {
+                    entidad.IdEstado = (int)EstadoMicro.RevisionConforme;
+                }
+                else
+                    entidad.IdEstado = (int)EstadoMicro.RevisionObservada;
 
-        
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    if (entidad.ListaIdsMicroforma.Count() > 0)
+                    {
+                        foreach (MicroEvaluarModel item in entidad.ListaIdsMicroforma)
+                        {
+                            repositorio.Microforma_RevisionPeriodica(entidad, ref auditoria);
+                        }
+                        if (!auditoria.EjecucionProceso)
+                        {
+                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                        }
+                        else
+                        {
+                            if (!auditoria.Rechazo)
+                                auditoria.Code = (int)HttpStatusCode.Created;
+                            else
+                                auditoria.Code = (int)HttpStatusCode.OK;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
     }
 }
