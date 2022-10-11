@@ -39,8 +39,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false },
         { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false },
-        { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },
-        
+        { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },   
     ];
     var opciones = {
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: GetRules(),

@@ -82,7 +82,6 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 
         }
 
-
         [HttpPost]
         [Route("listar")]
         public IActionResult Microforma_Listar([FromBody] MicroModel entidad)
