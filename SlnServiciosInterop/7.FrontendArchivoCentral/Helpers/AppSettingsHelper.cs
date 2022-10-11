@@ -10,6 +10,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
         public static string baseUrlApi => GetAppSetting("baseUrlApi");
         public static string RutaVisorLF => GetAppSetting("RutaVisorLF");
         public static string MinIdLaser => GetAppSetting("MinIdLaser");
+        public static string UrlApiDownload => GetAppSetting("UrlApiDownload");
         
         private static string GetAppSetting(string key)
         {

@@ -40,7 +40,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MICROFORMA_USU_CREACION { get; set; }
         public string MICROFORMA_STR_FEC_CREACION { get; set; }
         public string MICROFORMA_IP_CREACION { get; set; }
-
+        public long ID_DOC_APERTURA { get; set; }
+        public long ID_DOC_CIERRE { get; set; }
 
         //VALIDAR
         [Required(ErrorMessage = "[Estado de Conformidad] Obligatorio")]

@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     var options = {
         AjaxWait: {
             AjaxWaitMessage: "<h5><img style='height: 20px' src='" + waitimageUrl + "' /> Procesando...</h5>",
-            AjaxWaitMessageCss: { width: "20px", left: "20%" }
+            AjaxWaitMessageCss: { width: "20px", left: "20%"}
         },
         AjaxErrorMessage: "<h6>Error! Por favor contacte con el Administrador del sistema!</h6>"
     };

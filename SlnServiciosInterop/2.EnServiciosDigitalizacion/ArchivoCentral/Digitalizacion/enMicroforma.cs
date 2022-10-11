@@ -16,6 +16,8 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string OBSERVACION { get; set; }
         public string FECHA { get; set; }
         public string HORA { get; set; }
+        public long ID_DOC_APERTURA { get; set; }
+        public long ID_DOC_CIERRE { get; set; }
         public string NRO_ACTA { get; set; }
         public string NRO_COPIAS { get; set; }
         public string DESC_ESTADO { get; set; }

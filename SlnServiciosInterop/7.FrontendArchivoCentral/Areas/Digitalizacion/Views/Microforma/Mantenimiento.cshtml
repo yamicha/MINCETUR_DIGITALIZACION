@@ -2,24 +2,23 @@
 @{
     Layout = null;
 }
-
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
-        CountCharactersControlTxt('MICROFORMA_OBSERVACION', 'Microforma_Grabar_lbl1', 3000);
-        ValidarNumerosOtros("#MICROFORMA_COPIAS", false, true);
+        if ($('#HDF_ACCION').val() == "M") {
+            $('#MICROFORMA_NROVOLUMEN').prop('disabled', true);
+        }
         $('#Microforma_Grabar_btn_Grabar').click(function (e) {
             if ($("#FrmMicroformaGrabar").valid()) {
                 if ($('#HDF_ACCION').val() == "N") {
                     MicroformaGrabar_Grabar();
                 } else {
-                    Microforma_Editar(); 
+                    Microforma_Editar();
                 }
             }
         });
     });
-
     function ValidarNumerosOtros(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode == 8) return true;
@@ -28,7 +27,6 @@
         var te = String.fromCharCode(charCode);
         return patron.test(te);
     }
-
     function ValidarNumerosOtros(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode == 8) return true;
@@ -37,7 +35,6 @@
         var te = String.fromCharCode(charCode);
         return patron.test(te);
     }
-
     function ValidarNumerosOtrosR(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode == 8) return true;
@@ -52,7 +49,6 @@
         if (nuevovalor > 59) return false;
         return patron.test(te);
     }
-
     function CountCharactersControlTxt(obj, lblObject, max) {
         try {
             var total = max;
@@ -68,11 +64,9 @@
             alert(e.Message);
         }
     }
-
     function LeadingZero(Time) {
         return (Time < 10) ? "0" + Time : +Time;
     }
-
     var MicroformaH_Hora = "00";
     var MicroformaH_Min = "00";
     var MicroformaH_Sec = "00";
@@ -200,13 +194,7 @@
             }
         }
     }
-
     timePicker('MICROFORMA_HORA');
-
-    //$('#MICROFORMA_FECHA').onkeypress(function (e) {
-    //    return ValidarNumerosOtros(e);
-    //});
-
     $('#MICROFORMA_FECHA').datepicker({
         changeMonth: true,
         changeYear: true,
@@ -215,14 +203,10 @@
         changeFirstDay: false,
         placeholder: "dd/MM/yyyy"
     });
-
-
-
     $('.modal-dialogMicroforma').draggable({
         handle: ".modal-header",
         cursor: "handler"
     });
-
 </script>
 <style>
     .time-picker {
@@ -318,7 +302,15 @@
                             <div class="col-sm-12 inline-container-Group">
                                 <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
                                 <fieldset style="width: 100%;">
-
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro. Volumen: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_NROVOLUMEN, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha de grabación: </label>
@@ -337,15 +329,7 @@
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro. Volumen: </label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
-                                            @Html.ValidationMessageFor(model => model.MICROFORMA_NROVOLUMEN, string.Empty, new { @class = "cssMessageError" })
-                                        </div>
-                                    </div>
+
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de medio de soporte: </label>
@@ -388,7 +372,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="input-group ">
+                                            <div class="input-group">
                                                 <div style=" height: 30px; margin-bottom: 3px;" class="form-control file-caption  kv-fileinput-caption">
                                                     <div class="file-caption-name" id="filenameApertura"></div>
                                                 </div>
@@ -399,6 +383,10 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            @if (Model.Accion == "M")
+                                            {
+                                                <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                            }
                                         </div>
                                     </div>
 
@@ -418,6 +406,10 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            @if (Model.Accion == "M")
+                                            {
+                                                <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
+                                            }
                                         </div>
                                     </div>
 
@@ -452,6 +444,8 @@
         </div>
     </div>
     @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
+    @Html.Hidden("HDF_ID_DOC_APERTURA", Model.ID_DOC_APERTURA)
+    @Html.Hidden("HDF_ID_DOC_CIERRE", Model.ID_DOC_CIERRE)
     @Html.Hidden("HDF_ACCION", Model.Accion)
 }
 

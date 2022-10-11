@@ -63,12 +63,10 @@ jQuery('#aTabMicroformaGrabar').click(function (e) {
     Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, 0);
     MicroformaGrabar_buscar();
 });
-
 function MicroformaGrabar_Cerrar() {
     $('#myModal_Documento_Grabar').modal('hide');
     jQuery("#myModal_Documento_Grabar").html('');
 }
-
 function Documento_MostrarGrabar() {
     jQuery("#myModal_Documento_Grabar").html('');
     jQuery("#myModal_Documento_Grabar").modal('show');
@@ -77,8 +75,6 @@ function Documento_MostrarGrabar() {
         if (request.status != 200) return;
     });
 }
-
-
 async function MicroformaGrabar_IniciarProceso() {
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
     if (rowKey != null) {
@@ -89,7 +85,6 @@ async function MicroformaGrabar_IniciarProceso() {
         jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
     }
 }
-
 function MicroformaGrabar_ValidarLote() {
     var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
     return new Promise((valido) => {
@@ -128,44 +123,61 @@ function MicroformaGrabar_ValidarLote() {
         }
     });
 }
-
 function MicroformaGrabar_Grabar() {
     jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
         if (r) {
-            var item = {
-                ListaIdsLotes: MicroformaGrabar_ListaLotes,
-                Fecha: $("#MICROFORMA_FECHA").val() ,
-                Hora: $("#MICROFORMA_HORA").val(),
-                NroVolumen: $("#MICROFORMA_NROVOLUMEN").val(),
-                CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
-                IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
-                NroActa: $("#MICROFORMA_ACTA").val(),
-                NroCopias: $("#MICROFORMA_COPIAS").val(),
-                CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
-                Observacion: $("#MICROFORMA_OBSERVACION").val(),
-                UsuCreacion: $("#inputHddCod_usuario").val(),
-            }
-            var url = "archivo-central/microforma/insertar";
-            API.Fetch("POST", url, item, function (auditoria) {
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EjecucionProceso) {
-                        if (!auditoria.Rechazo) {
-                            _ID_LOTE = 0;
-                            Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
-                            jOkas("Microforma grabada correctamente.", "Atención");
-                            //MicroformaGrabar_buscar();
-                            MicroformaGrabar_Cerrar();
-                        } else {
-                            jAlert(auditoria.MensajeSalida, "Atención");
+            try {
+                var ID_DOC_APERTURA = 0;
+                var ID_DOC_CIERRE = 0;
+                var FileApertura = new FormData();
+                FileApertura.append('fileArchivo', $('#fileActaApertura').prop('files')[0]);
+                var FileCierre = new FormData();
+                FileCierre.append('fileArchivo', $('#fileActaCierre').prop('files')[0]); 
+                UploadFileSerive(FileApertura)
+                    .then((ID_APERTURA) => {
+                        ID_DOC_APERTURA = ID_APERTURA;
+                        return UploadFileSerive(FileCierre);
+                    }).then((ID_CIERRE) => {
+                        ID_DOC_CIERRE = ID_CIERRE;
+                        var item = {
+                            ListaIdsLotes: MicroformaGrabar_ListaLotes,
+                            Fecha: $("#MICROFORMA_FECHA").val(),
+                            Hora: $("#MICROFORMA_HORA").val(),
+                            NroVolumen: $("#MICROFORMA_NROVOLUMEN").val(),
+                            CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
+                            IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
+                            IdDocApertura: parseInt(ID_DOC_APERTURA),
+                            IdDocCierre: parseInt(ID_DOC_CIERRE), 
+                            NroActa: $("#MICROFORMA_ACTA").val(),
+                            NroCopias: $("#MICROFORMA_COPIAS").val(),
+                            CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
+                            Observacion: $("#MICROFORMA_OBSERVACION").val(),
+                            UsuCreacion: $("#inputHddCod_usuario").val(),
                         }
-                    } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
-                    }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
-            });
+                        var url = "archivo-central/microforma/insertar";
+                        API.Fetch("POST", url, item, function (auditoria) {
+                            if (auditoria != null && auditoria != "") {
+                                if (auditoria.EjecucionProceso) {
+                                    if (!auditoria.Rechazo) {
+                                        _ID_LOTE = 0;
+                                        Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
+                                        jOkas("Microforma grabada correctamente.", "Atención");
+                                        MicroformaGrabar_Cerrar();
+                                    } else {
+                                        jAlert(auditoria.MensajeSalida, "Atención");
+                                    }
+                                } else {
+                                    jAlert(auditoria.MensajeSalida, "Atención");
+                                }
+                            } else {
+                                jAlert("No se encontraron registros", "Atención");
+                            }
+                        });
+
+                    });
+            } catch (err) {
+                alert(err);
+            }
         }
     });
-
 }

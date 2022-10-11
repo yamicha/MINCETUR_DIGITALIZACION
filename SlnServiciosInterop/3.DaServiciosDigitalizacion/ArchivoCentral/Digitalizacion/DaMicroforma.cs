@@ -302,6 +302,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
                             int intFecha = drReader.GetOrdinal("FECHA");
                             int intHora = drReader.GetOrdinal("HORA");
+                            int intNroVolumen = drReader.GetOrdinal("NRO_VOLUMEN");
+                            int intIdApertura = drReader.GetOrdinal("ID_DOC_APERTURA");
+                            int intIdCierre = drReader.GetOrdinal("ID_DOC_CIERRE");
                             int intNroActa = drReader.GetOrdinal("NRO_ACTA");
                             int intNroCopias = drReader.GetOrdinal("NRO_COPIAS");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
@@ -324,10 +327,12 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intFecha)) temp.FECHA = arrResult[intFecha].ToString();
                                 if (!drReader.IsDBNull(intHora)) temp.HORA = arrResult[intHora].ToString();
+                                if (!drReader.IsDBNull(intNroVolumen)) temp.NRO_VOLUMEN = arrResult[intNroVolumen].ToString();
+                                if (!drReader.IsDBNull(intIdApertura)) temp.ID_DOC_APERTURA = long.Parse(arrResult[intIdApertura].ToString());
+                                if (!drReader.IsDBNull(intIdCierre)) temp.ID_DOC_CIERRE = long.Parse(arrResult[intIdCierre].ToString());
                                 if (!drReader.IsDBNull(intNroActa)) temp.NRO_ACTA = arrResult[intNroActa].ToString();
                                 if (!drReader.IsDBNull(intNroCopias)) temp.NRO_COPIAS = arrResult[intNroCopias].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
-
                                 if (!drReader.IsDBNull(intIdDocConforma)) temp.MA_ID_DOC_CONFORMIDAD = long.Parse(arrResult[intIdDocConforma].ToString());
                                 if (!drReader.IsDBNull(intTipoArchivo)) temp.MA_TIPO_ARCHIVO = long.Parse(arrResult[intTipoArchivo].ToString());
                                 if (!drReader.IsDBNull(intMaDireccion)) temp.MA_DIRECCION = arrResult[intMaDireccion].ToString();
@@ -435,6 +440,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
                 cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
                 cmd.Parameters.Add(new OracleParameter("XIN_NRO_VOLUMEN", OracleDbType.Varchar2)).Value = entidad.NroVolumen;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
                 cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
                 cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
                 cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
@@ -539,6 +546,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
                 cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
                 cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
                 cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
                 cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
                 cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;

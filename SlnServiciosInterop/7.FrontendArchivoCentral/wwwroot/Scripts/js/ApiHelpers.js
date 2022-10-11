@@ -40,14 +40,14 @@ API = {
             }
         });
         fetch(request)
-            .then((resp) => resp.json() )
+            .then((resp) => resp.json())
             .then(function (data) {
                 fetchload.close();
                 calback(data);
             })
             .catch(function (error) {
                 fetchload.close();
-                alert("request error api: "+ error.message);
+                alert("request error api: " + error.message);
             });
     },
 
@@ -65,7 +65,7 @@ API = {
                 calback(data);
             })
             .catch(function (error) {
-                 
+
                 fetchload.close();
                 alert("request error api", error);
             });
@@ -81,7 +81,7 @@ API = {
             },
             body: JSON.stringify(paramters)
         };
-        fetch(BaseUrlApi+url, requestOptions)
+        fetch(BaseUrlApi + url, requestOptions)
             .then(response => response.json())
             .then(data => alert(data));
     }
@@ -94,14 +94,13 @@ function DownloadFile(Url) {
 }
 
 function ProcesarArchivo(input, filename) {
-    debugger; 
     var file = input.files[0];
     var nombre = "";
-      $('#' + filename).text(""); 
+    $('#' + filename).text("");
     if (file != undefined) {
         var PesodeArchivo = parseFloat(file.size);
         var ext = input.files[0].name.split('.').pop();
-         nombre = input.files[0].name;
+        nombre = input.files[0].name;
         if (nombre.length > 100) {
             jAlert("El nombre del documento es muy largo", 'Atención');
             $(this).val('');
@@ -120,9 +119,60 @@ function ProcesarArchivo(input, filename) {
 
                 return false;
             } else {
-                $('#' + filename).text(nombre); 
+                $('#' + filename).text(nombre);
                 //PedidosGuardarArchivo(input, ID_DETALLE);
             }
         }
     }
+}
+
+function UploadFileSerive(formdata) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: baseUrl + "Base/UploadFileService",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (auditoria) {
+                if (auditoria.ejecucionProceso) {
+                    if (!auditoria.rechazo) {
+                        resolve(auditoria.objeto);
+                    } else {
+                        console.log(auditoria.mensajeSalida, 'Atención');
+                        resolve(0);
+                    }
+                } else {
+                    resolve(0);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+                resolve(0);
+            }
+        });
+    });
+}
+
+function DownloadFile(ID_DOC) {
+    $.ajax({
+        url: baseUrl + "Base/DownloadFileService?ID_DOC=" + ID_DOC,
+        //data: item,
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        type: 'GET',
+        success: function (auditoria) {
+            if (auditoria.ejecucionProceso) {
+                if (!auditoria.rechazo) {
+                    window.open(auditoria.objeto,"_blank"); 
+                } else {
+                    console.log(auditoria.mensajeSalida, 'Atención');
+                }
+            } else {
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.status);
+        }
+    });
 }

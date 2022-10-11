@@ -1,4 +1,6 @@
-﻿
+﻿.blockUI {
+    z-index: 1100 !important;
+}
 
 .Titulo
 {

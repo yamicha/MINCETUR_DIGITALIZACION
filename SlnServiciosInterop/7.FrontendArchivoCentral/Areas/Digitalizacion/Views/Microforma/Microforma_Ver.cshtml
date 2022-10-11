@@ -103,12 +103,12 @@
                             <div class="col-sm-12 inline-container-Group">
                                 @*<p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>*@
                                 <fieldset style="width: 100%;">
-                                    <div class="row" hidden="hidden">
+                                    <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro de Lote:</label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro Volumen:</label>
                                         </div>
-                                        <div class="col-sm-4">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_ID_LOTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -125,7 +125,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora de grabación: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss" ,disabled = "true" })
+                                            @Html.TextBoxFor(model => model.MICROFORMA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "HH:mm:ss", disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -163,6 +163,22 @@
                                         <div class="col-sm-6">
                                             @Html.TextBoxFor(model => model.MICROFORMA_COPIAS, new { @class = "form-control", @maxlength = "100", @style = "width:100%", onkeypress = "return ValidarNumerosOtros(event)", disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_COPIAS, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
                                         </div>
                                     </div>
                                     <div class="row">

@@ -87,6 +87,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             model.MICROFORMA_COPIAS = item.NRO_COPIAS;
                             model.MICROFORMA_OBSERVACION = item.OBSERVACION;
                             model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
+                            model.MICROFORMA_NROVOLUMEN = item.NRO_VOLUMEN;
+                            model.ID_DOC_APERTURA = item.ID_DOC_APERTURA;
+                            model.ID_DOC_CIERRE = item.ID_DOC_CIERRE;
                         }
                     }
                 }
@@ -160,6 +163,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             model.MICROFORMA_COPIAS = item.NRO_COPIAS;
                             model.MICROFORMA_OBSERVACION = item.OBSERVACION;
                             model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
+                            model.MICROFORMA_NROVOLUMEN = item.NRO_VOLUMEN;
+                            model.ID_DOC_APERTURA = item.ID_DOC_APERTURA;
+                            model.ID_DOC_CIERRE = item.ID_DOC_CIERRE;
                         }
                     }
                 }
@@ -237,6 +243,12 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             model.MICROFORMA_COPIAS = item.NRO_COPIAS;
                             model.MICROFORMA_OBSERVACION = item.OBSERVACION;
                             model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
+                            model.MICROFORMA_NROVOLUMEN = item.NRO_VOLUMEN;
+                            model.ID_DOC_APERTURA = item.ID_DOC_APERTURA;
+                            model.ID_DOC_CIERRE = item.ID_DOC_CIERRE;
+                            model.MICROFORMA_NROVOLUMEN = item.NRO_VOLUMEN;
+                            model.ID_DOC_APERTURA = item.ID_DOC_APERTURA;
+                            model.ID_DOC_CIERRE = item.ID_DOC_CIERRE;
                         }
                     }
                 }
