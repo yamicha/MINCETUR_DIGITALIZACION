@@ -126,7 +126,7 @@ function ProcesarArchivo(input, filename) {
     }
 }
 
-function UploadFileSerive(formdata) {
+function UploadFileService(formdata) {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: baseUrl + "Base/UploadFileService",

@@ -50,9 +50,15 @@ function ControlFinalizadoBuscar() {
         MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.CAlmacenFin, true);
     Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
 }
-function Microforma_MicroArchivoGrabar() {
-    jConfirm(" ¿ Desea guardar datos de micro archivo ingresados ? ", "Atención", function (r) {
+async function Microforma_MicroArchivoGrabar() {
+    jConfirm(" ¿ Desea guardar datos de microArchivo ingresados ? ", "Atención", async function (r) {
         if (r) {
+            var IdDocAlmacenamiento = 0; 
+            if ($('#fileActaAlma').prop('files')[0] != undefined) {
+                var FileApertura = new FormData();
+                FileApertura.append('fileArchivo', $('#fileActaAlma').prop('files')[0]);
+                IdDocAlmacenamiento = await UploadFileService(FileApertura);
+            }
             var item = {
                 IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
                 TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
@@ -60,6 +66,7 @@ function Microforma_MicroArchivoGrabar() {
                 Observacion: $("#MA_OBSERVACION").val(),
                 IdUsuario: parseInt($("#inputHddId_Usuario").val()),
                 UsuCreacion: $("#inputHddCod_usuario").val(),
+                IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento)
             }
             var url = "archivo-central/microforma/micro-archivo-insertar";
             API.Fetch("POST", url, item, function (auditoria) {

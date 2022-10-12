@@ -6,6 +6,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
 {
     public class MicroArchivoModel
     {
+        public long ID_MICROFORMA { get; set; }
+
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "[Tipo Micro Archivo] es obligatorio")]
         public string MA_TIPO_ARCHIVO { get; set; }
@@ -24,8 +26,17 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [Required(ErrorMessage = "[Observación] es obligatorio")]
         public string MA_OBSERVACION { get; set; }
 
-        public long ID_MICROFORMA { get; set; }
-        
+    
+
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$", ErrorMessage = "Formato inválido (HH:MM:SS)")]
+        [Required(ErrorMessage = "[Hora] es obligatorio")]
+        public string MA_HORA { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "[Fecha] es obligatorio")]
+        public string MA_FECHA { get; set; }
+
 
 
     }

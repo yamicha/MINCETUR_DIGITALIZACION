@@ -72,7 +72,16 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MA_OBSERVACION { get; set; }
 
         public string MA_FEC_CREACION { get; set; }
-        
+
+        [DataType(DataType.Text)]
+        [RegularExpression(@"^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$", ErrorMessage = "Formato inválido (HH:MM:SS)")]
+        [Required(ErrorMessage = "[Hora] es obligatorio")]
+        public string MA_HORA { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "[Fecha] es obligatorio")]
+        public string MA_FECHA { get; set; }
+
 
     }
 }

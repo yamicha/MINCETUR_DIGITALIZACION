@@ -40,14 +40,14 @@ async function Microforma_Editar() {
             if ($('#fileActaApertura').prop('files')[0] != undefined) {
                 var FileApertura = new FormData();
                 FileApertura.append('fileArchivo', $('#fileActaApertura').prop('files')[0]);
-                ID_DOC_APERTURA = await UploadFileSerive(FileApertura);
+                ID_DOC_APERTURA = await UploadFileService(FileApertura);
             } else {
                 ID_DOC_APERTURA = parseInt($("#HDF_ID_DOC_APERTURA").val());
             }
             if ($('#fileActaCierre').prop('files')[0] != undefined) {
                 var FileCierre = new FormData();
                 FileCierre.append('fileArchivo', $('#fileActaCierre').prop('files')[0]);
-                ID_DOC_CIERRE = await UploadFileSerive(FileCierre);
+                ID_DOC_CIERRE = await UploadFileService(FileCierre);
             } else {
                 ID_DOC_CIERRE = parseInt($("#HDF_ID_DOC_CIERRE").val());
             }

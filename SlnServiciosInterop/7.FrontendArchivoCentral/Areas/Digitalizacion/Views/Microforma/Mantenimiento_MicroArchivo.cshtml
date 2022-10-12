@@ -4,86 +4,134 @@
 }
 
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
-    <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#MicroformaBtnMicroArchivo').click(function (e) {
-                if ($("#FrmMicroArchivo").valid()) {
-                    Microforma_MicroArchivoGrabar();
-                }
-            });
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#MicroformaBtnMicroArchivo').click(function (e) {
+            if ($("#FrmMicroArchivo").valid()) {
+                Microforma_MicroArchivoGrabar();
+            }
         });
-
-    </script>
-    @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroArchivo", @class = "form-horizontal" }))
-    {
-        @Html.ValidationSummary(true)
-        <div class="modal-dialogMicroforma">
-            <div class="modal-content" style="width:100%;">
-                <div class="modal-header" style="cursor: move; background-color: #ca2626">
-                    <div class="col-sm-14">
-                        <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
-                        <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Micro Archivo </h4>
-                    </div>
+    });
+    timePicker('MA_HORA');
+    $('#MA_FECHA').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        changeFirstDay: false,
+        placeholder: "dd/MM/yyyy"
+    });
+</script>
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroArchivo", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogMicroforma">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Micro Archivo </h4>
                 </div>
-                <div class="modal-body">
-                    <fieldset style="width: 100%;">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="col-sm-12 inline-container-Group">
-                                    <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
-                                    <fieldset style="width: 100%;">
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
+                                <fieldset style="width: 100%;">
 
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo Micro Archivo: </label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                @Html.DropDownListFor(model => model.MA_TIPO_ARCHIVO, Model.Lista_TipoMicroArchivo, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.MA_TIPO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo MicroArchivo: </label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
-                                                @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(model => model.MA_TIPO_ARCHIVO, Model.Lista_TipoMicroArchivo, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.MA_TIPO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled="true" })
-                                                @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
                                         </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                                            @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                                            @Html.ValidationMessageFor(model => model.MA_FECHA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;",@placeholder = "HH:mm:ss" })
+                                            @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Almacenamiento: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <div style=" height: 30px; margin-bottom: 5px;" class="form-control file-caption  kv-fileinput-caption">
+                                                    <div class="file-caption-name" id="filenameAlma"></div>
+                                                </div>
+                                                <div class="input-group-btn">
+                                                    <label for="fileActaAlma" class="btn btn-primary btn-file">
+                                                        <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
+                                                        <input id="fileActaAlma" type="file" class="file" onchange="ProcesarArchivo(this,'filenameAlma')">
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            @*@if (Model.Accion == "M")
+                                                {
+                                                    <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                                }*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
-                                                <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
-                                                @Html.ValidationMessageFor(model => model.MA_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
                                         </div>
-                                    </fieldset>
-                                </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
+                                            <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
+                                            @Html.ValidationMessageFor(model => model.MA_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </div>
                         </div>
-                    </fieldset>
-                    <div class="modal-footer">
-                        <button type="button" id="MicroformaBtnMicroArchivo" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
-                        <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
                     </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="MicroformaBtnMicroArchivo" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
                 </div>
             </div>
         </div>
-        @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
-    }
+    </div>
+    @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
+}
 

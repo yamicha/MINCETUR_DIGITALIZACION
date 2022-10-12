@@ -133,10 +133,10 @@ function MicroformaGrabar_Grabar() {
                 FileApertura.append('fileArchivo', $('#fileActaApertura').prop('files')[0]);
                 var FileCierre = new FormData();
                 FileCierre.append('fileArchivo', $('#fileActaCierre').prop('files')[0]); 
-                UploadFileSerive(FileApertura)
+                UploadFileService(FileApertura)
                     .then((ID_APERTURA) => {
                         ID_DOC_APERTURA = ID_APERTURA;
-                        return UploadFileSerive(FileCierre);
+                        return UploadFileService(FileCierre);
                     }).then((ID_CIERRE) => {
                         ID_DOC_CIERRE = ID_CIERRE;
                         var item = {

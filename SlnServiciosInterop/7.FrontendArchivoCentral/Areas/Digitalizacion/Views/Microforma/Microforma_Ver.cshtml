@@ -167,22 +167,6 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre </label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de Fedatario: </label>
                                         </div>
                                         <div class="col-sm-6">
@@ -196,7 +180,22 @@
                                         </div>
                                         <div class="col-sm-8">
                                             @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)", disabled = "true" })
-                                            <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
                                         </div>
                                     </div>
                                 </fieldset>
