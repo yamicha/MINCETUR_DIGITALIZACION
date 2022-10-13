@@ -16,7 +16,7 @@ $(document).ready(function () {
     jQuery('#aTabMicroforma').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
-        Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra, MicroModulo.Detalle);
+        Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra, MicroModulo.Grabados);
         Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
     });
 

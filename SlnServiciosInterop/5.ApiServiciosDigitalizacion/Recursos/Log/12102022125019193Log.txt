@@ -1,0 +1,14 @@
+System.FormatException: One of the identified items was in an invalid format.
+   at Oracle.ManagedDataAccess.Types.DateTimeStringUtilities.FromString(String stringRep, Int32& year, Int32& month, Int32& day, Int32& hours, Int32& minutes, Int32& seconds, Int32& nanos, String& region, Boolean expectNoRegion, Boolean expectNoNanos)
+   at Oracle.ManagedDataAccess.Types.OracleDate.FromString(String datStr)
+   at Oracle.ManagedDataAccess.Types.OracleDate..ctor(String datStr)
+   at OracleInternal.ServiceObjects.OracleParameterImpl.SetDateInBytes(Object paramValue, Byte[]& dateByteArray)
+   at OracleInternal.ServiceObjects.OracleParameterImpl.SetDateInBytes(Object paramValue)
+   at Oracle.ManagedDataAccess.Client.OracleParameter.PreBind_Date()
+   at Oracle.ManagedDataAccess.Client.OracleParameter.PreBind(OracleConnectionImpl connImpl, ColumnDescribeInfo cachedParamMetadata, Boolean& bMetadataModified, Int32 arrayBindCount, ColumnDescribeInfo& paramMetaData, Object& paramValue, Boolean isEFSelectStatement, SqlStatementType stmtType)
+   at OracleInternal.ServiceObjects.OracleCommandImpl.InitializeParamInfo(ICollection paramColl, OracleConnectionImpl connectionImpl, ColumnDescribeInfo[] cachedParamMetadata, Boolean& bMetadataModified, Boolean isEFSelectStatement, MarshalBindParameterValueHelper& marshalBindValuesHelper)
+   at OracleInternal.ServiceObjects.OracleCommandImpl.ProcessParameters(OracleParameterCollection paramColl, OracleConnectionImpl connectionImpl, ColumnDescribeInfo[] cachedParamMetadata, Boolean& bBindMetadataModified, Boolean isEFSelectStatement, MarshalBindParameterValueHelper& marshalBindValuesHelper)
+   at OracleInternal.ServiceObjects.OracleCommandImpl.ExecuteReader(String commandText, OracleParameterCollection paramColl, CommandType commandType, OracleConnectionImpl connectionImpl, OracleDataReaderImpl& rdrImpl, Int32 longFetchSize, Int64 clientInitialLOBFS, OracleDependencyImpl orclDependencyImpl, Int64[] scnForExecution, Int64[]& scnFromExecution, OracleParameterCollection& bindByPositionParamColl, Boolean& bBindParamPresent, Int64& internalInitialLOBFS, Int64 internalInitialJSONFS, OracleException& exceptionForArrayBindDML, OracleConnection connection, IEnumerable`1 adrianParsedStmt, Boolean isDescribeOnly, Boolean isFromEF)
+   at Oracle.ManagedDataAccess.Client.OracleCommand.ExecuteReader(Boolean requery, Boolean fillRequest, CommandBehavior behavior)
+   at Oracle.ManagedDataAccess.Client.OracleCommand.ExecuteReader()
+   at DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion.DaMicroforma.Microforma_MicroArchivo(MicroArchivoModels entidad, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Digitalizacion\DaMicroforma.cs:line 599

@@ -1,0 +1,4 @@
+System.IndexOutOfRangeException: No se ha encontrado la columna especificada en el juego de resultados
+   at OracleInternal.ServiceObjects.OracleDataReaderImpl.GetColumnOrdinal(String colName)
+   at Oracle.ManagedDataAccess.Client.OracleDataReader.GetOrdinal(String name)
+   at DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion.DaMicroforma.MicroArchivo_ListarUno(Int64 ID_MICROFORMA, enAuditoria& auditoria) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Digitalizacion\DaMicroforma.cs:line 392

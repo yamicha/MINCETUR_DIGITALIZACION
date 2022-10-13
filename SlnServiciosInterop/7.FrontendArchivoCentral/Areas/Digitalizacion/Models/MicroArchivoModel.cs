@@ -37,7 +37,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [Required(ErrorMessage = "[Fecha] es obligatorio")]
         public string MA_FECHA { get; set; }
 
-
+        public string Accion { get; set; }
 
     }
 }

@@ -26,7 +26,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
 
         [Required(ErrorMessage = "[Soporte] Obligatorio")]
         public long MICROFORMA_ID_TIPO_SOPORTE { get; set; }
-        public List<SelectListItem> Lista_MICROFORMA_ID_TIPO_SOPORTE = new List<SelectListItem>(); 
+        public List<SelectListItem> Lista_MICROFORMA_ID_TIPO_SOPORTE = new List<SelectListItem>();
+        public string MICROFORMA_DESC_SOPORTE { get; set; }
 
         [Required(ErrorMessage = "[N° Acta] Obligatorio")]
         public string MICROFORMA_ACTA { get; set; }
@@ -42,6 +43,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MICROFORMA_IP_CREACION { get; set; }
         public long ID_DOC_APERTURA { get; set; }
         public long ID_DOC_CIERRE { get; set; }
+        public long ID_DOC_CONFORMIDAD { get; set; }
+        
 
         //VALIDAR
         [Required(ErrorMessage = "[Estado de Conformidad] Obligatorio")]
@@ -81,7 +84,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "[Fecha] es obligatorio")]
         public string MA_FECHA { get; set; }
-
+        public long MA_ID_DOC_ALMACENAMIENTO { get; set; }
 
     }
 }

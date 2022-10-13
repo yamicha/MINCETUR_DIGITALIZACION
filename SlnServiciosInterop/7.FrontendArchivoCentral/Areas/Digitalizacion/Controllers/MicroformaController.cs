@@ -166,6 +166,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                             model.MICROFORMA_NROVOLUMEN = item.NRO_VOLUMEN;
                             model.ID_DOC_APERTURA = item.ID_DOC_APERTURA;
                             model.ID_DOC_CIERRE = item.ID_DOC_CIERRE;
+                            model.ID_DOC_CONFORMIDAD = item.ID_DOC_CONFORMIDAD; 
                         }
                     }
                 }
@@ -275,10 +276,11 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/microformas/mantenimiento-microarchivo")]
-        public ActionResult Mantenimiento_MicroArchivo(long ID_MICROFORMA)
+        public ActionResult Mantenimiento_MicroArchivo(long ID_MICROFORMA, string Accion)
         {
             MicroArchivoModel model = new MicroArchivoModel();
             model.ID_MICROFORMA = ID_MICROFORMA;
+            model.Accion = Accion;
             try
             {
                 model.Lista_TipoMicroArchivo = new List<SelectListItem>();
@@ -306,76 +308,62 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
             try
             {
-                var parametessp = new parameters()
+                enAuditoria getmircoArchivo = await new CssApi().GetApi<enAuditoria>($"archivo-central/microforma/get-microArchivo/{ID_MICROFORMA}");
+                if (getmircoArchivo != null)
                 {
-                    FlgEstado = "1"
-                };
-                enAuditoria postseccion = await new CssApi().PostApi<enAuditoria>($"archivo-central/soporte/listar", parametessp);
-                if (postseccion != null)
-                {
-                    if (!postseccion.EjecucionProceso)
+                    if (!getmircoArchivo.EjecucionProceso)
                     {
-                        if (postseccion.Rechazo)
-                            Log.Guardar(postseccion.ErrorLog);
+                        if (getmircoArchivo.Rechazo)
+                            Log.Guardar(getmircoArchivo.ErrorLog);
                     }
                     else
                     {
-                        if (postseccion.Objeto != null)
+                        if (getmircoArchivo.Objeto != null)
                         {
-                            List<enSoporte> Lista = JsonConvert.DeserializeObject<List<enSoporte>>(postseccion.Objeto.ToString());
-                            if (Lista != null)
-                            {
-                                model.Lista_MICROFORMA_ID_TIPO_SOPORTE = Lista.Select(x => new SelectListItem
-                                {
-                                    Value = x.ID_SOPORTE.ToString(),
-                                    Text = x.DESC_SOPORTE
-                                }).ToList();
-                            }
+                            enMicroArchivo item = JsonConvert.DeserializeObject<enMicroArchivo>(getmircoArchivo.Objeto.ToString());
+                            if (item == null) item = new enMicroArchivo();
+                            model.MA_TIPO_ARCHIVO = item.TIPO_ARCHIVO;
+                            model.MA_RESPONSABLE = item.RESPONSABLE;
+                            model.MA_OBSERVACION = item.OBSERVACION;
+                            model.MA_DIRECCION = item.DIRECCION;
+                            model.MA_FECHA = item.FECHA;
+                            model.MA_HORA = item.HORA;
+                            model.MA_ID_DOC_ALMACENAMIENTO = item.ID_DOC_CONFORMIDAD;
                         }
                     }
                 }
 
-                enAuditoria getmicroforma = await new CssApi().GetApi<enAuditoria>($"archivo-central/microforma/get-microforma/{ID_MICROFORMA}");
-                if (getmicroforma != null)
-                {
-                    if (!getmicroforma.EjecucionProceso)
-                    {
-                        if (getmicroforma.Rechazo)
-                            Log.Guardar(getmicroforma.ErrorLog);
-                    }
-                    else
-                    {
-                        if (getmicroforma.Objeto != null)
-                        {
-                            enMicroforma item = JsonConvert.DeserializeObject<enMicroforma>(getmicroforma.Objeto.ToString());
-                            if (item == null) item = new enMicroforma();
-                            model.MICROFORMA_ID_TIPO_SOPORTE = item.ID_TIPO_SOPORTE;
-                            model.MICROFORMA_CODIGO_FEDATARIO = item.CODIGO_FEDATARIO;
-                            model.MICROFORMA_FECHA = item.FECHA;
-                            model.MICROFORMA_HORA = item.HORA;
-                            model.MICROFORMA_ACTA = item.NRO_ACTA;
-                            model.MICROFORMA_COPIAS = item.NRO_COPIAS;
-                            model.MICROFORMA_OBSERVACION = item.OBSERVACION;
-                            model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
-
-                            model.MA_TIPO_ARCHIVO = item.MA_TIPO_ARCHIVO;
-                            model.MA_DIRECCION = item.MA_DIRECCION;
-                            model.MA_RESPONSABLE = item.MA_RESPONSABLE;
-                            model.MA_FEC_CREACION = item.MA_FEC_CREACION;
-                            model.MA_OBSERVACION = item.MA_OBSERVACION;
-
-                        }
-                    }
-                }
+                //enAuditoria getmicroforma = await new CssApi().GetApi<enAuditoria>($"archivo-central/microforma/get-microforma/{ID_MICROFORMA}");
+                //if (getmicroforma != null)
+                //{
+                //    if (!getmicroforma.EjecucionProceso)
+                //    {
+                //        if (getmicroforma.Rechazo)
+                //            Log.Guardar(getmicroforma.ErrorLog);
+                //    }
+                //    else
+                //    {
+                //        if (getmicroforma.Objeto != null)
+                //        {
+                //            enMicroforma item = JsonConvert.DeserializeObject<enMicroforma>(getmicroforma.Objeto.ToString());
+                //            if (item == null) item = new enMicroforma();
+                //            model.MICROFORMA_DESC_SOPORTE = item.DESC_SOPORTE;
+                //            model.MICROFORMA_CODIGO_FEDATARIO = item.CODIGO_FEDATARIO;
+                //            model.MICROFORMA_FECHA = item.FECHA;
+                //            model.MICROFORMA_HORA = item.HORA;
+                //            model.MICROFORMA_ACTA = item.NRO_ACTA;
+                //            model.MICROFORMA_COPIAS = item.NRO_COPIAS;
+                //            model.MICROFORMA_OBSERVACION = item.OBSERVACION;
+                //            model.MICROFORMA_CODIGO_SOPORTE = item.CODIGO_SOPORTE;
+                //        }
+                //    }
+                //}
             }
             catch (Exception ex)
             {
                 Log.Guardar(ex.Message.ToString());
             }
-            finally
-            {
-                model.Lista_MICROFORMA_ID_TIPO_SOPORTE.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
-            }
+
 
             return View(model);
         }

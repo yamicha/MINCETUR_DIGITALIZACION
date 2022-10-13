@@ -13,8 +13,11 @@
         $('#MICROFORMA_FLG_CONFORME').change(function () {
             if ($(this).val() == 1) {
                 $('#Adv_Conforme').show('slow');
-            } else
+                $('#InputActa').show('slow');
+            } else {
                 $('#Adv_Conforme').hide();
+                $('#InputActa').hide();
+            }
         });
     });
 </script>
@@ -128,7 +131,7 @@
                                         <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
                                         <fieldset style="width: 100%;">
                                             <div class="row">
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-4">
                                                     <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Conforme ?</label>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -136,11 +139,29 @@
                                                     @Html.ValidationMessageFor(model => model.MICROFORMA_FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
                                                 </div>
                                             </div>
+                                            <div class="row" id="InputActa" style="display:none;">
+                                                <div class="col-sm-4">
+                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Conformidad: </label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group">
+                                                        <div style=" height: 30px; margin-bottom: 5px;" class="form-control file-caption  kv-fileinput-caption">
+                                                            <div class="file-caption-name" id="filenameConformidad"></div>
+                                                        </div>
+                                                        <div class="input-group-btn">
+                                                            <label for="fileActaConformidad" class="btn btn-primary btn-file">
+                                                                <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
+                                                                <input id="fileActaConformidad" type="file" class="file" onchange="ProcesarArchivo(this,'filenameConformidad')">
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-4">
                                                     <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-6">
                                                     @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
                                                 </div>
                                                 <div class="col-sm-12" id="Adv_Conforme" style="display:none;">
@@ -152,7 +173,6 @@
                                                         </p>
                                                     </blockquote>
                                                 </div>
-
                                             </div>
                                         </fieldset>
                                     </div>

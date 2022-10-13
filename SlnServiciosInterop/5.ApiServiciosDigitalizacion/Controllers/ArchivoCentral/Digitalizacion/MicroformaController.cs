@@ -58,7 +58,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             id = item.ID_MICROFORMA.ToString(),
                             cell = new string[] {
                             item.ID_MICROFORMA.ToString(),
-                            item.ID_MICROFORMA.ToString(),
+                            item.NRO_VOLUMEN,
                             item.CODIGO_SOPORTE, 
                             item.DESC_SOPORTE, 
                             null,
@@ -95,6 +95,31 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         ID_ESTADO = entidad.IdEstado
                     }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpGet]
+        [Route("get-microArchivo/{IdMicroforma:long}")]
+        public IActionResult MicroArchivo_ListarUno(long IdMicroforma)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.MicroArchivo_ListarUno(IdMicroforma, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);
@@ -360,8 +385,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpPost]
-        [Route("micro-archivo-estado")]
-        public IActionResult MicroArchivo_Estado([FromBody] MicroArchivoModels entidad)
+        [Route("micro-archivo-editar")]
+        public IActionResult MicroArchivo_Editar([FromBody] MicroArchivoModels entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -372,7 +397,10 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         foreach (MicroArchivoModels item in entidad.ListaIdsMicroforma)
                         {
-                            repositorio.Microforma_MicroArchivoEstado(item, ref auditoria);
+                            entidad.IdMicroforma = item.IdMicroforma; 
+                            repositorio.Microforma_MicroArchivo(entidad, ref auditoria);
+                            if (auditoria.Rechazo)
+                                break; 
                         }
                         if (!auditoria.EjecucionProceso)
                         {

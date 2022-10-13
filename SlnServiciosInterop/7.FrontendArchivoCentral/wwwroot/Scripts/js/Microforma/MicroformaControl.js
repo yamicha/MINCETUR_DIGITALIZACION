@@ -37,15 +37,23 @@ function MicroformaCerrar() {
     jQuery("#myModal_Documento_Grabar").html('');
 }
 
-function MicroformaEvaluar() {
+async function MicroformaEvaluar() {
     if ($('#FrmMicroEvaluar').valid()) {
-        jConfirm(" ¿ Desea grabar esta evaluación de microforma ? ", "Atención", function (r) {
+        jConfirm(" ¿ Desea grabar esta evaluación de microforma ? ", "Atención", async function (r) {
             if (r) {
+
+                var IdDocConformidad = 0;
+                if ($('#fileActaConformidad').prop('files')[0] != undefined) {
+                    var FileAlmacenamiento = new FormData();
+                    FileAlmacenamiento.append('fileArchivo', $('#fileActaConformidad').prop('files')[0]);
+                    IdDocConformidad = await UploadFileService(FileAlmacenamiento);
+                }
                 var item = {
                     IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
                     FlgConforme: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
                     Observacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
                     UsuCreacion: $("#inputHddCod_usuario").val(),
+                    IdDocConformidad: parseInt(IdDocConformidad),
                 }
                 var url = "archivo-central/microforma/evaluar";
                 API.Fetch("POST", url, item, function (auditoria) {

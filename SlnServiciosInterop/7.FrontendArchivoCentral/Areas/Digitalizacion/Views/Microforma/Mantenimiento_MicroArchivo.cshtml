@@ -9,7 +9,12 @@
     $(document).ready(function () {
         $('#MicroformaBtnMicroArchivo').click(function (e) {
             if ($("#FrmMicroArchivo").valid()) {
-                Microforma_MicroArchivoGrabar();
+                if ($('#HDF_Accion').val() == "M") {
+                    MicroArchivo_Editar();
+                }
+                else {
+                    Microforma_MicroArchivoGrabar();
+                }
             }
         });
     });
@@ -31,7 +36,7 @@
             <div class="modal-header" style="cursor: move; background-color: #ca2626">
                 <div class="col-sm-14">
                     <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
-                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Micro Archivo </h4>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar MicroArchivo </h4>
                 </div>
             </div>
             <div class="modal-body">
@@ -62,7 +67,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha: </label>
                                         </div>
                                         <div class="col-sm-6">
                                             @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
@@ -71,10 +76,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;",@placeholder = "HH:mm:ss" })
+                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @placeholder = "HH:mm:ss" })
                                             @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -133,5 +138,6 @@
         </div>
     </div>
     @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
+    @Html.Hidden("HDF_Accion", Model.Accion)
 }
 
