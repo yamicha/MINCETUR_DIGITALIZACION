@@ -18,6 +18,10 @@ var MicroModulo = {
 var _MICROMODULO = 0;
 function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab,_select = false) {
     _MICROMODULO = _tab;
+    var EstadoHidden = false; 
+    if (_MICROMODULO == 7) {
+        EstadoHidden = true; 
+    }
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
@@ -29,7 +33,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 2
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 250, hidden: true }, // 3
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 4
-        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: false }, // 5
+        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 5
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }, // 6
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 7
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true } // 8
@@ -52,7 +56,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         GridLocal: false, multiselect: _select, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
         estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules: true,
         gridCompleteFunc: function () {
-            MicroformaColorRevision(_Grilla);
+            //MicroformaColorRevision(_Grilla);
         }
     };
     SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
@@ -84,11 +88,12 @@ function GetRulesMicroforma() {
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
     } if (_MICROMODULO == MicroModulo.RevisionPend) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
-        rules.push({ field: '', data: `((FLG_CONFORME = '1') OR (FLG_CONFORME = '0') OR (FLG_CONFORME = '-'))`, op: " " });
-    } if (_MICROMODULO == MicroModulo.RevisionFin) { // control almacen
-        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
-        rules.push({ field: 'FLG_CONFORME', data: `'1'`, op: "=" });
+        rules.push({ field: '', data: `(FLG_CONFORME ='0' OR FLG_CONFORME = '-')`, op: "" });
     }
+    //} if (_MICROMODULO == MicroModulo.RevisionFin) { // control almacen
+    //    rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
+    //    rules.push({ field: 'FLG_ACCION', data: `'1'`, op: "=" });
+    //}
     return rules;
 }
 

@@ -2,10 +2,11 @@
 @{
     Layout = null;
 }
-<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet"/>
-<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet"/>
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script>
     $(function () {
+        $('#MICROFORMA_TIPO_PRUEBA').fastselect();
         $('#Microforma_Revision_Evaluar').click(function () {
             if ($('#FrmEvaluarRevision').valid()) {
                 Revision_Grabar();
@@ -13,9 +14,9 @@
         });
         $('#MICROFORMA_FLG_CONFORME').change(function () {
             if ($(this).val() == 1) {
-                $('#Adv_Conforme').show('slow');
+                $('#InputActa').show('slow');
             } else
-                $('#Adv_Conforme').hide();
+                $('#InputActa').hide();
         });
     });
 </script>
@@ -32,46 +33,61 @@
             <fieldset style="width: 100%;">
                 <div class="row">
                     <div class="col-sm-12">
-                            @*<p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>*@
-                            <fieldset style="width: 100%;">              
-                                @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmEvaluarRevision", @class = "form-horizontal" }))
-                                {
-                                    @Html.ValidationSummary(true)
+                        @*<p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>*@
+                        <fieldset style="width: 100%;">
+                            @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmEvaluarRevision", @class = "form-horizontal" }))
+                            {
+                                @Html.ValidationSummary(true)
 
-                                    <div class="col-sm-12 inline-container-Group">
-                                        <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
-                                        <fieldset style="width: 100%;">
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Conforme ?</label>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    @Html.DropDownListFor(model => model.MICROFORMA_FLG_CONFORME, Model.Lista_MICROFORMA_ID_CONFORME, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.MICROFORMA_FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
+                                <div class="col-sm-12 inline-container-Group">
+                                    <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
+                                    <fieldset style="width: 100%;">
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-12">
+                                                <label for="form-field-1">Conforme ?: </label>
+                                                @Html.DropDownListFor(model => model.MICROFORMA_FLG_CONFORME, Model.Lista_MICROFORMA_ID_CONFORME, new { @class = "form-control", disabled = "true" })
+                                                @Html.ValidationMessageFor(model => model.MICROFORMA_FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+
+                                            <div class="form-group col-sm-12">
+                                                <label for="form-field-1">Tipo de Revisiónes: </label>
+                                                @Html.DropDownListFor(model => model.MICROFORMA_TIPO_PRUEBA, Model.Lista_Tipo_Pruebas, new
+                                                              {
+                                                                  @class = "form-control",
+                                                                  @multiple = "true",
+                                                                  @placeholder ="Seleccione Tipos de Prueba"
+                                                              })
+                                                @Html.ValidationMessageFor(model => model.MICROFORMA_TIPO_PRUEBA, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row" >
+                                            <div class="form-group col-sm-12" id="InputActa">
+                                                <label for="form-field-1">Acta Revisión: </label>
+                                                <div class="input-group">
+                                                    <div style=" height: 30px; margin-bottom: 5px;" class="form-control file-caption  kv-fileinput-caption">
+                                                        <div class="file-caption-name" id="filenameRevision"></div>
+                                                    </div>
+                                                    <div class="input-group-btn">
+                                                        <label for="fileActaRevision" class="btn btn-primary btn-file">
+                                                            <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
+                                                            <input id="fileActaRevision" type="file" class="file" onchange="ProcesarArchivo(this,'filenameRevision')">
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                    @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
-                                                </div>
-                                                <div class="col-sm-12" id="Adv_Conforme" style="display:none;">
-                                                    <blockquote style="font-size:15px;">
-                                                        <p>
-                                                            <strong>Al seleccionar conforme</strong> usted acepta, que la
-                                                            funcionalidad de los medios de soporte, Identificación y recuperación de imágenes,
-                                                            Integridad, Legibilidad de Imagen/Impresión son correctos.
-                                                        </p>
-                                                    </blockquote>
-                                                </div>
 
+                                            <div class="form-group col-sm-12">
+                                                <label for="form-field-1">Observación: </label>
+                                                @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, string.Empty, new { @class = "cssMessageError" })
                                             </div>
-                                        </fieldset>
-                                    </div>
-                                }
-                            </fieldset>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                            }
+                        </fieldset>
                     </div>
                 </div>
             </fieldset>

@@ -34,15 +34,21 @@
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">
         <li class="active">
-            <a data-toggle="tab" href="#panel_tab_1" id="aTabRevisionPend">
+            <a data-toggle="tab" href="#panel_tab_1" id="aTabMicroformas">
                 <i class="fa fa-home"></i>
-                Revisión Pendientes
+                Microformas Almacenadas
             </a>
         </li>
         <li class="">
-            <a data-toggle="tab" href="#panel_tab_2" id="aTabRevisionFin">
+            <a data-toggle="tab" href="#panel_tab_2" id="aTabRevisionObservadas">
                 <i class="clip-checkmark"></i>
-                Revisión Finalizadas
+                Revisiónes Observadas
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#panel_tab_3" id="aTabRevisionEliminadas">
+                <i class="clip-close"></i>
+                Microformas Anuladas
             </a>
         </li>
     </ul>
@@ -50,7 +56,7 @@
     <div id="panel_tab_1" class="tab-pane active">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Listado de microformas revisados con observaciones y conformes.</p>
+                <p>Listado de microformas.</p>
             </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
@@ -76,7 +82,7 @@
     <div id="panel_tab_2" class="tab-pane">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Listado de microformas revisados con estado conforme.</p>
+                <p>Listado de microformas revisados eliminados.</p>
             </div>
             @*<div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
