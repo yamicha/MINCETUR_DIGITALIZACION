@@ -6,11 +6,11 @@ var MicroPendiente_Lote_grilla = 'MicroPendiente_Lote_grilla';
 var MicroPendiente_Lote_barra = 'MicroPendiente_Lote_barra';
 
 // tab 2
-var MicroFin_grilla = 'MicroFin_grilla';
-var MicroFin_barra = 'MicroFin_barra';
+var MicroObs_grilla = 'MicroObs_grilla';
+var MicroObs_barra = 'MicroObs_barra';
 
-var MicroFin_Lote_grilla = 'MicroFin_Lote_grilla';
-var MicroFin_Lote_barra = 'MicroFin_Lote_barra';
+var MicroObs_Lote_grilla = 'MicroObs_Lote_grilla';
+var MicroObs_Lote_barra = 'MicroObs_Lote_barra';
 var MicroForma_Lista = new Array(); 
 
 // tab 3 
@@ -26,9 +26,9 @@ $(document).ready(function () {
         _ID_LOTE = 0;
         RevisionPendienteBuscar(); 
     });
-    jQuery('#aTabRevisionFin').click(function (e) {
+    jQuery('#aTabRevisionObservadas').click(function (e) {
         _ID_LOTE = 0;
-        RevisionFinalizadoBuscar(); 
+        RevisionObservadoBuscar(); 
     });
     jQuery('#aTabRevisionAnuladas').click(function (e) {
         _ID_LOTE = 0;
@@ -56,10 +56,10 @@ function RevisionPendienteBuscar() {
         MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend, true);
     Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra);
 }
-function RevisionFinalizadoBuscar() {
-    Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra,
-        MicroFin_grilla, MicroFin_barra, MicroModulo.RevisionFin, true);
-    Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
+function RevisionObservadoBuscar() {
+    Microforma_ConfigurarGrilla(MicroObs_Lote_grilla, MicroObs_Lote_barra,
+        MicroObs_grilla, MicroObs_barra, MicroModulo.RevisionObs, true);
+    Documento_Detalle_buscar(MicroObs_grilla, MicroObs_barra);
 }
 function RevisionAnuladasBuscar() {
     Microforma_ConfigurarGrilla(MicroAnuladas_Lote_grilla, MicroAnuladas_Lote_barra,

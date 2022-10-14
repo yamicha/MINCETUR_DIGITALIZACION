@@ -20,7 +20,7 @@ var _MICROMODULO = 0;
 function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab,_select = false) {
     _MICROMODULO = _tab;
     var EstadoHidden = false; 
-    if (_MICROMODULO > MicroModulo.RevisionPend) {
+    if (_MICROMODULO >= MicroModulo.RevisionPend) {
         EstadoHidden = true; 
     }
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
@@ -90,6 +90,10 @@ function GetRulesMicroforma() {
     } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
+    }
+    if (_MICROMODULO == MicroModulo.RevisionObs) { // revision Obs 
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
+        rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='0')`, op: "" });
     }
     if (_MICROMODULO == MicroModulo.RevisionAnulada) { // revision anulada 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
