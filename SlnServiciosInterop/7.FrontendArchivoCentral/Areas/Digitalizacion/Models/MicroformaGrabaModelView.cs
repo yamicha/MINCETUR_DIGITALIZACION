@@ -51,7 +51,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MICROFORMA_FLG_CONFORME { get; set; }
         public List<SelectListItem> Lista_MICROFORMA_ID_CONFORME = new List<SelectListItem>();
 
-        [Required(ErrorMessage = "[Tipo Revision] Obligatorio")]
+        [Required(ErrorMessage = "[Tipo Pruebas] Obligatorio")]
         public string MICROFORMA_TIPO_PRUEBA { get; set; }
         public List<SelectListItem> Lista_Tipo_Pruebas = new List<SelectListItem>();
 

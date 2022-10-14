@@ -1,4 +1,4 @@
-﻿@model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.MicroformaGrabaModelView
+﻿@model Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models.RevisionPeriodicaModel
 @{
     Layout = null;
 }
@@ -6,22 +6,22 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script>
     $(function () {
-        $('#MICROFORMA_TIPO_PRUEBA').fastselect();
+        $('#TIPO_PRUEBA').fastselect();
         $('#Microforma_Revision_Evaluar').click(function () {
             if ($('#FrmEvaluarRevision').valid()) {
                 Revision_Grabar();
             }
         });
-        $('#MICROFORMA_FLG_CONFORME').change(function () {
-            if ($(this).val() == 1) {
-                $('#InputActa').show('slow');
+        $('#FLG_CONFORME').change(function () {
+            if ($(this).val() == 0) {
+                $('#InputAccion').show('slow');
             } else
-                $('#InputActa').hide();
+                $('#InputAccion').hide();
         });
     });
 </script>
 
-<div class="modal-dialogMicroforma">
+<div class="modal-dialogMicroforma" >
     <div class="modal-content" style="width:100%;">
         <div class="modal-header" style="cursor: move; background-color: #ca2626">
             <div class="col-sm-14">
@@ -45,23 +45,38 @@
                                         <div class="form-row">
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Conforme ?: </label>
-                                                @Html.DropDownListFor(model => model.MICROFORMA_FLG_CONFORME, Model.Lista_MICROFORMA_ID_CONFORME, new { @class = "form-control", disabled = "true" })
-                                                @Html.ValidationMessageFor(model => model.MICROFORMA_FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
+                                                @Html.DropDownListFor(model => model.FLG_CONFORME, Model.Lista_Conforme, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+                                            <div class="form-group col-sm-12" id="InputAccion" style="display:none;">
+                                                <label for="form-field-1">Accion: </label>
+                                                @Html.DropDownListFor(model => model.FLG_ACCION, Model.Lista_Accion, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.FLG_ACCION, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-12">
+                                                <label for="form-field-1">Tipo de Revisiónes: </label>
+                                                @Html.DropDownListFor(model => model.TIPO_PRUEBA, Model.Lista_TipoPrueba, new
+                                                {
+                                                    @class = "form-control",
+                                                    @multiple = "true",
+                                                    @placeholder = "Seleccione Tipos de Prueba"
+                                                })
+                                                @Html.ValidationMessageFor(model => model.TIPO_PRUEBA, string.Empty, new { @class = "cssMessageError" })
                                             </div>
 
                                             <div class="form-group col-sm-12">
-                                                <label for="form-field-1">Tipo de Revisiónes: </label>
-                                                @Html.DropDownListFor(model => model.MICROFORMA_TIPO_PRUEBA, Model.Lista_Tipo_Pruebas, new
-                                                              {
-                                                                  @class = "form-control",
-                                                                  @multiple = "true",
-                                                                  @placeholder ="Seleccione Tipos de Prueba"
-                                                              })
-                                                @Html.ValidationMessageFor(model => model.MICROFORMA_TIPO_PRUEBA, string.Empty, new { @class = "cssMessageError" })
+                                                <label for="form-field-1">Responsable: </label>
+                                                @Html.DropDownListFor(model => model.ID_USUARIO, Model.Lista_Usuarios, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.ID_USUARIO, string.Empty, new { @class = "cssMessageError" })
                                             </div>
+
                                         </div>
 
-                                        <div class="form-row" >
+                                        <div class="form-row">
                                             <div class="form-group col-sm-12" id="InputActa">
                                                 <label for="form-field-1">Acta Revisión: </label>
                                                 <div class="input-group">
@@ -71,16 +86,17 @@
                                                     <div class="input-group-btn">
                                                         <label for="fileActaRevision" class="btn btn-primary btn-file">
                                                             <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
-                                                            <input id="fileActaRevision" type="file" class="file" onchange="ProcesarArchivo(this,'filenameRevision')">
+                                                            <input id="fileActaRevision"  type="file" class="file" onchange="ProcesarArchivo(this,'filenameRevision')">
                                                         </label>
                                                     </div>
                                                 </div>
+                                                <span class="field-validation-valid cssMessageError" data-valmsg-for="fileActaRevision" data-valmsg-replace="true">
+                                                </span>
                                             </div>
-
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Observación: </label>
-                                                @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
-                                                @Html.ValidationMessageFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, string.Empty, new { @class = "cssMessageError" })
+                                                @Html.TextAreaFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
+                                                @Html.ValidationMessageFor(model => model.OBSERVACION, string.Empty, new { @class = "cssMessageError" })
                                             </div>
                                         </div>
 

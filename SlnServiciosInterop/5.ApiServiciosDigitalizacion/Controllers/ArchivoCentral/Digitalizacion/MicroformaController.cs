@@ -428,7 +428,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 
         [HttpPost]
         [Route("revision-periodica")]
-        public IActionResult Microforma_RevisionPeriodica([FromBody] MicroEvaluarModel entidad)
+        public IActionResult Microforma_RevisionPeriodica([FromBody] RevsionPeriodicaModel entidad)
         {
             enAuditoria auditoria = new enAuditoria();
             try

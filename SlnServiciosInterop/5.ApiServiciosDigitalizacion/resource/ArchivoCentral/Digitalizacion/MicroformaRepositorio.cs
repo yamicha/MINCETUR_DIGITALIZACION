@@ -76,7 +76,7 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Microforma_MicroArchivoEstado(entidad, ref auditoria);
         }
-        public void Microforma_RevisionPeriodica(MicroEvaluarModel entidad, ref enAuditoria auditoria)
+        public void Microforma_RevisionPeriodica(RevsionPeriodicaModel entidad, ref enAuditoria auditoria)
         {
             _rule.Microforma_RevisionPeriodica(entidad, ref auditoria);
         }

@@ -1,0 +1,2 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion.MicroformaController.Microforma_RevisionPeriodica(MicroEvaluarModel entidad) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Digitalizacion\MicroformaController.cs:line 436

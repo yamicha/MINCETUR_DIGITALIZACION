@@ -86,9 +86,9 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
-    } if (_MICROMODULO == MicroModulo.RevisionPend) { // control almacen
+    } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
-        rules.push({ field: '', data: `(FLG_CONFORME ='0' OR FLG_CONFORME = '-')`, op: "" });
+        rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
     }
     //} if (_MICROMODULO == MicroModulo.RevisionFin) { // control almacen
     //    rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });

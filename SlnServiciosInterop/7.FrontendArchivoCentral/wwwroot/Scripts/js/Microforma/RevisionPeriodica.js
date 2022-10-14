@@ -58,7 +58,8 @@ function Revision_MostrarEvaluar() {
         if (request.status != 200) return;
     });
 }
-function Revision_Grabar() {
+
+async function Revision_Grabar() {
     MicroForma_Lista.pop(); 
     var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
     if (_CONFORME == "0") {
@@ -66,7 +67,7 @@ function Revision_Grabar() {
     } else {
         pregunta = "dar un 'CONFORME'";
     }
-    jConfirm(" ¿ Desea " + pregunta + " a los registros seleccionados  ? ", "Atención", function (r) {
+    jConfirm(" ¿ Desea " + pregunta + " a los registros seleccionados  ? ", "Atención", async function (r) {
         if (r) {
             var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
             for (i_ = 0; i_ < rowKey.length; i_++) {
@@ -76,12 +77,31 @@ function Revision_Grabar() {
                 }
                 MicroForma_Lista.push(_item);
             }
+            var IdDocRevision = 0;
+            var TipoPruebaText = ""; 
+            //if ($('#fileActaRevision').prop('files')[0] != undefined) {
+            //    var formdataFile = new FormData();
+            //    formdataFile.append('fileArchivo', $('#fileActaRevision').prop('files')[0]);
+            //    IdDocRevision = await UploadFileService(formdataFile);
+            //}
+            $("#TIPO_PRUEBA option:selected").each(function () {
+                var $this = $(this);
+                if ($this.length) {
+                    TipoPruebaText += `[${$this.text()}] `;
+                }
+            });
             var item = {
                 ListaIdsMicroforma: MicroForma_Lista,
-                FlgConforme: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
-                Observacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
+                FlgConforme: parseInt($("#FLG_CONFORME").val()),
+                FlgAccion: parseInt($("#FLG_ACCION").val()), 
+                //TipoPrueba: $("#TIPO_PRUEBA").val().join(','),
+                TipoPrueba: TipoPruebaText, 
+                IdUsuario: parseInt($("#ID_USUARIO").val()), 
+                IdDocRevision: parseInt(IdDocRevision), 
+                Observacion: $("#OBSERVACION").val(),
                 UsuCreacion: $("#inputHddCod_usuario").val(),
             }
+            debugger; 
             var url = "archivo-central/microforma/revision-periodica";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {

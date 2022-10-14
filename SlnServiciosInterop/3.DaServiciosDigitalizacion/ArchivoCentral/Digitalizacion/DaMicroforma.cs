@@ -716,7 +716,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             }
         }
 
-        public void Microforma_RevisionPeriodica(MicroEvaluarModel entidad, ref enAuditoria auditoria)
+        public void Microforma_RevisionPeriodica(RevsionPeriodicaModel entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -725,9 +725,13 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROREVISION_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdEstado;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdEstado;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_CONFORME", OracleDbType.Varchar2)).Value = entidad.FlgConforme;
+                cmd.Parameters.Add(new OracleParameter("XIN_FLG_ACCION", OracleDbType.Varchar2)).Value = entidad.FlgAccion;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = entidad.FlgConforme;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_REVISION", OracleDbType.Int64)).Value = entidad.IdDocRevision;
+                cmd.Parameters.Add(new OracleParameter("XIN_TIPO_PRUEBA", OracleDbType.Varchar2)).Value = entidad.TipoPrueba;
                 cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

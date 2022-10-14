@@ -7,13 +7,13 @@ using System.Collections.Generic;
 
 namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
 {
-    public class AreaRepositorio : IDisposable
+    public class UsuarioRepositorio : IDisposable
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
         private coConexionDb _objCoConexionDb;
-        private neArea _rule = null;
+        private neUsuario _rule = null;
 
-        public AreaRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
+        public UsuarioRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
         {
             this._ConfigurationManager = ConfigurationManager;
             this._objCoConexionDb = new coConexionDb()
@@ -23,22 +23,13 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
                 PassCnx = this._ConfigurationManager.Value.AppSettings.PassCnx,
                 TNS_ADMIN = this._ConfigurationManager.Value.ConnectionStrings.Tns_Admin
             };
-            _rule = new neArea(_objCoConexionDb);
+            _rule = new neUsuario(_objCoConexionDb);
         }
 
-        public List<enArea> Area_Listar(enArea entidad, ref enAuditoria auditoria)
+        public List<enUsuario> Usuario_Listar(ref enAuditoria auditoria)
         {
-            try
-            {
-                return _rule.Area_Listar(entidad, ref auditoria);
-            }
-            catch (Exception ex)
-            {
-                auditoria.Error(ex);
-                return new List<enArea>();
-            }
+             return _rule.Usuario_Listar(ref auditoria);
         }
-      
         public void Dispose()
         {
             GC.SuppressFinalize(this);
