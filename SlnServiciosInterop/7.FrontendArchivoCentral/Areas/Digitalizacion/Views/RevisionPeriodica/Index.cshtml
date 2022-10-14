@@ -46,7 +46,7 @@
             </a>
         </li>
         <li class="">
-            <a data-toggle="tab" href="#panel_tab_3" id="aTabRevisionEliminadas">
+            <a data-toggle="tab" href="#panel_tab_3" id="aTabRevisionAnuladas">
                 <i class="clip-close"></i>
                 Microformas Anuladas
             </a>
@@ -60,7 +60,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
-                    <button id="Microforma_BtnRevision" class="btn btn-blue" type="button" data-toggle='modal' ><i class="clip-paste" ></i>&nbsp; Revisar Seleccionados</button>
+                    <button id="Microforma_BtnRevision" class="btn btn-blue" type="button" data-toggle='modal'><i class="clip-paste"></i>&nbsp; Revisar Seleccionados</button>
                 </div>
             </div>
             <div class="row">
@@ -84,11 +84,6 @@
             <div class="alert alert-info">
                 <p>Listado de microformas revisados eliminados.</p>
             </div>
-            @*<div class="row">
-                <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
-                    <button id="Microforma_BtnMicroArchivo" class="btn btn-blue" type="button" data-toggle='modal'><i class="clip-spinner-6"></i>&nbsp; Volver a Grabar</button>
-                </div>
-            </div>*@
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="Microforma_Lote_jqGrid">
@@ -101,6 +96,27 @@
                         <table id="MicroFin_grilla"></table>
                     </div>
                     <div id="MicroFin_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="panel_tab_3" class="tab-pane">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de microformas revisados eliminados.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="padding-right:0px">
+                    <div class="Microforma_Lote_jqGrid">
+                        <table id="MicroAnuladas_Lote_grilla"></table>
+                    </div>
+                    <div id="MicroAnuladas_Lote_barra"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="MicroFin_jqGrid">
+                        <table id="MicroAnuladas_grilla"></table>
+                    </div>
+                    <div id="MicroAnuladas_barra"></div>
                 </div>
             </div>
         </div>

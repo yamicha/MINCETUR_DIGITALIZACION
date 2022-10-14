@@ -13,6 +13,13 @@ var MicroFin_Lote_grilla = 'MicroFin_Lote_grilla';
 var MicroFin_Lote_barra = 'MicroFin_Lote_barra';
 var MicroForma_Lista = new Array(); 
 
+// tab 3 
+var MicroAnuladas_grilla = 'MicroAnuladas_grilla';
+var MicroAnuladas_barra = 'MicroAnuladas_barra';
+
+var MicroAnuladas_Lote_grilla = 'MicroAnuladas_Lote_grilla';
+var MicroAnuladas_Lote_barra = 'MicroAnuladas_Lote_barra';
+
 $(document).ready(function () {
     RevisionPendienteBuscar(); 
     jQuery('#aTabRevisionPend').click(function (e) {
@@ -22,6 +29,10 @@ $(document).ready(function () {
     jQuery('#aTabRevisionFin').click(function (e) {
         _ID_LOTE = 0;
         RevisionFinalizadoBuscar(); 
+    });
+    jQuery('#aTabRevisionAnuladas').click(function (e) {
+        _ID_LOTE = 0;
+        RevisionAnuladasBuscar();
     });
 
     $('#Microforma_BtnRevision').click(function () {
@@ -50,6 +61,12 @@ function RevisionFinalizadoBuscar() {
         MicroFin_grilla, MicroFin_barra, MicroModulo.RevisionFin, true);
     Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
 }
+function RevisionAnuladasBuscar() {
+    Microforma_ConfigurarGrilla(MicroAnuladas_Lote_grilla, MicroAnuladas_Lote_barra,
+        MicroAnuladas_grilla, MicroAnuladas_barra, MicroModulo.RevisionAnulada, false);
+    Documento_Detalle_buscar(MicroAnuladas_grilla, MicroAnuladas_barra);
+}
+
 function Revision_MostrarEvaluar() {
     jQuery("#myModal_Documento_Grabar").html('');
     jQuery("#myModal_Documento_Grabar").modal('show');
@@ -125,7 +142,7 @@ async function Revision_Grabar() {
     });
 }
 
-//********************************************************** tab finalizados *********************************************************/
+//********************************************************** tab OBSERVADOS *********************************************************/
 
 function Microforma_VolverGrabarMicroArchivo() {
     jConfirm(" ¿ Desea enviar a pendientes de grabación de micro archivos todos los registros seleccionados  ? ", "Atención", function (r) {
@@ -164,3 +181,4 @@ function Microforma_VolverGrabarMicroArchivo() {
 }
 
 
+//********************************************************** tab ANULADOS *********************************************************/

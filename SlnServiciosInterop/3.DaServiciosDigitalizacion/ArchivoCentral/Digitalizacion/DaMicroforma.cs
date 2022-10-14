@@ -729,7 +729,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdEstado;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_CONFORME", OracleDbType.Varchar2)).Value = entidad.FlgConforme;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_ACCION", OracleDbType.Varchar2)).Value = entidad.FlgAccion;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = entidad.FlgConforme;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = entidad.IdUsuario;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_REVISION", OracleDbType.Int64)).Value = entidad.IdDocRevision;
                 cmd.Parameters.Add(new OracleParameter("XIN_TIPO_PRUEBA", OracleDbType.Varchar2)).Value = entidad.TipoPrueba;
                 cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
