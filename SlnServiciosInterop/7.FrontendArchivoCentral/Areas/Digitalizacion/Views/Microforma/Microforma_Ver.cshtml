@@ -93,16 +93,18 @@
             <div class="modal-header" style="cursor: move; background-color: #ca2626">
                 <div class="col-sm-14">
                     <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
-                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Detalle Microforma </h4>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Microforma </h4>
                 </div>
             </div>
             <div class="modal-body">
                 <fieldset style="width: 100%;">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-sm-12 inline-container-Group">
-                                @*<p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>*@
-                                <fieldset style="width: 100%;">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="clip-vynil"></i>Detalle  Microforma
+                                </div>
+                                <div class="panel-body">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro Volumen:</label>
@@ -138,13 +140,14 @@
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo de soporte: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.DropDownListFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, Model.Lista_MICROFORMA_ID_TIPO_SOPORTE, new { @class = "form-control", disabled = "true" })
-                                            @Html.ValidationMessageFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
+                                            @Html.TextBoxFor(model => model.MICROFORMA_DESC_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MICROFORMA_DESC_SOPORTE, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -179,7 +182,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)", disabled = "true" })
+                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -206,8 +209,84 @@
                                             <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CONFORMIDAD)"><i class="clip-download"></i>&nbsp;Descargar Acta Conformidad</a>
                                         </div>
                                     </div>
-                                </fieldset>
+                                </div>
                             </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="clip-paste"></i> Detalle MicroArchivo
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo MicroArchivo:</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.DropDownListFor(model => model.MA_TIPO_ARCHIVO, Model.Lista_TipoMicroArchivo, new { @class = "form-control", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_TIPO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_FECHA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Almacenamiento </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.MA_ID_DOC_ALMACENAMIENTO)"><i class="clip-download"></i>&nbsp;Descargar Acta Conformidad</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </fieldset>

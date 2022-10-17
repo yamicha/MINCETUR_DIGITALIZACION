@@ -58,15 +58,18 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             id = item.ID_MICROFORMA.ToString(),
                             cell = new string[] {
                             item.ID_MICROFORMA.ToString(),
+                            null,
                             item.NRO_VOLUMEN,
-                            item.CODIGO_SOPORTE, 
-                            item.DESC_SOPORTE, 
+                            item.NRO_REVISIONES.ToString(),
+                            item.CODIGO_SOPORTE,
+                            item.DESC_SOPORTE,
                             null,
                             item.DESC_ESTADO,
-                            item.STR_FEC_CREACION, 
+                            item.STR_FEC_CREACION,
                             item.ID_ESTADO.ToString(),
-                            item.FLG_CONFORME, 
-                      }
+                            item.FLG_CONFORME
+
+                                }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);
                     }
@@ -111,15 +114,40 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpGet]
-        [Route("get-microArchivo/{IdMicroforma:long}")]
-        public IActionResult MicroArchivo_ListarUno(long IdMicroforma)
+        [Route("get-microArchivo/{IdMicroforma:long}/{FlgEstado:int}")]
+        public IActionResult MicroArchivo_Listar(long IdMicroforma, int FlgEstado)
         {
             enAuditoria auditoria = new enAuditoria();
             try
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.MicroArchivo_ListarUno(IdMicroforma, ref auditoria);
+                    auditoria.Objeto = repositorio.MicroArchivo_Listar(IdMicroforma, FlgEstado, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpGet]
+        [Route("get-revision/{IdMicroforma:long}")]
+        public IActionResult Revision_Listar(long IdMicroforma)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Revision_Listar(IdMicroforma, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);
@@ -169,9 +197,10 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Microforma_ListarProcesos(new enMicroformaProceso { 
-                     ID_MICROFORMA = entidad.IdMicroforma, 
-                     ID_ESTADO_MICROFORMA = entidad.IdEstado
+                    auditoria.Objeto = repositorio.Microforma_ListarProcesos(new enMicroformaProceso
+                    {
+                        ID_MICROFORMA = entidad.IdMicroforma,
+                        ID_ESTADO_MICROFORMA = entidad.IdEstado
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -237,19 +266,19 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
-                        repositorio.Microforma_Reprocesar(entidad, ref auditoria);
-                        if (!auditoria.EjecucionProceso)
-                        {
-                            string CodigoLog = Log.Guardar(auditoria.ErrorLog);
-                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
-                        }
+                    repositorio.Microforma_Reprocesar(entidad, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
                         else
-                        {
-                            if (!auditoria.Rechazo)
-                                auditoria.Code = (int)HttpStatusCode.Created;
-                            else
-                                auditoria.Code = (int)HttpStatusCode.OK;
-                        }
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
                 }
             }
             catch (Exception ex)
@@ -262,7 +291,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
         }
 
         [HttpPost]
-        [Route("lote-microforma")]      
+        [Route("lote-microforma")]
         public IActionResult Microforma_ListarLotes([FromBody] parameters param)
         {
             enAuditoria auditoria = new enAuditoria();
@@ -397,10 +426,10 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         foreach (MicroArchivoModels item in entidad.ListaIdsMicroforma)
                         {
-                            entidad.IdMicroforma = item.IdMicroforma; 
+                            entidad.IdMicroforma = item.IdMicroforma;
                             repositorio.Microforma_MicroArchivo(entidad, ref auditoria);
                             if (auditoria.Rechazo)
-                                break; 
+                                break;
                         }
                         if (!auditoria.EjecucionProceso)
                         {
@@ -446,7 +475,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         foreach (MicroEvaluarModel item in entidad.ListaIdsMicroforma)
                         {
-                            entidad.IdMicroforma = item.IdMicroforma; 
+                            entidad.IdMicroforma = item.IdMicroforma;
                             repositorio.Microforma_RevisionPeriodica(entidad, ref auditoria);
                         }
                         if (!auditoria.EjecucionProceso)

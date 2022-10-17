@@ -30,6 +30,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [Required(ErrorMessage = "[Observación] es obligatorio")]
         public string OBSERVACION { get; set; }
 
+        [Required(ErrorMessage = "[Fecha Revision] es obligatorio")]
+        public string FECHA { get; set; }
+
         public string Accion { get; set; }
 
     }

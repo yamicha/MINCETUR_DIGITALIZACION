@@ -66,8 +66,29 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                 }
             }
 
+           //var task1 =  Task.Run(() => {
+           //     // Just loop.
+           //     int ctr = 0;
+           //     for (ctr = 0; ctr <= 1000; ctr++)
+           //     {
+           //        Log.Guardar("task estoy trabajando"); 
+           //      }
+               
+           // });
+      
             return View(model);
         }
+
+        [HttpGet, Route("~/Digitalizacion/revision-periodica/ver-revisiones")]
+        public ActionResult Microforma_VerRevisiones(long ID_MICROFORMA)
+        {
+            RevisionPeriodicaModel model = new RevisionPeriodicaModel();
+            model.ID_MICROFORMA = ID_MICROFORMA;
+
+            return View(model);
+        }
+
+
 
     }
 }

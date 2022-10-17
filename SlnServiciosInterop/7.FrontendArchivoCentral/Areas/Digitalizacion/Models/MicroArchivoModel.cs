@@ -10,7 +10,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
 
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "[Tipo Micro Archivo] es obligatorio")]
-        public string MA_TIPO_ARCHIVO { get; set; }
+        public long MA_TIPO_ARCHIVO { get; set; }
         public List<SelectListItem> Lista_TipoMicroArchivo = new List<SelectListItem>();
 
 
@@ -36,7 +36,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "[Fecha] es obligatorio")]
         public string MA_FECHA { get; set; }
+        public long MA_ID_DOC_ALMACENAMIENTO { get; set; }
 
+        
         public string Accion { get; set; }
 
     }

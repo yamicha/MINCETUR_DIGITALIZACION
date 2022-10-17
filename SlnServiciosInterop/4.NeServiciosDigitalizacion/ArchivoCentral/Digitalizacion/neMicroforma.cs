@@ -35,9 +35,14 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return _objDa.Microforma_ListarUno(ID_MICROFORMA, ref auditoria);
         }
 
-        public enMicroArchivo MicroArchivo_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
+        public List<enRevision> Revision_Listar(long ID_MICROFORMA, ref enAuditoria auditoria)
         {
-            return _objDa.MicroArchivo_ListarUno(ID_MICROFORMA, ref auditoria);
+            return _objDa.Revision_Listar(ID_MICROFORMA, ref auditoria);
+        }
+
+        public List<enMicroArchivo> MicroArchivo_Listar(long ID_MICROFORMA, int FlgEstado, ref enAuditoria auditoria)
+        {
+            return _objDa.MicroArchivo_Listar(ID_MICROFORMA, FlgEstado, ref auditoria);
         }
 
         public List<enLote> Microforma_LotesListar(long ID_MICROFORMA, ref enAuditoria auditoria)

@@ -25,6 +25,8 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string DESC_ESTADO { get; set; }
         public string FLG_CONFORME { get; set; }
         public long ID_ESTADO { get; set; }
+        public long NRO_REVISIONES { get; set; }
+        
 
 
     }

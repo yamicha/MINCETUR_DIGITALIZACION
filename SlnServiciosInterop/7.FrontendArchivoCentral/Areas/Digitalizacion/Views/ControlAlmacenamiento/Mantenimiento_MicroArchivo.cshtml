@@ -2,7 +2,6 @@
 @{
     Layout = null;
 }
-
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -83,13 +82,13 @@
                                             @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom:3px;">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Almacenamiento: </label>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="input-group">
-                                                <div style=" height: 30px; margin-bottom: 5px;" class="form-control file-caption  kv-fileinput-caption">
+                                                <div style=" height: 31px;" class="form-control file-caption  kv-fileinput-caption">
                                                     <div class="file-caption-name" id="filenameAlma"></div>
                                                 </div>
                                                 <div class="input-group-btn">
@@ -99,10 +98,6 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            @*@if (Model.Accion == "M")
-                                                {
-                                                    <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
-                                                }*@
                                         </div>
                                     </div>
                                     <div class="row">

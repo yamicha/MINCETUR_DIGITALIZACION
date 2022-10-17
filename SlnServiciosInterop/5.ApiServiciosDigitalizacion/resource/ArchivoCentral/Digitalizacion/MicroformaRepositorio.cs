@@ -39,6 +39,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Microforma_ListarControl(entidad, ref auditoria);
         }
+        public List<enRevision> Revision_Listar(long ID_MICROFORMA, ref enAuditoria auditoria)
+        {
+            return _rule.Revision_Listar(ID_MICROFORMA, ref auditoria);
+        }
         public List<enMicroformaProceso> Microforma_ListarProcesos(enMicroformaProceso entidad, ref enAuditoria auditoria)
         {
             return _rule.Microforma_ListarProcesos(entidad, ref auditoria);
@@ -51,9 +55,9 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             return _rule.Microforma_ListarUno(ID_MICROFORMA, ref auditoria);
         }
-        public enMicroArchivo MicroArchivo_ListarUno(long ID_MICROFORMA, ref enAuditoria auditoria)
+        public List<enMicroArchivo> MicroArchivo_Listar(long ID_MICROFORMA, int FlgEstado, ref enAuditoria auditoria)
         {
-            return _rule.MicroArchivo_ListarUno(ID_MICROFORMA, ref auditoria);
+            return _rule.MicroArchivo_Listar(ID_MICROFORMA, FlgEstado, ref auditoria);
         }
         public void Microforma_Insertar(MicroModel entidad, ref enAuditoria auditoria)
         {

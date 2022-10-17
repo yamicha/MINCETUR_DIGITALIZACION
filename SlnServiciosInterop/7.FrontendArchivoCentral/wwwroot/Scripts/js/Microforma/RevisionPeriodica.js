@@ -115,10 +115,10 @@ async function Revision_Grabar() {
                 TipoPrueba: TipoPruebaText, 
                 IdUsuario: parseInt($("#ID_USUARIO").val()), 
                 IdDocRevision: parseInt(IdDocRevision), 
+                FecRevision: $("#FECHA").val(),
                 Observacion: $("#OBSERVACION").val(),
                 UsuCreacion: $("#inputHddCod_usuario").val(),
             }
-            debugger; 
             var url = "archivo-central/microforma/revision-periodica";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {

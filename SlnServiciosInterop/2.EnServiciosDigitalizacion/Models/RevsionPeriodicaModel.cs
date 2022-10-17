@@ -15,6 +15,7 @@ namespace EnServiciosDigitalizacion.Models
         public long IdDocRevision { get; set; }
         public string UsuCreacion { get; set; }
         public string TipoPrueba { get; set; }
+        public string FecRevision { get; set; }
         public List<MicroEvaluarModel> ListaIdsMicroforma { get; set; }
     
         

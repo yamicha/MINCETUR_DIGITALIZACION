@@ -1,2 +1,0 @@
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion.SeccionController.Seccion_Listar(SeccionModel entidad) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Administracion\SeccionController.cs:line 34

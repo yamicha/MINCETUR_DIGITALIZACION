@@ -16,6 +16,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string FECHA { get; set; }
         public string HORA { get; set; }
         public string OBSERVACION { get; set; }
-
+        public string STR_TIPO_ARCHIVO { get; set; }
+        
     }
 }
