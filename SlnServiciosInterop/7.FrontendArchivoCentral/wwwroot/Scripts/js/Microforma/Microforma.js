@@ -112,7 +112,7 @@ function GetRulesMicroforma() {
 }
 
 function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
-    var _btn = rowObject[5];
+    var _btn = rowObject[4];
     var _Revisiones = rowObject[10];
     if (_MICROMODULO == MicroModulo.Grabados || _MICROMODULO == MicroModulo.Conforme) {
         _btn += "<button title='Ver Microforma' onclick='Microforma_GrabadaVer(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-vynil\" style=\"color:#a01010;font-size:15px\"></i></button>";
@@ -137,7 +137,7 @@ function Microforma_OpcionesFormatter(cellvalue, options, rowObject) {
     if (_MICROMODULO == MicroModulo.RevisionObs || _MICROMODULO == MicroModulo.RevisionAnulada)
         _btnDevolver = "<li><a onclick=\"Microforma_DevolverRevision(" + rowObject[0] + ");\"  > <i class=\"clip-rotate-2\" style=\"color:;\"></i> Devolver a Revisión</a></li>";
     if (_MICROMODULO == MicroModulo.RevisionObs)
-        _btnReprocesar = "<li><a onclick=\"Microforma_MostrarReprocesar(" + rowObject[0] + ");\"  data-toggle=\"modal\" data-target=\"#myModalNuevo\"  > <i class=\"clip-spinner-4\" style=\"color:#16A941;\"></i> Reprocesar Microforma</a></li>";
+        _btnReprocesar = "<li><a onclick=\"Microforma_MostrarReprocesar(" + rowObject[0] + ");\" href='#'  data-toggle=\"modal\" data-target=\"#myModalNuevo\"  > <i class=\"clip-spinner-4\" style=\"color:#16A941;\"></i> Reprocesar Microforma</a></li>";
 
     _btn += "<div class=\"dropdown\" title=\"Opciones\"> " +
         " <button class=\"btn-link dropdown-toggle\" type =\"button\" data-toggle=\"dropdown\" style=\"text-decoration: none !important;\"> <i class=\"clip-list\" style=\"color:#212529;font-size:17px\"></i>" +

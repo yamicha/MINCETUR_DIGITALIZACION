@@ -133,7 +133,7 @@ function Tabla_Procesar() {
         jAlert("Seleccione su formato", "Atención");
         return;
     }
-    jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea Hoja1, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
+    jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea FormatoCarga, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
         if (r) {
             var url = BaseUrlApi + "archivo-central/carga/procesar-excel";
             var ID_TABLA = $("#ID_TABLA").val();

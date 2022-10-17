@@ -178,7 +178,6 @@ function Microforma_DevolverRevision(IdMicroforma) {
 //********************************************************** tab OBSERVADOS *********************************************************/
 function Microforma_MostrarReprocesar(ID_MICROFORMA) {
     jQuery("#myModalNuevo").html('');
-    jQuery("#myModalNuevo").modal('show');
     jQuery("#myModalNuevo").load(baseUrl + "Digitalizacion/revision-periodica/mantenimiento-reprocesar?ID_MICROFORMA=" + ID_MICROFORMA, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModalNuevo');
         if (request.status != 200) return;
