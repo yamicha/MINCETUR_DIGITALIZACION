@@ -1,0 +1,4 @@
+System.ArgumentNullException: Value cannot be null. (Parameter 'source')
+   at System.Linq.ThrowHelper.ThrowArgumentNullException(ExceptionArgument argument)
+   at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion.MicroformaController.Microforma_Desarchivar(MicroArchivoModels entidad) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Digitalizacion\MicroformaController.cs:line 514

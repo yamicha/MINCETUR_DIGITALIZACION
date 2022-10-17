@@ -29,7 +29,7 @@
     });
 </script>
 
-<div class="modal-dialogMicroforma" >
+<div class="modal-dialogMicroforma">
     <div class="modal-content" style="width:100%;">
         <div class="modal-header" style="cursor: move; background-color: #ca2626">
             <div class="col-sm-14">
@@ -50,19 +50,6 @@
                                 <div class="col-sm-12 inline-container-Group">
                                     <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
                                     <fieldset style="width: 100%;">
-                                        <div class="form-row">
-                                            <div class="form-group col-sm-12">
-                                                <label for="form-field-1">Conforme ?: </label>
-                                                @Html.DropDownListFor(model => model.FLG_CONFORME, Model.Lista_Conforme, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
-                                            <div class="form-group col-sm-12" id="InputAccion" style="display:none;">
-                                                <label for="form-field-1">Accion: </label>
-                                                @Html.DropDownListFor(model => model.FLG_ACCION, Model.Lista_Accion, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.FLG_ACCION, string.Empty, new { @class = "cssMessageError" })
-                                            </div>
-
-                                        </div>
 
                                         <div class="form-row">
                                             <div class="form-group col-sm-12">
@@ -109,11 +96,23 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                               
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Observación: </label>
                                                 @Html.TextAreaFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
                                                 @Html.ValidationMessageFor(model => model.OBSERVACION, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-sm-12">
+                                                <label for="form-field-1">Conforme ?: </label>
+                                                @Html.DropDownListFor(model => model.FLG_CONFORME, Model.Lista_Conforme, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.FLG_CONFORME, string.Empty, new { @class = "cssMessageError" })
+                                            </div>
+                                            <div class="form-group col-sm-12" id="InputAccion" style="display:none;">
+                                                <label for="form-field-1">Accion: </label>
+                                                @Html.DropDownListFor(model => model.FLG_ACCION, Model.Lista_Accion, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.FLG_ACCION, string.Empty, new { @class = "cssMessageError" })
                                             </div>
                                         </div>
 

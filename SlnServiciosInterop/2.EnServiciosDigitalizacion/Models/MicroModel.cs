@@ -10,6 +10,9 @@ namespace EnServiciosDigitalizacion.Models
         public long IdLote { get; set; }
         public long IdDocApertura { get; set; }
         public long IdDocCierre { get; set; }
+
+        public long IdDocConformidad { get; set; }
+        
         public int IdEstado { get; set; }
         public int IdSoporte { get; set; }
         public string Fecha { get; set; }
@@ -23,5 +26,7 @@ namespace EnServiciosDigitalizacion.Models
         public List<MicroModel> ListaIdsLotes { get; set; }
         public string UsuCreacion { get; set; }
         public string UsuModificacion { get; set; }
+
+        public MicroArchivoModels MicroArchivo { get; set; }
     }
 }

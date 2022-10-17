@@ -312,13 +312,16 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intNroActa = drReader.GetOrdinal("NRO_ACTA");
                             int intNroCopias = drReader.GetOrdinal("NRO_COPIAS");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
-                            int intIdConformidad = drReader.GetOrdinal("ID_DOC_CONFORMIDAD");                     
-                            //int intIdDocConforma = drReader.GetOrdinal("MA_ID_DOC_CONFORMIDAD");
-                            //int intTipoArchivo = drReader.GetOrdinal("MA_TIPO_ARCHIVO");
-                            //int intMaDireccion = drReader.GetOrdinal("MA_DIRECCION");
-                            //int intMaReponsble = drReader.GetOrdinal("MA_RESPONSABLE");
-                            //int intMaFecCreacion = drReader.GetOrdinal("MA_FEC_CREACION");
-                            //int intMaObservacion = drReader.GetOrdinal("MA_OBSERVACION");
+                            int intIdConformidad = drReader.GetOrdinal("ID_DOC_CONFORMIDAD");
+
+                            int intIdDocAlmacenamiento = drReader.GetOrdinal("ID_DOC_ALMACENAMIENTO");
+                            int intTipoArchivo = drReader.GetOrdinal("TIPO_ARCHIVO");
+                            int intMaDireccion = drReader.GetOrdinal("DIRECCION_MICROARCHIVO");
+                            int intMaReponsble = drReader.GetOrdinal("RESPONSABLE_MICROARCHIVO");
+                            int intMaFecCreacion = drReader.GetOrdinal("FEC_MICROARCHIVO");
+                            int intHoraMicro = drReader.GetOrdinal("HORA_MICROARCHIVO");
+                            int intMaObservacion = drReader.GetOrdinal("OBSERVACION_MICROACRCHIVO");
+
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -339,12 +342,14 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intNroCopias)) temp.NRO_COPIAS = arrResult[intNroCopias].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intIdConformidad)) temp.ID_DOC_CONFORMIDAD = long.Parse(arrResult[intIdConformidad].ToString());
-                                //if (!drReader.IsDBNull(intIdDocConforma)) temp.MA_ID_DOC_CONFORMIDAD = long.Parse(arrResult[intIdDocConforma].ToString());
-                                //if (!drReader.IsDBNull(intTipoArchivo)) temp.MA_TIPO_ARCHIVO = long.Parse(arrResult[intTipoArchivo].ToString());
-                                //if (!drReader.IsDBNull(intMaDireccion)) temp.MA_DIRECCION = arrResult[intMaDireccion].ToString();
-                                //if (!drReader.IsDBNull(intMaReponsble)) temp.MA_RESPONSABLE = arrResult[intMaReponsble].ToString();
-                                //if (!drReader.IsDBNull(intMaFecCreacion)) temp.MA_FEC_CREACION = arrResult[intMaFecCreacion].ToString();
-                                //if (!drReader.IsDBNull(intMaObservacion)) temp.MA_OBSERVACION = arrResult[intMaObservacion].ToString();
+
+                                if (!drReader.IsDBNull(intIdDocAlmacenamiento)) temp.MicroArchivo.ID_DOC_ALMACENAMIENTO = long.Parse(arrResult[intIdDocAlmacenamiento].ToString());
+                                if (!drReader.IsDBNull(intTipoArchivo)) temp.MicroArchivo.TIPO_ARCHIVO = long.Parse(arrResult[intTipoArchivo].ToString());
+                                if (!drReader.IsDBNull(intMaDireccion)) temp.MicroArchivo.DIRECCION = arrResult[intMaDireccion].ToString();
+                                if (!drReader.IsDBNull(intMaReponsble)) temp.MicroArchivo.RESPONSABLE = arrResult[intMaReponsble].ToString();
+                                if (!drReader.IsDBNull(intMaFecCreacion)) temp.MicroArchivo.FECHA = arrResult[intMaFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intHoraMicro)) temp.MicroArchivo.HORA = arrResult[intHoraMicro].ToString();
+                                if (!drReader.IsDBNull(intMaObservacion)) temp.MicroArchivo.OBSERVACION = arrResult[intMaObservacion].ToString();
 
                             }
                             drReader.Close();
@@ -406,7 +411,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 drReader.GetValues(arrResult);
                                 temp = new enMicroArchivo();
                                 if (!drReader.IsDBNull(intIdMicroA)) temp.ID_MICROARCHIVO = long.Parse(arrResult[intIdMicroA].ToString());
-                                if (!drReader.IsDBNull(intIdDocConforma)) temp.ID_DOC_CONFORMIDAD = long.Parse(arrResult[intIdDocConforma].ToString());
+                                if (!drReader.IsDBNull(intIdDocConforma)) temp.ID_DOC_ALMACENAMIENTO = long.Parse(arrResult[intIdDocConforma].ToString());
                                 if (!drReader.IsDBNull(intTipoArchivo)) temp.TIPO_ARCHIVO = long.Parse(arrResult[intTipoArchivo].ToString());
                                 if (!drReader.IsDBNull(intMaDireccion)) temp.DIRECCION = arrResult[intMaDireccion].ToString();
                                 if (!drReader.IsDBNull(intFecha)) temp.FECHA = arrResult[intFecha].ToString();
@@ -830,6 +835,90 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
+        public void Microforma_Desarchivar(MicroArchivoModels entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICRO_DESARCHIVAR"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+        public void Microforma_RevisionReprocesar(MicroModel entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAREVISION_REPROCESAR"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
+                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
+                cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
+                cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
+                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocConformidad;
+                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
+                cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
+                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
 
+                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_ALMACENAMIENTO", OracleDbType.Int64)).Value = entidad.MicroArchivo.IdDocAlmacenamiento;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_TIPO_ARCHIVO", OracleDbType.Int64)).Value = entidad.MicroArchivo.TipoArchivo;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_DIRECCION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Direccion;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_ID_USUARIO", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.IdUsuario;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_FECHA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Fecha;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_HORA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Hora;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Observacion;
+                cmd.Parameters.Add(new OracleParameter("XIN_MA_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Usucreacion;
+                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                        auditoria.Rechazar(PO_MENSAJE);
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
+        
     }
 }

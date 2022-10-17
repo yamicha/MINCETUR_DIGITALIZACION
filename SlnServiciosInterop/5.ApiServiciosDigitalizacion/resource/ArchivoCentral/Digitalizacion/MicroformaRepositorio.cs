@@ -84,7 +84,17 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
         {
             _rule.Microforma_RevisionPeriodica(entidad, ref auditoria);
         }
-        
+
+        public void Microforma_Desarchivar(MicroArchivoModels entidad, ref enAuditoria auditoria)
+        {
+            _rule.Microforma_Desarchivar(entidad, ref auditoria);
+        }
+
+        public void Microforma_RevisionReprocesar(MicroModel entidad, ref enAuditoria auditoria)
+        {
+            _rule.Microforma_RevisionReprocesar(entidad, ref auditoria);
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

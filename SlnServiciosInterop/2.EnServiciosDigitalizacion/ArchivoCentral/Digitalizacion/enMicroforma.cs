@@ -6,6 +6,9 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
 {
    public class enMicroforma : enBase
     {
+        public enMicroforma() {
+            MicroArchivo = new enMicroArchivo(); 
+        }
         public long ID_MICROFORMA { get; set; }
         public string DESC_SOPORTE { get; set; }
         public string CODIGO_SOPORTE { get; set; }
@@ -26,7 +29,9 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string FLG_CONFORME { get; set; }
         public long ID_ESTADO { get; set; }
         public long NRO_REVISIONES { get; set; }
-        
+
+        public enMicroArchivo MicroArchivo { get; set; }
+
 
 
     }

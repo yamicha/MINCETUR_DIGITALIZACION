@@ -85,7 +85,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                                 model.MA_DIRECCION = item[0].DIRECCION;
                                 model.MA_FECHA = item[0].FECHA;
                                 model.MA_HORA = item[0].HORA;
-                                model.MA_ID_DOC_ALMACENAMIENTO = item[0].ID_DOC_CONFORMIDAD;
+                                model.MA_ID_DOC_ALMACENAMIENTO = item[0].ID_DOC_ALMACENAMIENTO;
                             }
                         }
                     }

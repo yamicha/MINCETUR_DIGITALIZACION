@@ -22,10 +22,11 @@ var MicroAnuladas_Lote_barra = 'MicroAnuladas_Lote_barra';
 
 $(document).ready(function () {
     RevisionPendienteBuscar();
-    jQuery('#aTabRevisionPend').click(function (e) {
+    jQuery('#aTabMicroformas').click(function (e) {
         _ID_LOTE = 0;
         RevisionPendienteBuscar();
     });
+
     jQuery('#aTabRevisionObservadas').click(function (e) {
         _ID_LOTE = 0;
         RevisionObservadoBuscar();
@@ -58,7 +59,7 @@ function RevisionPendienteBuscar() {
 }
 function RevisionObservadoBuscar() {
     Microforma_ConfigurarGrilla(MicroObs_Lote_grilla, MicroObs_Lote_barra,
-        MicroObs_grilla, MicroObs_barra, MicroModulo.RevisionObs, true);
+        MicroObs_grilla, MicroObs_barra, MicroModulo.RevisionObs, false);
     Documento_Detalle_buscar(MicroObs_grilla, MicroObs_barra);
 }
 function RevisionAnuladasBuscar() {
@@ -75,7 +76,6 @@ function Revision_MostrarEvaluar() {
         if (request.status != 200) return;
     });
 }
-
 async function Revision_Grabar() {
     MicroForma_Lista.pop();
     var IdDocRevision = 0;
@@ -145,34 +145,23 @@ async function Revision_Grabar() {
         $('#MsgValidActa').show();
     }
 }
-
-function Microforma_DevolverRevision() {
-
-}
-//********************************************************** tab OBSERVADOS *********************************************************/
-
-function Microforma_VolverGrabarMicroArchivo() {
-    jConfirm(" ¿ Desea enviar a pendientes de grabación de micro archivos todos los registros seleccionados  ? ", "Atención", function (r) {
+function Microforma_DevolverRevision(IdMicroforma) {
+    jConfirm(" ¿ Desea devolver esta microforma para revisión ?", "Atención", async function (r) {
         if (r) {
-            var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow');
-            for (i_ = 0; i_ < rowKey.length; i_++) {
-                var data = jQuery("#" + MicroFin_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
-                var _item = {
-                    IdMicroforma: parseInt(data.ID_MICROFORMA)
-                }
-                MicroForma_Lista.push(_item);
-            }
             var item = {
-                ListaIdsMicroforma: MicroForma_Lista
+                IdMicroforma: IdMicroforma,
             }
-            var url = "archivo-central/microforma/micro-archivo-estado";
+            var url = "archivo-central/microforma/desarchivar-microforma";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
-                            ControlFinalizadoBuscar();
-                            jOkas("Datos guardados correctamente.", "Atención");
+                            if (_MICROMODULO == MicroModulo.RevisionObs)
+                                RevisionObservadoBuscar();
+                            if (_MICROMODULO == MicroModulo.RevisionAnulada)
+                                RevisionAnuladasBuscar();
+                            jOkas("Microforma devuelta para revisión correctamente.", "Atención");
                         } else {
                             jAlert(auditoria.MensajeSalida, "Atención");
                         }
@@ -186,6 +175,92 @@ function Microforma_VolverGrabarMicroArchivo() {
         }
     });
 }
+//********************************************************** tab OBSERVADOS *********************************************************/
+function Microforma_MostrarReprocesar(ID_MICROFORMA) {
+    jQuery("#myModalNuevo").html('');
+    jQuery("#myModalNuevo").modal('show');
+    jQuery("#myModalNuevo").load(baseUrl + "Digitalizacion/revision-periodica/mantenimiento-reprocesar?ID_MICROFORMA=" + ID_MICROFORMA, function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModalNuevo');
+        if (request.status != 200) return;
+    });
+}
 
+async function Revision_ReprocesoGrabar() {
+    jConfirm(" ¿ Desea reprocesar esta microforma  ? ", "Atención", async function (r) {
+        if (r) {
+            var IdDocApertura = $('#HDF_ID_DOC_APERTURA').val();
+            var IdDocCierre = $('#HDF_ID_DOC_CIERRE').val();
+            var IdDocConformidad = $('#HDF_ID_DOC_CONFORMIDAD').val();
+            var IdDocAlmacenamiento = $('#HDF_MA_ID_DOC_ALMACENAMIENTO').val();
+            if ($('#fileActaApertura').prop('files')[0] != undefined) {
+                var formdataFileApertura = new FormData();
+                formdataFileApertura.append('fileArchivo', $('#fileActaApertura').prop('files')[0]);
+                IdDocApertura = await UploadFileService(formdataFileApertura);
+            }
+            if ($('#fileActaCierre').prop('files')[0] != undefined) {
+                var formdataFileCierre = new FormData();
+                formdataFileCierre.append('fileArchivo', $('#fileActaCierre').prop('files')[0]);
+                IdDocCierre = await UploadFileService(formdataFileCierre);
+            }
+            if ($('#fileActaConformidad').prop('files')[0] != undefined) {
+                var formdataFileConformidad = new FormData();
+                formdataFileConformidad.append('fileArchivo', $('#fileActaConformidad').prop('files')[0]);
+                IdDocConformidad = await UploadFileService(formdataFileConformidad);
+            }
+            if ($('#fileActaAlmacenamiento').prop('files')[0] != undefined) {
+                var formdataFileAlma = new FormData();
+                formdataFileAlma.append('fileArchivo', $('#fileActaAlmacenamiento').prop('files')[0]);
+                IdDocAlmacenamiento = await UploadFileService(formdataFileAlma);
+            }
+            var item = {
+                IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
+                Fecha: $("#MICROFORMA_FECHA").val(),
+                Hora: $("#MICROFORMA_HORA").val(),
+                NroVolumen: $("#MICROFORMA_NROVOLUMEN").val(),
+                CodigoSoporte: $("#MICROFORMA_CODIGO_SOPORTE").val(),
+                IdSoporte: parseInt($("#MICROFORMA_ID_TIPO_SOPORTE").val()),
+                IdDocApertura: parseInt(IdDocApertura),
+                IdDocCierre: parseInt(IdDocCierre),
+                IdDocConformidad: parseInt(IdDocConformidad),
+                NroActa: $("#MICROFORMA_ACTA").val(),
+                NroCopias: $("#MICROFORMA_COPIAS").val(),
+                CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
+                Observacion: $("#MICROFORMA_OBSERVACION").val(),
+                UsuCreacion: $("#inputHddCod_usuario").val(),
+                MicroArchivo: {
+                    TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
+                    Direccion: $("#MA_DIRECCION").val(),
+                    Observacion: $("#MA_OBSERVACION").val(),
+                    IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                    UsuCreacion: $("#inputHddCod_usuario").val(),
+                    IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
+                    Fecha: $("#MA_FECHA").val(),
+                    Hora: $("#MA_HORA").val(),
+                }
+            }
+            var url = "archivo-central/microforma/revision-reprocesar";
+            API.Fetch("POST", url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            _ID_LOTE = 0;
+                            RevisionObservadoBuscar();
+                            jQuery("#myModalNuevo").html('');
+                            jQuery("#myModalNuevo").modal('hide');
+                            jOkas("Datos guardados correctamente.", "Atención");
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert("Sin respuesta del servidor):", "Atención");
+                }
+            });
+        }
+    });
+}
 
 //********************************************************** tab ANULADOS *********************************************************/
+
