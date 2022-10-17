@@ -11,7 +11,7 @@ var MicroObs_barra = 'MicroObs_barra';
 
 var MicroObs_Lote_grilla = 'MicroObs_Lote_grilla';
 var MicroObs_Lote_barra = 'MicroObs_Lote_barra';
-var MicroForma_Lista = new Array(); 
+var MicroForma_Lista = new Array();
 
 // tab 3 
 var MicroAnuladas_grilla = 'MicroAnuladas_grilla';
@@ -21,14 +21,14 @@ var MicroAnuladas_Lote_grilla = 'MicroAnuladas_Lote_grilla';
 var MicroAnuladas_Lote_barra = 'MicroAnuladas_Lote_barra';
 
 $(document).ready(function () {
-    RevisionPendienteBuscar(); 
+    RevisionPendienteBuscar();
     jQuery('#aTabRevisionPend').click(function (e) {
         _ID_LOTE = 0;
-        RevisionPendienteBuscar(); 
+        RevisionPendienteBuscar();
     });
     jQuery('#aTabRevisionObservadas').click(function (e) {
         _ID_LOTE = 0;
-        RevisionObservadoBuscar(); 
+        RevisionObservadoBuscar();
     });
     jQuery('#aTabRevisionAnuladas').click(function (e) {
         _ID_LOTE = 0;
@@ -36,10 +36,10 @@ $(document).ready(function () {
     });
 
     $('#Microforma_BtnRevision').click(function () {
-        var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+        var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow');
         if (rowKey != null) {
             if (rowKey.length > 0) {
-                Revision_MostrarEvaluar(); 
+                Revision_MostrarEvaluar();
             }
             else {
                 jAlert("Debe seleccionar por lo menos un registo.", "Atención");
@@ -49,7 +49,7 @@ $(document).ready(function () {
             jAlert("Debe seleccionar por lo menos un registo.", "Atención");
         }
 
-    });   
+    });
 });
 function RevisionPendienteBuscar() {
     Microforma_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra,
@@ -77,77 +77,84 @@ function Revision_MostrarEvaluar() {
 }
 
 async function Revision_Grabar() {
-    MicroForma_Lista.pop(); 
+    MicroForma_Lista.pop();
+    var IdDocRevision = 0;
+    var TipoPruebaText = "";
+    $('#MsgValidActa').hide();
     var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
     if (_CONFORME == "0") {
         pregunta = "darle 'NO CONFORME'";
     } else {
         pregunta = "dar un 'CONFORME'";
     }
-    jConfirm(" ¿ Desea " + pregunta + " a los registros seleccionados  ? ", "Atención", async function (r) {
-        if (r) {
-            var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
-            for (i_ = 0; i_ < rowKey.length; i_++) {
-                var data = jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
-                var _item = {
-                    IdMicroforma: parseInt(data.ID_MICROFORMA)
+    if ($('#fileActaRevision').prop('files')[0] != undefined) {
+        jConfirm(" ¿ Desea " + pregunta + " a los registros seleccionados  ? ", "Atención", async function (r) {
+            if (r) {
+                var rowKey = $("#" + MicroPendiente_Lote_grilla).jqGrid('getGridParam', 'selarrrow');
+                for (i_ = 0; i_ < rowKey.length; i_++) {
+                    var data = jQuery("#" + MicroPendiente_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
+                    var _item = {
+                        IdMicroforma: parseInt(data.ID_MICROFORMA)
+                    }
+                    MicroForma_Lista.push(_item);
                 }
-                MicroForma_Lista.push(_item);
-            }
-            var IdDocRevision = 0;
-            var TipoPruebaText = ""; 
-            //if ($('#fileActaRevision').prop('files')[0] != undefined) {
-            //    var formdataFile = new FormData();
-            //    formdataFile.append('fileArchivo', $('#fileActaRevision').prop('files')[0]);
-            //    IdDocRevision = await UploadFileService(formdataFile);
-            //}
-            $("#TIPO_PRUEBA option:selected").each(function () {
-                var $this = $(this);
-                if ($this.length) {
-                    TipoPruebaText += `[${$this.text()}] `;
+
+                var formdataFile = new FormData();
+                formdataFile.append('fileArchivo', $('#fileActaRevision').prop('files')[0]);
+                IdDocRevision = await UploadFileService(formdataFile);
+                $("#TIPO_PRUEBA option:selected").each(function () {
+                    var $this = $(this);
+                    if ($this.length) {
+                        TipoPruebaText += `[${$this.text()}] `;
+                    }
+                });
+                var item = {
+                    ListaIdsMicroforma: MicroForma_Lista,
+                    FlgConforme: parseInt($("#FLG_CONFORME").val()),
+                    FlgAccion: parseInt($("#FLG_ACCION").val()),
+                    //TipoPrueba: $("#TIPO_PRUEBA").val().join(','),
+                    TipoPrueba: TipoPruebaText,
+                    IdUsuario: parseInt($("#ID_USUARIO").val()),
+                    IdDocRevision: parseInt(IdDocRevision),
+                    FecRevision: $("#FECHA").val(),
+                    Observacion: $("#OBSERVACION").val(),
+                    UsuCreacion: $("#inputHddCod_usuario").val(),
                 }
-            });
-            var item = {
-                ListaIdsMicroforma: MicroForma_Lista,
-                FlgConforme: parseInt($("#FLG_CONFORME").val()),
-                FlgAccion: parseInt($("#FLG_ACCION").val()), 
-                //TipoPrueba: $("#TIPO_PRUEBA").val().join(','),
-                TipoPrueba: TipoPruebaText, 
-                IdUsuario: parseInt($("#ID_USUARIO").val()), 
-                IdDocRevision: parseInt(IdDocRevision), 
-                FecRevision: $("#FECHA").val(),
-                Observacion: $("#OBSERVACION").val(),
-                UsuCreacion: $("#inputHddCod_usuario").val(),
-            }
-            var url = "archivo-central/microforma/revision-periodica";
-            API.Fetch("POST", url, item, function (auditoria) {
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EjecucionProceso) {
-                        if (!auditoria.Rechazo) {
-                            _ID_LOTE = 0;
-                            RevisionPendienteBuscar(); 
-                            Microforma_CloseModal();
-                            jOkas("Datos guardados correctamente.", "Atención");             
+                var url = "archivo-central/microforma/revision-periodica";
+                API.Fetch("POST", url, item, function (auditoria) {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                _ID_LOTE = 0;
+                                RevisionPendienteBuscar();
+                                Microforma_CloseModal();
+                                jOkas("Datos guardados correctamente.", "Atención");
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
                         } else {
                             jAlert(auditoria.MensajeSalida, "Atención");
                         }
                     } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
+                        jAlert("No se encontraron registros", "Atención");
                     }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
-            });
-        }
-    });
+                });
+            }
+        });
+    } else {
+        $('#MsgValidActa').show();
+    }
 }
 
+function Microforma_DevolverRevision() {
+
+}
 //********************************************************** tab OBSERVADOS *********************************************************/
 
 function Microforma_VolverGrabarMicroArchivo() {
     jConfirm(" ¿ Desea enviar a pendientes de grabación de micro archivos todos los registros seleccionados  ? ", "Atención", function (r) {
         if (r) {
-            var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); 
+            var rowKey = $("#" + MicroFin_Lote_grilla).jqGrid('getGridParam', 'selarrrow');
             for (i_ = 0; i_ < rowKey.length; i_++) {
                 var data = jQuery("#" + MicroFin_Lote_grilla).jqGrid('getRowData', rowKey[i_]);
                 var _item = {

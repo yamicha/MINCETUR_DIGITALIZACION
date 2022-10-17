@@ -11,28 +11,28 @@ var MicroModulo = {
     Conforme: 4,
     CAlmacen: 5,
     CAlmacenFin: 6,
-    RevisionPend: 7, 
-    RevisionObs: 8, 
-    RevisionAnulada: 9, 
+    RevisionPend: 7,
+    RevisionObs: 8,
+    RevisionAnulada: 9,
 }
 
 var _MICROMODULO = 0;
-function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab,_select = false) {
+function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab, _select = false) {
     _MICROMODULO = _tab;
-    var EstadoHidden = false; 
-    var OpcionesHidden = true; 
+    var EstadoHidden = false;
+    var OpcionesHidden = true;
     if (_MICROMODULO >= MicroModulo.RevisionPend) {
-        EstadoHidden = true; 
-        OpcionesHidden = false; 
+        EstadoHidden = true;
+        OpcionesHidden = false;
     }
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
-    var colNames = ['0','Opciones', 'Volumen','Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Creación', 'idestado','FlgConforme'];
+    var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
+        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
-        { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden ,formatter: Microforma_OpcionesFormatter, sortable: false },// 1
+        { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false },// 1
         { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 100, hidden: false },// 2
         { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden }, // 3
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 4
@@ -41,7 +41,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
-        { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true } ,// 11
+        { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
 
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
@@ -131,13 +131,19 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
 }
 
 function Microforma_OpcionesFormatter(cellvalue, options, rowObject) {
-    var _btn = "<div class=\"dropdown\" title=\"Opciones\"> " +
+    var _btn = "";
+    var _btnDevolver = "";
+    if (_MICROMODULO == MicroModulo.RevisionObs || _MICROMODULO == MicroModulo.RevisionAnulada)
+        _btnDevolver = "<li><a onclick=\"Microforma_DevolverRevision(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModal_Documento_Grabar\" > <i class=\"clip-rotate-2\" style=\"color:;\"></i> Devolver a Revisión</a></li>";
+
+    _btn += "<div class=\"dropdown\" title=\"Opciones\"> " +
         " <button class=\"btn-link dropdown-toggle\" type =\"button\" data-toggle=\"dropdown\" style=\"text-decoration: none !important;\"> <i class=\"clip-list\" style=\"color:#212529;font-size:17px\"></i>" +
         "<span class=\"caret\" style=\"color:#212529;\" ></span></button>" +
         " <ul class=\"dropdown-menu\">" +
         "<li><a onclick=\"Microforma_VerRevisiones(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-stack\" style=\"color:#448aff;\"></i> Ver Revisiones</a></li>" +
         "<li><a onclick=\"Microforma_VerProceso(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-tree\" style=\"color:#448aff;\"></i> Ver Movimientos</a></li>" +
         "<li><a onclick=\"Microforma_VerMicroforma(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModal_Documento_Grabar\" > <i class=\"clip-vynil\" style=\"color:#a01010;\"></i> Ver Microforma</a></li>" +
+        _btnDevolver +
         "</ul>" +
         "</div >";
     return _btn;
@@ -153,7 +159,7 @@ function Microforma_VerMicroArchivo(ID_MICROFORMA) {
 
 function Microforma_MantenimientoMicroArchivo(ID_MICROFORMA) {
     jQuery("#myModal_Documento_Grabar").html('');
-    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/control-almacenamiento/mantenimiento-microarchivo?ID_MICROFORMA=" + ID_MICROFORMA+"&Accion=N", function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Grabar").load(baseUrl + "Digitalizacion/control-almacenamiento/mantenimiento-microarchivo?ID_MICROFORMA=" + ID_MICROFORMA + "&Accion=N", function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Grabar');
         if (request.status != 200) return;
     });
@@ -169,7 +175,7 @@ function Microforma_ActaConformidad(ID_MICROFORMA) {
 
 function Microforma_CloseModal() {
     jQuery("#myModal_Documento_Grabar").html('');
-    jQuery("#myModal_Documento_Grabar").modal('hide'); 
+    jQuery("#myModal_Documento_Grabar").modal('hide');
 }
 
 function Microforma_VerMicroforma(CODIGO) {
@@ -318,10 +324,10 @@ function MicroformaColorRevision(_Grilla) {
     for (var i = 0; i < rowKey.length; i++) {
         var data = jQuery("#" + _Grilla).jqGrid('getRowData', rowKey[i]);
         var _FLG_REPETIDO = data.FLG_CONFORME;
-        if (_FLG_REPETIDO == 1 && _MICROMODULO == MicroModulo.RevisionPend ) {
-            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgba(35, 173, 0, 0.54)"});
-        } else if (_FLG_REPETIDO == 0 && _MICROMODULO == MicroModulo.RevisionPend ) {
-            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#EE6B6F"});
+        if (_FLG_REPETIDO == 1 && _MICROMODULO == MicroModulo.RevisionPend) {
+            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "rgba(35, 173, 0, 0.54)" });
+        } else if (_FLG_REPETIDO == 0 && _MICROMODULO == MicroModulo.RevisionPend) {
+            $("#" + _Grilla).jqGrid('setRowData', rowKey[i], true, { background: "#EE6B6F" });
         }
     }
 }
@@ -337,20 +343,20 @@ function Microforma_VerProceso(ID_MICROFORMA) {
 function Microforma_ProcesoConfigurarGrilla(_Grilla, _barra) {
     $("#" + _Grilla).GridUnload();
     var colNames = [
-        '1', '2','3','Proceso', 'Observación',
+        '1', '2', '3', 'Proceso', 'Observación',
         'Usuario Creación', 'Fecha'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//3 
         { name: 'ID_MICROFORMA_PROCESO', index: 'ID_MICROFORMA_PROCESO', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//3 
         { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 200, hidden: false, sortable: true },
-        { name: 'OBSERVACION', index: 'OBSERVACION', align: 'center', width: 300, hidden: false,  sortable: true },
+        { name: 'OBSERVACION', index: 'OBSERVACION', align: 'center', width: 300, hidden: false, sortable: true },
         { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 120, hidden: false, sortable: true },
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false,
-        search: false, sort : 'asc',
+        search: false, sort: 'asc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -376,8 +382,8 @@ function Microforma_ProcesoCargarGrilla(_Grilla) {
                         {
                             CODIGO: x,
                             ID_MICROFORMA: v.ID_MICROFORMA,
-                            ID_MICROFORMA_PROCESO: v.ID_MICROFORMA_PROCESO, 
-                            DESC_ESTADO: v.DESC_ESTADO, 
+                            ID_MICROFORMA_PROCESO: v.ID_MICROFORMA_PROCESO,
+                            DESC_ESTADO: v.DESC_ESTADO,
                             OBSERVACION: v.OBSERVACION,
                             USU_CREACION: v.USU_CREACION,
                             FEC_CREACION: v.FEC_CREACION,
@@ -407,38 +413,40 @@ function Microforma_VerRevisiones(ID_MICROFORMA) {
     });
 }
 
-function Revision_ConfigurarGrilla(_Grilla,_Barra) {
+function Revision_ConfigurarGrilla(_Grilla, _Barra) {
     $("#" + _Grilla).GridUnload();
     var colNames = [
-        '1', '2', 'Formato','Fecha Revisión','Responsable',
-        'Conforme', 'Accion','Tipo Pruebas','Observación'];
+        '1', '2', 'Acta', 'Fecha Revisión', 'Responsable',
+        'Conforme', 'Accion', 'Tipo Pruebas', 'Observación', 'ID_DOC'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_REVISION', index: 'ID_REVISION', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//3 
-        { name: 'FORMATO', index: 'FORMATO', align: 'center', width: 80, hidden: false, formatter: Revision_ActaFormatter, sortable: false },// 1
+        { name: 'ACTA', index: 'ACTA', align: 'center', width: 80, hidden: false, formatter: Revision_ActaFormatter, sortable: false },// 1
         { name: 'FEC_REVISION', index: 'FEC_REVISION', align: 'center', width: 150, hidden: false, sortable: true },
         { name: 'RESPONSABLE', index: 'RESPONSABLE', align: 'center', width: 200, hidden: false, sorttype: 'number', sortable: true },
         { name: 'STR_FLG_CONFORME', index: 'STR_FLG_CONFORME', align: 'center', width: 100, hidden: false, sortable: true },
         { name: 'STR_FLG_ACCION', index: 'STR_FLG_ACCION', align: 'center', width: 100, hidden: false, sortable: true },
         { name: 'TIPO_PRUEBA', index: 'TIPO_PRUEBA', align: 'center', width: 300, hidden: false, sortable: true },
         { name: 'OBSERVACION', index: 'OBSERVACION', align: 'center', width: 200, hidden: false, sortable: true },
+        { name: 'ID_DOC_REVISION', index: 'ID_DOC_REVISION', align: 'center', width: 200, hidden: true, sortable: true },
+
 
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
     };
-    SICA.Grilla(_Grilla, _Barra, '', '300', '', "Revisiones", '', '', colNames, colModels, '', opciones);
+    SICA.Grilla(_Grilla, _Barra, '', '300', '', "Revisiones", '', 'ID_REVISION', colNames, colModels, 'ID_REVISION', opciones);
 }
 function Revision_ActaFormatter(cellvalue, options, rowObject) {
     var _btn = "<button title='Descargar Formato Revisión' onclick='DownloadFile(" + rowObject.ID_DOC_REVISION + ");' class=\"btn btn-link\" type=\"button\"  style=\"text-decoration: none !important;cursor: pointer;\"> <i class=\"clip-file-pdf\" style=\"color:#a01010;font-size:15px\"></i></button>";
-    return _btn; 
+    return _btn;
 }
 
 function Revision_CargarGrilla(_Grilla) {
-    IdMicroforma = parseInt($('#hd_ID_MICROFORMA').val()); 
+    IdMicroforma = parseInt($('#hd_ID_MICROFORMA').val());
     var url = `archivo-central/microforma/get-revision/${IdMicroforma}`;
     API.FetchGet("GET", url, function (auditoria) {
         jQuery("#" + _Grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
@@ -475,3 +483,4 @@ function Revision_CargarGrilla(_Grilla) {
         }
     });
 }
+
