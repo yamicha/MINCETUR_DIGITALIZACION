@@ -84,6 +84,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDesSeccion)) temp.DES_LARGA_SECCION = arrResult[intDesSeccion].ToString();
                                 if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = arrResult[intIdSerie].ToString();
                                 if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
+                                if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = arrResult[intAnio].ToString();
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = arrResult[intFolios].ToString();                    

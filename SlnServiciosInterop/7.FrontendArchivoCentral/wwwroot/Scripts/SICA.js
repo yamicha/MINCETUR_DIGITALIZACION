@@ -728,7 +728,7 @@ SICA = {
                 rownumbers: true,
                 sortorder: opciones.sort,
                 height: height,
-                footerrow: opciones.footerrow, 
+                footerrow: opciones.footerrow,
                 forceFit: true,
                 shrinkToFit: false,
                 //shrinkToFit: false,
@@ -909,8 +909,8 @@ SICA = {
                     migrilla._search = postdata.isSearch;
                     migrilla.filters = postdata.filters;
                     if (opciones.rules != false) {
-                       //migrilla.Rules = GetRules(grilla);
-                        migrilla.Rules = opciones.getrules
+                        //migrilla.Rules = GetRules(grilla);
+                        migrilla.Rules = eval(opciones.getrules);
                     }
 
                     if (migrilla._search == true) {
@@ -918,7 +918,7 @@ SICA = {
                         migrilla.searchOper = postdata.searchOper;
                         migrilla.searchString = postdata.searchString;
                     }
-                    var params = migrilla; 
+                    var params = migrilla;
 
                     $.ajax({
                         url: urlListar,
@@ -1008,9 +1008,9 @@ SICA = {
                     var subGrid = opciones.subGrid;
                     var subgrid_table_id, pager_id;
                     subgrid_table_id = subgrid_id + "_t";
-                    pager_id = "p_" + subgrid_table_id;           
+                    pager_id = "p_" + subgrid_table_id;
                     $("#" + subgrid_id).html("<table id='" + subgrid_table_id + "' class='scroll'></table><div id='" + pager_id + "' class='scroll'></div>");
-                    var GridSub = $('#' + subgrid_table_id); 
+                    var GridSub = $('#' + subgrid_table_id);
                     var parameters = { id: parseInt(row_id) };
                     $.ajax({
                         type: "POST",
@@ -1036,7 +1036,7 @@ SICA = {
                                     height: subGrid.Height,
                                     width: subGrid.Width,
                                     onSelectRow: function () {
-                                        debugger; 
+                                        debugger;
                                         rowKey = GridSub.getGridParam('selrow');
                                         if (rowKey != null) {
                                             $("#" + subgrid_table_id).val(rowKey);
@@ -1263,6 +1263,20 @@ SICA = {
                     }
                     else {
                         opciones.btnNuevo.Function(rowKey);
+                    }
+                }
+            });
+        }
+        if (opciones.exportar) {
+            $('#' + grilla).navButtonAdd('#' + pager, {
+                caption: 'Exportar   ↓',
+                title: 'Exportar a Excel',
+                buttonicon: 'ui-icon-arrowreturnthick-1-s',
+                position: 'first',
+                id: "E" + grilla,
+                onClickButton: function () {
+                    if (opciones.exportarExcel != null) {
+                        opciones.exportarExcel();
                     }
                 }
             });

@@ -26,7 +26,6 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 IdOficina = 20,
                 DesOficina = "MI CASA",
                 IdPerfil = 2,
-
             };
             auditoria.Limpiar();
             try

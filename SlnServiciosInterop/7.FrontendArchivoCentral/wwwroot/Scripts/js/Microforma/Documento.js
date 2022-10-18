@@ -16,9 +16,9 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     var url = BaseUrlApi + 'archivo-central/documento/listado-temporal-paginado';
     $("#" + _grilla).GridUnload();
     var colNames = [
-        '1', '2', '3', '4', '5','Nro Linea',
+        '1', '2', '3', '4', '5', 'Nro Linea',
         'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Anio', 'Folios', 'Obervación',
-        'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación','FLG_REPETIDO'
+        'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'FLG_REPETIDO'
     ]
     var colModels = [
         { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //1
@@ -39,12 +39,12 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false },
         { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false },
-        { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },   
+        { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },
     ];
     var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: GetRules(),
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: `GetRules()`,
         gridCompleteFunc: function () {
-            ConfigurarColor_DocumentoRepetido(_grilla); 
+            ConfigurarColor_DocumentoRepetido(_grilla);
             var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
             if (allJQGridData.length == 0) {
                 $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
@@ -63,8 +63,8 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     SICA.Grilla(_grilla, _barra, '', '400', '', _titulo, url, 'NRO_LINEA', colNames, colModels, 'NRO_LINEA', opciones);
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".Tabla_jqGrid"));
-
-    jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
+    $("#" + _grilla + "_barra_left").css('width', '0px');
+    //jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
     $("#Recepcion_busqueda").hide();
 }
 
@@ -81,7 +81,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     _ID_MODULO = _id_tab;
     var VER_BOTON_IMAGEN = true;
     var VER_BOTON_OBS = true;
-    var _NRO_REPROCESADOHidden = true; 
+    var _NRO_REPROCESADOHidden = true;
     var NOMBRE_BOTON_IMAGEN = "";
     var url = BaseUrlApi + 'archivo-central/documento/listado-paginado';
     if (_ID_MODULO == 0) {
@@ -100,12 +100,12 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     } else if (_ID_MODULO == 6) {
         _PREFIJO = "Control_Calidad_";
         NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
-        _NRO_REPROCESADOHidden = false; 
+        _NRO_REPROCESADOHidden = false;
         VER_BOTON_IMAGEN = false;
     } else if (_ID_MODULO == 7) {
         _PREFIJO = "Aprobados_";
         NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        _NRO_REPROCESADOHidden = false; 
+        _NRO_REPROCESADOHidden = false;
         VER_BOTON_IMAGEN = false;
     } else if (_ID_MODULO == 8) { // Reprocesar
         _PREFIJO = "Reprocesar_";
@@ -136,8 +136,8 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     $("#" + _grilla).GridUnload();
     var colNames = [
         '0', '1', '2', '3', '4', '5', '6', '7',
-        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador','Nro. Reprocesados', 'Estado de Documento', 'Nombre Documento', 'Fondo', '', 'Sección',
-        'Serie', 'Descripción', 'Anio', 'Folios', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación','ID_LASER'
+        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Documento', 'Nombre Documento', 'Fondo', '', 'Sección',
+        'Serie', 'Descripción', 'Anio', 'Folios', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
     ]
     var colModels = [
         { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
@@ -147,31 +147,32 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'ID_SECCION', index: _PREFIJO + 'ID_SECCION ', align: 'center', hidden: true }, //4
         { name: _PREFIJO + 'ID_SERIE', index: _PREFIJO + 'ID_SERIE ', align: 'center', hidden: true }, //5
         { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //6
-        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true}, //7
+        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //7
 
         { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //8
         { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //9
         { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true }, //10
         { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true }, //11  
         { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //12
-        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false}, //13
-        { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false, sortable: false}, // 14
+        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //13
+        { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false, sortable: false }, // 14
         { name: _PREFIJO + 'NOM_DOCUMENTO', index: _PREFIJO + 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: true }, // 15
-        { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false, sortable: false},// 16
+        { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false, sortable: false },// 16
         { name: _PREFIJO + 'DES_SERIE', index: _PREFIJO + 'DES_SERIE', align: 'center', width: 150, hidden: false, sortable: false },// 17
         { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO + 'DESCRIPCION', align: 'center', width: 200, hidden: false, sortable: false },// 18
-        { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false, sortable: false},// 19
-        { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false},// 20
+        { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false, sortable: false },// 19
+        { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false },// 20
         { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false, sortable: false },// 21
 
-        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false},// 22
+        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false },// 22
         { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false },// 23
         { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false },// 24
         { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false },// 25
-        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: false, sortable: false },// 26
+        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 26
     ];
     var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, sort: 'desc', getrules: GetRules(),
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
+        sort: 'desc', getrules: `GetRules()`,
         gridCompleteFunc: function () {
             ConfigurarColor(_grilla);
 
@@ -181,23 +182,21 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             }
             else {
                 //
-                var e = $(".ui-jqgrid-hdiv");// document.getElementsByClassName(".ui-jqgrid-hdiv");
+                var e = $(".ui-jqgrid-hdiv");
                 var ex = $(".ui-jqgrid-bdiv");
                 //scrollHeight: 68
                 for (var ii = 0; ii < e.length; ii++) {
                     e[ii].scrollLeft = ex[ii].scrollLeft;
                     //e[1].scrollLeft = ex[1].scrollLeft;
                 }
-
-                //scrollTop: 0
-                //scrollWidth: 3845
-
-                //e.scrollTop = 0;
-                //e.scrollTop = 0;
                 $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
                 //jQuery("#" + _grilla).trigger("reloadGrid");
             }
+            jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
         },
+        exportarExcel: function () {
+            Documento_Exportar(GetRules()); 
+        }
     };
     SICA.Grilla(_grilla, _barra, '', '500', '', _titulo, url, _PREFIJO + 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
@@ -329,7 +328,7 @@ function GetRules() {
     _gs_DESC_LARGA_SECCION = jQuery('#gs_' + _PREFIJO + 'DES_LARGA_SECCION').val();
     _gs_DESC_SERIE = jQuery('#gs_' + _PREFIJO + 'DES_SERIE').val();
 
-    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'NOM_DOCUMENTO').val();
+    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_NOM_DOCUMENTO').val();
     _gs_DESCRIPCION = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION').val();
     _gs_ANIO = jQuery('#gs_' + _PREFIJO + 'ANIO').val();
     _gs_FOLIOS = jQuery('#gs_' + _PREFIJO + 'FOLIOS').val();
@@ -375,11 +374,12 @@ function GetRules() {
         { field: 'V.USU_MODIFICACION', data: POR + ' || ' + _USU_MODIFICACION + ' || ' + POR, op: " LIKE " },
 
     ];
-    //if (_ID_MODULO != 1) {
-    //    rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
-    //    if (_ID_MODULO != 2)
-    //        rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
-    //}
+
+    if (_ID_MODULO != 1) {
+        rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
+        if (_ID_MODULO != 2)
+            rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
+    }
     if (_ID_MODULO == 0) { // detalle
         //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
         rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
@@ -406,19 +406,19 @@ function GetRules() {
     }
     if (_ID_MODULO == 8) { // Reprocesar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+    } 
+    if (_ID_MODULO == 1 || _ID_MODULO == 2) {
+        rules.push({ field: 'V.USU_CREACION', data: `'${$('#inputHddCod_usuario').val()}'`, op: " = " });
     }
-    //if ($("#input_hd_CodAdmin").val() != $("#inputHddid_perfil").val() && (_ID_MODULO == 1 || _ID_MODULO == 2)) {
-    //    rules.push({ field: 'V.USU_CREACION', data: 'x_USU_CREACION_TOKEN_x', op: " = " });
-    //}
-    //if ($("#input_hd_CodAdmin").val() != $("#inputHddid_perfil").val() && (_ID_MODULO != 1 && _ID_MODULO != 2)) {
-    //    rules.push({ field: 'V.ID_USUARIO', data: 'x_ID_USUARIO_TOKEN_x', op: " = " });
-    //}
+    if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3 ) {
+        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
 
     return rules;
 }
 
 function Documento_Ver_Obs_CargarGrilla() {
-     ID_DOCUMENTO = $("#hd_Documento_Ver_ID_DOCUMENTO").val()
+    ID_DOCUMENTO = $("#hd_Documento_Ver_ID_DOCUMENTO").val()
     var url = `archivo-central/documento/listado-obs-documento/${ID_DOCUMENTO}`;
     //var auditoria = SICA.Ajax(url, item, false);
     API.FetchGet("GET", url, function (auditoria) {
@@ -448,7 +448,7 @@ function Documento_Ver_Obs_CargarGrilla() {
                 }
             }
         }
-    }); 
+    });
 }
 
 function Documento_Ver_Obs_ConfigurarGrilla() {
@@ -544,7 +544,7 @@ function Documento_Ver_Proceso_CargarGrilla() {
 }
 
 function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
-    if (isNaN(idlaser) || idlaser == "" ) {
+    if (isNaN(idlaser) || idlaser == "") {
         jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
         return false;
     }
@@ -553,5 +553,27 @@ function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
         return false;
     }
 
-    return true; 
+    return true;
+}
+
+function Documento_Exportar(Rules) {
+    var item =
+    {
+        //IdControlCarga: ,
+    };
+    var url = 'archivo-central/documento/grabar-documentos';
+    API.Fetch("POST", url, item, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        } else {
+            jAlert("No se encontraron registros", "Atención");
+        }
+    });
 }
