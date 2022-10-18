@@ -30,6 +30,12 @@ namespace NeServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return _objDa.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
 
+        public HashSet<enDocumento> Documento_Exportar( string @WHERE, ref enAuditoria auditoria)
+        {
+            return _objDa.Documento_Exportar( @WHERE, ref auditoria);
+        }
+
+
         public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)
         {
             return _objDa.Documento_ListarUno(entidad, ref auditoria);

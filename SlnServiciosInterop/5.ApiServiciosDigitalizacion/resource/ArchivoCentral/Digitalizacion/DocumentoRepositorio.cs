@@ -35,6 +35,10 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion
             return _rule.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
 
+        public HashSet<enDocumento> Documento_Exportar( string @WHERE, ref enAuditoria auditoria)
+        {
+            return _rule.Documento_Exportar(@WHERE, ref auditoria);
+        }
 
 
         public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)

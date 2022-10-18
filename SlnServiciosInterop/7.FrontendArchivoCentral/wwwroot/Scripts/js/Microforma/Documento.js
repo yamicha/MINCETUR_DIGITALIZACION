@@ -413,7 +413,6 @@ function GetRules() {
     if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3 ) {
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
-
     return rules;
 }
 
@@ -557,23 +556,22 @@ function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
 }
 
 function Documento_Exportar(Rules) {
-    var item =
-    {
-        //IdControlCarga: ,
-    };
-    var url = 'archivo-central/documento/grabar-documentos';
-    API.Fetch("POST", url, item, function (auditoria) {
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EjecucionProceso) {
-                if (!auditoria.Rechazo) {
-                } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
-                }
-            } else {
-                jAlert(auditoria.MensajeSalida, "Atención");
-            }
-        } else {
-            jAlert("No se encontraron registros", "Atención");
+    var params = new Object;
+    params.rules = Rules; 
+    var url = BaseUrlApi +'archivo-central/documento/documento-exportar';
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(params),
+        success: function (data) {
+            if (data !=null || data!="")
+                window.location = BaseUrlApi + 'archivo-central/get-file/' + data
+        }, failure: function (msg) {
+            alert(msg);
+        },
+        error: function (xhr, status, error) {
+            alert(error);
         }
     });
 }
