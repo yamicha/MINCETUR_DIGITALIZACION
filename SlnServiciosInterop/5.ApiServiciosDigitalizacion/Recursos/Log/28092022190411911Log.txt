@@ -1,2 +1,0 @@
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion.DigitalizacionController.Documento_Digitalizado_Validar(DocumentoValidarModel entidad) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\ArchivoCentral\Digitalizacion\DigitalizacionController.cs:line 132

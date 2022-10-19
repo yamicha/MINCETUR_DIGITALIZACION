@@ -17,10 +17,19 @@ namespace ServiceReference1
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/encriptarAES", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/encriptarAESResponse")]
+        string encriptarAES(string plainText, string clave);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/encriptarAES", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/encriptarAESResponse")]
         System.Threading.Tasks.Task<string> encriptarAESAsync(string plainText, string clave);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/desencriptarAES", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/desencriptarAESResponse")]
+        string desencriptarAES(string encryptText, string clave);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/desencriptarAES", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/desencriptarAESResponse")]
         System.Threading.Tasks.Task<string> desencriptarAESAsync(string encryptText, string clave);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/traeLlave", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/traeLlaveResponse")]
+        string traeLlave();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFSeguridadEncripDesencrip/traeLlave", ReplyAction="http://tempuri.org/IWCFSeguridadEncripDesencrip/traeLlaveResponse")]
         System.Threading.Tasks.Task<string> traeLlaveAsync();
@@ -76,14 +85,29 @@ namespace ServiceReference1
         {
         }
         
+        public string encriptarAES(string plainText, string clave)
+        {
+            return base.Channel.encriptarAES(plainText, clave);
+        }
+        
         public System.Threading.Tasks.Task<string> encriptarAESAsync(string plainText, string clave)
         {
             return base.Channel.encriptarAESAsync(plainText, clave);
         }
         
+        public string desencriptarAES(string encryptText, string clave)
+        {
+            return base.Channel.desencriptarAES(encryptText, clave);
+        }
+        
         public System.Threading.Tasks.Task<string> desencriptarAESAsync(string encryptText, string clave)
         {
             return base.Channel.desencriptarAESAsync(encryptText, clave);
+        }
+        
+        public string traeLlave()
+        {
+            return base.Channel.traeLlave();
         }
         
         public System.Threading.Tasks.Task<string> traeLlaveAsync()

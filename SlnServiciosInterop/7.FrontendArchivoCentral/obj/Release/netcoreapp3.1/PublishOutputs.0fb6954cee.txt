@@ -296,6 +296,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\Autorizacion.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\bootbox.min.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\dataTables.bootstrap.min.js
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\download.min.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\inicializacion.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\jlayout.border.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\jquery-1.7.1.intellisense.js

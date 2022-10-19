@@ -64,7 +64,7 @@ namespace Frotend.ArchivoCentral.Micetur
 
 
            // app.UseCors(Microsoft.Owin.CorsOptions.AllowAll);
-             app.UseHttpsRedirection();
+             //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

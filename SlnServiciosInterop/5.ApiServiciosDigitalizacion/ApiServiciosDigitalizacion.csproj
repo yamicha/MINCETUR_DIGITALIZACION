@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
@@ -29,8 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Connected Services\" />
-    <Folder Include="Recursos\Log\" />
-    <Folder Include="Recursos\Temporales\" />
   </ItemGroup>
 
   <ItemGroup>

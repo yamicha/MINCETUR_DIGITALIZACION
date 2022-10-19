@@ -12,6 +12,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 {
     [EnableCors("AccesoCors")]
     [Route("api/archivo-central/fondo")]
+    [ApiController]
     public class FondoController : ControllerBase
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;

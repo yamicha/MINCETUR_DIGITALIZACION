@@ -3,17 +3,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-        "applicationUrl": "http://localhost:25778",
-        "sslPort": 44377
+      "applicationUrl": "http://localhost:25778",
+      "sslPort": 0
     }
   },
   "profiles": {
     "IIS Express": {
-        "commandName": "IISExpress",
-        "launchBrowser": true,
-        "environmentVariables": {
-            "ASPNETCORE_ENVIRONMENT": "Development"
-        }
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     },
     "Frotend.ArchivoCentral.Micetur": {
       "commandName": "Project",

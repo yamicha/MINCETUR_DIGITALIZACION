@@ -1,9 +1,4 @@
-﻿var BaseUrlApi = "http://localhost:21820/api/";
-
-//var appConfig = {
-//    IdlaserMin: '@AppSettingsHelper.MinIdLaser',
-
-//}
+﻿var BaseUrlApi = "http://intranetdesa.mincetur.gob.pe:8080/apisisgesdigarch/api/";
 
 API = {
     Ajax: function (url, parameters, async, type) {
