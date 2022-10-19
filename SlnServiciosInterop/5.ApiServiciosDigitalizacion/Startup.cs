@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,6 +39,7 @@ namespace ApiServiciosDigitalizacion
                 .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.Configure<resource.clases.ConfigurationManager>(Configuration.GetSection("ConfigurationManager"));
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,14 +52,15 @@ namespace ApiServiciosDigitalizacion
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiServiciosDigitalizacion v1"));
             }
             //app.UseHttpsRedirection();
-            app.UseRouting();
+            //app.UseRouting();
             app.UseCors(misReglasCors);
             app.UseAuthorization();
+            app.UseMvc();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
 
         }
     }

@@ -5,6 +5,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using Utilitarios.Helpers;
+using Utilitarios.Recursos;
 
 namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
 {
@@ -153,7 +154,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_INSERTAR"), cn);
+                var commantext = string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDAFONDO_INSERTAR");
+                Log.Guardar(commantext); 
+                OracleCommand cmd = new OracleCommand(commantext, cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;

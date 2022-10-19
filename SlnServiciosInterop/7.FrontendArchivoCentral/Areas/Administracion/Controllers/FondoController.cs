@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models;
+using Frotend.ArchivoCentral.Micetur.Filters;
 using Frotend.ArchivoCentral.Micetur.Helpers;
 using Frotend.ArchivoCentral.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
+    [MyAuthorize]
     [Area("Administracion")]
     [Route("[action]")]
     public class FondoController : Controller
@@ -52,7 +54,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
             }
             catch (Exception ex)
             {
-                auditoria.Error(ex);
+                Log.Guardar(ex.Message.ToString());
             }
             return View(model);
         }

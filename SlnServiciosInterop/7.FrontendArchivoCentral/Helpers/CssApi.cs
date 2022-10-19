@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using EnServiciosDigitalizacion.ArchivoCentral;
+using Frotend.ArchivoCentral.Micetur.Recursos;
 using Newtonsoft.Json;
 using ServiceReference1;
 
@@ -20,7 +21,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                 cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
                 var response = await cliente.GetAsync(_baseUrl);
                 var json_respuesta = await response.Content.ReadAsStringAsync();
-
+                Log.Guardar(json_respuesta); 
                 var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
                 return entidad;
             }

@@ -52,7 +52,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
 
 
         [HttpGet]
-        [Route("get-fondo/{id}")]
+        [Route("get-fondo/{id:int}")]
         public IActionResult Fondo_ListarUno(int id)
         {
             enAuditoria auditoria = new enAuditoria();
@@ -192,7 +192,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
         }
 
         [HttpDelete]
-        [Route("eliminar/{id}")]
+        [Route("eliminar/{id:int}")]
         public IActionResult Fondo_Eliminar(int id)
         {
             enAuditoria auditoria = new enAuditoria();
