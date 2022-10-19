@@ -25,7 +25,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enDocumentoTemporal> lista = new List<enDocumentoTemporal>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDADOC_TEMP_PAGINACION");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDADOC_TEMP_PAGINACION");
             cmd.Parameters.Add("XIN_PAGINA", PAGINA);
             cmd.Parameters.Add("XIN_NROREGISTROS", FILAS);
             cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
@@ -120,7 +120,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enDocumento> lista = new List<enDocumento>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDADOC_PAGINACION");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDADOC_PAGINACION");
             cmd.Parameters.Add("XIN_PAGINA", PAGINA);
             cmd.Parameters.Add("XIN_NROREGISTROS", FILAS);
             cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
@@ -226,7 +226,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             HashSet<enDocumento> lista = new HashSet<enDocumento>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDADOC_EXPORTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDADOC_EXPORTAR");
             cmd.Parameters.Add("XIN_WHERE", @WHERE);
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -326,7 +326,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             enDocumento temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PROC_CDADOC_LISTARUNO";
+            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PRC_CDADOC_LISTARUNO";
             cmd.Parameters.Add("XIN_ID_DOCUMENTO", validarNulo(entidad.ID_DOCUMENTO));
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
@@ -415,7 +415,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enDocumento_Obs> Lista =new List<enDocumento_Obs>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PROC_CDADOCOBS_LISTARUNO";
+            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PRC_CDADOCOBS_LISTARUNO";
             cmd.Parameters.Add("XIN_ID_DOCUMENTO", validarNulo(entidad.ID_DOCUMENTO));
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
@@ -486,7 +486,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCUMENTO_GRABAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDADOCUMENTO_GRABAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_CONTROL_CARGA", OracleDbType.Varchar2)).Value = entidad.ID_CONTROL_CARGA;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
@@ -520,7 +520,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDALOTES_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDALOTES_INSERTAR"), cn);
                 OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -546,7 +546,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                         {
                             foreach (enDocumento item in entidad.ListaDocumento)
                             {
-                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCASIGNACION_INSERTAR"), cn);
+                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDADOCASIGNACION_INSERTAR"), cn);
                                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                 cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;
                                 cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = PO_ID_LOTE;
@@ -598,7 +598,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
 
                         foreach (enDocumento item in entidad.ListaDocumento)
                         {
-                            cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCASIGN_ACTUALIZAR"), cn);
+                            cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDADOCASIGN_ACTUALIZAR"), cn);
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO_ASIGNADO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO_ASIGNADO;
                             cmd.Parameters.Add(new OracleParameter("XIN_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;

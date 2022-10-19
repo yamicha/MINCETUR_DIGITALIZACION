@@ -156,7 +156,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASERIE_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASERIE_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SECCION", OracleDbType.Long)).Value = entidad.ID_SECCION;
                 cmd.Parameters.Add(new OracleParameter("XIN_COD_SERIE", OracleDbType.Varchar2)).Value = entidad.COD_SERIE;
@@ -192,7 +192,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASERIE_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASERIE_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SERIE", OracleDbType.Long)).Value = entidad.ID_SERIE;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SECCION", OracleDbType.Long)).Value = entidad.ID_SECCION;
@@ -228,7 +228,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASERIE_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASERIE_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SERIE", OracleDbType.Long)).Value = entidad.ID_SERIE;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
@@ -263,7 +263,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASERIE_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASERIE_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SERIE", OracleDbType.Long)).Value = entidad.ID_SERIE;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

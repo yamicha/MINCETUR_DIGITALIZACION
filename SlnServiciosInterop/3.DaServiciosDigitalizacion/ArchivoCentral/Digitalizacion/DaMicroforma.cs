@@ -23,7 +23,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enMicroforma> lista = new List<enMicroforma>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_PAGINACION");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_PAGINACION");
             cmd.Parameters.Add("XIN_PAGINA", PAGINA);
             cmd.Parameters.Add("XIN_NROREGISTROS", FILAS);
             cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
@@ -97,7 +97,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enMicroforma> lista = new List<enMicroforma>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_LISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTAR");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO;
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -158,7 +158,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enMicroforma> lista = new List<enMicroforma>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_LISTARCONTROL");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTARCONTROL");
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -219,7 +219,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enMicroformaProceso> lista = new List<enMicroformaProceso>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMIRCOPROCESO_LISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMIRCOPROCESO_LISTAR");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.ID_MICROFORMA;
             cmd.Parameters.Add(new OracleParameter("XINT_ID_MICROFORMA_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO_MICROFORMA==0? null : entidad.ID_ESTADO_MICROFORMA;
             cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -282,7 +282,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             enMicroforma temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_LISTARUNO");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTARUNO");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -377,7 +377,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enMicroArchivo> Lista = new List<enMicroArchivo>(); 
                 OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICROARCHIVO_LISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICROARCHIVO_LISTAR");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
             cmd.Parameters.Add(new OracleParameter("XINT_FLG_ESTADO", OracleDbType.Int64)).Value = FlgEstado;
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
@@ -448,7 +448,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enRevision> Lista = new List<enRevision>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAREVISION_LISTARUNO");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAREVISION_LISTARUNO");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -514,7 +514,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             List<enLote> lista = new List<enLote>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PROC_CDAMICRO_LOTESLISTAR");
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LOTESLISTAR");
             cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
             cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
@@ -579,7 +579,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROFORMA_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROFORMA_INSERTAR"), cn);
                 OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -615,7 +615,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                         {
                             foreach (MicroModel item in entidad.ListaIdsLotes)
                             {
-                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDADOCLOTE_MICROFORMA"), cn);
+                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDADOCLOTE_MICROFORMA"), cn);
                                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                 cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = item.IdLote;
                                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = PO_ID_MICROFORMA;
@@ -652,7 +652,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROFORMA_EVALUAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROFORMA_EVALUAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdEstado;
@@ -687,7 +687,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROFORMA_REPROCESO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROFORMA_REPROCESO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
@@ -730,7 +730,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROARCHIVO_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROARCHIVO_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocAlmacenamiento;
@@ -770,7 +770,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROARCHIVO_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROARCHIVO_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -802,7 +802,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICROREVISION_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROREVISION_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdEstado;
@@ -842,7 +842,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAMICRO_DESARCHIVAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICRO_DESARCHIVAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -873,7 +873,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PROC_CDAREVISION_REPROCESAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAREVISION_REPROCESAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;

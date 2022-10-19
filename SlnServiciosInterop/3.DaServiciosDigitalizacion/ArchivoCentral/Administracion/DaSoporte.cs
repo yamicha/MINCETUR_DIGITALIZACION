@@ -153,7 +153,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASOPORTE_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_SOPORTE", OracleDbType.Varchar2)).Value = entidad.DESC_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
@@ -187,7 +187,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASOPORTE_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_SOPORTE", OracleDbType.Varchar2)).Value = entidad.DESC_SOPORTE;
@@ -221,7 +221,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASOPORTE_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("XIN_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
@@ -256,7 +256,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PROC_CDASOPORTE_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

@@ -168,7 +168,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PROC_CDACONTROLCARGA_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PRC_CDACONTROLCARGA_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_TABLA", OracleDbType.Int32)).Value = entidad.ID_TABLA;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int32)).Value = entidad.ID_USUARIO;
@@ -207,7 +207,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PROC_CDACONTROLCARGA_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PRC_CDACONTROLCARGA_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XOUT_ID_CONTROL_CARGA", OracleDbType.Varchar2)).Value = entidad.ID_CONTROL_CARGA;
                 cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -351,7 +351,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PROC_CDACARGA_VALIDAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackCargaMant, "PRC_CDACARGA_VALIDAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_CONTROL_CARGA", OracleDbType.Int32)).Value = ID_CONTROL_CARGA;
                 cmd.Parameters.Add(new OracleParameter("XIN_ID_TABLA", OracleDbType.Int32)).Value = ID_TABLA;
