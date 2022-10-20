@@ -84,7 +84,7 @@ API = {
 
 }
 
-function DownloadFile(Url) {
+function DownloadFileApi(Url) {
     window.location = Url;
 }
 

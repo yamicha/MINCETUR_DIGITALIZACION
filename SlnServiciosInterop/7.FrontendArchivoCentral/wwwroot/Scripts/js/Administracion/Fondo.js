@@ -103,7 +103,7 @@ function Fondo_Estado(ID_FONDO, CHECK) {
     var item = {
         IdFondo: ID_FONDO,
         FlgEstado: CHECK.checked == true ? '1' : '0',
-        UsuModificacion: $("#inputHddCod_usuario").val()
+        UsuModificacion: $("#inputHddId_Usuario").val()
     };
     var url = `archivo-central/fondo/estado/${item.IdFondo}`;
     API.Fetch("PUT", url, item, function (auditoria) {
@@ -214,7 +214,7 @@ function Fondo_RegistrarDatos() {
                     var item =
                     {
                         DescFondo: $("#DESC_FONDO").val().toUpperCase(),
-                        UsuCreacion: $("#inputHddCod_usuario").val()
+                        UsuCreacion: $("#inputHddId_Usuario").val()
                     };
                     var url = 'archivo-central/fondo/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
@@ -250,7 +250,7 @@ function Fondo_ActualizarDatos() {
         {
             //IdFondo: $("#hd_FONDO_ID_FONDO").val(),
             DescFondo: $("#DESC_FONDO").val().toUpperCase(),
-            UsuModificacion: $("#inputHddCod_usuario").val()
+            UsuModificacion: $("#inputHddId_Usuario").val()
         };
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {

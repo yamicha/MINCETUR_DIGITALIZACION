@@ -1,0 +1,2 @@
+ORA-02373: Error al analizar la sentencia de inserción para la tabla SCDDBA.CDA4DOCUMENTO.
+ORA-00904: "IP_CREACION": identificador no válido

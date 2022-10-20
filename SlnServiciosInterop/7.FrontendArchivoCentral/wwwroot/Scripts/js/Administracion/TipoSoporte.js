@@ -102,7 +102,7 @@ function Soporte_Estado(ID, CHECK) {
     var item = {
         IdSoporte: ID,
         FlgEstado: CHECK.checked == true ? '1' : '0',
-        UsuModificacion: $("#inputHddCod_usuario").val()
+        UsuModificacion: $("#inputHddId_Usuario").val()
     };
     var url = `archivo-central/soporte/estado/${item.IdSoporte}`;
     API.Fetch("PUT", url, item, function (auditoria) {
@@ -211,7 +211,7 @@ function Soporte_RegistrarDatos() {
                     var item =
                     {
                         DescSoporte: $("#DESC_SOPORTE").val().toUpperCase(),
-                        UsuCreacion: $("#inputHddCod_usuario").val()
+                        UsuCreacion: $("#inputHddId_Usuario").val()
                     };
                     var url = 'archivo-central/soporte/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
@@ -246,7 +246,7 @@ function Soporte_ActualizarDatos() {
         var item =
         {
             DescSoporte: $("#DESC_SOPORTE").val().toUpperCase(),
-            UsuModificacion: $("#inputHddCod_usuario").val()
+            UsuModificacion: $("#inputHddId_Usuario").val()
         };
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {

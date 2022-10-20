@@ -84,7 +84,7 @@ function Devolver_GrabarDevolucion() {
                         IdArea: parseInt($('#ID_AREA').val()),
                         IdUsuario: parseInt($('#inputHddId_Usuario').val()),
                         Comentario: $('#OBSERVACION').val(),
-                        UsuCreacion: $('#inputHddCod_usuario').val()
+                        UsuCreacion: $('#inputHddId_Usuario').val()
                     }
                     var url = "archivo-central/digitalizacion/devolver-documentos";
                     API.Fetch("POST", url, item, function (auditoria) {

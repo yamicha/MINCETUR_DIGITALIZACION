@@ -63,7 +63,7 @@ async function Microforma_Editar() {
                 NroCopias: $("#MICROFORMA_COPIAS").val(),
                 CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
                 Observacion: $("#MICROFORMA_OBSERVACION").val(),
-                UsuModificacion: $("#inputHddCod_usuario").val(),
+                UsuModificacion: $("#inputHddId_Usuario").val(),
             }
             var url = "archivo-central/microforma/editar";
             API.Fetch("POST", url, item, function (auditoria) {

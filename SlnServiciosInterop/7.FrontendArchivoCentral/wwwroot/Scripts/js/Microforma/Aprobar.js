@@ -50,7 +50,7 @@ function Aprobar_Evaluar() {
                 IdTipoObservacion: ID_TIPO_OBS,
                 IdDocumento: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO").val()),
                 IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
-                UsuCreacion: $('#inputHddCod_usuario').val()
+                UsuCreacion: $('#inputHddId_Usuario').val()
             }
             //Aprobar_ListaDocumentos.push(itemx);
             //var item = {

@@ -118,7 +118,7 @@ async function Revision_Grabar() {
                     IdDocRevision: parseInt(IdDocRevision),
                     FecRevision: $("#FECHA").val(),
                     Observacion: $("#OBSERVACION").val(),
-                    UsuCreacion: $("#inputHddCod_usuario").val(),
+                    UsuCreacion: $("#inputHddId_Usuario").val(),
                 }
                 var url = "archivo-central/microforma/revision-periodica";
                 API.Fetch("POST", url, item, function (auditoria) {
@@ -225,13 +225,13 @@ async function Revision_ReprocesoGrabar() {
                 NroCopias: $("#MICROFORMA_COPIAS").val(),
                 CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
                 Observacion: $("#MICROFORMA_OBSERVACION").val(),
-                UsuCreacion: $("#inputHddCod_usuario").val(),
+                UsuCreacion: $("#inputHddId_Usuario").val(),
                 MicroArchivo: {
                     TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                     Direccion: $("#MA_DIRECCION").val(),
                     Observacion: $("#MA_OBSERVACION").val(),
                     IdUsuario: parseInt($("#inputHddId_Usuario").val()),
-                    UsuCreacion: $("#inputHddCod_usuario").val(),
+                    UsuCreacion: $("#inputHddId_Usuario").val(),
                     IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                     Fecha: $("#MA_FECHA").val(),
                     Hora: $("#MA_HORA").val(),

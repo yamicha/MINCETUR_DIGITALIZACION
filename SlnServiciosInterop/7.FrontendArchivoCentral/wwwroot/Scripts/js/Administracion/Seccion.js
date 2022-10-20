@@ -87,7 +87,7 @@ function Seccion_Estado(ID_SECCION, CHECK) {
     var item = {
         IdSeccion: parseInt(ID_SECCION),
         FlgEstado: CHECK.checked == true ? '1' : '0',
-        UsuModificacion: $("#inputHddCod_usuario").val()
+        UsuModificacion: $("#inputHddId_Usuario").val()
     };
     var url = `archivo-central/seccion/estado/${item.IdSeccion}`;
     API.Fetch("PUT", url, item, function (auditoria) {
@@ -205,7 +205,7 @@ function Seccion_RegistrarDatos() {
                         //COD_SECCION: $("#COD_SECCION").val(),
                         DescCortaSeccion: $("#DESC_CORTA_SECCION").val().toUpperCase(),
                         DescLargaSeccion: $("#DESC_LARGA_SECCION").val().toUpperCase(),
-                        UsuCreacion: $("#inputHddCod_usuario").val()
+                        UsuCreacion: $("#inputHddId_Usuario").val()
                     };
                     var url = 'archivo-central/seccion/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
@@ -242,7 +242,7 @@ function Seccion_ActualizarDatos() {
             IdSeccion: parseInt($("#hd_SECCION_ID_SECCION").val()),
             DescCortaSeccion: $("#DESC_CORTA_SECCION").val().toUpperCase(),
             DescLargaSeccion: $("#DESC_LARGA_SECCION").val().toUpperCase(),
-            UsuModificacion: $("#inputHddCod_usuario").val()
+            UsuModificacion: $("#inputHddId_Usuario").val()
         };
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {
             if (r) {

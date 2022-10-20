@@ -52,7 +52,7 @@ async function MicroformaEvaluar() {
                     IdMicroforma: parseInt($("#HDF_ID_MICROFORMA").val()),
                     FlgConforme: parseInt($("#MICROFORMA_FLG_CONFORME").val()),
                     Observacion: $("#MICROFORMA_OBSERVACION_EVALUAR").val(),
-                    UsuCreacion: $("#inputHddCod_usuario").val(),
+                    UsuCreacion: $("#inputHddId_Usuario").val(),
                     IdDocConformidad: parseInt(IdDocConformidad),
                 }
                 var url = "archivo-central/microforma/evaluar";

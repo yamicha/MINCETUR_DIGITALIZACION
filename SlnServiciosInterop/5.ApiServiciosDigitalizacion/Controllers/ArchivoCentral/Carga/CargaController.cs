@@ -212,7 +212,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                 {
                     if (!auditoria.Rechazo)
                     {
-                        string NombreHoja = "FormatoCarga";
+                        string NombreHoja = "Hoja1";
                         bool flgValidaNombre = false;
                         if (midt.TableName == NombreHoja)
                         {
@@ -284,26 +284,26 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                     {
                                         columnas_restar++;
                                         // SE AÑADEN COLUMNAS DE AUDITORIA
-                                        if (campo.COD_CAMPO.Trim() == "FLG_ESTADO")
+                                        if (campo.COD_CAMPO.Trim() == "FLG_EST")
                                         {
                                             dt.Columns.Add(campo.COD_CAMPO.Trim(), typeof(string));
                                             dt.Columns[campo.COD_CAMPO.Trim()].DefaultValue = "1";
                                             dt.Columns[campo.COD_CAMPO.Trim()].Prefix = "BD";
                                         }
-                                        if (campo.COD_CAMPO.Trim() == "USU_CREACION")
+                                        if (campo.COD_CAMPO.Trim() == "USU_CREA")
                                         {
                                             dt.Columns.Add(campo.COD_CAMPO.Trim(), typeof(string));
                                             dt.Columns[campo.COD_CAMPO.Trim()].DefaultValue = USU_CREACION;
                                             dt.Columns[campo.COD_CAMPO.Trim()].Prefix = "BD";
                                         }
-                                        else if (campo.COD_CAMPO.Trim() == "FEC_CREACION")
+                                        else if (campo.COD_CAMPO.Trim() == "FEC_CREA")
                                         {
                                             dt.Columns.Add(campo.COD_CAMPO.Trim(), typeof(DateTime));
                                             dt.Columns[campo.COD_CAMPO.Trim()].DefaultValue = DateTime.Now; // String.Format("{0:dd/MM/yyyy HH:mm:ss}", DateTime.Now);//.ToString("HH:mm");
 
                                             dt.Columns[campo.COD_CAMPO.Trim()].Prefix = "BD";
                                         }
-                                        else if (campo.COD_CAMPO.Trim() == "IP_CREACION")
+                                        else if (campo.COD_CAMPO.Trim() == "IP_CREA")
                                         {
                                             dt.Columns.Add(campo.COD_CAMPO.Trim(), typeof(string));
                                             dt.Columns[campo.COD_CAMPO.Trim()].DefaultValue = IPUser.ObtenerIP();
@@ -350,10 +350,10 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                     dt.Rows.Add(drx);
                                 }
                                 int iColCount = dt.Columns.Count;
-                                dt.Columns["FLG_ESTADO"].SetOrdinal(iColCount - 1);
-                                dt.Columns["USU_CREACION"].SetOrdinal(iColCount - 1);
-                                dt.Columns["FEC_CREACION"].SetOrdinal(iColCount - 1);
-                                dt.Columns["IP_CREACION"].SetOrdinal(iColCount - 1);
+                                dt.Columns["FLG_EST"].SetOrdinal(iColCount - 1);
+                                dt.Columns["USU_CREA"].SetOrdinal(iColCount - 1);
+                                dt.Columns["FEC_CREA"].SetOrdinal(iColCount - 1);
+                                dt.Columns["IP_CREA"].SetOrdinal(iColCount - 1);
                                 dt.Columns["NRO_LINEA"].SetOrdinal(iColCount - 1);
                                 int columna = 0;
                                 foreach (enCampo campo in List_Cls_Ent_Campo)

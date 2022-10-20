@@ -23,6 +23,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                 var json_respuesta = await response.Content.ReadAsStringAsync();
                 Log.Guardar(json_respuesta); 
                 var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+               
                 return entidad;
             }
         }

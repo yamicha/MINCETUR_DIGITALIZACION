@@ -152,7 +152,7 @@ function MicroformaGrabar_Grabar() {
                             NroCopias: $("#MICROFORMA_COPIAS").val(),
                             CodigoFedatario: $("#MICROFORMA_CODIGO_FEDATARIO").val(),
                             Observacion: $("#MICROFORMA_OBSERVACION").val(),
-                            UsuCreacion: $("#inputHddCod_usuario").val(),
+                            UsuCreacion: $("#inputHddId_Usuario").val(),
                         }
                         var url = "archivo-central/microforma/insertar";
                         API.Fetch("POST", url, item, function (auditoria) {
