@@ -155,7 +155,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 cn.Open();
                 OracleDataReader dr = null;
                 var commantext = string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAFONDO_INSERTAR");
-                Log.Guardar(commantext); 
                 OracleCommand cmd = new OracleCommand(commantext, cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
