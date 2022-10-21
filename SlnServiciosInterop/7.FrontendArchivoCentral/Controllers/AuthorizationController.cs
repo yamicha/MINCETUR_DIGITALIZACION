@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Text;
 using EnServiciosDigitalizacion;
 using Frotend.ArchivoCentral.Micetur.Filters;
+using Frotend.ArchivoCentral.Micetur.Helpers;
 using Frotend.ArchivoCentral.Micetur.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -121,6 +123,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
         {
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
+
             //using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
             //{
             //    string StrCodDesEncriptado = string.Empty; 
@@ -128,7 +131,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             //    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
             //    int intIdUsu = int.Parse(StrCodDesEncriptado);
             //}
-                UserLogin userlogin = new UserLogin
+            UserLogin userlogin = new UserLogin
             {
                 Codusuario = "IPEREZ",
                 IdUsuario = 25,
@@ -137,6 +140,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 DesOficina = "MI CASA",
                 IdPerfil = 2,
             };
+            userlogin.token = CssToken.Generar(userlogin.IdUsuario.ToString()); 
             try
             {
                 if (userlogin != null)
@@ -170,7 +174,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
         public IActionResult SignOut()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Redirect("https://www.youtube.com/"); 
+            return Redirect("https://www.youtube.com/");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

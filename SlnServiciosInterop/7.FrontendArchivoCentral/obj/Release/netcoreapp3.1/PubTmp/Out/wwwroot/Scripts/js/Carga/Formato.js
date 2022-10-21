@@ -76,6 +76,6 @@ jQuery('#FormatoVer_btnDescargar').click(function (e) {
 });
 
 function Formato_Descargar() {
-    DownloadFile(BaseUrlApi + `archivo-central/carga/formato-descargar/${$("#hd_Formato_ID_TABLA").val()}`);
+    DownloadFileApi(BaseUrlApi + `archivo-central/carga/formato-descargar/${$("#hd_Formato_ID_TABLA").val()}`);
 }
 

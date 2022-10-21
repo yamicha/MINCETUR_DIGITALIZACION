@@ -25,5 +25,8 @@ namespace Frotend.ArchivoCentral.Micetur.Authorization
         public static string GetUserIdPerfil(this ClaimsPrincipal claimsPrincipal)
        => claimsPrincipal.FindFirst("IdPerfil").Value;
 
+        public static string GetUserToken(this ClaimsPrincipal claimsPrincipal)
+        => claimsPrincipal.FindFirst("Token").Value;
+
     }
 }

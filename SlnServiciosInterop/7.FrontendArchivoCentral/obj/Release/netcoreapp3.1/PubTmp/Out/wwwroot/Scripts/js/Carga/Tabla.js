@@ -133,7 +133,7 @@ function Tabla_Procesar() {
         jAlert("Seleccione su formato", "Atención");
         return;
     }
-    jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea FormatoCarga, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
+    jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea Hoja1, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
         if (r) {
             var url = BaseUrlApi + "archivo-central/carga/procesar-excel";
             var ID_TABLA = $("#ID_TABLA").val();
@@ -141,7 +141,7 @@ function Tabla_Procesar() {
             data.append('fileArchivo', $('#file-upload').prop('files')[0]);
             data.append('IdTabla', ID_TABLA);
             data.append('IdUsuario', $('#inputHddId_Usuario').val());
-            data.append('UsuCreacion', $('#inputHddCod_usuario').val());
+            data.append('UsuCreacion', $('#inputHddId_Usuario').val());
             $("#file-upload").val(null);
             $.ajax({
                 url: url,
@@ -181,7 +181,7 @@ function Tabla_Procesar() {
 
 
 function Tabla_Descargar_Errores(ID_CONTROL_CARGA) {
-    DownloadFile(BaseUrlApi + `archivo-central/carga/get-errores/${ID_CONTROL_CARGA}`);
+    DownloadFileApi(BaseUrlApi + `archivo-central/carga/get-errores/${ID_CONTROL_CARGA}`);
 }
 
 function Tabla_Descargar_Cargas() {
@@ -248,7 +248,7 @@ function Tabla_Grabar() {
                 var item =
                 {
                     IdControlCarga: parseInt($("#ID_CONTROL_CARGA").val()),
-                    UsuModificacion: $("#inputHddCod_usuario").val(),
+                    UsuModificacion: $("#inputHddId_Usuario").val(),
                     IpModificacion: '-',
                 };
                 var url = 'archivo-central/documento/grabar-documentos';

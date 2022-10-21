@@ -31,7 +31,9 @@ API = {
             method: type,
             body: JSON.stringify(paramters),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                 'mode' : 'no-cors'
             }
         });
         fetch(request)
@@ -84,7 +86,7 @@ API = {
 
 }
 
-function DownloadFile(Url) {
+function DownloadFileApi(Url) {
     window.location = Url;
 }
 
@@ -159,7 +161,7 @@ function DownloadFile(ID_DOC) {
         success: function (auditoria) {
             if (auditoria.ejecucionProceso) {
                 if (!auditoria.rechazo) {
-                    window.open(auditoria.objeto,"_blank"); 
+                    window.open(auditoria.objeto, "_blank");
                 } else {
                     console.log(auditoria.mensajeSalida, 'Atención');
                 }

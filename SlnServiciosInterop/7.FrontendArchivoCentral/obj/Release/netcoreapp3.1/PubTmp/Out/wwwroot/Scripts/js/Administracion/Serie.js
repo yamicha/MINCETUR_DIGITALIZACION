@@ -108,7 +108,7 @@ function Serie_Estado(ID, CHECK) {
     var item = {
         IdSerie: ID,
         FlgEstado: CHECK.checked == true ? '1' : '0',
-        UsuModificacion: $("#inputHddCod_usuario").val()
+        UsuModificacion: $("#inputHddId_Usuario").val()
     };
     var url = `archivo-central/serie/estado/${item.IdSerie}`;
     API.Fetch("PUT", url, item, function (auditoria) {
@@ -228,7 +228,7 @@ function Serie_RegistrarDatos() {
                         IdSeccion: parseInt($("#ID_SECCION").val()),
                         DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
                         DescSerie: $("#DES_SERIE").val().toUpperCase(),
-                        UsuCreacion: $("#inputHddCod_usuario").val()
+                        UsuCreacion: $("#inputHddId_Usuario").val()
                     };
                     var url = 'archivo-central/serie/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
@@ -269,7 +269,7 @@ function Serie_ActualizarDatos() {
             //ID_SUBSECCION: $("#ID_SUBSECCION").val(),
             DescCodSerie: $("#COD_SERIE").val().toUpperCase(),
             DescSerie: $("#DES_SERIE").val().toUpperCase(),
-            UsuModificacion: $("#inputHddCod_usuario").val()
+            UsuModificacion: $("#inputHddId_Usuario").val()
         };
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {

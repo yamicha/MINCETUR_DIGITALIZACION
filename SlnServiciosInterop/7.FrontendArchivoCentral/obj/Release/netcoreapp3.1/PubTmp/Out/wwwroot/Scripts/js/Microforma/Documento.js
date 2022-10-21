@@ -164,10 +164,10 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false },// 20
         { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false, sortable: false },// 21
 
-        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false },// 22
-        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false },// 23
-        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false },// 24
-        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false },// 25
+        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 22
+        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 23
+        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 24
+        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 25
         { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 26
     ];
     var opciones = {
@@ -353,10 +353,10 @@ function GetRules() {
     var _ANIO = _gs_ANIO == '' || _gs_ANIO == undefined ? null : "'" + _gs_ANIO + "'";
     var __FOLIOS = _gs_FOLIOS == '' || _gs_FOLIOS == undefined ? null : "UPPER('" + _gs_FOLIOS + "')";
     var _OBSERVACION = _gs_OBSERVACION == '' || _gs_OBSERVACION == undefined ? null : "UPPER('" + _gs_OBSERVACION + "')";
-    var _USU_CREACION = _gs_USU_CREACION == '' || _gs_USU_CREACION == undefined ? null : "UPPER('" + _gs_USU_CREACION + "')";
-    var _USU_MODIFICACION = _gs_USU_MODIFICACION == '' || _gs_USU_MODIFICACION == undefined ? null : "UPPER('" + _gs_USU_MODIFICACION + "')";
-    var _STR_FEC_CREACION = _gs_STR_FEC_CREACION == '' || _gs_STR_FEC_CREACION == undefined ? null : "'" + _gs_STR_FEC_CREACION + "'";
-    var _STR_FEC_MODIFICACION = _gs_STR_FEC_MODIFICACION == '' || _gs_STR_FEC_MODIFICACION == undefined ? null : "'" + _gs_STR_FEC_MODIFICACION + "'";
+    //var _USU_CREACION = _gs_USU_CREACION == '' || _gs_USU_CREACION == undefined ? null : "UPPER('" + _gs_USU_CREACION + "')";
+    //var _USU_MODIFICACION = _gs_USU_MODIFICACION == '' || _gs_USU_MODIFICACION == undefined ? null : "UPPER('" + _gs_USU_MODIFICACION + "')";
+    //var _STR_FEC_CREACION = _gs_STR_FEC_CREACION == '' || _gs_STR_FEC_CREACION == undefined ? null : "'" + _gs_STR_FEC_CREACION + "'";
+    //var _STR_FEC_MODIFICACION = _gs_STR_FEC_MODIFICACION == '' || _gs_STR_FEC_MODIFICACION == undefined ? null : "'" + _gs_STR_FEC_MODIFICACION + "'";
 
     var POR = "'%'";
 
@@ -370,8 +370,8 @@ function GetRules() {
         { field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
         { field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
         { field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
-        { field: 'V.USU_CREACION', data: POR + ' || ' + _USU_CREACION + ' || ' + POR, op: " LIKE " },
-        { field: 'V.USU_MODIFICACION', data: POR + ' || ' + _USU_MODIFICACION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.USU_CREACION', data: POR + ' || ' + _USU_CREACION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.USU_MODIFICACION', data: POR + ' || ' + _USU_MODIFICACION + ' || ' + POR, op: " LIKE " },
 
     ];
 
@@ -408,7 +408,7 @@ function GetRules() {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
     } 
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
-        rules.push({ field: 'V.USU_CREACION', data: `'${$('#inputHddCod_usuario').val()}'`, op: " = " });
+        rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
     }
     if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3 ) {
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });

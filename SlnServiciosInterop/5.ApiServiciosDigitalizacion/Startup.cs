@@ -54,7 +54,7 @@ namespace ApiServiciosDigitalizacion
             //app.UseHttpsRedirection();
             //app.UseRouting();
             app.UseCors(misReglasCors);
-            app.UseAuthorization();
+            //app.UseAuthorization();
             app.UseMvc();
             //app.UseEndpoints(endpoints =>
             //{

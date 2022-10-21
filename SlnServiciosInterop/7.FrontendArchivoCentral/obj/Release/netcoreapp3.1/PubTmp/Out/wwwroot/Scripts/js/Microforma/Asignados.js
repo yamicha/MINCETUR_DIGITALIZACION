@@ -69,7 +69,7 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
             if (r) {
                 var item = {
                     ListaIdsDocumento: Asignados_ListaDocumentos,
-                    UsuModificacion: $('#inputHddCod_usuario').val(),
+                    UsuModificacion: $('#inputHddId_Usuario').val(),
                 }
                 var url = "archivo-central/documento/actualizar-asignacion";
                 API.Fetch("POST", url, item, function (auditoria) {

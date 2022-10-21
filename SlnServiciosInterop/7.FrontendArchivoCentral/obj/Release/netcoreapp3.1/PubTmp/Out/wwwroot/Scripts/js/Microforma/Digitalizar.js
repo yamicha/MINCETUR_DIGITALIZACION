@@ -175,7 +175,7 @@ function Digitalizar_Finalizar(ID_LASERFICHER) {
             IdLaserfiche: parseInt(ID_LASERFICHER),
             HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
             HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
-            UsuCreacion: $('#inputHddCod_usuario').val()
+            UsuCreacion: $('#inputHddId_Usuario').val()
         }
         var url = "archivo-central/digitalizacion/digitalizar-documento";
         API.Fetch("POST", url, item, function (auditoria) {

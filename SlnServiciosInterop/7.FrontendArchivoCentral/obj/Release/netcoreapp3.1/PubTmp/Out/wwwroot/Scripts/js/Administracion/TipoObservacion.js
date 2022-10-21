@@ -100,7 +100,7 @@ function Observacion_Estado(ID, CHECK) {
     var item = {
         IdObservacion: ID,
         FlgEstado: CHECK.checked == true ? '1' : '0',
-        UsuModificacion: $("#inputHddCod_usuario").val()
+        UsuModificacion: $("#inputHddId_Usuario").val()
     };
     var url = `archivo-central/observacion/estado/${item.IdObservacion}`;
     API.Fetch("PUT", url, item, function (auditoria) {
@@ -212,7 +212,7 @@ function Observacion_RegistrarDatos() {
                     var item =
                     {
                         DescObservacion: $("#DESC_OBSERVACION").val().toUpperCase(),
-                        UsuCreacion: $("#inputHddCod_usuario").val()
+                        UsuCreacion: $("#inputHddId_Usuario").val()
                     };
                     var url = 'archivo-central/observacion/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
@@ -247,7 +247,7 @@ function Observacion_ActualizarDatos() {
         var item =
         {
             DescObservacion: $("#DESC_OBSERVACION").val().toUpperCase(),
-            UsuModificacion: $("#inputHddCod_usuario").val()
+            UsuModificacion: $("#inputHddId_Usuario").val()
         };
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {

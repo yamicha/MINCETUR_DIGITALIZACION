@@ -51,6 +51,7 @@ namespace Utilitarios.Helpers.Authorization
             identity.AddClaim(new Claim("Office", user.DesOficina));
             identity.AddClaim(new Claim("IdPerfil", user.IdPerfil.ToString()));
             identity.AddClaim(new Claim("IdOficina", user.IdOficina.ToString()));
+            identity.AddClaim(new Claim("Token", user.token));
             return identity;
         }
 

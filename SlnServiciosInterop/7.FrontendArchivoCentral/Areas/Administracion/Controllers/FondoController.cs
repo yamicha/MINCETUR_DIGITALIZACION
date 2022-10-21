@@ -8,6 +8,7 @@ using Frotend.ArchivoCentral.Micetur.Helpers;
 using Frotend.ArchivoCentral.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Frotend.ArchivoCentral.Micetur.Authorization;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 {
@@ -36,7 +37,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
             {
                 if (Accion == "M")
                 {
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Fondo/get-fondo/{id}");
+                    //enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Fondo/get-fondo/{id}");
+                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Fondo/get-fondo/{id}",User.GetUserToken());
                     if (!respuestapi.EjecucionProceso)
                     {
                         if (respuestapi.Rechazo)

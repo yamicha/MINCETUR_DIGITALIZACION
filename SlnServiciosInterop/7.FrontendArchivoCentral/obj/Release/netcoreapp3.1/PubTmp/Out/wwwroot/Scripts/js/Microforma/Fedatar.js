@@ -108,7 +108,7 @@ function Aprobar_Evaluar() {
                 IdTipoObservacion: parseInt(ID_TIPO_OBS),
                 IdDocumento: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO").val()),
                 IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
-                UsuCreacion: $('#inputHddCod_usuario').val()
+                UsuCreacion: $('#inputHddId_Usuario').val()
             }
             var url = "archivo-central/digitalizacion/digitalizado-fedatario-validar";
             API.Fetch("POST", url, itemx, function (auditoria) {
@@ -142,7 +142,7 @@ function Fedatar_ConformeMasivo() {
                 var itemDoc = {
                     IdDocumento: parseInt(data.Fedatar_ID_DOCUMENTO),
                     IdDocumentoAsignado: parseInt(data.Fedatar_ID_DOCUMENTO_ASIGNADO),
-                    UsuCreacion: $('#inputHddCod_usuario').val()
+                    UsuCreacion: $('#inputHddId_Usuario').val()
                 };
                 Fedatar_ListaDocumentos.push(itemDoc);
             }

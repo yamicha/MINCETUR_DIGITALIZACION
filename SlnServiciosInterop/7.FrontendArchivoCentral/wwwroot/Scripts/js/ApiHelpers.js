@@ -1,5 +1,5 @@
-﻿var BaseUrlApi = "http://localhost:21820/api/";
-
+﻿//var BaseUrlApi = "http://intranetdesa.mincetur.gob.pe:8080/apisisgesdigarch/api/";
+var BaseUrlApi = "http://localhost:21820/api/";
 API = {
     Ajax: function (url, parameters, async, type) {
         var rsp;
@@ -31,7 +31,9 @@ API = {
             method: type,
             body: JSON.stringify(paramters),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                 'mode' : 'no-cors'
             }
         });
         fetch(request)
@@ -159,7 +161,7 @@ function DownloadFile(ID_DOC) {
         success: function (auditoria) {
             if (auditoria.ejecucionProceso) {
                 if (!auditoria.rechazo) {
-                    window.open(auditoria.objeto,"_blank"); 
+                    window.open(auditoria.objeto, "_blank");
                 } else {
                     console.log(auditoria.mensajeSalida, 'Atención');
                 }
