@@ -23,7 +23,6 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
             return View();
         }
 
-
         [HttpGet, Route("~/Administracion/Fondo/Mantenimiento")]
         public async Task<ActionResult> Mantenimiento(int id, string Accion)
         {

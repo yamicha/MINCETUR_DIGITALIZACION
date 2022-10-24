@@ -1,5 +1,5 @@
-﻿var BaseUrlApi = "http://intranetdesa.mincetur.gob.pe:8080/apisisgesdigarch/api/";
-//var BaseUrlApi = "http://localhost:21820/api/";
+﻿//var BaseUrlApi = "http://intranetdesa.mincetur.gob.pe:8080/apisisgesdigarch/api/";
+var BaseUrlApi = "http://localhost:21820/api/";
 API = {
     Ajax: function (url, parameters, async, type) {
         var rsp;
