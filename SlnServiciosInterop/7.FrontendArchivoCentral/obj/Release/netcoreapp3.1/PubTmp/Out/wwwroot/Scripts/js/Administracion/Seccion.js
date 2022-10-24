@@ -36,7 +36,7 @@ function Seccion_ConfigurarGrilla(_grilla, _barra) {
         { name: 'FLG_ESTADO', index: 'FLG_ESTADO', align: 'center', width: 0, hidden: true },
 
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: Seccion_actionEditar },
-        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: Seccion_actionEliminar },
+        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: true, formatter: Seccion_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: Seccion_estadoAction },
 
         { name: 'COD_SECCION', index: 'COD_SECCION', align: 'center', width: 100, hidden: true },

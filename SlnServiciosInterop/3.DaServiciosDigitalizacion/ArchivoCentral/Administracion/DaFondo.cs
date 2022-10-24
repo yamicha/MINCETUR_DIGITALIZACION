@@ -23,9 +23,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR";
-            cmd.Parameters.Add("XIN_DES_FONDO", validarNulo(objenSubSerie.DESC_FONDO));
-            cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
-            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_DES_FONDO", validarNulo(objenSubSerie.DESC_FONDO));
+            cmd.Parameters.Add("X_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
+            cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -87,10 +87,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAFONDO_LISTAR_UNO";
-            cmd.Parameters.Add("XIN_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
-            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
-            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_ID_FONDO", validarNulo(objenSubSerie.ID_FONDO));
+            cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -99,8 +99,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
-                        string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                        string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                        string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                        string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                         if (PO_VALIDO == "0")
                             auditoria.Rechazar(PO_MENSAJE);
 
@@ -157,16 +157,16 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 var commantext = string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAFONDO_INSERTAR");
                 OracleCommand cmd = new OracleCommand(commantext, cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
-                cmd.Parameters.Add(new OracleParameter("XIN_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -191,17 +191,17 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAFONDO_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
-                cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
+                cmd.Parameters.Add(new OracleParameter("X_DESC_FONDO", OracleDbType.Varchar2)).Value = entidad.DESC_FONDO;
+                cmd.Parameters.Add(new OracleParameter("X_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
+                cmd.Parameters.Add(new OracleParameter("X_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -225,17 +225,17 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAFONDO_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XIN_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
-                cmd.Parameters.Add(new OracleParameter("XIN_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
+                cmd.Parameters.Add(new OracleParameter("X_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
+                cmd.Parameters.Add(new OracleParameter("X_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.USU_MODIFICACION;
+                cmd.Parameters.Add(new OracleParameter("X_IP_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.IP_MODIFICACION;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -260,14 +260,14 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAFONDO_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_FONDO", OracleDbType.Long)).Value = entidad.ID_FONDO;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }

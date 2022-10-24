@@ -1,0 +1,1 @@
+{"Objeto":{"ID_FONDO":13,"DESC_FONDO":"FONDO 1","FLG_ESTADO":null,"USU_CREACION":"25","FEC_CREACION":"19/10/2022 08:38:24 PM","IP_CREACION":null,"USU_MODIFICACION":"25","FEC_MODIFICACION":"24/10/2022 11:13:37 AM","IP_MODIFICACION":null},"MensajeSalida":"","Code":200,"ErrorLog":"","EjecucionProceso":true,"URL":null,"Rechazo":false}

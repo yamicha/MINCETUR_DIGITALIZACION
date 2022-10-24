@@ -17,13 +17,13 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
 {
     public class CssApi
     {
-        public async Task<T> GetApi<T>(string _baseUrl, string token ="") where T : class
+        public async Task<T> GetApi<T>(string _baseUrl, string token = "") where T : class
         {
             using (var cliente = new HttpClient())
             {
                 cliente.DefaultRequestHeaders.Clear();
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
-                   token);
+                //cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "cf1bEdmMXAeHLkHL2wIGNWRXyezDtPx8");
+                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
                 var response = await cliente.GetAsync(_baseUrl);
                 var json_respuesta = await response.Content.ReadAsStringAsync();
@@ -31,20 +31,6 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                 var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
                 return entidad;
             }
-
-            //using (HttpClient client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
-            //    //var content = new StringContent(JsonConvert.SerializeObject(param), Encoding.UTF8, "application/json");
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //    var response = await client.GetAsync(_baseUrl);
-            //    var json_respuesta = await response.Content.ReadAsStringAsync();
-            //    Log.Guardar(json_respuesta);
-            //    var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-
-            //    return entidad;
-            //}
         }
 
         public enAuditoria APi2(string Url)
@@ -64,9 +50,9 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                         if (strReader == null) return new enAuditoria();
                         using (StreamReader objReader = new StreamReader(strReader))
                         {
-                            string resp  = objReader.ReadToEnd();
+                            string resp = objReader.ReadToEnd();
                             Log.Guardar(resp);
-                            auditoria = JsonConvert.DeserializeObject<enAuditoria>(resp); 
+                            auditoria = JsonConvert.DeserializeObject<enAuditoria>(resp);
                         }
                     }
                 }
@@ -74,8 +60,8 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             }
             catch (WebException ex)
             {
-                Log.Guardar(ex.Message.ToString()); 
-                return  new enAuditoria();
+                Log.Guardar(ex.Message.ToString());
+                return new enAuditoria();
             }
         }
 

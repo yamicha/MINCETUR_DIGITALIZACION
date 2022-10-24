@@ -39,7 +39,7 @@ function Observacion_ConfigurarGrilla(_grilla, _barra) {
         { name: 'FLG_ESTADO', index: 'FLG_ESTADO', align: 'center', width: 0, hidden: true },
 
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: Observacion_actionEditar },
-        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: Observacion_actionEliminar },
+        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: true, formatter: Observacion_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: Observacion_estadoAction },
 
         { name: 'DESC_OBSERVACION', index: 'DESC_OBSERVACION', align: 'center', width: 250, hidden: false },

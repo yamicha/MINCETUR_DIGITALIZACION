@@ -40,7 +40,7 @@ function Fondo_ConfigurarGrilla(_grilla, _barra) {
         { name: 'FLG_ESTADO', index: 'FLG_ESTADO', align: 'center', width: 0, hidden: true },
 
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: Fondo_actionEditar },
-        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: Fondo_actionEliminar },
+        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: true, formatter: Fondo_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: Fondo_estadoAction },
 
         { name: 'DESC_FONDO', index: 'DESC_FONDO', align: 'center', width: 250, hidden: false },

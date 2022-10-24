@@ -21,7 +21,7 @@ function TipoDocumento_ConfigurarGrilla(_grilla, _barra) {
         { name: 'ID_SERIE', index: 'ID_SERIE', align: 'center', hidden: true, width: 0, key: false },
 
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: TipoDocumento_actionEditar },
-        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: TipoDocumento_actionEliminar },
+        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: true, formatter: TipoDocumento_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: TipoDocumento_estadoAction },
 
         { name: 'DESC_SERIE', index: 'DESC_SERIE', align: 'center', hidden: false, width: 200, key: false },

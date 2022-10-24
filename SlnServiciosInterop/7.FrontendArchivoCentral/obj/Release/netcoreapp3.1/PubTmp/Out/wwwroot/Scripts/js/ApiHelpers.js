@@ -1,5 +1,5 @@
 ﻿var BaseUrlApi = "http://intranetdesa.mincetur.gob.pe:8080/apisisgesdigarch/api/";
-
+//var BaseUrlApi = "http://localhost:21820/api/";
 API = {
     Ajax: function (url, parameters, async, type) {
         var rsp;
@@ -35,7 +35,7 @@ API = {
                 'Access-Control-Allow-Origin': '*',
                  'mode' : 'no-cors'
             }
-        });
+        }); 
         fetch(request)
             .then((resp) => resp.json())
             .then(function (data) {
@@ -62,7 +62,6 @@ API = {
                 calback(data);
             })
             .catch(function (error) {
-
                 fetchload.close();
                 alert("request error api", error);
             });

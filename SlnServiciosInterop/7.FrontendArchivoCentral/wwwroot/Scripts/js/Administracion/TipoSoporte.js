@@ -40,7 +40,7 @@ function Soporte_ConfigurarGrilla(_grilla, _barra) {
         { name: 'FLG_ESTADO', index: 'FLG_ESTADO', align: 'center', width: 0, hidden: true },
 
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 80, hidden: false, formatter: Soporte_actionEditar },
-        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: false, formatter: Soporte_actionEliminar },
+        { name: 'ELIMINAR', index: 'ELIMINAR', align: 'center', width: 90, hidden: true, formatter: Soporte_actionEliminar },
         { name: 'ACTIVO', index: 'ACTIVO', align: 'center', width: 70, hidden: false, sortable: true, formatter: Soporte_estadoAction },
 
         { name: 'DESC_SOPORTE', index: 'DESC_FONDO', align: 'center', width: 250, hidden: false },

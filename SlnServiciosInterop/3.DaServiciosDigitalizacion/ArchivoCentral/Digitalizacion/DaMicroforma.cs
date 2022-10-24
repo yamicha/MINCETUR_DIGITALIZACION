@@ -24,13 +24,13 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_PAGINACION");
-            cmd.Parameters.Add("XIN_PAGINA", PAGINA);
-            cmd.Parameters.Add("XIN_NROREGISTROS", FILAS);
-            cmd.Parameters.Add("XIN_ORDEN_COLUMNA", ORDEN_COLUMNA);
-            cmd.Parameters.Add("XIN_ORDEN", ORDEN);
-            cmd.Parameters.Add("XIN_WHERE", @WHERE);
-            cmd.Parameters.Add("XOUT_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_PAGINA", PAGINA);
+            cmd.Parameters.Add("X_NROREGISTROS", FILAS);
+            cmd.Parameters.Add("X_ORDEN_COLUMNA", ORDEN_COLUMNA);
+            cmd.Parameters.Add("X_ORDEN", ORDEN);
+            cmd.Parameters.Add("X_WHERE", @WHERE);
+            cmd.Parameters.Add("X_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -39,7 +39,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                     cmd.Connection = cn;
                     using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
-                        int CUENTA = int.Parse(cmd.Parameters["XOUT_CUENTA"].Value.ToString());
+                        int CUENTA = int.Parse(cmd.Parameters["X_CUENTA"].Value.ToString());
                         auditoria.Objeto = CUENTA;
                         object[] arrResult = null;
                         if (drReader.HasRows)
@@ -98,8 +98,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTAR");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -159,7 +159,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTARCONTROL");
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -220,11 +220,11 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMIRCOPROCESO_LISTAR");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.ID_MICROFORMA;
-            cmd.Parameters.Add(new OracleParameter("XINT_ID_MICROFORMA_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO_MICROFORMA==0? null : entidad.ID_ESTADO_MICROFORMA;
-            cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-            cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.ID_MICROFORMA;
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA_ESTADO", OracleDbType.Int64)).Value = entidad.ID_ESTADO_MICROFORMA==0? null : entidad.ID_ESTADO_MICROFORMA;
+            cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -283,8 +283,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LISTARUNO");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -378,9 +378,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICROARCHIVO_LISTAR");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
-            cmd.Parameters.Add(new OracleParameter("XINT_FLG_ESTADO", OracleDbType.Int64)).Value = FlgEstado;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
+            cmd.Parameters.Add(new OracleParameter("X_FLG_ESTADO", OracleDbType.Int64)).Value = FlgEstado;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -449,8 +449,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAREVISION_LISTARUNO");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -515,8 +515,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDAMICRO_LOTESLISTAR");
-            cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
-            cmd.Parameters.Add("XOUT_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = ID_MICROFORMA;
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
@@ -583,27 +583,27 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_VOLUMEN", OracleDbType.Varchar2)).Value = entidad.NroVolumen;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
-                cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_ID_MICROFORMA", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_VOLUMEN", OracleDbType.Varchar2)).Value = entidad.NroVolumen;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("X_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
+                cmd.Parameters.Add(new OracleParameter("X_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_ID_MICROFORMA = cmd.Parameters["XOUT_ID_MICROFORMA"].Value.ToString();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_ID_MICROFORMA = cmd.Parameters["X_ID_MICROFORMA"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                     {
                         auditoria.Rechazar(PO_MENSAJE);
@@ -617,12 +617,12 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             {
                                 cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDADOCLOTE_MICROFORMA"), cn);
                                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                                cmd.Parameters.Add(new OracleParameter("XIN_ID_LOTE", OracleDbType.Int64)).Value = item.IdLote;
-                                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = PO_ID_MICROFORMA;
-                                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                                cmd.Parameters.Add(new OracleParameter("X_ID_LOTE", OracleDbType.Int64)).Value = item.IdLote;
+                                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = PO_ID_MICROFORMA;
+                                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                                 dr = cmd.ExecuteReader();
-                                string PO_VALIDO2 = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
+                                string PO_VALIDO2 = cmd.Parameters["X_VALIDO"].Value.ToString();
                                 if (PO_VALIDO2 == "0")
                                 {
                                     auditoria.Rechazar(PO_MENSAJE);
@@ -654,18 +654,18 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROFORMA_EVALUAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdEstado;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocConformidad;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_ID_ESTADO_MICROFORMA", OracleDbType.Varchar2)).Value = entidad.IdEstado;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocConformidad;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -689,25 +689,25 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROFORMA_REPROCESO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
-                cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.UsuModificacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("X_ID_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
+                cmd.Parameters.Add(new OracleParameter("X_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
+                cmd.Parameters.Add(new OracleParameter("X_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.UsuModificacion;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -732,22 +732,22 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROARCHIVO_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocAlmacenamiento;
-                cmd.Parameters.Add(new OracleParameter("XIN_TIPO_ARCHIVO", OracleDbType.Int64)).Value = entidad.TipoArchivo;
-                cmd.Parameters.Add(new OracleParameter("XIN_DIRECCION", OracleDbType.Varchar2)).Value = entidad.Direccion;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Varchar2)).Value = entidad.IdUsuario;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
-                cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.Usucreacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocAlmacenamiento;
+                cmd.Parameters.Add(new OracleParameter("X_TIPO_ARCHIVO", OracleDbType.Int64)).Value = entidad.TipoArchivo;
+                cmd.Parameters.Add(new OracleParameter("X_DIRECCION", OracleDbType.Varchar2)).Value = entidad.Direccion;
+                cmd.Parameters.Add(new OracleParameter("X_ID_USUARIO", OracleDbType.Varchar2)).Value = entidad.IdUsuario;
+                cmd.Parameters.Add(new OracleParameter("X_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
+                cmd.Parameters.Add(new OracleParameter("X_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.Usucreacion;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -772,14 +772,14 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROARCHIVO_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -804,23 +804,23 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICROREVISION_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_ESTADO_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdEstado;
-                cmd.Parameters.Add(new OracleParameter("XIN_FLG_CONFORME", OracleDbType.Varchar2)).Value = entidad.FlgConforme;
-                cmd.Parameters.Add(new OracleParameter("XIN_FLG_ACCION", OracleDbType.Varchar2)).Value = entidad.FlgAccion;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_USUARIO", OracleDbType.Int64)).Value = entidad.IdUsuario;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_REVISION", OracleDbType.Int64)).Value = entidad.IdDocRevision;
-                cmd.Parameters.Add(new OracleParameter("XIN_TIPO_PRUEBA", OracleDbType.Varchar2)).Value = entidad.TipoPrueba;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FEC_REVISION", OracleDbType.Varchar2)).Value = entidad.FecRevision;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_ID_ESTADO_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdEstado;
+                cmd.Parameters.Add(new OracleParameter("X_FLG_CONFORME", OracleDbType.Varchar2)).Value = entidad.FlgConforme;
+                cmd.Parameters.Add(new OracleParameter("X_FLG_ACCION", OracleDbType.Varchar2)).Value = entidad.FlgAccion;
+                cmd.Parameters.Add(new OracleParameter("X_ID_USUARIO", OracleDbType.Int64)).Value = entidad.IdUsuario;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_REVISION", OracleDbType.Int64)).Value = entidad.IdDocRevision;
+                cmd.Parameters.Add(new OracleParameter("X_TIPO_PRUEBA", OracleDbType.Varchar2)).Value = entidad.TipoPrueba;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_FEC_REVISION", OracleDbType.Varchar2)).Value = entidad.FecRevision;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -844,14 +844,14 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAMICRO_DESARCHIVAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }
@@ -875,35 +875,35 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleDataReader dr = null;
                 OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackDigitalMant, "PRC_CDAREVISION_REPROCESAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
-                cmd.Parameters.Add(new OracleParameter("XIN_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
-                cmd.Parameters.Add(new OracleParameter("XIN_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocConformidad;
-                cmd.Parameters.Add(new OracleParameter("XIN_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
-                cmd.Parameters.Add(new OracleParameter("XIN_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
-                cmd.Parameters.Add(new OracleParameter("XIN_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_ID_MICROFORMA", OracleDbType.Int64)).Value = entidad.IdMicroforma;
+                cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_SOPORTE", OracleDbType.Int64)).Value = entidad.IdSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_SOPORTE", OracleDbType.Varchar2)).Value = entidad.CodigoSoporte;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_ACTA", OracleDbType.Varchar2)).Value = entidad.NroActa;
+                cmd.Parameters.Add(new OracleParameter("X_NRO_COPIAS", OracleDbType.Varchar2)).Value = entidad.NroCopias;
+                cmd.Parameters.Add(new OracleParameter("X_CODIGO_FEDATARIO", OracleDbType.Varchar2)).Value = entidad.CodigoFedatario;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_APERTURA", OracleDbType.Int64)).Value = entidad.IdDocApertura;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_CIERRE", OracleDbType.Int64)).Value = entidad.IdDocCierre;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_CONFORMIDAD", OracleDbType.Int64)).Value = entidad.IdDocConformidad;
+                cmd.Parameters.Add(new OracleParameter("X_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_FECHA", OracleDbType.Varchar2)).Value = entidad.Fecha;
+                cmd.Parameters.Add(new OracleParameter("X_HORA", OracleDbType.Varchar2)).Value = entidad.Hora;
+                cmd.Parameters.Add(new OracleParameter("X_USU_MODIFICACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
 
-                cmd.Parameters.Add(new OracleParameter("XIN_ID_DOC_ALMACENAMIENTO", OracleDbType.Int64)).Value = entidad.MicroArchivo.IdDocAlmacenamiento;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_TIPO_ARCHIVO", OracleDbType.Int64)).Value = entidad.MicroArchivo.TipoArchivo;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_DIRECCION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Direccion;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_ID_USUARIO", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.IdUsuario;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_FECHA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Fecha;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_HORA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Hora;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Observacion;
-                cmd.Parameters.Add(new OracleParameter("XIN_MA_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Usucreacion;
-                cmd.Parameters.Add(new OracleParameter("XOUT_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add(new OracleParameter("XOUT_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_ALMACENAMIENTO", OracleDbType.Int64)).Value = entidad.MicroArchivo.IdDocAlmacenamiento;
+                cmd.Parameters.Add(new OracleParameter("X_MA_TIPO_ARCHIVO", OracleDbType.Int64)).Value = entidad.MicroArchivo.TipoArchivo;
+                cmd.Parameters.Add(new OracleParameter("X_MA_DIRECCION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Direccion;
+                cmd.Parameters.Add(new OracleParameter("X_MA_ID_USUARIO", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.IdUsuario;
+                cmd.Parameters.Add(new OracleParameter("X_MA_FECHA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Fecha;
+                cmd.Parameters.Add(new OracleParameter("X_MA_HORA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Hora;
+                cmd.Parameters.Add(new OracleParameter("X_MA_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Observacion;
+                cmd.Parameters.Add(new OracleParameter("X_MA_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Usucreacion;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
                 {
                     dr = cmd.ExecuteReader();
-                    string PO_VALIDO = cmd.Parameters["XOUT_VALIDO"].Value.ToString();
-                    string PO_MENSAJE = cmd.Parameters["XOUT_MENSAJE"].Value.ToString();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
                     if (PO_VALIDO == "0")
                         auditoria.Rechazar(PO_MENSAJE);
                 }

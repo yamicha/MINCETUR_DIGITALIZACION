@@ -1,1 +1,0 @@
-{"Objeto":[],"MensajeSalida":"El registro que desea consultar no existe.","Code":200,"ErrorLog":"El registro que desea consultar no existe.","EjecucionProceso":true,"URL":null,"Rechazo":true}

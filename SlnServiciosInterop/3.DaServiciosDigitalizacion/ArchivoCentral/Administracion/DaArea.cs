@@ -22,9 +22,9 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAAREA_LISTAR";
-            cmd.Parameters.Add("XIN_DES_AREA", validarNulo(objenSubSerie.DES_AREA));
-            cmd.Parameters.Add("XIN_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
-            cmd.Parameters.Add("XOUT_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_DES_AREA", validarNulo(objenSubSerie.DES_AREA));
+            cmd.Parameters.Add("X_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
+            cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();

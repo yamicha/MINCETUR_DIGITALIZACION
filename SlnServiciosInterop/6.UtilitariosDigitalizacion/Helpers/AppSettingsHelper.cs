@@ -19,6 +19,8 @@ namespace Utilitarios.Helpers
         public static string MensajeLog => GetAppSetting("MensajeLog");
         public static string RutaTemporal => GetAppSetting("RutaTemporal");
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
+        public static string GetLlave => GetAppSetting("Llave");
+        
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
