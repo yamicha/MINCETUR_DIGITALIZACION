@@ -3,6 +3,10 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.FondoModelView
 <script type="text/javascript">
+    $(document).ready(function () {
+       if ($('#hd_FONDO_ACCION').val() == "M")
+          FondoLoadFormEdit(@Model.ID_FONDO);
+    });
     jQuery('#fondo_btn_grabar').click(function (e) {
         Fondo_RegistrarDatos();
     });
@@ -27,13 +31,6 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    @*<div class="form-group">
-                            @Html.LabelFor(model => model.COD_SECCION, new { @class = "col-sm-3 control-label" })
-                            <div class="col-sm-7">
-                                @Html.TextBoxFor(model => model.COD_SECCION, new { @class = "form-control", @maxlength = "50" })
-                                @Html.ValidationMessageFor(model => model.COD_SECCION, string.Empty, new { @class = "cssMessageError" })
-                            </div>
-                        </div>*@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DESC_FONDO, new { @class = "col-sm-3 control-label" })
                         <div class="col-sm-7">

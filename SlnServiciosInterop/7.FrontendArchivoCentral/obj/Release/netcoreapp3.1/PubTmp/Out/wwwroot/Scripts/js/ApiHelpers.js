@@ -63,7 +63,7 @@ API = {
             })
             .catch(function (error) {
                 fetchload.close();
-                alert("request error api", error);
+                alert("request error api: " + error.message);
             });
     },
     FetchPut: function (type, url, paramters, calback) {

@@ -129,7 +129,6 @@ function Fondo_Eliminar(id) {
 
     jConfirm("¿Desea eliminar este registro ?", "Atención", function (r) {
         if (r) {
-
             var url = `archivo-central/fondo/eliminar/${id}`;
             API.FetchGet("DELETE", url, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
@@ -292,3 +291,23 @@ function Fondo_MostrarNueva() {
 }
 
 
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+
+ function FondoLoadFormEdit(id) {
+    var url = `archivo-central/fondo/get-fondo/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_FONDO').val(auditoria.Objeto.DESC_FONDO);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
