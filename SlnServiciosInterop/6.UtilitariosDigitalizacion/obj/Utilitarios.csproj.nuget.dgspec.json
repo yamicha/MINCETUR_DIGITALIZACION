@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {}
+    "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+    "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "projectUniqueName": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
         "projectName": "CoServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
+        "projectPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Miguel\\.nuget\\packages\\",
+        "outputPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
+          "C:\\Users\\Miguel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -59,25 +58,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+    "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "projectUniqueName": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
         "projectName": "EnServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
+        "projectPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Miguel\\.nuget\\packages\\",
+        "outputPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
+          "C:\\Users\\Miguel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,15 +84,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               }
             }
           }
@@ -122,25 +120,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+    "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "projectUniqueName": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
         "projectName": "Utilitarios",
-        "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
-        "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
+        "projectPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "packagesPath": "C:\\Users\\Miguel\\.nuget\\packages\\",
+        "outputPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
+          "C:\\Users\\Miguel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -148,15 +146,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "E:\\APLICACIONES\\LINKSOFT_PROYECT\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
               }
             }
           }
@@ -235,7 +232,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
         }
       }
     }

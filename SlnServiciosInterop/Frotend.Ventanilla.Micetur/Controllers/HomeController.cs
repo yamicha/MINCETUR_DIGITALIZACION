@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Frotend.Ventanilla.Micetur.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Frotend.Ventanilla.Micetur.Authorization;
+using Utilitarios.Helpers.Authorization;
+using Utilitarios.Recursos;
+using EnServiciosDigitalizacion;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Frotend.Ventanilla.Micetur.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+        public  IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AccesoDenegado()
         {
             return View();
         }

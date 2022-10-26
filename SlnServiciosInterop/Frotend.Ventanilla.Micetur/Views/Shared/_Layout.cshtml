@@ -1,48 +1,208 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Frotend.Ventanilla.Micetur.Authorization
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Frotend.Ventanilla.Micetur</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">*@
+    <link href="@Url.Content("~/favicon.ico")" rel="icon">
+    <title>MINCETUR - @ViewBag.Title</title>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/fastselect/fastselect.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/font-awesome/css/font-awesome.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/fonts/style.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/jquery.alert.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/main.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/main-responsive.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css")" />
+    <link href="@Url.Content("~/assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/jqGrid/css/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.css")" />
+    <link rel="stylesheet" type="text/css" id="skin_color" href="@Url.Content("~/assets/css/theme_light.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/css/general.css")" />
+    <link href="~/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/SICA.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/inicializacion.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Js/ApiHelpers.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Js/General.js")" type="text/javascript"></script>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Frotend.Ventanilla.Micetur</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="background-color: white; vertical-align: middle; padding-right: 0px;">
+            <div class="navbar-header" style="float: left; height: 0px; vertical-align: middle;">
+                <img src="~/assets/images/logo-mincetur.png" style="float: left; width: 240px; margin-right: 20px; padding: 5px;" />
+                <label style="font-size: 24px; font-weight: 500; line-height: 1.1; color: #575556; margin-top: 20px; margin-left: -10px;">MICROFORMAS - MINCETUR</label>
+            </div>
+
+            <div class="navbar-tools">
+                <ul class="nav navbar-right">
+                    <li class="dropdown current-user" style="border-left: 1px solid #c8c7cc;">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#" aria-expanded="false" style="display: inline-flex">
+                            <span>
+                                <img src="~/assets/images/avatar-1-small.jpg" class="circle-img" alt="" style="margin-top: 4px;">
+                            </span>
+                            <span class="pr-lg-1 d-none d-lg-block">
+                                <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
+                                    <strong class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 16px">@User.GetUserName()</strong>
+                                    <input type="hidden" id="inputHddid_perfil" value="@User.GetUserIdPerfil()" />
+                                    <input type="hidden" id="inputHddCod_usuario" value="@User.GetCodUsuario()" />
+                                    <input type="hidden" id="inputHddId_Usuario" value="@User.GetUserId()" />
+                                </span>
+                                <span style="margin: 0px 0px 0px 8px; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;">
+                                    <small class="nav-text ml-2 d-none d-md-inline-block ng-binding" style="font-size: 13px" id="small_unidad">Unidad Orgánica: @User.GetOffice()</small>
+                                </span>
+                            </span>
+                            <i class="clip-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="~/Authorization/SignOut" style="cursor: pointer">
+                                    <i class="clip-exit"></i>&nbsp;Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="navbar-content">
+            <div class="main-navigation navbar-collapse collapse" id="menuPrincipal" style="margin-top: -2px;">
+                <ul class="main-navigation-menu">
+                    <li><a><i class="clip-list"></i><span class="title">Menú </span></a></li>
+                    <li id="liConsulta" class="active open">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-bars"></i><span class="title">Consultas</span><i class="icon-arrow"></i><span class="selected"></span></a><ul class="sub-menu">
+                            <li id="liControl" style=""> <a id="aControl" href="~/Consultas/control-documento" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Documentos</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li id="liProceso">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-file-pdf"></i><span class="title"> Proceso Digitalización</span><i class="icon-arrow"></i><span class="selected"></span></a><ul class="sub-menu">
+                            <li id="liRecepcion" style=""> <a id="aRecepcion" href="~/Digitalizacion/recepcion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Recepción</span></a></li>
+                            <li id="liDigitalizacion" style=""> <a id="aDigitalizacion" href="~/Digitalizacion/digitalizar-documento" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Digitalización</span></a></li>
+                            <li id="liControlCalidad" style=""> <a id="aControlCalidad" href="~/Digitalizacion/control-calidad" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Calidad</span></a></li>
+                            <li id="liReproceso" style=""> <a id="aReproceso" href="~/Digitalizacion/reproceso" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reproceso</span></a></li>
+                            <li id="liFedatario" style=""> <a id="aFedatario" href="~/Digitalizacion/fedatario" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Fedatario</span></a></li>
+                            <li id="liDevolucion" style=""> <a id="aDevolicion" href="~/Digitalizacion/devolucion-documento" style="height: auto; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Devolución de Documentos</span></a></li>
+                            <li id="liMicroformas" style=""> <a id="aMicroforma" href="~/Digitalizacion/microformas" style="height: auto; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Grabación y Rutulado de Microformas</span></a></li>
+                            <li id="liControlMicroformas" style=""> <a id="aFedatario" href="~/Digitalizacion/control-microforma" style="height: auto; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Microformas Grabadas</span></a></li>
+                            <li id="liControlAlamcenamiento" style=""> <a id="" href="~/Digitalizacion/control-almacenamiento" style="height: auto; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Control de Almacenamiento</span></a></li>
+                            <li id="liRevisionPeriodica" style=""> <a id="aControlMicroformas" href="~/Digitalizacion/revision-periodica" style="height: auto; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Revisión Periodica de Medios Soporte</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li id="liAdministracion">
+                        <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-cog-2"></i><span class="title"> Tablas Maestras</span><i class="icon-arrow"></i><span class="selected"></span></a>
+                        <ul class="sub-menu">
+                            <li id="liFondo" style=""> <a id="aFondo" href="~/Administracion/Fondo" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Fondo</span></a></li>
+                            <li id="liSeccion" style="">
+                                <a id="aSeccion" href="~/Administracion/Seccion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Sección</span></a>
+                                @*@Html.ActionLink("Ventas", "Index", new { area = "Administracion", controller = "Seccion" }, new { @class = "btn btn-primary text-light" })*@
+                            </li>
+                            @*<li id="liSubSeccion" style=""> <a id="aSubSeccion" style="height: 35px; padding-top: 9px;cursor:pointer"><span class="title">SubSección</span></a></li>*@
+                            <li id="liSerie" style=""> <a id="aSerie" href="~/Administracion/Serie" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Serie</span></a></li>
+                            @*<li id="liTipoDoc" style=""> <a id="aTipoDoc" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Documento</span></a></li>*@
+                            <li id="liTipoObservacion" style=""> <a id="aTipoObservacion" href="~/Administracion/Observacion" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Observación</span></a></li>
+                            <li id="liTipoSoporte" style=""> <a id="aTipoSoporte" href="~/Administracion/Soporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Tipo Soporte</span></a></li>
+                        </ul>
+                    </li>
+
+                    @*<li id="liReportes">
+            <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-stats"></i><span class="title"> Reportes</span><i class="icon-arrow"></i><span class="selected"></span></a>
+            <ul class="sub-menu">
+                <li id="liReporte" style=""> <a id="aReporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reportes</span></a></li>
+            </ul>
+        </li>*@
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" id="divMantenimiento">
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            <div id="Div_MasterPage" class="container" style="margin-left: 0px">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Frotend.Ventanilla.Micetur - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="row" style="margin-left: 0px">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="clip-home-3"></i>
+                                <a href="#">
+                                    <label id="lbNombreMenuPrincipal">Home</label>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <label id="lbNombreMenuSecundario">Inicio</label>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="side-app" id="divProceso" style="margin-left: 0px">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
-    <script src="@Url.Content("~/lib/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
+    </div>
+    <div class="footer clearfix">
+        <iframe id="#iframe" style="display:none;"></iframe>
+        <div class="footer-inner">
+            &copy; MICROFORMA
+        </div>
+        <div class="footer-items">
+            <span class="go-top"><i class="clip-chevron-up"></i></span>
+        </div>
+    </div>
+    <input type="hidden" id="hdfcounter" />
+
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-migrate-1.0.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui.datepicker-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/jqGrid/js/i18n/grid.locale-es.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/JSLINQ.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Autorizacion.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/blockUI/jquery.blockUI.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/perfect-scrollbar/src/jquery.mousewheel.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/perfect-scrollbar/src/perfect-scrollbar.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/less/less-1.5.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/jquery-cookie/jquery.cookie.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js")" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.allowchars.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.alphanumeric.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/js/main.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/js/index.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/linksoft.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.alerts.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootbox.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/assets/fastselect/fastselect.standalone.js")"></script>
+    <script src="@Url.Content("~/Scripts/download.min.js")" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+            var baseUrl = '@Url.Content("~/")';
+                $(function () {
+            Main.init();
+        });
+    </script>
 </body>
 </html>
+
