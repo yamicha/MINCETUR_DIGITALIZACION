@@ -41,23 +41,6 @@ namespace ApiServiciosDigitalizacion
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(x =>
-            //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettingsHelper.GetLlave)),
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false
-            //    };
-            //});
-
             services.Configure<resource.clases.ConfigurationManager>(Configuration.GetSection("ConfigurationManager"));
             services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
