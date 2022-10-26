@@ -30,7 +30,7 @@ function Observacion_ConfigurarGrilla(_grilla, _barra) {
     var colNames = [
         '', '', '',
         'Editar', 'Eliminar', 'Estado',
-        'Descripción', 
+        'Descripción',
         'Usuario Creación', 'Fecha Creación',
         'Usuario Modificación', 'Fecha Modificación'];
     var colModels = [
@@ -48,7 +48,7 @@ function Observacion_ConfigurarGrilla(_grilla, _barra) {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false },
         //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 250, hidden: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION', align: 'center', width: 250, hidden: false },
-        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false},
+        { name: 'FEC_MODIFICACION', index: 'FEC_MODIFICACION', align: 'center', width: 150, hidden: false },
         //{ name: 'IP_MODIFICACION', index: 'IP_MODIFICACION', align: 'center', width: 250, hidden: false }
     ];
     var opciones = {
@@ -73,7 +73,7 @@ function Observacion_actionEliminar(cellvalue, options, rowObject) {
 }
 
 function Observacion_estadoAction(cellvalue, options, rowObject) {
-    
+
     var check_ = 'check';
     if (rowObject['FLG_ESTADO'] == 1)
         check_ = 'checked';
@@ -288,3 +288,23 @@ function Observacion_MostrarNueva() {
 }
 
 
+
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+function Observacion_EditarGetOne(id) {
+    var url = `archivo-central/observacion/get-observacion/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_OBSERVACION').val(auditoria.Objeto.DESC_OBSERVACION);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}

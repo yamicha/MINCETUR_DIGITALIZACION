@@ -192,6 +192,34 @@ function MicroArchivo_Editar() {
     });
 }
 
+function MicroArchivo_GetOne(id) {
+    var url = `archivo-central/microforma/get-microforma/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#MA_TIPO_ARCHIVO').val(auditoria.Objeto.MicroArchivo.TIPO_ARCHIVO);
+                    $('#MA_RESPONSABLE').val(auditoria.Objeto.MicroArchivo.RESPONSABLE);
+                    $('#MICROFORMA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_OBSERVACION').val(auditoria.Objeto.MicroArchivo.OBSERVACION);
+                    $('#MA_DIRECCION').val(auditoria.Objeto.MicroArchivo.DIRECCION);
+                    $('#MA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_HORA').val(auditoria.Objeto.MicroArchivo.HORA);
+                    $('#MicroArchivoActa').attr('data-file', auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO);
+                    $('a[download-file="yes"]').click(function () {
+                        var IdFile = $(this).data('file');
+                        DownloadFile(IdFile);
+                    });
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
+
 // grila historial
 function MicroArchivo_HistorialCargarGrilla(_Grilla) {
     ID_MICROFORMA = $("#HDF_ID_MICROFORMA").val()

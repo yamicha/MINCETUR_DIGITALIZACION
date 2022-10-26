@@ -7,6 +7,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        Documento_EditValidarImagen(@Model.ID_DOCUMENTO); 
         CountCharactersControlTxt('VALIDAR_OBSERVACION', 'Documento_Validar_lbl4', 3000);
      $("#Documento_Ver_iframeVistaPrevia").attr("src", '@Url.Content("~/assets/sin-IMAGEN.jpg")');
        if ('@Model.VISOR_LF' != '' || '@Model.VISOR_LF' != null)

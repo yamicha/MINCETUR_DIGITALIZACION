@@ -40,7 +40,7 @@ function Aprobar_Evaluar() {
     jConfirm(" ¿ Desea " + pregunta + " al documento digitalizado ? ", "Atención", function (r) {
         if (r) {
             var Aprobar_ListaDocumentos = new Array();
-            var ID_TIPO_OBS = 0; 
+            var ID_TIPO_OBS = 0;
             if ($("#VALIDAR_ID_TIPO_OBS").val() != "")
                 ID_TIPO_OBS = parseInt($("#VALIDAR_ID_TIPO_OBS").val())
             var item = {
@@ -76,4 +76,5 @@ function Aprobar_Evaluar() {
             });
         }
     });
-} 
+}
+

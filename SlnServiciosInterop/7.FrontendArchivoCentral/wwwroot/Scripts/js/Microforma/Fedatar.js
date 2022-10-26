@@ -142,7 +142,8 @@ function Fedatar_ConformeMasivo() {
                 var itemDoc = {
                     IdDocumento: parseInt(data.Fedatar_ID_DOCUMENTO),
                     IdDocumentoAsignado: parseInt(data.Fedatar_ID_DOCUMENTO_ASIGNADO),
-                    UsuCreacion: $('#inputHddId_Usuario').val()
+                    UsuCreacion: $('#inputHddId_Usuario').val(),
+                    FlgConforme : 1
                 };
                 Fedatar_ListaDocumentos.push(itemDoc);
             }

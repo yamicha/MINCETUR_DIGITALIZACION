@@ -3,6 +3,11 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.SoporteModelView
 <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('#hd_SOPORTE_ACCION').val() == "M") {
+                Soporte_EditarGetOne(@Model.ID_SOPORTE);
+            }
+        });
     jQuery('#soporte_btn_grabar').click(function (e) {
         Soporte_RegistrarDatos();
     });

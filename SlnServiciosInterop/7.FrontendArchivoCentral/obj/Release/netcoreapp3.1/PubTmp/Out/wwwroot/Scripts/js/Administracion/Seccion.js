@@ -281,3 +281,25 @@ function Seccion_MostrarNueva() {
 }
 
 
+
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+
+function SeccionLoadFormEdit(id) {
+    var url = `archivo-central/seccion/get-seccion/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_CORTA_SECCION').val(auditoria.Objeto.DES_CORTA_SECCION);
+                    $('#DESC_LARGA_SECCION').val(auditoria.Objeto.DES_LARGA_SECCION);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}

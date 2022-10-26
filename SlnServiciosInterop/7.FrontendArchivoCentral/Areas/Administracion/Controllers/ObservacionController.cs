@@ -21,7 +21,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
         }
 
         [HttpGet, Route("~/Administracion/Observacion/Mantenimiento")]
-        public async Task<ActionResult> Mantenimiento(int id, string Accion)
+        public ActionResult Mantenimiento(int id, string Accion)
         {
             enAuditoria auditoria = new enAuditoria();
             ObservacionModelView model = new ObservacionModelView
@@ -29,30 +29,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                 ACCION = Accion,
                 ID_OBSERVACION = id
             };
-            try
-            {
-                if (Accion == "M")
-                {
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/observacion/get-observacion/{id}");
-                    if (!respuestapi.EjecucionProceso)
-                    {
-                        if (respuestapi.Rechazo)
-                            Log.Guardar(respuestapi.ErrorLog);
-                    }
-                    else
-                    {
-                        if (respuestapi.Objeto != null)
-                        {
-                            enObservacion item = JsonConvert.DeserializeObject<enObservacion>(respuestapi.Objeto.ToString());
-                            model.DESC_OBSERVACION = item.DESC_OBSERVACION;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                auditoria.Error(ex);
-            }
+
             return View(model);
         }
 

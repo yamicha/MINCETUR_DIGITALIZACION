@@ -3,7 +3,16 @@ var Tabla_grilla = "Tabla_grilla";
 var Tabla_barra = "Tabla_barra";
 var Tabla_ID_CONTROL_CARGA = 0;
 
+function CargarFormtato() {
+    var OptionsCboTabla = {
+        KeyVal: { value: "ID_TABLA", name: "DESCRIPCION_TABLA" },
+        paramters: null,
+        method: "GET"
+    }
+    LoadComboApi("archivo-central/carga/lista-formato", "ID_TABLA", OptionsCboTabla);
+}
 $(document).ready(function () {
+    Tabla_ControlCarga_Listar(); 
     $("#file-upload").change(function () {
         $("#lbl_file").html("Seleccionar archivo");
         var input = document.getElementById('file-upload');

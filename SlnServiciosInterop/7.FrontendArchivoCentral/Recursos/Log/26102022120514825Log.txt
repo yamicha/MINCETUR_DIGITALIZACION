@@ -1,0 +1,1 @@
+{"Objeto":[{"ID_USUARIO":24,"NOMBRE_USUARIO":"YORDAN YAUYO CARBAJAL"},{"ID_USUARIO":25,"NOMBRE_USUARIO":"IVAN PEREZ TINTAYA"}],"MensajeSalida":"","Code":200,"ErrorLog":"","EjecucionProceso":true,"URL":null,"Rechazo":false}

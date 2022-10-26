@@ -24,7 +24,6 @@ API = {
         });
         return rsp;
     },
-
     Fetch: function (type, url, paramters, calback) {
         fetchload.init();
         var request = new Request(BaseUrlApi + url, {
@@ -33,9 +32,9 @@ API = {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                 'mode' : 'no-cors'
+                'mode': 'no-cors'
             }
-        }); 
+        });
         fetch(request)
             .then((resp) => resp.json())
             .then(function (data) {
@@ -47,8 +46,6 @@ API = {
                 alert("request error api: " + error.message);
             });
     },
-
-
     FetchGet: function (type, url, calback) {
         fetchload.init();
         var request = new Request(BaseUrlApi + url, {
@@ -72,8 +69,6 @@ API = {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                //'Authorization': 'Bearer my-token',
-                //'My-Custom-Header': 'foobar'
             },
             body: JSON.stringify(paramters)
         };
@@ -81,8 +76,6 @@ API = {
             .then(response => response.json())
             .then(data => alert(data));
     }
-
-
 }
 
 function DownloadFileApi(Url) {
@@ -170,5 +163,56 @@ function DownloadFile(ID_DOC) {
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.status);
         }
+    });
+}
+
+function LoadComboApi(Url, Input, Options) {
+    return new Promise((resolve) => {
+        var request = null;
+        if (Options.method == "GET") {
+            request = new Request(BaseUrlApi + Url, {
+                method: "GET",
+                headers: new Headers()
+            });
+        } if (Options.method == "POST") {
+            request = new Request(BaseUrlApi + Url, {
+                method: "POST",
+                body: JSON.stringify(Options.paramters),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'mode': 'no-cors'
+                }
+            });
+        }
+        fetch(request)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                fetchload.close();
+                if (data != null && data != "") {
+                    if (data.EjecucionProceso) {
+                        if (!data.Rechazo) {
+                            if (data.Objeto != null) {
+                                var Html = "";
+                                var Combo = $('#' + Input);
+                                $(Combo).html('').append('<option value="">--seleccione--</option>');
+                                $.each(data.Objeto, function (x, v) {
+                                    Html += `<option value=${eval('v.' + Options.KeyVal.value)}> ${eval('v.' + Options.KeyVal.name)} </option>`
+                                });
+                                $(Combo).append(Html);
+                                resolve(true);
+                            }
+                        } else {
+                            resolve(false);
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    }
+                }
+            })
+            .catch(function (error) {
+                fetchload.close();
+                resolve(false);
+                alert("request error api: " + error.message);
+            });
     });
 }

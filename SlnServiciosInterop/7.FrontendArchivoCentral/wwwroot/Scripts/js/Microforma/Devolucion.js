@@ -114,6 +114,16 @@ function Devolver_GrabarDevolucion() {
     }
 }
 
+async function Devolver_ComboArea() {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_AREA", name: "DES_AREA" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    await LoadComboApi("archivo-central/area/listar", "ID_AREA", OptionsCbo)
+
+}
+
 
 /*************************************************** TAB DEVUELTOS *********************************/
 var Devueltos_grilla = 'Devueltos_grilla';
@@ -199,7 +209,6 @@ function DevueltosLote_CargarGrilla() {
     });
 
 }
-
 
 function Devueltos_ValidarLote() {
     var VALIDO = false;

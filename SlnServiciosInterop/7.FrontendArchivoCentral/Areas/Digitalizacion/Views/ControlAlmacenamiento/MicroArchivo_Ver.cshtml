@@ -6,6 +6,7 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
+        MicroArchivo_GetOne(@Model.ID_MICROFORMA); 
         MicroArchivo_HistorialConfigurarGrilla("MicroArchivoHistorial_grilla", "MicroArchivoHistorial_barra");
         MicroArchivo_HistorialCargarGrilla("MicroArchivoHistorial_grilla"); 
     });
@@ -67,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="form-row">
-                                        <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.MA_ID_DOC_ALMACENAMIENTO)"><i class="clip-download"></i>&nbsp; Descargar Acta Almacenamiento</a>
+                                        <a href="javascript:void(0)" id="MicroArchivoActa" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp; Descargar Acta Almacenamiento</a>
                                     </div>
                                 </fieldset>
                             </div>

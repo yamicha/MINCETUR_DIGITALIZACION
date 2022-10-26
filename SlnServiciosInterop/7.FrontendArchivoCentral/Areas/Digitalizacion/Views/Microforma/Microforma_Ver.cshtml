@@ -6,8 +6,9 @@
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
-    $(document).ready(function () {
-    });
+    $(function () {
+        MicroformaFinalizado_GetOne(@Model.ID_MICROFORMA);
+    }); 
 </script>
 <style>
 .time-picker {
@@ -190,7 +191,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                            <a href="javascript:void(0)" id="MicroActaApertura" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -198,15 +199,15 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
+                                            <a href="javascript:void(0)" id="MicroActaCierre" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" id="Conten_ActaConform" style="display:none;">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta conformidad </label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Conformidad </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CONFORMIDAD)"><i class="clip-download"></i>&nbsp;Descargar Acta Conformidad</a>
+                                            <a href="javascript:void(0)" id="MicroActaConformidad" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp;Descargar Acta Conformidad</a>
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +281,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Almacenamiento </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.MA_ID_DOC_ALMACENAMIENTO)"><i class="clip-download"></i>&nbsp;Descargar Acta Conformidad</a>
+                                            <a href="javascript:void(0)" id="MicroArchivoActa" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp; Descargar Acta Almacenamiento</a>
                                         </div>
                                     </div>
 

@@ -3,9 +3,9 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.SeccionModelView
 <script type="text/javascript">
-        $(document).ready(function () {
-        if ($('#hd_SECCION_ACCION').val() == "M")
-            SeccionLoadFormEdit(@Model.ID_SECCION);
+    $(document).ready(function () {
+    if ($('#hd_SECCION_ACCION').val() == "M")
+        SeccionLoadFormEdit(@Model.ID_SECCION);
     });
     jQuery('#SECCION_BTNGRABAR').click(function (e) {
         Seccion_RegistrarDatos();

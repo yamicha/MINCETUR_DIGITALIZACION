@@ -22,7 +22,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
 
 
         [HttpGet, Route("~/Administracion/Soporte/Mantenimiento")]
-        public async Task<ActionResult> Mantenimiento(int id, string Accion)
+        public ActionResult Mantenimiento(int id, string Accion)
         {
             enAuditoria auditoria = new enAuditoria();
             SoporteModelView model = new SoporteModelView
@@ -30,30 +30,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                 ACCION = Accion,
                 ID_SOPORTE = id
             };
-            try
-            {
-                if (Accion == "M")
-                {
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/soporte/get-soporte/{id}");
-                    if (!respuestapi.EjecucionProceso)
-                    {
-                        if (respuestapi.Rechazo)
-                            Log.Guardar(respuestapi.ErrorLog);
-                    }
-                    else
-                    {
-                        if (respuestapi.Objeto != null)
-                        {
-                            enSoporte item = JsonConvert.DeserializeObject<enSoporte>(respuestapi.Objeto.ToString());
-                            model.DESC_SOPORTE = item.DESC_SOPORTE;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                auditoria.Error(ex);
-            }
+
             return View(model);
         }
     }
