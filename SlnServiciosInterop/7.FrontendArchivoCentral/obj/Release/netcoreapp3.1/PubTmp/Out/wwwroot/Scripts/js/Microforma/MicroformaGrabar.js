@@ -181,3 +181,12 @@ function MicroformaGrabar_Grabar() {
         }
     });
 }
+
+function MicroformaGrabar_CargarCboSoporte() {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_SOPORTE", name: "DESC_SOPORTE" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    LoadComboApi("archivo-central/soporte/listar", "MICROFORMA_ID_TIPO_SOPORTE", OptionsCbo)
+}

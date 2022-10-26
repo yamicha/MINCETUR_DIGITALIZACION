@@ -76,6 +76,14 @@ function Revision_MostrarEvaluar() {
         if (request.status != 200) return;
     });
 }
+function Revision_CargarConboUsuario() {
+    var OptionsCboUsu = {
+        KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
+        paramters: null,
+        method: "GET"
+    }
+    LoadComboApi("archivo-central/usuario/listar", "ID_USUARIO", OptionsCboUsu);
+}
 async function Revision_Grabar() {
     MicroForma_Lista.pop();
     var IdDocRevision = 0;
@@ -145,6 +153,7 @@ async function Revision_Grabar() {
         $('#MsgValidActa').show();
     }
 }
+
 function Microforma_DevolverRevision(IdMicroforma) {
     jConfirm(" ¿ Desea devolver esta microforma para revisión ?", "Atención", async function (r) {
         if (r) {
@@ -175,6 +184,8 @@ function Microforma_DevolverRevision(IdMicroforma) {
         }
     });
 }
+
+
 //********************************************************** tab OBSERVADOS *********************************************************/
 function Microforma_MostrarReprocesar(ID_MICROFORMA) {
     jQuery("#myModalNuevo").html('');
@@ -184,13 +195,75 @@ function Microforma_MostrarReprocesar(ID_MICROFORMA) {
     });
 }
 
+async function Microforma_ReprocesoGetOne(id) {
+    var OptionsCboSoporte = {
+        KeyVal: { value: "ID_SOPORTE", name: "DESC_SOPORTE" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    if (await LoadComboApi("archivo-central/soporte/listar", "MICROFORMA_ID_TIPO_SOPORTE", OptionsCboSoporte)) {
+        var url = `archivo-central/microforma/get-microforma/${id}`;
+        API.FetchGet("GET", url, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        $('#MICROFORMA_ID_TIPO_SOPORTE').val(auditoria.Objeto.ID_TIPO_SOPORTE);
+                        $('#MICROFORMA_CODIGO_FEDATARIO').val(auditoria.Objeto.CODIGO_FEDATARIO);
+                        $('#MICROFORMA_FECHA').val(auditoria.Objeto.FECHA);
+                        $('#MICROFORMA_HORA').val(auditoria.Objeto.HORA);
+                        $('#MICROFORMA_ACTA').val(auditoria.Objeto.NRO_ACTA);
+                        $('#MICROFORMA_COPIAS').val(auditoria.Objeto.NRO_COPIAS);
+                        $('#MICROFORMA_OBSERVACION').val(auditoria.Objeto.OBSERVACION);
+                        $('#MICROFORMA_CODIGO_SOPORTE').val(auditoria.Objeto.CODIGO_SOPORTE);
+                        $('#MICROFORMA_NROVOLUMEN').val(auditoria.Objeto.NRO_VOLUMEN);
+                        $('#MA_TIPO_ARCHIVO').val(auditoria.Objeto.MicroArchivo.TIPO_ARCHIVO);
+                        $('#MA_RESPONSABLE').val(auditoria.Objeto.MicroArchivo.RESPONSABLE);
+                        $('#MICROFORMA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                        $('#MA_OBSERVACION').val(auditoria.Objeto.MicroArchivo.OBSERVACION);
+                        $('#MA_DIRECCION').val(auditoria.Objeto.MicroArchivo.DIRECCION);
+                        $('#MA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                        $('#MA_HORA').val(auditoria.Objeto.MicroArchivo.HORA);
+                        $('#MicroArchivoActa').attr('data-file', auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO);
+                        //files download
+                        if (auditoria.Objeto.ID_DOC_APERTURA != 0) {
+                            $('#DownloadApertura').show();
+                            $('#DownloadApertura').attr('data-file', auditoria.Objeto.ID_DOC_APERTURA);
+                        }
+                        if (auditoria.Objeto.ID_DOC_CIERRE != 0) {
+                            $('#DownloadCierre').show();
+                            $('#DownloadCierre').attr('data-file', auditoria.Objeto.ID_DOC_APERTURA);
+                        }
+                        if (auditoria.Objeto.ID_DOC_CONFORMIDAD != 0) {
+                            $('#DownloadConformidad').show();
+                            $('#DownloadConformidad').attr('data-file', auditoria.Objeto.ID_DOC_CONFORMIDAD);
+                        }
+                        if (auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO != 0) {
+                            $('#DownloadAlmacenamiento').show();
+                            $('#DownloadAlmacenamiento').attr('data-file', auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO);
+                        }
+                        $('label[download-file="yes"]').click(function () {
+                            var IdFile = $(this).data('file');
+                            DownloadFile(IdFile);
+                        });
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            }
+        });
+    }
+}
+
 async function Revision_ReprocesoGrabar() {
     jConfirm(" ¿ Desea reprocesar esta microforma  ? ", "Atención", async function (r) {
         if (r) {
-            var IdDocApertura = $('#HDF_ID_DOC_APERTURA').val();
-            var IdDocCierre = $('#HDF_ID_DOC_CIERRE').val();
-            var IdDocConformidad = $('#HDF_ID_DOC_CONFORMIDAD').val();
-            var IdDocAlmacenamiento = $('#HDF_MA_ID_DOC_ALMACENAMIENTO').val();
+            debugger; 
+            var IdDocApertura = $('#DownloadApertura').data('file');
+            var IdDocCierre = $('#DownloadCierre').data('file');
+            var IdDocConformidad = $('#DownloadConformidad').data('file');
+            var IdDocAlmacenamiento = $('#DownloadAlmacenamiento').data('file');
             if ($('#fileActaApertura').prop('files')[0] != undefined) {
                 var formdataFileApertura = new FormData();
                 formdataFileApertura.append('fileArchivo', $('#fileActaApertura').prop('files')[0]);

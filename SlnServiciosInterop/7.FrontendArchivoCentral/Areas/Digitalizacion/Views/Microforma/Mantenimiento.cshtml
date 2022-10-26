@@ -6,8 +6,12 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
+
         if ($('#HDF_ACCION').val() == "M") {
             $('#MICROFORMA_NROVOLUMEN').prop('disabled', true);
+            MicroformaReprocesar_GetOne(@Model.ID_MICROFORMA);
+        } else {
+            MicroformaGrabar_CargarCboSoporte();
         }
         $('#Microforma_Grabar_btn_Grabar').click(function (e) {
             if ($("#FrmMicroformaGrabar").valid()) {
@@ -19,7 +23,7 @@
             }
         });
     });
-  
+
     timePicker('MICROFORMA_HORA');
     $('#MICROFORMA_FECHA').datepicker({
         changeMonth: true,
@@ -132,12 +136,9 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaApertura" type="file" class="file" onchange="ProcesarArchivo(this,'filenameApertura')">
                                                     </label>
-                                                    @if (Model.Accion == "M" && Model.ID_DOC_APERTURA != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.ID_DOC_APERTURA)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
+                                                    <label class="btn btn-danger btn-file" id="DownloadApertura" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,18 +157,15 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaCierre" type="file" class="file" onchange="ProcesarArchivo(this,'filenameCierre')">
                                                     </label>
-                                                    @if (Model.Accion == "M" && Model.ID_DOC_CIERRE != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.ID_DOC_CIERRE)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
-                                                    </div>
+                                                    <label class="btn btn-danger btn-file" id="DownloadCierre" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row" >
+                                    <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de Fedatario: </label>
                                         </div>
@@ -198,8 +196,8 @@
         </div>
     </div>
     @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
-    @Html.Hidden("HDF_ID_DOC_APERTURA", Model.ID_DOC_APERTURA)
-    @Html.Hidden("HDF_ID_DOC_CIERRE", Model.ID_DOC_CIERRE)
+    @*@Html.Hidden("HDF_ID_DOC_APERTURA", Model.ID_DOC_APERTURA)
+    @Html.Hidden("HDF_ID_DOC_CIERRE", Model.ID_DOC_CIERRE)*@
     @Html.Hidden("HDF_ACCION", Model.Accion)
 }
 

@@ -212,7 +212,7 @@ function Documento_actionVerImagen(cellvalue, options, rowObject) {
     var _btn = "";
     var COD_DOCUMENTO = rowObject[10];
     if (_ID_MODULO == 6 || _ID_MODULO == 10) {
-        _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
+        _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[26]+ ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
     } else {
         _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[26] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
     }
@@ -263,9 +263,9 @@ function Documento_Ver_Proceso(CODIGO) {
     });
 }
 
-function Documento_ValidarImagen(CODIGO) {
+function Documento_ValidarImagen(CODIGO,ID_LASER) {
     jQuery("#myModal_Documento_Ver_Imagen").html('');
-    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/validar-imagen?ID_DOCUMENTO=" + CODIGO, function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/validar-imagen?ID_DOCUMENTO=" + CODIGO+"&ID_LASER=" + ID_LASER, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');
         if (request.status != 200) return;
     });
@@ -574,4 +574,43 @@ function Documento_Exportar(Rules) {
             alert(error);
         }
     });
+}
+
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+
+async function Documento_EditValidarImagen(id) {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_OBSERVACION", name: "DESC_OBSERVACION" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    if (await LoadComboApi("archivo-central/observacion/listar", "VALIDAR_ID_TIPO_OBS", OptionsCbo)) {
+        var url = `archivo-central/documento/get-documento/${id}`;
+        API.FetchGet("GET", url, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        $('#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO').val(auditoria.Objeto.ID_DOCUMENTO_ASIGNADO);
+                        $('#NOM_DOCUMENTO').val(auditoria.Objeto.NOM_DOCUMENTO);
+                        $('#DESC_FONDO').val(auditoria.Objeto.DES_FONDO);
+                        $('#DESC_LARGA_SECCION').val(auditoria.Objeto.DES_LARGA_SECCION);
+                        $('#DESC_SERIE').val(auditoria.Objeto.DES_SERIE);
+                        $('#ANIO').val(auditoria.Objeto.ANIO);
+                        $('#FOLIOS').val(auditoria.Objeto.FOLIOS);
+                        $('#OBSERVACION').val(auditoria.Objeto.OBSERVACION);
+                        $('#DESCRIPCION').val(auditoria.Objeto.DESCRIPCION);
+                        $('#VALIDAR_NOMBRE_DIGITALIZADOR').val(auditoria.Objeto.VALIDAR_NOMBRE_DIGITALIZADOR);
+                        $('#VALIDAR_NOMBRE_DIGITALIZADOR').val(auditoria.Objeto.NOMBRE_USUARIO);
+                        $('#DESCRIPCION').val(auditoria.Objeto.DESCRIPCION);
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            }
+        });
+    }
 }

@@ -11,9 +11,11 @@ $(document).ready(function () {
 
 jQuery('#aTabAsignados').click(function (e) {
     _ID_LOTE = 0;
+    Asignados_CargarUsuarios(); 
     Asignados_ListaDocumentos = new Array();
     Lote_CargarGrilla(Asignados_Lote_grilla,"","0");
     Asignados_buscar();
+
 });
 
 function Asignados_buscar() {
@@ -95,3 +97,12 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
         jAlert("Debe re-asignar por lo menos un documento.", "Atención");
     }
 });
+
+function Asignados_CargarUsuarios() {
+    var OptionsCboTabla = {
+        KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
+        paramters: null,
+        method: "GET"
+    }
+    LoadComboApi("archivo-central/usuario/listar", "ID_DIGITALIZADOR2", OptionsCboTabla);
+}

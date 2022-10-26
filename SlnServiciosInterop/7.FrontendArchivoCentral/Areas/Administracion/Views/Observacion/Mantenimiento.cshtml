@@ -3,6 +3,11 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.ObservacionModelView
 <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('#hd_OBSERVACION_ACCION').val() == "M") {
+                Observacion_EditarGetOne(@Model.ID_OBSERVACION);
+        }
+    });
     jQuery('#observacion_btn_grabar').click(function (e) {
         Observacion_RegistrarDatos();
     });

@@ -310,3 +310,35 @@ function Serie_MostrarNueva() {
 }
 
 
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+
+async function SerieLoadFormEdit(id) {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_SECCION", name: "DES_CORTA_SECCION" }, 
+        paramters: { FlgEstado: "1" }, 
+        method: "POST"
+    }
+    if (await LoadComboApi("archivo-central/seccion/listar", "ID_SECCION", OptionsCbo)){
+        var url = `archivo-central/serie/get-serie/${id}`;
+        API.FetchGet("GET", url, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        $('#ID_SECCION').val(auditoria.Objeto.ID_SECCION);
+                        $('#COD_SERIE').val(auditoria.Objeto.COD_SERIE);
+                        $('#DES_SERIE').val(auditoria.Objeto.DES_SERIE);
+                        $('#COD_SERIE').val(auditoria.Objeto.COD_SERIE);
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            }
+        });
+    }
+}
+
+

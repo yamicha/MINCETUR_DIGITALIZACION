@@ -18,9 +18,11 @@
 <script type="text/javascript" defer>
     $(document).ready(function () {
         Remove_RemoverClases("liRecepcion");
+        CargarFormtato(); 
         Tabla_Resultados('@Model.ID_CONTROL_CARGA_DEFAULT','@Model.ID_TABLA_DEFAULT');
         Tabla_Mostrar_div_Formato();
         Tabla_buscar();
+
 
     });
     function ValidarLetras(control, l, n, e, op, oc, oct) {

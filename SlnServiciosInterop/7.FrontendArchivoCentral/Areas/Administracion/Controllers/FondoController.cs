@@ -24,7 +24,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
         }
 
         [HttpGet, Route("~/Administracion/Fondo/Mantenimiento")]
-        public async Task<ActionResult> Mantenimiento(int id, string Accion)
+        public ActionResult Mantenimiento(int id, string Accion)
         {
             enAuditoria auditoria = new enAuditoria();
             FondoModelView model = new FondoModelView
@@ -32,31 +32,6 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Controllers
                 ACCION = Accion,
                 ID_FONDO = id
             };
-            try
-            {
-                if (Accion == "M")
-                {
-                    //enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Fondo/get-fondo/{id}");
-                    enAuditoria respuestapi = await new CssApi().GetApi<enAuditoria>($"archivo-central/Fondo/get-fondo/{id}",User.GetUserToken());
-                    if (!respuestapi.EjecucionProceso)
-                    {
-                        if (respuestapi.Rechazo)
-                            Log.Guardar(respuestapi.ErrorLog);
-                    }
-                    else
-                    {
-                        if (respuestapi.Objeto != null)
-                        {
-                            enFondo item = JsonConvert.DeserializeObject<enFondo>(respuestapi.Objeto.ToString());
-                            model.DESC_FONDO = item.DESC_FONDO;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Guardar(ex.Message.ToString());
-            }
             return View(model);
         }
 

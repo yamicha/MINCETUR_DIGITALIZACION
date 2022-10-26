@@ -257,7 +257,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         foreach (DocumentoValidarModel item in entidad.LisIdDocumento)
                         {
-                            item.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;             
+                            item.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;
+                            //item.FlgConforme = 1; 
                             repositorio.Documento_Fedatario_Validar(item, ref auditoria);
                             if (auditoria.Rechazo)
                                 break; 

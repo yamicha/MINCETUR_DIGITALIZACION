@@ -6,11 +6,12 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
+        Microforma_ReprocesoGetOne(@Model.ID_MICROFORMA);
         $('#Microforma_BtnGrabar').click(function () {
             if ($('#FrmRevisionReprocesar').valid()) {
                 Revision_ReprocesoGrabar();
             }
-        }); 
+        });
     });
     $('#MICROFORMA_FECHA, #MA_FECHA').datepicker({
         changeMonth: true,
@@ -213,12 +214,9 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaApertura" type="file" class="file" onchange="ProcesarArchivo(this,'filenameApertura')">
                                                     </label>
-                                                    @if (Model.ID_DOC_APERTURA != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.ID_DOC_APERTURA)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
+                                                    <label class="btn btn-danger btn-file" id="DownloadApertura" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -238,12 +236,9 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaCierre" type="file" class="file" onchange="ProcesarArchivo(this,'filenamecierre')">
                                                     </label>
-                                                    @if (Model.ID_DOC_CIERRE != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.ID_DOC_CIERRE)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
+                                                    <label class="btn btn-danger btn-file" id="DownloadCierre" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,12 +258,9 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaConformidad" type="file" class="file" onchange="ProcesarArchivo(this,'filenameConformidad')">
                                                     </label>
-                                                    @if (Model.ID_DOC_CONFORMIDAD != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.ID_DOC_CONFORMIDAD)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
+                                                    <label class="btn btn-danger btn-file" id="DownloadConformidad" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +317,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;",@disabled="true" })
+                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -354,12 +346,9 @@
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
                                                         <input id="fileActaAlmacenamiento" type="file" class="file" onchange="ProcesarArchivo(this,'filenameAlmacenamiento')">
                                                     </label>
-                                                    @if (Model.MA_ID_DOC_ALMACENAMIENTO != 0)
-                                                    {
-                                                        <label class="btn btn-danger btn-file" onclick="DownloadFile(@Model.MA_ID_DOC_ALMACENAMIENTO)">
-                                                            <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
-                                                        </label>
-                                                    }
+                                                    <label class="btn btn-danger btn-file" id="DownloadAlmacenamiento" download-file="yes" data-file="0" style="display:none">
+                                                        <i class="clip-file-pdf"></i>&nbsp; <span class="hidden-xs">Descargar</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>

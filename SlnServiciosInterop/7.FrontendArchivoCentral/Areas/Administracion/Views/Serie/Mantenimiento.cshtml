@@ -3,6 +3,11 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.SerieModelView
 <script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#hd_SERIE_ACCION').val() == "M") {     
+            SerieLoadFormEdit(@Model.ID_SERIE);
+        }
+    });
     jQuery('#serie_btn_grabar').click(function (e) {
         Serie_RegistrarDatos();
     });
@@ -28,7 +33,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.CBO_SECCION, new { @class = "col-sm-3 control-label" })
+                        @Html.LabelFor(model => model.ID_SECCION, new { @class = "col-sm-3 control-label" })
                         <div class="col-sm-7">
                             @Html.DropDownListFor(model => model.ID_SECCION, Model.CBO_SECCION, new { @class = "form-control", @maxlength = "50" })
                             @Html.ValidationMessageFor(model => model.ID_SECCION, string.Empty, new { @class = "cssMessageError" })

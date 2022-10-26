@@ -7,6 +7,7 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script>
     $(function () {
+            Microforma_GetOne(@Model.ID_MICROFORMA);
         $('#Microforma_Grabar_btn_Evaluar').click(function () {
             MicroformaEvaluar();
         });
@@ -68,8 +69,8 @@
                                         <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo de soporte: </label>
                                     </div>
                                     <div class="col-sm-6">
-                                        @Html.DropDownListFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, Model.Lista_MICROFORMA_ID_TIPO_SOPORTE, new { @class = "form-control", disabled = "true" })
-                                        @Html.ValidationMessageFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
+                                        @Html.TextBoxFor(model => model.MICROFORMA_DESC_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", disabled = "true" })
+                                        @Html.ValidationMessageFor(model => model.MICROFORMA_DESC_SOPORTE, string.Empty, new { @class = "cssMessageError" })
                                     </div>
                                 </div>
                                 <div class="row">
@@ -112,7 +113,7 @@
                                         <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Apertura: </label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_APERTURA)"><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
+                                        <a href="javascript:void(0)" id="MicroActaApertura" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp; Descargar Acta Apertura</a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -120,9 +121,10 @@
                                         <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre </label>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a href="javascript:void(0)" class="btn btn-link" onclick="DownloadFile(@Model.ID_DOC_CIERRE)"><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
+                                        <a href="javascript:void(0)" id="MicroActaCierre" class="btn btn-link" download-file="yes" data-file=""><i class="clip-download"></i>&nbsp;Descargar Acta Cierre</a>
                                     </div>
                                 </div>
+
                                 @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroEvaluar", @class = "form-horizontal" }))
                                 {
                                     @Html.ValidationSummary(true)
@@ -176,7 +178,7 @@
                                                             funcionalidad de los medios de soporte, Identificación y recuperación de imágenes,
                                                             Integridad, Legibilidad de Imagen/Impresión son correctos.
                                                         </p>
-     
+
                                                     </div>
                                                 </div>
                                             </div>

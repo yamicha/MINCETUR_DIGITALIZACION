@@ -3,11 +3,13 @@ var Asignar_barra = 'Asignar_barra';
 var Asignar_ListaDocumentos = new Array();
 
 $(document).ready(function () {
+
 });
 
 jQuery('#aTabAsignar').click(function (e) {
     Asignar_ListaDocumentos = new Array();
     Asignar_buscar();
+    Asignar_CargarUsuarios(); 
 });
 
 function Asignar_buscar() {
@@ -85,3 +87,13 @@ function Asignar_Digitalizador() {
         jAlert("Debe seleccionar un digitalizador.", "Atención");
     }
 }
+
+function Asignar_CargarUsuarios() {
+    var OptionsCboUsu = {
+        KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
+        paramters: null,
+        method: "GET"
+    }
+    LoadComboApi("archivo-central/usuario/listar", "ID_DIGITALIZADOR", OptionsCboUsu);
+}
+

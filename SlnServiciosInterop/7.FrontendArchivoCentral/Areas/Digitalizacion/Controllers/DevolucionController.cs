@@ -29,51 +29,19 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/devolucion/mantenimiento")]
-        public async Task<ActionResult> Mantenimiento(string Accion)
+        public  ActionResult Mantenimiento(string Accion)
         {
             DevolverModelView model = new DevolverModelView();
             try
             {
                 model.NOMBRE_USUARIO = User.GetUserName();
                 model.ListaArea = new List<SelectListItem>();
-                var paramarea= new parameters()
-                {
-                    FlgEstado = "1"
-                };
-                enAuditoria postArea = await new CssApi().PostApi<enAuditoria>($"archivo-central/area/listar", paramarea);
-                if (postArea != null)
-                {
-                    if (!postArea.EjecucionProceso)
-                    {
-                        if (postArea.Rechazo)
-                            Log.Guardar(postArea.ErrorLog);
-                    }
-                    else
-                    {
-                        if (postArea.Objeto != null)
-                        {
-                            List<enArea> Lista = JsonConvert.DeserializeObject<List<enArea>>(postArea.Objeto.ToString());
-                            if (Lista != null)
-                            {
-                                model.ListaArea = Lista.Select(x => new SelectListItem
-                                {
-                                    Value = x.ID_AREA.ToString(),
-                                    Text = x.DES_AREA
-                                }).ToList();
-                            }
-                        }
-                    }
-                }
+                model.ListaArea.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
             }
             catch (Exception ex)
             {
                 Log.Guardar(ex.Message.ToString());
             }
-            finally
-            {
-                model.ListaArea.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
-            }
-
             return View(model);
         }
 

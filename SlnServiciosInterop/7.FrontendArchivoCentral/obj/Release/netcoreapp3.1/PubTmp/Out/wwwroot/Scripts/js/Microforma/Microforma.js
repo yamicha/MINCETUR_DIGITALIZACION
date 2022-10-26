@@ -488,3 +488,81 @@ function Revision_CargarGrilla(_Grilla) {
     });
 }
 
+// extras
+function Microforma_GetOne(id) {
+    var url = `archivo-central/microforma/get-microforma/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#MICROFORMA_DESC_SOPORTE').val(auditoria.Objeto.DESC_SOPORTE);
+                    $('#MICROFORMA_CODIGO_FEDATARIO').val(auditoria.Objeto.CODIGO_FEDATARIO);
+                    $('#MICROFORMA_FECHA').val(auditoria.Objeto.FECHA);
+                    $('#MICROFORMA_HORA').val(auditoria.Objeto.HORA);
+                    $('#MICROFORMA_ACTA').val(auditoria.Objeto.NRO_ACTA);
+                    $('#MICROFORMA_COPIAS').val(auditoria.Objeto.NRO_COPIAS);
+                    $('#MICROFORMA_OBSERVACION').val(auditoria.Objeto.OBSERVACION);
+                    $('#MICROFORMA_CODIGO_SOPORTE').val(auditoria.Objeto.CODIGO_SOPORTE);
+                    $('#MICROFORMA_NROVOLUMEN').val(auditoria.Objeto.NRO_VOLUMEN);
+                    $('#MicroActaApertura').attr('data-file', auditoria.Objeto.ID_DOC_APERTURA);
+                    $('#MicroActaCierre').attr('data-file', auditoria.Objeto.ID_DOC_CIERRE);
+                    if (auditoria.Objeto.ID_DOC_CONFORMIDAD != 0) {
+                        $('#Conten_ActaConform').show();
+                        $('#MicroActaConformidad').attr('data-file', auditoria.Objeto.ID_DOC_CONFORMIDAD);
+                    }
+                    $('a[download-file="yes"]').click(function () {
+                        var IdFile = $(this).data('file');
+                        DownloadFile(IdFile);
+                    });
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
+
+function MicroformaFinalizado_GetOne(id) {
+    var url = `archivo-central/microforma/get-microforma/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#MICROFORMA_DESC_SOPORTE').val(auditoria.Objeto.DESC_SOPORTE);
+                    $('#MICROFORMA_CODIGO_FEDATARIO').val(auditoria.Objeto.CODIGO_FEDATARIO);
+                    $('#MICROFORMA_FECHA').val(auditoria.Objeto.FECHA);
+                    $('#MICROFORMA_HORA').val(auditoria.Objeto.HORA);
+                    $('#MICROFORMA_ACTA').val(auditoria.Objeto.NRO_ACTA);
+                    $('#MICROFORMA_COPIAS').val(auditoria.Objeto.NRO_COPIAS);
+                    $('#MICROFORMA_OBSERVACION').val(auditoria.Objeto.OBSERVACION);
+                    $('#MICROFORMA_CODIGO_SOPORTE').val(auditoria.Objeto.CODIGO_SOPORTE);
+                    $('#MICROFORMA_NROVOLUMEN').val(auditoria.Objeto.NRO_VOLUMEN);
+                    $('#MicroActaApertura').attr('data-file', auditoria.Objeto.ID_DOC_APERTURA);
+                    $('#MicroActaCierre').attr('data-file', auditoria.Objeto.ID_DOC_CIERRE);
+                    $('#MA_TIPO_ARCHIVO').val(auditoria.Objeto.MicroArchivo.TIPO_ARCHIVO);
+                    $('#MA_RESPONSABLE').val(auditoria.Objeto.MicroArchivo.RESPONSABLE);
+                    $('#MICROFORMA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_OBSERVACION').val(auditoria.Objeto.MicroArchivo.OBSERVACION);
+                    $('#MA_DIRECCION').val(auditoria.Objeto.MicroArchivo.DIRECCION);
+                    $('#MA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_HORA').val(auditoria.Objeto.MicroArchivo.HORA);
+                    $('#MicroArchivoActa').attr('data-file', auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO);
+                    if (auditoria.Objeto.ID_DOC_CONFORMIDAD != 0) {
+                        $('#Conten_ActaConform').show();
+                        $('#MicroActaConformidad').attr('data-file', auditoria.Objeto.ID_DOC_CONFORMIDAD);
+                    }
+                    $('a[download-file="yes"]').click(function () {
+                        var IdFile = $(this).data('file');
+                        DownloadFile(IdFile);
+                    });
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}

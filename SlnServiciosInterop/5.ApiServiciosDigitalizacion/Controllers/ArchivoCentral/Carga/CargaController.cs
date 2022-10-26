@@ -106,7 +106,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                                                     {
                                                                         array[i] = LISTA_CAMPOS[i].COD_CAMPO.Trim();
                                                                     }
-                                                                    array[LISTA_CAMPOS.Count()] = "NRO_LINEA";
+                                                                    array[LISTA_CAMPOS.Count()] = "NUM_LINEA";
                                                                     repositorio.Registrar_Carga(cls_Ent_Tabla.COD_TABLA_TEMPORAL, cls_Ent_Carga.TABLA, array, ref auditoria);
                                                                     if (auditoria.EjecucionProceso)
                                                                     {
@@ -226,11 +226,11 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                 DataSet tablesFromDB = new DataSet();
                                 DataTable dt = new DataTable();
                                 int col = 0;
-                                dt.Columns.Add("NRO_LINEA", typeof(int));
-                                dt.Columns["NRO_LINEA"].AutoIncrement = true;
-                                dt.Columns["NRO_LINEA"].AutoIncrementSeed = 2;
-                                dt.Columns["NRO_LINEA"].AutoIncrementStep = 1;
-                                dt.Columns["NRO_LINEA"].Prefix = "BD";
+                                dt.Columns.Add("NUM_LINEA", typeof(int));
+                                dt.Columns["NUM_LINEA"].AutoIncrement = true;
+                                dt.Columns["NUM_LINEA"].AutoIncrementSeed = 2;
+                                dt.Columns["NUM_LINEA"].AutoIncrementStep = 1;
+                                dt.Columns["NUM_LINEA"].Prefix = "BD";
                                 col++;
                                 int colh = 0;
                                 int columnas_restar = 1;
@@ -354,7 +354,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                                 dt.Columns["USU_CREA"].SetOrdinal(iColCount - 1);
                                 dt.Columns["FEC_CREA"].SetOrdinal(iColCount - 1);
                                 dt.Columns["IP_CREA"].SetOrdinal(iColCount - 1);
-                                dt.Columns["NRO_LINEA"].SetOrdinal(iColCount - 1);
+                                dt.Columns["NUM_LINEA"].SetOrdinal(iColCount - 1);
                                 int columna = 0;
                                 foreach (enCampo campo in List_Cls_Ent_Campo)
                                 {
@@ -392,7 +392,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                         }
                         else
                         {
-                            auditoria.Rechazar("El nombre de la hoja de excel tiene que ser 'FormatoCarga'.");
+                            auditoria.Rechazar("El nombre de la hoja de excel tiene que ser 'Hoja1'.");
                         }
                     }
                 }

@@ -3,11 +3,15 @@
 }
 @model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.SeccionModelView
 <script type="text/javascript">
+    $(document).ready(function () {
+    if ($('#hd_SECCION_ACCION').val() == "M")
+        SeccionLoadFormEdit(@Model.ID_SECCION);
+    });
     jQuery('#SECCION_BTNGRABAR').click(function (e) {
         Seccion_RegistrarDatos();
     });
 </script>
-@using (Html.BeginForm("Proceso", "Seccion", new { @area = "Administracion"}, FormMethod.Post, false, new { @id = "frmMantenimientoSeccion", @class = "form-horizontal" }))
+@using (Html.BeginForm("Proceso", "Seccion", new { @area = "Administracion" }, FormMethod.Post, false, new { @id = "frmMantenimientoSeccion", @class = "form-horizontal" }))
 {
     @Html.ValidationSummary(true)
     <div class="modal-dialog">
@@ -27,13 +31,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    @*<div class="form-group">
-                        @Html.LabelFor(model => model.COD_SECCION, new { @class = "col-sm-3 control-label" })
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(model => model.COD_SECCION, new { @class = "form-control", @maxlength = "50" })
-                            @Html.ValidationMessageFor(model => model.COD_SECCION, string.Empty, new { @class = "cssMessageError" })
-                        </div>
-                    </div>*@
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.DESC_CORTA_SECCION, new { @class = "col-sm-3 control-label" })
                         <div class="col-sm-7">
