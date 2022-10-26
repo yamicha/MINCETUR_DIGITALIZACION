@@ -20,7 +20,7 @@ namespace Utilitarios.Helpers
         public static string RutaTemporal => GetAppSetting("RutaTemporal");
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
         public static string GetLlave => GetAppSetting("Llave");
-        
+        public static string PackDocVentanilla => GetAppSetting("PackDocVentanilla");
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
