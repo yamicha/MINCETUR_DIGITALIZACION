@@ -15,6 +15,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+<<<<<<< HEAD
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.deps.json
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
@@ -25,3 +26,5 @@ E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csprojAssemblyReference.cache
+=======
+>>>>>>> 19b353f30d48dbf7c639ee7c8637c0a7b0f96790
