@@ -14,7 +14,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
         {
             //Constructor
         }
-
         public List<enArea> Area_Listar(enArea objenSubSerie, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
