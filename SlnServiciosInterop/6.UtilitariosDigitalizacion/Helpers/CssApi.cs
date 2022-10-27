@@ -19,7 +19,7 @@ namespace Frotend.Ventanilla.Micetur.Helpers
     {
         public async Task<T> GetApi<T>(string _baseUrl) where T : class
         {
-            using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(@"w-mincetur\gesfiles", "Soporte100") }))
+            using (var cliente = new HttpClient(new HttpClientHandler{ Credentials = new NetworkCredential(@"w-mincetur\gesfiles", "Soporte100") }))
             {
                 cliente.DefaultRequestHeaders.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

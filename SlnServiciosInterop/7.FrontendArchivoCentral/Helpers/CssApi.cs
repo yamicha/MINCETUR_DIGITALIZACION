@@ -19,18 +19,19 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
     {
         public async Task<T> GetApi<T>(string _baseUrl, string token = "") where T : class
         {
-            using (var cliente = new HttpClient(new HttpClientHandler{Credentials = new System.Net.NetworkCredential("W_MINCETUR","")) )
-            {
-                cliente.DefaultRequestHeaders.Clear();
-                //cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "cf1bEdmMXAeHLkHL2wIGNWRXyezDtPx8");
-                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
-                var response = await cliente.GetAsync(_baseUrl);
-                var json_respuesta = await response.Content.ReadAsStringAsync();
-                Log.Guardar(json_respuesta);
-                var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-                return entidad;
-            }
+            //using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new System.Net.NetworkCredential("W_MINCETUR", "") })
+            //{
+            //    cliente.DefaultRequestHeaders.Clear();
+            //    //cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "cf1bEdmMXAeHLkHL2wIGNWRXyezDtPx8");
+            //    cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //    cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
+            //    var response = await cliente.GetAsync(_baseUrl);
+            //    var json_respuesta = await response.Content.ReadAsStringAsync();
+            //    Log.Guardar(json_respuesta);
+            //    var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+            //    return entidad;
+            //}
+            return null; 
         }
 
         public enAuditoria APi2(string Url)
@@ -64,7 +65,6 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                 return new enAuditoria();
             }
         }
-
         public async Task<T> PostApi<T>(string _baseUrl, object param) where T : class
         {
             var cliente = new HttpClient();
