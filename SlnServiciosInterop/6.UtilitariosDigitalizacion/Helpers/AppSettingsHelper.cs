@@ -19,7 +19,7 @@ namespace Utilitarios.Helpers
         public static string MensajeLog => GetAppSetting("MensajeLog");
         public static string RutaTemporal => GetAppSetting("RutaTemporal");
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
-        public static string GetLlave => GetAppSetting("Llave");
+        public static string baseUrlApi => GetAppSetting("UrlApi");
         public static string PackDocVentanilla => GetAppSetting("PackDocVentanilla");
         private static string GetAppSetting(string key)
         {
