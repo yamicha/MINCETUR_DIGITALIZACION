@@ -1,0 +1,99 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.RecibirModelView
+@{
+    Layout = null;
+}
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+       RecibirLoadFormEdit(@Model.ID_EXPE);
+    });
+    //timePicker('MA_HORA');
+    //$('#MA_FECHA').datepicker({
+    //    changeMonth: true,
+    //    changeYear: true,
+    //    dateFormat: "dd/mm/yy",
+    //    firstDay: 1,
+    //    changeFirstDay: false,
+    //    placeholder: "dd/MM/yyyy"
+    //});
+</script>
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmRecibirDoc", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogMicroforma">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Recibir Documento </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Información de documentos principal: </p>
+                                <fieldset style="width: 100%;">
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° Exp.: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.TextBoxFor(model => model.ID_EXPE, new { @class = "form-control", @maxlength = "100", @disabled= "disabled" })
+                                             @Html.ValidationMessageFor(model => model.ID_EXPE, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Doc.: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @*@Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Peso KB: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @*@Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                @Html.ValidationMessageFor(model => model.MA_FECHA, string.Empty, new { @class = "cssMessageError" })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Extensión: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @*@Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @placeholder = "HH:mm:ss" })
+                @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Aplica Enlace: </label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @*@Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @placeholder = "HH:mm:ss" })
+                @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })*@
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="MicroformaBtnMicroArchivo" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("HDF_ID_EXPE", Model.ID_EXPE)
+}
+

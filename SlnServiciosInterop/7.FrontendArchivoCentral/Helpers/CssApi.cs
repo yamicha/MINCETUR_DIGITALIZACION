@@ -19,7 +19,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
     {
         public async Task<T> GetApi<T>(string _baseUrl, string token = "") where T : class
         {
-            using (var cliente = new HttpClient())
+            using (var cliente = new HttpClient(new HttpClientHandler{Credentials = new System.Net.NetworkCredential("W_MINCETUR","")) )
             {
                 cliente.DefaultRequestHeaders.Clear();
                 //cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "cf1bEdmMXAeHLkHL2wIGNWRXyezDtPx8");

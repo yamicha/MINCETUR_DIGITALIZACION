@@ -8,7 +8,6 @@
   <ItemGroup>
     <Folder Include="Areas\Consultas\Models\" />
     <Folder Include="Areas\Digitalizacion\Data\" />
-    <Folder Include="Areas\Digitalizacion\Models\" />
     <Folder Include="Recursos\Log\" />
     <Folder Include="Recursos\Repositorio\" />
   </ItemGroup>

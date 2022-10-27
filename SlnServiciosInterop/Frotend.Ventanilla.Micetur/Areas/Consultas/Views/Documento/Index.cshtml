@@ -15,6 +15,7 @@
             changeFirstDay: false,
             placeholder: "dd/MM/yyyy",
         }).datepicker("setDate", 'now');
+ 
     });
 </script>
 <div class="modal fade" id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
@@ -24,19 +25,23 @@
             <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Criterios de búsqueda: </p>
             <fieldset style="width: 100%;">
                 <div class="row">
-                    <div class="col-sm-5">
-                        <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-                            <legend style="font-size:small;display:block">Fecha de registro en Mesa de Partes</legend>
+                    <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                        <legend style="font-size:small;display:block">Fecha de registro en Ventanilla Virtual</legend>
+                        <div class="col-sm-3">
                             <label>Fecha inicio :</label>
-                            <input class="form-control" id="txtfechainicio" type="text" maxlength="13">
+                            <input class="form-control" id="txtfechainicio" type="text" maxlength="13" readonly style="background:white">
+                        </div>
+                        <div class="col-sm-3">
                             <label>Fecha fin :</label>
-                            <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="13">
-                        </fieldset>
-                    </div>
-                    <div class="col-sm-3">
-                        <button id="cons_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
-                        <button id="cons_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
-                    </div>
+                            <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="13"readonly style="background:white">
+                        </div>
+                        <div class="col-sm-3">
+                            <label></label><br />
+                            <button id="cons_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                            <button id="cons_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
+                        </div>
+                    </fieldset>
+                
                 </div>
             </fieldset>
         </div>
