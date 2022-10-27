@@ -13,7 +13,7 @@ using EnServiciosDigitalizacion.ArchivoCentral;
 using Newtonsoft.Json;
 using Utilitarios.Helpers;
 using Utilitarios.Recursos; 
-namespace Frotend.Ventanilla.Micetur.Helpers
+namespace Utilitarios.Helpers
 {
     public class CssApi
     {
