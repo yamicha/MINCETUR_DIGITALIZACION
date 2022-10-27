@@ -15,3 +15,13 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.deps.json
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.GeneratedMSBuildEditorConfig.editorconfig
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfoInputs.cache
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.AssemblyInfo.cs
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Debug\netcoreapp3.1\CoServiciosDigitalizacion.csproj.AssemblyReference.cache

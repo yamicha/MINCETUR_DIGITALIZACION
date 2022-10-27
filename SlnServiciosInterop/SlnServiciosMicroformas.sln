@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Datos", "03. Datos", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07. FrontendArchivoCentral", "07. FrontendArchivoCentral", "{D0400140-FEF6-4F58-A54E-5347B1A1C4E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08.Frontend Ventanilla", "08.Frontend Ventanilla", "{AC7E0EDC-F689-441D-89F1-4AAB10A18A29}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08.FrontendVentanilla", "08.FrontendVentanilla", "{AC7E0EDC-F689-441D-89F1-4AAB10A18A29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoServiciosDigitalizacion", "1.CoDigitalizacion\CoServiciosDigitalizacion.csproj", "{4F81F7B0-6AAB-4B06-A361-D155875FB87F}"
 EndProject
@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilitarios", "6.Utilitario
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frotend.ArchivoCentral.Micetur", "7.FrontendArchivoCentral\Frotend.ArchivoCentral.Micetur.csproj", "{57B97D41-1084-4956-A131-3BACA4591F8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frotend.Ventanilla.Micetur", "Frotend.Ventanilla.Micetur\Frotend.Ventanilla.Micetur.csproj", "{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frotend.Ventanilla.Micetur", "Frotend.Ventanilla.Micetur\Frotend.Ventanilla.Micetur.csproj", "{B11307E3-EC0D-416E-9D67-0E77AA8AB9CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +78,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{22E904FD-335E-4F3D-A551-42CECCC990BB} = {D0400140-FEF6-4F58-A54E-5347B1A1C4E9}
 		{4F81F7B0-6AAB-4B06-A361-D155875FB87F} = {675CF705-438D-48D6-8EAE-2F6F5BF9ED55}
 		{42501F50-DBB8-4DCF-AB16-34641E0ACBEF} = {DBE9261F-BB54-49DD-9261-9A63FB691970}
 		{F87F77C4-8088-48BE-A20F-E536088AC896} = {96E425A8-F34C-4195-9607-93C20C7C907B}

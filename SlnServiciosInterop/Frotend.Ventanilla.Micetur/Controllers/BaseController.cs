@@ -21,7 +21,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
     public class BaseController : Controller
     {
 
-        public ActionResult UploadFileService(IFormFile fileArchivo)
+        public ActionResult UploadFileService(IFormFile fileArchivo, long   ID_EXPE)
         {
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
@@ -41,9 +41,10 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                             Task<Resultado> respuesta;
                             datos.IdSis = AppSettingsHelper.AppId;
                             datos.DesNomAbr = nombre_archivo;
-                            datos.DesRuta = DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString();
+                            datos.DesRuta = "VV/"+DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString() + "/" +ID_EXPE.ToString();
                             datos.Archivo = archivo;
                             datos.IdUsu = usuario;
+                            datos.FlgCms = 1;
                             datos.IpAcceso = Request.HttpContext.Connection.RemoteIpAddress.ToString();
                             respuesta = proxy.insertarAsync(datos);
                             if (!string.IsNullOrEmpty(respuesta.Result.Valor))

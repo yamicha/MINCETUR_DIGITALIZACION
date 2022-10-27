@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
 //using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
-//using Frotend.Ventanilla.Micetur.Areas.Administracion.Models;
+using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
 using Frotend.Ventanilla.Micetur.Filters;
 using Frotend.Ventanilla.Micetur.Helpers;
 using Frotend.Ventanilla.Micetur.Recursos;
@@ -22,6 +22,13 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpGet, Route("~/Digitalizacion/Recepcion/RecibirDoc")]
+        public ActionResult RecibirDoc(long ID_EXPE)
+        {
+            RecibirModelView modelo = new RecibirModelView();
+            modelo.ID_EXPE = ID_EXPE;
+            return View(modelo);
         }
     }
 }
