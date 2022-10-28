@@ -4,12 +4,14 @@ using EnServiciosDigitalizacion;
 //using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
 using Frotend.Ventanilla.Micetur.Filters;
-//using Frotend.Ventanilla.Micetur.Helpers;
+using Frotend.Ventanilla.Micetur.Helpers;
 using Frotend.Ventanilla.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Frotend.Ventanilla.Micetur.Authorization;
-using Utilitarios.Helpers; 
+//using Utilitarios.Helpers;
+using EnServiciosDigitalizacion.Ventanilla.Consulta;
+using Utilitarios.Helpers;
 
 namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -24,12 +26,36 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         {
             return View();
         }
+
         [HttpGet, Route("~/Digitalizacion/Recepcion/RecibirDoc")]
-        public  ActionResult RecibirDoc(long ID_EXPE)
+        public async Task<ActionResult> RecibirDoc(long ID_EXPE)
         {
             RecibirModelView modelo = new RecibirModelView();
-            modelo.ID_EXPE = ID_EXPE;
-            enAuditoria auditoriaDoc = new css
+            //modelo.ID_EXPE = ID_EXPE;
+            try
+            {
+                enAuditoria auditoriaDoc = await new CssApi().GetApi<enAuditoria>( new ApiParams { 
+                 EndPoint = AppSettings.baseUrlApi, 
+                 Url = $"Ventanilla/DocRecepcion/listado-doc-ventanilla-getone/{ID_EXPE}",
+                 UserAD = AppSettings.UserAD, 
+                 PassAD = AppSettings.UserAD
+                });
+                if (auditoriaDoc != null)
+                {
+                    if (!auditoriaDoc.Rechazo)
+                    {
+                        if (auditoriaDoc.Objeto != null)
+                        {
+                            enDocumento Documento = JsonConvert.DeserializeObject<enDocumento>(auditoriaDoc.Objeto.ToString());
+                            modelo.ID_EXPE = Documento.ID_EXPE;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Css_Log.Guardar(ex.Message.ToString());
+            }
             return View(modelo);
         }
     }

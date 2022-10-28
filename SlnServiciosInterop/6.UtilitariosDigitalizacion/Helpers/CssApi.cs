@@ -12,19 +12,19 @@ using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral;
 using Newtonsoft.Json;
 using Utilitarios.Helpers;
-using Utilitarios.Recursos; 
+using Utilitarios.Recursos;
 namespace Utilitarios.Helpers
 {
     public class CssApi
     {
-        public async Task<T> GetApi<T>(string _baseUrl) where T : class
+        public async Task<T> GetApi<T>(ApiParams param) where T : class
         {
-            using (var cliente = new HttpClient(new HttpClientHandler{ Credentials = new NetworkCredential(@"w-mincetur\gesfiles", "Soporte100") }))
+            using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
             {
                 cliente.DefaultRequestHeaders.Clear();
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
-                var response = await cliente.GetAsync(_baseUrl);
+                cliente.BaseAddress = new Uri(param.EndPoint);
+                var response = await cliente.GetAsync(param.Url);
                 var json_respuesta = await response.Content.ReadAsStringAsync();
                 var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
                 return entidad;
@@ -44,6 +44,15 @@ namespace Utilitarios.Helpers
             return entidad;
         }
 
+    }
+
+    public class ApiParams
+    {
+       public string EndPoint { get; set; }
+       public string Url { get; set; }
+       public object Params { get; set; }
+       public string UserAD { get; set; }
+        public string PassAD { get; set; }
 
     }
 }

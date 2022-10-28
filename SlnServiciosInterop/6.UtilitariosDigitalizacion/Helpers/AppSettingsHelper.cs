@@ -21,6 +21,8 @@ namespace Utilitarios.Helpers
         public static string RutaRepositorio => GetAppSetting("RutaRepositorio");
         public static string baseUrlApi => GetAppSetting("UrlApi");
         public static string PackDocVentanilla => GetAppSetting("PackDocVentanilla");
+        public static string PackSeguridad => GetAppSetting("PackSeguridad");
+        
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();

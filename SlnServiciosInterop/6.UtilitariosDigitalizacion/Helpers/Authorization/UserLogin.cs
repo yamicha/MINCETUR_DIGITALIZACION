@@ -18,5 +18,6 @@ namespace Utilitarios.Helpers.Authorization
         public string NameApellidos { get; set; }
         public bool Usuario_Valido { get; set; }
         public string token { get; set; }
+        public string Modulos { get; set; }
     }
 }

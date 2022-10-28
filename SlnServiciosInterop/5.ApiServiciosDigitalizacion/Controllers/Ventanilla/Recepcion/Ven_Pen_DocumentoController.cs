@@ -99,8 +99,8 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
 
         }
         [HttpGet]
-        [Route("listado-doc-ventanilla-getone")]
-        public IActionResult Documento_Ventanilla_GetOne(long id)
+        [Route("listado-doc-ventanilla-getone/{ID_EXPE:long}")]
+        public IActionResult Documento_Ventanilla_GetOne(long ID_EXPE)
         {
             enAuditoria auditoria = new enAuditoria();
             try
@@ -109,7 +109,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
                 {
                     auditoria.Objeto = repositorio.Documento_Ventanilla_GetOne(new enDocumento
                     {
-                        ID_EXPE = id,
+                        ID_EXPE = ID_EXPE,
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {

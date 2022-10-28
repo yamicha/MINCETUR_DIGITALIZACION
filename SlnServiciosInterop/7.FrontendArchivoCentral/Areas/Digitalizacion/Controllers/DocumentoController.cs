@@ -50,8 +50,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
             if (ID_LASER != 0)
             {
-                string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
-                modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
+                modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
                 //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
 
             }
@@ -69,8 +69,8 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             {
                 if (ID_LASER != 0)
                 {
-                    string CODLASER_ENCRIPT = await new CssApi().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
-                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettingsHelper.RutaVisorLF, CODLASER_ENCRIPT);
+                    string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
+                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
                     //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
                 }
 

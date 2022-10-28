@@ -39,7 +39,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                         {
                             DocCmsSubir datos = new DocCmsSubir();
                             Task<Resultado> respuesta;
-                            datos.IdSis = AppSettingsHelper.AppId;
+                            datos.IdSis = AppSettings.AppId;
                             datos.DesNomAbr = nombre_archivo;
                             datos.DesRuta = "VV/"+DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString() + "/" +ID_EXPE.ToString();
                             datos.Archivo = archivo;
@@ -80,9 +80,9 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                 using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
                 {
                     string llave = await client.traeLlaveAsync();
-                    string tex = "{ IdDocCms:" + ID_DOC + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettingsHelper.AppId + "}";
+                    string tex = "{ IdDocCms:" + ID_DOC + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
                     string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
-                    var urlVisorLF = AppSettingsHelper.UrlApiDownload;
+                    var urlVisorLF = AppSettings.UrlApiDownload;
                     auditoria.Objeto = urlVisorLF + DOC + "&descarga=false";
                 }
             }
