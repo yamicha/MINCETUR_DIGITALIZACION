@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Security.Claims;
-using System.Text;
 using EnServiciosDigitalizacion;
 using Frotend.ArchivoCentral.Micetur.Filters;
 using Frotend.ArchivoCentral.Micetur.Helpers;
@@ -20,10 +19,11 @@ using Utilitarios.Helpers;
 
 namespace Frotend.ArchivoCentral.Micetur.Controllers
 {
-    public class AuthorizationController : Controller
+    public class AuthorizationController : BaseController
     {
         public async Task<IActionResult> SignIn(string cod)
         {
+            //cod = "KTF4vWGB8cXZzPAQUdGWLA=="; 
             enAuditoria auditoria = new enAuditoria();
             UserLogin userlogin = null;
             auditoria.Limpiar();
@@ -47,7 +47,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                         });
                         if (Usuario != null)
                         {
-                            if (Usuario.lstUsuSisRolEntEstorg.Length > 0)
+                            if (Usuario.lstUsuSisRolEntEstorg != null)
                             {
                                 userlogin = new UserLogin
                                 {
@@ -72,7 +72,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                                         if (auditoriaModulo.Objeto != null)
                                         {
                                             List<enModulos> Modulos = JsonConvert.DeserializeObject<List<enModulos>>(auditoriaModulo.Objeto.ToString());
-                                            userlogin.Modulos =  new CssUtil().traeListaOpcionesMenu(Modulos); 
+                                            userlogin.Modulos = new CssUtil().traeListaOpcionesMenu(Modulos); 
                                         }
                                     }
                                 }

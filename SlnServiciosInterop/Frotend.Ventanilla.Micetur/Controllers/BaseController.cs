@@ -21,7 +21,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
     public class BaseController : Controller
     {
 
-        public ActionResult UploadFileService(IFormFile fileArchivo, long   ID_EXPE)
+        public ActionResult UploadFileService(IFormFile fileArchivo, long  ID_EXPE)
         {
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();

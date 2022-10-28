@@ -92,6 +92,5 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             }
             return Json(auditoria);
         }
-
     }
 }

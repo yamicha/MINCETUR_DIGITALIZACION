@@ -685,6 +685,12 @@ var Main = function () {
         $('.color-text').val('#555555').next('.dropdown').find('i').css('background-color', '#555555');
         $('.color-badge').val('#007AFF').next('.dropdown').find('i').css('background-color', '#007AFF');
     };
+    var runRedirectPag = function () {
+        $('a[page-redirec="true"]').click(function(){
+            window.location.href = baseUrl + $(this).data('page'); 
+        }); 
+    };
+
     return {
         //main function to initiate template pages
         init: function () {
@@ -709,6 +715,7 @@ var Main = function () {
             runSaveSetting();
             runCustomSetting();
             runClearSetting();
+            runRedirectPag(); 
         }
     };
 }();

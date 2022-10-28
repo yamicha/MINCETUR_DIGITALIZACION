@@ -23,13 +23,6 @@ namespace Frotend.Ventanilla.Micetur.Controllers
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
 
-            //using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
-            //{
-            //    string StrCodDesEncriptado = string.Empty; 
-            //    string llave =  client.traeLlave();
-            //    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
-            //    int intIdUsu = int.Parse(StrCodDesEncriptado);
-            //}
             UserLogin userlogin = new UserLogin
             {
                 Codusuario = "IPEREZ",
@@ -38,6 +31,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                 IdOficina = 20,
                 DesOficina = "MI CASA",
                 IdPerfil = 2,
+                Modulos = string.Empty, 
             };
             userlogin.token = CssToken.Generar(userlogin.IdUsuario.ToString());
             try

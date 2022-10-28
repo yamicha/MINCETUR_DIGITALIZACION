@@ -31,6 +31,8 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                 return COD_ENCRIPTADO;
             }
         }
+
+
         /// <summary>
         /// estructura los modulos del usuario
         /// </summary>
@@ -73,7 +75,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             if (nivel == 1)
             {
                 //string dashboard = " <li  id='liModSecretarial' class='active' ><a id='aModuloSecretarial' href='javascript:" + vlInvocar + ";'><i class='clip-users-2'></i><span class='title'> Gestión de la Digitalización </span><span'class='selected'></span></a></li>";
-                menu = menu + "<ul  class='" + cssUL + "'>"  + Convert.ToChar(13);
+                menu = menu + "<ul  class='" + cssUL + "'>" + Convert.ToChar(13);
             }
             else
             {
@@ -99,7 +101,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                     {
                         if (item.ID_OPCION.Length == 2)
                         {
-                            menu += "<a  href='"+ item.DES_URL + "'  />" + item.DES_OPCION + "</a>";
+                            menu += "<a  href='" + item.DES_URL + "'  />" + item.DES_OPCION + "</a>";
                         }
                     }
                     //string df = items.Find(x => x.ID_OPCION.Contains("seat"));
@@ -149,7 +151,7 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
                     if (item.ID_OPCION.Substring(0, carc - 2) == ID_OPCION)
                     {
                         menu += "<li class='" + cssLI + "' id='" + item.DES_URLLABEL + "' style='" + ls_style_li + "' > ";
-                        menu += "<a  href='/"+ item.DES_URL + "'/>" + item.DES_OPCION + "</a>";
+                        menu += "<a href=" + vlInvocar + " page-redirec='true' data-page=" + item.DES_URL + "/>" + item.DES_OPCION + "</a>";
                         int cuenta = 0;
                         foreach (enModulos itemB in items)
                         {
@@ -178,6 +180,6 @@ namespace Frotend.ArchivoCentral.Micetur.Helpers
             menu += "</ul>" + Convert.ToChar(13);
         }
 
-
     }
+
 }
