@@ -31,26 +31,9 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         public async Task<ActionResult> RecibirDoc(long ID_EXPE)
         {
             RecibirModelView modelo = new RecibirModelView();
-            //modelo.ID_EXPE = ID_EXPE;
+            modelo.ID_EXPE = ID_EXPE;
             try
             {
-                //enAuditoria auditoriaDoc = await new CssApi().GetApi<enAuditoria>( new ApiParams { 
-                // EndPoint = AppSettings.baseUrlApi, 
-                // Url = $"Ventanilla/DocRecepcion/listado-doc-ventanilla-getone/{ID_EXPE}",
-                // UserAD = AppSettings.UserAD, 
-                // PassAD = AppSettings.UserAD
-                //});
-                //if (auditoriaDoc != null)
-                //{
-                //    if (!auditoriaDoc.Rechazo)
-                //    {
-                //        if (auditoriaDoc.Objeto != null)
-                //        {
-                //            enDocumento Documento = JsonConvert.DeserializeObject<enDocumento>(auditoriaDoc.Objeto.ToString());
-                //            //modelo.ID_EXPE = Documento.ID_EXPE;
-                //        }
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -58,5 +41,15 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             }
             return View(modelo);
         }
+
+        [HttpGet, Route("~/Digitalizacion/Recepcion/editar-documento")]
+        public async Task<ActionResult>  EditarDocumento(long id)
+        {
+            RecibirModelView modelo = new RecibirModelView();
+            modelo.ID_DOC = id; 
+            return View(modelo);
+        }
+
+
     }
 }

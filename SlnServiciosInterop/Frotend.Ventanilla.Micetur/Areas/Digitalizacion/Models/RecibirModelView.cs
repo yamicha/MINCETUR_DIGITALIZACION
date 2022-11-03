@@ -8,25 +8,20 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
     {
         public long ID_EXPE { get; set; }
 
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "[Adjunto] es obligatorio")]
+        public string NOMBRE_ARCHIVO { get; set; }
 
+        [DataType(DataType.Text)]
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        [Required(ErrorMessage = "[Peso] es obligatorio")]
+        public int PESO_ARCHIVO { get; set; }
 
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "[Extensión] es obligatorio")]
+        public string EXTENSION { get; set; }
 
-        
-        //[Display(Name = "Operador:")]
-        //public long ID_DIGITALIZADOR { get; set; }
-        //public long ID_DIGITALIZADOR2 { get; set; }
-        //public long ID_CONTROL_CARGA_DEFAULT { get; set; }
-        //public long ID_TABLA_DEFAULT { get; set; }
-        //public List<SelectListItem> ListaPersonal = new List<SelectListItem>();
-
-        //public long ID_TABLA { get; set; }
-        //public List<SelectListItem> Lista_ID_TABLA = new List<SelectListItem>();
-
-        //public long ID_CONTROL_CARGA { get; set; }
-        //public List<SelectListItem> Lista_ID_CONTROL_CARGA = new List<SelectListItem>();
-
-        //public string VISOR_LF { get; set; }
-        //public long ID_LASER { get; set; }
+        public long ID_DOC { get; set; }
     }
 
 }

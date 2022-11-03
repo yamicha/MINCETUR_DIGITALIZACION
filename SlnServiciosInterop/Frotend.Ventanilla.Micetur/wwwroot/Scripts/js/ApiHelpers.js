@@ -172,3 +172,9 @@ function DownloadFile(ID_DOC) {
         }
     });
 }
+
+function resetForm(_form) {
+    $(`#${_form} input, #${_form} select, #${_form} textarea`).each(function () {
+        $(this).val('').trigger('change');
+    });
+}

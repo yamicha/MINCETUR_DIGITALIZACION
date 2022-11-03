@@ -25,7 +25,7 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Consulta
             };
             _rule = new neDocumento(_objCoConexionDb);
         }
-        public List<enDocumento> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        public List<enExpediente> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
         {
             return _rule.Documento_Ventanilla(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }

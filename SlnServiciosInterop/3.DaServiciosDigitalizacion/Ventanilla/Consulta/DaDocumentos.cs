@@ -14,10 +14,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
         {
             //Constructor
         }
-        public List<enDocumento> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        public List<enExpediente> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enDocumento> lista = new List<enDocumento>();
+            List<enExpediente> lista = new List<enExpediente>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCVENT_PAGINACION");
@@ -41,7 +41,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enDocumento temp = null;
+                            enExpediente temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
                             int int_FEC_EXPE_STR = drReader.GetOrdinal("FEC_EXPE");
@@ -67,7 +67,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enDocumento();
+                                temp = new enExpediente();
 
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_FEC_EXPE_STR)) temp.FEC_EXPE_STR= arrResult[int_FEC_EXPE_STR].ToString();
@@ -98,7 +98,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enDocumento>();
+                    lista = new List<enExpediente>();
                 }
                 finally
                 {

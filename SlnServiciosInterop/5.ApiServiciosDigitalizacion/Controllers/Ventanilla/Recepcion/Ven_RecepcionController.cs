@@ -16,13 +16,13 @@ using Utilitarios.Excel;
 namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
 {
     [EnableCors("AccesoCors")]
-    [Route("api/Ventanilla/DocRecepcion")]
+    [Route("api/ventanilla/DocRecepcion")]
     [ApiController]
-    public class Ven_Pen_DocumentoController : ControllerBase
+    public class Ven_RecepcionController : ControllerBase
     {
 
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
-        public Ven_Pen_DocumentoController(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
+        public Ven_RecepcionController(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
         {
             this._ConfigurationManager = ConfigurationManager;
         }
@@ -49,7 +49,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
 
                 using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
                 {
-                    IList<enDocumento> lista = repositorio.Documento_Ventanilla_Pen(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
+                    IList<enExpediente> lista = repositorio.Documento_Ventanilla_Pen(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
                     if (auditoria.EjecucionProceso)
                     {
                         var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista);
@@ -107,10 +107,35 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
             {
                 using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Documento_Ventanilla_GetOne(new enDocumento
+                    auditoria.Objeto = repositorio.Documento_Ventanilla_GetOne(new enExpediente
                     {
                         ID_EXPE = ID_EXPE,
                     }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpGet]
+        [Route("listado-doc-expediente/{ID_EXPE:long}")]
+        public IActionResult Expediente_DocumentoGetOne(long ID_EXPE)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.Expediente_DocumentoGetOne(ID_EXPE, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);

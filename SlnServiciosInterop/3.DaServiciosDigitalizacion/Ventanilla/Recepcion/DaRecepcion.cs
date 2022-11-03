@@ -5,6 +5,7 @@ using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using Utilitarios.Helpers;
+using EnServiciosDigitalizacion.Ventanilla.Digitalizacion;
 namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
 {
     public class DaRecepcion: daBase
@@ -13,10 +14,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
         {
             //Constructor
         }
-        public List<enDocumento> Documento_Ventanilla_Pen(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        public List<enExpediente> Documento_Ventanilla_Pen(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enDocumento> lista = new List<enDocumento>();
+            List<enExpediente> lista = new List<enExpediente>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCVENT_PEND");
@@ -40,7 +41,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enDocumento temp = null;
+                            enExpediente temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
                             int int_FEC_EXPE_STR = drReader.GetOrdinal("FEC_EXPE");
@@ -67,7 +68,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enDocumento();
+                                temp = new enExpediente();
 
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_FEC_EXPE_STR)) temp.FEC_EXPE_STR = arrResult[int_FEC_EXPE_STR].ToString();
@@ -99,7 +100,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enDocumento>();
+                    lista = new List<enExpediente>();
                 }
                 finally
                 {
@@ -109,10 +110,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             }
             return lista;
         }
-        public List<enDocumento> Documento_Ventanilla_GetOne(enDocumento endtidad, ref enAuditoria auditoria)
+        public List<enExpediente> Documento_Ventanilla_GetOne(enExpediente endtidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enDocumento> lista = new List<enDocumento>();
+            List<enExpediente> lista = new List<enExpediente>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCVENT_GETONE");
@@ -129,7 +130,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enDocumento temp = null;
+                            enExpediente temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
                             int int_FEC_EXPE_STR = drReader.GetOrdinal("FEC_EXPE");
@@ -157,7 +158,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enDocumento();
+                                temp = new enExpediente();
 
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_FEC_EXPE_STR)) temp.FEC_EXPE_STR = arrResult[int_FEC_EXPE_STR].ToString();
@@ -181,6 +182,68 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                                 if (!drReader.IsDBNull(int_CANT_DOC)) temp.CANT_DOC = long.Parse(arrResult[int_CANT_DOC].ToString());
                                 if (!drReader.IsDBNull(int_NUM_SIZE_DOC)) temp.NUM_SIZE_DOC = long.Parse(arrResult[int_NUM_SIZE_DOC].ToString());
 
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new List<enExpediente>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
+
+        public List<enDocumento> Expediente_DocumentoGetOne(long ID_EXPE, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enDocumento> lista = new List<enDocumento>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCEXPEDIENTE_GETONE");
+            cmd.Parameters.Add("X_ID_EXPE", ID_EXPE);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enDocumento temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int int_ID_DOC = drReader.GetOrdinal("ID_DOC");
+                            int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
+                            int int_ID_DOC_CMS = drReader.GetOrdinal("ID_DOC_CMS");
+                            int int_DES_NOMABR = drReader.GetOrdinal("DES_NOM_ABR");
+                            int int_SIZE = drReader.GetOrdinal("NUM_SIZE_ARCHIVO");
+                            int int_DES_OBS = drReader.GetOrdinal("DES_OBS");
+   
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enDocumento();
+
+                                if (!drReader.IsDBNull(int_ID_DOC)) temp.ID_EXPE = long.Parse(arrResult[int_ID_DOC].ToString());
+                                if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
+                                if (!drReader.IsDBNull(int_ID_DOC_CMS)) temp.ID_DOC_CMS = long.Parse(arrResult[int_ID_DOC_CMS].ToString());
+                                if (!drReader.IsDBNull(int_DES_NOMABR)) temp.DES_NOM_ABR = arrResult[int_DES_NOMABR].ToString();
+                                if (!drReader.IsDBNull(int_SIZE)) temp.NUM_SIZE_ARCHIVO = arrResult[int_SIZE].ToString();
+                                if (!drReader.IsDBNull(int_DES_OBS)) temp.DES_OBS = arrResult[int_DES_OBS].ToString();
+                                if (!drReader.IsDBNull(int_DES_NOMABR)) temp.EXTENSION = System.IO.Path.GetExtension(arrResult[int_DES_NOMABR].ToString());
                                 lista.Add(temp);
                             }
                             drReader.Close();

@@ -15,6 +15,9 @@ using System.Text.Json;
 using Frotend.Ventanilla.Micetur.Recursos;
 using ServiceReference1;
 using System.Web;
+using Utilitarios.Recursos;
+using Utilitarios;
+using EnServiciosDigitalizacion.Enums;
 
 namespace Frotend.Ventanilla.Micetur.Controllers
 {
@@ -93,5 +96,43 @@ namespace Frotend.Ventanilla.Micetur.Controllers
             }
             return Json(auditoria);
         }
+
+        public ActionResult guardarTemporalArchivo(IFormFile filearchivo)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            auditoria.Limpiar(); 
+            enArchivo Miarchivo = new enArchivo(); 
+            if (filearchivo != null)
+            {
+                try
+                {  
+                    Miarchivo.extension = System.IO.Path.GetExtension(filearchivo.FileName).ToString();
+                    Miarchivo.codigoArchivo = GenerarCodigo.GenerarCodigoTemporal();
+                    string RutaTemporal = Directory.GetCurrentDirectory() + @"\Recursos\Temporal\" + Miarchivo.codigoArchivo + Miarchivo.extension;
+                    using (Stream fileStream = new FileStream(RutaTemporal, FileMode.Create))
+                    {
+                        Miarchivo.nombreArchivo = filearchivo.FileName;
+                        Miarchivo.pesoArchivo = Util.ConvertSizeFile(filearchivo.Length,(int)TypeSizeFile.KB);
+                        Miarchivo.codigoArchivo = Miarchivo.codigoArchivo + Miarchivo.extension; 
+                        filearchivo.CopyToAsync(fileStream);
+                        auditoria.Objeto = Miarchivo;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex); 
+                    string CodigoLog = Css_Log.Guardar(ex.ToString());
+                    auditoria.MensajeSalida = Css_Log.Mensaje(CodigoLog);
+                }
+            }
+            else
+            {
+                auditoria.Rechazar("No se encontró el archivo");
+            }
+            return Json(auditoria);
+        }
+
+
     }
 }

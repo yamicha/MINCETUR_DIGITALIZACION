@@ -1,12 +1,18 @@
 ﻿$(document).ready(function () {
     Remove_RemoverClases("liRecepcion");
-    Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes");
+    $('#Load_Busqueda').show(); 
+    setTimeout(function () {Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes")}, 500);
+});
+
+$("#cons_btn_buscar").click(function (e) {
+    $('#Load_Busqueda').show();
+    setTimeout(function () { Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes") }, 500);
 });
 function Documento_ConfigurarGrilla_Vent_Pen(_grilla, _barra, _titulo) {
     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
     _ID_MODULO = 1;
     _PREFIJO = "";
-    var url = BaseUrlApi + 'Ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
+    var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + _grilla).GridUnload();
     var colNames = [
         'N° Exp.','Recibir' ,'Doc.','Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación','',''
@@ -25,6 +31,7 @@ function Documento_ConfigurarGrilla_Vent_Pen(_grilla, _barra, _titulo) {
     var opciones = {
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: `GetRules()`,
         gridCompleteFunc: function () {
+            $('#Load_Busqueda').hide(); 
             var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
             if (allJQGridData.length == 0) {
                 $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
@@ -63,28 +70,7 @@ function Documento_Recibir(CODIGO) {
         if (request.status != 200) return;
     });
 }
-function DownloadFile(ID_DOC) {
-    $.ajax({
-        url: baseUrl + "Base/DownloadFileService?ID_DOC=" + ID_DOC,
-        //data: item,
-        contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-        type: 'GET',
-        success: function (auditoria) {
-            if (auditoria.ejecucionProceso) {
-                if (!auditoria.rechazo) {
-                    window.open(auditoria.objeto, "_blank");
-                } else {
-                    console.log(auditoria.mensajeSalida, 'Atención');
-                }
-            } else {
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.status);
-        }
-    });
-}
+
 function GetRules() {
     var rules = new Array();
     var FECHA_INICIO = ($("#txtfechainicio").val() == null || $("#txtfechainicio").val() == '') ? '' : $("#txtfechainicio").val() + '';
@@ -97,10 +83,6 @@ function GetRules() {
     ];
     return rules;
 }
-$("#cons_btn_buscar").click(function (e) {
-    debugger;
-    Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes");
-});
 function RecibirLoadFormEdit(id) {
     var url = `Ventanilla/DocRecepcion/listado-doc-ventanilla-getone?id=${id}`;
     API.FetchGet("GET", url, function (auditoria) {

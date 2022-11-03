@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EnServiciosDigitalizacion.Ventanilla.Consulta
 {
-    public class enDocumento
+    public class enExpediente
     {
         public long ID_EXPE { get; set; }
         public long ID_PERSONA { get; set; }

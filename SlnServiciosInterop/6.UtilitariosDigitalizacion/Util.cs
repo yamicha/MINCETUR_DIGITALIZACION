@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnServiciosDigitalizacion.Enums; 
+
 
 namespace Utilitarios
 {
@@ -41,6 +43,21 @@ namespace Utilitarios
             {
                 return false;
             }
+        }
+
+        public static double ConvertSizeFile(double len, int tipo) {
+            if(tipo == (int)TypeSizeFile.KB)
+            {
+                len = Math.Ceiling(len /1024); 
+            }else if (tipo == (int)TypeSizeFile.MB)
+            {
+                len = Math.Ceiling(len /1024/1024); 
+            }
+            else if (tipo == (int)TypeSizeFile.GB)
+            {
+                len = Math.Ceiling(len /1024/1024/1024);
+            }
+            return len; 
         }
     }
 }

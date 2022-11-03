@@ -13,6 +13,7 @@ namespace Frotend.Ventanilla.Micetur.Helpers
         public static string UrlApiDownload => GetAppSetting("UrlApiDownload");
         public static string UserAD => GetAppSetting("UserAD");
         public static string PassAD => GetAppSetting("PassAD");
+        public static string FileValid => GetAppSetting("FileValid");
 
         private static string GetAppSetting(string key)
         {
