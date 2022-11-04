@@ -221,7 +221,6 @@ function Serie_RegistrarDatos() {
         if ($("#frmMantenimientoSerie").valid()) {
             jConfirm("¿Desea guardar este registro ?", "Atención", function (r) {
                 if (r) {
-                    debugger;
                     var item =
                     {
                         //IdSerie: $("#ID_SECCION").val(),

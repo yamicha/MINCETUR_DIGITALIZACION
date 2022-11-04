@@ -326,7 +326,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             enDocumento temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PRC_CDADOC_LISTARUNO";
+            cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PRC_CDVEXPEDIENTE_PAGINACION";
             cmd.Parameters.Add("X_ID_DOCUMENTO", validarNulo(entidad.ID_DOCUMENTO));
             cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;

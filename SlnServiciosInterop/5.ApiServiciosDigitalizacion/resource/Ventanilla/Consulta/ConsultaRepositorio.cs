@@ -8,12 +8,12 @@ using NeServiciosDigitalizacion.Ventanilla.Consulta;
 
 namespace ApiServiciosDigitalizacion.resource.Ventanilla.Consulta
 {
-    public class DocumentoRepositorio: IDisposable
+    public class ConsultaRepositorio: IDisposable
     {
         private Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> _ConfigurationManager;
         private coConexionDb _objCoConexionDb;
         private neDocumento _rule = null;
-        public DocumentoRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
+        public ConsultaRepositorio(Microsoft.Extensions.Options.IOptions<resource.clases.ConfigurationManager> ConfigurationManager)
         {
             this._ConfigurationManager = ConfigurationManager;
             this._objCoConexionDb = new coConexionDb()
@@ -25,7 +25,7 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Consulta
             };
             _rule = new neDocumento(_objCoConexionDb);
         }
-        public List<enExpediente> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        public List<enDocumentoVen> Documento_Ventanilla(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
         {
             return _rule.Documento_Ventanilla(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }

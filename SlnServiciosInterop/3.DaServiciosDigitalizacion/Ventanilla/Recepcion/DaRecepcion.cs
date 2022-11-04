@@ -6,6 +6,10 @@ using System;
 using System.Collections.Generic;
 using Utilitarios.Helpers;
 using EnServiciosDigitalizacion.Ventanilla.Digitalizacion;
+using System.Data;
+using EnServiciosDigitalizacion.Models.Ventanilla;
+using System.Linq;
+
 namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
 {
     public class DaRecepcion: daBase
@@ -14,10 +18,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
         {
             //Constructor
         }
-        public List<enExpediente> Documento_Ventanilla_Pen(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        public List<enDocumentoVen> Documento_Ventanilla_Pen(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enExpediente> lista = new List<enExpediente>();
+            List<enDocumentoVen> lista = new List<enDocumentoVen>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCVENT_PEND");
@@ -41,7 +45,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enExpediente temp = null;
+                            enDocumentoVen temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
                             int int_FEC_EXPE_STR = drReader.GetOrdinal("FEC_EXPE");
@@ -68,7 +72,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enExpediente();
+                                temp = new enDocumentoVen();
 
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_FEC_EXPE_STR)) temp.FEC_EXPE_STR = arrResult[int_FEC_EXPE_STR].ToString();
@@ -100,7 +104,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enExpediente>();
+                    lista = new List<enDocumentoVen>();
                 }
                 finally
                 {
@@ -110,10 +114,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             }
             return lista;
         }
-        public List<enExpediente> Documento_Ventanilla_GetOne(enExpediente endtidad, ref enAuditoria auditoria)
+        public List<enDocumentoVen> Documento_Ventanilla_GetOne(enDocumentoVen endtidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enExpediente> lista = new List<enExpediente>();
+            List<enDocumentoVen> lista = new List<enDocumentoVen>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCVENT_GETONE");
@@ -130,7 +134,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enExpediente temp = null;
+                            enDocumentoVen temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
                             int int_FEC_EXPE_STR = drReader.GetOrdinal("FEC_EXPE");
@@ -158,7 +162,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enExpediente();
+                                temp = new enDocumentoVen();
 
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_FEC_EXPE_STR)) temp.FEC_EXPE_STR = arrResult[int_FEC_EXPE_STR].ToString();
@@ -192,7 +196,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enExpediente>();
+                    lista = new List<enDocumentoVen>();
                 }
                 finally
                 {
@@ -203,10 +207,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             return lista;
         }
 
-        public List<enDocumento> Expediente_DocumentoGetOne(long ID_EXPE, ref enAuditoria auditoria)
+        public List<enAdjuntos> Expediente_DocumentoGetOne(long ID_EXPE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
-            List<enDocumento> lista = new List<enDocumento>();
+            List<enAdjuntos> lista = new List<enAdjuntos>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCEXPEDIENTE_GETONE");
@@ -223,7 +227,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         object[] arrResult = null;
                         if (drReader.HasRows)
                         {
-                            enDocumento temp = null;
+                            enAdjuntos temp = null;
                             arrResult = new object[drReader.FieldCount];
                             int int_ID_DOC = drReader.GetOrdinal("ID_DOC");
                             int int_ID_EXPE = drReader.GetOrdinal("ID_EXPE");
@@ -235,9 +239,9 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
-                                temp = new enDocumento();
+                                temp = new enAdjuntos();
 
-                                if (!drReader.IsDBNull(int_ID_DOC)) temp.ID_EXPE = long.Parse(arrResult[int_ID_DOC].ToString());
+                                if (!drReader.IsDBNull(int_ID_DOC)) temp.ID_DOC = long.Parse(arrResult[int_ID_DOC].ToString());
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_ID_DOC_CMS)) temp.ID_DOC_CMS = long.Parse(arrResult[int_ID_DOC_CMS].ToString());
                                 if (!drReader.IsDBNull(int_DES_NOMABR)) temp.DES_NOM_ABR = arrResult[int_DES_NOMABR].ToString();
@@ -254,7 +258,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                 catch (Exception ex)
                 {
                     auditoria.Error(ex);
-                    lista = new List<enDocumento>();
+                    lista = new List<enAdjuntos>();
                 }
                 finally
                 {
@@ -264,6 +268,77 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             }
             return lista;
         }
+
+        public void Expediente_Insertar(ExpedienteModels entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDADOCUMENTO_INSERTAR"), cn);
+                OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.Transaction = transaction;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdExpediente;
+                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Int64)).Value = entidad.UsuCrea;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCrea;
+                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                try
+                {
+                    dr = cmd.ExecuteReader();
+                    string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                    string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
+                    if (PO_VALIDO == "0")
+                    {
+                        auditoria.Rechazar(PO_MENSAJE);
+                    }
+                    else
+                    {
+                        cmd.Parameters.Clear();
+                        if (entidad.ListaAdjuntos.Count() > 0)
+                        {
+                            foreach (var item in entidad.ListaAdjuntos)
+                            {
+                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDADOCUMENTOADJ_INSERTAR"), cn);
+                                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                                cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdExpediente;
+                                cmd.Parameters.Add(new OracleParameter("X_DES_NOM", OracleDbType.Varchar2)).Value = item.NombreArchivo;
+                                cmd.Parameters.Add(new OracleParameter("X_EXT", OracleDbType.Varchar2)).Value = item.Extension;
+                                cmd.Parameters.Add(new OracleParameter("X_NUM_SIZE_ARCHIVO", OracleDbType.Int64)).Value = item.PesoArchivo;
+                                cmd.Parameters.Add(new OracleParameter("X_ID_DOC_CMS", OracleDbType.Int64)).Value = item.IdArchivo;
+                                cmd.Parameters.Add(new OracleParameter("X_FLG_LINK", OracleDbType.Varchar2)).Value = item.FlgLink;
+                                cmd.Parameters.Add(new OracleParameter("X_FLG_TIPO", OracleDbType.Varchar2)).Value = item.FlgTipo;
+                                cmd.Parameters.Add(new OracleParameter("X_ID_DOC", OracleDbType.Int64)).Value = item.IdDocumento;
+                                cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Int64)).Value = entidad.UsuCrea;
+                                cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                                cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                                dr = cmd.ExecuteReader();
+                                string PO_VALIDO2 = cmd.Parameters["X_VALIDO"].Value.ToString();
+                                if (PO_VALIDO2 == "0")
+                                {
+                                    auditoria.Rechazar(PO_MENSAJE);
+                                    transaction.Rollback();
+                                }
+                            }
+                        }
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+        }
+
 
     }
 }

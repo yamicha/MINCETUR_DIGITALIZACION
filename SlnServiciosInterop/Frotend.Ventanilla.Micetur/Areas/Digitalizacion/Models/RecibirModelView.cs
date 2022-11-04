@@ -21,6 +21,10 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
         [Required(ErrorMessage = "[Extensión] es obligatorio")]
         public string EXTENSION { get; set; }
 
+        public long ID_DIGITALIZADOR { get; set; }
+        public long ID_DIGITALIZADOR2 { get; set; }
+        public List<SelectListItem> ListaPersonal = new List<SelectListItem>();
+
         public long ID_DOC { get; set; }
     }
 

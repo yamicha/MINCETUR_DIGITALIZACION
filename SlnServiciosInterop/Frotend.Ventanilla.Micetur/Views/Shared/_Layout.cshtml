@@ -1,4 +1,5 @@
 ﻿@using Frotend.Ventanilla.Micetur.Authorization
+@using Frotend.Ventanilla.Micetur.Helpers
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -116,11 +117,11 @@
                     </li>
 
                     @*<li id="liReportes">
-            <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-stats"></i><span class="title"> Reportes</span><i class="icon-arrow"></i><span class="selected"></span></a>
-            <ul class="sub-menu">
-                <li id="liReporte" style=""> <a id="aReporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reportes</span></a></li>
-            </ul>
-        </li>*@
+                            <a style="height: 38px; padding-top: 9px;cursor:pointer"><i class="clip-stats"></i><span class="title"> Reportes</span><i class="icon-arrow"></i><span class="selected"></span></a>
+                            <ul class="sub-menu">
+                                <li id="liReporte" style=""> <a id="aReporte" style="height: 35px; padding-top: 9px;cursor:pointer"><i class=""></i><span class="title">Reportes</span></a></li>
+                            </ul>
+                        </li>*@
 
                 </ul>
             </div>
@@ -198,7 +199,8 @@
     <script src="~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     @RenderSection("Scripts", required: false)
     <script type="text/javascript">
-            var baseUrl = '@Url.Content("~/")';
+                 var baseUrl = '@Url.Content("~/")';
+                var BaseUrlApi = '@AppSettings.baseUrlApi';
                 $(function () {
             Main.init();
         });

@@ -1,26 +1,26 @@
-﻿$(document).ready(function () {
-    Remove_RemoverClases("liRecepcion");
-    $('#Load_Busqueda').show(); 
-    setTimeout(function () {Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes")}, 500);
+﻿var Expediente_Grilla = "Tabla_Pen_grilla";
+var Expediente_Barra = "Tabla_Pen_barra";
+
+$(document).ready(function () {
+    Documento_ConfigurarGrilla_Vent_Pen();
 });
 
 $("#cons_btn_buscar").click(function (e) {
     $('#Load_Busqueda').show();
     setTimeout(function () { Documento_ConfigurarGrilla_Vent_Pen("Tabla_Pen_grilla", "Tabla_Pen_barra", "Documentos Pendientes") }, 500);
 });
-function Documento_ConfigurarGrilla_Vent_Pen(_grilla, _barra, _titulo) {
+function Documento_ConfigurarGrilla_Vent_Pen() {
+    $('#Load_Busqueda').show();
     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
-    _ID_MODULO = 1;
-    _PREFIJO = "";
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
-    $("#" + _grilla).GridUnload();
+    $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.','Recibir' ,'Doc.','Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación','',''
+        'N° Exp.', 'Recibir', 'Doc.', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', '', ''
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
-        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir},
-        { name: 'DOC', index:'DOC', align: 'center', width: 110, formatter: Documento_actionVerDoc}, 
+        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir },
+        { name: 'DOC', index: 'DOC', align: 'center', width: 110, formatter: Documento_actionVerDoc },
         { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false }, //2
         { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //3
         { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //4
@@ -31,8 +31,8 @@ function Documento_ConfigurarGrilla_Vent_Pen(_grilla, _barra, _titulo) {
     var opciones = {
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: `GetRules()`,
         gridCompleteFunc: function () {
-            $('#Load_Busqueda').hide(); 
-            var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
+            $('#Load_Busqueda').hide();
+            var allJQGridData = $("#" + Expediente_Grilla).jqGrid('getRowData');
             if (allJQGridData.length == 0) {
                 $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
             }
@@ -44,10 +44,10 @@ function Documento_ConfigurarGrilla_Vent_Pen(_grilla, _barra, _titulo) {
             }
         },
     };
-    SICA.Grilla(_grilla, _barra, '', '400', '', _titulo, url, 'ID_EXPE', colNames, colModels, 'ID_EXPE', opciones);
-    $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
+    SICA.Grilla(Expediente_Grilla, Expediente_Barra, '', '400', '', 'Expedientes Pendientes', url, 'ID_EXPE', colNames, colModels, 'ID_EXPE', opciones);
+    $("#" + Expediente_Grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".Tabla_jqGrid"));
-    $("#" + _grilla + "_barra_left").css('width', '0px');
+    $("#" + Expediente_Grilla + "_barra_left").css('width', '0px');
 }
 function Documento_actionRecibir(cellvalue, options, rowObject) {
     var _btn = "";
@@ -57,7 +57,7 @@ function Documento_actionRecibir(cellvalue, options, rowObject) {
 function Documento_actionVerDoc(cellvalue, options, rowObject) {
     var _btn = "";
     var cant = rowObject[7];
-    if (cant!=0) {
+    if (cant != 0) {
         _btn = "<button title='Descargar Documento' onclick='DownloadFile(" + rowObject[8] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" > <i class=\"clip-download-3\" style=\"color:#a01010;font-size:20px\"></i></button>";
 
     }
@@ -70,7 +70,6 @@ function Documento_Recibir(CODIGO) {
         if (request.status != 200) return;
     });
 }
-
 function GetRules() {
     var rules = new Array();
     var FECHA_INICIO = ($("#txtfechainicio").val() == null || $("#txtfechainicio").val() == '') ? '' : $("#txtfechainicio").val() + '';
@@ -83,20 +82,57 @@ function GetRules() {
     ];
     return rules;
 }
-function RecibirLoadFormEdit(id) {
-    var url = `Ventanilla/DocRecepcion/listado-doc-ventanilla-getone?id=${id}`;
-    API.FetchGet("GET", url, function (auditoria) {
-        if (auditoria != null && auditoria != "") {
-            if (auditoria.EjecucionProceso) {
-                if (!auditoria.Rechazo) {
-                    $('#HDF_ID_EXPE').val(auditoria.Objeto.ID_EXPE);
-                   
+
+function Expediente_Recibir() {
+    var ListaAdjuntos = $("#" + Adjuntos_grilla).getRowData();
+    var ListaDocumento = $("#" + Documento_grilla).getRowData();
+    jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
+        if (r) {
+            ListaAdjuntos = ListaAdjuntos.map(function (x) {
+                return {
+                    FlgTipo: 1,
+                    NombreArchivo: x.NOMBRE_ARCHIVO,
+                    Extension: x.EXTENSION,
+                    PesoArchivo: parseInt(x.PESO_ARCHIVO),
+                    CodigoArchivo: x.CODIGO_ARCHIVO,
+                    FlgLink: parseInt(x.FLG_ARCHIVO)
+                }
+            });
+            if (ListaDocumento.length > 0) {
+                ListaDocumento.forEach(function (itemdoc) {
+                    ListaAdjuntos.push({
+                        IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
+                        IdDocumento: parseInt(itemdoc.ID_DOC),
+                        FlgTipo: 2,
+                        NombreArchivo: itemdoc.DES_NOM_ABR,
+                        Extension: itemdoc.EXTENSION,
+                        PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
+                        FlgLink: 0
+                    });
+                });
+            }
+            var item =
+            {
+                IdExpediente: parseInt($('#HDF_ID_EXPE').val()),
+                UsuCrea: parseInt($('#inputHddId_Usuario').val()), 
+                ListaAdjuntos: ListaAdjuntos,
+            };
+            var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
+            var auditoria = API.Ajax(url, item,false); 
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        Documento_ConfigurarGrilla_Vent_Pen();
+                        $('#myModal_Recibir_Doc').modal('hide');
+                        jAlert("Expediente recibido corrrectamente", "Proceso");
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
                 } else {
                     jAlert(auditoria.MensajeSalida, "Atención");
                 }
-            } else {
-                jAlert(auditoria.MensajeSalida, "Atención");
             }
         }
     });
+
 }

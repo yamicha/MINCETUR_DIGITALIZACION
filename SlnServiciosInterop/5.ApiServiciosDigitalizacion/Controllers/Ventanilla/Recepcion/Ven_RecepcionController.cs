@@ -13,6 +13,8 @@ using ApiServiciosDigitalizacion.Recursos.Paginacion;
 using EnServiciosDigitalizacion.Base;
 using System.IO;
 using Utilitarios.Excel;
+using EnServiciosDigitalizacion.Models.Ventanilla;
+
 namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
 {
     [EnableCors("AccesoCors")]
@@ -49,7 +51,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
 
                 using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
                 {
-                    IList<enExpediente> lista = repositorio.Documento_Ventanilla_Pen(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
+                    IList<enDocumentoVen> lista = repositorio.Documento_Ventanilla_Pen(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
                     if (auditoria.EjecucionProceso)
                     {
                         var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista);
@@ -107,7 +109,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
             {
                 using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
                 {
-                    auditoria.Objeto = repositorio.Documento_Ventanilla_GetOne(new enExpediente
+                    auditoria.Objeto = repositorio.Documento_Ventanilla_GetOne(new enDocumentoVen
                     {
                         ID_EXPE = ID_EXPE,
                     }, ref auditoria);
@@ -150,5 +152,32 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
             }
             return StatusCode(auditoria.Code, auditoria);
         }
+
+        [HttpPost]
+        [Route("recibir-expediente")]
+        public IActionResult Expediente_Insertar([FromBody] ExpedienteModels entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
+                {
+                     repositorio.Expediente_Insertar(entidad, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                auditoria.MensajeSalida = ex.Message;
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+
     }
 }

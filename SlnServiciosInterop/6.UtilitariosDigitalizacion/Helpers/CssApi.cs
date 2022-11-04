@@ -32,27 +32,29 @@ namespace Utilitarios.Helpers
         }
 
 
-        public async Task<T> PostApi<T>(string _baseUrl, object param) where T : class
+        public async Task<T> PostApi<T>(ApiParams param) where T : class
         {
-            var cliente = new HttpClient();
-            cliente.BaseAddress = new Uri(AppSettingsHelper.baseUrlApi);
-            var content = new StringContent(JsonConvert.SerializeObject(param), Encoding.UTF8, "application/json");
-            var response = await cliente.PostAsync(_baseUrl, content);
-            var json_respuesta = await response.Content.ReadAsStringAsync();
+            using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
+            {
+                cliente.BaseAddress = new Uri(param.EndPoint);
+                var content = new StringContent(JsonConvert.SerializeObject(param.parametros), Encoding.UTF8, "application/json");
+                var response = await cliente.PostAsync(param.Url, content);
+                var json_respuesta = await response.Content.ReadAsStringAsync();
 
-            var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-            return entidad;
+                var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+                return entidad;
+            }
         }
 
     }
 
     public class ApiParams
     {
-       public string EndPoint { get; set; }
-       public string Url { get; set; }
-       public object Params { get; set; }
-       public string UserAD { get; set; }
+        public string EndPoint { get; set; }
+        public string Url { get; set; }
+        public object Params { get; set; }
+        public string UserAD { get; set; }
         public string PassAD { get; set; }
-
+        public object parametros { get; set; }
     }
 }

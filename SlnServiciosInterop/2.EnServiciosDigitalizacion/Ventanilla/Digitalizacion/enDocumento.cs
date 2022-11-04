@@ -4,16 +4,21 @@ using System.Text;
 
 namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
 {
-    public class enDocumento
+   public class enDocumento :enBase
     {
+        public long ID_DOCUMENTO { get; set; }
+        public long ID_DOCUMENTO_ASIGNADO { get; set; }
+        public long ID_USUARIO { get; set; }
+        public long ID_LOTE { get; set; }
+        public long ID_LASERFICHE { get; set; }
+        public long ID_ESTADO_DOCUMENTO { get; set; }
+        public string DESCRIPCION_ESTADO { get; set; }
+        public string NOMBRE_USUARIO { get; set; }  
+         public long NRO_REPROCESADOS { get; set; }
+        public string OBSERVACION { get; set; }
+        public string STR_FEC_CREACION { get; set; }
+        public string STR_FEC_MODIFICACION { get; set; }
 
-        public long ID_DOC { get; set; }
-        public long ID_EXPE { get; set; }
-        public long ID_DOC_CMS { get; set; }
-        public string DES_NOM_ABR { get; set; }
-        public string NUM_SIZE_ARCHIVO { get; set; }
-        public string EXTENSION { get; set; }
-        public string DES_OBS { get; set; }
-        
-    }
+        public List<enDocumento> ListaDocumento  { get; set; }
+}
 }

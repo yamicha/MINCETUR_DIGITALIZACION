@@ -6,15 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Digitalizacion\Data\**" />
     <Compile Remove="Recursos\Repositorio\**" />
+    <Content Remove="Areas\Digitalizacion\Data\**" />
     <Content Remove="Recursos\Repositorio\**" />
+    <EmbeddedResource Remove="Areas\Digitalizacion\Data\**" />
     <EmbeddedResource Remove="Recursos\Repositorio\**" />
+    <None Remove="Areas\Digitalizacion\Data\**" />
     <None Remove="Recursos\Repositorio\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\Consultas\Models\" />
-    <Folder Include="Areas\Digitalizacion\Data\" />
     <Folder Include="Recursos\Log\" />
     <Folder Include="Recursos\Temporal\" />
   </ItemGroup>

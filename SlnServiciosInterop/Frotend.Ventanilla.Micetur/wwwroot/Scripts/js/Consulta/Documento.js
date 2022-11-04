@@ -51,6 +51,5 @@ function GetRules() {
     return rules;
 }
 $("#cons_btn_buscar").click(function (e) {
-    debugger;
     Documento_ConfigurarGrilla_Venta("Documento_Grilla", "Documento_Barra", "Documentos");
 });

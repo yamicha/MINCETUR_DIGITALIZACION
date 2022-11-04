@@ -47,10 +47,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha de grabación: </label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Extensión: </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(model => model.EXTENSION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "DD/MM/YYYY", @autocomplete = "off" })
+                                            @Html.TextBoxFor(model => model.EXTENSION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = ".pdf", @autocomplete = "off" })
                                             @Html.ValidationMessageFor(model => model.EXTENSION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

@@ -54,7 +54,7 @@ function Adjunto_Agregar() {
     if ($('#FrmAdjunto').valid() && ValidarExtension($('#EXTENSION').val())) {
         IdAdjunto++;
         var CODIGO_ARCHIVO = "";
-        if ($("#TIPO_ADJUNTO").val() == 2) {
+        if ($("#TIPO_ADJUNTO").val() == 0) {
             if (Adjunto.length > 0) {
                 CODIGO_ARCHIVO = Adjunto[0].codigoArchivo;
             } else {
@@ -90,7 +90,6 @@ function ValidarExtension(extension) {
 
 function ValidarArchivoTemporal(input) {
     var file = input.files[0];
-    resetForm('FrmAdjunto'); 
     var nombre = "";
     if (file != undefined) {
         var PesodeArchivo = parseFloat(file.size);
@@ -136,6 +135,7 @@ function Adjunto_CargarTemporal() {
             if (response.ejecucionProceso) {
                 Adjunto = new Array();
                 Adjunto.push(response.objeto);
+                debugger; 
                 $('#NOMBRE_ARCHIVO').val(response.objeto.nombreArchivo);
                 $('#PESO_ARCHIVO').val(response.objeto.pesoArchivo);
                 $('#EXTENSION').val(response.objeto.extension);
@@ -196,12 +196,10 @@ function Documento_Editar() {
         $('#MyModalDoc').modal('hide'); 
     }
 }
-
 function Documento_actionver(cellvalue, options, rowObject) {
     var Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-file-pdf\" style=\"color:#e40613;font-size:17px\"></i></button>";
     return Btn;
 }
-
 function Documento_CargarGrilla(ID_EXPE) {
     var url = "ventanilla/DocRecepcion/listado-doc-expediente/"+ID_EXPE;
     API.FetchGet("GET", url, function (auditoria) {

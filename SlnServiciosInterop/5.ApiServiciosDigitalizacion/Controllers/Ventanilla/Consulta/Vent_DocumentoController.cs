@@ -47,9 +47,9 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Consulta
                 else
                     @where = "1=1";
 
-                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                using (ConsultaRepositorio repositorio = new ConsultaRepositorio(_ConfigurationManager))
                 {
-                    IList<enExpediente> lista = repositorio.Documento_Ventanilla(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
+                    IList<enDocumentoVen> lista = repositorio.Documento_Ventanilla(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
                     if (auditoria.EjecucionProceso)
                     {
                         var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista);

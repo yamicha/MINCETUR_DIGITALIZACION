@@ -10,7 +10,10 @@
     $(document).ready(function () {
         Adjuntos_ConfigurarGrilla();
         Documento_ConfigurarGrilla();
-        Documento_CargarGrilla(@Model.ID_EXPE); 
+        Documento_CargarGrilla(@Model.ID_EXPE);
+        $('#ExpedienteBtnRecibir').click(function () {
+            Expediente_Recibir(); 
+        }); 
     });
     $('.modal-lg').draggable({
         handle: ".modal-header",
@@ -42,8 +45,8 @@
                                             @Html.TextBoxFor(model => model.NOMBRE_ARCHIVO, new { @class = "form-control", @maxlength = "100" })
                                             <div class="input-group-append">
                                                 <select id="TIPO_ADJUNTO" class="form-control">
-                                                    <option value="1">Link</option>
-                                                    <option value="2">Archivo</option>
+                                                    <option value="1" selected>Link</option>
+                                                    <option value="0">Archivo</option>
                                                 </select>
                                             </div>
                                         </div>
