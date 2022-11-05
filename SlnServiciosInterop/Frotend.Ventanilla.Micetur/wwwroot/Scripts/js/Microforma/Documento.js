@@ -13,12 +13,12 @@ var Documento_Ver_Proceso_barra = "Documento_Ver_Proceso_barra";
 // 2 : Asignar
 // 3 : Asignados
 function Documento_Detalle_buscar(_Grilla, _Barra) {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + _Grilla + "," + _Barra + ",\"Listado de documentos\",false,0);", 500);
+    Documento_ConfigurarGrilla(_Grilla, _Barra, "Listado de documentos", false, 0); 
 }
 
 function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_tab) {
-    //$(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
+    $("#Load_Busqueda").show();
+    setTimeout(() => { 
     _ID_MODULO = _id_tab;
     var VER_BOTON_IMAGEN = true;
     var VER_BOTON_OBS = true;
@@ -102,6 +102,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
         sort: 'desc', getrules: `GetRulesDoc()`,
         gridCompleteFunc: function () {
+            $("#Load_Busqueda").hide();
             ConfigurarColor(_grilla);
 
             var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
@@ -133,7 +134,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
     $("#" + _grilla + "_cb").css("width", "30px");
     $("#" + _grilla + "_cb tbody tr").children().first("td").css("width", "30px");
-    $("#Load_Busqueda").hide();
+    }, 500);
 }
 
 function Documento_actionVerImagen(cellvalue, options, rowObject) {

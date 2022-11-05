@@ -1,0 +1,6 @@
+System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Recursos\Temporales\9f93091f-c0c3-493e-bea4-be0ad9298464.pdf'.
+   at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at Frotend.Ventanilla.Micetur.Controllers.BaseController.guardarTemporalArchivo(IFormFile filearchivo) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Controllers\BaseController.cs:line 112

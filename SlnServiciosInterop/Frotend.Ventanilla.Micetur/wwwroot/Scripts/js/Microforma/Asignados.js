@@ -17,8 +17,7 @@ jQuery('#aTabAsignados').click(function (e) {
 });
 
 function Asignados_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Asignados_grilla + "," + Asignados_barra + ",\"Listado de documentos asignados\", true, 3);", 500);
+    Documento_ConfigurarGrilla(Asignados_grilla ,Asignados_barra ,"Listado de documentos asignados", true, 3)
 }
 
 jQuery('#Asignados_btn_Reasignar').click(function (e) {

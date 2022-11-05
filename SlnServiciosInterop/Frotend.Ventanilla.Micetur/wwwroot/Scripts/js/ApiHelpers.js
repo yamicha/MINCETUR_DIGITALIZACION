@@ -1,28 +1,32 @@
 ﻿
 API = {
-    Ajax: function (url, parameters, async) {
-        var rsp;
-        $.ajax({
-            type: "POST",
-            url:  url,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            traditional: true,
-            async: async,
-            data: JSON.stringify(parameters),
-            success: function (response) {
-                rsp = response;
-            },
-            failure: function (msg) {
-                alert(msg);
-                rsp = msg;
-            },
-            error: function (xhr, status, error) {
-                alert(error);
-                rsp = error;
-            }
-        });
-        return rsp;
+    Ajax: function (url, parameters, callback) {
+        fetchload.init();
+        setTimeout(function () {
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                traditional: true,
+                async: false,
+                data: JSON.stringify(parameters),
+                success: function (response) {
+                    fetchload.close();
+                    callback(response);
+                },
+                failure: function (msg) {
+                    fetchload.close();
+                    alert(msg);
+                    rsp = msg;
+                },
+                error: function (xhr, status, error) {
+                    fetchload.close();
+                    alert(error);
+                    rsp = error;
+                }
+            });
+        },500); 
     },
 
     Fetch: function (type, url, paramters, calback) {
@@ -33,9 +37,9 @@ API = {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                 'mode' : 'no-cors'
+                'mode': 'no-cors'
             }
-        }); 
+        });
         fetch(request)
             .then((resp) => resp.json())
             .then(function (data) {

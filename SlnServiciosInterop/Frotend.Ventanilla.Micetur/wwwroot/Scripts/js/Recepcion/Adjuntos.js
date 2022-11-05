@@ -10,8 +10,14 @@ $(document).ready(function () {
     $('#TIPO_ADJUNTO').change(function () {
         if ($(this).val() == 1) {
             $('#ControlFile').hide();
+            $('#NOMBRE_ARCHIVO').prop("disabled", false);
+            $('#PESO_ARCHIVO').prop("disabled", false);
+            $('#EXTENSION').prop("disabled", false);
         } else {
             $('#ControlFile').show('slow');
+            $('#NOMBRE_ARCHIVO').prop("disabled", true);
+            $('#PESO_ARCHIVO').prop("disabled", true);
+            $('#EXTENSION').prop("disabled", true);
         }
     });
 
@@ -72,10 +78,9 @@ function Adjunto_Agregar() {
             FLG_ARCHIVO: $("#TIPO_ADJUNTO").val(),
         };
         Adjunto.pop();
-        resetForm('FrmAdjunto'); 
+        resetForm('FrmAdjunto');
         jQuery("#" + Adjuntos_grilla).jqGrid('addRowData', IdAdjunto, myData);
     }
-
 }
 
 function ValidarExtension(extension) {
@@ -135,7 +140,7 @@ function Adjunto_CargarTemporal() {
             if (response.ejecucionProceso) {
                 Adjunto = new Array();
                 Adjunto.push(response.objeto);
-                debugger; 
+                debugger;
                 $('#NOMBRE_ARCHIVO').val(response.objeto.nombreArchivo);
                 $('#PESO_ARCHIVO').val(response.objeto.pesoArchivo);
                 $('#EXTENSION').val(response.objeto.extension);
@@ -154,7 +159,7 @@ function Adjunto_CargarTemporal() {
 
 function Documento_ConfigurarGrilla() {
     $("#" + Documento_grilla).GridUnload();
-    var colNames = ['Codigo','ID_DOC', 'ID_LASER','Editar','Ver', 'Documento', 'Observación', 'Peso', 'Extensión'];
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Documento', 'Observación', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
@@ -164,7 +169,7 @@ function Documento_ConfigurarGrilla() {
         { name: 'DES_NOM_ABR', index: 'DES_NOM_ABR', align: 'center', width: 200, hidden: false },
         { name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
         { name: 'NUM_SIZE_ARCHIVO', index: 'NUM_SIZE_ARCHIVO', align: 'center', width: 100, hidden: false, editable: true },
-        { name: 'EXTENSION', index: 'EXTENSION', align: 'center', width: 100, hidden: false ,editable: true, },
+        { name: 'EXTENSION', index: 'EXTENSION', align: 'center', width: 100, hidden: false, editable: true, },
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
@@ -178,12 +183,12 @@ function Documento_actionEditar(cellvalue, options, rowObject) {
 }
 function Documento_MostrarEditar(id) {
     jQuery("#MyModalDoc").html('');
-    jQuery("#MyModalDoc").load(baseUrl + "Digitalizacion/Recepcion/editar-documento?id=" + id , function (responseText, textStatus, request) {
+    jQuery("#MyModalDoc").load(baseUrl + "Digitalizacion/Recepcion/editar-documento?id=" + id, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#MyModalDoc');
         if (request.status == 200) {
-            var data = $('#' + Documento_grilla).getRowData(id); 
+            var data = $('#' + Documento_grilla).getRowData(id);
             $('#PESO_ARCHIVO').val(data.NUM_SIZE_ARCHIVO);
-            $('#EXTENSION').val(data.EXTENSION); 
+            $('#EXTENSION').val(data.EXTENSION);
         }
     });
 }
@@ -193,7 +198,7 @@ function Documento_Editar() {
         $("#" + Documento_grilla).jqGrid('setCell', rowKey, 'NUM_SIZE_ARCHIVO', $('#PESO_ARCHIVO').val());
         $("#" + Documento_grilla).jqGrid('setCell', rowKey, 'EXTENSION', $('#EXTENSION').val());
         jQuery("#" + Documento_grilla).trigger("reloadGrid");
-        $('#MyModalDoc').modal('hide'); 
+        $('#MyModalDoc').modal('hide');
     }
 }
 function Documento_actionver(cellvalue, options, rowObject) {
@@ -201,15 +206,15 @@ function Documento_actionver(cellvalue, options, rowObject) {
     return Btn;
 }
 function Documento_CargarGrilla(ID_EXPE) {
-    var url = "ventanilla/DocRecepcion/listado-doc-expediente/"+ID_EXPE;
+    var url = "ventanilla/DocRecepcion/listado-doc-expediente/" + ID_EXPE;
     API.FetchGet("GET", url, function (auditoria) {
         if (auditoria != null && auditoria != "") {
             jQuery("#" + Documento_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
             if (auditoria.EjecucionProceso) {
                 if (!auditoria.Rechazo) {
                     $.each(auditoria.Objeto, function (i, v) {
-                        i = i + 1; 
-                        v.CODIGO = i; 
+                        i = i + 1;
+                        v.CODIGO = i;
                         jQuery("#" + Documento_grilla).jqGrid('addRowData', i, v);
                     });
                     jQuery("#" + Documento_grilla).trigger("reloadGrid");

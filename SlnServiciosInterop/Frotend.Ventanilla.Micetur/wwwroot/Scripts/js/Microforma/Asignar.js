@@ -11,8 +11,7 @@ jQuery('#aTabAsignar').click(function (e) {
 });
 
 function Asignar_buscar() {
-    $("#Load_Busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Asignar_grilla + "," + Asignar_barra + ",\"Listado de documentos\",true,2);", 500);
+    Documento_ConfigurarGrilla(Asignar_grilla,  Asignar_barra ,"Listado de documentos",true,2);
 }
 
 jQuery('#Asignar_btn_Grabar').click(function (e) {
