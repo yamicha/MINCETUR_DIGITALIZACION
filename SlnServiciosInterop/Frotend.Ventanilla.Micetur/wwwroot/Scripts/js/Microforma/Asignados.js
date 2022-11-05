@@ -70,7 +70,7 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
                     ListaIdsDocumento: Asignados_ListaDocumentos,
                     UsuModificacion: $('#inputHddId_Usuario').val(),
                 }
-                var url = "archivo-central/documento/actualizar-asignacion";
+                var url = "ventanilla/documento/actualizar-asignacion";
                 API.Fetch("POST", url, item, function (auditoria) {
                     if (auditoria != null && auditoria != "") {
                         if (auditoria.EjecucionProceso) {

@@ -140,7 +140,6 @@ function Adjunto_CargarTemporal() {
             if (response.ejecucionProceso) {
                 Adjunto = new Array();
                 Adjunto.push(response.objeto);
-                debugger;
                 $('#NOMBRE_ARCHIVO').val(response.objeto.nombreArchivo);
                 $('#PESO_ARCHIVO').val(response.objeto.pesoArchivo);
                 $('#EXTENSION').val(response.objeto.extension);

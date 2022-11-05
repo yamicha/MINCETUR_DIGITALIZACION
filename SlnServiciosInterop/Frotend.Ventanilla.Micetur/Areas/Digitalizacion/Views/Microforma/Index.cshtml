@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Microformas";
+}
+<link href="~/assets/css/Grilla.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Lote.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaGrabar.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaGrabados.js")" type="text/javascript"></script>
+
+
+<link href="~/assets/css/Leyenda.css" rel="stylesheet" />
+<script>
+
+    $(document).ready(function () {
+        $("#MicroformaGrabar_btn_X").hide();
+        Remove_RemoverClases("liMicroformas");
+    });
+
+</script>
+
+<div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
+    <h5>
+        <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
+        Buscando registros...
+    </h5>
+</div>
+
+<div id="Microforma_Div_validar" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
+    <h5>
+        <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
+        Validando documentos...
+    </h5>
+</div>
+
+<div class="modal fade" id="myModal_Documento_Ver_Imagen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal_Documento_Grabar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+
+<div class="tab-content">
+    <ul id="myTab" class="nav nav-tabs tab-bricky">
+        <li class="active">
+            <a data-toggle="tab" href="#panel_tab_1" id="aTabMicroformaGrabar">
+                <i class="green fa fa-home"></i>
+                Pendientes de Grabación
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#panel_tab_2" id="aTabMicroforma">
+                Microformas Grabadas
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#panel_tab_3" id="aTabMicroReprocesar">
+                Reprocesar
+            </a>
+        </li>
+    </ul>
+
+    <div id="panel_tab_1" class="tab-pane active">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de documentos agrupados por lote, que ya han sido digitalizados y aprobados por el Fedatario.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
+                    <button id="MicroformaGrabar_btn_Nuevo" class="btn btn-blue" type="button" data-toggle='modal'><i class="fa fa-save"></i>&nbsp; Grabar Microforma</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" style="padding-right:0px">
+                    <div class="MicroformaGrabar_Lote_jqGrid">
+                        <table id="MicroformaGrabar_Lote_grilla"></table>
+                    </div>
+                    <div id="MicroformaGrabar_Lote_barra"></div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="MicroformaGrabar_jqGrid">
+                        <table id="MicroformaGrabar_grilla"></table>
+                       
+                    </div>
+                    <div id="MicroformaGrabar_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel_tab_2" class="tab-pane">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de documentos que se encuentran digitalizados y grabados.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="padding-right:0px">
+                    <div class="Microforma_Lote_jqGrid">
+                        <table id="Microforma_Lote_grilla"></table>
+                    </div>
+                    <div id="Microforma_Lote_barra"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="Microforma_jqGrid">
+                        <table id="Microforma_grilla"></table>
+                    </div>
+                    <div id="Microforma_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="panel_tab_3" class="tab-pane">
+        <div class="col-sm-12 inline-container-Group">
+            <div class="alert alert-info">
+                <p>Listado de documentos que se encuentran digitalizados y grabados.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" style="padding-right:0px">
+                    <div class="Microforma_Lote_jqGrid">
+                        <table id="MicroformaRepro_Lote_grilla"></table>
+                    </div>
+                    <div id="MicroformaRepro_Lote_barra"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="Microforma_jqGrid">
+                        <table id="MicroformaRepro_grilla"></table>
+                    </div>
+                    <div id="MicroformaRepro_barra"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

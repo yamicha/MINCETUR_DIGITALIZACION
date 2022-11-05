@@ -1,23 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
-//using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
+using EnServiciosDigitalizacion.Models.Ventanilla;
 using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
+using Frotend.Ventanilla.Micetur.Authorization;
+using Frotend.Ventanilla.Micetur.Controllers;
 using Frotend.Ventanilla.Micetur.Filters;
 using Frotend.Ventanilla.Micetur.Helpers;
 using Frotend.Ventanilla.Micetur.Recursos;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using EnServiciosDigitalizacion.Models.Ventanilla;
-using Frotend.Ventanilla.Micetur.Controllers;
-using System.IO;
-using Frotend.Ventanilla.Micetur.Authorization;
-using Utilitarios.Helpers;
-using System.Linq;
-using System.Collections.Generic;
-using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Frotend.Ventanilla.Micetur.Recursos;
+using Newtonsoft.Json;
+using Utilitarios.Helpers;
 
 namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
 {

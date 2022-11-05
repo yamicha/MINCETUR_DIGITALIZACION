@@ -51,7 +51,7 @@ function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA) {
         flgDevuelto: _FLG_DEVOLUCION,
         flgMicroforma: _FLG_MICROFORMA
     }
-    var url = `archivo-central/digitalizacion/listar-lotes`;
+    var url = `ventanilla/digitalizacion/listar-lotes`;
     API.Fetch("POST", url, item, function (auditoria) {
         jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
