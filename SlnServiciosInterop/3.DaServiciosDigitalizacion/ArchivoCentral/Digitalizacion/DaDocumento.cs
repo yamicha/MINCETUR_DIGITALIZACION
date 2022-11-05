@@ -478,7 +478,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             return Lista;
         }
 
-
         public void Documento_Grabar(enDocumento entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

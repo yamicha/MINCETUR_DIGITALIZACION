@@ -17,8 +17,7 @@ jQuery('#aTabAsignados').click(function (e) {
 });
 
 function Asignados_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Asignados_grilla + "," + Asignados_barra + ",\"Listado de documentos asignados\", true, 3);", 500);
+    Documento_ConfigurarGrilla(Asignados_grilla ,Asignados_barra ,"Listado de documentos asignados", true, 3)
 }
 
 jQuery('#Asignados_btn_Reasignar').click(function (e) {
@@ -71,7 +70,7 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
                     ListaIdsDocumento: Asignados_ListaDocumentos,
                     UsuModificacion: $('#inputHddId_Usuario').val(),
                 }
-                var url = "archivo-central/documento/actualizar-asignacion";
+                var url = "ventanilla/documento/actualizar-asignacion";
                 API.Fetch("POST", url, item, function (auditoria) {
                     if (auditoria != null && auditoria != "") {
                         if (auditoria.EjecucionProceso) {

@@ -53,8 +53,7 @@ jQuery('#Digitalizar_Check_Finalizar').change(function (e) {
 });
 
 function Digitalizar_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Digitalizar_grilla + "," + Digitalizar_barra + ",\"Listado de documentos asignados\", false, 4);", 500);
+    Documento_ConfigurarGrilla(Digitalizar_grilla ,Digitalizar_barra ,"Listado de documentos asignados", false, 4);
 }
 
 function Digitalizar_Iniciar() {
@@ -177,7 +176,7 @@ function Digitalizar_Finalizar(ID_LASERFICHER) {
             HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
             UsuCreacion: $('#inputHddId_Usuario').val()
         }
-        var url = "archivo-central/digitalizacion/digitalizar-documento";
+        var url = "ventanilla/digitalizacion/digitalizar-documento";
         API.Fetch("POST", url, item, function (auditoria) {
             if (auditoria != null && auditoria != "") {
                 if (auditoria.EjecucionProceso) {

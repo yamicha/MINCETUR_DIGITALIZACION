@@ -1,0 +1,51 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.MicroformaGrabaModelView
+@{
+    Layout = null;
+}
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Microforma_ProcesoConfigurarGrilla('Microforma_Procesogrilla', 'Microforma_Procesobarra');
+        Microforma_ProcesoCargarGrilla('Microforma_Procesogrilla');
+    });
+
+    $('.modal-dialogDocObs').draggable({
+        handle: ".modal-header",
+        cursor: "handler"
+    });
+
+</script>
+@{
+    var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
+    var htmlShort = new Dictionary<string, object> { { "style", "width:100px; font-family:verdana; font-size:.8em" } };
+}
+<div class="modal-dialogDocObs" style="width:800px;">
+    <div class="modal-content" style="width:100%;">
+        <div class="modal-header" style="cursor: move; background-color: #ca2626">
+            <div class="col-sm-14">
+                <button class="close" aria-hidden="true" type="button" data-dismiss="modal">× </button>
+                <h4 class="modal-title"><i class='clip-tree'></i>&nbsp; Listado de Proceso</h4>
+            </div>
+        </div>
+        <div class="modal-body">
+            <fieldset style="width: 100%;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="jqGrid">
+                            <table id="Microforma_Procesogrilla">
+                            </table>
+                            <div id="Microforma_Procesobarra"></div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_ID_MICROFORMA", Model.ID_MICROFORMA)
+</div>
+
+

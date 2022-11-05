@@ -97,7 +97,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
             return Json(auditoria);
         }
 
-        public ActionResult guardarTemporalArchivo(IFormFile filearchivo)
+        public async  Task<ActionResult> guardarTemporalArchivo(IFormFile filearchivo)
         {
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar(); 
@@ -108,13 +108,13 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                 {  
                     Miarchivo.extension = System.IO.Path.GetExtension(filearchivo.FileName).ToString();
                     Miarchivo.codigoArchivo = GenerarCodigo.GenerarCodigoTemporal();
-                    string RutaTemporal = Directory.GetCurrentDirectory() + @"\Recursos\Temporal\" + Miarchivo.codigoArchivo + Miarchivo.extension;
+                    string RutaTemporal = Css_Ruta.Ruta_Temporal+  Miarchivo.codigoArchivo + Miarchivo.extension;
                     using (Stream fileStream = new FileStream(RutaTemporal, FileMode.Create))
                     {
                         Miarchivo.nombreArchivo = filearchivo.FileName;
                         Miarchivo.pesoArchivo = Util.ConvertSizeFile(filearchivo.Length,(int)TypeSizeFile.KB);
                         Miarchivo.codigoArchivo = Miarchivo.codigoArchivo + Miarchivo.extension; 
-                        filearchivo.CopyToAsync(fileStream);
+                        await filearchivo.CopyToAsync(fileStream);
                         auditoria.Objeto = Miarchivo;
                     }
 

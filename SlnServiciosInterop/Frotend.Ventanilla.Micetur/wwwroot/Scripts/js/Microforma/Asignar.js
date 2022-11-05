@@ -11,8 +11,7 @@ jQuery('#aTabAsignar').click(function (e) {
 });
 
 function Asignar_buscar() {
-    $("#Load_Busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Asignar_grilla + "," + Asignar_barra + ",\"Listado de documentos\",true,2);", 500);
+    Documento_ConfigurarGrilla(Asignar_grilla, Asignar_barra, "Listado de documentos", true, 2);
 }
 
 jQuery('#Asignar_btn_Grabar').click(function (e) {
@@ -23,24 +22,21 @@ jQuery('#Asignar_btn_Grabar').click(function (e) {
                     ListaIdsDocumento: Asignar_ListaDocumentos,
                     UsuCreacion: $('#inputHddId_Usuario').val()
                 }
-                var url = "archivo-central/documento/grabar-asignacion";
-                //var auditoria = SICA.Ajax(url, item, false);
+                var url = "ventanilla/documento/grabar-asignacion";
                 API.Fetch("POST", url, item, function (auditoria) {
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.EjecucionProceso) {
-                        if (!auditoria.Rechazo) {
-                            jOkas("Documentos asignados correctamente", "Atención");
-                            Asignar_buscar();
-                            Asignar_ListaDocumentos = new Array();
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                jOkas("Documentos asignados correctamente", "Atención");
+                                Asignar_buscar();
+                                Asignar_ListaDocumentos = new Array();
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
                         } else {
                             jAlert(auditoria.MensajeSalida, "Atención");
                         }
-                    } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
                     }
-                } else {
-                    jAlert("No se encontraron registros", "Atención");
-                }
                 });
             }
         });
@@ -56,7 +52,7 @@ jQuery('#Asignar_btnDigitalizador').click(function (e) {
 function Asignar_Digitalizador() {
     var ID_DIGITALIZADOR = $("#ID_DIGITALIZADOR").val();
     if (ID_DIGITALIZADOR != '') {
-        Asignar_ListaDocumentos.pop(); 
+        Asignar_ListaDocumentos.pop();
         var rowKey = $("#" + Asignar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
         if (rowKey.length > 0) {
             var DESC_DIGITALIZADOR = $("#ID_DIGITALIZADOR option:selected").text();

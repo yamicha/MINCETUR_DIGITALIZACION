@@ -28,6 +28,27 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Digitalizacion
         {
             return _rule.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
+        //public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
+        //{
+        //    return _rule.Documento_Exportar(@WHERE, ref auditoria);
+        //}
+        public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            return _rule.Documento_ListarUno(entidad, ref auditoria);
+        }
+
+        public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
+        {
+            return _rule.DocumentoObservado_Listar(entidad, ref auditoria);
+        }
+        public void Documento_AsignacionInsertar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_AsignacionInsertar(entidad, ref auditoria);
+        }
+        public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
+        {
+            _rule.Documento_AsignacionActualizar(entidad, ref auditoria);
+        }
 
         public void Dispose()
         {

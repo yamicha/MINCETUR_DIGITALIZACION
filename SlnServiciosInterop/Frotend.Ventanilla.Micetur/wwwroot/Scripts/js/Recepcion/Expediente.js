@@ -2,7 +2,8 @@
 var Expediente_Barra = "Tabla_Pen_barra";
 
 $(document).ready(function () {
-    Documento_ConfigurarGrilla_Vent_Pen();
+    $('#Load_Busqueda').show();
+    setTimeout("Documento_ConfigurarGrilla_Vent_Pen()", 500);
 });
 
 $("#cons_btn_buscar").click(function (e) {
@@ -82,7 +83,6 @@ function GetRules() {
     ];
     return rules;
 }
-
 function Expediente_Recibir() {
     var ListaAdjuntos = $("#" + Adjuntos_grilla).getRowData();
     var ListaDocumento = $("#" + Documento_grilla).getRowData();
@@ -114,25 +114,27 @@ function Expediente_Recibir() {
             var item =
             {
                 IdExpediente: parseInt($('#HDF_ID_EXPE').val()),
-                UsuCrea: parseInt($('#inputHddId_Usuario').val()), 
+                UsuCrea: parseInt($('#inputHddId_Usuario').val()),
                 ListaAdjuntos: ListaAdjuntos,
             };
             var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
-            var auditoria = API.Ajax(url, item,false); 
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EjecucionProceso) {
-                    if (!auditoria.Rechazo) {
-                        Documento_ConfigurarGrilla_Vent_Pen();
-                        $('#myModal_Recibir_Doc').modal('hide');
-                        jAlert("Expediente recibido corrrectamente", "Proceso");
+            API.Ajax(url, item, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.ejecucionProceso) {
+                        if (!auditoria.rechazo) {
+                            $('#myModal_Recibir_Doc').modal('hide');
+                            Documento_ConfigurarGrilla_Vent_Pen();
+                            jAlert("Expediente recibido corrrectamente", "Proceso");
+                        } else {
+                            $('#myModal_Recibir_Doc').modal('hide');
+                            jAlert(auditoria.mensajeSalida, "Atención");
+                        }
                     } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
+                        $('#myModal_Recibir_Doc').modal('hide');
+                        jAlert(auditoria.mensajeSalida, "Atención");
                     }
-                } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
                 }
-            }
+            });
         }
     });
-
 }

@@ -1,0 +1,79 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.DevolverModelView
+@{
+    Layout = null;
+}
+
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Devolver_ComboArea(); 
+        CountCharactersControlTxt('OBSERVACION', 'Microforma_Grabar_lbl1', 3000);
+        $('#Devolver_btn_Grabar').click(function (e) {
+            Devolver_GrabarDevolucion(); 
+        }); 
+    });
+</script>
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmDevolucion", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogMicroforma">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Grabar Devolución </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
+                                <fieldset style="width: 100%;">
+                                    <div class="row" >
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Area:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(model => model.ID_AREA, Model.ListaArea, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ID_AREA, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.NOMBRE_USUARIO, new { @class = "form-control", @maxlength = "100", @disabled = "true", @style = "width:100%", @placeholder = "DD/MM/YYYY", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(model => model.NOMBRE_USUARIO, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextAreaFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Devolver_Grabar_lbl1', 3000)" })
+                                            <label id="Devolver_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="Devolver_btn_Grabar" class="btn btn-blue"><i class="fa fa-save"></i> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Html.Hidden("hd_Microforma_Grabar_MICROFORMA_ID_LOTE", Model.MICROFORMA_ID_LOTE)*@
+}
+
+
+

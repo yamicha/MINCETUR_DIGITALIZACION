@@ -10,8 +10,7 @@ jQuery('#aTabAprobar').click(function (e) {
 });
 
 function Aprobar_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Aprobar_grilla + "," + Aprobar_barra + ",\"Listado de documentos digitalizados\", false, 6);", 500);
+    Documento_ConfigurarGrilla(Aprobar_grilla, Aprobar_barra, "Listado de documentos digitalizados", false, 6); 
 }
 
 function Aprobar_Cerrar() {

@@ -1,28 +1,32 @@
 ﻿
 API = {
-    Ajax: function (url, parameters, async) {
-        var rsp;
-        $.ajax({
-            type: "POST",
-            url:  url,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            traditional: true,
-            async: async,
-            data: JSON.stringify(parameters),
-            success: function (response) {
-                rsp = response;
-            },
-            failure: function (msg) {
-                alert(msg);
-                rsp = msg;
-            },
-            error: function (xhr, status, error) {
-                alert(error);
-                rsp = error;
-            }
-        });
-        return rsp;
+    Ajax: function (url, parameters, callback) {
+        fetchload.init();
+        setTimeout(function () {
+            $.ajax({
+                type: "POST",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                traditional: true,
+                async: false,
+                data: JSON.stringify(parameters),
+                success: function (response) {
+                    fetchload.close();
+                    callback(response);
+                },
+                failure: function (msg) {
+                    fetchload.close();
+                    alert(msg);
+                    rsp = msg;
+                },
+                error: function (xhr, status, error) {
+                    fetchload.close();
+                    alert(error);
+                    rsp = error;
+                }
+            });
+        },500); 
     },
 
     Fetch: function (type, url, paramters, calback) {
@@ -33,9 +37,9 @@ API = {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                 'mode' : 'no-cors'
+                'mode': 'no-cors'
             }
-        }); 
+        });
         fetch(request)
             .then((resp) => resp.json())
             .then(function (data) {
@@ -176,5 +180,56 @@ function DownloadFile(ID_DOC) {
 function resetForm(_form) {
     $(`#${_form} input, #${_form} select, #${_form} textarea`).each(function () {
         $(this).val('').trigger('change');
+    });
+}
+
+function LoadComboApi(Url, Input, Options) {
+    return new Promise((resolve) => {
+        var request = null;
+        if (Options.method == "GET") {
+            request = new Request(BaseUrlApi + Url, {
+                method: "GET",
+                headers: new Headers()
+            });
+        } if (Options.method == "POST") {
+            request = new Request(BaseUrlApi + Url, {
+                method: "POST",
+                body: JSON.stringify(Options.paramters),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'mode': 'no-cors'
+                }
+            });
+        }
+        fetch(request)
+            .then((resp) => resp.json())
+            .then(function (data) {
+                fetchload.close();
+                if (data != null && data != "") {
+                    if (data.EjecucionProceso) {
+                        if (!data.Rechazo) {
+                            if (data.Objeto != null) {
+                                var Html = "";
+                                var Combo = $('#' + Input);
+                                $(Combo).html('').append('<option value="">--seleccione--</option>');
+                                $.each(data.Objeto, function (x, v) {
+                                    Html += `<option value=${eval('v.' + Options.KeyVal.value)}> ${eval('v.' + Options.KeyVal.name)} </option>`
+                                });
+                                $(Combo).append(Html);
+                                resolve(true);
+                            }
+                        } else {
+                            resolve(false);
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    }
+                }
+            })
+            .catch(function (error) {
+                fetchload.close();
+                resolve(false);
+                alert("request error api: " + error.message);
+            });
     });
 }

@@ -13,127 +13,128 @@ var Documento_Ver_Proceso_barra = "Documento_Ver_Proceso_barra";
 // 2 : Asignar
 // 3 : Asignados
 function Documento_Detalle_buscar(_Grilla, _Barra) {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + _Grilla + "," + _Barra + ",\"Listado de documentos\",false,0);", 500);
+    Documento_ConfigurarGrilla(_Grilla, _Barra, "Listado de documentos", false, 0);
 }
 
 function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_tab) {
-    //$(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
-    _ID_MODULO = _id_tab;
-    var VER_BOTON_IMAGEN = true;
-    var VER_BOTON_OBS = true;
-    var _NRO_REPROCESADOHidden = true;
-    var NOMBRE_BOTON_IMAGEN = "";
-    var url = BaseUrlApi + 'ventanilla/documento/listar-paginado';
-    if (_ID_MODULO == 0) {
-        _PREFIJO = "Detalle_";
-    }
-    if (_ID_MODULO == 2) {
-        _PREFIJO = "Asignar_";
-    } else if (_ID_MODULO == 3) {
-        _PREFIJO = "Asignados_";
-    } else if (_ID_MODULO == 4) {
-        _PREFIJO = "Digitalizar_";
-    } else if (_ID_MODULO == 5) {
-        _PREFIJO = "Digitalizados_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 6) {
-        _PREFIJO = "Control_Calidad_";
-        NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
-        _NRO_REPROCESADOHidden = false;
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 7) {
-        _PREFIJO = "Aprobados_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        _NRO_REPROCESADOHidden = false;
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 8) { // Reprocesar
-        _PREFIJO = "Reprocesar_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_OBS = false;
-    } else if (_ID_MODULO == 9) { // Reprocesados
-        _PREFIJO = "Reprocesados_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_IMAGEN = false;
-        VER_BOTON_OBS = false;
-    } else if (_ID_MODULO == 10) {
-        _PREFIJO = "Fedatar_";
-        NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 11) {
-        _PREFIJO = "Fedatados_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 12) {
-        _PREFIJO = "MicroformaGrabar_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_IMAGEN = false;
-    } else if (_ID_MODULO == 13) {
-        _PREFIJO = "Microforma_";
-        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
-        VER_BOTON_IMAGEN = false;
-    }
-    $("#" + _grilla).GridUnload();
-    var colNames = [
-        '0', '1', '2', '3',
-        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Nro. Expediente',
-        'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER']
-    var colModels = [
-        { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
-        { name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
-        { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //2
-        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //3
-
-        { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //4
-        { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //5
-        { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true }, //6
-        { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true }, //7
-        { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //8
-        { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //9
-
-        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 10
-        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 11
-        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 12
-        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 13
-        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 14
-    ];
-    var opciones = {
-        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
-        sort: 'desc', getrules: `GetRulesDoc()`,
-        gridCompleteFunc: function () {
-            ConfigurarColor(_grilla);
-
-            var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
-            if (allJQGridData.length == 0) {
-                $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
-            }
-            else {
-                //
-                var e = $(".ui-jqgrid-hdiv");
-                var ex = $(".ui-jqgrid-bdiv");
-                //scrollHeight: 68
-                for (var ii = 0; ii < e.length; ii++) {
-                    e[ii].scrollLeft = ex[ii].scrollLeft;
-                    //e[1].scrollLeft = ex[1].scrollLeft;
-                }
-                $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
-                //jQuery("#" + _grilla).trigger("reloadGrid");
-            }
-            jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
-        },
-        exportarExcel: function () {
-            Documento_Exportar(GetRules()); 
+    $("#Load_Busqueda").show();
+    setTimeout(() => {
+        _ID_MODULO = _id_tab;
+        var VER_BOTON_IMAGEN = true;
+        var VER_BOTON_OBS = true;
+        var _NRO_REPROCESADOHidden = true;
+        var NOMBRE_BOTON_IMAGEN = "";
+        var url = BaseUrlApi + 'ventanilla/documento/listar-paginado';
+        if (_ID_MODULO == 0) {
+            _PREFIJO = "Detalle_";
         }
-    };
-    SICA.Grilla(_grilla, _barra, '', '500', '', _titulo, url, _PREFIJO + 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
-    $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
-    jqGridResponsive($(".Tabla_jqGrid"));
+        if (_ID_MODULO == 2) {
+            _PREFIJO = "Asignar_";
+        } else if (_ID_MODULO == 3) {
+            _PREFIJO = "Asignados_";
+        } else if (_ID_MODULO == 4) {
+            _PREFIJO = "Digitalizar_";
+        } else if (_ID_MODULO == 5) {
+            _PREFIJO = "Digitalizados_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 6) {
+            _PREFIJO = "Control_Calidad_";
+            NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
+            _NRO_REPROCESADOHidden = false;
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 7) {
+            _PREFIJO = "Aprobados_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            _NRO_REPROCESADOHidden = false;
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 8) { // Reprocesar
+            _PREFIJO = "Reprocesar_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_OBS = false;
+        } else if (_ID_MODULO == 9) { // Reprocesados
+            _PREFIJO = "Reprocesados_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_IMAGEN = false;
+            VER_BOTON_OBS = false;
+        } else if (_ID_MODULO == 10) {
+            _PREFIJO = "Fedatar_";
+            NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 11) {
+            _PREFIJO = "Fedatados_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 12) {
+            _PREFIJO = "MicroformaGrabar_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_IMAGEN = false;
+        } else if (_ID_MODULO == 13) {
+            _PREFIJO = "Microforma_";
+            NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+            VER_BOTON_IMAGEN = false;
+        }
+        $("#" + _grilla).GridUnload();
+        var colNames = [
+            '0', '1', '2', '3',
+            NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Nro. Expediente',
+            'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER']
+        var colModels = [
+            { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
+            { name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
+            { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //2
+            { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //3
 
-    jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
-    $("#" + _grilla + "_cb").css("width", "30px");
-    $("#" + _grilla + "_cb tbody tr").children().first("td").css("width", "30px");
-    $("#Load_Busqueda").hide();
+            { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //4
+            { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //5
+            { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true }, //6
+            { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true }, //7
+            { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //8
+            { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //9
+
+            { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 10
+            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 11
+            { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 12
+            { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 13
+            { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 14
+        ];
+        var opciones = {
+            GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
+            sort: 'desc', getrules: `GetRulesDoc()`,
+            gridCompleteFunc: function () {
+                $("#Load_Busqueda").hide();
+                ConfigurarColor(_grilla);
+
+                var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
+                if (allJQGridData.length == 0) {
+                    $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
+                }
+                else {
+                    //
+                    var e = $(".ui-jqgrid-hdiv");
+                    var ex = $(".ui-jqgrid-bdiv");
+                    //scrollHeight: 68
+                    for (var ii = 0; ii < e.length; ii++) {
+                        e[ii].scrollLeft = ex[ii].scrollLeft;
+                        //e[1].scrollLeft = ex[1].scrollLeft;
+                    }
+                    $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
+                    //jQuery("#" + _grilla).trigger("reloadGrid");
+                }
+                jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
+            },
+            exportarExcel: function () {
+                Documento_Exportar(GetRules());
+            }
+        };
+        SICA.Grilla(_grilla, _barra, '', '500', '', _titulo, url, _PREFIJO + 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
+        $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
+        jqGridResponsive($(".Tabla_jqGrid"));
+
+        jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
+        $("#" + _grilla + "_cb").css("width", "30px");
+        $("#" + _grilla + "_cb tbody tr").children().first("td").css("width", "30px");
+    }, 500);
 }
 
 function Documento_actionVerImagen(cellvalue, options, rowObject) {
@@ -200,57 +201,58 @@ function Documento_ValidarImagen(CODIGO) {
 
 function GetRulesDoc() {
     var rules = new Array();
-    //var _ID_CONTROL_CARGA = null;
-    //var _ID_ESTADO_DOCUMENTO = null;
+    var _ID_CONTROL_CARGA = null;
+    var _ID_ESTADO_DOCUMENTO = null;
     //if (_ID_MODULO == 1) { // Carga temporales
     //    _ID_CONTROL_CARGA = jQuery('#ID_CONTROL_CARGA').val() == '' ? '0' : "'" + jQuery('#ID_CONTROL_CARGA').val() + "'";
-    //} else if (_ID_MODULO == 2) { // Asignar
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 1;
-    //} else if (_ID_MODULO == 3) { // Asignados
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 1;
-    //} else if (_ID_MODULO == 4) { // Digitalizar
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 2;
-    //} else if (_ID_MODULO == 5) { // Digitalizados
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 3;
-    //} else if (_ID_MODULO == 6) { // Aprobar
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 3;
-    //} else if (_ID_MODULO == 7) { // Aprobados
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 4;
-    //} else if (_ID_MODULO == 8) { // Reprocesar
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 5;
-    //} else if (_ID_MODULO == 9) { // Reprocesados
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 6;
-    //} else if (_ID_MODULO == 10) { // Fedatar
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 4;
-    //} else if (_ID_MODULO == 11) { // Fedatados
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 7;
-    //} else if (_ID_MODULO == 12) { // Grabar 
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 1;
-    //} else if (_ID_MODULO == 13) { // Microforma 
-    //    _ID_CONTROL_CARGA = null;
-    //    _ID_ESTADO_DOCUMENTO = 9;
-    //}
-    //_gs_NOMBRE_USUARIO = jQuery('#gs_' + _PREFIJO + 'NOMBRE_USUARIO').val();
-    //_gs_DESCRIPCION_ESTADO = "";
-    //_gs_COD_DOCUMENTO = "";
-    //if (_ID_MODULO != 1) {
-    //    _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + '_DESCRIPCION_ESTADO').val();
-    //    _gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_COD_DOCUMENTO').val();
-    //} else {
-    //    _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION_ESTADO').val();
-    //    _gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'COD_DOCUMENTO').val();
-    //}
+    //} else
+    if (_ID_MODULO == 2) { // Asignar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 3) { // Asignados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 4) { // Digitalizar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 2;
+    } else if (_ID_MODULO == 5) { // Digitalizados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 3;
+    } else if (_ID_MODULO == 6) { // Aprobar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 3;
+    } else if (_ID_MODULO == 7) { // Aprobados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 4;
+    } else if (_ID_MODULO == 8) { // Reprocesar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 5;
+    } else if (_ID_MODULO == 9) { // Reprocesados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 6;
+    } else if (_ID_MODULO == 10) { // Fedatar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 4;
+    } else if (_ID_MODULO == 11) { // Fedatados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 7;
+    } else if (_ID_MODULO == 12) { // Grabar 
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 13) { // Microforma 
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 9;
+    }
+    _gs_NOMBRE_USUARIO = jQuery('#gs_' + _PREFIJO + 'NOMBRE_USUARIO').val();
+    _gs_DESCRIPCION_ESTADO = "";
+    _gs_COD_DOCUMENTO = "";
+    if (_ID_MODULO != 1) {
+        _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + '_DESCRIPCION_ESTADO').val();
+        //_gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_COD_DOCUMENTO').val();
+    } else {
+        _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION_ESTADO').val();
+        //_gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'COD_DOCUMENTO').val();
+    }
     //_gs_DESC_FONDO = jQuery('#gs_' + _PREFIJO + 'DES_FONDO').val();
     //_gs_DESC_LARGA_SECCION = jQuery('#gs_' + _PREFIJO + 'DES_LARGA_SECCION').val();
     //_gs_DESC_SERIE = jQuery('#gs_' + _PREFIJO + 'DES_SERIE').val();
@@ -261,16 +263,16 @@ function GetRulesDoc() {
     //_gs_FOLIOS = jQuery('#gs_' + _PREFIJO + 'FOLIOS').val();
     //_gs_OBSERVACION = jQuery('#gs_' + _PREFIJO + 'OBSERVACION').val();
 
-    //_gs_USU_CREACION = jQuery('#gs_' + _PREFIJO + 'USU_CREACION').val();
-    //_gs_USU_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'USU_MODIFICACION').val();
+    _gs_USU_CREACION = jQuery('#gs_' + _PREFIJO + 'USU_CREACION').val();
+    _gs_USU_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'USU_MODIFICACION').val();
 
-    //_gs_STR_FEC_CREACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val();
-    //_gs_STR_FEC_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_MODIFICACION').val();
+    _gs_STR_FEC_CREACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val();
+    _gs_STR_FEC_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_MODIFICACION').val();
 
 
-    ////
-    //var _NOMBRE_USUARIO = _gs_NOMBRE_USUARIO == '' || _gs_NOMBRE_USUARIO == undefined ? null : "UPPER('" + _gs_NOMBRE_USUARIO + "')";
-    //var _DESCRIPCION_ESTADO = _gs_DESCRIPCION_ESTADO == '' || _gs_DESCRIPCION_ESTADO == undefined ? null : "'" + _gs_DESCRIPCION_ESTADO + "'";
+    //
+    var _NOMBRE_USUARIO = _gs_NOMBRE_USUARIO == '' || _gs_NOMBRE_USUARIO == undefined ? null : "UPPER('" + _gs_NOMBRE_USUARIO + "')";
+    var _DESCRIPCION_ESTADO = _gs_DESCRIPCION_ESTADO == '' || _gs_DESCRIPCION_ESTADO == undefined ? null : "'" + _gs_DESCRIPCION_ESTADO + "'";
     //var _DESC_FONDO = _gs_DESC_FONDO == '' || _gs_DESC_FONDO == undefined ? null : "UPPER('" + _gs_DESC_FONDO + "')";
     //var _DESC_LARGA_SECCION = _gs_DESC_LARGA_SECCION == '' || _gs_DESC_LARGA_SECCION == undefined ? null : "UPPER('" + _gs_DESC_LARGA_SECCION + "')";
     //var _DESC_SERIE = _gs_DESC_SERIE == '' || _gs_DESC_SERIE == undefined ? null : "UPPER('" + _gs_DESC_SERIE + "')";
@@ -281,66 +283,65 @@ function GetRulesDoc() {
     //var __FOLIOS = _gs_FOLIOS == '' || _gs_FOLIOS == undefined ? null : "UPPER('" + _gs_FOLIOS + "')";
     //var _OBSERVACION = _gs_OBSERVACION == '' || _gs_OBSERVACION == undefined ? null : "UPPER('" + _gs_OBSERVACION + "')";
 
-    //var POR = "'%'";
+    var POR = "'%'";
 
-    //rules = [
-    //    { field: 'V.ID_CONTROL_CARGA', data: 'NVL(' + _ID_CONTROL_CARGA + ',V.ID_CONTROL_CARGA)', op: " = " },
-    //    { field: 'V.DES_FONDO', data: POR + ' || ' + _DESC_FONDO + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.DES_LARGA_SECCION', data: POR + ' || ' + _DESC_LARGA_SECCION + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.DES_SERIE', data: POR + ' || ' + _DESC_SERIE + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.NOM_DOCUMENTO', data: POR + ' || ' + _NOM_DOCUMENTO + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.DESCRIPCION', data: POR + ' || ' + _DESCRIPCION + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
-    //    { field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
-    //    { field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
+    rules = [
+        //{ field: 'V.ID_CONTROL_CARGA', data: 'NVL(' + _ID_CONTROL_CARGA + ',V.ID_CONTROL_CARGA)', op: " = " },
+        //{ field: 'V.DES_FONDO', data: POR + ' || ' + _DESC_FONDO + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DES_LARGA_SECCION', data: POR + ' || ' + _DESC_LARGA_SECCION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DES_SERIE', data: POR + ' || ' + _DESC_SERIE + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.NOM_DOCUMENTO', data: POR + ' || ' + _NOM_DOCUMENTO + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DESCRIPCION', data: POR + ' || ' + _DESCRIPCION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
+        //{ field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
 
-    //];
+    ];
 
-    //if (_ID_MODULO != 1) {
-    //    rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
-    //    if (_ID_MODULO != 2)
-    //        rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
-    //}
-    //if (_ID_MODULO == 0) { // detalle
-    //    //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
-    //    rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
-    //}
-    //if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
-    //}
-    //if (_ID_MODULO == 3) { // Asignados
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
-    //    rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
-    //}
-    //if (_ID_MODULO == 12) { // Grabar 
-    //    rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " != " });
-    //}
-    //if (_ID_MODULO == 13) { // Grabados
-    //    rules.push({ field: 'V.ID_MICROFORMA', data: 'NVL(' + _ID_MICROFORMA + ',V.ID_MICROFORMA)', op: " = " });
-    //}
-    //if (_ID_MODULO == 6) { // Aprobar
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6)', op: " in " });
-    //}
-    //if (_ID_MODULO == 8) { // Reprocesar
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
-    //}
-    //if (_ID_MODULO == 8) { // Reprocesar
-    //    rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
-    //} 
-    //if (_ID_MODULO == 1 || _ID_MODULO == 2) {
-    //    rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
-    //}
-    //if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3 ) {
-    //    rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
-    //}
+    if (_ID_MODULO != 1) {
+        rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
+        if (_ID_MODULO != 2)
+            rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
+    }
+    if (_ID_MODULO == 0) { // detalle
+        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
+    if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
+    }
+    if (_ID_MODULO == 3) { // Asignados
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
+    if (_ID_MODULO == 12) { // Grabar 
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " != " });
+    }
+    if (_ID_MODULO == 13) { // Grabados
+        rules.push({ field: 'V.ID_MICROFORMA', data: 'NVL(' + _ID_MICROFORMA + ',V.ID_MICROFORMA)', op: " = " });
+    }
+    if (_ID_MODULO == 6) { // Aprobar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6)', op: " in " });
+    }
+    if (_ID_MODULO == 8) { // Reprocesar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+    }
+    if (_ID_MODULO == 8) { // Reprocesar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+    }
+    if (_ID_MODULO == 1 || _ID_MODULO == 2) {
+        rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
+    }
+    if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3) {
+        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
     return rules;
 }
 
 function Documento_Ver_Obs_CargarGrilla() {
     ID_DOCUMENTO = $("#hd_Documento_Ver_ID_DOCUMENTO").val()
-    var url = `archivo-central/documento/listado-obs-documento/${ID_DOCUMENTO}`;
-    //var auditoria = SICA.Ajax(url, item, false);
+    var url = `ventanilla/documento/listado-obs-documento/${ID_DOCUMENTO}`;
     API.FetchGet("GET", url, function (auditoria) {
         jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
@@ -360,7 +361,6 @@ function Documento_Ver_Obs_CargarGrilla() {
                             OBSERVACION: v.OBSERVACION,
                             USU_CREACION: v.USU_CREACION,
                             STR_FEC_CREACION: v.STR_FEC_CREACION,
-                            //IP_CREACION: v.IP_CREACION
                         };
                         jQuery("#" + Documento_Ver_Obs_grilla).jqGrid('addRowData', ix, myData);
                     });
@@ -430,7 +430,7 @@ function Documento_Ver_Proceso_ConfigurarGrilla() {
 
 function Documento_Ver_Proceso_CargarGrilla() {
     var ID_DOCUMENTO = $("#hd_Documento_Ver_ID_DOCUMENTO").val()
-    var url = `archivo-central/digitalizacion/listar-documento-proceso/${ID_DOCUMENTO}`;
+    var url = `ventanilla/digitalizacion/listar-documento-proceso/${ID_DOCUMENTO}`;
     API.FetchGet("GET", url, function (auditoria) {
         jQuery("#" + Documento_Ver_Proceso_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
@@ -478,16 +478,16 @@ function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
 
 function Documento_Exportar(Rules) {
     var params = new Object;
-    params.rules = Rules; 
-    var url = BaseUrlApi +'archivo-central/documento/documento-exportar';
+    params.rules = Rules;
+    var url = BaseUrlApi + 'ventanilla/documento/documento-exportar';
     $.ajax({
         url: url,
         type: "POST",
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(params),
         success: function (data) {
-            if (data !=null || data!="")
-                window.location = BaseUrlApi + 'archivo-central/get-file/' + data
+            if (data != null || data != "")
+                window.location = BaseUrlApi + 'ventanilla/get-file/' + data
         }, failure: function (msg) {
             alert(msg);
         },
@@ -495,4 +495,43 @@ function Documento_Exportar(Rules) {
             alert(error);
         }
     });
+}
+
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+
+async function Documento_EditValidarImagen(id) {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_OBSERVACION", name: "DESC_OBSERVACION" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    if (await LoadComboApi("ventanilla/observacion/listar", "VALIDAR_ID_TIPO_OBS", OptionsCbo)) {
+        var url = `ventanilla/documento/get-documento/${id}`;
+        API.FetchGet("GET", url, function (auditoria) {
+            if (auditoria != null && auditoria != "") {
+                if (auditoria.EjecucionProceso) {
+                    if (!auditoria.Rechazo) {
+                        $('#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO').val(auditoria.Objeto.ID_DOCUMENTO_ASIGNADO);
+                        $('#NOM_DOCUMENTO').val(auditoria.Objeto.NOM_DOCUMENTO);
+                        $('#DESC_FONDO').val(auditoria.Objeto.DES_FONDO);
+                        $('#DESC_LARGA_SECCION').val(auditoria.Objeto.DES_LARGA_SECCION);
+                        $('#DESC_SERIE').val(auditoria.Objeto.DES_SERIE);
+                        $('#ANIO').val(auditoria.Objeto.ANIO);
+                        $('#FOLIOS').val(auditoria.Objeto.FOLIOS);
+                        $('#OBSERVACION').val(auditoria.Objeto.OBSERVACION);
+                        $('#DESCRIPCION').val(auditoria.Objeto.DESCRIPCION);
+                        $('#VALIDAR_NOMBRE_DIGITALIZADOR').val(auditoria.Objeto.VALIDAR_NOMBRE_DIGITALIZADOR);
+                        $('#VALIDAR_NOMBRE_DIGITALIZADOR').val(auditoria.Objeto.NOMBRE_USUARIO);
+                        $('#DESCRIPCION').val(auditoria.Objeto.DESCRIPCION);
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            }
+        });
+    }
 }
