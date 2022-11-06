@@ -21,7 +21,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             List<enSoporte> lista = new List<enSoporte>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDASOPORTE_LISTAR";
+            cmd.CommandText = AppSettingsHelper.PackAdmConsVentanilla + ".PRC_CDVSOPORTE_LISTAR";
             cmd.Parameters.Add("X_DESC_SOPORTE", validarNulo(objenSubSerie.DESC_SOPORTE));
             cmd.Parameters.Add("X_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
             cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
@@ -85,7 +85,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             enSoporte temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDASOPORTE_LISTAR_UNO";
+            cmd.CommandText = AppSettingsHelper.PackAdmConsVentanilla + ".PRC_CDVSOPORTE_LISTAR_UNO";
             cmd.Parameters.Add("X_ID_SOPORTE", validarNulo(objenSubSerie.ID_SOPORTE));
             cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
@@ -153,7 +153,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVSOPORTE_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_DESC_SOPORTE", OracleDbType.Varchar2)).Value = entidad.DESC_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
@@ -187,7 +187,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVSOPORTE_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("X_DESC_SOPORTE", OracleDbType.Varchar2)).Value = entidad.DESC_SOPORTE;
@@ -221,7 +221,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVSOPORTE_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("X_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
@@ -256,7 +256,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDASOPORTE_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVSOPORTE_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_SOPORTE", OracleDbType.Long)).Value = entidad.ID_SOPORTE;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

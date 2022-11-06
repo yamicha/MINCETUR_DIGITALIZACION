@@ -23,7 +23,9 @@ namespace Utilitarios.Helpers
         public static string PackDocVentanilla => GetAppSetting("PackDocVentanilla");
         public static string PackManVentanilla => GetAppSetting("PackManVentanilla");
         public static string PackSeguridad => GetAppSetting("PackSeguridad");
-        
+        public static string PackAdmConsVentanilla => GetAppSetting("PackAdmConsVentanilla");
+        public static string PackAdmManVentanilla => GetAppSetting("PackAdmManVentanilla");
+
         private static string GetAppSetting(string key)
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();

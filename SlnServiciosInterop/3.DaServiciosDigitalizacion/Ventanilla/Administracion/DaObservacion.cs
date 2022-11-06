@@ -21,7 +21,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             List<enObservacion> lista = new List<enObservacion>();
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAOBSERVACION_LISTAR";
+            cmd.CommandText = AppSettingsHelper.PackAdmConsVentanilla + ".PRC_CDVOBSERVACION_LISTAR";
             cmd.Parameters.Add("X_DESC_OBSERVACION", validarNulo(objenSubSerie.DESC_OBSERVACION));
             cmd.Parameters.Add("X_FLG_ESTADO", validarNulo(objenSubSerie.FLG_ESTADO));
             cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
@@ -85,7 +85,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             enObservacion temp = null;
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAOBSERVACION_LISTAR_UNO";
+            cmd.CommandText = AppSettingsHelper.PackAdmConsVentanilla + ".PRC_CDVOBSERVACION_LISTAR_UNO";
             cmd.Parameters.Add("X_ID_OBSERVACION", validarNulo(objenSubSerie.ID_OBSERVACION));
             cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
             cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
@@ -153,7 +153,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAOBSERVACION_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVOBSERVACION_INSERTAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_DESC_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.DESC_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
@@ -187,7 +187,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAOBSERVACION_ACTUALIZAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVOBSERVACION_ACTUALIZAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("X_DESC_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.DESC_OBSERVACION;
@@ -221,7 +221,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAOBSERVACION_ESTADO"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVOBSERVACION_ESTADO"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("X_FLG_ESTADO", OracleDbType.Varchar2)).Value = entidad.FLG_ESTADO;
@@ -256,7 +256,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Administracion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdminMant, "PRC_CDAOBSERVACION_ELIMINAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackAdmManVentanilla, "PRC_CDVOBSERVACION_ELIMINAR"), cn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_ID_OBSERVACION", OracleDbType.Long)).Value = entidad.ID_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;

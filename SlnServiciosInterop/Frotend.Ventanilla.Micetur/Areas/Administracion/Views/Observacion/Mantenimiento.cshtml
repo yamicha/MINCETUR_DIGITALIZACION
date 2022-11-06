@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+@model Frotend.Ventanilla.Micetur.Areas.Administracion.Models.ObservacionModelView
+<script type="text/javascript">
+        $(document).ready(function () {
+            if ($('#hd_OBSERVACION_ACCION').val() == "M") {
+                Observacion_EditarGetOne(@Model.ID_OBSERVACION);
+        }
+    });
+    jQuery('#observacion_btn_grabar').click(function (e) {
+        Observacion_RegistrarDatos();
+    });
+</script>
+@using (Html.BeginForm("Proceso", "Observacion", new { @area = "Administracion" }, FormMethod.Post, false, new { @id = "frmMantenimientoObservacion", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #530d0d;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                @{
+                    if (Model.ACCION == "N")
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Nueva Observacion</h4>
+                    }
+                    else
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Mantenimiento  de Observacion</h4>
+                    }
+                }
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DESC_OBSERVACION, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(model => model.DESC_OBSERVACION, new { @class = "form-control", @maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.DESC_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="observacion_btn_grabar" class="btn btn-blue" type="button" data-toggle="modal"><i class="fa fa-save" /> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="fa fa-share-square-o"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_OBSERVACION_ACCION", Model.ACCION)
+    @Html.Hidden("hd_OBSERVACION_ID_OBSERVACION", Model.ID_OBSERVACION)
+}

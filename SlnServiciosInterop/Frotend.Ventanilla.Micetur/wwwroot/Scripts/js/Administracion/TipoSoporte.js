@@ -104,7 +104,7 @@ function Soporte_Estado(ID, CHECK) {
         FlgEstado: CHECK.checked == true ? '1' : '0',
         UsuModificacion: $("#inputHddId_Usuario").val()
     };
-    var url = `archivo-central/soporte/estado/${item.IdSoporte}`;
+    var url = `Ventanilla/soporte/estado/${item.IdSoporte}`;
     API.Fetch("PUT", url, item, function (auditoria) {
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
@@ -128,7 +128,7 @@ function Soporte_Eliminar(id) {
 
     jConfirm("¿Desea eliminar este registro ?", "Atención", function (r) {
         if (r) {
-            var url = `archivo-central/soporte/eliminar/${id}`;
+            var url = `Ventanilla/soporte/eliminar/${id}`;
             API.FetchGet("DELETE", url, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -157,7 +157,7 @@ function Soporte_CargarGrilla(_grilla) {
         DescSoporte: $("#soporte_descripcion").val().toUpperCase(),
         FlgEstado: $("#SoporteCboEstado").val()
     };
-    var url = "archivo-central/soporte/listar";
+    var url = "Ventanilla/soporte/listar";
     jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
     API.Fetch("POST", url, item, function (auditoria) {
 
@@ -213,7 +213,7 @@ function Soporte_RegistrarDatos() {
                         DescSoporte: $("#DESC_SOPORTE").val().toUpperCase(),
                         UsuCreacion: $("#inputHddId_Usuario").val()
                     };
-                    var url = 'archivo-central/soporte/insertar';
+                    var url = 'Ventanilla/soporte/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
 
                         if (auditoria != null && auditoria != "") {
@@ -252,7 +252,7 @@ function Soporte_ActualizarDatos() {
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {
             if (r) {
 
-                var url = `archivo-central/soporte/actualizar/${id}`;
+                var url = `Ventanilla/soporte/actualizar/${id}`;
                 API.Fetch("PUT", url, item, function (auditoria) {
 
                     if (auditoria != null && auditoria != "") {
