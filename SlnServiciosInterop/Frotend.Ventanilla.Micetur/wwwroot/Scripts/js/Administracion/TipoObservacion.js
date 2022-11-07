@@ -287,4 +287,23 @@ function Observacion_MostrarNueva() {
     });
 }
 
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+function Observacion_EditarGetOne(id) {
+    var url = `Ventanilla/observacion/get-observacion/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_OBSERVACION').val(auditoria.Objeto.DESC_OBSERVACION);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
 

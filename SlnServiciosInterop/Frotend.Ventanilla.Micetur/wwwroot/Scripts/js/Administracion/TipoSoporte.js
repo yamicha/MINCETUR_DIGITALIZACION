@@ -288,4 +288,24 @@ function Soporte_MostrarNueva() {
     });
 }
 
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+function Soporte_EditarGetOne(id) {
+    var url = `Ventanilla/soporte/get-soporte/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_SOPORTE').val(auditoria.Objeto.DESC_SOPORTE);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
+
 
