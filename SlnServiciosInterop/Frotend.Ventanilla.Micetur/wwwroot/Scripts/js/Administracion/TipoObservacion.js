@@ -102,7 +102,7 @@ function Observacion_Estado(ID, CHECK) {
         FlgEstado: CHECK.checked == true ? '1' : '0',
         UsuModificacion: $("#inputHddId_Usuario").val()
     };
-    var url = `archivo-central/observacion/estado/${item.IdObservacion}`;
+    var url = `Ventanilla/observacion/estado/${item.IdObservacion}`;
     API.Fetch("PUT", url, item, function (auditoria) {
         if (auditoria != null && auditoria != "") {
             if (auditoria.EjecucionProceso) {
@@ -126,7 +126,7 @@ function Observacion_Eliminar(id) {
     jConfirm("¿Desea eliminar este registro ?", "Atención", function (r) {
         if (r) {
 
-            var url = `archivo-central/observacion/eliminar/${id}`;
+            var url = `Ventanilla/observacion/eliminar/${id}`;
             API.FetchGet("DELETE", url, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -156,7 +156,7 @@ function Observacion_CargarGrilla(_grilla) {
         DescObservacion: $("#observacion_descripcion").val().toUpperCase(),
         FlgEstado: $("#ObservacionCboEstado").val()
     };
-    var url = "archivo-central/observacion/listar";
+    var url = "Ventanilla/observacion/listar";
     jQuery("#" + _grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
 
     API.Fetch("POST", url, item, function (auditoria) {
@@ -214,7 +214,7 @@ function Observacion_RegistrarDatos() {
                         DescObservacion: $("#DESC_OBSERVACION").val().toUpperCase(),
                         UsuCreacion: $("#inputHddId_Usuario").val()
                     };
-                    var url = 'archivo-central/observacion/insertar';
+                    var url = 'Ventanilla/observacion/insertar';
                     API.Fetch("POST", url, item, function (auditoria) {
 
                         if (auditoria != null && auditoria != "") {
@@ -252,7 +252,7 @@ function Observacion_ActualizarDatos() {
 
         jConfirm("¿Desea actualizar este registro ?", "Atención", function (r) {
             if (r) {
-                var url = `archivo-central/observacion/actualizar/${id}`;
+                var url = `Ventanilla/observacion/actualizar/${id}`;
                 API.Fetch("PUT", url, item, function (auditoria) {
 
                     if (auditoria != null && auditoria != "") {
@@ -287,4 +287,23 @@ function Observacion_MostrarNueva() {
     });
 }
 
+/*  ------------------------------
+    |  Carga data para editar    |
+    ------------------------------ */
+function Observacion_EditarGetOne(id) {
+    var url = `Ventanilla/observacion/get-observacion/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#DESC_OBSERVACION').val(auditoria.Objeto.DESC_OBSERVACION);
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
 

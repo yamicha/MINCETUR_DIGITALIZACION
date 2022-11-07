@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Administracion\Data\" />
     <Folder Include="Areas\Consultas\Models\" />
     <Folder Include="Recursos\Log\" />
     <Folder Include="Recursos\Temporal\" />
