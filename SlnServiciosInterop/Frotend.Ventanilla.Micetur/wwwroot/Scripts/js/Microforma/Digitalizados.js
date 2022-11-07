@@ -11,6 +11,5 @@ jQuery('#aTabDigitalizados').click(function (e) {
 });
 
 function Digitalizados_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Digitalizados_grilla + "," + Digitalizados_barra + ",\"Listado de documentos digitalizados\", false, 5);", 500);
+   Documento_ConfigurarGrilla( Digitalizados_grilla ,  Digitalizados_barra ,"Listado de documentos digitalizados", false, 5);
 }
