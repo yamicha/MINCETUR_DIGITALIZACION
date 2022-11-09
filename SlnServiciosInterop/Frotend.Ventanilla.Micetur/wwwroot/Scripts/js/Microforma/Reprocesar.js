@@ -41,14 +41,12 @@ jQuery('#Reprocesar_Check_Finalizar').change(function (e) {
 });
 
 function Reprocesar_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Reprocesar_grilla + "," + Reprocesar_barra + ",\"Listado de documentos no aprobados\", false, 8);", 500);
+   Documento_ConfigurarGrilla(Reprocesar_grilla,Reprocesar_barra ,"Listado de documentos no aprobados", false, 8);
 }
 
 function Reprocesar_Iniciar() {
     Reprocesar_ListaDocumentos = new Array();
     var rowKey = $("#" + Reprocesar_grilla).jqGrid('getGridParam', 'selrow');
-    //var rowKey = $("#" + Reprocesar_grilla).jqGrid('getGridParam', 'selarrrow'); // esta opcion permite traer los indices de cada fila seleccionada
     if (rowKey != null) {
         if (rowKey.length != 0) {
             $("#Reprocesar_btn_Fin").show();
@@ -162,7 +160,7 @@ function Reprocesar_Finalizar(ID_LASERFICHER) {
             HoraFIn: Reprocesar_ListaDocumentos[0].HORA_FIN,
             UsuCreacion: $('#inputHddId_Usuario').val()
         }
-        var url = "archivo-central/digitalizacion/reprocesar-documento";
+        var url = "ventanilla/digitalizacion/reprocesar-documento";
         API.Fetch("POST", url, item, function (auditoria) {
             if (auditoria != null && auditoria != "") {
                 if (auditoria.EjecucionProceso) {

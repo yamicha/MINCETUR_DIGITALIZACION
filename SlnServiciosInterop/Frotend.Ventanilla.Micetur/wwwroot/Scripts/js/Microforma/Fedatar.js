@@ -110,7 +110,7 @@ function Aprobar_Evaluar() {
                 IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
                 UsuCreacion: $('#inputHddId_Usuario').val()
             }
-            var url = "archivo-central/digitalizacion/digitalizado-fedatario-validar";
+            var url = "ventanilla/digitalizacion/digitalizado-fedatario-validar";
             API.Fetch("POST", url, itemx, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -140,16 +140,18 @@ function Fedatar_ConformeMasivo() {
             for (var i = 0; i < rowKey.length; i++) {
                 var data = jQuery("#" + Fedatar_grilla).jqGrid('getRowData', rowKey[i]);
                 var itemDoc = {
+                    FlgConforme : 1 ,// conforme
                     IdDocumento: parseInt(data.Fedatar_ID_DOCUMENTO),
                     IdDocumentoAsignado: parseInt(data.Fedatar_ID_DOCUMENTO_ASIGNADO),
-                    UsuCreacion: $('#inputHddId_Usuario').val()
+                    UsuCreacion: $('#inputHddId_Usuario').val(),
+                    IdTipoObservacion : 0
                 };
                 Fedatar_ListaDocumentos.push(itemDoc);
             }
             var itemx = {
                 LisIdDocumento: Fedatar_ListaDocumentos,
             }
-            var url = "archivo-central/digitalizacion/fedatario-validar-masivo";
+            var url = "ventanilla/digitalizacion/fedatario-validar-masivo";
             API.Fetch("POST", url, itemx, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {

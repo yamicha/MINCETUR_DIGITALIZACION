@@ -507,8 +507,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
                             int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
-                            int intIdLote = drReader.GetOrdinal("ID_LOTE");
-                            int intNroRepro = drReader.GetOrdinal("NRO_REPROCESADOS");
                             int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
 
                             while (drReader.Read())
@@ -519,10 +517,8 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
                                 if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
                                 if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
-                                if (!drReader.IsDBNull(intNroRepro)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroRepro].ToString());
                                 if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
                                 if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
-                                if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = long.Parse(arrResult[intIdLote].ToString());
                                 if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
                             }
                             drReader.Close();

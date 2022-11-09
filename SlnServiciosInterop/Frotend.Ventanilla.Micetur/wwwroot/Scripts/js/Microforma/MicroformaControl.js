@@ -55,7 +55,7 @@ async function MicroformaEvaluar() {
                     UsuCreacion: $("#inputHddId_Usuario").val(),
                     IdDocConformidad: parseInt(IdDocConformidad),
                 }
-                var url = "archivo-central/microforma/evaluar";
+                var url = "ventanilla/microforma/evaluar";
                 API.Fetch("POST", url, item, function (auditoria) {
                     if (auditoria != null && auditoria != "") {
                         if (auditoria.EjecucionProceso) {
@@ -83,7 +83,7 @@ async function MicroformaEvaluar() {
 function MicroformaControl_CargarGrilla() {
     var item = {
     }
-    var url = "archivo-central/microforma/listar-control";
+    var url = "ventanilla/microforma/listar-control";
     API.Fetch("POST", url, item, function (auditoria) {
         jQuery("#" + MicroControl_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {

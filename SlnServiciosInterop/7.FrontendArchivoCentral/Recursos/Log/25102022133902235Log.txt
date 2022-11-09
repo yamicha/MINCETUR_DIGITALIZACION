@@ -1,1 +1,0 @@
-{"Objeto":{"ID_SERIE":3,"ID_SECCION":92,"DES_CORTA_SECCION":"XD","COD_SERIE":"SERIEX","DES_SERIE":"SERIEX 1","FLG_ESTADO":null,"USU_CREACION":null,"STR_FEC_CREACION":null,"IP_CREACION":null,"USU_MODIFICACION":null,"STR_FEC_MODIFICACION":null,"IP_MODIFICACION":null},"MensajeSalida":"","Code":200,"ErrorLog":"","EjecucionProceso":true,"URL":null,"Rechazo":false}

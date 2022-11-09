@@ -70,7 +70,7 @@ async function Microforma_MicroArchivoGrabar() {
                 Fecha: $("#MA_FECHA").val(),
                 Hora: $("#MA_HORA").val(),
             }
-            var url = "archivo-central/microforma/micro-archivo-insertar";
+            var url = "ventanilla/microforma/micro-archivo-insertar";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -95,7 +95,7 @@ async function Microforma_MicroArchivoGrabar() {
 function MicroformaAlmacen_CargarGrilla() {
     var item = {
     }
-    var url = "archivo-central/microforma/listar-control";
+    var url = "ventanilla/microforma/listar-control";
     API.Fetch("POST", url, item, function (auditoria) {
         jQuery("#" + MicroAlmacen_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
@@ -169,7 +169,7 @@ function MicroArchivo_Editar() {
                 Fecha: $("#MA_FECHA").val(),
                 Hora: $("#MA_HORA").val(),
             }
-            var url = "archivo-central/microforma/micro-archivo-editar";
+            var url = "ventanilla/microforma/micro-archivo-editar";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -191,11 +191,37 @@ function MicroArchivo_Editar() {
         }
     });
 }
-
+function MicroArchivo_GetOne(id) {
+    var url = `ventanilla/microforma/get-microforma/${id}`;
+    API.FetchGet("GET", url, function (auditoria) {
+        if (auditoria != null && auditoria != "") {
+            if (auditoria.EjecucionProceso) {
+                if (!auditoria.Rechazo) {
+                    $('#MA_TIPO_ARCHIVO').val(auditoria.Objeto.MicroArchivo.TIPO_ARCHIVO);
+                    $('#MA_RESPONSABLE').val(auditoria.Objeto.MicroArchivo.RESPONSABLE);
+                    $('#MICROFORMA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_OBSERVACION').val(auditoria.Objeto.MicroArchivo.OBSERVACION);
+                    $('#MA_DIRECCION').val(auditoria.Objeto.MicroArchivo.DIRECCION);
+                    $('#MA_FECHA').val(auditoria.Objeto.MicroArchivo.FECHA);
+                    $('#MA_HORA').val(auditoria.Objeto.MicroArchivo.HORA);
+                    $('#MicroArchivoActa').attr('data-file', auditoria.Objeto.MicroArchivo.ID_DOC_ALMACENAMIENTO);
+                    $('a[download-file="yes"]').click(function () {
+                        var IdFile = $(this).data('file');
+                        DownloadFile(IdFile);
+                    });
+                } else {
+                    jAlert(auditoria.MensajeSalida, "Atención");
+                }
+            } else {
+                jAlert(auditoria.MensajeSalida, "Atención");
+            }
+        }
+    });
+}
 // grila historial
 function MicroArchivo_HistorialCargarGrilla(_Grilla) {
     ID_MICROFORMA = $("#HDF_ID_MICROFORMA").val()
-    var url = `archivo-central/microforma/get-microArchivo/${ID_MICROFORMA}/0`;
+    var url = `ventanilla/microforma/get-microArchivo/${ID_MICROFORMA}/0`;
     API.FetchGet("GET", url, function (auditoria) {
         jQuery("#" + _Grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
@@ -250,7 +276,7 @@ function MicroArchivo_HistorialConfigurarGrilla(_Grilla, _barra) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
     };
-    SICA.Grilla(_Grilla, _barra, '', '', '', "Listado Historial MicroArchivo", '', '', colNames, colModels, '', opciones);
+    SICA.Grilla(_Grilla, _barra, '', '', '', "Historial MicroArchivo", '', '', colNames, colModels, '', opciones);
 }
 
 function MicroArchivo_ActaFormatter(cellvalue, options, rowObject) {

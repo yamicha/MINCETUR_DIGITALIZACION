@@ -86,7 +86,7 @@ function Devolver_GrabarDevolucion() {
                         Comentario: $('#OBSERVACION').val(),
                         UsuCreacion: $('#inputHddId_Usuario').val()
                     }
-                    var url = "archivo-central/digitalizacion/devolver-documentos";
+                    var url = "ventanilla/digitalizacion/devolver-documentos";
                     API.Fetch("POST", url, item, function (auditoria) {
                         if (auditoria != null && auditoria != "") {
                             if (auditoria.EjecucionProceso) {
@@ -112,6 +112,16 @@ function Devolver_GrabarDevolucion() {
             jAlert("Debe seleccionar por lo menos un lote.", "Atención");
         }
     }
+}
+
+async function Devolver_ComboArea() {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_AREA", name: "DES_AREA" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    await LoadComboApi("ventanilla/area/listar", "ID_AREA", OptionsCbo)
+
 }
 
 
@@ -163,7 +173,7 @@ function DevueltosLote_CargarGrilla() {
         flgDevuelto: "1",
         flgMicroforma: ""
     }
-    var url = `archivo-central/digitalizacion/listar-lotes`;
+    var url = `ventanilla/digitalizacion/listar-lotes`;
     API.Fetch("POST", url, item, function (auditoria) {
         jQuery("#" + Devueltos_Lote_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
         if (auditoria != null && auditoria != "") {
@@ -217,7 +227,7 @@ function Devueltos_ValidarLote() {
             var item = {
                 ListaIdsLotes: MicroformaGrabar_ListaLotes
             }
-            var url = "archivo-central/digitalizacion/documento-validar-lote";
+            var url = "ventanilla/digitalizacion/documento-validar-lote";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {

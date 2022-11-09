@@ -78,7 +78,9 @@ function Adjunto_Agregar() {
             FLG_ARCHIVO: $("#TIPO_ADJUNTO").val(),
         };
         Adjunto.pop();
-        resetForm('FrmAdjunto');
+        $('#NOMBRE_ARCHIVO').val(''); 
+        $('#PESO_ARCHIVO').val(''); 
+        $('#EXTENSION').val(''); 
         jQuery("#" + Adjuntos_grilla).jqGrid('addRowData', IdAdjunto, myData);
     }
 }

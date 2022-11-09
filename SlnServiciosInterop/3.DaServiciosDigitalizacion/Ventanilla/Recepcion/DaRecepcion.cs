@@ -276,7 +276,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             {
                 cn.Open();
                 OracleDataReader dr = null;
-                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDADOCUMENTO_INSERTAR"), cn);
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDVDOCUMENTO_INSERTAR"), cn);
                 OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -301,7 +301,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                         {
                             foreach (var item in entidad.ListaAdjuntos)
                             {
-                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDADOCUMENTOADJ_INSERTAR"), cn);
+                                cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDVDOCUMENTOADJ_INSERTAR"), cn);
                                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                 cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdExpediente;
                                 cmd.Parameters.Add(new OracleParameter("X_DES_NOM", OracleDbType.Varchar2)).Value = item.NombreArchivo;

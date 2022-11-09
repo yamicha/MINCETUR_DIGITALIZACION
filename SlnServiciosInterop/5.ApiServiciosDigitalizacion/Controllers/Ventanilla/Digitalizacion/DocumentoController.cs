@@ -66,11 +66,12 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.NOMBRE_USUARIO,
                             item.NRO_REPROCESADOS.ToString(),
                             null,
-                            null, 
+                            null,
                             item.USU_CREACION,
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
-                            item.STR_FEC_MODIFICACION
+                            item.STR_FEC_MODIFICACION,
+                           item.ID_LASERFICHE.ToString(),
 
                       }
                         }).ToArray();

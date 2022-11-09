@@ -76,6 +76,14 @@ function Revision_MostrarEvaluar() {
         if (request.status != 200) return;
     });
 }
+function Revision_CargarConboUsuario() {
+    var OptionsCboUsu = {
+        KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
+        paramters: null,
+        method: "GET"
+    }
+    LoadComboApi("archivo-central/usuario/listar", "ID_USUARIO", OptionsCboUsu);
+}
 async function Revision_Grabar() {
     MicroForma_Lista.pop();
     var IdDocRevision = 0;

@@ -185,7 +185,6 @@ function Microforma_DevolverRevision(IdMicroforma) {
     });
 }
 
-
 //********************************************************** tab OBSERVADOS *********************************************************/
 function Microforma_MostrarReprocesar(ID_MICROFORMA) {
     jQuery("#myModalNuevo").html('');

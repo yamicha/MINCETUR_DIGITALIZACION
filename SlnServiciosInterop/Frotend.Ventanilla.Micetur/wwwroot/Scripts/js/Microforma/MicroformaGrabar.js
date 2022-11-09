@@ -30,7 +30,6 @@ $(document).ready(function () {
         }
     });
 });
-
 function MicroformaLote_ConfigurarGrilla() {
     $("#" + MicroformaGrabar_Lote_grilla).GridUnload();
     var colNames = ['1', '2',
@@ -56,7 +55,6 @@ function MicroformaLote_ConfigurarGrilla() {
 
     jqGridResponsive($(".jqGridLote"));
 }
-
 jQuery('#aTabMicroformaGrabar').click(function (e) {
     _ID_LOTE = 0;
     _ID_MODULO = 12;
@@ -100,7 +98,7 @@ function MicroformaGrabar_ValidarLote() {
             var item = {
                 ListaIdsLotes: MicroformaGrabar_ListaLotes
             }
-            var url = "archivo-central/digitalizacion/documento-validar-lote";
+            var url = "ventanilla/digitalizacion/documento-validar-lote";
             API.Fetch("POST", url, item, function (auditoria) {
                 if (auditoria != null && auditoria != "") {
                     if (auditoria.EjecucionProceso) {
@@ -124,6 +122,7 @@ function MicroformaGrabar_ValidarLote() {
     });
 }
 function MicroformaGrabar_Grabar() {
+    debugger; 
     jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
         if (r) {
             try {
@@ -154,7 +153,8 @@ function MicroformaGrabar_Grabar() {
                             Observacion: $("#MICROFORMA_OBSERVACION").val(),
                             UsuCreacion: $("#inputHddId_Usuario").val(),
                         }
-                        var url = "archivo-central/microforma/insertar";
+                        debugger; 
+                        var url = "ventanilla/microforma/insertar";
                         API.Fetch("POST", url, item, function (auditoria) {
                             if (auditoria != null && auditoria != "") {
                                 if (auditoria.EjecucionProceso) {
@@ -180,4 +180,12 @@ function MicroformaGrabar_Grabar() {
             }
         }
     });
+}
+function MicroformaGrabar_CargarCboSoporte() {
+    var OptionsCbo = {
+        KeyVal: { value: "ID_SOPORTE", name: "DESC_SOPORTE" },
+        paramters: { FlgEstado: "1" },
+        method: "POST"
+    }
+    LoadComboApi("ventanilla/soporte/listar", "MICROFORMA_ID_TIPO_SOPORTE", OptionsCbo)
 }

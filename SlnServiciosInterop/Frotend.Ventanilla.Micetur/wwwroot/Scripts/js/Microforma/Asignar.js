@@ -3,11 +3,10 @@ var Asignar_barra = 'Asignar_barra';
 var Asignar_ListaDocumentos = new Array();
 
 $(document).ready(function () {
-});
-
-jQuery('#aTabAsignar').click(function (e) {
-    Asignar_ListaDocumentos = new Array();
-    Asignar_buscar();
+    jQuery('#aTabAsignar').click(function (e) {
+        Asignar_ListaDocumentos = new Array();
+        Asignar_buscar();
+    });
 });
 
 function Asignar_buscar() {

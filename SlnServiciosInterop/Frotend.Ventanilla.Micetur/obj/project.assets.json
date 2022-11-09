@@ -9826,19 +9826,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Inmortal\\.nuget\\packages\\": {}
+    "C:\\Users\\ivans\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\Frotend.Ventanilla.Micetur.csproj",
+      "projectUniqueName": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\Frotend.Ventanilla.Micetur.csproj",
       "projectName": "Frotend.Ventanilla.Micetur",
-      "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\Frotend.Ventanilla.Micetur.csproj",
-      "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\obj\\",
+      "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\Frotend.Ventanilla.Micetur.csproj",
+      "packagesPath": "C:\\Users\\ivans\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\Frotend.Ventanilla.Micetur\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ivans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9846,14 +9851,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 22.1\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
-              "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
+            "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+              "projectPath": "C:\\Users\\ivans\\OneDrive\\Documentos\\GitHub\\App_Mincetur_Digitalizacion\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
             }
           }
         }
@@ -9915,7 +9921,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

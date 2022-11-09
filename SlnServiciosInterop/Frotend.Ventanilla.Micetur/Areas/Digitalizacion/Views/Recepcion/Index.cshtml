@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Recepción";
 }
-@using Frotend.Ventanilla.Micetur.Helpers 
+@using Frotend.Ventanilla.Micetur.Helpers
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
@@ -19,10 +19,41 @@
                 changeFirstDay: false,
                 placeholder: "dd/MM/yyyy",
             }).datepicker("setDate", 'now');
-            $('#txtfechainicio').val('01/01/2012'); 
+            $('#txtfechainicio').val('01/01/2012');
         });
 
 </script>
+<style>
+    .input-group {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        width: 100%;
+    }
+    .input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control {
+        position: relative;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        width: 1%;
+        margin-bottom: 0;
+    }
+    .input-group-append {
+        margin-left: -1px;
+    }
+
+    .input-group-append, .input-group-prepend {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+</style>
 <div id="Load_Busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
         <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
@@ -100,7 +131,7 @@
                                 <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
                             </div>
                             <div class="col-sm-4">
-                                 @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control" })
                             </div>
                             <div class="col-sm-4">
                                 <button id="Asignar_btnDigitalizador" class="btn btn-blue" type="button"><i class="clip-user-3"></i> Asignar</button>
@@ -141,7 +172,7 @@
                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
                         </div>
                         <div class="col-sm-4">
-                             @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control" })
                         </div>
                         <div class="col-sm-4">
                             <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
