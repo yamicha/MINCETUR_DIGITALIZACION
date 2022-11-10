@@ -14,11 +14,57 @@ function Asignar_buscar() {
 }
 
 jQuery('#Asignar_btn_Grabar').click(function (e) {
+    Asginar_Grabar(); 
+});
+
+jQuery('#Asignar_btnDigitalizador').click(function (e) {
+    Asignar_Digitalizador();
+});
+
+function Asignar_Digitalizador() {
+    var ID_DIGITALIZADOR = $("#ID_DIGITALIZADOR").val();
+    if (ID_DIGITALIZADOR != '') {
+        Asignar_ListaDocumentos.pop();
+        var rowKey = $("#" + Asignar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+        if (rowKey.length > 0) {
+            var DESC_DIGITALIZADOR = $("#ID_DIGITALIZADOR option:selected").text();
+            let PesoTotal = 0; 
+            for (var i = 0; i < rowKey.length; i++) {
+                var data = jQuery("#" + Asignar_grilla).jqGrid('getRowData', rowKey[i]);
+                jQuery("#" + Asignar_grilla).jqGrid('setRowData', rowKey[i], { Asignar_NOMBRE_USUARIO: DESC_DIGITALIZADOR });
+                data.Asignar_NOMBRE_USUARIO = DESC_DIGITALIZADOR;
+                const resultado = Asignar_ListaDocumentos.find(x => x.ID_DOCUMENTO === data.Asignar_ID_DOCUMENTO);
+                PesoTotal = PesoTotal + parseInt(data.Asignar_PESO_ADJ) ; 
+                var miitem = {
+                    IdDocumento: parseInt(data.Asignar_ID_DOCUMENTO),
+                    IdUsuario: parseInt(ID_DIGITALIZADOR),
+                }
+                if (resultado != undefined) {
+                    resultado.ID_USUARIO = ID_DIGITALIZADOR;
+                } else {
+                    Asignar_ListaDocumentos.push(miitem);
+                }
+            }
+            PesoTotal = formatBytes(PesoTotal, TypeSize.MB);
+            if (PesoTotal != 0) {
+                $('#mssgPesoAsignar').text(PesoTotal+" MB"); 
+                $('#mssgAsignar').show('slow'); 
+            }
+        } else {
+            jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+        }
+    } else {
+        jAlert("Debe seleccionar un digitalizador.", "Atención");
+    }
+}
+
+function Asginar_Grabar() {
     if (Asignar_ListaDocumentos.length > 0) {
         jConfirm(" ¿ Desea grabar todas las asignaciones realizadas ? ", "Atención", function (r) {
             if (r) {
                 var item = {
                     ListaIdsDocumento: Asignar_ListaDocumentos,
+                    FlgDigitalizar: $('input[name="flgdigital"]:checked').val(),
                     UsuCreacion: $('#inputHddId_Usuario').val()
                 }
                 var url = "ventanilla/documento/grabar-asignacion";
@@ -41,42 +87,5 @@ jQuery('#Asignar_btn_Grabar').click(function (e) {
         });
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
-    }
-});
-
-jQuery('#Asignar_btnDigitalizador').click(function (e) {
-    Asignar_Digitalizador();
-});
-
-function Asignar_Digitalizador() {
-    var ID_DIGITALIZADOR = $("#ID_DIGITALIZADOR").val();
-    if (ID_DIGITALIZADOR != '') {
-        Asignar_ListaDocumentos.pop();
-        var rowKey = $("#" + Asignar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
-        if (rowKey.length > 0) {
-            var DESC_DIGITALIZADOR = $("#ID_DIGITALIZADOR option:selected").text();
-            for (var i = 0; i < rowKey.length; i++) {
-                var data = jQuery("#" + Asignar_grilla).jqGrid('getRowData', rowKey[i]);
-                jQuery("#" + Asignar_grilla).jqGrid('setRowData', rowKey[i], { Asignar_NOMBRE_USUARIO: DESC_DIGITALIZADOR });
-                data.Asignar_NOMBRE_USUARIO = DESC_DIGITALIZADOR;
-                const resultado = Asignar_ListaDocumentos.find(x => x.ID_DOCUMENTO === data.Asignar_ID_DOCUMENTO);
-
-                var miitem = {
-                    IdDocumento: parseInt(data.Asignar_ID_DOCUMENTO),
-                    IdUsuario: parseInt(ID_DIGITALIZADOR),
-                    //NOMBRE_USUARIO: DESC_DIGITALIZADOR
-                }
-                if (resultado != undefined) {
-                    resultado.ID_USUARIO = ID_DIGITALIZADOR;
-                } else {
-                    Asignar_ListaDocumentos.push(miitem);
-                }
-            }
-            //jQuery("#" + Asignar_grilla).jqGrid('resetSelection');
-        } else {
-            jAlert("Debe seleccionar por lo menos un documento.", "Atención");
-        }
-    } else {
-        jAlert("Debe seleccionar un digitalizador.", "Atención");
     }
 }

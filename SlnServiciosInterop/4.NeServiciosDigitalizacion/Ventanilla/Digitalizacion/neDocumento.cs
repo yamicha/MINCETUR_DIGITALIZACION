@@ -27,7 +27,12 @@ namespace NeServiciosDigitalizacion.Ventanilla.Digitalizacion
         {
             return _objDa.Documento_ListarUno(entidad, ref auditoria);
         }
-        public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
+
+        public List<enAdjuntos> DocumentoAdjuntos_Listar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            return _objDa.DocumentoAdjuntos_Listar(entidad, ref auditoria);
+        }
+            public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
         {
             return _objDa.DocumentoObservado_Listar(entidad, ref auditoria);
         }

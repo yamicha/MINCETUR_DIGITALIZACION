@@ -16,12 +16,12 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.', 'Recibir', 'Doc.', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', '', ''
+        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', '', ''
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
         { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir },
-        { name: 'DOC', index: 'DOC', align: 'center', width: 110, formatter: Documento_actionVerDoc },
+        //{ name: 'DOC', index: 'DOC', align: 'center', width: 110, formatter: Documento_actionVerDoc },
         { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false }, //2
         { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //3
         { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //4
@@ -85,7 +85,7 @@ function GetRules() {
 }
 function Expediente_Recibir() {
     var ListaAdjuntos = $("#" + Adjuntos_grilla).getRowData();
-    var ListaDocumento = $("#" + Documento_grilla).getRowData();
+    var ListaDocumento = $("#" + DocumentoAdj_grilla).getRowData();
     jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
         if (r) {
             ListaAdjuntos = ListaAdjuntos.map(function (x) {

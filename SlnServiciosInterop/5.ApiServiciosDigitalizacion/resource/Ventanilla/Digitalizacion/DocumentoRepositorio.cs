@@ -36,7 +36,10 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Digitalizacion
         {
             return _rule.Documento_ListarUno(entidad, ref auditoria);
         }
-
+        public List<enAdjuntos> DocumentoAdjuntos_Listar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            return _rule.DocumentoAdjuntos_Listar(entidad, ref auditoria);
+        }
         public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
         {
             return _rule.DocumentoObservado_Listar(entidad, ref auditoria);

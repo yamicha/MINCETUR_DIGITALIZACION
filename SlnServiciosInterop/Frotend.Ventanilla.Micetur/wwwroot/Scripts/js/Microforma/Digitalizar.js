@@ -53,7 +53,7 @@ jQuery('#Digitalizar_Check_Finalizar').change(function (e) {
 });
 
 function Digitalizar_buscar() {
-    Documento_ConfigurarGrilla(Digitalizar_grilla ,Digitalizar_barra ,"Listado de documentos asignados", false, 4);
+    Documento_ConfigurarGrilla(Digitalizar_grilla, Digitalizar_barra, "Listado de documentos asignados", false, 4);
 }
 
 function Digitalizar_Iniciar() {
@@ -153,25 +153,18 @@ jQuery('#Digitalizar_btn_Fin').click(function (e) {
 
 function Digitalizar_FinalizarPregunta() {
     if (Digitalizar_ListaDocumentos.length > 0) {
-        jPrompt(" Para finalizar con la digitalización <br/> porfavor ingrese el <b>ID LASERFICHE</b> ", 0, "Atención", function (val) {
-            if (val != null) {
-                debugger; 
-                if (Digitalizar_ValidIdLaser(IdLaserMin, val)) {
-                    Digitalizar_Finalizar(val);
-                }
-            }
-        });
+            Digitalizar_Finalizar();
     } else {
         jAlert("Debe asignar por lo menos un documento.", "Atención");
     }
 }
 
-function Digitalizar_Finalizar(ID_LASERFICHER) {
+function Digitalizar_Finalizar() {
     if (Digitalizar_ListaDocumentos.length > 0) {
         var item = {
             IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
             IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
-            IdLaserfiche: parseInt(ID_LASERFICHER),
+            IdLaserfiche: 0,
             HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
             HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
             UsuCreacion: $('#inputHddId_Usuario').val()

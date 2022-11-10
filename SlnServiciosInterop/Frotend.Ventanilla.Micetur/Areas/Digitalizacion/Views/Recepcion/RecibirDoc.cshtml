@@ -9,8 +9,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         Adjuntos_ConfigurarGrilla();
-        Documento_ConfigurarGrilla();
-        Documento_CargarGrilla(@Model.ID_EXPE);
+        DocumentoAdj_ConfigurarGrilla();
+        DocumentoAdj_CargarGrilla(@Model.ID_EXPE);
         $('#ExpedienteBtnRecibir').click(function () {
             Expediente_Recibir(); 
         }); 
@@ -33,12 +33,23 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="col-sm-12 inline-container-Group" style="margin-bottom:15px;">
+                    <div class="col-sm-12 inline-container-Group" style="margin-bottom:20px;">
                         <p class="modal-title" style="color: #999; font-size: 20px; margin-bottom: 10px; margin-top: -5px">Agregar adjuntos al expediente: </p>
                         <fieldset style="width: 100%;">
                             @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmAdjunto", @class = "form-horizontal" }))
                             {
                                 @Html.ValidationSummary(true)
+                                <div class="row" style="margin-bottom:20px;">
+                                    <div class="col-sm-12">
+                                        <div class="alert alert-block alert-warning fade in">
+                                            <button data-dismiss="alert" class="close" type="button"> × </button>
+                                            <h4 class="alert-heading"><i class="fa fa-exclamation-triangle"></i> Tener en cuenta!</h4>
+                                            <p>
+                                                Por favor ingresar el peso del archivo en bytes tener en cuentra tambien ingresar dicho peso sin decimales.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Adjunto: </label>
                                     <div class="col-sm-10">
@@ -55,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Peso(Kb): </label>
+                                    <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Peso(Bytes): </label>
                                     <div class="col-sm-4">
                                         @Html.TextBoxFor(model => model.PESO_ARCHIVO, new { @class = "form-control", @maxlength = "100" })
                                         @Html.ValidationMessageFor(model => model.PESO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
@@ -90,14 +101,15 @@
                                 <div id="Adjuntos_barra"></div>
                             </div>
 
+
                         </fieldset>
                     </div>
                     <div class="col-sm-12 inline-container-Group">
                         <p class="modal-title" style="color: #999; font-size:20px; margin-bottom: 10px; margin-top: -5px">Documentos del Expediente: </p>
                         <fieldset style="width: 100%;">
                             <div class="Documento_jqGrid">
-                                <table id="Documento_grilla"></table>
-                                <div id="Documento_barra"></div>
+                                <table id="DocumentoAdj_grilla"></table>
+                                <div id="DocumentoAdj_barra"></div>
                             </div>
                         </fieldset>
                     </div>

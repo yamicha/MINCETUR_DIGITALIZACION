@@ -17,7 +17,7 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public List<DocumentoModel> ListaIdsDocumento { get; set; }
         public long IdDocumentoAsignado { get; set; }
         public long IdLaserfiche { get; set; }
-
+        public string FlgDigitalizar { get; set; }
         public string HoraInicio { get; set; }
         public string HoraFIn { get; set; }
     }

@@ -71,7 +71,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
-                           item.ID_LASERFICHE.ToString(),
+                            item.PESO_ADJ.ToString(),
 
                       }
                         }).ToArray();
@@ -178,6 +178,38 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpGet]
+        [Route("get-adjuntos/{idDocumento}")]
+        public IActionResult DocumentoAdjuntos_Listar(int idDocumento)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    auditoria.Objeto = repositorio.DocumentoAdjuntos_Listar(new enAdjuntos
+                    {
+                        ID_EXPE = idDocumento
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
         [HttpPost]
         [Route("grabar-asignacion")]
@@ -199,6 +231,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             }).ToList(),
                             USU_CREACION = entidad.UsuCreacion,
                             IP_CREACION = entidad.IpCreacion,
+                            FLG_DIGITALIZAR = entidad.FlgDigitalizar 
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
                         {

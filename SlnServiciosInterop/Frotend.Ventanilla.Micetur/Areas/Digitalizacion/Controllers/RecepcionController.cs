@@ -142,6 +142,6 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             return Json(auditoria);
         }
 
-
+   
     }
 }

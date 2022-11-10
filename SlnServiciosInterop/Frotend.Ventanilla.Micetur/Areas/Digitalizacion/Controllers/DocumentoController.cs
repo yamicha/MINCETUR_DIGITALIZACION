@@ -31,52 +31,29 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/validar-imagen")]
-        public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO,long ID_LASER)
+        public ActionResult Documento_Validar_Imagen(long ID_DOCUMENTO, long ID_DOCUMENTO_ASIGNADO)
         {
             int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             enAuditoria auditoria = new enAuditoria();
-            modelo.ID_DOCUMENTO = ID_DOCUMENTO; 
+            modelo.ID_DOCUMENTO = ID_DOCUMENTO;
+            modelo.ID_DOCUMENTO_ASIGNADO = ID_DOCUMENTO_ASIGNADO;
             modelo.Lista_VALIDAR_ID_CONFORME = new List<SelectListItem>();
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(1, new SelectListItem() { Value = "1", Text = "CONFORME" });
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(2, new SelectListItem() { Value = "0", Text = "NO CONFORME" });
             modelo.VALIDAR_ID_CONFORME = "";
             modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
-            if (ID_LASER != 0)
-            {
-                string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
-                modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
-                //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
 
-            }
             return View(modelo);
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/ver-imagen")]
-        public async Task<ActionResult> Documento_Ver_Imagen(long ID_LASER)
+        public async Task<ActionResult> Documento_Ver_Imagen(long ID_DOCUMENTO)
         {
             int ID_USUARIO = int.Parse(User.GetUserId());
-            DocumentoVerModelView modelo = new DocumentoVerModelView();
-            enAuditoria auditoria = new enAuditoria();
-            auditoria.Limpiar();
-            try
-            {
-                if (ID_LASER != 0)
-                {
-                    string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
-                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
-                    //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                modelo.CODIGO_IMAGEN = "";
-                auditoria.Error(ex);
-                Log.Guardar(auditoria.ErrorLog);
-            }
-
+            DocumentoValidarModelView modelo = new DocumentoValidarModelView();
+            modelo.ID_DOCUMENTO = ID_DOCUMENTO;
             return View(modelo);
         }
 

@@ -112,7 +112,7 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                     using (Stream fileStream = new FileStream(RutaTemporal, FileMode.Create))
                     {
                         Miarchivo.nombreArchivo = filearchivo.FileName;
-                        Miarchivo.pesoArchivo = Util.ConvertSizeFile(filearchivo.Length,(int)TypeSizeFile.KB);
+                        Miarchivo.pesoArchivo = filearchivo.Length; 
                         Miarchivo.codigoArchivo = Miarchivo.codigoArchivo + Miarchivo.extension; 
                         await filearchivo.CopyToAsync(fileStream);
                         auditoria.Objeto = Miarchivo;

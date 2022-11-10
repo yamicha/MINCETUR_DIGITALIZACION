@@ -1,4 +1,9 @@
-﻿
+﻿const TypeSize =  {
+    Byte: 0, 
+    KB: 1, 
+    MB: 2, 
+    GB: 3
+}
 API = {
     Ajax: function (url, parameters, callback) {
         fetchload.init();
@@ -232,4 +237,16 @@ function LoadComboApi(Url, Input, Options) {
                 alert("request error api: " + error.message);
             });
     });
+}
+
+function formatBytes(bytes,type) {
+    if (bytes==0) return 0; 
+    const k = 1024
+    return parseFloat((bytes / Math.pow(k, type)).toFixed(2)); 
+}
+
+function convertKb(KB) {
+    if (KB == 0) return 0;
+    const k = 1024
+    return parseFloat((KB * k).toFixed(2));
 }

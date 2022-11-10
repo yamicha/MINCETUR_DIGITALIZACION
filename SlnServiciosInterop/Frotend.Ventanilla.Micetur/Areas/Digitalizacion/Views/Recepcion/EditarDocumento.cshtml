@@ -10,11 +10,11 @@
             cursor: "handler"
         });
         $('#DocumentoBtnEditar').click(function () {
-            Documento_Editar(); 
-        }); 
+            DocumentoAdj_Editar();
+        });
     });
     function CloseModal() {
-        $('#MyModalDoc').modal('hide'); 
+        $('#MyModalDoc').modal('hide');
     }
 </script>
 
@@ -38,15 +38,6 @@
                                 <fieldset style="width: 100%;">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Peso(Kb): </label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            @Html.TextBoxFor(model => model.PESO_ARCHIVO, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
-                                            @Html.ValidationMessageFor(model => model.PESO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Extensión: </label>
                                         </div>
                                         <div class="col-sm-8">
@@ -54,7 +45,26 @@
                                             @Html.ValidationMessageFor(model => model.EXTENSION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
-                               
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Peso(Bytes): </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.PESO_ARCHIVO, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            @Html.ValidationMessageFor(model => model.PESO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" id="Adv_Conforme" >
+                                            <div class="alert alert-block alert-warning fade in">
+                                                <button data-dismiss="alert" class="close" type="button"> × </button>
+                                                <h4 class="alert-heading"><i class="fa fa-exclamation-triangle"></i> Tener en cuenta!</h4>
+                                                <p>
+                                                    Por favor ingresar el peso del archivo en bytes tener en cuentra tambien ingresar dicho peso sin decimales.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>

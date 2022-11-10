@@ -1,8 +1,8 @@
 ﻿var Adjuntos_grilla = "Adjuntos_grilla";
 var Adjuntos_barra = "Adjuntos_barra";
 
-var Documento_grilla = "Documento_grilla";
-var Documento_barra = "Documento_barra";
+var DocumentoAdj_grilla = "DocumentoAdj_grilla";
+var DocumentoAdj_barra = "DocumentoAdj_barra";
 
 var Adjunto = new Array();
 var IdAdjunto = 0;
@@ -72,7 +72,7 @@ function Adjunto_Agregar() {
             CODIGO: IdAdjunto,
             NOMBRE_ARCHIVO: $('#NOMBRE_ARCHIVO').val(),
             CODIGO_ARCHIVO: CODIGO_ARCHIVO,
-            STR_PESO_ARCHIVO: $('#PESO_ARCHIVO').val() + " KB",
+            STR_PESO_ARCHIVO: $('#PESO_ARCHIVO').val(), 
             PESO_ARCHIVO: $('#PESO_ARCHIVO').val(),
             EXTENSION: $('#EXTENSION').val(),
             FLG_ARCHIVO: $("#TIPO_ADJUNTO").val(),
@@ -158,15 +158,15 @@ function Adjunto_CargarTemporal() {
 
 /////////////////////////////////// documentos ///////////////////////////
 
-function Documento_ConfigurarGrilla() {
-    $("#" + Documento_grilla).GridUnload();
-    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Documento', 'Observación', 'Peso', 'Extensión'];
+function DocumentoAdj_ConfigurarGrilla() {
+    $("#" + DocumentoAdj_grilla).GridUnload();
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'DocumentoAdj', 'Observación', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
         { name: 'ID_DOC_CMS', index: 'ID_DOC_CMS', align: 'center', hidden: true, width: 0, },
-        { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: false, formatter: Documento_actionEditar },
-        { name: 'VERDOCUMENTO', index: 'VERDOCUMENTO', align: 'center', width: 90, hidden: false, formatter: Documento_actionver },
+        { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionEditar },
+        { name: 'VERDOCUMENTO', index: 'VERDOCUMENTO', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionver },
         { name: 'DES_NOM_ABR', index: 'DES_NOM_ABR', align: 'center', width: 200, hidden: false },
         { name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
         { name: 'NUM_SIZE_ARCHIVO', index: 'NUM_SIZE_ARCHIVO', align: 'center', width: 100, hidden: false, editable: true },
@@ -175,50 +175,49 @@ function Documento_ConfigurarGrilla() {
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
     };
-    SICA.Grilla(Documento_grilla, Documento_barra, '', '', '', '', "", "", colNames, colModels, "", opciones);
+    SICA.Grilla(DocumentoAdj_grilla, DocumentoAdj_barra, '', '', '', '', "", "", colNames, colModels, "", opciones);
 }
-
-function Documento_actionEditar(cellvalue, options, rowObject) {
-    var Btn = "<button title=\"ver\" onclick='Documento_MostrarEditar(" + rowObject.CODIGO + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" data-target=\"#MyModalDoc\" style=\"text-decoration: none !important;\"><i class=\"clip-pencil-2\" style=\"font-size:17px\"></i></button>";
+function DocumentoAdj_actionEditar(cellvalue, options, rowObject) {
+    var Btn = "<button title=\"ver\" onclick='DocumentoAdj_MostrarEditar(" + rowObject.CODIGO + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" data-target=\"#MyModalDoc\" style=\"text-decoration: none !important;\"><i class=\"clip-pencil-2\" style=\"font-size:17px\"></i></button>";
     return Btn;
 }
-function Documento_MostrarEditar(id) {
+function DocumentoAdj_MostrarEditar(id) {
     jQuery("#MyModalDoc").html('');
     jQuery("#MyModalDoc").load(baseUrl + "Digitalizacion/Recepcion/editar-documento?id=" + id, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#MyModalDoc');
         if (request.status == 200) {
-            var data = $('#' + Documento_grilla).getRowData(id);
+            var data = $('#' + DocumentoAdj_grilla).getRowData(id);
             $('#PESO_ARCHIVO').val(data.NUM_SIZE_ARCHIVO);
             $('#EXTENSION').val(data.EXTENSION);
         }
     });
 }
-function Documento_Editar() {
-    if ($('#FrmDocumento').valid() && ValidarExtension($('#EXTENSION').val())) {
+function DocumentoAdj_Editar() {
+    if ($('#FrmDocumentoAdj').valid() && ValidarExtension($('#EXTENSION').val())) {
         var rowKey = parseInt($('#HDF_ID_DOC').val());
-        $("#" + Documento_grilla).jqGrid('setCell', rowKey, 'NUM_SIZE_ARCHIVO', $('#PESO_ARCHIVO').val());
-        $("#" + Documento_grilla).jqGrid('setCell', rowKey, 'EXTENSION', $('#EXTENSION').val());
-        jQuery("#" + Documento_grilla).trigger("reloadGrid");
+        $("#" + DocumentoAdj_grilla).jqGrid('setCell', rowKey, 'NUM_SIZE_ARCHIVO', $('#PESO_ARCHIVO').val());
+        $("#" + DocumentoAdj_grilla).jqGrid('setCell', rowKey, 'EXTENSION', $('#EXTENSION').val());
+        jQuery("#" + DocumentoAdj_grilla).trigger("reloadGrid");
         $('#MyModalDoc').modal('hide');
     }
 }
-function Documento_actionver(cellvalue, options, rowObject) {
+function DocumentoAdj_actionver(cellvalue, options, rowObject) {
     var Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-file-pdf\" style=\"color:#e40613;font-size:17px\"></i></button>";
     return Btn;
 }
-function Documento_CargarGrilla(ID_EXPE) {
+function DocumentoAdj_CargarGrilla(ID_EXPE) {
     var url = "ventanilla/DocRecepcion/listado-doc-expediente/" + ID_EXPE;
     API.FetchGet("GET", url, function (auditoria) {
         if (auditoria != null && auditoria != "") {
-            jQuery("#" + Documento_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
+            jQuery("#" + DocumentoAdj_grilla).jqGrid('clearGridData', true).trigger("reloadGrid");
             if (auditoria.EjecucionProceso) {
                 if (!auditoria.Rechazo) {
                     $.each(auditoria.Objeto, function (i, v) {
                         i = i + 1;
                         v.CODIGO = i;
-                        jQuery("#" + Documento_grilla).jqGrid('addRowData', i, v);
+                        jQuery("#" + DocumentoAdj_grilla).jqGrid('addRowData', i, v);
                     });
-                    jQuery("#" + Documento_grilla).trigger("reloadGrid");
+                    jQuery("#" + DocumentoAdj_grilla).trigger("reloadGrid");
                 } else {
                     jAlert(auditoria.MensajeSalida, "Ocurrio un Error");
                 }

@@ -55,7 +55,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
                             int intIdLote = drReader.GetOrdinal("ID_LOTE");
                             int intNroRepro = drReader.GetOrdinal("NRO_REPROCESADOS");
-                            int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
+                            int intPesoAdj = drReader.GetOrdinal("PESO_ADJ");
                             int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
@@ -72,7 +72,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
                                 if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
                                 if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = long.Parse(arrResult[intIdLote].ToString());              
-                                if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
+                                if (!drReader.IsDBNull(intPesoAdj)) temp.PESO_ADJ = long.Parse(arrResult[intPesoAdj].ToString());
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intUsuModific)) temp.USU_MODIFICACION = arrResult[intUsuModific].ToString();
@@ -367,6 +367,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("X_FLG_DIGITALIZAR", OracleDbType.Varchar2)).Value = entidad.FLG_DIGITALIZAR;
                 cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
                 cmd.Parameters.Add(new OracleParameter("X_ID_LOTE", OracleDbType.Int64)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
@@ -391,6 +392,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackManVentanilla, "PRC_CDVDOCASIGNACION_INSERTAR"), cn);
                                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                 cmd.Parameters.Add(new OracleParameter("X_ID_DOCUMENTO", OracleDbType.Int64)).Value = item.ID_DOCUMENTO;
+                                cmd.Parameters.Add(new OracleParameter("X_FLG_DIGITALIZAR", OracleDbType.Varchar2)).Value = entidad.FLG_DIGITALIZAR;
                                 cmd.Parameters.Add(new OracleParameter("X_ID_LOTE", OracleDbType.Int64)).Value = PO_ID_LOTE;
                                 cmd.Parameters.Add(new OracleParameter("X_ID_USUARIO", OracleDbType.Int64)).Value = item.ID_USUARIO;
                                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
@@ -507,7 +509,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
                             int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
-                            int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
 
                             while (drReader.Read())
                             {
@@ -519,7 +520,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
                                 if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
                                 if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
-                                if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
+
                             }
                             drReader.Close();
                         }
@@ -538,6 +539,66 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 }
             }
             return temp;
+        }
+
+        public List<enAdjuntos> DocumentoAdjuntos_Listar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enAdjuntos> Lista = new List<enAdjuntos>(); 
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = AppSettingsHelper.PackDocVentanilla + ".PRC_CDVDOCADJUNTOS_LISTAR";
+            cmd.Parameters.Add("X_ID_EXPE", validarNulo(entidad.ID_EXPE));
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdDoc = drReader.GetOrdinal("ID_DOC_ADJ");
+                            int intDesNom = drReader.GetOrdinal("DES_NOM");
+                            int intExtension = drReader.GetOrdinal("EXT");
+                            int intNumsize = drReader.GetOrdinal("NUM_SIZE_ARCHIVO");
+                            int intIdLaser = drReader.GetOrdinal("ID_DOC_CMS");
+                            int intFlgLink = drReader.GetOrdinal("FLG_LINK");
+                            enAdjuntos temp = null;
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enAdjuntos();
+                                if (!drReader.IsDBNull(intIdDoc)) temp.ID_DOC_ADJ = long.Parse(arrResult[intIdDoc].ToString());
+                                if (!drReader.IsDBNull(intDesNom)) temp.DES_NOM_ABR =arrResult[intDesNom].ToString();
+                                if (!drReader.IsDBNull(intExtension)) temp.EXTENSION = arrResult[intExtension].ToString();
+                                if (!drReader.IsDBNull(intNumsize)) temp.NUM_SIZE_ARCHIVO = long.Parse(arrResult[intNumsize].ToString());
+                                if (!drReader.IsDBNull(intIdLaser)) temp.ID_DOC_CMS = long.Parse(arrResult[intIdLaser].ToString());
+                                if (!drReader.IsDBNull(intFlgLink)) temp.FLG_LINK = int.Parse(arrResult[intFlgLink].ToString());
+                                Lista.Add(temp); 
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    Lista = new List<enAdjuntos>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return Lista;
         }
         public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
         {

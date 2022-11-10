@@ -59,7 +59,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                             int int_DES_TIP_DOC = drReader.GetOrdinal("DES_TIP_DOC");
                             int int_DES_ASUNTO = drReader.GetOrdinal("DES_ASUNTO");
                             int int_DES_OBS = drReader.GetOrdinal("DES_OBS");
-                            int int_ID_DOC = drReader.GetOrdinal("ID_DOC");
+                            //int int_ID_DOC = drReader.GetOrdinal("ID_DOC");
                             int int_NUM_DOC = drReader.GetOrdinal("NUM_DOC");
                             int int_NUM_FOLIOS = drReader.GetOrdinal("NUM_FOLIOS");
                             int int_USU_CREA = drReader.GetOrdinal("USU_CREA");
@@ -86,7 +86,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                                 if (!drReader.IsDBNull(int_DES_TIP_DOC)) temp.DES_TIP_DOC = (arrResult[int_DES_TIP_DOC].ToString());
                                 if (!drReader.IsDBNull(int_DES_ASUNTO)) temp.DES_ASUNTO = (arrResult[int_DES_ASUNTO].ToString());
                                 if (!drReader.IsDBNull(int_DES_OBS)) temp.DES_OBS = (arrResult[int_DES_OBS].ToString());
-                                if (!drReader.IsDBNull(int_ID_DOC)) temp.ID_DOC = long.Parse(arrResult[int_ID_DOC].ToString());
+                                //if (!drReader.IsDBNull(int_ID_DOC)) temp.ID_DOC = long.Parse(arrResult[int_ID_DOC].ToString());
                                 if (!drReader.IsDBNull(int_NUM_DOC)) temp.NUM_DOC = (arrResult[int_NUM_DOC].ToString());
                                 if (!drReader.IsDBNull(int_NUM_FOLIOS)) temp.NUM_FOLIOS = long.Parse(arrResult[int_NUM_FOLIOS].ToString());
                                 if (!drReader.IsDBNull(int_USU_CREA)) temp.USU_CREA = long.Parse(arrResult[int_USU_CREA].ToString());
@@ -206,7 +206,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             }
             return lista;
         }
-
         public List<enAdjuntos> Expediente_DocumentoGetOne(long ID_EXPE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -245,7 +244,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                                 if (!drReader.IsDBNull(int_ID_EXPE)) temp.ID_EXPE = long.Parse(arrResult[int_ID_EXPE].ToString());
                                 if (!drReader.IsDBNull(int_ID_DOC_CMS)) temp.ID_DOC_CMS = long.Parse(arrResult[int_ID_DOC_CMS].ToString());
                                 if (!drReader.IsDBNull(int_DES_NOMABR)) temp.DES_NOM_ABR = arrResult[int_DES_NOMABR].ToString();
-                                if (!drReader.IsDBNull(int_SIZE)) temp.NUM_SIZE_ARCHIVO = arrResult[int_SIZE].ToString();
+                                if (!drReader.IsDBNull(int_SIZE)) temp.NUM_SIZE_ARCHIVO = long.Parse(arrResult[int_SIZE].ToString());
                                 if (!drReader.IsDBNull(int_DES_OBS)) temp.DES_OBS = arrResult[int_DES_OBS].ToString();
                                 if (!drReader.IsDBNull(int_DES_NOMABR)) temp.EXTENSION = System.IO.Path.GetExtension(arrResult[int_DES_NOMABR].ToString());
                                 lista.Add(temp);

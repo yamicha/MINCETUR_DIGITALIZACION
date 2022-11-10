@@ -36,14 +36,16 @@
         align-items: stretch;
         width: 100%;
     }
-    .input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control {
-        position: relative;
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        width: 1%;
-        margin-bottom: 0;
-    }
+
+        .input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control {
+            position: relative;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            width: 1%;
+            margin-bottom: 0;
+        }
+
     .input-group-append {
         margin-left: -1px;
     }
@@ -126,6 +128,7 @@
                 <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Asignar: </p>
                 <fieldset style="width: 100%;">
                     <div class="row">
+
                         <div class="col-sm-12">
                             <div class="col-sm-2">
                                 <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
@@ -135,6 +138,36 @@
                             </div>
                             <div class="col-sm-4">
                                 <button id="Asignar_btnDigitalizador" class="btn btn-blue" type="button"><i class="clip-user-3"></i> Asignar</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="col-sm-2">
+                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Accion:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flgdigital" id="checkDigital" value="1" checked="">
+                                    <label class="form-check-label" for="checkDigital">
+                                        Digitalizar
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flgdigital" id="checkDigital2" value="0">
+                                    <label class="form-check-label" for="checkDigital2">
+                                        No Digitalizar
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="alert alert-block alert-success fade in" id="mssgAsignar" style="display:none;">
+                                <button data-dismiss="alert" class="close" type="button"> × </button>
+                                <h4 class="alert-heading"><i class="fa fa-info-circle"></i> Creanción de lote</h4>
+                                <p>
+                                   Se creara un lote con los expedientes seleccionados el cual tiene un peso total de 
+                                    <strong id="mssgPesoAsignar">300 GB</strong> aproximadamente.                      
+                                </p>
                             </div>
                         </div>
                     </div>
