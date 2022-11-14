@@ -37,6 +37,10 @@
     <ProjectReference Include="..\6.UtilitariosDigitalizacion\Utilitarios.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

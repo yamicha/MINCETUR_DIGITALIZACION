@@ -267,7 +267,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
             }
             return lista;
         }
-
         public void Expediente_Insertar(ExpedienteModels entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

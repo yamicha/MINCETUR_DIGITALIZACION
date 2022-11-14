@@ -210,6 +210,109 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
+        [HttpPost]
+        [Route("adjuntos-insertar")]
+        public IActionResult DocumentoAdjuntos_Insertar(AdjuntoModels entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    repositorio.DocumentoAdjuntos_Insertar(new enAdjuntos
+                    {
+                        ID_EXPEDIENTE = entidad.IdExpediente,
+                        DES_NOM_ABR = entidad.NombreArchivo,
+                        EXTENSION = entidad.Extension,
+                        NUM_SIZE_ARCHIVO = entidad.PesoArchivo,
+                        ID_DOC_CMS = entidad.IdArchivo,
+                        FLG_LINK = entidad.FlgLink,
+                        FLG_TIPO = entidad.FlgTipo,
+                        USU_CREACION = entidad.UsuCreacion,
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
+        [Route("adjuntos-actualizar")]
+        public IActionResult DocumentoAdjuntos_Actualizar(AdjuntoModels entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                 repositorio.DocumentoAdjuntos_Actualizar(new enAdjuntos
+                    {
+                        ID_DOC_ADJ = entidad.IdocAdjunto,
+                        NUM_SIZE_ARCHIVO = entidad.PesoArchivo,
+                        EXTENSION = entidad.Extension,
+                        USU_MODIFICACION = entidad.UsuCreacion,
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpDelete]
+        [Route("adjuntos-eliminar/{IdocAdjunto:long}")]
+        public IActionResult DocumentoAdjuntos_Eliminar(long IdocAdjunto)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
+                {
+                    repositorio.DocumentoAdjuntos_Eliminar(new enAdjuntos
+                    {
+                        ID_DOC_ADJ = IdocAdjunto,
+                    }, ref auditoria);
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                       if (auditoria.Objeto == null)
+                        auditoria.Code = (int)HttpStatusCode.NotFound;
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
 
         [HttpPost]
         [Route("grabar-asignacion")]

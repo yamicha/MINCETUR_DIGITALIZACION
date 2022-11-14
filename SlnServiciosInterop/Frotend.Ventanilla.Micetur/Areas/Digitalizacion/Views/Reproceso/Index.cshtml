@@ -13,10 +13,11 @@
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script>
+    var extensionValid =@AppSettings.FileValid
     var IdLaserMin = @AppSettings.MinIdLaser;
     $(document).ready(function () {
         Remove_RemoverClases("liReproceso");
-        $("#Reprocesar_btn_Fin").hide();
+        //$("#Reprocesar_btn_Fin").hide();
     });
 
 </script>
@@ -26,6 +27,7 @@
         Buscando registros...
     </h5>
 </div>
+<div class="modal fade" id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="myModal_Documento_Ver_Imagen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">
@@ -51,9 +53,9 @@
                 <div class="col-sm-12">
                     <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
                         <legend style="font-size:small;display:block">Iniciar Reproceso</legend>
-                        <button id="Reprocesar_btn_Iniciar" title="Iniciar reloj" class="btn btn-blue" type="button" style="margin-left:20px;margin-bottom:10px;"><i class="clip-clock-2"></i> Iniciar</button>
-                        <button id="Reprocesar_btn_Fin" title="Detener reloj y finalizar la digitalización" class="btn btn-blue" type="button" style="margin-right:6px;margin-left:6px;margin-bottom:10px;"><i class="clip-stopwatch"></i> Finalizar</button>
-                        <label id="Reprocesar_lbl_Crono" style="text-align:center;margin-right:6px;margin-left:6px;color:red;font-size:large;">00:00:00</label>
+                        <button id="Reprocesar_btn_Iniciar" title="Iniciar reloj" class="btn btn-blue" type="button" style="margin-left:20px;margin-bottom:10px;"><i class="clip-clock-2"></i> Reprocesar seleccionado</button>
+                        @*<button id="Reprocesar_btn_Fin" title="Detener reloj y finalizar la digitalización" class="btn btn-blue" type="button" style="margin-right:6px;margin-left:6px;margin-bottom:10px;"><i class="clip-stopwatch"></i> Finalizar</button>
+                            <label id="Reprocesar_lbl_Crono" style="text-align:center;margin-right:6px;margin-left:6px;color:red;font-size:large;">00:00:00</label>*@
                         @*<label id="Reprocesar_lbl_Check" style="width:40%;text-align:left;margin-right:1px;">
                                 <input id="Reprocesar_Check_Finalizar" type="checkbox" value="0" style="margin-left:35px" />
                                 Mostrar Finalizar

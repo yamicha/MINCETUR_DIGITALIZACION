@@ -13,10 +13,10 @@ namespace ServiceReference2
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DocCmsSubir", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
-    internal partial class DocCmsSubir : object
+    public partial class DocCmsSubir : object
     {
         
         private int IdDocCmsField;
@@ -48,7 +48,7 @@ namespace ServiceReference2
         private string IpAccesoField;
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal int IdDocCms
+        public int IdDocCms
         {
             get
             {
@@ -61,7 +61,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal int IdSis
+        public int IdSis
         {
             get
             {
@@ -74,7 +74,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        internal string DesNomAbr
+        public string DesNomAbr
         {
             get
             {
@@ -87,7 +87,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        internal string DesRuta
+        public string DesRuta
         {
             get
             {
@@ -100,7 +100,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        internal byte[] Archivo
+        public byte[] Archivo
         {
             get
             {
@@ -113,7 +113,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        internal string CodPin
+        public string CodPin
         {
             get
             {
@@ -126,7 +126,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
-        internal int FlgPin
+        public int FlgPin
         {
             get
             {
@@ -139,7 +139,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
-        internal string CodCms
+        public string CodCms
         {
             get
             {
@@ -152,7 +152,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
-        internal int FlgCms
+        public int FlgCms
         {
             get
             {
@@ -165,7 +165,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
-        internal int IdDoc
+        public int IdDoc
         {
             get
             {
@@ -178,7 +178,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
-        internal int FlgDoc
+        public int FlgDoc
         {
             get
             {
@@ -191,7 +191,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
-        internal int IdUsu
+        public int IdUsu
         {
             get
             {
@@ -204,7 +204,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=12)]
-        internal string Dato
+        public string Dato
         {
             get
             {
@@ -217,7 +217,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=13)]
-        internal string IpAcceso
+        public string IpAcceso
         {
             get
             {
@@ -231,10 +231,10 @@ namespace ServiceReference2
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Resultado", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
-    internal partial class Resultado : object
+    public partial class Resultado : object
     {
         
         private int IdTipoField;
@@ -246,7 +246,7 @@ namespace ServiceReference2
         private string Valor1Field;
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        internal int IdTipo
+        public int IdTipo
         {
             get
             {
@@ -259,7 +259,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        internal string DesError
+        public string DesError
         {
             get
             {
@@ -272,7 +272,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        internal string Valor
+        public string Valor
         {
             get
             {
@@ -285,7 +285,7 @@ namespace ServiceReference2
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        internal string Valor1
+        public string Valor1
         {
             get
             {
@@ -298,23 +298,26 @@ namespace ServiceReference2
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.IWCFGeneralesDocCmsRegistro")]
-    internal interface IWCFGeneralesDocCmsRegistro
+    public interface IWCFGeneralesDocCmsRegistro
     {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertar", ReplyAction="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertarResponse")]
+        ServiceReference2.Resultado insertar(ServiceReference2.DocCmsSubir model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertar", ReplyAction="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertarResponse")]
         System.Threading.Tasks.Task<ServiceReference2.Resultado> insertarAsync(ServiceReference2.DocCmsSubir model);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    internal interface IWCFGeneralesDocCmsRegistroChannel : ServiceReference2.IWCFGeneralesDocCmsRegistro, System.ServiceModel.IClientChannel
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    public interface IWCFGeneralesDocCmsRegistroChannel : ServiceReference2.IWCFGeneralesDocCmsRegistro, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    internal partial class WCFGeneralesDocCmsRegistroClient : System.ServiceModel.ClientBase<ServiceReference2.IWCFGeneralesDocCmsRegistro>, ServiceReference2.IWCFGeneralesDocCmsRegistro
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    public partial class WCFGeneralesDocCmsRegistroClient : System.ServiceModel.ClientBase<ServiceReference2.IWCFGeneralesDocCmsRegistro>, ServiceReference2.IWCFGeneralesDocCmsRegistro
     {
         
         /// <summary>
@@ -355,6 +358,11 @@ namespace ServiceReference2
         public WCFGeneralesDocCmsRegistroClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
+        }
+        
+        public ServiceReference2.Resultado insertar(ServiceReference2.DocCmsSubir model)
+        {
+            return base.Channel.insertar(model);
         }
         
         public System.Threading.Tasks.Task<ServiceReference2.Resultado> insertarAsync(ServiceReference2.DocCmsSubir model)

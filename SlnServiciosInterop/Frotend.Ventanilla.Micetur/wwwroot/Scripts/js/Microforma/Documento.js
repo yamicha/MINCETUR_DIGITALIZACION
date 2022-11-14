@@ -143,7 +143,7 @@ function Documento_actionVerImagen(cellvalue, options, rowObject) {
     if (_ID_MODULO == 6 || _ID_MODULO == 10) {
         _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
     } else {
-        _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[14] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
+        _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
     }
     return _btn;
 }
@@ -168,9 +168,9 @@ function Documento_actionCodVerProceso(cellvalue, options, rowObject) {
     return _btn;
 }
 
-function Documento_VerImagen(ID_LF) {
+function Documento_VerImagen(ID_DOCUMENTO) {
     jQuery("#myModal_Documento_Ver_Imagen").html('');
-    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/ver-imagen?ID_LASER=" + ID_LF, function (responseText, textStatus, request) {
+    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/ver-imagen?ID_DOCUMENTO=" + ID_DOCUMENTO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');
         if (request.status != 200) return;
     });

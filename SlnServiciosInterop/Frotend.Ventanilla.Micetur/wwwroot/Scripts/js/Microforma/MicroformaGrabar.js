@@ -122,7 +122,6 @@ function MicroformaGrabar_ValidarLote() {
     });
 }
 function MicroformaGrabar_Grabar() {
-    debugger; 
     jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", function (r) {
         if (r) {
             try {

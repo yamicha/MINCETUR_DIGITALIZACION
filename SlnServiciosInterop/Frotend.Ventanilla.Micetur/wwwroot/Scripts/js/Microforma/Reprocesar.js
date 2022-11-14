@@ -28,7 +28,7 @@ jQuery('#aTabReprocesar').click(function (e) {
 });
 
 jQuery('#Reprocesar_btn_Iniciar').click(function (e) {
-    Reprocesar_Iniciar();
+    Rprocesar_Mantenimiento();
 });
 
 jQuery('#Reprocesar_Check_Finalizar').change(function (e) {
@@ -41,7 +41,7 @@ jQuery('#Reprocesar_Check_Finalizar').change(function (e) {
 });
 
 function Reprocesar_buscar() {
-   Documento_ConfigurarGrilla(Reprocesar_grilla,Reprocesar_barra ,"Listado de documentos no aprobados", false, 8);
+    Documento_ConfigurarGrilla(Reprocesar_grilla, Reprocesar_barra, "Listado de documentos no aprobados", false, 8);
 }
 
 function Reprocesar_Iniciar() {
@@ -150,59 +150,62 @@ function Reprocesar_FinalizarPregunta() {
     }
 }
 
-function Reprocesar_Finalizar(ID_LASERFICHER) {     
-    if (Reprocesar_ListaDocumentos.length > 0) {
-        var item = {        
-            IdDocumento: parseInt(Reprocesar_ListaDocumentos[0].IdDocumento),
-            IdDocumentoAsignado: parseInt(Reprocesar_ListaDocumentos[0].IdDocumentoAsignado),
-            IdLaserfiche: parseInt(ID_LASERFICHER),
-            HoraInicio: Reprocesar_ListaDocumentos[0].HORA_INICIO,
-            HoraFIn: Reprocesar_ListaDocumentos[0].HORA_FIN,
-            UsuCreacion: $('#inputHddId_Usuario').val()
-        }
-        var url = "ventanilla/digitalizacion/reprocesar-documento";
-        API.Fetch("POST", url, item, function (auditoria) {
-            if (auditoria != null && auditoria != "") {
-                if (auditoria.EjecucionProceso) {
-                    if (!auditoria.Rechazo) {
-                        jOkas("Documento reprocesado correctamente", "Atención");
-                    } else {
-                        jAlert(auditoria.MensajeSalida, "Atención");
-                    }
-                    Reprocesar_ListaDocumentos = new Array();
-                    Reprocesar_LimpiarCronometro();
-                    Reprocesar_RestaurarBotones();
-                    Reprocesar_buscar();
-                } else {
-                    jAlert(auditoria.MensajeSalida, "Atención");
+function Reprocesar_Finalizar() {
+    jConfirm("¿ Desea finalizar con el reproceso de este expediente ?", "Atención", function (r) {
+        if (r) {
+            debugger; 
+            if (Reprocesar_ListaDocumentos.length > 0) {
+                var item = {
+                    IdDocumento: parseInt(Reprocesar_ListaDocumentos[0].IdDocumento),
+                    IdDocumentoAsignado: parseInt(Reprocesar_ListaDocumentos[0].IdDocumentoAsignado),
+                    UsuCreacion: $('#inputHddId_Usuario').val()
                 }
-            } else {
-                jAlert("No se encontraron registros", "Atención");
+                var url = "ventanilla/digitalizacion/reprocesar-documento";
+                API.Fetch("POST", url, item, function (auditoria) {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.EjecucionProceso) {
+                            if (!auditoria.Rechazo) {
+                                $('#myModalNuevo').modal('hide')
+                                jOkas("Expediente reprocesado correctamente", "Atención");
+                            } else {
+                                jAlert(auditoria.MensajeSalida, "Atención");
+                            }
+                            Reprocesar_ListaDocumentos = new Array();
+                            //Reprocesar_LimpiarCronometro();
+                            //Reprocesar_RestaurarBotones();
+                            Reprocesar_buscar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                    } else {
+                        jAlert("No se encontraron registros", "Atención");
+                    }
+                });
             }
-        }); 
-    } else {
-        jAlert("Debe asignar por lo menos un documento.", "Atención");
-    }
+        } else {
+            jAlert("Debe seleecionar por lo menos un registo.", "Atención");
+        }
+    });
 }
 
-//function Reprocesar_ValidarDocumento() {
-//    Reprocesar_Int_Documento = setInterval(function () {
-//        var item = {
-//            COD_DOCUMENTO: Reprocesar_COD_DOCUMENTO
-//        }
-//        var url = baseUrl + "Microforma/Documento/Documento_Validar";
-//        var auditoria = SICA.Ajax(url, item, false);
-//        if (auditoria != null && auditoria != "") {
-//            if (auditoria.EjecucionProceso) {
-//                if (!auditoria.Rechazo) {
-//                    clearInterval(Reprocesar_Int_Documento);
-//                    Reprocesar_Finalizar();
-//                }
-//            } else {
-//                jAlert(auditoria.MensajeSalida, "Atención");
-//            }
-//        } else {
-//            jAlert("No se encontraron registros", "Atención");
-//        }
-//    }, 1000);
-//}
+
+function Rprocesar_Mantenimiento() {
+    var rowKey = $("#" + Reprocesar_grilla).jqGrid('getGridParam', 'selrow');
+    var data = jQuery("#" + Reprocesar_grilla).jqGrid('getRowData', rowKey);
+    let ID_DOCUMENTO = data.Reprocesar_ID_DOCUMENTO; 
+    if (data != null && data != 0) {
+        var itemDoc = {
+            IdDocumento: data.Reprocesar_ID_DOCUMENTO,
+            IdDocumentoAsignado: data.Reprocesar_ID_DOCUMENTO_ASIGNADO,
+            //ID_LASERFICHER: data.Reprocesar_ID_LASERFICHE,
+        };
+        Reprocesar_ListaDocumentos.push(itemDoc);
+        jQuery("#myModalNuevo").modal('show');
+        jQuery("#myModalNuevo").load(baseUrl + "Digitalizacion/reproceso/mantinimiento?ID_DOCUMENTO=" + ID_DOCUMENTO, function (responseText, textStatus, request) {
+            $.validator.unobtrusive.parse('#myModalNuevo');
+            if (request.status != 200) return;
+        });
+    } else {
+        jAlert("Seleccione un solo registro para reprocesar.", "Atención");
+    }
+}

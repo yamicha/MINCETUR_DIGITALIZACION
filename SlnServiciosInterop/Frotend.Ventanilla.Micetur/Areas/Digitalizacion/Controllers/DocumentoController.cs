@@ -49,9 +49,8 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/ver-imagen")]
-        public async Task<ActionResult> Documento_Ver_Imagen(long ID_DOCUMENTO)
+        public ActionResult Documento_Ver_Imagen(long ID_DOCUMENTO)
         {
-            int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             modelo.ID_DOCUMENTO = ID_DOCUMENTO;
             return View(modelo);

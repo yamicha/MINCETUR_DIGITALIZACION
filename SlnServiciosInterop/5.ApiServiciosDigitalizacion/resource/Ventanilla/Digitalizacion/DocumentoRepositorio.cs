@@ -40,6 +40,19 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Digitalizacion
         {
             return _rule.DocumentoAdjuntos_Listar(entidad, ref auditoria);
         }
+
+        public void DocumentoAdjuntos_Eliminar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            _rule.DocumentoAdjuntos_Eliminar(entidad, ref auditoria);
+        }
+        public void DocumentoAdjuntos_Actualizar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            _rule.DocumentoAdjuntos_Actualizar(entidad, ref auditoria);
+        }
+        public void DocumentoAdjuntos_Insertar(enAdjuntos entidad, ref enAuditoria auditoria)
+        {
+            _rule.DocumentoAdjuntos_Insertar(entidad, ref auditoria);
+        }
         public List<enDocumento_Obs> DocumentoObservado_Listar(enDocumento_Obs entidad, ref enAuditoria auditoria)
         {
             return _rule.DocumentoObservado_Listar(entidad, ref auditoria);

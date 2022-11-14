@@ -33,7 +33,6 @@ API = {
             });
         },500); 
     },
-
     Fetch: function (type, url, paramters, calback) {
         fetchload.init();
         var request = new Request(BaseUrlApi + url, {
@@ -46,7 +45,7 @@ API = {
             }
         });
         fetch(request)
-            .then((resp) => resp.json())
+            .then((resp) => resp.json() )
             .then(function (data) {
                 fetchload.close();
                 calback(data);
@@ -56,8 +55,6 @@ API = {
                 alert("request error api: " + error.message);
             });
     },
-
-
     FetchGet: function (type, url, calback) {
         fetchload.init();
         var request = new Request(BaseUrlApi + url, {
@@ -90,8 +87,6 @@ API = {
             .then(response => response.json())
             .then(data => alert(data));
     }
-
-
 }
 
 function DownloadFileApi(Url) {
@@ -135,6 +130,34 @@ function UploadFileService(formdata) {
     return new Promise((resolve, reject) => {
         $.ajax({
             url: baseUrl + "Base/UploadFileService",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (auditoria) {
+                if (auditoria.ejecucionProceso) {
+                    if (!auditoria.rechazo) {
+                        resolve(auditoria.objeto);
+                    } else {
+                        console.log(auditoria.mensajeSalida, 'Atención');
+                        resolve(0);
+                    }
+                } else {
+                    resolve(0);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.status);
+                resolve(0);
+            }
+        });
+    });
+}
+
+function UploadFileLaserService(formdata) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: baseUrl + "Base/UploadFileLaserficherService",
             data: formdata,
             processData: false,
             contentType: false,

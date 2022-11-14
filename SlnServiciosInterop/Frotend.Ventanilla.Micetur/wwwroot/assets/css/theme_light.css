@@ -188,3 +188,12 @@ body.rtl .main-content .container {
         background-color: #fff;
     }
 }
+
+
+.file-caption-name {
+    max-width: 150px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

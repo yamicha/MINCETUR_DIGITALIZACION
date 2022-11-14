@@ -1,0 +1,82 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.ReprocesoModels
+@{
+    Layout = null;
+}
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.modal-dialogMicroforma').draggable({
+            handle: ".modal-header",
+            cursor: "handler"
+        });
+        $('#DocumentoBtnEditar').click(function () {
+            DocumentoAdjunto_Actualizar();
+        });
+    });
+    function CloseModal() {
+        $('#MyModalEditarDocumento').modal('hide');
+    }
+</script>
+
+@using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmAdjunto", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialogMicroforma" style="margin:100px auto">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #ca2626">
+                <div class="col-sm-14">
+                    <button class="close" aria-hidden="true" onclick="CloseModal()" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-pencil-2'></i>&nbsp; Editar Documento </h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <fieldset style="width: 100%;">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Ingresar los siguientes datos: </p>
+                                <fieldset style="width: 100%;">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Extensión: </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.EDIT_EXTENSION, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = ".pdf", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(model => model.EDIT_EXTENSION, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Peso(Bytes): </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(model => model.EDIT_PESO_ARCHIVO, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            @Html.ValidationMessageFor(model => model.EDIT_PESO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" id="Adv_Conforme">
+                                            <div class="alert alert-block alert-warning fade in">
+                                                <button data-dismiss="alert" class="close" type="button"> × </button>
+                                                <h4 class="alert-heading"><i class="fa fa-exclamation-triangle"></i> Tener en cuenta!</h4>
+                                                <p>
+                                                    Por favor ingresar el peso del archivo en bytes tener en cuentra tambien ingresar dicho peso sin decimales.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="modal-footer">
+                    <button type="button" id="DocumentoBtnEditar" class="btn btn-blue"><i class="clip-pencil-2"></i> Editar</button>
+                    <button type="button" class="btn btn-light-grey" onclick="CloseModal()"><i class="clip-close-4"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

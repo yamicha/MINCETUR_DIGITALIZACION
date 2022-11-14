@@ -26,6 +26,8 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
         public List<SelectListItem> ListaPersonal = new List<SelectListItem>();
 
         public long ID_DOC { get; set; }
+
+
     }
 
 }

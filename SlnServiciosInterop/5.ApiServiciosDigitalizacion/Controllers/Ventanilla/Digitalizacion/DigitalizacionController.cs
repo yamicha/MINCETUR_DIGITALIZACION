@@ -106,9 +106,9 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                     {
                         ID_DOCUMENTO = entidad.IdDocumento,
                         ID_DOCUMENTO_ASIGNADO = entidad.IdDocumentoAsignado,
-                        ID_LASERFICHE = entidad.IdLaserfiche,
-                        HORA_INICIO = entidad.HoraInicio,
-                        HORA_FIN = entidad.HoraFIn,
+                        //ID_LASERFICHE = entidad.IdLaserfiche,
+                        //HORA_INICIO = entidad.HoraInicio,
+                        //HORA_FIN = entidad.HoraFIn,
                         USU_CREACION = entidad.UsuCreacion,
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)

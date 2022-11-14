@@ -1,0 +1,169 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.ReprocesoModels
+@{
+    Layout = null;
+}
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        DocumentoAdjuntos_ConfigurarGrilla("Edit");
+        DocumentoAdjuntos_CargarGrilla(@Model.ID_DOCUMENTO);
+        $('#FLG_LINK').change(function () {
+            let inputFile = $('#ControlFile');
+            let inputName = $('#NOMBRE_ARCHIVO');
+            let inputPeso = $('#PESO_ARCHIVO');
+            let inputEx = $('#EXTENSION');
+            if ($(this).val() == 0) {
+                inputFile.show('slow');
+                inputName.prop('disabled', true);
+                inputPeso.prop('disabled', true);
+                inputEx.prop('disabled', true);
+            } else {
+                inputFile.hide();
+                inputName.prop('disabled', false);
+                inputPeso.prop('disabled', false);
+                inputEx.prop('disabled', false);
+            }
+        });
+        $('#BtnAgregarAdjunto').click(function () {
+            DocumentoAdjunto_Insertar(); 
+        });
+        $('#Reproceso_Finalizar').click(function () {
+            Reprocesar_Finalizar(); 
+        }); 
+    });
+    $('.modal-dialogValidar').draggable({
+        handle: ".modal-header",
+        cursor: "handler"
+    });
+
+</script>
+<style>
+    .input-group {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        width: 100%;
+    }
+
+        .input-group > .custom-file, .input-group > .custom-select, .input-group > .form-control {
+            position: relative;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            width: 1%;
+            margin-bottom: 0;
+        }
+
+    .input-group-append {
+        margin-left: -1px;
+    }
+
+    .input-group-append, .input-group-prepend {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+</style>
+<div class="modal fade" id="MyModalEditarDocumento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+@{
+    var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
+    var htmlShort = new Dictionary<string, object> { { "style", "width:100px; font-family:verdana; font-size:.8em" } };
+}
+
+<div class="modal-lg" style="margin:50px auto;">
+    <div class="modal-content">
+        <div class="modal-header" style="cursor: move; background-color: #ca2626">
+            <div class="col-sm-14">
+                <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                <h4 class="modal-title"><i class='clip-pictures'></i>&nbsp; Adjuntos del Expediente</h4>
+            </div>
+        </div>
+        <div class="modal-body">
+            <fieldset style="width: 100%;">
+                @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmAdjunto", @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 inline-container-Group" style="margin-bottom:15px">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Agregue o edite de la información de ser necesario: </p>
+
+                                <div class="alert alert-block alert-warning fade in">
+                                    <button data-dismiss="alert" class="close" type="button"> × </button>
+                                    <h4 class="alert-heading"><i class="fa fa-exclamation-triangle"></i> Tener en cuenta!</h4>
+                                    <p>
+                                        Por favor ingresar el peso del archivo en bytes tener en cuentra tambien ingresar dicho peso sin decimales.
+                                    </p>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Adjunto: </label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.NOMBRE_ARCHIVO, new { @class = "form-control", @maxlength = "100" })
+                                            <div class="input-group-append">
+                                                <select id="FLG_LINK" class="form-control">
+                                                    <option value="1" selected>Link</option>
+                                                    <option value="0">Archivo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.NOMBRE_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Peso(Bytes): </label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.PESO_ARCHIVO, new { @class = "form-control", @maxlength = "100" })
+                                        @Html.ValidationMessageFor(model => model.PESO_ARCHIVO, string.Empty, new { @class = "cssMessageError" })
+                                    </div>
+                                    <label class="col-sm-2 control-label" for="form-field-1" style=" color: black;">Extensión: </label>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(model => model.EXTENSION, new { @class = "form-control", @maxlength = "100", @placeholder = "Ejm: .pdf" })
+                                        @Html.ValidationMessageFor(model => model.EXTENSION, string.Empty, new { @class = "cssMessageError" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group " id="ControlFile" style="display:none;">
+                                    <label class="col-sm-2 control-label" for="form-field-1" style="color: black;">Cargar: </label>
+                                    <div class="col-sm-10">
+                                        <label for="filearchivo" class="btn  btn-file" style="width: 100%; border-color: #4b4b4d; color: #4b4b4d">
+                                            <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar Archivo …</span>
+                                            <input required type="file" id="filearchivo" name="filearchivo" class="file" onchange="DocumentoAdjuntos_ProcesarFile(this)">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label" for="form-field-1" style="color: black;"></label>
+                                    <div class="col-sm-10">
+                                        <button type="button" id="BtnAgregarAdjunto" class="btn btn-red"><i class="clip-plus-circle-2"></i>&nbsp; Agregar</button>
+                                    </div>
+                                </div>
+
+                                <div class="Documento_jqGrid">
+                                    <table id="DocumentoAdjunto_grilla"></table>
+                                    <div id="DocumentoAdjunto_barra"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </fieldset>
+            <div class="modal-footer">
+                <button type="button" id="Reproceso_Finalizar" class="btn btn-blue"><i class="fa fa-save"></i> Finalizar Reproceso</button>
+                <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("hd_ID_DOCUMENTO", Model.ID_DOCUMENTO)
+
+
+
