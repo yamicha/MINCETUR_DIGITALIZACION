@@ -60,6 +60,14 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intDestipoDoc = drReader.GetOrdinal("DES_TIP_DOC");
+                            int intDesAsunto = drReader.GetOrdinal("DES_ASUNTO");
+                            int intdesObs = drReader.GetOrdinal("DES_OBS");
+                            int intNumfolio = drReader.GetOrdinal("NUM_FOLIOS");
+                            int intNumdoc = drReader.GetOrdinal("NUM_DOC");
+                            int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
+                            int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
+                            
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -77,6 +85,13 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intUsuModific)) temp.USU_MODIFICACION = arrResult[intUsuModific].ToString();
                                 if (!drReader.IsDBNull(intFecModific)) temp.STR_FEC_MODIFICACION = arrResult[intFecModific].ToString();
+                                if (!drReader.IsDBNull(intDestipoDoc)) temp.DES_TIP_DOC = arrResult[intDestipoDoc].ToString();
+                                if (!drReader.IsDBNull(intDesAsunto)) temp.DES_ASUNTO = arrResult[intDesAsunto].ToString();
+                                if (!drReader.IsDBNull(intdesObs)) temp.DES_OBS = arrResult[intdesObs].ToString();
+                                if (!drReader.IsDBNull(intNumfolio)) temp.NUM_FOLIOS = long.Parse(arrResult[intNumfolio].ToString());
+                                if (!drReader.IsDBNull(intNumdoc)) temp.NUM_DOC = arrResult[intNumdoc].ToString();
+                                if (!drReader.IsDBNull(intDesClasif)) temp.DES_CLASIF = arrResult[intDesClasif].ToString();
+                                if (!drReader.IsDBNull(intDescPersona)) temp.DES_PERSONA = arrResult[intDescPersona].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();
@@ -509,6 +524,13 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
                             int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
+                            int intDestipoDoc = drReader.GetOrdinal("DES_TIP_DOC");
+                            int intDesAsunto = drReader.GetOrdinal("DES_ASUNTO");
+                            int intdesObs = drReader.GetOrdinal("DES_OBS");
+                            int intNumfolio = drReader.GetOrdinal("NUM_FOLIOS");
+                            int intNumdoc = drReader.GetOrdinal("NUM_DOC");
+                            int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
+                            int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
 
                             while (drReader.Read())
                             {
@@ -520,6 +542,13 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
                                 if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
                                 if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
+                                if (!drReader.IsDBNull(intDestipoDoc)) temp.DES_TIP_DOC = arrResult[intDestipoDoc].ToString();
+                                if (!drReader.IsDBNull(intDesAsunto)) temp.DES_ASUNTO = arrResult[intDesAsunto].ToString();
+                                if (!drReader.IsDBNull(intdesObs)) temp.DES_OBS = arrResult[intdesObs].ToString();
+                                if (!drReader.IsDBNull(intNumfolio)) temp.NUM_FOLIOS = long.Parse(arrResult[intNumfolio].ToString());
+                                if (!drReader.IsDBNull(intNumdoc)) temp.NUM_DOC = arrResult[intNumdoc].ToString();
+                                if (!drReader.IsDBNull(intDesClasif)) temp.DES_CLASIF = arrResult[intDesClasif].ToString();
+                                if (!drReader.IsDBNull(intDescPersona)) temp.DES_PERSONA = arrResult[intDescPersona].ToString();
 
                             }
                             drReader.Close();

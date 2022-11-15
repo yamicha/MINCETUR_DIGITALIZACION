@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        Documento_EditValidarImagen(); 
+        Documento_EditValidarImagen();
         DocumentoAdjuntos_ConfigurarGrilla();
         DocumentoAdjuntos_CargarGrilla(@Model.ID_DOCUMENTO);
     });
@@ -42,7 +42,6 @@
         handle: ".modal-header",
         cursor: "handler"
     });
-
 </script>
 @{
     var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
@@ -52,7 +51,7 @@
 {
     @Html.ValidationSummary(true)
     <div class="modal-lg" style="margin:50px auto;">
-        <div class="modal-content" >
+        <div class="modal-content">
             <div class="modal-header" style="cursor: move; background-color: #ca2626">
                 <div class="col-sm-14">
                     <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
@@ -64,8 +63,50 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="col-sm-12 inline-container-Group" style="margin-bottom:15px">
-                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Adjuntos: </p>
-                                <div class="Documento_jqGrid">
+                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 10px; margin-top: -5px">Datos del expediente: </p>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Nº Expediente:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.ID_DOCUMENTO</span>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Tipo Doc.:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.DES_TIP_DOC</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Nro. Doc:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.NUM_DOC</span>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Folios:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.NUM_FOLIOS</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Clasificación:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.DES_CLASIF</span>
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Persona:</strong> </label>
+                                    <div class="col-sm-4">
+                                        <span>@Model.DES_PERSONA</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Asunto:</strong> </label>
+                                    <div class="col-sm-10">
+                                        <span>@Model.DES_ASUNTO</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Observación:</strong> </label>
+                                    <div class="col-sm-10">
+                                        <span>@Model.DES_OBS</span>
+                                    </div>
+                                </div>
+                                <div class="Documento_jqGrid" >
                                     <table id="DocumentoAdjunto_grilla"></table>
                                     <div id="DocumentoAdjunto_barra"></div>
                                 </div>
@@ -99,13 +140,13 @@
                                         </div>
                                     </div>
                                     @*<div class="row">
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Digitalizador:</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            @Html.TextBoxFor(model => model.VALIDAR_NOMBRE_DIGITALIZADOR, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
-                                        </div>
-                                    </div>*@
+                                            <div class="col-sm-2">
+                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Digitalizador:</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                @Html.TextBoxFor(model => model.VALIDAR_NOMBRE_DIGITALIZADOR, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
+                                            </div>
+                                        </div>*@
                                 </fieldset>
                             </div>
                         </div>

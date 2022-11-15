@@ -16,18 +16,20 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', '', ''
+        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.','Folios','Usuario'
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
         { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir },
-        //{ name: 'DOC', index: 'DOC', align: 'center', width: 110, formatter: Documento_actionVerDoc },
         { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false }, //2
         { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //3
         { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //4
         { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'left', hidden: false, width: 200 },
-        { name: 'CANT_DOC', index: 'CANT_DOC', align: 'left', hidden: true, width: 200 },
-        { name: 'ID_DOC', index: 'ID_DOC', align: 'left', hidden: true, width: 200 },
+        { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
+        { name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150 },
+        { name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150 },
+        { name: 'USU_CREA', index: 'USU_CREA', align: 'left', hidden: true, width: 200 },
+
     ];
     var opciones = {
         GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: `GetRules()`,

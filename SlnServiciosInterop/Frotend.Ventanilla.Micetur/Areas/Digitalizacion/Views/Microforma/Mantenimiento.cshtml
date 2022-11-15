@@ -6,7 +6,6 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
-
         if ($('#HDF_ACCION').val() == "M") {
             $('#MICROFORMA_NROVOLUMEN').prop('disabled', true);
             MicroformaReprocesar_GetOne(@Model.ID_MICROFORMA);
@@ -62,7 +61,10 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro. Volumen: </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            <div class="input-group" style="margin-bottom:3px">
+                                                <span class="input-group-addon">VOL_VV</span>
+                                                @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "Nro. volumen" })
+                                            </div>
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_NROVOLUMEN, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

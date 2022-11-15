@@ -75,7 +75,7 @@ function CalcularPesoAdjunto(_grilla) {
         }
         peso += valorCelda;
     });
-    $("#" + _grilla).jqGrid('footerData', 'set', { NUM_SIZE_ARCHIVO: ' Peso: ' + formatBytes(peso, TypeSize.MB) + " MB" });
+    $("#" + _grilla).jqGrid('footerData', 'set', { NUM_SIZE_ARCHIVO: ' Peso: ' + formatBytes(peso) });
 }
 function DocumentoAdjuntos_CargarGrilla(ID_DOCUMENTO) {
     var url = `ventanilla/documento/get-adjuntos/${ID_DOCUMENTO}`;

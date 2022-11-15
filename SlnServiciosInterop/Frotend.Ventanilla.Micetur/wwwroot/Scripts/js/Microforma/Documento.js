@@ -78,8 +78,8 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         $("#" + _grilla).GridUnload();
         var colNames = [
             '0', '1', '2', '3',
-            NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Nro. Expediente',
-            'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
+            NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Nro. Expediente','Tipo Expediente','Asunto','Clasificación',
+            'Num. Doc','Folios','Observación','Persona','Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
         var colModels = [
             { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
             { name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
@@ -93,11 +93,19 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //8
             { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //9
 
-            { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 10
-            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 11
-            { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 12
-            { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 13
-            { name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: false, sortable: false },// 14
+            { name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 10
+            { name: _PREFIJO + 'DES_ASUNTO', index: _PREFIJO + 'DES_ASUNTO ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 11
+            { name: _PREFIJO + 'DES_CLASIF', index: _PREFIJO + 'DES_CLASIF ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 12
+            { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 13
+            { name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 14
+            { name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15 
+            { name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15
+
+            { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 16
+            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 17
+            { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 18
+            { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 19
+            { name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: true, sortable: false },// 20
         ];
         var opciones = {
             GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
@@ -192,7 +200,7 @@ function Documento_Ver_Proceso(CODIGO) {
     });
 }
 
-function Documento_ValidarImagen(ID_DOCUMENTO,ID_ASIGNADO) {
+function Documento_ValidarImagen(ID_DOCUMENTO, ID_ASIGNADO) {
     jQuery("#myModal_Documento_Ver_Imagen").html('');
     jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/validar-imagen?ID_DOCUMENTO=" + ID_DOCUMENTO + "&ID_DOCUMENTO_ASIGNADO=" + ID_ASIGNADO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');

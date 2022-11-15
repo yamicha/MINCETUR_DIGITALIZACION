@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.Ventanilla.Digitalizacion;
 using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
 using Frotend.Ventanilla.Micetur.Authorization;
 using Frotend.Ventanilla.Micetur.Filters;
 using Frotend.Ventanilla.Micetur.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Utilitarios.Helpers;
 using Utilitarios.Recursos;
 namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -31,7 +34,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/validar-imagen")]
-        public ActionResult Documento_Validar_Imagen(long ID_DOCUMENTO, long ID_DOCUMENTO_ASIGNADO)
+        public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO, long ID_DOCUMENTO_ASIGNADO)
         {
             int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
@@ -44,7 +47,32 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             modelo.Lista_VALIDAR_ID_CONFORME.Insert(2, new SelectListItem() { Value = "0", Text = "NO CONFORME" });
             modelo.VALIDAR_ID_CONFORME = "";
             modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
-
+            enAuditoria apiDocumento= await new CssApi().GetApi<enAuditoria>(new ApiParams
+            {
+                EndPoint = AppSettings.baseUrlApi,
+                Url = $"ventanilla/documento/get-documento/{ID_DOCUMENTO}",
+                UserAD = AppSettings.UserAD,
+                PassAD = AppSettings.PassAD
+            });
+            if (apiDocumento != null)
+            {
+                if (!apiDocumento.Rechazo)
+                {
+                    if (apiDocumento.Objeto != null)
+                    {
+                        enDocumento Documento = JsonConvert.DeserializeObject<enDocumento>(apiDocumento.Objeto.ToString());
+                        if (Documento == null) Documento = new enDocumento();
+                        modelo.DES_TIP_DOC = Documento.DES_TIP_DOC;
+                        modelo.DES_ASUNTO = Documento.DES_ASUNTO;
+                        modelo.DES_OBS = Documento.DES_OBS;
+                        modelo.NUM_DOC = Documento.NUM_DOC;
+                        modelo.NUM_FOLIOS = Documento.NUM_FOLIOS;
+                        modelo.DES_CLASIF = Documento.DES_CLASIF;
+                        modelo.DES_PERSONA = Documento.DES_PERSONA;
+                        //modelo.
+                    }
+                }
+            }
             return View(modelo);
         }
 

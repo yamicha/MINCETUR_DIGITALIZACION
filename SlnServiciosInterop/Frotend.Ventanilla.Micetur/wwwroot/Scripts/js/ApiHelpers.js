@@ -262,10 +262,24 @@ function LoadComboApi(Url, Input, Options) {
     });
 }
 
-function formatBytes(bytes,type) {
-    if (bytes==0) return 0; 
-    const k = 1024
-    return parseFloat((bytes / Math.pow(k, type)).toFixed(2)); 
+/**
+ * Format file size in binary prefix
+ * @param fileSize
+ * @returns {string}
+ */
+function formatBytes(fileSize) {
+    let size = Math.abs(fileSize);
+    if (Number.isNaN(size)) {
+        return 'Invalid file size';
+    }
+    if (size === 0) {
+        return '0 bytes';
+    }
+    const units = ['bytes', 'kB', 'MB', 'GB', 'TB'];
+    let quotient = Math.floor(Math.log2(size) / 10);
+    quotient = quotient < units.length ? quotient : units.length - 1;
+    size /= (1024 ** quotient);
+    return `${+size.toFixed(2)} ${units[quotient]}`;
 }
 
 function convertKb(KB) {
