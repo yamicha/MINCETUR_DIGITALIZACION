@@ -45,7 +45,6 @@ function Asignar_Digitalizador() {
                     Asignar_ListaDocumentos.push(miitem);
                 }
             }
-            debugger; 
             PesoTotal = formatBytes(PesoTotal);
             if (PesoTotal != 0) {
                 $('#mssgPesoAsignar').text(PesoTotal); 

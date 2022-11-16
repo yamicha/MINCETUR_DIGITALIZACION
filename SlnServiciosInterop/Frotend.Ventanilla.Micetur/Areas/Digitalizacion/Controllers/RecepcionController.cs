@@ -101,26 +101,15 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                                             entidad.IdExpediente,
                                             entidad.ListaAdjuntos[i].NombreArchivo,
                                             int.Parse(User.GetUserId()), Archivo);
-                                if (!auditoria.EjecucionProceso)
+                                if (auditoria.EjecucionProceso)
                                 {
                                     if (auditoria.Objeto != null)
-                                        entidad.ListaAdjuntos[i].IdArchivo = (long)auditoria.Objeto;
+                                        entidad.ListaAdjuntos[i].IdArchivo = Convert.ToInt64(auditoria.Objeto);
                                 }
                             }
                         }
                     }
-                    Task.Run(() =>
-                    {
-                        foreach (var item in entidad.ListaAdjuntos)
-                        {
-                            if (item.FlgTipo == 1 && item.FlgLink == 0) // archivos de expdientes 
-                            {
-                                string path = Css_Ruta.Ruta_Temporal + item.CodigoArchivo;
-                                if (System.IO.File.Exists(path))
-                                    System.IO.File.Delete(path);
-                            }
-                        }
-                    });
+           
                 }
                 enAuditoria ApiExpedienteInser = await new CssApi().PostApi<enAuditoria>(new ApiParams
                 {
@@ -138,6 +127,21 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                 auditoria.Error(ex);
                 string codigo = Css_Log.Guardar(ex.Message.ToString());
                 auditoria.MensajeSalida = codigo;
+            }
+            finally
+            {
+                Task.Run(() =>
+                {
+                    foreach (var item in entidad.ListaAdjuntos)
+                    {
+                        if (item.FlgTipo == 1 && item.FlgLink == 0) // archivos de expdientes 
+                        {
+                            string path = Css_Ruta.Ruta_Temporal + item.CodigoArchivo;
+                            if (System.IO.File.Exists(path))
+                                System.IO.File.Delete(path);
+                        }
+                    }
+                });
             }
             return Json(auditoria);
         }

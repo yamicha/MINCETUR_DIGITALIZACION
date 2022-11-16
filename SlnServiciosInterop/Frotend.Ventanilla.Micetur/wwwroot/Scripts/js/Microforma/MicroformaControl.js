@@ -41,7 +41,6 @@ async function MicroformaEvaluar() {
     if ($('#FrmMicroEvaluar').valid()) {
         jConfirm(" ¿ Desea grabar esta evaluación de microforma ? ", "Atención", async function (r) {
             if (r) {
-
                 var IdDocConformidad = 0;
                 if ($('#fileActaConformidad').prop('files')[0] != undefined) {
                     var FileAlmacenamiento = new FormData();

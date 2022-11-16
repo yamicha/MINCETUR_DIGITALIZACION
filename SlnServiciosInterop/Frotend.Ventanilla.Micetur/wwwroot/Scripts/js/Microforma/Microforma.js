@@ -12,6 +12,7 @@ var MicroModulo = {
     CAlmacen: 5,
     CAlmacenFin: 6,
     RevisionPend: 7,
+    RevisionObs : 8, 
     RevisionAnulada: 9,
 }
 
