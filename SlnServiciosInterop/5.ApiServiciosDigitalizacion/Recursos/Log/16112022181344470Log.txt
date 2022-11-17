@@ -1,0 +1,8 @@
+System.Data.DuplicateNameException: A column named 'Nro. Expediente' already belongs to this DataTable.
+   at System.Data.DataColumnCollection.RegisterColumnName(String name, DataColumn column)
+   at System.Data.DataColumnCollection.BaseAdd(DataColumn column)
+   at System.Data.DataColumnCollection.AddAt(Int32 index, DataColumn column)
+   at System.Data.DataColumnCollection.Add(DataColumn column)
+   at Utilitarios.Excel.CreateExcelFile.ListToDataTable[T](List`1 list, Boolean solo_columna, List`1 columnas) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\Excel\CreateExcelFile.cs:line 46
+   at Utilitarios.Excel.CreateExcelFile.CreateExcelDocument[T](List`1 list, String xlsxFilePath, Titulo titulo, Boolean solo_columna, String NombreHoja, List`1 columnas) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\6.UtilitariosDigitalizacion\Excel\CreateExcelFile.cs:line 23
+   at ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion.DocumentoController.Documento_Exportar(GridTable grid) in C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\Controllers\Ventanilla\Digitalizacion\DocumentoController.cs:line 143

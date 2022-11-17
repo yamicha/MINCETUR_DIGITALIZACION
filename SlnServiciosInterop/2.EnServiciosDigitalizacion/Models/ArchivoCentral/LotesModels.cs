@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EnServiciosDigitalizacion.Models
+namespace EnServiciosDigitalizacion.Models.ArchivoCentral
 {
    public class LotesModels
     {

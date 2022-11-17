@@ -19,44 +19,41 @@
     });
 </script>
 <div class="modal fade" id="myModalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div id="Load_Busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
+    <h5>
+        <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
+        Buscando registros...
+    </h5>
+</div>
 <div class="tab-content">
     <div id="panel_tab_directorio" class="tab-pane active">
-        <div class="col-sm-12 inline-container-Group" style=" margin-bottom: 10px;">
-            <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Criterios de búsqueda: </p>
-            <fieldset style="width: 100%;">
-                <div class="row">
-                    <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-                        <legend style="font-size:small;display:block">Fecha de registro en Ventanilla Virtual</legend>
-                        <div class="col-sm-3">
-                            <label>Fecha inicio :</label>
-                            <input class="form-control" id="txtfechainicio" type="text" maxlength="13" readonly style="background:white">
-                        </div>
-                        <div class="col-sm-3">
-                            <label>Fecha fin :</label>
-                            <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="13"readonly style="background:white">
-                        </div>
-                        <div class="col-sm-3">
-                            <label></label><br />
-                            <button id="cons_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
-                            <button id="cons_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
-                        </div>
-                    </fieldset>
-                
+        <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Fecha de registro en Ventanilla Virtual</legend>
+                <div class="col-sm-3">
+                    <label>Fecha inicio :</label>
+                    <input class="form-control" id="txtfechainicio" type="text" maxlength="13" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha fin :</label>
+                    <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="13" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="cons_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                    @*<button id="cons_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>*@
                 </div>
             </fieldset>
         </div>
         <div class="row">
-            <br />
-            <br />
-            <div class="col-sm-7">
-            </div>
-            <div class="col-sm-12" style="margin-top: 10px">
-                <div class="Documento_jqGrid">
+            <div class="col-sm-12">
+                <div class="Tabla_Pen_jqGrid">
                     <table id="Documento_Grilla"></table>
-                    <div id="Documento_Barra"></div>
                 </div>
+                <div id="Documento_Barra"></div>
             </div>
         </div>
+
     </div>
 </div>
 <script src="@Url.Content("~/Scripts/js/Remove.js")" defer type="text/javascript"></script>

@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "No Autorizado";
+}
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Meta data -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Favicon -->
+    <link href="@Url.Content("~/favicon.ico")" rel="icon">
+
+    <!-- Title -->
+    <!--Bootstrap.min css-->
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/bootstrap/css/bootstrap.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/plugins/font-awesome/css/font-awesome.min.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/fonts/style.css")" />
+</head>
+<body>
+    <div class="container-fluid" style="display: flex; height: 100vh; justify-content: center; align-items: center;">
+        <div class="row">
+            <div class="mb-3 text-center">
+                <img src="@Url.Content("~/assets/images/logo-mincetur.png")" class=" mb-2" alt="" width="350">
+            </div>
+            <h1 class="text-danger text-center" style="font-weight:bold;"> NO AUTORIZADO</h1>
+            <h1 class="text-center">401</h1>
+            <p class="text-center">No se encontró autorización, no tiene acesso a este sistema o su fecha de ingreso caduco<br /> Por favor contacte con el administrador del sistema.</p>
+            <div class="text-center"><a class="btn btn-primary" href="~/authorization/signin"><i class="clip-home"></i> &nbsp;Iniciar Sessión </a> </div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+
+</body>
+</html>

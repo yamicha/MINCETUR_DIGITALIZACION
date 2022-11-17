@@ -112,105 +112,92 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
             }
             return lista;
         }
-        //public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
-        //{
-        //    auditoria.Limpiar();
-        //    HashSet<enDocumento> lista = new HashSet<enDocumento>();
-        //    OracleCommand cmd = new OracleCommand();
-        //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //    cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDigitalCons, "PRC_CDVDOC_EXPORTAR");
-        //    cmd.Parameters.Add("X_WHERE", @WHERE);
-        //    cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
-        //    using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
-        //    {
-        //        cn.Open();
-        //        try
-        //        {
-        //            cmd.Connection = cn;
-        //            using (OracleDataReader drReader = cmd.ExecuteReader())
-        //            {
-        //                object[] arrResult = null;
-        //                if (drReader.HasRows)
-        //                {
-        //                    enDocumento temp = null;
-        //                    arrResult = new object[drReader.FieldCount];
-        //                    int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
-        //                    int intIdcontrolCarga = drReader.GetOrdinal("ID_CONTROL_CARGA");
-        //                    int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
-        //                    int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
-        //                    int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
-        //                    int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
-        //                    int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
-        //                    int intIdLote = drReader.GetOrdinal("ID_LOTE");
-        //                    int intIdFondo = drReader.GetOrdinal("ID_FONDO");
-        //                    int intDesFondo = drReader.GetOrdinal("DES_FONDO");
-        //                    int intIdSeccion = drReader.GetOrdinal("ID_SECCION");
-        //                    int intDesSeccion = drReader.GetOrdinal("DES_LARGA_SECCION");
-        //                    int intIdSerie = drReader.GetOrdinal("ID_SERIE");
-        //                    int intDesSerie = drReader.GetOrdinal("DES_SERIE");
-        //                    int intNomDocumento = drReader.GetOrdinal("NOM_DOCUMENTO");
-        //                    int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
-        //                    int intAnio = drReader.GetOrdinal("ANIO");
-        //                    int intFolios = drReader.GetOrdinal("FOLIOS");
-        //                    int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
-        //                    int intObservacion = drReader.GetOrdinal("OBSERVACION");
-        //                    int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
-        //                    int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
-        //                    int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
-        //                    int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
-        //                    int intNroReprocesados = drReader.GetOrdinal("NRO_REPROCESADOS");
+        public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            HashSet<enDocumento> lista = new HashSet<enDocumento>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOC_EXPORTAR");
+            cmd.Parameters.Add("X_WHERE", @WHERE);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enDocumento temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
+                            int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
+                            int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
+                            int intIdDocAsignado = drReader.GetOrdinal("ID_DOCUMENTO_ASIGNADO");
+                            int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
+                            int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
+                            int intIdLote = drReader.GetOrdinal("ID_LOTE");
+                            int intNroRepro = drReader.GetOrdinal("NRO_REPROCESADOS");
+                            int intPesoAdj = drReader.GetOrdinal("PESO_ADJ");
+                            int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
+                            int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
+                            int intDestipoDoc = drReader.GetOrdinal("DES_TIP_DOC");
+                            int intDesAsunto = drReader.GetOrdinal("DES_ASUNTO");
+                            int intdesObs = drReader.GetOrdinal("DES_OBS");
+                            int intNumfolio = drReader.GetOrdinal("NUM_FOLIOS");
+                            int intNumdoc = drReader.GetOrdinal("NUM_DOC");
+                            int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
+                            int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
 
-
-        //                    while (drReader.Read())
-        //                    {
-        //                        drReader.GetValues(arrResult);
-        //                        temp = new enDocumento();
-
-        //                        if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
-        //                        if (!drReader.IsDBNull(intIdcontrolCarga)) temp.ID_CONTROL_CARGA = long.Parse(arrResult[intIdcontrolCarga].ToString());
-        //                        if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
-        //                        if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
-        //                        if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
-        //                        if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
-        //                        if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
-        //                        if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = long.Parse(arrResult[intIdLote].ToString());
-        //                        if (!drReader.IsDBNull(intIdFondo)) temp.ID_FONDO = long.Parse(arrResult[intIdFondo].ToString());
-        //                        if (!drReader.IsDBNull(intDesFondo)) temp.DES_FONDO = arrResult[intDesFondo].ToString();
-        //                        if (!drReader.IsDBNull(intIdSeccion)) temp.ID_SECCION = long.Parse(arrResult[intIdSeccion].ToString());
-        //                        if (!drReader.IsDBNull(intDesSeccion)) temp.DES_LARGA_SECCION = arrResult[intDesSeccion].ToString();
-        //                        if (!drReader.IsDBNull(intIdSerie)) temp.ID_SERIE = long.Parse(arrResult[intIdSerie].ToString());
-        //                        if (!drReader.IsDBNull(intDesSerie)) temp.DES_SERIE = arrResult[intDesSerie].ToString();
-        //                        if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
-        //                        if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
-        //                        if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
-        //                        if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
-        //                        if (!drReader.IsDBNull(intNroReprocesados)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroReprocesados].ToString());
-        //                        if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
-        //                        if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
-        //                        if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
-        //                        if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
-        //                        if (!drReader.IsDBNull(intUsuModific)) temp.USU_MODIFICACION = arrResult[intUsuModific].ToString();
-        //                        if (!drReader.IsDBNull(intFecModific)) temp.STR_FEC_MODIFICACION = arrResult[intFecModific].ToString();
-        //                        lista.Add(temp);
-        //                    }
-        //                    drReader.Close();
-        //                }
-        //            }
-        //            //--------------------------------
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            auditoria.Error(ex);
-        //            lista = new HashSet<enDocumento>();
-        //        }
-        //        finally
-        //        {
-        //            if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
-        //            if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
-        //        }
-        //    }
-        //    return lista;
-        //}
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enDocumento();
+                                if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
+                                if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
+                                if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
+                                if (!drReader.IsDBNull(intIdDocAsignado)) temp.ID_DOCUMENTO_ASIGNADO = long.Parse(arrResult[intIdDocAsignado].ToString());
+                                if (!drReader.IsDBNull(intNroRepro)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroRepro].ToString());
+                                if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
+                                if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
+                                if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = long.Parse(arrResult[intIdLote].ToString());
+                                if (!drReader.IsDBNull(intPesoAdj)) temp.PESO_ADJ = long.Parse(arrResult[intPesoAdj].ToString());
+                                if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intUsuModific)) temp.USU_MODIFICACION = arrResult[intUsuModific].ToString();
+                                if (!drReader.IsDBNull(intFecModific)) temp.STR_FEC_MODIFICACION = arrResult[intFecModific].ToString();
+                                if (!drReader.IsDBNull(intDestipoDoc)) temp.DES_TIP_DOC = arrResult[intDestipoDoc].ToString();
+                                if (!drReader.IsDBNull(intDesAsunto)) temp.DES_ASUNTO = arrResult[intDesAsunto].ToString();
+                                if (!drReader.IsDBNull(intdesObs)) temp.DES_OBS = arrResult[intdesObs].ToString();
+                                if (!drReader.IsDBNull(intNumfolio)) temp.NUM_FOLIOS = long.Parse(arrResult[intNumfolio].ToString());
+                                if (!drReader.IsDBNull(intNumdoc)) temp.NUM_DOC = arrResult[intNumdoc].ToString();
+                                if (!drReader.IsDBNull(intDesClasif)) temp.DES_CLASIF = arrResult[intDesClasif].ToString();
+                                if (!drReader.IsDBNull(intDescPersona)) temp.DES_PERSONA = arrResult[intDescPersona].ToString();
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new HashSet<enDocumento>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
 
         //public enDocumento Documento_ListarUno(enDocumento entidad, ref enAuditoria auditoria)
         //{
@@ -369,7 +356,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
         //    }
         //    return Lista;
         //}
-
         public void Documento_AsignacionInsertar(enDocumento entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
@@ -569,7 +555,6 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
             }
             return temp;
         }
-
         public List<enAdjuntos> DocumentoAdjuntos_Listar(enAdjuntos entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

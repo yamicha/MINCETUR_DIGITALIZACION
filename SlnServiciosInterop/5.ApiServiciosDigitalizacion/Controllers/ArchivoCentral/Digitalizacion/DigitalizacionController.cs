@@ -1,16 +1,16 @@
 ﻿using System;
+using System.Linq;
+using System.Net;
+using ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion;
+using ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion;
 using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
+using EnServiciosDigitalizacion.Enums;
+using EnServiciosDigitalizacion.Models.ArchivoCentral;
+using EnServiciosDigitalizacion.Models; 
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Utilitarios.Recursos;
-using ApiServiciosDigitalizacion.resource.ArchivoCentral.Digitalizacion;
-using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
-using EnServiciosDigitalizacion.Enums;
-using System.Collections.Generic;
-using System.Linq;
-using ApiServiciosDigitalizacion.Models.ArchivoCentral.Digitalizacion;
-using System.Net;
-using EnServiciosDigitalizacion.Models;
 
 namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 {

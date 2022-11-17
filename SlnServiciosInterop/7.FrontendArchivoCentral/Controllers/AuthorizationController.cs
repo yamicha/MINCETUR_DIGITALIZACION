@@ -23,7 +23,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
     {
         public async Task<IActionResult> SignIn(string cod)
         {
-            //cod = "KTF4vWGB8cXZzPAQUdGWLA=="; 
+            //cod = "KTF4vWGB8cXZzPAQUdGWLA==";
             enAuditoria auditoria = new enAuditoria();
             UserLogin userlogin = null;
             auditoria.Limpiar();

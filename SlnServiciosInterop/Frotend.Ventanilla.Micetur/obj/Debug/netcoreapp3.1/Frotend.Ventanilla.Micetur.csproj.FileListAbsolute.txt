@@ -230,6 +230,7 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\Connected Services\docSubirDocumento\ConnectedService.json
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\Connected Services\SeguridadWsdl\ConnectedService.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\Connected Services\ServiceReference1\ConnectedService.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\Connected Services\ServiceReference2\ConnectedService.json
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\bin\Debug\netcoreapp3.1\Frotend.Ventanilla.Micetur.exe
@@ -444,6 +445,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\RevisionPeriodica\Microforma_VerRevisiones.cshtml.g.cs
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\RevisionPeriodica\Revision_Evaluar.cshtml.g.cs
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\_ViewStart.cshtml.g.cs
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Views\Authorization\AccesoDenegado.cshtml.g.cs
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs

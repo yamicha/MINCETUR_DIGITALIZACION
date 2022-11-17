@@ -63,21 +63,10 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Consulta
                             item.DES_PERSONA,
                             item.DES_ASUNTO,
                             item.DES_CLASIF.ToString(),
-                            item.ID_PERSONA.ToString(),
-                            item.ID_SUB.ToString(),
-                            item.ID_SUBOFI.ToString(),
-                            item.ABR_SUBOFI,
-                            item.DES_SUBOFI,
-                            item.ID_TIP_DOC.ToString(),
                             item.DES_TIP_DOC,
                             item.DES_OBS,
-                            item.ID_DOC.ToString(),
                             item.NUM_DOC,
-                            item.NUM_FOLIOS.ToString(),
-                            item.USU_CREA.ToString(),
-                            item.COD_LOG,
-                            item.ID_TUPA.ToString(),
-                            item.ID_CLASIF.ToString(),
+                            item.NUM_FOLIOS.ToString()
                          
                       }
                         }).ToArray();

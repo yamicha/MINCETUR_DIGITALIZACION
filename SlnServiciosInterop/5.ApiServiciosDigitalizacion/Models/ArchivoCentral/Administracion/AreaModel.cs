@@ -4,7 +4,7 @@
 namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion
 {
 
-    [DataContract(Name = "Area", Namespace = "Mincetur.ArchivoCentral.ServiciosInterop.ApiServiciosDigitalizacion")]
+    [DataContract(Name = "Area")]
     public class AreaModel
     {
         [DataMember(Name = "strIdArea", Order = 1)]
