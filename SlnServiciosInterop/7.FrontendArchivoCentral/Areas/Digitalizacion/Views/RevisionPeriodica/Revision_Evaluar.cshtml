@@ -6,6 +6,7 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <script>
     $(function () {
+        $('#ID_USUARIO').select2(); 
         Revision_CargarConboUsuario();
         $('#TIPO_PRUEBA').fastselect();
         $('#Microforma_Revision_Evaluar').click(function () {
@@ -66,7 +67,7 @@
 
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Responsable: </label>
-                                                @Html.DropDownListFor(model => model.ID_USUARIO, Model.Lista_Usuarios, new { @class = "form-control" })
+                                                @Html.DropDownListFor(model => model.ID_USUARIO, Model.Lista_Usuarios, new { @class = "form-control" ,@style="width:100%" })
                                                 @Html.ValidationMessageFor(model => model.ID_USUARIO, string.Empty, new { @class = "cssMessageError" })
                                             </div>
 

@@ -19,7 +19,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string DESCRIPCION { get; set; }
         public long ANIO { get; set; }
         public long FOLIOS { get; set; }
-        
+        public long IMAGEN { get; set; }
         public string OBSERVACION { get; set; }
         public string CODIGO_IMAGEN { get; set; }
         public string VALIDAR_ID_CONFORME { get; set; }

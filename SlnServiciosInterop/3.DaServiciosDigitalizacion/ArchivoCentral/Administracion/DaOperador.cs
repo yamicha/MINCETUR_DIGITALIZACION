@@ -22,7 +22,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Administracion
             OracleCommand cmd = new OracleCommand();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = AppSettingsHelper.PackAdminConsulta + ".PRC_CDAOPERADOR_LISTAR";
-            cmd.Parameters.Add("X_ID_OPERADOR", validarNulo(entidad.ID_USUARIO));
+            cmd.Parameters.Add("X_USUARIO", validarNulo(entidad.NOMBRE_USUARIO));
             cmd.Parameters.Add("X_FLG_ESTADO", validarNulo(entidad.FLG_ESTADO));
             cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))

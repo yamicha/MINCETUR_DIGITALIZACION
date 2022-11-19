@@ -91,9 +91,9 @@ function Asignar_Digitalizador() {
 function Asignar_CargarUsuarios() {
     var OptionsCboUsu = {
         KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
-        paramters: null,
-        method: "GET"
+        paramters: { FlgEstado:"1"},
+        method: "POST"
     }
-    LoadComboApi("archivo-central/usuario/listar", "ID_DIGITALIZADOR", OptionsCboUsu);
+    LoadComboApi("archivo-central/operador/listar", "ID_DIGITALIZADOR", OptionsCboUsu);
 }
 

@@ -61,6 +61,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
                             int intAnio = drReader.GetOrdinal("ANIO"); 
                             int intFolios = drReader.GetOrdinal("FOLIOS");
+                            int intImagen = drReader.GetOrdinal("IMAGEN");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
                             int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
@@ -73,7 +74,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             {
                                 drReader.GetValues(arrResult);
                                 temp = new enDocumentoTemporal();
-
                                 if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
                                 if (!drReader.IsDBNull(intIdcontrolCarga)) temp.ID_CONTROL_CARGA = long.Parse(arrResult[intIdcontrolCarga].ToString());
                                 if (!drReader.IsDBNull(intNroLinea)) temp.NRO_LINEA = arrResult[intNroLinea].ToString();
@@ -87,7 +87,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intNomDocumento)) temp.NOM_DOCUMENTO = arrResult[intNomDocumento].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = arrResult[intAnio].ToString();
-                                if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = arrResult[intFolios].ToString();                    
+                                if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = arrResult[intFolios].ToString();
+                                if (!drReader.IsDBNull(intImagen)) temp.IMAGEN = arrResult[intImagen].ToString();
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -161,9 +162,10 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
                             int intAnio = drReader.GetOrdinal("ANIO");
                             int intFolios = drReader.GetOrdinal("FOLIOS");
+                            int intImagen = drReader.GetOrdinal("IMAGEN");
                             int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
-                            int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intUsuariocreacion = drReader.GetOrdinal("STR_USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
@@ -193,6 +195,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
+                                if(!drReader.IsDBNull(intImagen)) temp.IMAGEN = long.Parse(arrResult[intImagen].ToString());
                                 if (!drReader.IsDBNull(intNroReprocesados)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroReprocesados].ToString());
                                 if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
@@ -363,6 +366,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intDescripcion = drReader.GetOrdinal("DESCRIPCION");
                             int intAnio = drReader.GetOrdinal("ANIO");
                             int intFolios = drReader.GetOrdinal("FOLIOS");
+                            int intImagen = drReader.GetOrdinal("IMAGEN");
                             int intIdlaser = drReader.GetOrdinal("ID_LASERFICHE");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
                             int intusuAsignado = drReader.GetOrdinal("NOMBRE_USUARIO");
@@ -386,6 +390,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intDescripcion)) temp.DESCRIPCION = arrResult[intDescripcion].ToString();
                                 if (!drReader.IsDBNull(intAnio)) temp.ANIO = long.Parse(arrResult[intAnio].ToString());
                                 if (!drReader.IsDBNull(intFolios)) temp.FOLIOS = long.Parse(arrResult[intFolios].ToString());
+                                if (!drReader.IsDBNull(intImagen)) temp.IMAGEN = long.Parse(arrResult[intImagen].ToString());
                                 if (!drReader.IsDBNull(intIdlaser)) temp.ID_LASERFICHE = long.Parse(arrResult[intIdlaser].ToString());
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intusuAsignado)) temp.NOMBRE_USUARIO = arrResult[intusuAsignado].ToString();

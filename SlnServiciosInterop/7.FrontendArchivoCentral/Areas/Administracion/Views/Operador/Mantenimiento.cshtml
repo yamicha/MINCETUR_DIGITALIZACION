@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+@model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.OperadorModelView
+<script type="text/javascript">
+    $(document).ready(function () {
+        Operador_Usuarios();
+        $('#OPERADOR').select2(); 
+    });
+    jQuery('#fondo_btn_grabar').click(function (e) {
+        Operador_RegistrarDatos();
+    });
+</script>
+@using (Html.BeginForm("Proceso", "Operador", new { @area = "Administracion" }, FormMethod.Post, false, new { @id = "frmMantenimientoOperador", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header" style="cursor: move; background-color: #530d0d;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title"><i class="clip-user"></i> Nuevo Operador</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OPERADOR, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(model => model.OPERADOR, Model.ListaUsuarios, new { @class = "form-control", @maxlength = "100",@style="width:100%"})
+                            @Html.ValidationMessageFor(model => model.OPERADOR, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="fondo_btn_grabar" class="btn btn-blue" type="button" data-toggle="modal"><i class="fa fa-save" /> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="fa fa-share-square-o"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

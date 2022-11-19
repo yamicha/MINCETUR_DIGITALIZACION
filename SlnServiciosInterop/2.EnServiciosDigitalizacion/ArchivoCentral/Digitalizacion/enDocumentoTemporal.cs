@@ -17,8 +17,9 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string DES_SERIE { get; set; }
         public string DESCRIPCION { get; set; }
         public string DES_FONDO { get; set; }
-        public string ANIO { get; set; }
+        public string ANIO { get; set; }      
         public string FOLIOS { get; set; }
+        public string IMAGEN { get; set; }
         public string OBSERVACION { get; set; }
         public string STR_FEC_CREACION { get; set; }
         public string STR_FEC_MODIFICACION { get; set; }

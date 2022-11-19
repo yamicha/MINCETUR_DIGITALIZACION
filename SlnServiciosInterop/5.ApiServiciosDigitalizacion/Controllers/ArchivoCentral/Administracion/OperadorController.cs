@@ -31,7 +31,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                 {
                     auditoria.Objeto = repositorio.Operador_Listar(new enOperador
                     {
-                        ID_USUARIO = entidad.IdUsuario,
+                        NOMBRE_USUARIO = entidad.NombreUsuario,
                         FLG_ESTADO = entidad.FlgEstado
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)

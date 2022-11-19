@@ -63,7 +63,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.ID_FONDO,
                             item.ID_SECCION,
                             item.ID_SERIE,
-                            item.NRO_LINEA, 
+                            item.NRO_LINEA,
                             item.DES_FONDO,
                             item.NOM_DOCUMENTO,
                             item.DES_LARGA_SECCION,
@@ -71,6 +71,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.DESCRIPCION,
                             item.ANIO,
                             item.FOLIOS,
+                            item.IMAGEN,
                             item.OBSERVACION,
                             item.USU_CREACION,
                             item.STR_FEC_CREACION,
@@ -126,19 +127,19 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             id = item.ID_DOCUMENTO.ToString(),
                             cell = new string[] {
                             item.ID_DOCUMENTO.ToString(),
-                            item.ID_DOCUMENTO_ASIGNADO.ToString(), 
+                            item.ID_DOCUMENTO_ASIGNADO.ToString(),
                             item.ID_CONTROL_CARGA.ToString(),
                             item.ID_FONDO.ToString(),
                             item.ID_SECCION.ToString(),
                             item.ID_SERIE.ToString(),
                             item.ID_ESTADO_DOCUMENTO.ToString(),
-                            item.DESCRIPCION_ESTADO, 
+                            item.DESCRIPCION_ESTADO,
                             null,
-                            null, 
-                            item.NOMBRE_USUARIO, 
-                            item.NRO_REPROCESADOS.ToString(), 
                             null,
-                            null, 
+                            item.NOMBRE_USUARIO,
+                            item.NRO_REPROCESADOS.ToString(),
+                            null,
+                            null,
                             item.DES_FONDO,
                             item.NOM_DOCUMENTO,
                             item.DES_LARGA_SECCION,
@@ -146,6 +147,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.DESCRIPCION,
                             item.ANIO.ToString(),
                             item.FOLIOS.ToString(),
+                            item.IMAGEN.ToString(),
                             item.OBSERVACION,
                             item.USU_CREACION,
                             item.STR_FEC_CREACION,
@@ -192,7 +194,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             TITULO_INT = 3,
                             RUTA_LOGO = Directory.GetCurrentDirectory() + @"/assets/img/logo-mincetur.png",
                         };
-                        string CODIGO_TEMPORAL = GenerarCodigo.GenerarCodigoTemporal() + ".xlsx"; 
+                        string CODIGO_TEMPORAL = GenerarCodigo.GenerarCodigoTemporal() + ".xlsx";
                         string RUTA_TEMPORAL = Rutas.Ruta_Temporal();
                         string RUTA_ARCHIVO_TEMPORAL = string.Format("{0}{1}", RUTA_TEMPORAL, CODIGO_TEMPORAL);
 
@@ -208,7 +210,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                         columnas.Add(new Columnas { ID_COLUMNA = "ANIO", DESCRIPCION_COLUMNA = "Año", CELDA_INICIO = "K", CELDA_FIN = "K", INT_CELDAS = 1 });
                         columnas.Add(new Columnas { ID_COLUMNA = "FOLIOS", DESCRIPCION_COLUMNA = "Folios", CELDA_INICIO = "L", CELDA_FIN = "L", INT_CELDAS = 1 });
                         columnas.Add(new Columnas { ID_COLUMNA = "OBSERVACION", DESCRIPCION_COLUMNA = "Observación", CELDA_INICIO = "M", CELDA_FIN = "N", INT_CELDAS = 1 });
-                        
+
                         CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, _Titulo, false, "Documentos", columnas);
                         return StatusCode(auditoria.Code, CODIGO_TEMPORAL);
                     }
@@ -308,9 +310,9 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                     {
                         repositorio.Documento_AsignacionInsertar(new enDocumento
                         {
-                            ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento() 
-                            { 
-                                ID_DOCUMENTO = x.IdDocumento, 
+                            ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
+                            {
+                                ID_DOCUMENTO = x.IdDocumento,
                                 ID_USUARIO = x.IdUsuario
                             }).ToList(),
                             USU_CREACION = entidad.UsuCreacion,
@@ -330,8 +332,9 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                         }
                     }
                 }
-                else {
-                    auditoria.Rechazar("Ingrese al menos un documento a la lista."); 
+                else
+                {
+                    auditoria.Rechazar("Ingrese al menos un documento a la lista.");
                 }
             }
             catch (Exception ex)
@@ -424,7 +427,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             }
             return StatusCode(auditoria.Code, auditoria);
         }
-        
+
 
 
 
