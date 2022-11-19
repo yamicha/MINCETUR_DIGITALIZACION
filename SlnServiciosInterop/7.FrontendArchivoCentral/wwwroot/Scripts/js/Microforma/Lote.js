@@ -6,13 +6,12 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
-        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false },
+        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false, search: true },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
     ];
     var opciones = {
         GridLocal: true, multiselect: _multiselect, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
         grouping: false,
-        //groupingCampo: 'STR_GROUP_FEC_CREACION',
         selectRowFunc: function () {
             if (!_multiselect) {
                 var rowKey = parseInt(jQuery("#" + _grilla).getGridParam('selrow'));
@@ -24,10 +23,10 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
                 }
             }
         },
-        //tituloGrupo: 'Sub Lote(s)'
+
     };
     SICA.Grilla(_grilla, _barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
-
+    $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }
 

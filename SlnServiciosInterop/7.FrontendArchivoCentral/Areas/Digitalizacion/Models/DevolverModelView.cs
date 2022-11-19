@@ -17,7 +17,6 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public long ID_CONTROL_CARGA { get; set; }
 
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "[Observación] es obligatorio")]
         public string OBSERVACION { get; set; }
     }
 }

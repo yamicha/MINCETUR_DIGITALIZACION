@@ -23,7 +23,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MA_DIRECCION { get; set; }
 
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "[Observación] es obligatorio")]
+        //[Required(ErrorMessage = "[Observación] es obligatorio")]
         public string MA_OBSERVACION { get; set; }
 
     

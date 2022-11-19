@@ -33,13 +33,13 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false },// 1
-        { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 100, hidden: false },// 2
+        { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 100, hidden: false, search: true  },// 2
         { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden }, // 3
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 4
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 300, hidden: true }, // 5
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 7
         { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false }, // 9
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true  }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
 
@@ -60,15 +60,15 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     }
     var opciones = {
         GridLocal: false, multiselect: _select, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
-        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: GetRulesMicroforma(), rules: true,
+        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: `GetRulesMicroforma()`, rules: true,
         gridCompleteFunc: function () {
             //MicroformaColorRevision(_Grilla);
         }
     };
     SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
+    $("#" + _Grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }
-
 
 function GetRulesMicroforma() {
     var rules = new Array();
@@ -104,10 +104,16 @@ function GetRulesMicroforma() {
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='1')`, op: "" });
     }
-    //} if (_MICROMODULO == MicroModulo.RevisionFin) { // control almacen
-    //    rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
-    //    rules.push({ field: 'FLG_ACCION', data: `'1'`, op: "=" });
-    //}
+
+    _gs_NRO_VOL = $('#gs_NRO_VOLUMEN').val() != undefined ? `'${$('#gs_NRO_VOLUMEN').val()}'` : `''`;
+    _gs_DESC_SPORTE = $('#gs_DESC_SOPORTE_X').val() != undefined ? `'${$('#gs_DESC_SOPORTE_X').val()}'` : `''`;
+    _gs_DESC_ESTADO = $('#gs_DESC_ESTADO').val() != undefined ? `'${$('#gs_DESC_ESTADO').val()}'` : `''`;
+    _gs_FEC_CREACION = $('#gs_STR_FEC_CREACION').val() != undefined ? `'${$('#gs_STR_FEC_CREACION').val()}'` : `''`;
+
+    rules.push({ field: 'NRO_VOLUMEN', data: POR + ' || ' + _gs_NRO_VOL + ' || ' + POR, op: " LIKE " }); 
+    rules.push({ field: 'CODIGO_SOPORTE', data: POR + ' || ' + _gs_DESC_SPORTE + ' || ' + POR, op: " LIKE " }); 
+    rules.push({ field: 'DESC_ESTADO', data: POR + ' || ' + _gs_DESC_ESTADO + ' || ' + POR, op: " LIKE " }); 
+    rules.push({ field: 'STR_FEC_CREACION', data: POR + ' || ' + _gs_FEC_CREACION + ' || ' + POR, op: " LIKE " }); 
     return rules;
 }
 

@@ -62,7 +62,11 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Nro. Volumen: </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
+                                            <div class="input-group" style="margin-bottom:3px">
+                                                @if (Model.Accion == "N")
+                                                {   <span class="input-group-addon">VOL_AC-</span>  }
+                                                @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "Nro. volumen" })
+                                            </div>
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_NROVOLUMEN, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -128,9 +132,9 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="input-group">
-                                                <div style=" height: 31px;" class="form-control file-caption  kv-fileinput-caption">
-                                                    <div class="file-caption-name" id="filenameApertura"></div>
-                                                </div>
+                                                <label for="fileActaApertura" style=" height: 31px;" class="form-control file-caption  kv-fileinput-caption">
+                                                    <span class="file-caption-name" id="filenameApertura"></span>
+                                                </label>
                                                 <div class="input-group-btn">
                                                     <label for="fileActaApertura" class="btn btn-primary btn-file">
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
@@ -148,10 +152,10 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Acta Cierre: </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <div class="input-group ">
-                                                <div style=" height: 31px; " class="form-control file-caption  kv-fileinput-caption">
-                                                    <div class="file-caption-name" id="filenameCierre"></div>
-                                                </div>
+                                            <div class="input-group">
+                                                <label for="fileActaCierre" style=" height: 31px; " class="form-control file-caption  kv-fileinput-caption">
+                                                    <span class="file-caption-name" id="filenameCierre"></span>
+                                                </label>
                                                 <div class="input-group-btn">
                                                     <label for="fileActaCierre" class="btn btn-primary btn-file">
                                                         <i class=" clip-upload-3"></i>&nbsp; <span class="hidden-xs">Cargar …</span>
@@ -196,6 +200,7 @@
         </div>
     </div>
     @Html.Hidden("HDF_ID_MICROFORMA", Model.ID_MICROFORMA)
+    @Html.Hidden("HDF_ACCION", Model.Accion)
 }
 
 

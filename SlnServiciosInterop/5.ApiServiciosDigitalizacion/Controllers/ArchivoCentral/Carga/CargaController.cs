@@ -590,7 +590,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
                             if (campo.FLG_CLASIFICACION == "F")
                                 columnas.Add(new Columnas { ID_COLUMNA = campo.COD_CAMPO, DESCRIPCION_COLUMNA = campo.DES_CAMPO });
                         }
-                        CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, null, true, "Formatocarga", columnas);
+                        CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, null, true, "Hoja1", columnas);
                         ByteFile = System.IO.File.ReadAllBytes(RUTA_ARCHIVO_TEMPORAL);
                         if (System.IO.File.Exists(RUTA_ARCHIVO_TEMPORAL))
                             System.IO.File.Delete(RUTA_ARCHIVO_TEMPORAL);
