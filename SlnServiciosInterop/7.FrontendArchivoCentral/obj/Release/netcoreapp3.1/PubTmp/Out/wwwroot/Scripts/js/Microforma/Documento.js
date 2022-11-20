@@ -17,7 +17,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     $("#" + _grilla).GridUnload();
     var colNames = [
         '1', '2', '3', '4', '5', 'Nro Linea',
-        'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Anio', 'Folios', 'Obervación',
+        'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Anio', 'Folios', 'Imágenes', 'Obervación',
         'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'FLG_REPETIDO'
     ]
     var colModels = [
@@ -34,11 +34,12 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'DESCRIPCION', index: 'DESCRIPCION', align: 'center', width: 200, hidden: false },
         { name: 'ANIO', index: 'ANIO', align: 'center', width: 80, hidden: false },
         { name: 'FOLIOS', index: 'FOLIOS', align: 'center', width: 100, hidden: false },
+        { name: 'IMAGEN', index: 'IMAGEN', align: 'center', width: 100, hidden: false },
         { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 300, hidden: false },
         { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 140, hidden: false },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
-        { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false },
-        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false },
+        { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true },
+        { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true },
         { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },
     ];
     var opciones = {
@@ -137,7 +138,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     var colNames = [
         '0', '1', '2', '3', '4', '5', '6', '7',
         NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Documento', 'Nombre Documento', 'Fondo', '', 'Sección',
-        'Serie', 'Descripción', 'Anio', 'Folios', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
+        'Serie', 'Descripción', 'Anio', 'Folios','Imágenes', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
     ]
     var colModels = [
         { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
@@ -162,12 +163,13 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO + 'DESCRIPCION', align: 'center', width: 200, hidden: false, sortable: false },// 18
         { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false, sortable: false },// 19
         { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false },// 20
+        { name: _PREFIJO + 'IMAGEN', index: _PREFIJO + 'IMAGEN', align: 'center', width: 100, hidden: false, sortable: false },// 20
         { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false, sortable: false },// 21
 
         { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 22
         { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 23
-        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: false, sortable: false, sortable: false },// 24
-        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false},// 25
+        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 24
+        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false},// 25
         { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 26
     ];
     var opciones = {
@@ -212,9 +214,9 @@ function Documento_actionVerImagen(cellvalue, options, rowObject) {
     var _btn = "";
     var COD_DOCUMENTO = rowObject[10];
     if (_ID_MODULO == 6 || _ID_MODULO == 10) {
-        _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[26]+ ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
+        _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[27]+ ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
     } else {
-        _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[26] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
+        _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[27] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-pictures\" style=\"color:#a01010;font-size:20px\"></i></button>";
     }
     return _btn;
 }
@@ -599,6 +601,7 @@ async function Documento_EditValidarImagen(id) {
                         $('#DESC_SERIE').val(auditoria.Objeto.DES_SERIE);
                         $('#ANIO').val(auditoria.Objeto.ANIO);
                         $('#FOLIOS').val(auditoria.Objeto.FOLIOS);
+                        $('#IMAGEN').val(auditoria.Objeto.IMAGEN);
                         $('#OBSERVACION').val(auditoria.Objeto.OBSERVACION);
                         $('#DESCRIPCION').val(auditoria.Objeto.DESCRIPCION);
                         $('#VALIDAR_NOMBRE_DIGITALIZADOR').val(auditoria.Objeto.VALIDAR_NOMBRE_DIGITALIZADOR);

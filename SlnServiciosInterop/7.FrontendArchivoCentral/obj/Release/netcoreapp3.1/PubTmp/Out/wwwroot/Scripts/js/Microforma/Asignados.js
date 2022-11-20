@@ -101,8 +101,8 @@ jQuery('#Asignados_btn_Grabar').click(function (e) {
 function Asignados_CargarUsuarios() {
     var OptionsCboTabla = {
         KeyVal: { value: "ID_USUARIO", name: "NOMBRE_USUARIO" },
-        paramters: null,
-        method: "GET"
+        paramters: { FlgEstado: "1" },
+        method: "POST"
     }
-    LoadComboApi("archivo-central/usuario/listar", "ID_DIGITALIZADOR2", OptionsCboTabla);
+    LoadComboApi("archivo-central/operador/listar", "ID_DIGITALIZADOR2", OptionsCboTabla);
 }
