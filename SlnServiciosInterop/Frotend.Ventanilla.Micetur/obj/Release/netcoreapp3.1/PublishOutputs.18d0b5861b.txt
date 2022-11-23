@@ -282,6 +282,8 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\plugins\perfect-scrollbar\src\perfect-scrollbar.css
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\plugins\perfect-scrollbar\src\perfect-scrollbar.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Reloj\Reloj.css
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Select2\select2.min.css
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Select2\select2.min.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\switch\bootstrap-social.css
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\switch\bootstrap-switch.min.css
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\switch\bootstrap-switch.min.js
@@ -332,11 +334,7 @@ C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServici
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\jquery_LinkFish.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\JSLINQ.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion.js
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\Fondo.js
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\Seccion.js
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\Serie.js
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\SubSeccion.js
-C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\TipoDocumento.js
+C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\Operador.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\TipoObservacion.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Administracion\TipoSoporte.js
 C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\ApiHelpers.js

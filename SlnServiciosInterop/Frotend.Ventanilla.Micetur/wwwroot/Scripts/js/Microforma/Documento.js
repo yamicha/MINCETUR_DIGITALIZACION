@@ -210,11 +210,8 @@ function Documento_ValidarImagen(ID_DOCUMENTO, ID_ASIGNADO) {
 
 function GetRulesDoc() {
     var rules = new Array();
-    var _ID_CONTROL_CARGA = null;
     var _ID_ESTADO_DOCUMENTO = null;
-    //if (_ID_MODULO == 1) { // Carga temporales
-    //    _ID_CONTROL_CARGA = jQuery('#ID_CONTROL_CARGA').val() == '' ? '0' : "'" + jQuery('#ID_CONTROL_CARGA').val() + "'";
-    //} else
+
     if (_ID_MODULO == 2) { // Asignar
         _ID_CONTROL_CARGA = null;
         _ID_ESTADO_DOCUMENTO = 1;
@@ -306,15 +303,13 @@ function GetRulesDoc() {
         //{ field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
 
     ];
-
+    if (_ID_MODULO == 0) { // detalle
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
     if (_ID_MODULO != 1) {
         rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
         if (_ID_MODULO != 2)
             rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
-    }
-    if (_ID_MODULO == 0) { // detalle
-        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
-        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
     }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
@@ -336,13 +331,10 @@ function GetRulesDoc() {
     if (_ID_MODULO == 8) { // Reprocesar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
     }
-    if (_ID_MODULO == 8) { // Reprocesar
-        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
-    }
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
         rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
     }
-    if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3) {
+    if (_ID_MODULO == 4 || _ID_MODULO == 8  ) {
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     return rules;

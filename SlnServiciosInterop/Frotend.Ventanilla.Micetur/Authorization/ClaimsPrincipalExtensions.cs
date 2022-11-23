@@ -27,5 +27,8 @@ namespace Frotend.Ventanilla.Micetur.Authorization
 
         public static string GetUserToken(this ClaimsPrincipal claimsPrincipal)
         => claimsPrincipal.FindFirst("Token").Value;
+
+        public static string GetUserModulos(this ClaimsPrincipal claimsPrincipal)
+          => claimsPrincipal.FindFirst("Modulos").Value;
     }
 }

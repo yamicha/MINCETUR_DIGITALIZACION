@@ -11,6 +11,7 @@
     var extensionValid =@AppSettings.FileValid
         $(document).ready(function () {
             Remove_RemoverClases("liRecepcion");
+            $('#ID_DIGITALIZADOR, #ID_DIGITALIZADOR2').select2();
             $('#txtfechafin,#txtfechainicio').datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -19,7 +20,7 @@
                 changeFirstDay: false,
                 placeholder: "dd/MM/yyyy",
             }).datepicker("setDate", 'now');
-            $('#txtfechainicio').val('01/01/2012');
+            //$('#txtfechainicio').val('01/01/2012');
         });
 
 </script>
@@ -134,7 +135,7 @@
                                 <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
                             </div>
                             <div class="col-sm-4">
-                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control",@style="width:100%" })
                             </div>
                             <div class="col-sm-4">
                                 <button id="Asignar_btnDigitalizador" class="btn btn-blue" type="button"><i class="clip-user-3"></i> Asignar</button>
@@ -205,7 +206,7 @@
                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
                         </div>
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
                         </div>
                         <div class="col-sm-4">
                             <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>

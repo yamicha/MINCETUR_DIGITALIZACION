@@ -29,13 +29,14 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         {
             RecibirModelView model = new RecibirModelView();
             model.ListaPersonal = new List<SelectListItem>();
-            enAuditoria ApiUsuarios = await new CssApi().GetApi<enAuditoria>(new ApiParams
+            enAuditoria ApiUsuarios = await new CssApi().PostApi<enAuditoria>(new ApiParams
             {
                 EndPoint = AppSettings.baseUrlApi,
-                Url = $"archivo-central/usuario/listar",
+                Url = $"ventanilla/operador/listar",
                 UserAD = AppSettings.UserAD,
                 PassAD = AppSettings.PassAD,
-            });
+                parametros = new parameters { FlgEstado = "1" }
+        });
             if (ApiUsuarios != null)
             {
                 if (!ApiUsuarios.Rechazo)

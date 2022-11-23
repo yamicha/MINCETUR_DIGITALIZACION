@@ -121,7 +121,7 @@ function MicroformaGrabar_ValidarLote() {
         }
     });
 }
- async function MicroformaGrabar_Grabar() {
+async function MicroformaGrabar_Grabar() {
      jConfirm(" ¿ Desea grabar esta microforma ? ", "Atención", async function (r) {
         if (r) {
             try {
