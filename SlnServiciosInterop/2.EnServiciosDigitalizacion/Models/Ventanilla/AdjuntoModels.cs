@@ -8,7 +8,6 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
     {
         public long IdExpediente { get; set; }
         public long IdocAdjunto { get; set; }
-        public string CodigoArchivo { get; set; }
         public string NombreArchivo { get; set; }
         public int PesoArchivo { get; set; }
         public string Extension { get; set; }

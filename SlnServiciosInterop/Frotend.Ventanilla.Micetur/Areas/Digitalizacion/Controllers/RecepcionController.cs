@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
@@ -11,6 +12,7 @@ using Frotend.Ventanilla.Micetur.Controllers;
 using Frotend.Ventanilla.Micetur.Filters;
 using Frotend.Ventanilla.Micetur.Helpers;
 using Frotend.Ventanilla.Micetur.Recursos;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -36,7 +38,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                 UserAD = AppSettings.UserAD,
                 PassAD = AppSettings.PassAD,
                 parametros = new parameters { FlgEstado = "1" }
-        });
+            });
             if (ApiUsuarios != null)
             {
                 if (!ApiUsuarios.Rechazo)
@@ -65,7 +67,6 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         {
             RecibirModelView modelo = new RecibirModelView();
             modelo.ID_EXPE = ID_EXPE;
-
             return View(modelo);
         }
 
@@ -78,39 +79,42 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpPost, Route("~/Digitalizacion/Recepcion/recibir-expediente")]
-        public async Task<ActionResult> ExpedienteRecibir([FromBody] ExpedienteModels entidad)
+        public async Task<ActionResult> ExpedienteRecibir(List<IFormFile> files, ExpedienteModels entidad, string ListaAdj)
         {
             enAuditoria auditoria = new enAuditoria();
             auditoria.Limpiar();
-            ExpedienteModels model = new ExpedienteModels();
-            model.ListaAdjuntos = new List<AdjuntoModels>();
             try
             {
-                model.IdExpediente = entidad.IdExpediente;
-                model.UsuCrea = entidad.UsuCrea;
-                if (entidad.ListaAdjuntos != null)
+                entidad.ListaAdjuntos = new List<AdjuntoModels>();
+                entidad.ListaAdjuntos = JsonConvert.DeserializeObject<List<AdjuntoModels>>(ListaAdj);
+                if (files != null && files.Count > 0)
                 {
-                    for (var i = 0; i < entidad.ListaAdjuntos.Count(); i++)
+                    foreach (var file in files)
                     {
-                        if (entidad.ListaAdjuntos[i].FlgTipo == 1 && entidad.ListaAdjuntos[i].FlgLink == 0) // archivos de expdientes 
+                        using (var ms = new MemoryStream())
                         {
-                            string path = Css_Ruta.Ruta_Temporal + entidad.ListaAdjuntos[i].CodigoArchivo;
-                            if (System.IO.File.Exists(path))
+                            file.CopyTo(ms);
+                            var archivo = ms.ToArray();
+                            auditoria = new Proxy().UploadFileService(
+                                         entidad.IdExpediente,
+                                         file.FileName,
+                                         int.Parse(User.GetUserId()), archivo);
+                            if (auditoria.EjecucionProceso)
                             {
-                                var Archivo = System.IO.File.ReadAllBytes(path);
-                                auditoria = new Proxy().UploadFileService(
-                                            entidad.IdExpediente,
-                                            entidad.ListaAdjuntos[i].NombreArchivo,
-                                            int.Parse(User.GetUserId()), Archivo);
-                                if (auditoria.EjecucionProceso)
+                                if (auditoria.Objeto != null)
                                 {
-                                    if (auditoria.Objeto != null)
-                                        entidad.ListaAdjuntos[i].IdArchivo = Convert.ToInt64(auditoria.Objeto);
+                                    entidad.ListaAdjuntos.Add(new AdjuntoModels
+                                    {
+                                        IdArchivo = Convert.ToInt64(auditoria.Objeto),
+                                        NombreArchivo = file.FileName,
+                                        PesoArchivo = (int)file.Length,
+                                        Extension = System.IO.Path.GetExtension(file.FileName),
+                                        FlgTipo = 1
+                                    });
                                 }
                             }
                         }
                     }
-           
                 }
                 enAuditoria ApiExpedienteInser = await new CssApi().PostApi<enAuditoria>(new ApiParams
                 {
@@ -129,24 +133,10 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                 string codigo = Css_Log.Guardar(ex.Message.ToString());
                 auditoria.MensajeSalida = codigo;
             }
-            finally
-            {
-                Task.Run(() =>
-                {
-                    foreach (var item in entidad.ListaAdjuntos)
-                    {
-                        if (item.FlgTipo == 1 && item.FlgLink == 0) // archivos de expdientes 
-                        {
-                            string path = Css_Ruta.Ruta_Temporal + item.CodigoArchivo;
-                            if (System.IO.File.Exists(path))
-                                System.IO.File.Delete(path);
-                        }
-                    }
-                });
-            }
+
             return Json(auditoria);
         }
 
-   
+
     }
 }

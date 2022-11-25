@@ -16,7 +16,7 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.','Folios','Usuario'
+        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.', 'Folios', 'Usuario'
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
@@ -86,10 +86,13 @@ function GetRules() {
     return rules;
 }
 function Expediente_Recibir() {
-    var ListaAdjuntos = $("#" + Adjuntos_grilla).getRowData();
+    let ListaAdjuntos;
+    var ListaGridAdjunto = $("#" + Adjuntos_grilla).getRowData();
     var ListaDocumento = $("#" + DocumentoAdj_grilla).getRowData();
     jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
         if (r) {
+            var data = new FormData();
+            ListaAdjuntos = ListaGridAdjunto.filter(x => x.FLG_ARCHIVO == 1); //links
             ListaAdjuntos = ListaAdjuntos.map(function (x) {
                 return {
                     FlgTipo: 1,
@@ -100,43 +103,48 @@ function Expediente_Recibir() {
                     FlgLink: parseInt(x.FLG_ARCHIVO)
                 }
             });
-            if (ListaDocumento.length > 0) {
-                ListaDocumento.forEach(function (itemdoc) {
-                    ListaAdjuntos.push({
-                        IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
-                        IdDocumento: parseInt(itemdoc.ID_DOC),
-                        FlgTipo: 2,
-                        NombreArchivo: itemdoc.DES_NOM_ABR,
-                        Extension: itemdoc.EXTENSION,
-                        PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
-                        FlgLink: 0
-                    });
+            ListaDocumento.forEach(function (itemdoc) {
+                ListaAdjuntos.push({
+                    IdExpediente: 0,
+                    IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
+                    IdDocumento: parseInt(itemdoc.ID_DOC),
+                    FlgTipo: 2,
+                    NombreArchivo: itemdoc.DES_NOM_ABR,
+                    Extension: itemdoc.EXTENSION,
+                    PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
+                    FlgLink: 0
                 });
+            });
+            // enviar todos los archivos
+            for (var i = 0; i < files.length; i++) {
+                data.append("files", files[i]);
             }
-            var item =
-            {
-                IdExpediente: parseInt($('#HDF_ID_EXPE').val()),
-                UsuCrea: parseInt($('#inputHddId_Usuario').val()),
-                ListaAdjuntos: ListaAdjuntos,
-            };
+            data.append("IdExpediente", parseInt($('#HDF_ID_EXPE').val()));
+            data.append("UsuCrea", parseInt($('#inputHddId_Usuario').val()));
+            data.append("ListaAdj", JSON.stringify(ListaAdjuntos));
             var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
-            API.Ajax(url, item, function (auditoria) {
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.ejecucionProceso) {
-                        if (!auditoria.rechazo) {
-                            $('#myModal_Recibir_Doc').modal('hide');
-                            Documento_ConfigurarGrilla_Vent_Pen();
-                            jAlert("Expediente recibido corrrectamente", "Proceso");
+            fetch(url, {
+                method: 'POST', //
+                body: data, // 
+            }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(auditoria => {
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.ejecucionProceso) {
+                            if (!auditoria.rechazo) {
+                                $('#myModal_Recibir_Doc').modal('hide');
+                                Documento_ConfigurarGrilla_Vent_Pen();
+                                jAlert("Expediente recibido corrrectamente", "Proceso");
+                            } else {
+                                $('#myModal_Recibir_Doc').modal('hide');
+                                jAlert(auditoria.mensajeSalida, "Atención");
+                            }
                         } else {
                             $('#myModal_Recibir_Doc').modal('hide');
                             jAlert(auditoria.mensajeSalida, "Atención");
                         }
-                    } else {
-                        $('#myModal_Recibir_Doc').modal('hide');
-                        jAlert(auditoria.mensajeSalida, "Atención");
                     }
-                }
-            });
+                });
         }
     });
 }

@@ -6,6 +6,7 @@ var DocumentoAdj_barra = "DocumentoAdj_barra";
 
 var Adjunto = new Array();
 var IdAdjunto = 0;
+var files=[]; 
 $(document).ready(function () {
     $('#TIPO_ADJUNTO').change(function () {
         if ($(this).val() == 1) {
@@ -53,31 +54,26 @@ function Adjunto_actionEliminar(cellvalue, options, rowObject) {
 }
 
 function Adjunto_Eliminar(id) {
+    let data = $("#" + Adjuntos_grilla).getRowData(id);
     $("#" + Adjuntos_grilla).jqGrid('delRowData', id);
+    if (data.FLG_ARCHIVO == 0) {
+        files = files.filter(file => file.name != data.NOMBRE_ARCHIVO); 
+    }
 }
 
 function Adjunto_Agregar() {
     if ($('#FrmAdjunto').valid() && ValidarExtension($('#EXTENSION').val())) {
         IdAdjunto++;
-        var CODIGO_ARCHIVO = "";
-        if ($("#TIPO_ADJUNTO").val() == 0) {
-            if (Adjunto.length > 0) {
-                CODIGO_ARCHIVO = Adjunto[0].codigoArchivo;
-            } else {
-                jAlert('Por favor seleccione un archivo.', 'Atención');
-            }
-        }
         var myData =
         {
             CODIGO: IdAdjunto,
             NOMBRE_ARCHIVO: $('#NOMBRE_ARCHIVO').val(),
-            CODIGO_ARCHIVO: CODIGO_ARCHIVO,
+            //CODIGO_ARCHIVO: CODIGO_ARCHIVO,
             STR_PESO_ARCHIVO: $('#PESO_ARCHIVO').val(), 
             PESO_ARCHIVO: $('#PESO_ARCHIVO').val(),
             EXTENSION: $('#EXTENSION').val(),
             FLG_ARCHIVO: $("#TIPO_ADJUNTO").val(),
         };
-        Adjunto.pop();
         $('#NOMBRE_ARCHIVO').val(''); 
         $('#PESO_ARCHIVO').val(''); 
         $('#EXTENSION').val(''); 
@@ -86,7 +82,6 @@ function Adjunto_Agregar() {
 }
 
 function ValidarExtension(extension) {
-    //var pattern = /.pdf|.zip|.rar/;
     if (!extensionValid.test(extension)) {
         jAlert('Ingrese una extensión valida.', 'Atención');
         return false;
@@ -109,7 +104,7 @@ function ValidarArchivoTemporal(input) {
         }
         else {
             var valido = false;
-            if (extensionValid.test(`.${ext}`))
+            if (extensionValid.test(`${ext}`))
                 valido = true;
             if (PesodeArchivo > Tamanio_Valido || !valido) {
                 $(this).val('');
@@ -120,7 +115,11 @@ function ValidarArchivoTemporal(input) {
 
                 return false;
             } else {
-                Adjunto_CargarTemporal();
+                //Adjunto_CargarTemporal();
+                files.push(file);
+                $('#NOMBRE_ARCHIVO').val(file.name);
+                $('#PESO_ARCHIVO').val(file.size);
+                $('#EXTENSION').val(file.name.split('.')[1]); 
             }
         }
     }
