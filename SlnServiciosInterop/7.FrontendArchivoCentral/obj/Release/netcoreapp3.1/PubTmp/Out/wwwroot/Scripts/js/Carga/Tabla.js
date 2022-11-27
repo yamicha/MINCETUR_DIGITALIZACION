@@ -173,7 +173,7 @@ function Tabla_Procesar() {
                     else {
                         SICA.Alert('Alerta', auditoria.MensajeSalida, '', 'es');
                     }
-                    if (auditoria.Objeto != null)
+                    if (auditoria.Objeto != null && auditoria.MensajeSalida =="")
                         Tabla_Resultados(auditoria.Objeto, ID_TABLA);
                     else {
                         html = "<i class=\"clip-close\" style='color:#f30203'></i>&nbsp; <span style='color:#f30203'>Carga con errores</span>";

@@ -94,6 +94,7 @@ function Devolver_GrabarDevolucion() {
                                     Devolver_CloseModal(); 
                                     jOkas("Devolución generado correctamente", "Atención");
                                     Lote_CargarGrilla(Devolver_Lote_grilla, "0", "");
+                                    _ID_LOTE = 0;
                                     Documento_Detalle_buscar(Devolver_grilla, Devolver_barra);
                                     Devolver_ListaLotes = new Array();
                                 } else {

@@ -55,7 +55,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
         public string MICROFORMA_TIPO_PRUEBA { get; set; }
         public List<SelectListItem> Lista_Tipo_Pruebas = new List<SelectListItem>();
 
-        [Required(ErrorMessage = "[Observación] Obligatorio")]
+        //[Required(ErrorMessage = "[Observación] Obligatorio")]
         public string MICROFORMA_OBSERVACION_EVALUAR { get; set; }
         public string Accion { get; set; }
 

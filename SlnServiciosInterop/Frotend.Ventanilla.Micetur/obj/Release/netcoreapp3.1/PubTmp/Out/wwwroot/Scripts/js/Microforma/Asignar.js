@@ -75,6 +75,7 @@ function Asginar_Grabar() {
                                 jOkas("Documentos asignados correctamente", "Atención");
                                 Asignar_buscar();
                                 Asignar_ListaDocumentos = new Array();
+                                $('#mssgAsignar').hide(); 
                             } else {
                                 jAlert(auditoria.MensajeSalida, "Atención");
                             }

@@ -62,51 +62,42 @@
                 <fieldset style="width: 100%;">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-sm-12 inline-container-Group" style="margin-bottom:15px">
-                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 10px; margin-top: -5px">Datos del expediente: </p>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Nº Expediente:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.ID_DOCUMENTO</span>
-                                    </div>
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Tipo Doc.:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.DES_TIP_DOC</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Nro. Doc:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.NUM_DOC</span>
-                                    </div>
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Folios:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.NUM_FOLIOS</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Clasificación:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.DES_CLASIF</span>
-                                    </div>
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Persona:</strong> </label>
-                                    <div class="col-sm-4">
-                                        <span>@Model.DES_PERSONA</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Asunto:</strong> </label>
-                                    <div class="col-sm-10">
-                                        <span>@Model.DES_ASUNTO</span>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" style="text-align:right"><strong>Observación:</strong> </label>
-                                    <div class="col-sm-10">
-                                        <span>@Model.DES_OBS</span>
-                                    </div>
-                                </div>
-                                <div class="Documento_jqGrid" >
+                            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px">
+                                <table class="table table-condensed table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="6"><h4>Datos del Expediente</h4></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Nº Expediente:</strong></td>
+                                            <td> <span>@Model.ID_DOCUMENTO</span> </td>
+                                            <td><strong>Tipo Doc.:</strong></td>
+                                            <td><span>@Model.DES_TIP_DOC</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Nro. Doc:</strong></td>
+                                            <td> <span>@Model.NUM_DOC</span> </td>
+                                            <td><strong>Folios:</strong></td>
+                                            <td> <span>@Model.NUM_FOLIOS</span> </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Clasificación:</strong></td>
+                                            <td> <span>@Model.DES_CLASIF</span> </td>
+                                            <td><strong>Persona:</strong></td>
+                                            <td> <span>@Model.DES_PERSONA</span> </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Asunto:</strong></td>
+                                            <td> <span>@Model.DES_ASUNTO</span> </td>
+                                            <td><strong>Observación:</strong></td>
+                                            <td> <span>@Model.DES_OBS</span> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="Documento_jqGrid">
                                     <table id="DocumentoAdjunto_grilla"></table>
                                     <div id="DocumentoAdjunto_barra"></div>
                                 </div>

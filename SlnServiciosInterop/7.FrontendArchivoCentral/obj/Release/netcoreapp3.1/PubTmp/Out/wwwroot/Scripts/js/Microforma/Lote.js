@@ -25,7 +25,7 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
         },
 
     };
-    SICA.Grilla(_grilla, _barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
+    SICA.Grilla(_grilla, _barra, '', '550', '', '', "", "", colNames, colModels, "", opciones);
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }

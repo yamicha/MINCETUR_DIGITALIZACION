@@ -56,7 +56,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdLote = drReader.GetOrdinal("ID_LOTE");
                             int intNroRepro = drReader.GetOrdinal("NRO_REPROCESADOS");
                             int intPesoAdj = drReader.GetOrdinal("PESO_ADJ");
-                            int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intUsuariocreacion = drReader.GetOrdinal("STR_USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");

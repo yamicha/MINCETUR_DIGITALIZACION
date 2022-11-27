@@ -22,7 +22,6 @@ namespace Frotend.Ventanilla.Micetur.Controllers
 {
     public class AuthorizationController : Controller
     {
-   
         public async Task<IActionResult> SignIn(string cod)
         {
             //cod = "KTF4vWGB8cXZzPAQUdGWLA==";
@@ -36,8 +35,8 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                     string StrCodDesEncriptado = string.Empty;
                     string llave = client.traeLlaveAsync().Result;
                     if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAESAsync(cod, llave).Result;
-                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    int intIdUsu = 3248;
+                    int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    //int intIdUsu = 3248;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
@@ -104,44 +103,6 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                 Log.Guardar(ex.Message.ToString());
                 return RedirectToAction("AccesoDenegado", "Authorization");
             }
-
-            //enAuditoria auditoria = new enAuditoria();
-            //auditoria.Limpiar();
-
-            //UserLogin userlogin = new UserLogin
-            //{
-            //    Codusuario = "IPEREZ",
-            //    IdUsuario = 3248,
-            //    NameApellidos = "IVAN PEREZ TINTAYA",
-            //    IdOficina = 20,
-            //    DesOficina = "MI CASA",
-            //    IdPerfil = 2,
-            //    Modulos = string.Empty, 
-            //};
-            //userlogin.token = CssToken.Generar(userlogin.IdUsuario.ToString());
-            //try
-            //{
-            //    if (userlogin != null)
-            //    {
-            //        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            //        var identity = new Authentication().CreateIdentity(userlogin);
-            //        ClaimsPrincipal userPrincipal = new ClaimsPrincipal(identity);
-            //        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties
-            //        {
-            //            ExpiresUtc = DateTime.Now.AddDays(1)
-            //        });
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    else
-            //    {
-            //        return RedirectToAction("AccesoDenegado", "Authorization");
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Guardar(ex.Message.ToString());
-            //    return RedirectToAction("AccesoDenegado", "Authorization");
-            //}
 
         }
         public IActionResult AccesoDenegado()

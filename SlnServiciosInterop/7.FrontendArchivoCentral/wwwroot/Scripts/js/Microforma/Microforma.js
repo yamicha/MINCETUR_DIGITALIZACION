@@ -65,7 +65,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
             //MicroformaColorRevision(_Grilla);
         }
     };
-    SICA.Grilla(_Grilla, _Barra, '', '582', '', '', url, "", colNames, colModels, "", opciones);
+    SICA.Grilla(_Grilla, _Barra, '', '550', '', '', url, "", colNames, colModels, "", opciones);
     $("#" + _Grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }

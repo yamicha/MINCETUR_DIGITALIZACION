@@ -16,19 +16,19 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.','Folios','Usuario'
+        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.', 'Folios', 'Usuario'
     ]
     var colModels = [
-        { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
-        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir },
-        { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false }, //2
-        { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //3
-        { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' } }, //4
-        { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'left', hidden: false, width: 200 },
+        { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true, search:true }, //1
+        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir, search: false },
+        { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false, search: false }, //2
+        { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false }, //3
+        { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: true }, //4
+        { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'left', hidden: false, width: 200},
         { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
         { name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150 },
         { name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150 },
-        { name: 'USU_CREA', index: 'USU_CREA', align: 'left', hidden: true, width: 200 },
+        { name: 'USU_CREA', index: 'USU_CREA', align: 'left', hidden: true, width: 200, search: false},
 
     ];
     var opciones = {
@@ -80,16 +80,37 @@ function GetRules() {
     var POR = "'%'";
     var FORM = "'DD/MM/YYYY'";
     var a = ' and ';
+
+    _gs_DES_CLASIF = $('#gs_' + 'DES_CLASIF').val();
+    _gs_DES_ASUNTO = $('#gs_' + 'DES_ASUNTO').val();
+    _gs_DES_PERSONA = $('#gs_' + 'DES_PERSONA').val();
+    _gs_DES_TIP_DOC = $('#gs_' + 'DES_TIP_DOC').val();
+    _gs_NROEXPEDIENTE = $('#gs_' + _PREFIJO + 'ID_EXPE').val();
+    //
+    var _DES_CLASIF = _gs_DES_CLASIF == '' || _gs_DES_CLASIF == undefined ? null : "UPPER('" + _gs_DES_CLASIF + "')";
+    var _DES_ASUNTO = _gs_DES_ASUNTO == '' || _gs_DES_ASUNTO == undefined ? null : "UPPER('" + _gs_DES_ASUNTO + "')";
+    var _DES_DES_PERSONA = _gs_DES_PERSONA == '' || _gs_DES_PERSONA == undefined ? null : "UPPER('" + _gs_DES_PERSONA + "')";
+    var _DES_TIP_DOC = _gs_DES_TIP_DOC == '' || _gs_DES_TIP_DOC == undefined ? null : "UPPER('" + _gs_DES_TIP_DOC + "')";
+    var _NROEXPEDIENTE = _gs_NROEXPEDIENTE == '' || _gs_NROEXPEDIENTE == undefined ? null : "UPPER('" + _gs_NROEXPEDIENTE + "')";
     rules = [
+        { field: 'V.DES_CLASIF', data: POR + ' || ' + _DES_CLASIF + ' || ' + POR, op: " LIKE " },
+        { field: 'V.DES_ASUNTO', data: POR + ' || ' + _DES_ASUNTO + ' || ' + POR, op: " LIKE " },
+        { field: 'V.DES_PERSONA', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
+        { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
+        { field: 'V.ID_EXPE', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         { field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
     ];
     return rules;
 }
 function Expediente_Recibir() {
-    var ListaAdjuntos = $("#" + Adjuntos_grilla).getRowData();
+    let ListaAdjuntos;
+    var ListaGridAdjunto = $("#" + Adjuntos_grilla).getRowData();
     var ListaDocumento = $("#" + DocumentoAdj_grilla).getRowData();
     jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
         if (r) {
+            fetchload.init();
+            var data = new FormData();
+            ListaAdjuntos = ListaGridAdjunto.filter(x => x.FLG_ARCHIVO == 1); //links
             ListaAdjuntos = ListaAdjuntos.map(function (x) {
                 return {
                     FlgTipo: 1,
@@ -100,43 +121,49 @@ function Expediente_Recibir() {
                     FlgLink: parseInt(x.FLG_ARCHIVO)
                 }
             });
-            if (ListaDocumento.length > 0) {
-                ListaDocumento.forEach(function (itemdoc) {
-                    ListaAdjuntos.push({
-                        IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
-                        IdDocumento: parseInt(itemdoc.ID_DOC),
-                        FlgTipo: 2,
-                        NombreArchivo: itemdoc.DES_NOM_ABR,
-                        Extension: itemdoc.EXTENSION,
-                        PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
-                        FlgLink: 0
-                    });
+            ListaDocumento.forEach(function (itemdoc) {
+                ListaAdjuntos.push({
+                    IdExpediente: 0,
+                    IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
+                    IdDocumento: parseInt(itemdoc.ID_DOC),
+                    FlgTipo: 2,
+                    NombreArchivo: itemdoc.DES_NOM_ABR,
+                    Extension: itemdoc.EXTENSION,
+                    PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
+                    FlgLink: 0
                 });
+            });
+            // enviar todos los archivos
+            for (var i = 0; i < files.length; i++) {
+                data.append("files", files[i]);
             }
-            var item =
-            {
-                IdExpediente: parseInt($('#HDF_ID_EXPE').val()),
-                UsuCrea: parseInt($('#inputHddId_Usuario').val()),
-                ListaAdjuntos: ListaAdjuntos,
-            };
+            data.append("IdExpediente", parseInt($('#HDF_ID_EXPE').val()));
+            data.append("UsuCrea", parseInt($('#inputHddId_Usuario').val()));
+            data.append("ListaAdj", JSON.stringify(ListaAdjuntos));
             var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
-            API.Ajax(url, item, function (auditoria) {
-                if (auditoria != null && auditoria != "") {
-                    if (auditoria.ejecucionProceso) {
-                        if (!auditoria.rechazo) {
-                            $('#myModal_Recibir_Doc').modal('hide');
-                            Documento_ConfigurarGrilla_Vent_Pen();
-                            jAlert("Expediente recibido corrrectamente", "Proceso");
+            fetch(url, {
+                method: 'POST', //
+                body: data, // 
+            }).then(res => res.json())
+                .catch(error => { fetchload.close(); alert(error) })
+                .then(auditoria => {
+                    fetchload.close();
+                    if (auditoria != null && auditoria != "") {
+                        if (auditoria.ejecucionProceso) {
+                            if (!auditoria.rechazo) {
+                                $('#myModal_Recibir_Doc').modal('hide');
+                                Documento_ConfigurarGrilla_Vent_Pen();
+                                jAlert("Expediente recibido corrrectamente", "Proceso");
+                            } else {
+                                $('#myModal_Recibir_Doc').modal('hide');
+                                jAlert(auditoria.mensajeSalida, "Atención");
+                            }
                         } else {
                             $('#myModal_Recibir_Doc').modal('hide');
                             jAlert(auditoria.mensajeSalida, "Atención");
                         }
-                    } else {
-                        $('#myModal_Recibir_Doc').modal('hide');
-                        jAlert(auditoria.mensajeSalida, "Atención");
                     }
-                }
-            });
+                });
         }
     });
 }

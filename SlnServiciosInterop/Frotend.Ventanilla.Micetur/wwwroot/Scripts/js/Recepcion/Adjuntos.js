@@ -159,7 +159,7 @@ function Adjunto_CargarTemporal() {
 
 function DocumentoAdj_ConfigurarGrilla() {
     $("#" + DocumentoAdj_grilla).GridUnload();
-    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'DocumentoAdj', 'Observación', 'Peso', 'Extensión'];
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Observación', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },

@@ -38,7 +38,7 @@ function MicroformaLote_ConfigurarGrilla() {
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
-        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false, search: true},
+        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false, search: true },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
     ];
     var opciones = {
@@ -52,11 +52,10 @@ function MicroformaLote_ConfigurarGrilla() {
             Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
         },
     };
-    SICA.Grilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, '', '582', '', '', "", "", colNames, colModels, "", opciones);
+    SICA.Grilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, '', '550', '', '', "", "", colNames, colModels, "", opciones);
     $("#" + MicroformaGrabar_Lote_grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }
-
 jQuery('#aTabMicroformaGrabar').click(function (e) {
     _ID_LOTE = 0;
     _ID_MODULO = 12;
@@ -174,7 +173,6 @@ function MicroformaGrabar_Grabar() {
         }
     });
 }
-
 function MicroformaGrabar_CargarCboSoporte() {
     var OptionsCbo = {
         KeyVal: { value: "ID_SOPORTE", name: "DESC_SOPORTE" },

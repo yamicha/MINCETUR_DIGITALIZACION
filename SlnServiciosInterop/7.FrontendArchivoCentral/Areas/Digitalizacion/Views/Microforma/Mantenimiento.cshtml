@@ -64,7 +64,7 @@
                                         <div class="col-sm-8">
                                             <div class="input-group" style="margin-bottom:3px">
                                                 @if (Model.Accion == "N")
-                                                {   <span class="input-group-addon">VOL_AC-</span>  }
+                                                {   <span class="input-group-addon">VOL_AC</span>  }
                                                 @Html.TextBoxFor(model => model.MICROFORMA_NROVOLUMEN, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @placeholder = "Nro. volumen" })
                                             </div>
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_NROVOLUMEN, string.Empty, new { @class = "cssMessageError" })

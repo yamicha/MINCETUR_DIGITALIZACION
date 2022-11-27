@@ -192,8 +192,9 @@ function Reprocesar_Finalizar() {
 function Rprocesar_Mantenimiento() {
     var rowKey = $("#" + Reprocesar_grilla).jqGrid('getGridParam', 'selrow');
     var data = jQuery("#" + Reprocesar_grilla).jqGrid('getRowData', rowKey);
-    let ID_DOCUMENTO = data.Reprocesar_ID_DOCUMENTO; 
-    if (data != null && data != 0) {
+    let ID_DOCUMENTO = data.Reprocesar_ID_DOCUMENTO;
+    debugger;
+    if (ID_DOCUMENTO != undefined) {
         var itemDoc = {
             IdDocumento: data.Reprocesar_ID_DOCUMENTO,
             IdDocumentoAsignado: data.Reprocesar_ID_DOCUMENTO_ASIGNADO,
