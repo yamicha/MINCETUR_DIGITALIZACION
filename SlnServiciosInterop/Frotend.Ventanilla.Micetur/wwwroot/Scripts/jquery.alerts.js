@@ -73,7 +73,6 @@
         // Private methods
 
         _show: function (title, msg, value, type, callback) {
-
             $.alerts._hide();
             $.alerts._overlay('show');
 
@@ -115,6 +114,7 @@
                 case ' ': 
                     $("#popup_message").after('<div id="popup_panel"><input type="button" class="btn btn-blue" value="' + $.alerts.okButton + '" id="popup_ok" /></div>');
                     $("#popup_ok").click(function () {
+                        debugger;
                         $.alerts._hide();
                         callback(true);
                     });

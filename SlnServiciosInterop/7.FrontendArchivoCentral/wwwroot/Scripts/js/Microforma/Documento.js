@@ -16,8 +16,8 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     var url = BaseUrlApi + 'archivo-central/documento/listado-temporal-paginado';
     $("#" + _grilla).GridUnload();
     var colNames = [
-        '1', '2', '3', '4', '5', 'Nro Linea',
-        'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Anio', 'Folios', 'Imágenes', 'Obervación',
+        '1', '2', '3', '4', '5', 'Nro Línea',
+        'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Año', 'Folios', 'Imágenes', 'Obervación',
         'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'FLG_REPETIDO'
     ]
     var colModels = [
@@ -138,7 +138,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
     var colNames = [
         '0', '1', '2', '3', '4', '5', '6', '7',
         NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Documento', 'Nombre Documento', 'Fondo', '', 'Sección',
-        'Serie', 'Descripción', 'Anio', 'Folios','Imágenes', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
+        'Serie', 'Descripción', 'Año', 'Folios','Imágenes', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
     ]
     var colModels = [
         { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Frotend.Ventanilla.Micetur.props" />
+</Project>

@@ -63,7 +63,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intFolios = drReader.GetOrdinal("FOLIOS");
                             int intImagen = drReader.GetOrdinal("IMAGEN");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
-                            int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intUsuariocreacion = drReader.GetOrdinal("STR_USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");

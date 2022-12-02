@@ -9,6 +9,7 @@
         Revision_CargarConboUsuario();
         $('#TIPO_PRUEBA').fastselect();
         $('#Microforma_Revision_Evaluar').click(function () {
+            debugger;
             if ($('#FrmEvaluarRevision').valid()) {
                 Revision_Grabar();
             }
@@ -28,6 +29,22 @@
         changeFirstDay: false,
         placeholder: "dd/MM/yyyy"
     });
+
+    $('#FECHA').blur(function () {
+        if (this.value == "" || this.value.length == 0) {
+            return true;
+        }
+        if (!validateDate(this.value)) {
+            jOkas("Ingrese una fecha válida.", "Mensaje", function (lol) {
+                $('#FECHA').val('');
+                $('#FECHA').focus();
+            });
+            
+        }
+    });
+
+
+    
 </script>
 
 <div class="modal-dialogMicroforma">
@@ -35,7 +52,7 @@
         <div class="modal-header" style="cursor: move; background-color: #ca2626">
             <div class="col-sm-14">
                 <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
-                <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Revisión Periodica </h4>
+                <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Revisión Periódica </h4>
             </div>
         </div>
         <div class="modal-body">
@@ -92,7 +109,7 @@
                                             </div>
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Fecha Revisión: </label>
-                                                @Html.TextBoxFor(model => model.FECHA, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
+                                                @Html.TextBoxFor(model => model.FECHA, new { @class = "form-control", @maxlength = "10", @style = "width:100%" })
                                                 @Html.ValidationMessageFor(model => model.FECHA, string.Empty, new { @class = "cssMessageError" })
                                             </div>
                                         </div>

@@ -21,7 +21,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
 
         [Required(ErrorMessage = "[Volumen] Obligatorio")]
         public string MICROFORMA_NROVOLUMEN { get; set; }
-        [Required(ErrorMessage = "[Volumen] Obligatorio")]
+        [Required(ErrorMessage = "[Soporte] Obligatorio")]
         public string MICROFORMA_CODIGO_SOPORTE { get; set; }
 
         [Required(ErrorMessage = "[Soporte] Obligatorio")]
@@ -35,7 +35,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
         [Required(ErrorMessage = "[N° Copia] Obligatorio")]
         public string MICROFORMA_COPIAS { get; set; }
 
-        [Required(ErrorMessage = "[Fedatario] Obligatorio")]
+        [Required(ErrorMessage = "[Código de Fedatario] Obligatorio")]
         public string MICROFORMA_CODIGO_FEDATARIO { get; set; }
         public string MICROFORMA_OBSERVACION { get; set; }
         public string MICROFORMA_USU_CREACION { get; set; }

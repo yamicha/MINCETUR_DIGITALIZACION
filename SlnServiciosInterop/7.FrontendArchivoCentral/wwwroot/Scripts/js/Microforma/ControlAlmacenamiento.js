@@ -285,3 +285,29 @@ function MicroArchivo_ActaFormatter(cellvalue, options, rowObject) {
     var _btn = "<button title='Descargar Formato Revisión' onclick='DownloadFile(" + rowObject.ID_DOC_CONFORMIDAD + ");' class=\"btn btn-link\" type=\"button\"  style=\"text-decoration: none !important;cursor: pointer;\"> <i class=\"clip-file-pdf\" style=\"color:#a01010;font-size:15px\"></i></button>";
     return _btn;
 }
+
+
+// METODO QUE VALIDA LA FECHA
+const validateDate = (birthDate) => {
+    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
+
+    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
+    if (!birthDate.match(DATE_REGEX)) {
+        return false
+    }
+
+    /* Comprobar los días del mes */
+    const day = parseInt(birthDate.split('/')[0])
+    const month = parseInt(birthDate.split('/')[1])
+    const year = parseInt(birthDate.split('/')[2])
+    const monthDays = new Date(year, month, 0).getDate()
+    if (day > monthDays) {
+        return false
+    }
+
+    /* Comprobar que el año no sea superior al actual*/
+    //if (year > CURRENT_YEAR) {
+    //    return false
+    //}
+    return true
+}

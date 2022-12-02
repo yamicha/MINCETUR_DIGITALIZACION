@@ -31,11 +31,11 @@ $(document).ready(function () {
                 Microforma_MostrarEditar();
             }
             else {
-                jAlert("Debe seleccionar por lo menos un registo.", "Atención");
+                jAlert("Debe seleccionar por lo menos un registro.", "Atención");
             }
         }
         else {
-            jAlert("Debe seleccionar por lo menos un registo.", "Atención");
+            jAlert("Debe seleccionar por lo menos un registro.", "Atención");
         }
 
     });
@@ -51,7 +51,7 @@ function ControlFinalizadoBuscar() {
     Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
 }
 async function Microforma_MicroArchivoGrabar() {
-    jConfirm(" ¿ Desea guardar datos de microArchivo ingresados ? ", "Atención", async function (r) {
+    jConfirm(" ¿ Desea guardar los datos del MicroArchivo ingresado ? ", "Atención", async function (r) {
         if (r) {
             var IdDocAlmacenamiento = 0;
             if ($('#fileActaAlma').prop('files')[0] != undefined) {
@@ -142,7 +142,7 @@ function Microforma_MostrarEditar() {
 }
 
 function MicroArchivo_Editar() {
-    jConfirm(" ¿ Desea guardar datos de microArchivo ingresados ? ", "Atención", async function (r) {
+    jConfirm(" ¿ Desea guardar los datos del MicroArchivo ingresado ? ", "Atención", async function (r) {
         if (r) {
             var IdDocAlmacenamiento = 0;
             if ($('#fileActaAlma').prop('files')[0] != undefined) {

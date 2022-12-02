@@ -22,11 +22,11 @@ $(document).ready(function () {
                 setTimeout("MicroformaGrabar_IniciarProceso();", 500);
             }
             else {
-                jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+                jAlert("Debe seleccionar por lo menos un lote.", "Atención");
             }
         }
         else {
-            jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+            jAlert("Debe seleccionar por lo menos un lote.", "Atención");
         }
     });
 });
@@ -80,7 +80,7 @@ async function MicroformaGrabar_IniciarProceso() {
             Documento_MostrarGrabar();
         }
     } else {
-        jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+        jAlert("Debe seleccionar por lo menos un lote.", "Atención");
     }
 }
 function MicroformaGrabar_ValidarLote() {
@@ -181,4 +181,29 @@ function MicroformaGrabar_CargarCboSoporte() {
         method: "POST"
     }
     LoadComboApi("ventanilla/soporte/listar", "MICROFORMA_ID_TIPO_SOPORTE", OptionsCbo)
+}
+
+// METODO QUE VALIDA LA FECHA
+const validateDate = (birthDate) => {
+    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
+
+    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
+    if (!birthDate.match(DATE_REGEX)) {
+        return false
+    }
+
+    /* Comprobar los días del mes */
+    const day = parseInt(birthDate.split('/')[0])
+    const month = parseInt(birthDate.split('/')[1])
+    const year = parseInt(birthDate.split('/')[2])
+    const monthDays = new Date(year, month, 0).getDate()
+    if (day > monthDays) {
+        return false
+    }
+
+    /* Comprobar que el año no sea superior al actual*/
+    //if (year > CURRENT_YEAR) {
+    //    return false
+    //}
+    return true
 }

@@ -1066,7 +1066,7 @@
           }
         }
       },
-      "Oracle.ManagedDataAccess.Core/3.21.70": {
+      "Oracle.ManagedDataAccess.Core/3.21.80": {
         "dependencies": {
           "System.Diagnostics.PerformanceCounter": "6.0.0",
           "System.DirectoryServices": "5.0.0",
@@ -2281,7 +2281,7 @@
         "dependencies": {
           "CoServiciosDigitalizacion": "1.0.0",
           "EnServiciosDigitalizacion": "1.0.0",
-          "Oracle.ManagedDataAccess.Core": "3.21.70",
+          "Oracle.ManagedDataAccess.Core": "3.21.80",
           "Utilitarios": "1.0.0"
         },
         "runtime": {
@@ -2898,12 +2898,12 @@
       "path": "npoi/2.5.6",
       "hashPath": "npoi.2.5.6.nupkg.sha512"
     },
-    "Oracle.ManagedDataAccess.Core/3.21.70": {
+    "Oracle.ManagedDataAccess.Core/3.21.80": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KUiIl5761WWWh/TqTdvi3THewAqNkLFSCxV5RwYJWTAE8TbkiT8K/lnFgtEqmnWd4BJKbM4oEZnqrK4dKaf03g==",
-      "path": "oracle.manageddataaccess.core/3.21.70",
-      "hashPath": "oracle.manageddataaccess.core.3.21.70.nupkg.sha512"
+      "sha512": "sha512-NBy3qenkUo3PJBmKc6/SOyNCWPCJijtRqWZ4gImdfeS5hhXs60L1dAeDLiF6N15IfQT2ExRe/0W3+xbxJ6VQ/Q==",
+      "path": "oracle.manageddataaccess.core/3.21.80",
+      "hashPath": "oracle.manageddataaccess.core.3.21.80.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.8.9": {
       "type": "package",

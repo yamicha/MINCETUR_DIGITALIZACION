@@ -83,7 +83,7 @@ function Adjunto_Agregar() {
 
 function ValidarExtension(extension) {
     if (!extensionValid.test(extension)) {
-        jAlert('Ingrese una extensión valida.', 'Atención');
+        jAlert('Ingrese una extensión válida.', 'Atención');
         return false;
     } else
         return true;

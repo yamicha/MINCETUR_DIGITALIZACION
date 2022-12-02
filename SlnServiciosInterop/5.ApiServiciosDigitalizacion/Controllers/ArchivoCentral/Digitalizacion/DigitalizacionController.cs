@@ -53,7 +53,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             return StatusCode(auditoria.Code, auditoria);
         }
 
-     
+
         [HttpPost]
         [Route("digitalizar-documento")]
         public IActionResult Documento_digitalizar([FromBody] DocumentoModel entidad)
