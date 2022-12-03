@@ -153,6 +153,7 @@ function MicroformaGrabar_Grabar() {
                         if (auditoria.EjecucionProceso) {
                             if (!auditoria.Rechazo) {
                                 _ID_LOTE = 0;
+                                Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
                                 Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0");
                                 jOkas("Microforma grabada correctamente.", "Atención");
                                 MicroformaGrabar_Cerrar();

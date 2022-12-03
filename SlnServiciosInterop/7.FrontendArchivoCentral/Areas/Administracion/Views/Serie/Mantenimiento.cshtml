@@ -6,6 +6,8 @@
     $(document).ready(function () {
         if ($('#hd_SERIE_ACCION').val() == "M") {     
             SerieLoadFormEdit(@Model.ID_SERIE);
+        } else {
+            SerieLoadCombo();
         }
     });
     jQuery('#serie_btn_grabar').click(function (e) {

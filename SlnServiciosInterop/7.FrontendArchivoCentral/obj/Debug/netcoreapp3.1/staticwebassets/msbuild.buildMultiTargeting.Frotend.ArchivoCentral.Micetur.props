@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Frotend.ArchivoCentral.Micetur.props" />
+</Project>

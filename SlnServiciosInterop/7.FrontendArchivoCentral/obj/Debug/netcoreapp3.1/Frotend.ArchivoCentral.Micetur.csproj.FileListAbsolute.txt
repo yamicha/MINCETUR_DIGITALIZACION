@@ -641,8 +641,6 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cache
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cs
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.ArchivoCentral.Micetur.StaticWebAssets.Manifest.cache
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.ArchivoCentral.Micetur.StaticWebAssets.xml
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\scopedcss\bundle\Frotend.ArchivoCentral.Micetur.styles.css
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.TagHelpers.input.cache
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.TagHelpers.output.cache
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorCoreGenerate.cache
@@ -938,3 +936,9 @@ E:\PROYECTO\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCent
 E:\PROYECTO\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.dll
 E:\PROYECTO\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 E:\PROYECTO\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.genruntimeconfig.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.StaticWebAssets.xml
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.ArchivoCentral.Micetur.StaticWebAssets.Pack.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.Frotend.ArchivoCentral.Micetur.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.Frotend.ArchivoCentral.Micetur.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.Frotend.ArchivoCentral.Micetur.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.Frotend.ArchivoCentral.Micetur.props

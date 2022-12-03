@@ -193,10 +193,12 @@ function LoadComboApi(Url, Input, Options) {
                     if (data.EjecucionProceso) {
                         if (!data.Rechazo) {
                             if (data.Objeto != null) {
+                                debugger;
                                 var Html = "";
                                 var Combo = $('#' + Input);
                                 $(Combo).html('').append('<option value="">--seleccione--</option>');
                                 $.each(data.Objeto, function (x, v) {
+                                    debugger;
                                     Html += `<option value=${eval('v.' + Options.KeyVal.value)}> ${eval('v.' + Options.KeyVal.name)} </option>`
                                 });
                                 $(Combo).append(Html);
