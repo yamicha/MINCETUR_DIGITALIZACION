@@ -235,7 +235,8 @@ function MicroArchivo_HistorialCargarGrilla(_Grilla) {
                         {
                             CODIGO: ix,
                             ID_MICROARCHIVO: v.ID_MICROARCHIVO,
-                            ID_DOC_CONFORMIDAD: v.ID_DOC_CONFORMIDAD,
+                            //ID_DOC_CONFORMIDAD: v.ID_DOC_CONFORMIDAD,
+                            ID_DOC_CONFORMIDAD: v.ID_DOC_ALMACENAMIENTO,
                             STR_TIPO_ARCHIVO: v.STR_TIPO_ARCHIVO,
                             DIRECCION: v.DIRECCION,
                             FECHA: v.FECHA,

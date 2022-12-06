@@ -89,7 +89,7 @@ async function Revision_Grabar() {
     var IdDocRevision = 0;
     var TipoPruebaText = "";
     $('#MsgValidActa').hide();
-    var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
+    var _CONFORME = $("#FLG_CONFORME").val();
     if (_CONFORME == "0") {
         pregunta = "darle 'NO CONFORME'";
     } else {
@@ -258,7 +258,6 @@ async function Microforma_ReprocesoGetOne(id) {
 async function Revision_ReprocesoGrabar() {
     jConfirm(" ¿ Desea reprocesar esta microforma  ? ", "Atención", async function (r) {
         if (r) {
-            debugger; 
             var IdDocApertura = $('#DownloadApertura').data('file');
             var IdDocCierre = $('#DownloadCierre').data('file');
             var IdDocConformidad = $('#DownloadConformidad').data('file');

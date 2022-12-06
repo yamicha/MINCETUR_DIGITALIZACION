@@ -330,7 +330,7 @@ function GetRules() {
     _gs_DESC_LARGA_SECCION = jQuery('#gs_' + _PREFIJO + 'DES_LARGA_SECCION').val();
     _gs_DESC_SERIE = jQuery('#gs_' + _PREFIJO + 'DES_SERIE').val();
 
-    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_NOM_DOCUMENTO').val();
+    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'NOM_DOCUMENTO').val();
     _gs_DESCRIPCION = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION').val();
     _gs_ANIO = jQuery('#gs_' + _PREFIJO + 'ANIO').val();
     _gs_FOLIOS = jQuery('#gs_' + _PREFIJO + 'FOLIOS').val();
@@ -544,7 +544,7 @@ function Documento_Ver_Proceso_CargarGrilla() {
 
 function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
     if (isNaN(idlaser) || idlaser == "") {
-        jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
+        jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo caracter).", "Atención");
         return false;
     }
     if (IdLaserMin > idlaser) {

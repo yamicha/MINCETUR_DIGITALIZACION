@@ -10,7 +10,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models
 
         [Display(Name = "Operador:")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "(*) Operador Ingrese descripción")]
+        [Required(ErrorMessage = "(*) Seleccione Operador")]
         public string OPERADOR { get; set; }
         public List<SelectListItem> ListaUsuarios = new List<SelectListItem>(); 
 

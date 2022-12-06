@@ -136,14 +136,21 @@ function Tabla_Mostrar_Formato() {
 
 
 function Tabla_Procesar() {
+    debugger;
     var __ID_TABLA = $("#ID_TABLA").val();
     var pregunta = "";
     if (__ID_TABLA == "") {
         jAlert("Seleccione su formato", "Atención");
         return;
     }
+
+    if ($('#file-upload').prop('files').length == 0) {
+        jAlert("Debe ingresar el archivo a procesar", "Atención");
+        return;
+    }
     jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea Hoja1, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
         if (r) {
+            debugger;
             var url = BaseUrlApi + "archivo-central/carga/procesar-excel";
             var ID_TABLA = $("#ID_TABLA").val();
             var data = new FormData();
@@ -159,6 +166,7 @@ function Tabla_Procesar() {
                 contentType: false,
                 type: 'POST',
                 success: function (auditoria) {
+                    debugger;
                     $("#lbl_file").html("Seleccionar archivo");
                     Tabla_Mostrar_div_Formato();
                     if (auditoria.EjecucionProceso) {

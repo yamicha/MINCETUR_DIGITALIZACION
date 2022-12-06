@@ -447,7 +447,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intIdTipoObs = drReader.GetOrdinal("ID_TIPO_OBSERVACION");
                             int intDesctipoObs = drReader.GetOrdinal("DESC_TIPO_OBSERVACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
-                            int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intUsuCreacion = drReader.GetOrdinal("STR_USU_CREACION");
                             int intObservacion= drReader.GetOrdinal("OBSERVACION");
                             
                             enDocumento_Obs temp = null;

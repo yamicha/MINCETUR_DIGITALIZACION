@@ -703,5 +703,8 @@ E:\PROYECTO\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Frotend.Ventanill
 E:\PROYECTO\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Frotend.Ventanilla.Micetur.dll
 E:\PROYECTO\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Frotend.Ventanilla.Micetur.pdb
 E:\PROYECTO\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\Frotend.Ventanilla.Micetur.genruntimeconfig.cache
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.Ventanilla.Micetur.StaticWebAssets.xml
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\scopedcss\bundle\Frotend.Ventanilla.Micetur.styles.css
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.Ventanilla.Micetur.StaticWebAssets.Pack.cache
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.Frotend.Ventanilla.Micetur.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.Frotend.Ventanilla.Micetur.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.Frotend.Ventanilla.Micetur.props
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.Frotend.Ventanilla.Micetur.props

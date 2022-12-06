@@ -13,12 +13,12 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models
 
         [Display(Name = "Descripción corta:")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "(*) Ingrese descripcion corta")]
+        [Required(ErrorMessage = "(*) Ingrese descripción corta")]
         public string DESC_CORTA_SECCION { get; set; }
 
         [Display(Name = "Descripción larga:")]
         [DataType(DataType.Text)]
-        [Required(ErrorMessage = "(*) Ingrese descripcion larga")]
+        [Required(ErrorMessage = "(*) Ingrese descripción larga")]
         public string DESC_LARGA_SECCION { get; set; }
         public string ACCION { get; set; }
     }

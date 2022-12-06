@@ -28,7 +28,9 @@ using Frotend.Ventanilla.Micetur.Models;
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a", @"/Views/Authorization/AccesoDenegado.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e6cba4bc8b94c59196583fb357813f92bcfc0ab8", @"/Views/_ViewImports.cshtml")]
+    #nullable restore
     public class Views_Authorization_AccesoDenegado : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
+    #nullable disable
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-primary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("href", new global::Microsoft.AspNetCore.Html.HtmlString("~/authorization/signin"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -69,7 +71,7 @@ using Frotend.Ventanilla.Micetur.Models;
 #line hidden
 #nullable disable
             WriteLiteral("<!doctype html>\r\n<html lang=\"en\" dir=\"ltr\">\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a4751", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a4797", async() => {
                 WriteLiteral("\r\n    <!-- Meta data -->\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\'viewport\' content=\'width=device-width, initial-scale=1.0, user-scalable=0\'>\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <!-- Favicon -->\r\n    <link");
                 BeginWriteAttribute("href", " href=\"", 355, "\"", 391, 1);
 #nullable restore
@@ -123,7 +125,7 @@ WriteAttributeValue("", 751, Url.Content("~/assets/fonts/style.css"), 751, 40, f
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a8134", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a8180", async() => {
                 WriteLiteral("\r\n    <div class=\"container-fluid\" style=\"display: flex; height: 100vh; justify-content: center; align-items: center;\">\r\n        <div class=\"row\">\r\n            <div class=\"mb-3 text-center\">\r\n                <img");
                 BeginWriteAttribute("src", " src=\"", 1024, "\"", 1079, 1);
 #nullable restore
@@ -143,7 +145,7 @@ WriteAttributeValue("", 1030, Url.Content("~/assets/images/logo-mincetur.png"), 
             <h1 class=""text-center"">401</h1>
             <p class=""text-center"">No se encontró autorización, no tiene acesso a este sistema o su fecha de ingreso caduco<br /> Por favor contacte con el administrador del sistema.</p>
             <div class=""text-center"">");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a9678", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5b4bf12a14b8c75653d15bbfbe24740d4c8b7e7a9724", async() => {
                     WriteLiteral("<i class=\"clip-home\"></i> &nbsp;Iniciar Sessión ");
                 }
                 );
@@ -183,16 +185,26 @@ WriteAttributeValue("", 1667, Url.Content("~/Scripts/jquery-ui-1.8.24.min.js"), 
             WriteLiteral("\r\n</html>");
         }
         #pragma warning restore 1998
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; } = default!;
+        #nullable disable
     }
 }
 #pragma warning restore 1591
