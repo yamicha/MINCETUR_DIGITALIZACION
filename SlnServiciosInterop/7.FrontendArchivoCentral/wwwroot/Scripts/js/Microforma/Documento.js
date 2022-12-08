@@ -851,12 +851,12 @@ function GetRulesCalidad() {
         //{ field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
         //{ field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
         //{ field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
-        { field: '', data: "V.FEC_CREACION >= TO_DATE(" + _STR_FEC_CREACION + ", 'DD/MM/YYYY') AND V.FEC_CREACION <= TO_dATE(" + _STR_FEC_FIN + ", 'DD/MM/YYYY')", op: " " },
+        { field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE(" + _STR_FEC_CREACION + ", 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE(" + _STR_FEC_FIN + ", 'DD/MM/YYYY'))+1", op: " " },
     ];
 
     if (_ID_MODULO != 1) {
         //rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
-        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data:  _ID_ESTADO, op: " = " });
+        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data:  _ID_ESTADO, op: " = " });
         if (_ID_MODULO != 2)
             rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
     }
@@ -865,7 +865,7 @@ function GetRulesCalidad() {
         rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
     }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
-        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
     }
     if (_ID_MODULO == 3) { // Asignados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });

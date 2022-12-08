@@ -35,7 +35,6 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             RecepcionModelView modelo = new RecepcionModelView();
             modelo.Lista_ID_CONTROL_CARGA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
             modelo.Lista_ID_TABLA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
-
             enAuditoria ApiArea = await new CssApi().PostApi<enAuditoria>(new ApiParams
             {
                 EndPoint = AppSettings.baseUrlApi,
