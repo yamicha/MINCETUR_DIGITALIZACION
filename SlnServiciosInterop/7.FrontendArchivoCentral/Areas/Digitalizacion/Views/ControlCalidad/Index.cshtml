@@ -5,6 +5,7 @@
 <script defer src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
+<script defer src="@Url.Content("~/Scripts/js/Microforma/DocumentoProceso.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Lote.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Aprobar.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Aprobados.js")" type="text/javascript"></script>
@@ -14,18 +15,14 @@
 
     $(document).ready(function () {
         Remove_RemoverClases("liControlCalidad");
-        $('#txtFechaInicio, #txtFechaFin').datepicker({
+        $('#txtfechainicio, #txtfechafin').datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
             firstDay: 1,
             changeFirstDay: false,
             placeholder: "dd/MM/yyyy"
-        });
-
-        $('#txtFechaInicio').val(GetFecha());
-        $('#txtFechaFin').val(GetFecha());
-
+        }).datepicker("setDate", 'now');
         $('#aprobado_btn_buscar').click(function () {
             Aprobados_buscar();
         });
@@ -79,7 +76,7 @@
                 <p>Listado de documentos finalizados de control de calidad</p>
             </div>
             <div class="row">
-                
+
                 <div class="col-sm-12">
                     <div class=" inline-container-Group" style=" margin-bottom: 10px;">
                         <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Criterios de búsqueda: </p>
@@ -91,26 +88,28 @@
                                     <select class="form-control" id="comboEstadoDocumento">
                                         @*<option value="">--SELECCIONE--</option>*@
                                         <option value="4">CONFORME</option>
-                                        <option value="5">NO CONFORME</option>
-                                        <option value="3">PENDIENTE</option>
+                                        <option value="5">OBSERVADO</option>
+                                        @*<option value="3">PENDIENTE</option>*@
                                     </select>
                                 </div>
 
+                                @*<div class="form-group col-sm-3">
+                                        <label class="" for="txtNombreDocumento" style="width: 100%; margin-top: 5px;">Nombre Documento</label>
+                                        <input type="text" id="txtNombreDocumento" name="txtComprobante" maxlength="13" class="form-control" style="width: 100%" />
+                                    </div>*@
+
                                 <div class="form-group col-sm-3">
-                                    <label class="" for="txtNombreDocumento" style="width: 100%; margin-top: 5px;">Nombre Documento</label>
-                                    <input type="text" id="txtNombreDocumento" name="txtComprobante" maxlength="13" class="form-control" style="width: 100%" />
+                                    <label class="" for="txtfechainicio" style="width: 100%; margin-top: 5px;">Fecha Inicio:</label>
+                                    <input type="text" maxlength="10" class="form-control" id="txtfechainicio" />
                                 </div>
 
                                 <div class="form-group col-sm-3">
-                                    <label class="" for="txtFechaInicio" style="width: 100%; margin-top: 5px;">Fecha Inicio:</label>
-                                    <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
+                                    <label class="" for="txtfechafin" style="width: 100%; margin-top: 5px;">Fecha Fin:</label>
+                                    <input type="text" maxlength="10" class="form-control" id="txtfechafin" />
                                 </div>
-
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-sm-3">
-                                    <label class="" for="txtFechaFin" style="width: 100%; margin-top: 5px;">Fecha Fin:</label>
-                                    <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
-                                </div>
-                                <div class="col-sm-3">
                                     <button id="aprobado_btn_buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
                                     <button id="aprobado_btn_limpiar" class="btn btn-grey" type="button"><i class="clip-undo"></i>&nbsp Limpiar</button>
                                 </div>
