@@ -15,5 +15,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public string OBS_DEVOLUCION { get; set; }
         public string STR_FEC_DEVOLUCION { get; set; }
         public string USU_DEVOLUCION { get; set; }
+        public DateTime FECHA_INICIO { get; set; }
+        public DateTime FECHA_FIN { get; set; }
     }
 }

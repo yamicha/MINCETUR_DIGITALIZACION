@@ -25,6 +25,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
             cmd.CommandText = AppSettingsHelper.PackDigitalCons + ".PRC_CDALOTES_LISTAR";
             cmd.Parameters.Add("X_ID_FLG_DEVOLUCION", validarNulo(entidad.FLG_DEVOLUCION));
             cmd.Parameters.Add("X_ID_FLG_MICROFORMA", validarNulo(entidad.FLG_MICROFORMA));
+            cmd.Parameters.Add("X_FECHA_INICIO", validarNulo(entidad.FECHA_INICIO));
+            cmd.Parameters.Add("X_FECHA_FIN", validarNulo(entidad.FECHA_FIN));
             cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {

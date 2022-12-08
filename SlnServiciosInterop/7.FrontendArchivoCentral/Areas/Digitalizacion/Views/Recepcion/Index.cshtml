@@ -18,13 +18,48 @@
 <script type="text/javascript" defer>
     $(document).ready(function () {
         Remove_RemoverClases("liRecepcion");
-        CargarFormtato(); 
+        CargarFormtato();
         Tabla_Resultados('@Model.ID_CONTROL_CARGA_DEFAULT','@Model.ID_TABLA_DEFAULT');
         Tabla_Mostrar_div_Formato();
         Tabla_buscar();
         $('#ID_DIGITALIZADOR').select2(); 
-        $('#ID_DIGITALIZADOR2').select2(); 
+        $('#ID_DIGITALIZADOR2').select2();
+        $('#txtFechaInicio, #txtFechaFin').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false,
+            placeholder: "dd/MM/yyyy"
+        });
+
+        $('#txtFechaInicio').val(GetFecha());
+        $('#txtFechaFin').val(GetFecha());
+
+        $('#txtFechaInicio, #txtFechaFin').blur(function () {
+            var id = this.id;
+            if (this.value == "" || this.value.length == 0) {
+                $('#' + id).focus();
+            } else if (!validateDate(this.value)) {
+                jOkas("Ingrese una fecha válida.", "Mensaje", function () {
+                    $('#' + id).val('');
+                    $('#' + id).focus();
+                });
+
+            }
+        });
+
+        $('#Asignados_btn_Buscar').click(function () {
+            var fechaInicio = $('#txtFechaInicio').val();
+            var fechaFin = $('#txtFechaFin').val();
+            Asignados_Buscar_Fecha(fechaInicio, fechaFin);
+        });
     });
+
+    
+
+    
+
     function ValidarLetras(control, l, n, e, op, oc, oct) {
         l || (l = true);
         e || (e = true);
@@ -116,6 +151,8 @@ ID_TABLA_DEFAULT        }
         }
         return true;
     }
+
+    
 </script>
 <div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
@@ -283,6 +320,32 @@ ID_TABLA_DEFAULT        }
             </div>
             <div class="row">
                 <div class="col-sm-3">
+                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+
+                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Fin: </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-4 col-sm-4">
+                                <button id="Asignados_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                            </div>
+                        </div>
+                        
+                    </fieldset>
                 </div>
                 <div class="col-sm-9">
                     <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
@@ -303,6 +366,7 @@ ID_TABLA_DEFAULT        }
             </div>
             <div class="row">
                 <div class="col-sm-3" style="padding-right:0px">
+                    
                     <div class="Asignados_Lote_jqGrid">
                         <table id="Asignados_Lote_grilla"></table>
                     </div>

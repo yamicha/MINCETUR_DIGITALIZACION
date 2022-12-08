@@ -56,7 +56,7 @@ function Tabla_ControlCarga_Listar() {
                 if (auditoria.Objeto.length > 0) {
                     $.each(auditoria.Objeto, function (i, item) {
                         items += "<option value=\"" + item.ID_CONTROL_CARGA + "\">" + item.ID_CONTROL_CARGA + " | Fecha : " + item.STR_FEC_CREACION;
-                        items += " | N° Registros : " + item.NRO_REGISTROS + " | N° Folios : " + item.NRO_FOLIOS + "</option>";
+                        items += " | N° Registros : " + item.NRO_REGISTROS + " | N° Folios : " + item.NRO_FOLIOS + " | N° Imagenes : " + item.NRO_IMAGENES + "</option>";
                     });
                 }
             }
@@ -150,7 +150,6 @@ function Tabla_Procesar() {
     }
     jConfirm("Antes de continuar favor de asegurarse que el archivo no tenga caracteres especiales [;*_\!,etc] en el nombre y el nombre de la hoja sea Hoja1, si ya hizo todo lo mencionado obvie este mensaje presionando el botón Aceptar para seguir con el proceso", "Atención", function (r) {
         if (r) {
-            debugger;
             var url = BaseUrlApi + "archivo-central/carga/procesar-excel";
             var ID_TABLA = $("#ID_TABLA").val();
             var data = new FormData();
@@ -166,7 +165,6 @@ function Tabla_Procesar() {
                 contentType: false,
                 type: 'POST',
                 success: function (auditoria) {
-                    debugger;
                     $("#lbl_file").html("Seleccionar archivo");
                     Tabla_Mostrar_div_Formato();
                     if (auditoria.EjecucionProceso) {
@@ -210,6 +208,7 @@ function Tabla_Descargar_Cargas() {
 }
 
 function Tabla_Resultados(ID_CONTROL_CARGA, ID_TABLA) {
+
     if (ID_CONTROL_CARGA == 0) {
         var html = "";
         html = "<i class=\"clip-notification-2\"></i> <span>No se encontró ninguna carga realizada</span>";
@@ -220,18 +219,22 @@ function Tabla_Resultados(ID_CONTROL_CARGA, ID_TABLA) {
             if (auditoria != null && auditoria != "") {
                 if (auditoria.EjecucionProceso) {
                     if (!auditoria.Rechazo) {
+                        debugger;
                         var Cls_Ent_Control_Carga = auditoria.Objeto;
                         var html = "";
                         var color = "#9999b1";
                         if (Cls_Ent_Control_Carga.ID_CONTROL_CARGA != 0) {
+                            debugger;
                             if (Cls_Ent_Control_Carga.FLG_CARGA == 1) {
+                                debugger;
                                 color = "green";
                                 html = " Ultima carga registrada   : "
                                     + "<br/> <i class=\"clip-checkmark-2\" style='color:#6f9a37'></i>&nbsp; <span style='color:#6f9a37'> Carga correcta sin errores</span>"
                                     + "<br/> N°               : " + Cls_Ent_Control_Carga.ID_CONTROL_CARGA
                                     + "<br/> Fecha de Carga   : " + Cls_Ent_Control_Carga.STR_FEC_CREACION
                                     + "<br/> Nro de Registros : " + Cls_Ent_Control_Carga.NRO_REGISTROS
-                                    + "<br/> Nro de Folios : " + Cls_Ent_Control_Carga.NRO_FOLIOS;
+                                    + "<br/> Nro de Folios : " + Cls_Ent_Control_Carga.NRO_FOLIOS
+                                    + "<br/> Nro de Imagenes : " + Cls_Ent_Control_Carga.NRO_IMAGENES;
                                 Tabla_ControlCarga_Listar();
                             } else {
                                 color = "red";
@@ -321,3 +324,5 @@ function Tabla_Eliminar() {
         });
     }
 }
+
+

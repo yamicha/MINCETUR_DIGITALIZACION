@@ -7,6 +7,7 @@ var Devolver_ListaLotes = new Array();
 
 $(document).ready(function () {
     DevolverLote_ConfigurarGrilla(Devolver_Lote_grilla, Devolver_Lote_barra);
+    debugger;
     Lote_CargarGrilla(Devolver_Lote_grilla, "0","");
     Documento_Detalle_buscar(Devolver_grilla, Devolver_barra);
     $('#Devolver_btnDevolver').click(async function (e) {
@@ -34,12 +35,13 @@ function Devolver_CloseModal() {
 function DevolverLote_ConfigurarGrilla(_grilla, _barra) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote', 'Fecha de Creación'];
+        'Lote', 'Fecha de Creación', 'Usuario Recepción'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 50, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: true  },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true  }
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true },
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false, search: true }
     ];
     var opciones = {
         GridLocal: true, multiselect: true, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
@@ -53,7 +55,7 @@ function DevolverLote_ConfigurarGrilla(_grilla, _barra) {
         },
         //tituloGrupo: 'Sub Lote(s)'
     };
-    SICA.Grilla(_grilla, _barra, '', '550', '', '', "", "", colNames, colModels, "", opciones)
+    SICA.Grilla(_grilla, _barra, '', '390', '', '', "", "", colNames, colModels, "", opciones)
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });;
     jqGridResponsive($(".jqGridLote"));
 }
@@ -125,6 +127,9 @@ async function Devolver_ComboArea() {
 
 }
 
+function Devolver_Buscar_Fecha(fechaInicio, fechaFin) {
+    Lote_CargarGrilla(Devolver_Lote_grilla, "", "0", fechaInicio, fechaFin);
+}
 
 /*************************************************** TAB DEVUELTOS *********************************/
 var Devueltos_grilla = 'Devueltos_grilla';
@@ -172,7 +177,9 @@ function DevueltosLote_ConfigurarGrilla() {
 function DevueltosLote_CargarGrilla() {
     var item = {
         flgDevuelto: "1",
-        flgMicroforma: ""
+        flgMicroforma: "",
+        fechaInicio: GetFecha(),
+        fechaFin: GetFecha()
     }
     var url = `archivo-central/digitalizacion/listar-lotes`;
     API.Fetch("POST", url, item, function (auditoria) {
@@ -210,6 +217,9 @@ function DevueltosLote_CargarGrilla() {
     });
 
 }
+
+
+
 
 function Devueltos_ValidarLote() {
     var VALIDO = false;

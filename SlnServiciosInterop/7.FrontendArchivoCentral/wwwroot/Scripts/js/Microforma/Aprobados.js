@@ -11,5 +11,5 @@ jQuery('#aTabAprobados').click(function (e) {
 
 function Aprobados_buscar() {
     $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Aprobados_grilla + "," + Aprobados_barra + ",\"Listado de documentos aprobados\", false, 7);", 500);
+    setTimeout("Documento_ConfigurarGrilla_CALIDAD(" + Aprobados_grilla + "," + Aprobados_barra + ",\"Listado de documentos aprobados\", false, 7);", 500);
 }

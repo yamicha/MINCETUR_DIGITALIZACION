@@ -8,5 +8,7 @@ namespace EnServiciosDigitalizacion.Models.ArchivoCentral
     {
         public string flgDevuelto { get; set; }
         public string flgMicroforma { get; set; }
+        public string fechaInicio{ get; set; }
+        public string fechaFin { get; set; }
     }
 }
