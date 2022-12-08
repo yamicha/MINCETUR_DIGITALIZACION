@@ -29,66 +29,68 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
             auditoria.Limpiar();
             try
             {
-              //  using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
-            //    {
-                  //  string StrCodDesEncriptado = string.Empty;
-                   // string llave = client.traeLlave();
-                    //if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
-                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
-                //    using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
-                //    {
-                //        ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
-                //        {
-                //            IdSis = AppSettings.AppId,
-                //            IdUsu = intIdUsu,
-                //            FlgEst = 1,
-                //            Opr = "3",
-                //        });
-                //        if (Usuario != null)
-                //        {
-                //            if (Usuario.lstUsuSisRolEntEstorg != null)
-                //            {
-                //                userlogin = new UserLogin
-                //                {
-                //                    Codusuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu.ToString(),
-                //                    IdUsuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu,
-                //                    NameApellidos = Usuario.lstUsuSisRolEntEstorg[0].NomUsu,
-                //                    IdOficina = 0,
-                //                    DesOficina = "",
-                //                    IdPerfil = 0,
-                //                    Modulos = string.Empty 
-                //                 };
-                //                enAuditoria auditoriaModulo = await new CssApi().GetApi<enAuditoria>(new ApiParams {
-                //                  EndPoint = AppSettings.baseUrlApi, 
-                //                  Url = $"seguridad/modulos/listar/{intIdUsu}/{AppSettings.AppId}",
-                //                  UserAD = AppSettings.UserAD, 
-                //                  PassAD = AppSettings.PassAD
-                //                });
-                //                if (auditoriaModulo != null)
-                //                {
-                //                    if (!auditoriaModulo.Rechazo)
-                //                    {
-                //                        if (auditoriaModulo.Objeto != null)
-                //                        {
-                //                            List<enModulos> Modulos = JsonConvert.DeserializeObject<List<enModulos>>(auditoriaModulo.Objeto.ToString());
-                //                            userlogin.Modulos = new CssUtil().traeListaOpcionesMenu(Modulos); 
-                //                        }
-                //                    }
-                //                }
-                //            }
-                //        }
-                //    }
-               // }
-                userlogin = new UserLogin
+                using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
                 {
-                    Codusuario = "123",// Usuario.lstUsuSisRolEntEstorg[0].IdUsu.ToString(),
-                    IdUsuario = 3248,
-                    NameApellidos = "VALVERDE ROJAS JUAN",
-                    IdOficina = 0,
-                    DesOficina = "",
-                    IdPerfil = 0,
-                    Modulos = string.Empty
-                };
+                    string StrCodDesEncriptado = string.Empty;
+                    string llave = client.traeLlave();
+                    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
+                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    int intIdUsu = 3248;
+                    using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
+                    {
+                        ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
+                        {
+                            IdSis = AppSettings.AppId,
+                            IdUsu = intIdUsu,
+                            FlgEst = 1,
+                            Opr = "3",
+                        });
+                        if (Usuario != null)
+                        {
+                            if (Usuario.lstUsuSisRolEntEstorg != null)
+                            {
+                                userlogin = new UserLogin
+                                {
+                                    Codusuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu.ToString(),
+                                    IdUsuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu,
+                                    NameApellidos = Usuario.lstUsuSisRolEntEstorg[0].NomUsu,
+                                    IdOficina = 0,
+                                    DesOficina = "",
+                                    IdPerfil = 0,
+                                    Modulos = string.Empty
+                                };
+                                enAuditoria auditoriaModulo = await new CssApi().GetApi<enAuditoria>(new ApiParams
+                                {
+                                    EndPoint = AppSettings.baseUrlApi,
+                                    Url = $"seguridad/modulos/listar/{intIdUsu}/{AppSettings.AppId}",
+                                    UserAD = AppSettings.UserAD,
+                                    PassAD = AppSettings.PassAD
+                                });
+                                if (auditoriaModulo != null)
+                                {
+                                    if (!auditoriaModulo.Rechazo)
+                                    {
+                                        if (auditoriaModulo.Objeto != null)
+                                        {
+                                            List<enModulos> Modulos = JsonConvert.DeserializeObject<List<enModulos>>(auditoriaModulo.Objeto.ToString());
+                                            userlogin.Modulos = new CssUtil().traeListaOpcionesMenu(Modulos);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                //userlogin = new UserLogin
+                //{
+                //    Codusuario = "123",// Usuario.lstUsuSisRolEntEstorg[0].IdUsu.ToString(),
+                //    IdUsuario = 3248,
+                //    NameApellidos = "VALVERDE ROJAS JUAN",
+                //    IdOficina = 0,
+                //    DesOficina = "",
+                //    IdPerfil = 0,
+                //    Modulos = string.Empty
+                //};
                 if (userlogin != null)
                 {
                     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
