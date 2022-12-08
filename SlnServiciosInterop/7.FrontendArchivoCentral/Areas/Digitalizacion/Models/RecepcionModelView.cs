@@ -8,6 +8,9 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
     {
         [Display(Name = "Operador:")]
         public long ID_DIGITALIZADOR { get; set; }
+
+        public long ID_AREA_PROCEDENCIA { get; set; }
+        public List<SelectListItem> ListaArea = new List<SelectListItem>();
         public long ID_DIGITALIZADOR2 { get; set; }
         public long ID_CONTROL_CARGA_DEFAULT { get; set; }
         public long ID_TABLA_DEFAULT { get; set; }

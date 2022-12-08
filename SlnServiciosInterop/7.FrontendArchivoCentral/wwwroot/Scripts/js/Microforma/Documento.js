@@ -813,7 +813,6 @@ function GetRulesCalidad() {
 
     _gs_USU_CREACION = jQuery('#gs_' + _PREFIJO + 'USU_CREACION').val();
     _gs_USU_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'USU_MODIFICACION').val();
-    debugger;
     //_gs_STR_FEC_CREACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val() == null ? jQuery('#txtFechaInicio').val() : jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val();
     _gs_STR_FEC_CREACION = jQuery('#txtFechaInicio').val();
     _gs_STR_FEC_FIN = jQuery('#txtFechaFin').val();

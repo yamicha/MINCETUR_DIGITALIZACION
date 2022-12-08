@@ -15,6 +15,9 @@ using EnServiciosDigitalizacion.ArchivoCentral.Carga;
 using Frotend.ArchivoCentral.Micetur.Controllers;
 using Frotend.ArchivoCentral.Micetur.Authorization;
 using Frotend.ArchivoCentral.Micetur.Filters;
+using Utilitarios.Helpers;
+using EnServiciosDigitalizacion.Models;
+using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -26,13 +29,36 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 
         // GET: SeccionController
         [HttpGet, Route("~/Digitalizacion/recepcion")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             enAuditoria auditoria = new enAuditoria();
             RecepcionModelView modelo = new RecepcionModelView();
-
             modelo.Lista_ID_CONTROL_CARGA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
             modelo.Lista_ID_TABLA.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
+
+            enAuditoria ApiArea = await new CssApi().PostApi<enAuditoria>(new ApiParams
+            {
+                EndPoint = AppSettings.baseUrlApi,
+                Url = $"archivo-central/area/listar",
+                UserAD = AppSettings.UserAD,
+                PassAD = AppSettings.PassAD,
+                parametros = new parameters { FlgEstado = "1" }
+            });
+            if (ApiArea != null)
+            {
+                if (!ApiArea.Rechazo)
+                {
+                    if (ApiArea.Objeto != null)
+                    {
+                        var Lista = JsonConvert.DeserializeObject<List<enArea>>(ApiArea.Objeto.ToString());
+                        modelo.ListaArea = Lista.Select(x => new SelectListItem
+                        {
+                            Value = x.ID_AREA.ToString(),
+                            Text = x.DES_AREA
+                        }).ToList();
+                    }
+                }
+            }
             return View(modelo);
         }
         [HttpGet, Route("~/Digitalizacion/formato-ver")]
