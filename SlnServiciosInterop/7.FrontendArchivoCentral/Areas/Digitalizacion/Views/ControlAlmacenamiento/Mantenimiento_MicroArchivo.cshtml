@@ -4,9 +4,15 @@
 }
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/js/Microforma/Usuarios.js")" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        
         $('#MicroformaBtnMicroArchivo').click(function (e) {
+            if ($('#fileActaAlma').prop('files').length == 0) {
+                jAlert("Ingrese Acta de Almacenamiento.", "Atención");
+                return;
+            }
             if ($("#FrmMicroArchivo").valid()) {
                 if ($('#HDF_Accion').val() == "M") {
                     MicroArchivo_Editar();
@@ -16,6 +22,11 @@
                 }
             }
         });
+        Lista_Usuarios();
+        $('#comboUsuario').select2();
+        
+        //$('#comboUsuario').val($("#inputHddId_Usuario").val());
+
     });
     timePicker('MA_HORA');
     $('#MA_FECHA').datepicker({
@@ -33,13 +44,14 @@
         }
         if (!validateDate(this.value)) {
             jOkas("Ingrese una fecha válida.", "Mensaje", function (lol) {
-                debugger;
                 $('#MA_FECHA').val('');
                 $('#MA_FECHA').focus();
             });
-
         }
     });
+
+    
+    
 
 </script>
 @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroArchivo", @class = "form-horizontal" }))
@@ -115,14 +127,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom:3px;">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled = "true" })
-                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
+                                            <select id="comboUsuario" class="form-control" style="width:100%;">
+                                                <option value="">--Seleccione--</option>
+                                            </select>
+                                            @*@Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })*@
                                         </div>
+                                        @*<div class="col-sm-6">
+                                            <select id="comboUsuario" class="form-control">
+                                                <option value="">--Seleccione--</option>
+                                            </select>
+                                        </div>*@
                                     </div>
 
                                     <div class="row">

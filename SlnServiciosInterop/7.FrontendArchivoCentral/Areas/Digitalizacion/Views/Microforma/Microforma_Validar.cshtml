@@ -9,6 +9,13 @@
     $(function () {
             Microforma_GetOne(@Model.ID_MICROFORMA);
         $('#Microforma_Grabar_btn_Evaluar').click(function () {
+
+            if ($('#MICROFORMA_FLG_CONFORME').val() == 1) {
+                if ($('#fileActaConformidad').prop('files').length == 0) {
+                    jAlert("Ingrese Acta de Conformidad.", "Atención");
+                    return;
+                }
+            }
             MicroformaEvaluar();
         });
         $('#MICROFORMA_FLG_CONFORME').change(function () {
