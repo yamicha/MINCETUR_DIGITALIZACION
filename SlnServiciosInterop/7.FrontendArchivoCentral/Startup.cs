@@ -39,7 +39,7 @@ namespace Frotend.ArchivoCentral.Micetur
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
             {
-                //config.LoginPath = new PathString("/authorization/signin");
+                config.LoginPath = new PathString("/authorization/signin");
                 config.AccessDeniedPath = "/Authorization/AccesoDenegado";
                 config.Cookie.Name = "CookMinceturSISAR";
             });
@@ -58,7 +58,6 @@ namespace Frotend.ArchivoCentral.Micetur
             else
             {
                 app.UseExceptionHandler("/Authorization/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -79,7 +78,7 @@ namespace Frotend.ArchivoCentral.Micetur
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Authorization}/{action=SignIn}/{id?}");
             });
 
 
