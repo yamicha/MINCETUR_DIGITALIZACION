@@ -55,7 +55,7 @@ function DevolverLote_ConfigurarGrilla(_grilla, _barra) {
         },
         //tituloGrupo: 'Sub Lote(s)'
     };
-    SICA.Grilla(_grilla, _barra, '', '390', '', '', "", "", colNames, colModels, "", opciones)
+    SICA.Grilla(_grilla, _barra, '', '550', '', '', "", "", colNames, colModels, "", opciones)
     $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });;
     jqGridResponsive($(".jqGridLote"));
 }
@@ -127,7 +127,7 @@ async function Devolver_ComboArea() {
 
 }
 
-function Devolver_Buscar_Fecha(fechaInicio, fechaFin) {
+function Pendiente_Buscar_Fecha(fechaInicio, fechaFin) {
     Lote_CargarGrilla(Devolver_Lote_grilla, "", "0", fechaInicio, fechaFin);
 }
 
@@ -147,13 +147,14 @@ $('#aTabDevueltos').click(function () {
 function DevueltosLote_ConfigurarGrilla() {
     $("#" + Devueltos_Lote_grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote', 'Fecha de Creación','Area','Fecha Devolución','Observación'];
+        'Lote', 'Área', 'Responsable Devolución', 'Fecha Devolución','Observación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 50, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: true },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false, search: true },
-        { name: 'DES_AREA', index: 'DES_AREA', align: 'center', width: 250, hidden: true, search: true },
+        { name: 'DES_AREA', index: 'DES_AREA', align: 'center', width: 250, hidden: false, search: true },
+        { name: 'USU_DEVOLUCION', index: 'USU_DEVOLUCION', align: 'center', width: 250, hidden: false, search: true },
+        //{ name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false, search: true },
         { name: 'STR_FEC_DEVOLUCION', index: 'STR_FEC_DEVOLUCION', align: 'center', width: 150, hidden: false, search: true },
         { name: 'OBS_DEVOLUCION', index: 'OBS_DEVOLUCION', align: 'center', width: 250, hidden: false, search: true }
     ];
@@ -178,8 +179,8 @@ function DevueltosLote_CargarGrilla() {
     var item = {
         flgDevuelto: "1",
         flgMicroforma: "",
-        fechaInicio: GetFecha(),
-        fechaFin: GetFecha()
+        fechaInicio: $('#txtFechaInicioDevuelto').val(),
+        fechaFin: $('#txtFechaFinDevuelto').val()
     }
     var url = `archivo-central/digitalizacion/listar-lotes`;
     API.Fetch("POST", url, item, function (auditoria) {

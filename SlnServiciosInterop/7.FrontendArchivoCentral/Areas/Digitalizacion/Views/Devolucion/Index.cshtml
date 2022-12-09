@@ -16,7 +16,7 @@
     $(document).ready(function () {
         Remove_RemoverClases("liDevolucion");
 
-        $('#txtFechaInicio, #txtFechaFin').datepicker({
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioDevuelto, #txtFechaFinDevuelto').datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -25,10 +25,10 @@
             placeholder: "dd/MM/yyyy"
         });
 
-        $('#txtFechaInicio').val(GetFecha());
-        $('#txtFechaFin').val(GetFecha());
+        $('#txtFechaInicio, #txtFechaFin').val(GetFecha());
+        $('#txtFechaInicioDevuelto, #txtFechaFinDevuelto').val(GetFecha());
 
-        $('#txtFechaInicio, #txtFechaFin').blur(function () {
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioDevuelto, #txtFechaFinDevuelto').blur(function () {
             var id = this.id;
             if (this.value == "" || this.value.length == 0) {
                 $('#' + id).focus();
@@ -41,15 +41,48 @@
             }
         });
 
-        $('#Devolver_btn_Buscar').click(function () {
-            debugger;
+        $('#Pendiente_btn_Buscar').click(function () {
             var fechaInicio = $('#txtFechaInicio').val();
             var fechaFin = $('#txtFechaFin').val();
-            Devolver_Buscar_Fecha(fechaInicio, fechaFin);
+            Pendiente_Buscar_Fecha(fechaInicio, fechaFin);
         });
+
+        $('#Devuelto_btn_Buscar').click(function () {
+            DevueltosLote_CargarGrilla();
+        });
+        
     });
 
 </script>
+<style>
+    .leyenda {
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    .leyenda-item {
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    .icon-caja {
+        width: 25px;
+        height: auto;
+        margin-right: 5px;
+    }
+
+    .documento-duplicado {
+        background-color: rgb(238, 107, 111);
+    }
+
+    .documento-asignado {
+        background-color: rgb(255, 199, 144);
+    }
+
+    .documento-conforme {
+        background-color: rgba(35, 173, 0, 0.54);
+    }
+</style>
 
 <div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
@@ -83,42 +116,33 @@
                     <button id="Devolver_btnDevolver" class="btn btn-blue" type="button" data-toggle='modal'><i class="fa fa-save"></i>&nbsp; Devolver Documentos</button>
                 </div>
             </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="Pendiente_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                    </div>
+                </fieldset>
+            </div>
             <div class="row">
 
                 <div class="col-sm-3" style="padding-right:0px">
-                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
 
-                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Fin: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
-                                <button id="Devolver_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                        
-                    </fieldset>
+                    <div class="Asignados_Lote_jqGrid">
+                        <table id="Devolver_Lote_grilla"></table>
+                    </div>
+                    <div id="Devolver_Lote_barra"></div>
 
-                        <div class="Asignados_Lote_jqGrid">
-                            <table id="Devolver_Lote_grilla"></table>
-                        </div>
-                        <div id="Devolver_Lote_barra"></div>
 
-                    
                 </div>
                 <div class="col-sm-9">
                     <div class="Asignados_jqGrid">
@@ -134,6 +158,25 @@
             <div class="alert alert-info">
                 <p>Listado de documentos agrupados por lote y Devueltos, que ya han sido digitalizados y aprobados por el Fedatario.</p>
             </div>
+
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input class="form-control" id="txtFechaInicioDevuelto" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input class="form-control" id="txtFechaFinDevuelto" name="txtfechafin" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="Devuelto_btn_Buscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                    </div>
+                </fieldset>
+            </div>
+
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="Asignados_Lote_jqGrid">
@@ -148,6 +191,15 @@
                     <div id="Devueltos_barra"></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="leyenda">
+                <li class="leyenda-item"><div class="icon-caja documento-duplicado"></div> Documento Repetido</li>
+                <li class="leyenda-item"><div class="icon-caja documento-asignado "></div> Documento Asignado</li>
+                <li class="leyenda-item"><div class="icon-caja documento-conforme"></div> Documento Conforme</li>
+            </ul>
         </div>
     </div>
 </div>

@@ -4,8 +4,11 @@
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
+
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Fecha.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
+
 <script src="@Url.Content("~/Scripts/js/Microforma/ControlAlmacenamiento.js")" type="text/javascript"></script>
 
 
@@ -13,6 +16,35 @@
 <script>
     $(document).ready(function () {
         Remove_RemoverClases("liControlAlamcenamiento");
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioConforme, #txtFechaFinConforme').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false,
+            placeholder: "dd/MM/yyyy"
+        });
+        //$('#txtFechaInicio, #txtFechaFin').val(GetFecha());
+        $('#txtFechaInicioConforme, #txtFechaFinConforme').val(GetFecha());
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioConforme, #txtFechaFinConforme').blur(function () {
+            var id = this.id;
+            if (this.value == "" || this.value.length == 0) {
+                $('#' + id).focus();
+            } else if (!validateDate(this.value)) {
+                jOkas("Ingrese una fecha válida.", "Mensaje", function () {
+                    $('#' + id).val('');
+                    $('#' + id).focus();
+                });
+
+            }
+        });
+        $('#MicroformaPendiente_btn_Buscar').click(function () {
+            ControlBuscar();
+        });
+
+        $('#MicroformaConforme_btn_Buscar').click(function () {
+            ControlFinalizadoBuscar();
+        });
     });
 
 </script>
@@ -53,6 +85,23 @@
             <div class="alert alert-info">
                 <p>Listado de microformas para el control de almacenamiento.</p>
             </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input class="form-control" id="txtFechaInicio" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input class="form-control" id="txtFechaFin" name="txtfechafin" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="MicroformaPendiente_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                    </div>
+                </fieldset>
+            </div>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="MicroformaGrabar_Lote_jqGrid">
@@ -73,6 +122,23 @@
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
                 <p>Listado de microformas aprobados y finalizados.</p>
+            </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input class="form-control" id="txtFechaInicioConforme" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input class="form-control" id="txtFechaFinConforme" name="txtfechafin" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="MicroformaConforme_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                    </div>
+                </fieldset>
             </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">

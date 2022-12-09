@@ -146,9 +146,39 @@ ID_TABLA_DEFAULT        }
         }
         return true;
     }
-
     
 </script>
+
+<style>
+    .leyenda {
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    .leyenda-item {
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    .icon-caja {
+        width: 25px;
+        height: auto;
+        margin-right: 5px;
+    }
+
+    .documento-duplicado {
+        background-color: rgb(238, 107, 111);
+    }
+
+    .documento-asignado {
+        background-color: rgb(255, 199, 144);
+    }
+
+    .documento-conforme {
+        background-color: rgba(35, 173, 0, 0.54);
+    }
+</style>
+
 <div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
         <img style="height: 20px" src="@Url.Content("~/assets/images/loading.gif")">
@@ -226,8 +256,8 @@ ID_TABLA_DEFAULT        }
                                 </label>
                             </div>
                             @*<div class="col-sm-4" style="margin-top: 5px">
-                                <a title='Click para descargar' onclick="Tabla_Descargar_Cargas()" style='color:#364f6a;cursor: pointer;margin-top:10px'><i class='clip-download' style='color:#364f6a' data-toggle='modal'></i> Descargar historial de cargas</a>
-                            </div>*@
+                                    <a title='Click para descargar' onclick="Tabla_Descargar_Cargas()" style='color:#364f6a;cursor: pointer;margin-top:10px'><i class='clip-download' style='color:#364f6a' data-toggle='modal'></i> Descargar historial de cargas</a>
+                                </div>*@
                         </div>
                         <div class="row" style="margin-top:10px">
                             <div class="col-sm-2">
@@ -347,7 +377,7 @@ ID_TABLA_DEFAULT        }
                                 <button id="Asignados_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
                             </div>
                         </div>
-                        
+
                     </fieldset>
                 </div>
                 <div class="col-sm-9">
@@ -358,7 +388,7 @@ ID_TABLA_DEFAULT        }
                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
                         </div>
                         <div class="col-sm-4">
-                           @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
                         </div>
                         <div class="col-sm-4">
                             <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
@@ -369,7 +399,7 @@ ID_TABLA_DEFAULT        }
             </div>
             <div class="row">
                 <div class="col-sm-3" style="padding-right:0px">
-                    
+
                     <div class="Asignados_Lote_jqGrid">
                         <table id="Asignados_Lote_grilla"></table>
                     </div>
@@ -384,8 +414,17 @@ ID_TABLA_DEFAULT        }
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="leyenda">
+                <li class="leyenda-item"><div class="icon-caja documento-duplicado"></div> Documento Repetido</li>
+                <li class="leyenda-item"><div class="icon-caja documento-asignado "></div> Documento Asignado</li>
+                <li class="leyenda-item"><div class="icon-caja documento-conforme"></div> Documento Conforme</li>
+            </ul>
+        </div>
+    </div>
+    
 
- 
 </div>
 <input id="hdfFlag" type="hidden" value="0" />
 <input id="hdfFlag2" type="hidden" value="0" />

@@ -71,6 +71,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
 }
 
 function GetRulesMicroforma() {
+    debugger;
     var rules = new Array();
     var POR = "'%'";
     if (_MICROMODULO == MicroModulo.Reprocesar) { // Reprocesar
@@ -78,21 +79,37 @@ function GetRulesMicroforma() {
     }
     if (_MICROMODULO == MicroModulo.Control) { // Reprocesador, grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicio').val();
+        var _STR_FEC_FIN = $('#txtFechaFin').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
+        var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+        var _STR_FEC_CREACION = $('#txtFechaInicio').val();
+        var _STR_FEC_FIN = $('#txtFechaFin').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicioGrabada').val();
+        var _STR_FEC_FIN = $('#txtFechaFinGrabada').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
-    } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
+        var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
+        var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+    }
+    if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
     }
