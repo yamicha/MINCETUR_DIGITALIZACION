@@ -47,6 +47,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intObsDevolucion = drReader.GetOrdinal("OBS_DEVOLUCION");
                             int intDesArea = drReader.GetOrdinal("DES_AREA");
+                            int intDesAreaPro = drReader.GetOrdinal("AREA_PROCEDENCIA");
                             int intFecDevolucion = drReader.GetOrdinal("STR_FEC_DEVOLUCION");
                             int intResponsableDevo = drReader.GetOrdinal("USU_DEVOLUCION");
                             while (drReader.Read())
@@ -59,6 +60,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intUsuCrea)) temp.USU_CREACION = arrResult[intUsuCrea].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intObsDevolucion)) temp.OBS_DEVOLUCION = arrResult[intObsDevolucion].ToString();
+                                if (!drReader.IsDBNull(intDesAreaPro)) temp.AREA_PROCEDENCIA = arrResult[intDesAreaPro].ToString();
                                 if (!drReader.IsDBNull(intDesArea)) temp.DES_AREA = arrResult[intDesArea].ToString();
                                 if (!drReader.IsDBNull(intFecDevolucion)) temp.STR_FEC_DEVOLUCION = arrResult[intFecDevolucion].ToString();
                                 if (!drReader.IsDBNull(intResponsableDevo)) temp.USU_DEVOLUCION = arrResult[intResponsableDevo].ToString();

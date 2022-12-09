@@ -375,8 +375,9 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
                             {
                                 ID_DOCUMENTO = x.IdDocumento,
-                                ID_USUARIO = x.IdUsuario
+                                ID_USUARIO = x.IdUsuario,         
                             }).ToList(),
+                            ID_AREA_PROCEDENCIA = entidad.IdAreaProcedencia,
                             USU_CREACION = entidad.UsuCreacion,
                             IP_CREACION = entidad.IpCreacion,
                         }, ref auditoria);

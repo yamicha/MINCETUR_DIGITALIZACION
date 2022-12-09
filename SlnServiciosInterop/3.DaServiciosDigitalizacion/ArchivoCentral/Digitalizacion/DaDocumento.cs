@@ -618,6 +618,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 OracleTransaction transaction = cn.BeginTransaction(IsolationLevel.ReadCommitted);
                 cmd.Transaction = transaction;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("X_ID_AREA_PROCEDENCIA", OracleDbType.Int64)).Value = entidad.ID_AREA_PROCEDENCIA;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
                 cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
                 cmd.Parameters.Add(new OracleParameter("X_ID_LOTE", OracleDbType.Int64)).Direction = System.Data.ParameterDirection.Output;
@@ -673,8 +674,6 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 }
             }
         }
-
-
         public void Documento_AsignacionActualizar(enDocumento entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

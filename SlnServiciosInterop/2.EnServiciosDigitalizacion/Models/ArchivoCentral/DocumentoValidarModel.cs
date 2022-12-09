@@ -13,7 +13,8 @@ namespace EnServiciosDigitalizacion.Models
         public long IdTipoObservacion { get; set; }
         public string Comentario { get; set; }
         public string UsuCreacion { get; set; }
-
+        public long IdAreaProcedencia { get; set; }
+        
         public List<DocumentoValidarModel> LisIdDocumento { get; set; }
 
     }
