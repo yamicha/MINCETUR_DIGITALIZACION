@@ -18,12 +18,13 @@ function Asignar_buscar() {
 }
 
 jQuery('#Asignar_btn_Grabar').click(function (e) {
-    if (Asignar_ListaDocumentos.length > 0) {
+    if (Asignar_ListaDocumentos.length > 0 && $('#FrmAsignar').valid()) {
         jConfirm(" ¿ Desea grabar todas las asignaciones realizadas ? ", "Atención", function (r) {
             if (r) {
                 var item = {
+                    IdAreaProcedencia: parseInt($('#ID_AREA_PROCEDENCIA').val()),
                     ListaIdsDocumento: Asignar_ListaDocumentos,
-                    UsuCreacion: $('#inputHddId_Usuario').val()
+                    UsuCreacion: $('#inputHddId_Usuario').val(), 
                 }
                 var url = "archivo-central/documento/grabar-asignacion";
                 //var auditoria = SICA.Ajax(url, item, false);
@@ -70,8 +71,7 @@ function Asignar_Digitalizador() {
 
                 var miitem = {
                     IdDocumento: parseInt(data.Asignar_ID_DOCUMENTO),
-                    IdUsuario: parseInt(ID_DIGITALIZADOR),
-                    //NOMBRE_USUARIO: DESC_DIGITALIZADOR
+                    IdUsuario: parseInt(ID_DIGITALIZADOR),   
                 }
                 if (resultado != undefined) {
                     resultado.ID_USUARIO = ID_DIGITALIZADOR;

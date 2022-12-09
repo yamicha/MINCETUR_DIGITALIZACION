@@ -27,6 +27,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public long ANIO { get; set; }
         public long FOLIOS { get; set; }
         public long IMAGEN { get; set; }
+        public long ID_AREA_PROCEDENCIA { get; set; }
         
         public string OBSERVACION { get; set; }
         public string STR_FEC_CREACION { get; set; }

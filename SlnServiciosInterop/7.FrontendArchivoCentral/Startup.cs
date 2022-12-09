@@ -79,7 +79,7 @@ namespace Frotend.ArchivoCentral.Micetur
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Authorization}/{action=SignIn}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
 

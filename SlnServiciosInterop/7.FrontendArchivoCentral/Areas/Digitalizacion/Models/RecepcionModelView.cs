@@ -7,8 +7,11 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models
     public class RecepcionModelView
     {
         [Display(Name = "Operador:")]
+
+        [Required(ErrorMessage = "[Digitalizador] Obligatorio")]
         public long ID_DIGITALIZADOR { get; set; }
 
+        [Required(ErrorMessage = "[Area Procedencia] Obligatorio")]
         public long ID_AREA_PROCEDENCIA { get; set; }
         public List<SelectListItem> ListaArea = new List<SelectListItem>();
         public long ID_DIGITALIZADOR2 { get; set; }

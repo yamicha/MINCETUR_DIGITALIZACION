@@ -22,7 +22,7 @@
         Tabla_Resultados('@Model.ID_CONTROL_CARGA_DEFAULT','@Model.ID_TABLA_DEFAULT');
         Tabla_Mostrar_div_Formato();
         Tabla_buscar();
-        $('#ID_DIGITALIZADOR').select2(); 
+        $('#ID_DIGITALIZADOR').select2();
         $('#ID_DIGITALIZADOR2').select2();
         $('#txtFechaInicio, #txtFechaFin').datepicker({
             changeMonth: true,
@@ -56,7 +56,7 @@
         });
     });
 
-    
+
     function ValidarLetras(control, l, n, e, op, oc, oct) {
         l || (l = true);
         e || (e = true);
@@ -146,7 +146,12 @@ ID_TABLA_DEFAULT        }
         }
         return true;
     }
+<<<<<<< HEAD
     
+=======
+
+
+>>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
 </script>
 
 <style>
@@ -308,25 +313,31 @@ ID_TABLA_DEFAULT        }
                 <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Asignar: </p>
                 <fieldset style="width: 100%;">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="col-sm-2">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                        @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmAsignar", @class = "form-horizontal" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            <div class="col-sm-12">
+                                <div class="col-sm-2">
+                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                                    @Html.ValidationMessageFor(model => model.ID_DIGITALIZADOR, string.Empty, new { @class = "cssMessageError" })
+                                </div>
+                                <div class="col-sm-4">
+                                    <button id="Asignar_btnDigitalizador" class="btn btn-blue" type="button"><i class="clip-user-3"></i> Asignar</button>
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                            <div class="col-sm-12">
+                                <div class="col-sm-2">
+                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Área de procedencia :</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.ID_AREA_PROCEDENCIA, Model.ListaArea, new { @class = "form-control", @style = "width:100%" })
+                                    @Html.ValidationMessageFor(model => model.ID_AREA_PROCEDENCIA, string.Empty, new { @class = "cssMessageError" })
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <button id="Asignar_btnDigitalizador" class="btn btn-blue" type="button"><i class="clip-user-3"></i> Asignar</button>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-2">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Área de procedencia :</label>
-                            </div>
-                            <div class="col-sm-4">
-                                @Html.DropDownListFor(model => model.ID_AREA_PROCEDENCIA, Model.ListaArea, new { @class = "form-control", @style = "width:100%" })
-                            </div>
-                        </div>
+                        }
                     </div>
                 </fieldset>
             </div>
@@ -352,60 +363,76 @@ ID_TABLA_DEFAULT        }
                 <p>Consulta de documentos asignados agrupados por lote.</p>
             </div>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
                         <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="col-sm-3">
+                                <label  for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Fin: </label>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
+                            <div class="col-sm-offset-3 col-sm-4">
                                 <button id="Asignados_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
                             </div>
                         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                     </fieldset>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
                         <legend style="font-size:small;display:block">Re-asignar Digitalizador</legend>
-                        <div class="col-sm-2">
-                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                        <div class="row" style="margin-bottom:5px">
+                                <div class="col-sm-2">
+                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                                </div>
                         </div>
+<<<<<<< HEAD
                         <div class="col-sm-4">
                             @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
                         </div>
                         <div class="col-sm-4">
                             <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
                             <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+=======
+                        <div class="row">
+                            <div class="col-sm-4  col-sm-offset-2">
+                                <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
+                                <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+                            </div>
+>>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="row">
+<<<<<<< HEAD
                 <div class="col-sm-3" style="padding-right:0px">
 
+=======
+                <div class="col-sm-4" style="padding-right:0px">
+>>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                     <div class="Asignados_Lote_jqGrid">
                         <table id="Asignados_Lote_grilla"></table>
                     </div>
                     <div id="Asignados_Lote_barra"></div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <div class="Asignados_jqGrid">
                         <table id="Asignados_grilla"></table>
                     </div>
@@ -425,6 +452,10 @@ ID_TABLA_DEFAULT        }
     </div>
     
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
 </div>
 <input id="hdfFlag" type="hidden" value="0" />
 <input id="hdfFlag2" type="hidden" value="0" />
