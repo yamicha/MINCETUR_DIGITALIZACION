@@ -17,7 +17,7 @@
     $(document).ready(function () {
         $("#MicroformaGrabar_btn_X").hide();
         Remove_RemoverClases("liMicroformas");
-        $('#txtFechaInicio, #txtFechaFin').datepicker({
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioGrabada, #txtFechaFinGrabada').datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -25,9 +25,9 @@
             changeFirstDay: false,
             placeholder: "dd/MM/yyyy"
         });
-        $('#txtFechaInicio').val(GetFecha());
-        $('#txtFechaFin').val(GetFecha());
-        $('#txtFechaInicio, #txtFechaFin').blur(function () {
+        $('#txtFechaInicio, #txtFechaFin').val(GetFecha());
+        $('#txtFechaInicioGrabada, #txtFechaFinGrabada').val(GetFecha());
+        $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioGrabada, #txtFechaFinGrabada').blur(function () {
             var id = this.id;
             if (this.value == "" || this.value.length == 0) {
                 $('#' + id).focus();
@@ -40,11 +40,15 @@
             }
         });
         $('#Microforma_btn_Buscar').click(function () {
-            debugger;
             var fechaInicio = $('#txtFechaInicio').val();
             var fechaFin = $('#txtFechaFin').val();
             Microforma_Buscar_Fecha(fechaInicio, fechaFin);
         });
+
+        $('#MicroformaGrabada_btn_Buscar').click(function () {
+            MicroformaGrabada_BuscarFecha();
+        });
+        
     });
 
 </script>
@@ -91,6 +95,23 @@
             <div class="alert alert-info">
                 <p>Listado de documentos agrupados por lote, que ya han sido digitalizados y aprobados por el Fedatario.</p>
             </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input class="form-control" id="txtFechaInicio" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input class="form-control" id="txtFechaFin" name="txtfechafin" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="Microforma_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                    </div>
+                </fieldset>
+            </div>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
                     <button id="MicroformaGrabar_btn_Nuevo" class="btn btn-blue" type="button" data-toggle='modal'><i class="fa fa-save"></i>&nbsp; Grabar Microforma</button>
@@ -98,32 +119,6 @@
             </div>
             <div class="row">
                 <div class="col-sm-3" style="padding-right:0px">
-                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
-                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha Fin: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
-                                <button id="Microforma_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
-                            </div>
-                        </div>
-
-                    </fieldset>
                     <div class="MicroformaGrabar_Lote_jqGrid">
                         <table id="MicroformaGrabar_Lote_grilla"></table>
                     </div>
@@ -132,7 +127,7 @@
                 <div class="col-sm-9">
                     <div class="MicroformaGrabar_jqGrid">
                         <table id="MicroformaGrabar_grilla"></table>
-                       
+
                     </div>
                     <div id="MicroformaGrabar_barra"></div>
                 </div>
@@ -144,6 +139,23 @@
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
                 <p>Listado de documentos que se encuentran digitalizados y grabados.</p>
+            </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha Inicio:</label>
+                        <input class="form-control" id="txtFechaInicioGrabada" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha Fin:</label>
+                        <input class="form-control" id="txtFechaFinGrabada" name="txtfechafin" type="text" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="MicroformaGrabada_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                    </div>
+                </fieldset>
             </div>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">

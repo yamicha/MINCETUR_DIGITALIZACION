@@ -28,6 +28,10 @@ $(document).ready(function () {
     });
 });
 
+function MicroformaGrabada_BuscarFecha() {
+    Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra, MicroModulo.Grabados);
+}
+
 
 
 /******************************* TAB REPROCESADOR ********************************/

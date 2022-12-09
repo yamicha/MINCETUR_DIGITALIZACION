@@ -15,7 +15,7 @@
 
     $(document).ready(function () {
         Remove_RemoverClases("liControlCalidad");
-        $('#txtfechainicio, #txtfechafin').datepicker({
+        $('#txtFechaInicio, #txtFechaFin').datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "dd/mm/yy",
@@ -25,6 +25,19 @@
         }).datepicker("setDate", 'now');
         $('#aprobado_btn_buscar').click(function () {
             Aprobados_buscar();
+        });
+
+        $('#txtFechaInicio, #txtFechaFin').blur(function () {
+            var id = this.id;
+            if (this.value == "" || this.value.length == 0) {
+                $('#' + id).focus();
+            } else if (!validateDate(this.value)) {
+                jOkas("Ingrese una fecha válida.", "Mensaje", function () {
+                    $('#' + id).val('');
+                    $('#' + id).focus();
+                });
+
+            }
         });
     });
 
@@ -95,13 +108,13 @@
                                         <input type="text" id="txtNombreDocumento" name="txtComprobante" maxlength="13" class="form-control" style="width: 100%" />
                                     </div>*@
                                 <div class="form-group col-sm-3">
-                                    <label class="" for="txtfechainicio" style="width: 100%; margin-top: 5px;">Fecha Inicio:</label>
-                                    <input type="text" maxlength="10" class="form-control" id="txtfechainicio" />
+                                    <label class="" for="txtFechaInicio" style="width: 100%; margin-top: 5px;">Fecha Inicio:</label>
+                                    <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
                                 </div>
 
                                 <div class="form-group col-sm-3">
-                                    <label class="" for="txtfechafin" style="width: 100%; margin-top: 5px;">Fecha Fin:</label>
-                                    <input type="text" maxlength="10" class="form-control" id="txtfechafin" />
+                                    <label class="" for="txtFechaFin" style="width: 100%; margin-top: 5px;">Fecha Fin:</label>
+                                    <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
                                 </div>
                             </div>
                             <div class="row">

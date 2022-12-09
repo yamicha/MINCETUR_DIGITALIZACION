@@ -8,8 +8,8 @@
         placeholder: "dd/MM/yyyy"
     });
 
-    //$('#txtFechaInicio').val(GetFecha());
-    //$('#txtFechaFin').val(GetFecha());
+    $('#txtFechaInicio').val(GetFecha());
+    $('#txtFechaFin').val(GetFecha());
 
 
 });
