@@ -28,6 +28,10 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Digitalizacion
         {
             return _rule.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
+        public List<enDocumento_Proceso> DocumentoProceso_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            return _rule.DocumentoProceso_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
+        }
         public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
         {
             return _rule.Documento_Exportar(@WHERE, ref auditoria);

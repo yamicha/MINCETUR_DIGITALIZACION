@@ -18,6 +18,10 @@ namespace NeServiciosDigitalizacion.Ventanilla.Digitalizacion
         {
             return _objDa.Documento_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
+        public List<enDocumento_Proceso> DocumentoProceso_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            return _objDa.DocumentoProceso_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
+        }
 
         public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
         {
