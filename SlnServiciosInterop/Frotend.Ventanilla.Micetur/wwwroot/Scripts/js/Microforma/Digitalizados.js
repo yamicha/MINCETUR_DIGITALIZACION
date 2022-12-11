@@ -11,5 +11,5 @@ jQuery('#aTabDigitalizados').click(function (e) {
 });
 
 function Digitalizados_buscar() {
-   Documento_ConfigurarGrilla( Digitalizados_grilla ,  Digitalizados_barra ,"Listado de documentos digitalizados", false, 5);
+    DocumentoProceso_ConfigurarGrilla(Digitalizados_grilla, Digitalizados_barra, "Listado de documentos digitalizados", 5);
 }

@@ -112,6 +112,93 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
             }
             return lista;
         }
+
+        public List<enDocumento_Proceso> DocumentoProceso_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enDocumento_Proceso> lista = new List<enDocumento_Proceso>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVDOCPROCESO_PAGINACION");
+            cmd.Parameters.Add("X_PAGINA", PAGINA);
+            cmd.Parameters.Add("X_NROREGISTROS", FILAS);
+            cmd.Parameters.Add("X_ORDEN_COLUMNA", ORDEN_COLUMNA);
+            cmd.Parameters.Add("X_ORDEN", ORDEN);
+            cmd.Parameters.Add("X_WHERE", @WHERE);
+            cmd.Parameters.Add("X_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        int CUENTA = int.Parse(cmd.Parameters["X_CUENTA"].Value.ToString());
+                        auditoria.Objeto = CUENTA;
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enDocumento_Proceso temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdDocProceso = drReader.GetOrdinal("ID_DOCUMENTO_PROCESO");
+                            int intIdDocumento = drReader.GetOrdinal("ID_DOCUMENTO");
+                            int intIdestadoDoc = drReader.GetOrdinal("ID_ESTADO_DOCUMENTO");
+                            int intDescEstado = drReader.GetOrdinal("DESCRIPCION_ESTADO");
+                            int intNroLote = drReader.GetOrdinal("NRO_LOTE");
+                            int intDescClasif = drReader.GetOrdinal("DES_CLASIF");
+                            int intDesTipoDoc = drReader.GetOrdinal("DES_TIP_DOC");
+                            int intAsunto = drReader.GetOrdinal("DES_ASUNTO");
+                            int intHoraInicio = drReader.GetOrdinal("HORA_INICIO");
+                            int intHoraFin = drReader.GetOrdinal("HORA_FIN");
+                            int intObservacion = drReader.GetOrdinal("OBSERVACION");
+                            int intIdUsuario = drReader.GetOrdinal("ID_USU_CREACION");
+                            int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enDocumento_Proceso();
+                                if (!drReader.IsDBNull(intIdDocProceso)) temp.ID_DOCUMENTO_PROCESO = long.Parse(arrResult[intIdDocProceso].ToString());
+                                if (!drReader.IsDBNull(intIdDocumento)) temp.ID_DOCUMENTO = long.Parse(arrResult[intIdDocumento].ToString());
+                                if (!drReader.IsDBNull(intIdestadoDoc)) temp.ID_ESTADO_DOCUMENTO = long.Parse(arrResult[intIdestadoDoc].ToString());
+                                if (!drReader.IsDBNull(intDescEstado)) temp.DESCRIPCION_ESTADO = arrResult[intDescEstado].ToString();
+                                if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USU_CREACION = long.Parse(arrResult[intIdUsuario].ToString());
+                                if (!drReader.IsDBNull(intNroLote)) temp.NRO_LOTE = arrResult[intNroLote].ToString();
+                                if (!drReader.IsDBNull(intDescClasif)) temp.DES_CLASIF = arrResult[intDescClasif].ToString();
+                                if (!drReader.IsDBNull(intDesTipoDoc)) temp.DES_TIP_DOC = arrResult[intDesTipoDoc].ToString();
+                                if (!drReader.IsDBNull(intAsunto)) temp.DES_ASUNTO = arrResult[intAsunto].ToString();
+                                if (!drReader.IsDBNull(intHoraInicio)) temp.HORA_INICIO = arrResult[intHoraInicio].ToString();
+                                if (!drReader.IsDBNull(intHoraFin)) temp.HORA_FIN = arrResult[intHoraFin].ToString();
+                                if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
+                                if (!drReader.IsDBNull(intHoraInicio)) temp.HORA_INICIO = arrResult[intHoraInicio].ToString();
+                                if (!drReader.IsDBNull(intHoraFin)) temp.HORA_FIN = arrResult[intHoraFin].ToString();
+                                if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new List<enDocumento_Proceso>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
+
         public HashSet<enDocumento> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

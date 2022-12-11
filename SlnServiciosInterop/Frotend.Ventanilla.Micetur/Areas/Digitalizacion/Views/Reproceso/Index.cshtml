@@ -7,6 +7,7 @@
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/DocumentoAdjunto.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
+<script defer src="@Url.Content("~/Scripts/js/Microforma/DocumentoProceso.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Lote.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Reprocesar.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Reprocesados.js")" type="text/javascript"></script>
@@ -17,6 +18,15 @@
     var IdLaserMin = @AppSettings.MinIdLaser;
     $(document).ready(function () {
         Remove_RemoverClases("liReproceso");
+        $('#txtfechafin,#txtfechainicio').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false,
+            placeholder: "dd/MM/yyyy",
+        }).datepicker("setDate", 'now');
+        $('#btnReprocesadosBuscar').click(Reprocesados_buscar)
         //$("#Reprocesar_btn_Fin").hide();
     });
 
@@ -78,6 +88,23 @@
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
                 <p>Listado de documentos reprocesados</p>
+            </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha inicio :</label>
+                        <input class="form-control" id="txtfechainicio" type="text" maxlength="13" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha fin :</label>
+                        <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="13" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="btnReprocesadosBuscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                    </div>
+                </fieldset>
             </div>
             <div class="row">
                 <div class="col-sm-12">

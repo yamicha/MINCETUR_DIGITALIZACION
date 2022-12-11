@@ -10,6 +10,7 @@ jQuery('#aTabReprocesados').click(function (e) {
 });
 
 function Reprocesados_buscar() {
-    $("#Recepcion_busqueda").show();
-    setTimeout("Documento_ConfigurarGrilla(" + Reprocesados_grilla + "," + Reprocesados_barra + ",\"Listado de documentos reprocesados\", false, 9);", 500);
+    //$("#Recepcion_busqueda").show();
+    //setTimeout("Documento_ConfigurarGrilla(" + Reprocesados_grilla + "," + Reprocesados_barra + ",\"Listado de documentos reprocesados\", false, 9);", 500);
+    DocumentoProceso_ConfigurarGrilla(Reprocesados_grilla, Reprocesados_barra, "Listado de documentos aprobados/Observados", 9);
 }

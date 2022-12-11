@@ -35,8 +35,8 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                     string StrCodDesEncriptado = string.Empty;
                     string llave = client.traeLlaveAsync().Result;
                     if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAESAsync(cod, llave).Result;
-                    int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    //int intIdUsu = 3248;
+                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    int intIdUsu = 3248;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
