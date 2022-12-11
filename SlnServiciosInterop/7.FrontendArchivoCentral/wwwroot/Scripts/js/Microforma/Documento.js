@@ -388,8 +388,8 @@ function GetRules() {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
     }
     if (_ID_MODULO == 11) {
-        let FECHA_INICIO = ($("#txtfechainicio").val() == null || $("#txtfechainicio").val() == '') ? '' : $("#txtfechainicio").val() + '';
-        let FECHA_FIN = ($("#txtfechafin").val() == null || $("#txtfechafin").val() == '') ? '' : $("#txtfechafin").val() + '';
+        let FECHA_INICIO = ($("#txtFechaInicio").val() == null || $("#txtFechaInicio").val() == '') ? '' : $("#txtFechaInicio").val() + '';
+        let FECHA_FIN = ($("#txtFechaFin").val() == null || $("#txtFechaFin").val() == '') ? '' : $("#txtFechaFin").val() + '';
         rules.push({ field: "TO_DATE(TO_CHAR(V.FEC_CREACION,'DD/MM/YYYY'), 'DD/MM/YYYY')", data: "TO_DATE('" + FECHA_INICIO + "', 'DD/MM/YYYY') and TO_DATE('" + FECHA_FIN + "','DD/MM/YYYY')", op: " between " });
     }
     if (_ID_MODULO == 3) { // Asignados

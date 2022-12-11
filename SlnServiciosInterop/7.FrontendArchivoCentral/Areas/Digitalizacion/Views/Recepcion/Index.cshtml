@@ -7,6 +7,7 @@
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script defer src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
+<script defer src="@Url.Content("~/Scripts/js/Microforma/Fecha.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Lote.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Carga/Tabla.js")" type="text/javascript"></script>
@@ -111,7 +112,7 @@
             jQuery('#bttnBuscarDocumento_Recepcionar').click();
             $("#inputBuscarDocumento_Recepcionar").val("");
             $("#inputBuscarDoMoID_CONTROL_CARGA_DEFAULTD_CONTROL_CARGA_DEFAULTID_CONTROL_CARGA_DEFAULTluID_CONTROL_CARGA_DEFAULTmento_Recepcionar").focus();
-ID_TABLA_DEFAULT        }
+       ID_TABLA_DEFAULT}
         var patron = /([0-9]|[.])/;
         var te = String.fromCharCode(charCode);
         return patron.test(te);
@@ -146,12 +147,6 @@ ID_TABLA_DEFAULT        }
         }
         return true;
     }
-<<<<<<< HEAD
-    
-=======
-
-
->>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
 </script>
 
 <style>
@@ -385,10 +380,6 @@ ID_TABLA_DEFAULT        }
                                 <button id="Asignados_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
                             </div>
                         </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                     </fieldset>
                 </div>
                 <div class="col-sm-8">
@@ -402,31 +393,15 @@ ID_TABLA_DEFAULT        }
                                     @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
                                 </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
-                        </div>
                         <div class="col-sm-4">
                             <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
                             <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
-=======
-                        <div class="row">
-                            <div class="col-sm-4  col-sm-offset-2">
-                                <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
-                                <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
-                            </div>
->>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="row">
-<<<<<<< HEAD
-                <div class="col-sm-3" style="padding-right:0px">
-
-=======
                 <div class="col-sm-4" style="padding-right:0px">
->>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
                     <div class="Asignados_Lote_jqGrid">
                         <table id="Asignados_Lote_grilla"></table>
                     </div>
@@ -438,9 +413,11 @@ ID_TABLA_DEFAULT        }
                     </div>
                     <div id="Asignados_barra"></div>
                 </div>
+
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-12">
             <ul class="leyenda">
@@ -450,12 +427,6 @@ ID_TABLA_DEFAULT        }
             </ul>
         </div>
     </div>
-    
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 0fe33ed8763970a011c30d353a2414ea990f9b59
 </div>
 <input id="hdfFlag" type="hidden" value="0" />
 <input id="hdfFlag2" type="hidden" value="0" />

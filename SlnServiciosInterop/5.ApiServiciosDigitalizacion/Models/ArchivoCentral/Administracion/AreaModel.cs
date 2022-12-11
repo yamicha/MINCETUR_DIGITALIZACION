@@ -13,13 +13,16 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion
         [DataMember(Name = "strDescArea", Order = 2)]
         public string DescArea { get; set; }
 
-        [DataMember(Name = "strFlgEstado", Order = 3)]
+        [DataMember(Name = "strSigla", Order = 3)]
+        public string Sigla { get; set; }
+
+        [DataMember(Name = "strFlgEstado", Order = 4)]
         public string FlgEstado { get; set; }
 
-        [DataMember(Name = "strUsuarioCreacion", Order = 4)]
+        [DataMember(Name = "strUsuarioCreacion", Order = 5)]
         public string UsuCreacion { get; set; }
 
-        [DataMember(Name = "strUsuarioModificacion", Order = 5)]
+        [DataMember(Name = "strUsuarioModificacion", Order = 6)]
         public string UsuModificacion { get; set; }
     }
 

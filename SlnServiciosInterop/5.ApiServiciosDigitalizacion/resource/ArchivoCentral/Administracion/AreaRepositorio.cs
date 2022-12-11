@@ -38,7 +38,36 @@ namespace ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion
                 return new List<enArea>();
             }
         }
-      
+
+        public enArea Area_ListarUno(enArea entidad, ref enAuditoria auditoria)
+        {
+            try
+            {
+                return _rule.Area_ListarUno(entidad, ref auditoria);
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                return new enArea();
+            }
+        }
+
+        public void Area_Insertar(enArea objenArea, ref enAuditoria auditoria)
+        {
+            _rule.Area_Insertar(objenArea, ref auditoria);
+        }
+        public void Area_Actualizar(enArea objenArea, ref enAuditoria auditoria)
+        {
+            _rule.Area_Actualizar(objenArea, ref auditoria);
+        }
+        public void Area_Estado(enArea objenArea, ref enAuditoria auditoria)
+        {
+            _rule.Area_Estado(objenArea, ref auditoria);
+        }
+        public void Area_Eliminar(enArea objenArea, ref enAuditoria auditoria)
+        {
+            _rule.Area_Eliminar(objenArea, ref auditoria);
+        }
         public void Dispose()
         {
             GC.SuppressFinalize(this);

@@ -17,7 +17,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
     $("#" + _grilla).GridUnload();
     var colNames = [
         '1', '2', '3', '4', '5', 'Nro Línea',
-        'Fondo', 'Nombre Documento', 'Sección', 'Serie', 'Descripción', 'Año', 'Folios', 'Imágenes', 'Obervación',
+        'Fondo', 'Sección', 'Serie', 'Nombre Documento', 'Descripción', 'Año', 'Folios', 'Imágenes', 'Obervación',
         'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'FLG_REPETIDO'
     ]
     var colModels = [
@@ -28,9 +28,9 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'ID_SERIE', index: 'ID_SERIE ', align: 'center', hidden: true }, //5
         { name: 'NRO_LINEA', index: 'NRO_LINEA ', align: 'center', width: 150, hidden: false }, //6
         { name: 'DES_FONDO', index: 'DES_FONDO', align: 'center', width: 200, hidden: false },
-        { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: false },
         { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false },
         { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 150, hidden: false },
+        { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: false },
         { name: 'DESCRIPCION', index: 'DESCRIPCION', align: 'center', width: 200, hidden: false },
         { name: 'ANIO', index: 'ANIO', align: 'center', width: 80, hidden: false },
         { name: 'FOLIOS', index: 'FOLIOS', align: 'center', width: 100, hidden: false },
@@ -330,7 +330,7 @@ function GetRules() {
     _gs_DESC_LARGA_SECCION = jQuery('#gs_' + _PREFIJO + 'DES_LARGA_SECCION').val();
     _gs_DESC_SERIE = jQuery('#gs_' + _PREFIJO + 'DES_SERIE').val();
 
-    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_NOM_DOCUMENTO').val();
+    _gs_NOM_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'NOM_DOCUMENTO').val();
     _gs_DESCRIPCION = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION').val();
     _gs_ANIO = jQuery('#gs_' + _PREFIJO + 'ANIO').val();
     _gs_FOLIOS = jQuery('#gs_' + _PREFIJO + 'FOLIOS').val();
@@ -386,6 +386,11 @@ function GetRules() {
     }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
+    }
+    if (_ID_MODULO == 11) {
+        let FECHA_INICIO = ($("#txtFechaInicio").val() == null || $("#txtFechaInicio").val() == '') ? '' : $("#txtFechaInicio").val() + '';
+        let FECHA_FIN = ($("#txtFechaFin").val() == null || $("#txtFechaFin").val() == '') ? '' : $("#txtFechaFin").val() + '';
+        rules.push({ field: "TO_DATE(TO_CHAR(V.FEC_CREACION,'DD/MM/YYYY'), 'DD/MM/YYYY')", data: "TO_DATE('" + FECHA_INICIO + "', 'DD/MM/YYYY') and TO_DATE('" + FECHA_FIN + "','DD/MM/YYYY')", op: " between " });
     }
     if (_ID_MODULO == 3) { // Asignados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
@@ -544,7 +549,7 @@ function Documento_Ver_Proceso_CargarGrilla() {
 
 function Digitalizar_ValidIdLaser(IdLaserMin, idlaser) {
     if (isNaN(idlaser) || idlaser == "") {
-        jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo carácter).", "Atención");
+        jAlert("El <b>ID LASERFICHER</b> no puede ser (0 - vacío o de tipo caracter).", "Atención");
         return false;
     }
     if (IdLaserMin > idlaser) {
@@ -614,4 +619,284 @@ async function Documento_EditValidarImagen(id) {
             }
         });
     }
+}
+/*=======================================================================QCALIDAD=================================================*/
+function Documento_ConfigurarGrilla_CALIDAD(_grilla, _barra, _titulo, _multiselect, _id_tab) {
+    //$(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
+    _ID_MODULO = _id_tab;
+    var VER_BOTON_IMAGEN = true;
+    var VER_BOTON_OBS = true;
+    var _NRO_REPROCESADOHidden = true;
+    var NOMBRE_BOTON_IMAGEN = "";
+    var url = BaseUrlApi + 'archivo-central/documento/listado-paginado';
+    if (_ID_MODULO == 0) {
+        _PREFIJO = "Detalle_";
+    }
+    if (_ID_MODULO == 2) {
+        _PREFIJO = "Asignar_";
+    } else if (_ID_MODULO == 3) {
+        _PREFIJO = "Asignados_";
+    } else if (_ID_MODULO == 4) {
+        _PREFIJO = "Digitalizar_";
+    } else if (_ID_MODULO == 5) {
+        _PREFIJO = "Digitalizados_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 6) {
+        _PREFIJO = "Control_Calidad_";
+        NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
+        _NRO_REPROCESADOHidden = false;
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 7) {
+        _PREFIJO = "Aprobados_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        _NRO_REPROCESADOHidden = false;
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 8) { // Reprocesar
+        _PREFIJO = "Reprocesar_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_OBS = false;
+    } else if (_ID_MODULO == 9) { // Reprocesados
+        _PREFIJO = "Reprocesados_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_IMAGEN = false;
+        VER_BOTON_OBS = false;
+    } else if (_ID_MODULO == 10) {
+        _PREFIJO = "Fedatar_";
+        NOMBRE_BOTON_IMAGEN = 'Validar Imagen';
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 11) {
+        _PREFIJO = "Fedatados_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 12) {
+        _PREFIJO = "MicroformaGrabar_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_IMAGEN = false;
+    } else if (_ID_MODULO == 13) {
+        _PREFIJO = "Microforma_";
+        NOMBRE_BOTON_IMAGEN = 'Ver Imagen';
+        VER_BOTON_IMAGEN = false;
+    }
+    $("#" + _grilla).GridUnload();
+    var colNames = [
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Documento', 'Nombre Documento', 'Fondo', '', 'Sección',
+        'Serie', 'Descripción', 'Año', 'Folios', 'Imágenes', 'Observación', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'ID_LASER'
+    ]
+    var colModels = [
+        { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
+        { name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
+        { name: _PREFIJO + 'ID_CONTROL_CARGA', index: _PREFIJO + 'ID_CONTROL_CARGA ', align: 'center', hidden: true }, //2
+        { name: _PREFIJO + 'ID_FONDO', index: _PREFIJO + 'ID_FONDO ', align: 'center', hidden: true }, //3
+        { name: _PREFIJO + 'ID_SECCION', index: _PREFIJO + 'ID_SECCION ', align: 'center', hidden: true }, //4
+        { name: _PREFIJO + 'ID_SERIE', index: _PREFIJO + 'ID_SERIE ', align: 'center', hidden: true }, //5
+        { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //6
+        { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //7
+
+        { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //8
+        { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //9
+        { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //10
+        { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true }, //11  
+        { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //12
+        { name: _PREFIJO + '_NOM_DOCUMENTO', index: _PREFIJO + '_NOM_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //13
+        { name: _PREFIJO + 'DES_FONDO', index: _PREFIJO + 'DES_FONDO', align: 'center', width: 200, hidden: false, sortable: false }, // 14
+        { name: _PREFIJO + 'NOM_DOCUMENTO', index: _PREFIJO + 'NOM_DOCUMENTO', align: 'center', width: 200, hidden: true }, // 15
+        { name: _PREFIJO + 'DES_LARGA_SECCION', index: _PREFIJO + 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false, sortable: false },// 16
+        { name: _PREFIJO + 'DES_SERIE', index: _PREFIJO + 'DES_SERIE', align: 'center', width: 150, hidden: false, sortable: false },// 17
+        { name: _PREFIJO + 'DESCRIPCION', index: _PREFIJO + 'DESCRIPCION', align: 'center', width: 200, hidden: false, sortable: false },// 18
+        { name: _PREFIJO + 'ANIO', index: _PREFIJO + 'ANIO', align: 'center', width: 80, hidden: false, sortable: false },// 19
+        { name: _PREFIJO + 'FOLIOS', index: _PREFIJO + 'FOLIOS', align: 'center', width: 100, hidden: false, sortable: false },// 20
+        { name: _PREFIJO + 'IMAGEN', index: _PREFIJO + 'IMAGEN', align: 'center', width: 100, hidden: false, sortable: false },// 20
+        { name: _PREFIJO + 'OBSERVACION', index: _PREFIJO + 'OBSERVACION ', align: 'center', width: 300, hidden: false, sortable: false },// 21
+
+        { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 22
+        { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false },// 23
+        { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 24
+        { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false },// 25
+        { name: _PREFIJO + 'ID_LASERFICHE', index: _PREFIJO + 'ID_LASERFICHE ', align: 'center', width: 150, hidden: true, sortable: false },// 26
+    ];
+    var opciones = {
+        GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
+        sort: 'desc', getrules: `GetRulesCalidad()`,
+        gridCompleteFunc: function () {
+            ConfigurarColor(_grilla);
+
+            var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
+            if (allJQGridData.length == 0) {
+                $(".ui-jqgrid-hdiv").css("overflow-x", "auto");
+            }
+            else {
+                //
+                var e = $(".ui-jqgrid-hdiv");
+                var ex = $(".ui-jqgrid-bdiv");
+                //scrollHeight: 68
+                for (var ii = 0; ii < e.length; ii++) {
+                    e[ii].scrollLeft = ex[ii].scrollLeft;
+                    //e[1].scrollLeft = ex[1].scrollLeft;
+                }
+                $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
+            }
+            jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
+        },
+        exportarExcel: function () {
+            Documento_Exportar(GetRulesCalidad());
+        }
+    };
+    SICA.Grilla(_grilla, _barra, '', '500', '', _titulo, url, _PREFIJO + 'ID_DOCUMENTO', colNames, colModels, 'ID_DOCUMENTO', opciones);
+    //$("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
+    jqGridResponsive($(".Tabla_jqGrid"));
+
+    jQuery("#" + _grilla).jqGrid('setLabel', 0, 'NewLabel');
+    $("#" + _grilla + "_cb").css("width", "30px");
+    $("#" + _grilla + "_cb tbody tr").children().first("td").css("width", "30px");
+    $("#Recepcion_busqueda").hide();
+}
+function GetRulesCalidad() {
+    var rules = new Array();
+    var _ID_CONTROL_CARGA = null;
+    var _ID_ESTADO_DOCUMENTO = null;
+    if (_ID_MODULO == 1) { // Carga temporales
+        _ID_CONTROL_CARGA = jQuery('#ID_CONTROL_CARGA').val() == '' ? '0' : "'" + jQuery('#ID_CONTROL_CARGA').val() + "'";
+    } else if (_ID_MODULO == 2) { // Asignar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 3) { // Asignados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 4) { // Digitalizar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 2;
+    } else if (_ID_MODULO == 5) { // Digitalizados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 3;
+    } else if (_ID_MODULO == 6) { // Aprobar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 3;
+    } else if (_ID_MODULO == 7) { // Aprobados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 4;
+    } else if (_ID_MODULO == 8) { // Reprocesar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 5;
+    } else if (_ID_MODULO == 9) { // Reprocesados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 6;
+    } else if (_ID_MODULO == 10) { // Fedatar
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 4;
+    } else if (_ID_MODULO == 11) { // Fedatados
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 7;
+    } else if (_ID_MODULO == 12) { // Grabar 
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 1;
+    } else if (_ID_MODULO == 13) { // Microforma 
+        _ID_CONTROL_CARGA = null;
+        _ID_ESTADO_DOCUMENTO = 9;
+    }
+    _gs_NOMBRE_USUARIO = jQuery('#gs_' + _PREFIJO + 'NOMBRE_USUARIO').val();
+    _gs_DESCRIPCION_ESTADO = "";
+    _gs_COD_DOCUMENTO = "";
+    if (_ID_MODULO != 1) {
+        _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + '_DESCRIPCION_ESTADO').val();
+        _gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + '_COD_DOCUMENTO').val();
+    } else {
+        _gs_DESCRIPCION_ESTADO = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION_ESTADO').val();
+        _gs_COD_DOCUMENTO = jQuery('#gs_' + _PREFIJO + 'COD_DOCUMENTO').val();
+    }
+
+    _gs_DESC_FONDO = jQuery('#gs_' + _PREFIJO + 'DES_FONDO').val();
+    _gs_DESC_LARGA_SECCION = jQuery('#gs_' + _PREFIJO + 'DES_LARGA_SECCION').val();
+    _gs_DESC_SERIE = jQuery('#gs_' + _PREFIJO + 'DES_SERIE').val();
+
+    _gs_NOM_DOCUMENTO = jQuery('#txtNombreDocumento').val() == "" ? jQuery('#gs_' + _PREFIJO + 'NOM_DOCUMENTO').val() : jQuery('#txtNombreDocumento').val();
+    _gs_DESCRIPCION = jQuery('#gs_' + _PREFIJO + 'DESCRIPCION').val();
+    _gs_ANIO = jQuery('#gs_' + _PREFIJO + 'ANIO').val();
+    _gs_FOLIOS = jQuery('#gs_' + _PREFIJO + 'FOLIOS').val();
+    _gs_OBSERVACION = jQuery('#gs_' + _PREFIJO + 'OBSERVACION').val();
+
+    _gs_USU_CREACION = jQuery('#gs_' + _PREFIJO + 'USU_CREACION').val();
+    _gs_USU_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'USU_MODIFICACION').val();
+    //_gs_STR_FEC_CREACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val() == null ? jQuery('#txtFechaInicio').val() : jQuery('#gs_' + _PREFIJO + 'STR_FEC_CREACION').val();
+    _gs_STR_FEC_CREACION = jQuery('#txtFechaInicio').val();
+    _gs_STR_FEC_FIN = jQuery('#txtFechaFin').val();
+    _gs_ID_ESTADO = jQuery('#comboEstadoDocumento').val();
+    _gs_STR_FEC_MODIFICACION = jQuery('#gs_' + _PREFIJO + 'STR_FEC_MODIFICACION').val();
+
+
+    //
+    var _NOMBRE_USUARIO = _gs_NOMBRE_USUARIO == '' || _gs_NOMBRE_USUARIO == undefined ? null : "UPPER('" + _gs_NOMBRE_USUARIO + "')";
+    //var _DESCRIPCION_ESTADO = _gs_DESCRIPCION_ESTADO == '' || _gs_DESCRIPCION_ESTADO == undefined ? null : "'" + _gs_DESCRIPCION_ESTADO + "'";
+    var _ID_ESTADO = _gs_ID_ESTADO;
+    var _DESC_FONDO = _gs_DESC_FONDO == '' || _gs_DESC_FONDO == undefined ? null : "UPPER('" + _gs_DESC_FONDO + "')";
+    var _DESC_LARGA_SECCION = _gs_DESC_LARGA_SECCION == '' || _gs_DESC_LARGA_SECCION == undefined ? null : "UPPER('" + _gs_DESC_LARGA_SECCION + "')";
+    var _DESC_SERIE = _gs_DESC_SERIE == '' || _gs_DESC_SERIE == undefined ? null : "UPPER('" + _gs_DESC_SERIE + "')";
+
+    var _NOM_DOCUMENTO = _gs_NOM_DOCUMENTO == '' || _gs_NOM_DOCUMENTO == undefined ? null : "UPPER('" + _gs_NOM_DOCUMENTO + "')";
+    var _DESCRIPCION = _gs_DESCRIPCION == '' || _gs_DESCRIPCION == undefined ? null : "UPPER('" + _gs_DESCRIPCION + "')";
+    var _ANIO = _gs_ANIO == '' || _gs_ANIO == undefined ? null : "'" + _gs_ANIO + "'";
+    var __FOLIOS = _gs_FOLIOS == '' || _gs_FOLIOS == undefined ? null : "UPPER('" + _gs_FOLIOS + "')";
+    var _OBSERVACION = _gs_OBSERVACION == '' || _gs_OBSERVACION == undefined ? null : "UPPER('" + _gs_OBSERVACION + "')";
+    //var _USU_CREACION = _gs_USU_CREACION == '' || _gs_USU_CREACION == undefined ? null : "UPPER('" + _gs_USU_CREACION + "')";
+    //var _USU_MODIFICACION = _gs_USU_MODIFICACION == '' || _gs_USU_MODIFICACION == undefined ? null : "UPPER('" + _gs_USU_MODIFICACION + "')";
+    var _STR_FEC_CREACION = _gs_STR_FEC_CREACION == '' || _gs_STR_FEC_CREACION == undefined ? null : "'" + _gs_STR_FEC_CREACION + "'";
+    var _STR_FEC_FIN = _gs_STR_FEC_FIN == '' || _gs_STR_FEC_FIN == undefined ? null : "'" + _gs_STR_FEC_FIN + "'";
+    //var _STR_FEC_MODIFICACION = _gs_STR_FEC_MODIFICACION == '' || _gs_STR_FEC_MODIFICACION == undefined ? null : "'" + _gs_STR_FEC_MODIFICACION + "'";
+
+    var POR = "'%'";
+
+    rules = [
+        //{ field: 'V.ID_CONTROL_CARGA', data: 'NVL(' + _ID_CONTROL_CARGA + ',V.ID_CONTROL_CARGA)', op: " = " },
+        //{ field: 'V.DES_FONDO', data: POR + ' || ' + _DESC_FONDO + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DES_LARGA_SECCION', data: POR + ' || ' + _DESC_LARGA_SECCION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DES_SERIE', data: POR + ' || ' + _DESC_SERIE + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.NOM_DOCUMENTO)', data: POR + ' || ' + _NOM_DOCUMENTO + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DESCRIPCION', data: POR + ' || ' + _DESCRIPCION + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
+        //{ field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
+        { field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE(" + _STR_FEC_CREACION + ", 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE(" + _STR_FEC_FIN + ", 'DD/MM/YYYY'))+1", op: " " },
+    ];
+
+    if (_ID_MODULO != 1) {
+        //rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
+        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data:  _ID_ESTADO, op: " = " });
+        if (_ID_MODULO != 2)
+            rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
+    }
+    if (_ID_MODULO == 0) { // detalle
+        //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
+    if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
+    }
+    if (_ID_MODULO == 3) { // Asignados
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+    }
+    if (_ID_MODULO == 12) { // Grabar 
+        rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " != " });
+    }
+    if (_ID_MODULO == 13) { // Grabados
+        rules.push({ field: 'V.ID_MICROFORMA', data: 'NVL(' + _ID_MICROFORMA + ',V.ID_MICROFORMA)', op: " = " });
+    }
+    if (_ID_MODULO == 6) { // Aprobar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6)', op: " in " });
+    }
+    if (_ID_MODULO == 8) { // Reprocesar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+    }
+    if (_ID_MODULO == 8) { // Reprocesar
+        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+    }
+    if (_ID_MODULO == 1 || _ID_MODULO == 2) {
+        rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
+    }
+    if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3) {
+        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
+    return rules;
 }

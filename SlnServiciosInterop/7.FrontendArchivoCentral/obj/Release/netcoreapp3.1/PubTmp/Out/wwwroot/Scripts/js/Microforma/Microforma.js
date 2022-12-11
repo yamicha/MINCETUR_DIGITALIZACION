@@ -71,6 +71,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
 }
 
 function GetRulesMicroforma() {
+    debugger;
     var rules = new Array();
     var POR = "'%'";
     if (_MICROMODULO == MicroModulo.Reprocesar) { // Reprocesar
@@ -78,21 +79,37 @@ function GetRulesMicroforma() {
     }
     if (_MICROMODULO == MicroModulo.Control) { // Reprocesador, grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicio').val();
+        var _STR_FEC_FIN = $('#txtFechaFin').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
+        var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+        var _STR_FEC_CREACION = $('#txtFechaInicio').val();
+        var _STR_FEC_FIN = $('#txtFechaFin').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
+        var _STR_FEC_CREACION = $('#txtFechaInicioGrabada').val();
+        var _STR_FEC_FIN = $('#txtFechaFinGrabada').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
-    } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
+        var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
+        var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+    }
+    if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
     }
@@ -571,4 +588,118 @@ function MicroformaFinalizado_GetOne(id) {
             }
         }
     });
+}
+
+//MODULO REVISION PERIODICA
+function MicroformaRevisionPeriodica_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab, _select = false) {
+    _MICROMODULO = _tab;
+    var EstadoHidden = false;
+    var OpcionesHidden = true;
+    if (_MICROMODULO >= MicroModulo.RevisionPend) {
+        EstadoHidden = true;
+        OpcionesHidden = false;
+    }
+    var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
+    var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
+    $("#" + _Grilla).GridUnload();
+    var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
+        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme'];
+    var colModels = [
+        { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
+        { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, search: false, sortable: false },// 1
+        { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 100, hidden: false, search: true },// 2
+        { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden, search: false }, // 3
+        { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 4
+        { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 300, hidden: true }, // 5
+        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 7
+        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: false }, // 9
+        { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
+        { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
+
+    ];
+    var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
+    var colModels_2 = [
+        { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true, sortable: false, key: true },
+        { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 200, hidden: false, sortable: false },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 150, hidden: false },
+    ];
+    var opcionesSubgrid = {
+        ColNames: colNames_2, Url: urlsubgrid, ColModels: colModels_2, Width: 595, Height: '',
+        selectRowFunc: function (rowkey) {
+            if (rowkey == undefined) _ID_LOTE = 0;
+            _ID_LOTE = parseInt(rowkey);
+            Documento_Detalle_buscar(_GrillaDocumento, _BarraDocumento);
+        }
+    }
+    var opciones = {
+        GridLocal: false, multiselect: _select, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc',
+        estadoSubGrid: true, viewrecords: true, subGrid: opcionesSubgrid, getrules: `GetRulesMicroformaRevisionPeriodica()`, rules: true,
+        gridCompleteFunc: function () {
+            //MicroformaColorRevision(_Grilla);
+        }
+    };
+    SICA.Grilla(_Grilla, _Barra, '', '550', '', '', url, "", colNames, colModels, "", opciones);
+    $("#" + _Grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
+    jqGridResponsive($(".jqGridLote"));
+}
+
+function GetRulesMicroformaRevisionPeriodica() {
+    var rules = new Array();
+    var POR = "'%'";
+    if (_MICROMODULO == MicroModulo.Reprocesar) { // Reprocesar
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(3)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.Control) { // Reprocesador, grabados
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.Conforme) { // conformes
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
+        rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+    }
+    if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
+    }
+    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
+        rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
+    } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
+        rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
+    }
+    if (_MICROMODULO == MicroModulo.RevisionObs) { // revision Obs 
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
+        rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='0')`, op: "" });
+    }
+    if (_MICROMODULO == MicroModulo.RevisionAnulada) { // revision anulada 
+        rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
+        rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='1')`, op: "" });
+    }
+
+    _gs_NRO_VOL = $('#gs_NRO_VOLUMEN').val() != undefined ? `'${$('#gs_NRO_VOLUMEN').val()}'` : `''`;
+    _gs_DESC_SPORTE = $('#gs_DESC_SOPORTE_X').val() != undefined ? `'${$('#gs_DESC_SOPORTE_X').val()}'` : `''`;
+    _gs_DESC_ESTADO = $('#gs_DESC_ESTADO').val() != undefined ? `'${$('#gs_DESC_ESTADO').val()}'` : `''`;
+    //_gs_FEC_CREACION = $('#gs_STR_FEC_CREACION').val() != undefined ? `'${$('#gs_STR_FEC_CREACION').val()}'` : `''`;
+    debugger;
+    if (_MICROMODULO == 7) {
+        _gs_FEC_CREACION = $('#txtFechaInicio').val();
+        _gs_FEC_FIN = $('#txtFechaFin').val();
+    } else if (_MICROMODULO == 8) {
+        _gs_FEC_CREACION = $('#txtFechaInicioObservado').val();
+        _gs_FEC_FIN = $('#txtFechaFinObservado').val();
+    } else if (_MICROMODULO == 9) {
+        _gs_FEC_CREACION = $('#txtFechaInicioAnulada').val();
+        _gs_FEC_FIN = $('#txtFechaFinAnulada').val();
+    }
+    
+
+    rules.push({ field: 'NRO_VOLUMEN', data: POR + ' || ' + _gs_NRO_VOL + ' || ' + POR, op: " LIKE " });
+    rules.push({ field: 'CODIGO_SOPORTE', data: POR + ' || ' + _gs_DESC_SPORTE + ' || ' + POR, op: " LIKE " });
+    rules.push({ field: 'DESC_ESTADO', data: POR + ' || ' + _gs_DESC_ESTADO + ' || ' + POR, op: " LIKE " });
+    //rules.push({ field: 'STR_FEC_CREACION', data: POR + ' || ' + _gs_FEC_CREACION + ' || ' + POR, op: " LIKE " });
+    rules.push({ field: '', data: "V.FEC_CREACION >= TO_DATE('" + _gs_FEC_CREACION + "', 'DD/MM/YYYY') AND V.FEC_CREACION <= TO_dATE('" + _gs_FEC_FIN + "', 'DD/MM/YYYY')", op: " " });
+    return rules;
 }

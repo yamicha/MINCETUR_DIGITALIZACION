@@ -53,17 +53,17 @@ $(document).ready(function () {
     });
 });
 function RevisionPendienteBuscar() {
-    Microforma_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra,
+    MicroformaRevisionPeriodica_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra,
         MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend, true);
     Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra);
 }
 function RevisionObservadoBuscar() {
-    Microforma_ConfigurarGrilla(MicroObs_Lote_grilla, MicroObs_Lote_barra,
+    MicroformaRevisionPeriodica_ConfigurarGrilla(MicroObs_Lote_grilla, MicroObs_Lote_barra,
         MicroObs_grilla, MicroObs_barra, MicroModulo.RevisionObs, false);
     Documento_Detalle_buscar(MicroObs_grilla, MicroObs_barra);
 }
 function RevisionAnuladasBuscar() {
-    Microforma_ConfigurarGrilla(MicroAnuladas_Lote_grilla, MicroAnuladas_Lote_barra,
+    MicroformaRevisionPeriodica_ConfigurarGrilla(MicroAnuladas_Lote_grilla, MicroAnuladas_Lote_barra,
         MicroAnuladas_grilla, MicroAnuladas_barra, MicroModulo.RevisionAnulada, false);
     Documento_Detalle_buscar(MicroAnuladas_grilla, MicroAnuladas_barra);
 }
@@ -89,7 +89,7 @@ async function Revision_Grabar() {
     var IdDocRevision = 0;
     var TipoPruebaText = "";
     $('#MsgValidActa').hide();
-    var _CONFORME = $("#MICROFORMA_FLG_CONFORME").val();
+    var _CONFORME = $("#FLG_CONFORME").val();
     if (_CONFORME == "0") {
         pregunta = "darle 'NO CONFORME'";
     } else {
@@ -258,7 +258,6 @@ async function Microforma_ReprocesoGetOne(id) {
 async function Revision_ReprocesoGrabar() {
     jConfirm(" ¿ Desea reprocesar esta microforma  ? ", "Atención", async function (r) {
         if (r) {
-            debugger; 
             var IdDocApertura = $('#DownloadApertura').data('file');
             var IdDocCierre = $('#DownloadCierre').data('file');
             var IdDocConformidad = $('#DownloadConformidad').data('file');
@@ -334,27 +333,4 @@ async function Revision_ReprocesoGrabar() {
 }
 
 //********************************************************** tab ANULADOS *********************************************************/
-// METODO QUE VALIDA LA FECHA
-const validateDate = (birthDate) => {
-    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
 
-    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
-    if (!birthDate.match(DATE_REGEX)) {
-        return false
-    }
-
-    /* Comprobar los días del mes */
-    const day = parseInt(birthDate.split('/')[0])
-    const month = parseInt(birthDate.split('/')[1])
-    const year = parseInt(birthDate.split('/')[2])
-    const monthDays = new Date(year, month, 0).getDate()
-    if (day > monthDays) {
-        return false
-    }
-
-    /* Comprobar que el año no sea superior al actual*/
-    //if (year > CURRENT_YEAR) {
-    //    return false
-    //}
-    return true
-}

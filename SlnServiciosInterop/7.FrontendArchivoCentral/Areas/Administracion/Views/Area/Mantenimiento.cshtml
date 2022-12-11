@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+@model Frotend.ArchivoCentral.Micetur.Areas.Administracion.Models.AreaModelView
+<script type="text/javascript">
+    $(document).ready(function () {
+    if ($('#hd_AREA_ACCION').val() == "M")
+        AreaLoadFormEdit(@Model.ID_AREA);
+    });
+    jQuery('#AREA_BTNGRABAR').click(function (e) {
+        Area_RegistrarDatos();
+    });
+</script>
+@using (Html.BeginForm("Proceso", "AREA", new { @area = "Administracion" }, FormMethod.Post, false, new { @id = "frmMantenimientoArea", @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:100%;">
+            <div class="modal-header" style="cursor: move; background-color: #530d0d;">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                @{
+                    if (Model.ACCION == "N")
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Nueva Área</h4>
+                    }
+                    else
+                    {
+                        <h4 class="modal-title"><i class="clip-pencil"></i> Mantenimiento  de Área</h4>
+                    }
+                }
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DESC_AREA, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(model => model.DESC_AREA, new { @class = "form-control", @maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.DESC_AREA, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SIGLA, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(model => model.SIGLA, new { @class = "form-control", @maxlength = "300" })
+                            @Html.ValidationMessageFor(model => model.SIGLA, string.Empty, new { @class = "cssMessageError" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="AREA_BTNGRABAR" class="btn btn-blue" type="button" data-toggle="modal"><i class="fa fa-save" /> Grabar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="fa fa-share-square-o"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("hd_AREA_ACCION", Model.ACCION)
+    @Html.Hidden("hd_AREA_ID_AREA", Model.ID_AREA)
+}
+

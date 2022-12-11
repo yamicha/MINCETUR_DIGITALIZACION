@@ -2,7 +2,7 @@
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote','Area Procedencia', 'Fecha de Creación','Usuario Recepción'];
+        'Lote','Área Procedencia', 'Fecha de Creación','Usuario Recepción'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
@@ -49,8 +49,8 @@ function Lote_VerDocumentos(CODIGO) {
 
 function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA, _FEHCA_INICIO, _FECHA_FIN) {
     if (_FEHCA_INICIO == null && _FECHA_FIN == null) {
-        _FEHCA_INICIO = GetFecha();
-        _FECHA_FIN = GetFecha();
+        _FEHCA_INICIO = GetFechaHoy();
+        _FECHA_FIN = GetFechaHoy();
     }
     var item = {
         flgDevuelto: _FLG_DEVOLUCION,
@@ -96,32 +96,32 @@ function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA, _FEHCA_INI
 
 
 // METODO QUE VALIDA LA FECHA
-const validateDate = (birthDate) => {
-    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
+//const validateDate = (birthDate) => {
+//    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
 
-    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
-    if (!birthDate.match(DATE_REGEX)) {
-        return false
-    }
+//    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
+//    if (!birthDate.match(DATE_REGEX)) {
+//        return false
+//    }
 
-    /* Comprobar los días del mes */
-    const day = parseInt(birthDate.split('/')[0])
-    const month = parseInt(birthDate.split('/')[1])
-    const year = parseInt(birthDate.split('/')[2])
-    const monthDays = new Date(year, month, 0).getDate()
-    if (day > monthDays) {
-        return false
-    }
+//    /* Comprobar los días del mes */
+//    const day = parseInt(birthDate.split('/')[0])
+//    const month = parseInt(birthDate.split('/')[1])
+//    const year = parseInt(birthDate.split('/')[2])
+//    const monthDays = new Date(year, month, 0).getDate()
+//    if (day > monthDays) {
+//        return false
+//    }
 
-    /* Comprobar que el año no sea superior al actual*/
-    //if (year > CURRENT_YEAR) {
-    //    return false
-    //}
-    return true
-}
+//    /* Comprobar que el año no sea superior al actual*/
+//    //if (year > CURRENT_YEAR) {
+//    //    return false
+//    //}
+//    return true
+//}
 
 //METODO QUE TRAE LA FECHA HOY
-function GetFecha() {
+function GetFechaHoy() {
 
     var f = new Date();
     var fechaActual = '';

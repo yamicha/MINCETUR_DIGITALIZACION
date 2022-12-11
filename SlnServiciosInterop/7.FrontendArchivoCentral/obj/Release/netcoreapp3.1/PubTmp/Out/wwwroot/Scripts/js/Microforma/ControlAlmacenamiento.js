@@ -50,6 +50,11 @@ function ControlFinalizadoBuscar() {
         MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.CAlmacenFin, true);
     Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
 }
+
+//function MicroformaAlmacenamiento_BuscarFecha() {
+//    Microforma_ConfigurarGrilla(MicroAlmacen_Lote_grilla, MicroAlmacen_Lote_barra, MicroAlmacen_grilla, MicroAlmacen_barra, MicroModulo.CAlmacen);
+//}
+
 async function Microforma_MicroArchivoGrabar() {
     jConfirm(" ¿ Desea guardar datos de microArchivo ingresados ? ", "Atención", async function (r) {
         if (r) {
@@ -64,7 +69,8 @@ async function Microforma_MicroArchivoGrabar() {
                 TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                 Direccion: $("#MA_DIRECCION").val(),
                 Observacion: $("#MA_OBSERVACION").val(),
-                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                //IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                IdUsuario: parseInt($("#comboUsuario").val()),
                 UsuCreacion: $("#inputHddId_Usuario").val(),
                 IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                 Fecha: $("#MA_FECHA").val(),
@@ -163,7 +169,8 @@ function MicroArchivo_Editar() {
                 TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                 Direccion: $("#MA_DIRECCION").val(),
                 Observacion: $("#MA_OBSERVACION").val(),
-                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                //IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                IdUsuario: parseInt($("#comboUsuario").val()),
                 UsuCreacion: $("#inputHddId_Usuario").val(),
                 IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                 Fecha: $("#MA_FECHA").val(),
@@ -235,7 +242,8 @@ function MicroArchivo_HistorialCargarGrilla(_Grilla) {
                         {
                             CODIGO: ix,
                             ID_MICROARCHIVO: v.ID_MICROARCHIVO,
-                            ID_DOC_CONFORMIDAD: v.ID_DOC_CONFORMIDAD,
+                            //ID_DOC_CONFORMIDAD: v.ID_DOC_CONFORMIDAD,
+                            ID_DOC_CONFORMIDAD: v.ID_DOC_ALMACENAMIENTO,
                             STR_TIPO_ARCHIVO: v.STR_TIPO_ARCHIVO,
                             DIRECCION: v.DIRECCION,
                             FECHA: v.FECHA,
@@ -288,26 +296,26 @@ function MicroArchivo_ActaFormatter(cellvalue, options, rowObject) {
 
 
 // METODO QUE VALIDA LA FECHA
-const validateDate = (birthDate) => {
-    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
+//const validateDate = (birthDate) => {
+//    const DATE_REGEX = /^(0[1-9]|[1-2]\d|3[01])(\/)(0[1-9]|1[012])\2(\d{4})$/
 
-    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
-    if (!birthDate.match(DATE_REGEX)) {
-        return false
-    }
+//    /* Comprobar formato dd/mm/yyyy, que el no sea mayor de 12 y los días mayores de 31 */
+//    if (!birthDate.match(DATE_REGEX)) {
+//        return false
+//    }
 
-    /* Comprobar los días del mes */
-    const day = parseInt(birthDate.split('/')[0])
-    const month = parseInt(birthDate.split('/')[1])
-    const year = parseInt(birthDate.split('/')[2])
-    const monthDays = new Date(year, month, 0).getDate()
-    if (day > monthDays) {
-        return false
-    }
+//    /* Comprobar los días del mes */
+//    const day = parseInt(birthDate.split('/')[0])
+//    const month = parseInt(birthDate.split('/')[1])
+//    const year = parseInt(birthDate.split('/')[2])
+//    const monthDays = new Date(year, month, 0).getDate()
+//    if (day > monthDays) {
+//        return false
+//    }
 
-    /* Comprobar que el año no sea superior al actual*/
-    //if (year > CURRENT_YEAR) {
-    //    return false
-    //}
-    return true
-}
+//    /* Comprobar que el año no sea superior al actual*/
+//    //if (year > CURRENT_YEAR) {
+//    //    return false
+//    //}
+//    return true
+//}

@@ -13,7 +13,7 @@ jQuery('#aTabAsignados').click(function (e) {
     _ID_LOTE = 0;
     Asignados_CargarUsuarios(); 
     Asignados_ListaDocumentos = new Array();
-    Lote_CargarGrilla(Asignados_Lote_grilla,"","0");
+    Lote_CargarGrilla(Asignados_Lote_grilla, "", "0");
     Asignados_buscar();
 
 });
@@ -21,6 +21,10 @@ jQuery('#aTabAsignados').click(function (e) {
 function Asignados_buscar() {
     $("#Recepcion_busqueda").show();
     setTimeout("Documento_ConfigurarGrilla(" + Asignados_grilla + "," + Asignados_barra + ",\"Listado de documentos asignados\", true, 3);", 500);
+}
+
+function Asignados_Buscar_Fecha(fechaInicio, fechaFin) {
+    Lote_CargarGrilla(Asignados_Lote_grilla, "", "0", fechaInicio, fechaFin);
 }
 
 jQuery('#Asignados_btn_Reasignar').click(function (e) {
@@ -106,3 +110,4 @@ function Asignados_CargarUsuarios() {
     }
     LoadComboApi("archivo-central/operador/listar", "ID_DIGITALIZADOR2", OptionsCboTabla);
 }
+

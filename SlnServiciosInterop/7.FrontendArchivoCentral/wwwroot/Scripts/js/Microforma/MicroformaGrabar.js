@@ -53,7 +53,7 @@ function MicroformaLote_ConfigurarGrilla() {
             Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
         },
     };
-    SICA.Grilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, '', '390', '', '', "", "", colNames, colModels, "", opciones);
+    SICA.Grilla(MicroformaGrabar_Lote_grilla, MicroformaGrabar_Lote_barra, '', '545', '', '', "", "", colNames, colModels, "", opciones);
     $("#" + MicroformaGrabar_Lote_grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
     jqGridResponsive($(".jqGridLote"));
 }
