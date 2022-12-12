@@ -30,6 +30,7 @@ namespace EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion
         public long ID_ESTADO { get; set; }
         public long NRO_REVISIONES { get; set; }
         public string STR_FEC_GRABACION { get; set; }
+        public long NRO_REPROCESADOS { get; set; }
         public enMicroArchivo MicroArchivo { get; set; }
 
 

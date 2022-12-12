@@ -28,10 +28,14 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     }
     var fechaGrabado = true;
     var fechaCreacion = false;
+    var usuCreacion = true;
+    var nroReprocesado = true;
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
     if (_MICROMODULO == MicroModulo.Grabados) {
         fechaGrabado = false;
         fechaCreacion = true;
+        usuCreacion = false;
+        nroReprocesado = false;
         url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
     } else if (_MICROMODULO == MicroModulo.Control) {
         url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
@@ -40,7 +44,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme', 'Fecha de Grabación'];
+        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme', 'Fecha de Grabación', 'Operador Grabación', 'Nro. Reprocesados'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, search: false , sortable: false },// 1
@@ -54,6 +58,8 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
         { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: fechaGrabado, search: true }, // 12
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: usuCreacion, search: true }, // 13
+        { name: 'NRO_REPROCESADOS', index: 'NRO_REPROCESADOS', align: 'center', width: 250, hidden: nroReprocesado, search: true }, // 14
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
     var colModels_2 = [
