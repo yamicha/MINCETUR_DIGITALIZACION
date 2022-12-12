@@ -8,12 +8,20 @@ var Asignados_ListaDocumentos = new Array();
 $(document).ready(function () {
     Lote_ConfigurarGrilla(Asignados_Lote_grilla, Asignados_Lote_barra, false);
     jQuery('#aTabAsignados').click(function (e) {
-        _ID_LOTE = 0;
+        Asignados_LoteBuscar(); 
         Asignados_ListaDocumentos = new Array();
-        Lote_CargarGrilla(Asignados_Lote_grilla, "", "0");
+        //Lote_CargarGrilla(Asignados_Lote_grilla, "", "0",);
         Asignados_buscar();
     });
+    $('#AsignadosLote_btn_Buscar').click(Asignados_LoteBuscar); 
 });
+
+function Asignados_LoteBuscar() {
+    _ID_LOTE = 0;
+    let fecInicio = $('#loteFechaInicio').val(); 
+    let fecFin = $('#loteFechaFin').val(); 
+    Lote_CargarGrilla(Asignados_Lote_grilla, "", "", fecInicio, fecFin);
+}
 
 function Asignados_buscar() {
     Documento_ConfigurarGrilla(Asignados_grilla, Asignados_barra, "Listado de documentos asignados", true, 3)

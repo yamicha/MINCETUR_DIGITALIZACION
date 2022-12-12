@@ -34,7 +34,9 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                     auditoria.Objeto = repositorio.Lote_Listar(new enLote
                     {
                         FLG_DEVOLUCION = entidad.flgDevuelto,
-                        FLG_MICROFORMA = entidad.flgMicroforma
+                        FLG_MICROFORMA = entidad.flgMicroforma, 
+                        FEC_INICIO = entidad.fechaInicio, 
+                        FEC_FIN = entidad.fechaFin
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
