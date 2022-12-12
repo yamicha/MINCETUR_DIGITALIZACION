@@ -34,8 +34,8 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                     auditoria.Objeto = repositorio.Lote_Listar(new enLote
                     {
                         FLG_DEVOLUCION = entidad.flgDevuelto,
-                        FLG_MICROFORMA = entidad.flgMicroforma, 
-                        FEC_INICIO = entidad.fechaInicio, 
+                        FLG_MICROFORMA = entidad.flgMicroforma,
+                        FEC_INICIO = entidad.fechaInicio,
                         FEC_FIN = entidad.fechaFin
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -63,15 +63,22 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             {
                 using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
                 {
-                    repositorio.Documento_Digitalizar(new enDocumento_Asignado
+                    if (entidad.ListaIdsDocumento.Count() > 0)
                     {
-                        ID_DOCUMENTO = entidad.IdDocumento,
-                        ID_DOCUMENTO_ASIGNADO = entidad.IdDocumentoAsignado,
-                        ID_LASERFICHE = entidad.IdLaserfiche,
-                        HORA_INICIO = entidad.HoraInicio,
-                        HORA_FIN = entidad.HoraFIn,
-                        USU_CREACION = entidad.UsuCreacion,
-                    }, ref auditoria);
+                        foreach (DocumentoModel item in entidad.ListaIdsDocumento)
+                        {
+                            repositorio.Documento_Digitalizar(new enDocumento_Asignado
+                            {
+                                ID_DOCUMENTO = item.IdDocumento,
+                                ID_DOCUMENTO_ASIGNADO = item.IdDocumentoAsignado,
+                                ID_LASERFICHE = entidad.IdLaserfiche,
+                                HORA_INICIO = entidad.HoraInicio,
+                                HORA_FIN = entidad.HoraFIn,
+                                USU_CREACION = entidad.UsuCreacion,
+                            }, ref auditoria);
+                            if (!auditoria.EjecucionProceso) break; 
+                        }
+                    }
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);

@@ -28,12 +28,10 @@ function Fedatar_buscar() {
     $("#Recepcion_busqueda").show();
     setTimeout("Documento_ConfigurarGrilla(" + Fedatar_grilla + "," + Fedatar_barra + ",\"Listado de documentos aprobados\", true, 10);", 500);
 }
-
 function Aprobar_Cerrar() {
     $('#myModal_Documento_Ver_Imagen').modal('hide');
-    jQuery("#myModal_Documento_Ver_Imagen").html('');
+    $("#myModal_Documento_Ver_Imagen").html('');
 }
-
 $("#Fedatar_btn_Conforme").click(function (e) {
     Fedatar_ListaDocumentos = new Array();
     var rowKey = $("#" + Fedatar_grilla).jqGrid('getGridParam', 'selarrrow'); // esta opcion permite traer los indices de cada fila seleccionada
