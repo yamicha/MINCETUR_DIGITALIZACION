@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma checksum "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "2657edfd9d9d442b57dd289f3d4e2c532498632d"
+=======
+#pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "2657edfd9d9d442b57dd289f3d4e2c532498632d"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "2657edfd9d9d442b57dd289f3d4e2c532498632d"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -62,7 +66,11 @@ using Frotend.Ventanilla.Micetur.Helpers;
 #line hidden
 #nullable disable
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d4364", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d4343", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d4343", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -123,7 +131,11 @@ WriteAttributeValue("", 481, Url.Content("~/Scripts/js/Microforma/Documento.js")
             BeginWriteAttribute("src", " src=\"", 582, "\"", 647, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 10 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 10 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 10 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -137,7 +149,11 @@ WriteAttributeValue("", 588, Url.Content("~/Scripts/js/Microforma/DocumentoProce
             BeginWriteAttribute("src", " src=\"", 696, "\"", 749, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 11 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 11 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 11 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -151,7 +167,11 @@ WriteAttributeValue("", 702, Url.Content("~/Scripts/js/Microforma/Lote.js"), 702
             BeginWriteAttribute("src", " src=\"", 798, "\"", 857, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 12 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 12 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 12 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -173,7 +193,11 @@ WriteAttributeValue("", 912, Url.Content("~/Scripts/js/Microforma/Reprocesados.j
             EndWriteAttribute();
             WriteLiteral(" type=\"text/javascript\"></script>\r\n\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d9771", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d9694", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2657edfd9d9d442b57dd289f3d4e2c532498632d9694", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -193,7 +217,11 @@ WriteAttributeValue("", 912, Url.Content("~/Scripts/js/Microforma/Reprocesados.j
             WriteLiteral("\r\n<script>\r\n    var extensionValid =");
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 17 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 17 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 17 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -205,7 +233,11 @@ WriteAttributeValue("", 912, Url.Content("~/Scripts/js/Microforma/Reprocesados.j
             WriteLiteral("\r\n    var IdLaserMin = ");
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 18 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 18 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 18 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -236,7 +268,11 @@ WriteAttributeValue("", 912, Url.Content("~/Scripts/js/Microforma/Reprocesados.j
             BeginWriteAttribute("src", " src=\"", 2033, "\"", 2082, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 36 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+=======
+#line 36 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 36 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Reproceso\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2

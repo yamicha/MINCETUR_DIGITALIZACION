@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma checksum "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "737894d9f6acce6a40b8c82eafde188123eed450"
+=======
+#pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "737894d9f6acce6a40b8c82eafde188123eed450"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "737894d9f6acce6a40b8c82eafde188123eed450"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -56,7 +60,11 @@ namespace AspNetCore
 #line hidden
 #nullable disable
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4504428", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4504414", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4504414", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -75,7 +83,11 @@ namespace AspNetCore
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4505542", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4505528", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4505528", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -94,7 +106,11 @@ namespace AspNetCore
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4506656", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4506642", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "737894d9f6acce6a40b8c82eafde188123eed4506642", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -141,7 +157,11 @@ WriteAttributeValue("", 283, Url.Content("~/assets/Switch_Toggle.css"), 283, 42,
             BeginWriteAttribute("src", " src=\"", 1177, "\"", 1226, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 23 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+=======
+#line 23 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 23 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -187,7 +207,11 @@ WriteAttributeValue("", 1183, Url.Content("~/assets/images/loading.gif"), 1183, 
             BeginWriteAttribute("src", " src=\"", 3000, "\"", 3044, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 58 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+=======
+#line 58 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 58 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -201,7 +225,11 @@ WriteAttributeValue("", 3006, Url.Content("~/Scripts/js/Remove.js"), 3006, 38, f
             BeginWriteAttribute("src", " src=\"", 3093, "\"", 3149, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 59 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+=======
+#line 59 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 59 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Consultas\Views\Documento\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2

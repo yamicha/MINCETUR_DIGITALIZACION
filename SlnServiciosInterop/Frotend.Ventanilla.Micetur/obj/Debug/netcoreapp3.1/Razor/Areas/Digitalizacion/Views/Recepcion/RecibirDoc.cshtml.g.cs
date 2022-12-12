@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma checksum "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Recepcion\RecibirDoc.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "34caca58b60e6948737b3ad5f3f46872185f6c95"
+=======
+#pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Recepcion\RecibirDoc.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "6aa1a8e0dcf26400cdd17988a3c3320dcc566468"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Recepcion\RecibirDoc.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "6aa1a8e0dcf26400cdd17988a3c3320dcc566468"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -55,7 +59,11 @@ namespace AspNetCore
 #line hidden
 #nullable disable
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "34caca58b60e6948737b3ad5f3f46872185f6c954176", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6aa1a8e0dcf26400cdd17988a3c3320dcc5664684162", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6aa1a8e0dcf26400cdd17988a3c3320dcc5664684162", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -74,7 +82,11 @@ namespace AspNetCore
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "34caca58b60e6948737b3ad5f3f46872185f6c955290", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6aa1a8e0dcf26400cdd17988a3c3320dcc5664685276", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "6aa1a8e0dcf26400cdd17988a3c3320dcc5664685276", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2

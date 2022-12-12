@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #pragma checksum "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "15a17a3b67987713f2c70951d04beaa7b3ed7f29"
+=======
+#pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "15a17a3b67987713f2c70951d04beaa7b3ed7f29"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #pragma checksum "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml" "{ff1816ec-aa5e-4d10-87f7-6f4963833460}" "15a17a3b67987713f2c70951d04beaa7b3ed7f29"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -55,7 +59,11 @@ namespace AspNetCore
 #line hidden
 #nullable disable
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f294074", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f294060", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f294060", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -144,7 +152,11 @@ WriteAttributeValue("", 711, Url.Content("~/Scripts/js/Microforma/Fedatados.js")
             EndWriteAttribute();
             WriteLiteral(" type=\"text/javascript\"></script>\r\n\r\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f298890", async() => {
+=======
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f298827", async() => {
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
             __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "15a17a3b67987713f2c70951d04beaa7b3ed7f298827", async() => {
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -185,7 +197,11 @@ WriteAttributeValue("", 711, Url.Content("~/Scripts/js/Microforma/Fedatados.js")
             BeginWriteAttribute("src", " src=\"", 1690, "\"", 1739, 1);
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 33 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
+=======
+#line 33 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 33 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
@@ -279,7 +295,11 @@ WriteAttributeValue("", 1696, Url.Content("~/assets/images/loading.gif"), 1696, 
 ");
 #nullable restore
 <<<<<<< HEAD
+<<<<<<< HEAD
 #line 109 "C:\Users\ivans\OneDrive\Documentos\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
+=======
+#line 109 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
+>>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
 =======
 #line 109 "C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\Areas\Digitalizacion\Views\Fedatario\Index.cshtml"
 >>>>>>> db1871144159c8f4998826e70bd27ad9eaa27ac2
