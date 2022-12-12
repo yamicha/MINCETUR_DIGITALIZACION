@@ -2,11 +2,17 @@
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote', 'Fecha de Creación'];
+        'Lote','Cant. Expedientes','Cant. Adjuntos','Peso Adjuntos', 'Fecha de Creación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false },
+        { name: 'CANT_EXPEDIENTES', index: 'CANT_EXPEDIENTES', align: 'center', width: 120, hidden: false, search: false },
+        { name: 'CANT_ADJUNTOS', index: 'CANT_ADJUNTOS', align: 'center', width: 120, hidden: false, search: false },
+        {
+            name: 'PESO_TOTALADJUNTOS', index: 'PESO_TOTALADJUNTOS', align: 'center', width: 120, hidden: false, search: false,
+            formatter: (cellvalue, options, rowObject) => { return formatBytes(rowObject.PESO_TOTALADJUNTOS) }
+        },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
     ];
     var opciones = {
@@ -46,10 +52,12 @@ function Lote_VerDocumentos(CODIGO) {
     }
 }
 
-function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA) {
+function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA, _FECHA_INICIO="", _FECHA_FIN="") {
     var item = {
         flgDevuelto: _FLG_DEVOLUCION,
-        flgMicroforma: _FLG_MICROFORMA
+        flgMicroforma: _FLG_MICROFORMA,
+        fechaInicio: _FECHA_INICIO, 
+        fechaFin: _FECHA_FIN
     }
     var url = `ventanilla/digitalizacion/listar-lotes`;
     API.Fetch("POST", url, item, function (auditoria) {
@@ -65,6 +73,9 @@ function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA) {
                             CODIGO: x,
                             ID_LOTE: v.ID_LOTE,
                             NRO_LOTE: v.NRO_LOTE,
+                            CANT_EXPEDIENTES: v.CANT_EXPEDIENTES,
+                            CANT_ADJUNTOS: v.CANT_ADJUNTOS,
+                            PESO_TOTALADJUNTOS: v.PESO_TOTALADJUNTOS,
                             STR_FEC_CREACION: v.STR_FEC_CREACION,
                             //USU_CREACION: v.USU_CREACION
                         };

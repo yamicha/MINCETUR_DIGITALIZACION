@@ -4,12 +4,9 @@ var Fedatados_barra = 'Fedatados_barra';
 $(document).ready(function () {
     //Fedatados_buscar();
     jQuery('#aTabFedatados').click(function (e) {
-
         Fedatados_buscar();
     });
-
 });
-
 
 function Fedatados_buscar() {
     $("#Recepcion_busqueda").show();

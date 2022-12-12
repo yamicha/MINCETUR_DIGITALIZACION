@@ -188,6 +188,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.ID_DOCUMENTO_PROCESO.ToString(),
                             item.ID_DOCUMENTO.ToString(),
                             item.DESCRIPCION_ESTADO,
+                            null,
                             item.NRO_LOTE,
                             item.ID_DOCUMENTO.ToString(),
                             item.DES_CLASIF,

@@ -53,29 +53,42 @@ jQuery('#Digitalizar_Check_Finalizar').change(function (e) {
 });
 
 function Digitalizar_buscar() {
-    Documento_ConfigurarGrilla(Digitalizar_grilla, Digitalizar_barra, "Listado de documentos asignados", false, 4);
+    Documento_ConfigurarGrilla(Digitalizar_grilla, Digitalizar_barra, "Listado de documentos asignados", true, 4);
 }
 
 function Digitalizar_Iniciar() {
 
     Digitalizar_ListaDocumentos = new Array();
-    var rowKey = $("#" + Digitalizar_grilla).jqGrid('getGridParam', 'selrow'); // esta opcion permite traer los indices de cada fila seleccionada
+    var rowKey = $("#" + Digitalizar_grilla).jqGrid('getGridParam', 'selarrrow'); // esta opcion permite traer los indices de cada fila seleccionada
     if (rowKey != null) {
         if (rowKey.length != 0) {
             jConfirm(" ¿ Desea iniciar el proceso de digitalización ? ", "Atención", function (e) {
                 if (e) {
                     $("#Digitalizar_btn_Fin").show();
                     //for (var i = 0; i < rowKey.length; i++) {
-                    var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey);
-                    // var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey[i]);
-                    Digitalizar_COD_DOCUMENTO = data.Digitalizar_COD_DOCUMENTO;
-                    var itemDoc = {
-                        IdDocumento: parseInt(data.Digitalizar_ID_DOCUMENTO),
-                        IdDocumentoAsignado: parseInt(data.Digitalizar_ID_DOCUMENTO_ASIGNADO),
-                        HORA_INICIO: '',
-                        HORA_FIN: ''
-                    };
-                    Digitalizar_ListaDocumentos.push(itemDoc);
+                    //var data = jQuery("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey);
+                    for (var i = 0; i < rowKey.length; i++) {
+                        var data = $("#" + Digitalizar_grilla).jqGrid('getRowData', rowKey[i]);
+                        //var itemDoc = {
+                        //    FLG_CONFORME: 1,
+                        //    OBSERVACION: '-',
+                        //    COD_DOCUMENTO: data.Fedatar_COD_DOCUMENTO, //$("#COD_DOCUMENTO").val(),
+                        //    ID_TIPO_OBSERVACION: 0,
+                        //    ID_DOCUMENTO: data.Fedatar_ID_DOCUMENTO,
+                        //    ID_DOCUMENTO_ASIGNADO: data.Fedatar_ID_DOCUMENTO_ASIGNADO
+                        //};
+                        //Fedatar_ListaDocumentos.push(itemDoc);
+                        var itemDoc = {
+                            IdDocumento: parseInt(data.Digitalizar_ID_DOCUMENTO),
+                            IdDocumentoAsignado: parseInt(data.Digitalizar_ID_DOCUMENTO_ASIGNADO),
+                            //HORA_INICIO: '',
+                            //HORA_FIN: ''
+                        };
+                        Digitalizar_ListaDocumentos.push(itemDoc);
+                    }
+
+                    //Digitalizar_COD_DOCUMENTO = data.Digitalizar_COD_DOCUMENTO;
+          
                     //}
                     $('#Digitalizar_btn_Iniciar').attr('disabled', true);
                     $('#Digitalizar_btn_Fin').attr('disabled', false);
@@ -89,10 +102,10 @@ function Digitalizar_Iniciar() {
                 }
             });
         } else {
-            jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
+            jAlert("Seleccione al menos un registro para iniciar la digitalización", "Atención");
         }
     } else {
-        jAlert("Seleccione un solo registro para iniciar la digitalización", "Atención");
+        jAlert("Seleccione al menos un registro para iniciar la digitalización", "Atención");
     }
 }
 
@@ -162,11 +175,11 @@ function Digitalizar_FinalizarPregunta() {
 function Digitalizar_Finalizar() {
     if (Digitalizar_ListaDocumentos.length > 0) {
         var item = {
-            IdDocumento: Digitalizar_ListaDocumentos[0].IdDocumento,
-            IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
+            ListaIdsDocumento: Digitalizar_ListaDocumentos,
+            //IdDocumentoAsignado: Digitalizar_ListaDocumentos[0].IdDocumentoAsignado,
             IdLaserfiche: 0,
-            HoraInicio: Digitalizar_ListaDocumentos[0].HORA_INICIO,
-            HoraFIn: Digitalizar_ListaDocumentos[0].HORA_FIN,
+            HoraInicio: Digitalizar_HORA_INICIO,
+            HoraFIn: Digitalizar_HORA_FIN,
             UsuCreacion: $('#inputHddId_Usuario').val()
         }
         var url = "ventanilla/digitalizacion/digitalizar-documento";

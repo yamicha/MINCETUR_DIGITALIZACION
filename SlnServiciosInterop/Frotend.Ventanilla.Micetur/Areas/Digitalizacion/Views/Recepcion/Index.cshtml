@@ -20,8 +20,17 @@
                 changeFirstDay: false,
                 placeholder: "dd/MM/yyyy",
             }).datepicker("setDate", 'now');
-            //$('#txtfechainicio').val('01/01/2012');
+            $('#loteFechaInicio,#loteFechaFin').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                firstDay: 1,
+                changeFirstDay: false,
+                placeholder: "dd/MM/yyyy",
+            }).datepicker("setDate", 'now');
         });
+
+
 
 </script>
 <style>
@@ -196,33 +205,58 @@
                 <p>Consulta de documentos asignados agrupados por lote.</p>
             </div>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
+                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="col-sm-3">
+                                <label for="loteFechaInicio" style="width: 100%; color: black;">Fecha Inicio: </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" maxlength="10" class="form-control" id="loteFechaInicio" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="col-sm-15 control-label" for="loteFechaFin" style="width: 100%; color: black;">Fecha Fin: </label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" maxlength="10" class="form-control" id="loteFechaFin" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-3 col-sm-4">
+                                <button id="AsignadosLote_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
                         <legend style="font-size:small;display:block">Re-asignar Digitalizador</legend>
-                        <div class="col-sm-2">
-                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="col-sm-2">
+                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
-                        </div>
-                        <div class="col-sm-4">
-                            <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
-                            <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="col-sm-offset-2  col-sm-4">
+                                <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
+                                <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3" style="padding-right:0px">
+                <div class="col-sm-4" style="padding-right:0px">
                     <div class="Asignados_Lote_jqGrid">
                         <table id="Asignados_Lote_grilla"></table>
                     </div>
                     <div id="Asignados_Lote_barra"></div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                     <div class="Asignados_jqGrid">
                         <table id="Asignados_grilla"></table>
                     </div>

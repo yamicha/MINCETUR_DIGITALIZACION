@@ -25,6 +25,8 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
             cmd.CommandText = AppSettingsHelper.PackDocVentanilla + ".PRC_CDVLOTES_LISTAR";
             cmd.Parameters.Add("X_ID_FLG_DEVOLUCION", validarNulo(entidad.FLG_DEVOLUCION));
             cmd.Parameters.Add("X_ID_FLG_MICROFORMA", validarNulo(entidad.FLG_MICROFORMA));
+            cmd.Parameters.Add("X_FEC_INICIO", validarNulo(entidad.FEC_INICIO));
+            cmd.Parameters.Add("X_FEC_FIN", validarNulo(entidad.FEC_FIN));
             cmd.Parameters.Add("X_CURSOR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
@@ -41,6 +43,9 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             arrResult = new object[drReader.FieldCount];
                             int intIdLote = drReader.GetOrdinal("ID_LOTE");
                             int intNroLote = drReader.GetOrdinal("NRO_LOTE");
+                            int intCantExp= drReader.GetOrdinal("CANT_EXPEDIENTES");
+                            int intCantAdjuntos = drReader.GetOrdinal("CANT_ADJUNTOS");
+                            int intPesoTotalAdj = drReader.GetOrdinal("PESO_TOTALADJUNTOS");
                             int intUsuCrea = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
                             int intObsDevolucion = drReader.GetOrdinal("OBS_DEVOLUCION");
@@ -54,6 +59,9 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
 
                                 if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = int.Parse(arrResult[intIdLote].ToString());
                                 if (!drReader.IsDBNull(intNroLote)) temp.NRO_LOTE = arrResult[intNroLote].ToString();
+                                if (!drReader.IsDBNull(intCantExp)) temp.CANT_EXPEDIENTES = long.Parse(arrResult[intCantExp].ToString());
+                                if (!drReader.IsDBNull(intPesoTotalAdj)) temp.PESO_TOTALADJUNTOS = long.Parse(arrResult[intPesoTotalAdj].ToString());
+                                if (!drReader.IsDBNull(intCantAdjuntos)) temp.CANT_ADJUNTOS = long.Parse(arrResult[intCantAdjuntos].ToString());
                                 if (!drReader.IsDBNull(intUsuCrea)) temp.USU_CREACION = arrResult[intUsuCrea].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intObsDevolucion)) temp.OBS_DEVOLUCION = arrResult[intObsDevolucion].ToString();

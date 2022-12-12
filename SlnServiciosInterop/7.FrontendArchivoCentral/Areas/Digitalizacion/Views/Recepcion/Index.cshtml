@@ -363,7 +363,7 @@
                         <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
                         <div class="row" style="margin-bottom:5px">
                             <div class="col-sm-3">
-                                <label  for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
+                                <label for="form-field-1" style="width: 100%; color: black;">Fecha Inicio: </label>
                             </div>
                             <div class="col-sm-3">
                                 <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
@@ -386,16 +386,18 @@
                     <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
                         <legend style="font-size:small;display:block">Re-asignar Digitalizador</legend>
                         <div class="row" style="margin-bottom:5px">
-                                <div class="col-sm-2">
-                                    <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
-                                </div>
-                                <div class="col-sm-4">
-                                    @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
-                                </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;  ">Digitalizador:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.ID_DIGITALIZADOR2, Model.ListaPersonal, new { @class = "form-control", @style = "width:100%" })
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
-                            <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+                        <div class="row" style="margin-bottom:5px">
+                            <div class="col-sm-offset-2 col-sm-4">
+                                <button id="Asignados_btn_Reasignar" class="btn btn-red" type="button"><i class="clip-user-3"></i> Re-asignar</button>
+                                <button id="Asignados_btn_Grabar" class="btn btn-blue" type="button"><i class="fa fa-save"></i> Grabar Re-asignación</button>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
