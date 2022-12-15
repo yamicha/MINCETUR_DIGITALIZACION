@@ -22,5 +22,11 @@ namespace NeServiciosDigitalizacion.Ventanilla.Consulta
         {
             return _objDa.Documento_Ventanilla(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
+
+        public HashSet<enDocumentoVen> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
+        {
+            return _objDa.Documento_Exportar(@WHERE, ref auditoria);
+        }
+
     }
 }

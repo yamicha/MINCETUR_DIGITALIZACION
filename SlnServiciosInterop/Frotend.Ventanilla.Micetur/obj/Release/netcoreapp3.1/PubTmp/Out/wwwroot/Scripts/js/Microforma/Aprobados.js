@@ -10,5 +10,6 @@ jQuery('#aTabAprobados').click(function (e) {
 });
 
 function Aprobados_buscar() {
-    Documento_ConfigurarGrilla(Aprobados_grilla ,Aprobados_barra ,"Listado de documentos aprobados", false, 7);
+    //Documento_ConfigurarGrilla(Aprobados_grilla ,Aprobados_barra ,"Listado de documentos aprobados", false, 7);
+    DocumentoProceso_ConfigurarGrilla(Aprobados_grilla, Aprobados_barra, "Listado de documentos aprobados/Observados", 7);
 }

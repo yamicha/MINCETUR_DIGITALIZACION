@@ -32,6 +32,6 @@ namespace EnServiciosDigitalizacion.Ventanilla.Consulta
         public DateTime int_FEC_EXPE { get; set; }
         public long CANT_DOC { get; set; }
         public long NUM_SIZE_DOC { get; set; }
-        
+        public long NRO_LOTE { get; set; }
     }
 }

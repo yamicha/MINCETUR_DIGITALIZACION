@@ -27,7 +27,7 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
         { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'left', hidden: false, width: 200},
         { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
         { name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150 },
-        { name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150 },
+        { name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: true, width: 150 },
         { name: 'USU_CREA', index: 'USU_CREA', align: 'left', hidden: true, width: 200, search: false},
 
     ];

@@ -26,7 +26,8 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public long NUM_FOLIOS { get; set; }
         public string DES_CLASIF { get; set; }
         public string DES_PERSONA { get; set; }
-        
+        public string NRO_LOTE { get; set; }
+
         public List<enDocumento> ListaDocumento { get; set; }
     }
 }

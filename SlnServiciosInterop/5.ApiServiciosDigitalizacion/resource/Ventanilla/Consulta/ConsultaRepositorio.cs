@@ -30,6 +30,11 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Consulta
             return _rule.Documento_Ventanilla(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
 
+        public HashSet<enDocumentoVen> Documento_Exportar(string @WHERE, ref enAuditoria auditoria)
+        {
+            return _rule.Documento_Exportar(@WHERE, ref auditoria);
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);

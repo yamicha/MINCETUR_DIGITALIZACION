@@ -86,6 +86,65 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
         }
 
         [HttpPost]
+        [Route("listadoProceso-paginado")]
+        public IActionResult MicroformaProceso_Paginado([FromBody] Recursos.Paginacion.GridTable grid)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                grid.page = (grid.page == 0) ? 1 : grid.page;
+                grid.rows = (grid.rows == 0) ? 100 : grid.rows;
+                var @where = (Recursos.Paginacion.Css_Paginacion.GetWhere(grid.filters, grid.rules));
+                if (!string.IsNullOrEmpty(@where))
+                {
+                    grid._search = true;
+                    if (!string.IsNullOrEmpty(grid.searchString))
+                    {
+                        @where = @where + " and ";
+                    }
+                }
+                else
+                    @where = "1=1";
+
+                using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
+                {
+                    IList<enMicroforma> lista = repositorio.MicroformaProceso_Paginado(grid.sidx, grid.sord, grid.rows, grid.page, @where, ref auditoria);
+                    if (auditoria.EjecucionProceso)
+                    {
+                        var generic = Recursos.Paginacion.Css_Paginacion.BuscarPaginador(grid.page, grid.rows, (int)auditoria.Objeto, lista);
+
+                        generic.Value.rows = generic.List.Select(item => new Recursos.Paginacion.Css_Row
+                        {
+                            id = item.ID_MICROFORMA.ToString(),
+                            cell = new string[] {
+                            item.ID_MICROFORMA.ToString(),
+                            null,
+                            item.NRO_VOLUMEN,
+                            item.NRO_REVISIONES.ToString(),
+                            item.CODIGO_SOPORTE,
+                            item.DESC_SOPORTE,
+                            null,
+                            item.DESC_ESTADO,
+                            item.STR_FEC_GRABACION,
+                            item.ID_ESTADO.ToString(),
+                            item.FLG_CONFORME
+                                }
+                        }).ToArray();
+                        return StatusCode(auditoria.Code, generic.Value);
+                    }
+                    else
+                        return StatusCode(auditoria.Code, auditoria);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Guardar(ex.ToString());
+                return StatusCode(auditoria.Code, auditoria);
+            }
+
+        }
+
+        [HttpPost]
         [Route("listar")]
         public IActionResult Microforma_Listar([FromBody] MicroModel entidad)
         {

@@ -13,7 +13,7 @@ function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
         $("#" + _grilla).GridUnload();
         var colNames = [
             'N° Exp.', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación','Observación',
-            'Tipo Expediente', 'Número Doc.', 'Folios'
+            'Tipo Expediente', 'Número Doc.'
         ]
         var colModels = [
             { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
@@ -24,10 +24,10 @@ function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
             { name: 'DES_OBS', index: 'DES_OBS', align: 'left', hidden: false, width: 200 },
             { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
             { name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150, search: false },
-            { name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150, search: false },
+            //{ name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150, search: false },
         ];
         var opciones = {
-            GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc', getrules: `GetRules()`,
+            GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, exportar: true, sort: 'asc', getrules: `GetRules()`,
             gridCompleteFunc: function () {
                 $("#Load_Busqueda").hide();
                 var allJQGridData = $("#" + _grilla).jqGrid('getRowData');
@@ -41,6 +41,9 @@ function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
                     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
                 }
             },
+            exportarExcel: function () {
+                Documento_Exportar(GetRules());
+            }
         };
         SICA.Grilla(_grilla, _barra, '', '400', '', _titulo, url, 'ID_EXPE', colNames, colModels, 'ID_EXPE', opciones);
         $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
@@ -78,6 +81,29 @@ function GetRules() {
     ];
     return rules;
 }
+
 $("#cons_btn_buscar").click(function (e) {
     Documento_ConfigurarGrilla_Venta("Documento_Grilla", "Documento_Barra", "Documentos");
 });
+
+function Documento_Exportar(Rules) {
+    debugger;
+    var params = new Object;
+    params.rules = Rules;
+    var url = BaseUrlApi + 'Ventanilla/DocVentanilla/documento-exportar';
+    $.ajax({
+        url: url,
+        type: "POST",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(params),
+        success: function (data) {
+            if (data != null || data != "")
+                window.location = BaseUrlApi + 'archivo-central/get-file/' + data
+        }, failure: function (msg) {
+            alert(msg);
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}

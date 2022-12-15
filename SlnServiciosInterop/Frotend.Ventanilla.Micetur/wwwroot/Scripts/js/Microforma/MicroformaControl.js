@@ -32,6 +32,14 @@ $(document).ready(function () {
 
 });
 
+function MicroformaControl_BuscarFecha() {
+    Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra, MicroModulo.Control);
+}
+
+function MicroformaConforme_BuscarFecha() {
+    Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra, MicroFin_grilla, MicroFin_barra, MicroModulo.Conforme);
+}
+
 function MicroformaCerrar() {
     $('#myModal_Documento_Grabar').modal('hide');
     jQuery("#myModal_Documento_Grabar").html('');
@@ -118,6 +126,4 @@ function MicroformaControl_CargarGrilla() {
 }
 
 //********************************************************** tab finalizados *********************************************************/
-
-
 

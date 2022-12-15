@@ -91,6 +91,84 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
             }
             return lista;
         }
+
+        public List<enMicroforma> MicroformaProceso_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            List<enMicroforma> lista = new List<enMicroforma>();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackDocVentanilla, "PRC_CDVMICROPROCESO_PAGINACION");
+            cmd.Parameters.Add("X_PAGINA", PAGINA);
+            cmd.Parameters.Add("X_NROREGISTROS", FILAS);
+            cmd.Parameters.Add("X_ORDEN_COLUMNA", ORDEN_COLUMNA);
+            cmd.Parameters.Add("X_ORDEN", ORDEN);
+            cmd.Parameters.Add("X_WHERE", @WHERE);
+            cmd.Parameters.Add("X_CUENTA", OracleDbType.Int32, System.Data.ParameterDirection.Output);
+            cmd.Parameters.Add("X_RESULTADO", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                try
+                {
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        int CUENTA = int.Parse(cmd.Parameters["X_CUENTA"].Value.ToString());
+                        auditoria.Objeto = CUENTA;
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enMicroforma temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intIdMicro = drReader.GetOrdinal("ID_MICROFORMA");
+                            int intTipoSoporte = drReader.GetOrdinal("ID_TIPO_SOPORTE");
+                            int intNroVolumen = drReader.GetOrdinal("NRO_VOLUMEN");
+                            int intDescSoporte = drReader.GetOrdinal("DESC_SOPORTE");
+                            int intCodigoSoporte = drReader.GetOrdinal("CODIGO_SOPORTE");
+                            int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
+                            int intDesEstado = drReader.GetOrdinal("DESC_ESTADO");
+                            int intIdEstado = drReader.GetOrdinal("ID_ESTADO_MICROFORMA");
+                            int intFlgConforme = drReader.GetOrdinal("FLG_CONFORME");
+                            int intNroRevision = drReader.GetOrdinal("NRO_REVISIONES");
+                            int intFecGrabacion = drReader.GetOrdinal("STR_FEC_GRABACION");
+
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enMicroforma();
+                                if (!drReader.IsDBNull(intIdMicro)) temp.ID_MICROFORMA = long.Parse(arrResult[intIdMicro].ToString());
+                                if (!drReader.IsDBNull(intTipoSoporte)) temp.ID_TIPO_SOPORTE = long.Parse(arrResult[intTipoSoporte].ToString());
+                                if (!drReader.IsDBNull(intDescSoporte)) temp.DESC_SOPORTE = arrResult[intDescSoporte].ToString();
+                                if (!drReader.IsDBNull(intCodigoSoporte)) temp.CODIGO_SOPORTE = arrResult[intCodigoSoporte].ToString();
+                                if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
+                                if (!drReader.IsDBNull(intDesEstado)) temp.DESC_ESTADO = arrResult[intDesEstado].ToString();
+                                if (!drReader.IsDBNull(intIdEstado)) temp.ID_ESTADO = long.Parse(arrResult[intIdEstado].ToString());
+                                if (!drReader.IsDBNull(intFlgConforme)) temp.FLG_CONFORME = arrResult[intFlgConforme].ToString();
+                                if (!drReader.IsDBNull(intNroVolumen)) temp.NRO_VOLUMEN = arrResult[intNroVolumen].ToString();
+                                if (!drReader.IsDBNull(intNroRevision)) temp.NRO_REVISIONES = long.Parse(arrResult[intNroRevision].ToString());
+                                if (!drReader.IsDBNull(intFecGrabacion)) temp.STR_FEC_GRABACION = arrResult[intFecGrabacion].ToString();
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                    //--------------------------------
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                    lista = new List<enMicroforma>();
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+            }
+            return lista;
+        }
+
         public List<enMicroforma> Microforma_Listar(enMicroforma entidad, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();

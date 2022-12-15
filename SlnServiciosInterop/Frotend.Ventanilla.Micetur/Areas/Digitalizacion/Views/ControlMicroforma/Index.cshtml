@@ -14,6 +14,16 @@
     $(document).ready(function () {
         $("#MicroformaGrabar_btn_X").hide();
         Remove_RemoverClases("liControlMicroformas");
+        $('#txtfechafin, #txtfechainicio, #txtfechainiciocontrol, #txtfechafincontrol').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false,
+            placeholder: "dd/MM/yyyy",
+        }).datepicker("setDate", 'now');
+        $('#btnMicroControlBuscar').click(MicroformaControl_BuscarFecha);
+        $('#btnMicroConformeBuscar').click(MicroformaConforme_BuscarFecha);
     });
 
 </script>
@@ -55,6 +65,23 @@
             <div class="alert alert-info">
                 <p>Listado de microformas grabadas para su aprobación.</p>
             </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha inicio :</label>
+                        <input class="form-control" id="txtfechainicio" type="text" maxlength="10" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha fin :</label>
+                        <input class="form-control" id="txtfechafin" name="txtfechafin" type="text" maxlength="10" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="btnMicroControlBuscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                    </div>
+                </fieldset>
+            </div>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="MicroformaGrabar_Lote_jqGrid">
@@ -76,6 +103,23 @@
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
                 <p>Listado de microformas aprobados y finalizados.</p>
+            </div>
+            <div class="col-sm-12 inline-container-Group" style="margin-bottom:5px;">
+                <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                    <legend style="font-size:small;display:block">Busqueda:</legend>
+                    <div class="col-sm-3">
+                        <label>Fecha inicio :</label>
+                        <input class="form-control" id="txtfechainiciocontrol" type="text" maxlength="10" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Fecha fin :</label>
+                        <input class="form-control" id="txtfechafincontrol" name="txtfechafin" type="text" maxlength="10" readonly style="background:white">
+                    </div>
+                    <div class="col-sm-3">
+                        <label></label><br />
+                        <button id="btnMicroConformeBuscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                    </div>
+                </fieldset>
             </div>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">

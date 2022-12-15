@@ -18,6 +18,12 @@ namespace NeServiciosDigitalizacion.Ventanilla.Digitalizacion
 
             return _objDa.Microforma_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
         }
+        
+        public List<enMicroforma> MicroformaProceso_Paginado(string ORDEN_COLUMNA, string ORDEN, int FILAS, int PAGINA, string @WHERE, ref enAuditoria auditoria)
+        {
+
+            return _objDa.MicroformaProceso_Paginado(ORDEN_COLUMNA, ORDEN, FILAS, PAGINA, @WHERE, ref auditoria);
+        }
         public List<enMicroforma> Microforma_Listar(enMicroforma entidad, ref enAuditoria auditoria)
         {
             return _objDa.Microforma_Listar(entidad, ref auditoria);

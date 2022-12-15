@@ -23,7 +23,7 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public string STR_FEC_CREACION { get; set; }
         public long ID_USU_CREACION { get; set; }
         public string NRO_LOTE { get; set; }
+        public string NOMBRE_USUARIO { get; set; }
         
-
     }
 }

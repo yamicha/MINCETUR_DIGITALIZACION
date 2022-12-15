@@ -353,7 +353,9 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Digitalizar.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Documento.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\DocumentoAdjunto.js
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\DocumentoProceso.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Documento_Color.js
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Fecha.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Fedatados.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Fedatar.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Lote.js
@@ -361,6 +363,7 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\MicroformaControl.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\MicroformaGrabados.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\MicroformaGrabar.js
+C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\MicroformaProceso.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Reprocesados.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\Reprocesar.js
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Scripts\js\Microforma\RevisionPeriodica.js

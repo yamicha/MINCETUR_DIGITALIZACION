@@ -18,6 +18,7 @@ var MicroModulo = {
 
 var _MICROMODULO = 0;
 function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDocumento, _tab, _select = false) {
+    debugger;
     _MICROMODULO = _tab;
     var EstadoHidden = false;
     var OpcionesHidden = true;
@@ -25,11 +26,25 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         EstadoHidden = true;
         OpcionesHidden = false;
     }
+    var fechaGrabado = true;
+    var fechaCreacion = false;
+    var usuCreacion = true;
+    var nroReprocesado = true;
     var url = BaseUrlApi + "archivo-central/microforma/listado-paginado";
+    if (_MICROMODULO == MicroModulo.Grabados) {
+        fechaGrabado = false;
+        fechaCreacion = true;
+        usuCreacion = false;
+        nroReprocesado = false;
+        url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
+    } else if (_MICROMODULO == MicroModulo.Control) {
+        url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
+    } 
+
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme'];
+        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme', 'Fecha de Grabación', 'Operador Grabación', 'Nro. Reprocesados'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, search: false , sortable: false },// 1
@@ -39,10 +54,12 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 300, hidden: true }, // 5
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 7
         { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true  }, // 9
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: fechaCreacion, search: true  }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
-
+        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: fechaGrabado, search: true }, // 12
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: usuCreacion, search: true }, // 13
+        { name: 'NRO_REPROCESADOS', index: 'NRO_REPROCESADOS', align: 'center', width: 250, hidden: nroReprocesado, search: true }, // 14
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
     var colModels_2 = [
@@ -100,7 +117,7 @@ function GetRulesMicroforma() {
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
         var _STR_FEC_CREACION = $('#txtFechaInicioGrabada').val();
         var _STR_FEC_FIN = $('#txtFechaFinGrabada').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });

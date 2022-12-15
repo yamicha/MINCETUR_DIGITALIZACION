@@ -88,7 +88,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
 }
 
 function GetRulesMicroforma() {
-    debugger;
+    
     var rules = new Array();
     var POR = "'%'";
     if (_MICROMODULO == MicroModulo.Reprocesar) { // Reprocesar

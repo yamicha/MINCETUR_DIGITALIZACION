@@ -9,6 +9,7 @@ $(document).ready(function () {
 });
 
 function Fedatados_buscar() {
+    debugger;
     $("#Recepcion_busqueda").show();
     setTimeout("Documento_ConfigurarGrilla(" + Fedatados_grilla + "," + Fedatados_barra + ",\"Listado de documentos fedatados\", false, 11);", 500);
 }

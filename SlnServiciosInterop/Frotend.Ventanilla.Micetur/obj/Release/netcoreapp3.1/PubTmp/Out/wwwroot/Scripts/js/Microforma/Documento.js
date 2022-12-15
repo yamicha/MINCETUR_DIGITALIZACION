@@ -25,6 +25,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         var VER_BOTON_OBS = true;
         var _NRO_REPROCESADOHidden = true;
         var NOMBRE_BOTON_IMAGEN = "";
+        var verLote = true;
         var url = BaseUrlApi + 'ventanilla/documento/listar-paginado';
         if (_ID_MODULO == 0) {
             _PREFIJO = "Detalle_";
@@ -66,6 +67,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             _PREFIJO = "Fedatados_";
             NOMBRE_BOTON_IMAGEN = 'Ver Adjuntos';
             VER_BOTON_IMAGEN = false;
+            verLote = false;
         } else if (_ID_MODULO == 12) {
             _PREFIJO = "MicroformaGrabar_";
             NOMBRE_BOTON_IMAGEN = 'Ver Adjuntos';
@@ -76,36 +78,71 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             VER_BOTON_IMAGEN = false;
         }
         $("#" + _grilla).GridUnload();
+        //var colNames = [
+        //    '0', '1', '2', '3',
+        //    NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Nro. Expediente', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Tipo Expediente', 'Asunto', 'Clasificación',
+        //    'Num. Doc', 'Folios', 'Observación', 'Persona', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
         var colNames = [
             '0', '1', '2', '3',
-            NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Digitalizador', 'Nro. Reprocesados', 'Estado de Expediente', 'Nro. Expediente', 'Tipo Expediente', 'Asunto', 'Clasificación',
-            'Num. Doc', 'Folios', 'Observación', 'Persona', 'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
+            NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Nro. Lote', 'Digitalizador', 'Nro. Expediente', 'Fecha de Registro', 'Solicitante', 'Asunto', 'Clasificación',  'Nro. Reprocesados', 'Estado de Expediente', 'Tipo Expediente',
+            'Num. Doc', 'Folios', 'Observación',  'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
         var colModels = [
+            //{ name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
+            //{ name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
+            //{ name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //2
+            //{ name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //3
+
+            //{ name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //4
+            //{ name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //5
+            //{ name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false  }, //6
+            //{ name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false  }, //7
+            //{ name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //8
+            //{ name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //9
+
+            //{ name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 10
+            //{ name: _PREFIJO + 'DES_ASUNTO', index: _PREFIJO + 'DES_ASUNTO ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 11
+            //{ name: _PREFIJO + 'DES_CLASIF', index: _PREFIJO + 'DES_CLASIF ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 12
+            //{ name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 13
+            //{ name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false,search: false},// 14
+            //{ name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15 
+            //{ name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15
+
+            //{ name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 16
+            //{ name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 17
+            //{ name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 18
+            //{ name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false },// 19
+            //{ name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: true, sortable: false },// 20
+
             { name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
             { name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
             { name: _PREFIJO + 'ID_ESTADO_DOCUMENTO', index: _PREFIJO + 'ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //2
             { name: _PREFIJO + 'DESCRIPCION_ESTADO', index: _PREFIJO + 'DESCRIPCION_ESTADO', align: 'center', hidden: true }, //3
 
+            
             { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //4
             { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //5
-            { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false  }, //6
-            { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false  }, //7
-            { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //8
-            { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //9
+            { name: _PREFIJO + 'NRO_LOTE', index: _PREFIJO + 'NRO_LOTE', align: 'center', width: 180, hidden: verLote, editable: true, sortable: false }, //6
+            { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //6
+            { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //7
+            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 8
+            { name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 9
+            { name: _PREFIJO + 'DES_ASUNTO', index: _PREFIJO + 'DES_ASUNTO ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 10
+            { name: _PREFIJO + 'DES_CLASIF', index: _PREFIJO + 'DES_CLASIF ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 11
 
-            { name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 10
-            { name: _PREFIJO + 'DES_ASUNTO', index: _PREFIJO + 'DES_ASUNTO ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 11
-            { name: _PREFIJO + 'DES_CLASIF', index: _PREFIJO + 'DES_CLASIF ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 12
-            { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 13
-            { name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false,search: false},// 14
-            { name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15 
-            { name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 15
+            
+            { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false }, //12
+            { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //13
+            { name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 14
+            { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 15
+            { name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false, search: false },// 16
+            { name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 17
+            
 
-            { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 16
-            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 17
-            { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 18
-            { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false },// 19
-            { name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: true, sortable: false },// 20
+            { name: _PREFIJO + 'USU_CREACION', index: _PREFIJO + 'USU_CREACION ', align: 'center', width: 140, hidden: false, sortable: false, sortable: false },// 18
+            { name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 19
+            { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 20
+            { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false },// 21
+            { name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: true, sortable: false },// 22
         ];
         var opciones = {
             GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
@@ -149,7 +186,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
 function Documento_actionVerImagen(cellvalue, options, rowObject) {
     var _btn = "";
     if (_ID_MODULO == 6 || _ID_MODULO == 10) {
-        _btn = "<button title='Ver Imagen' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
+        _btn = "<button title='Evaluar' onclick='Documento_ValidarImagen(" + rowObject[0] + "," + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
     } else {
         _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
     }
@@ -288,7 +325,7 @@ function GetRulesDoc() {
     if (_ID_MODULO == 0) { // detalle
         _ID_LOTE = ((_ID_LOTE == 0) ? -1 : _ID_LOTE); 
           rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
-
+        //rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
     }
     if (_ID_MODULO != 1) {
         rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
@@ -297,6 +334,11 @@ function GetRulesDoc() {
     }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });
+    }
+    if (_ID_MODULO == 11) {
+        let FECHA_INICIO = ($("#txtfechainicio").val() == null || $("#txtfechainicio").val() == '') ? '' : $("#txtfechainicio").val() + '';
+        let FECHA_FIN = ($("#txtfechafin").val() == null || $("#txtfechafin").val() == '') ? '' : $("#txtfechafin").val() + '';
+        rules.push({ field: "TO_DATE(TO_CHAR(V.FEC_CREACION,'DD/MM/YYYY'), 'DD/MM/YYYY')", data: "TO_DATE('" + FECHA_INICIO + "', 'DD/MM/YYYY') and TO_DATE('" + FECHA_FIN + "','DD/MM/YYYY')", op: " between " });
     }
     if (_ID_MODULO == 3) { // Asignados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '' + _ID_ESTADO_DOCUMENTO + '', op: " != " });

@@ -22,11 +22,11 @@ $(document).ready(function () {
                 setTimeout("MicroformaGrabar_IniciarProceso();", 500);
             }
             else {
-                jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+                jAlert("Debe seleccionar por lo menos un lote.", "Atención");
             }
         }
         else {
-            jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+            jAlert("Debe seleccionar por lo menos un lote.", "Atención");
         }
     });
 });
@@ -82,7 +82,7 @@ async function MicroformaGrabar_IniciarProceso() {
             Documento_MostrarGrabar();
         }
     } else {
-        jAlert("Debe seleccionar por lo menos un sub lote.", "Atención");
+        jAlert("Debe seleccionar por lo menos un lote.", "Atención");
     }
 }
 function MicroformaGrabar_ValidarLote() {

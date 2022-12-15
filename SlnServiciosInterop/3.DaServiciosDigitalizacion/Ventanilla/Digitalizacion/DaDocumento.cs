@@ -54,6 +54,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdUsuario = drReader.GetOrdinal("ID_USUARIO");
                             int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
                             int intIdLote = drReader.GetOrdinal("ID_LOTE");
+                            int intNroLote = drReader.GetOrdinal("NRO_LOTE");
                             int intNroRepro = drReader.GetOrdinal("NRO_REPROCESADOS");
                             int intPesoAdj = drReader.GetOrdinal("PESO_ADJ");
                             int intUsuariocreacion = drReader.GetOrdinal("STR_USU_CREACION");
@@ -67,7 +68,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intNumdoc = drReader.GetOrdinal("NUM_DOC");
                             int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
                             int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
-                            
+                                                    
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -80,6 +81,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intIdUsuario)) temp.ID_USUARIO = long.Parse(arrResult[intIdUsuario].ToString());
                                 if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
                                 if (!drReader.IsDBNull(intIdLote)) temp.ID_LOTE = long.Parse(arrResult[intIdLote].ToString());
+                                if (!drReader.IsDBNull(intNroLote)) temp.NRO_LOTE = arrResult[intNroLote].ToString();
                                 if (!drReader.IsDBNull(intPesoAdj)) temp.PESO_ADJ = long.Parse(arrResult[intPesoAdj].ToString());
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
@@ -153,6 +155,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intHoraInicio = drReader.GetOrdinal("HORA_INICIO");
                             int intHoraFin = drReader.GetOrdinal("HORA_FIN");
                             int intObservacion = drReader.GetOrdinal("OBSERVACION");
+                            int intNomUsuario = drReader.GetOrdinal("NOMBRE_USUARIO");
                             int intIdUsuario = drReader.GetOrdinal("ID_USU_CREACION");
                             int intUsuariocreacion = drReader.GetOrdinal("USU_CREACION");
                             int intFecCreacion = drReader.GetOrdinal("STR_FEC_CREACION");
@@ -175,6 +178,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intObservacion)) temp.OBSERVACION = arrResult[intObservacion].ToString();
                                 if (!drReader.IsDBNull(intHoraInicio)) temp.HORA_INICIO = arrResult[intHoraInicio].ToString();
                                 if (!drReader.IsDBNull(intHoraFin)) temp.HORA_FIN = arrResult[intHoraFin].ToString();
+                                if (!drReader.IsDBNull(intNomUsuario)) temp.NOMBRE_USUARIO = arrResult[intNomUsuario].ToString();
                                 if (!drReader.IsDBNull(intUsuariocreacion)) temp.USU_CREACION = arrResult[intUsuariocreacion].ToString();
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
 
