@@ -30,8 +30,11 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public long ID_ESTADO { get; set; }
         public long NRO_REVISIONES { get; set; }
         public string STR_FEC_GRABACION { get; set; }
+        public string CANT_EXPEDIENTES { get; set; }
+        public string NRO_REPROCESADOS { get; set; }
+        public string FLG_MICROARCHIVO { get; set; }
         public enMicroArchivo MicroArchivo { get; set; }
-
+        
 
 
     }

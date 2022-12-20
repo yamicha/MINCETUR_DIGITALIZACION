@@ -17,11 +17,12 @@
         $('#txtFechaInicio, #txtFechaFin').val(GetFecha());
         $('#txtFechaInicioObservado, #txtFechaFinObservado').val(GetFecha());
         $('#txtFechaInicioAnulada, #txtFechaFinAnulada').val(GetFecha());
-        
 
-        $('#MicroAlmacenada_btn_Buscar, #MicroObservado_btn_Buscar, #MicroAnulada_btn_Buscar').click(function () {
-            RevisionPendienteBuscar();
-        });
+        $('#MicroAlmacenada_btn_Buscar').click(RevisionPendienteBuscar);
+
+        $('#MicroObservado_btn_Buscar').click(RevisionObservadoBuscar);
+
+        $('#MicroAnulada_btn_Buscar').click(RevisionAnuladasBuscar);
 
         $('#txtFechaInicio, #txtFechaFin').blur(function () {
             var id = this.id;
@@ -35,14 +36,15 @@
 
             }
         });
-
-        
-
     });
 
-    
-
 </script>
+
+<style>
+    .margen-top {
+        margin-top: 7px;
+    }
+</style>
 
 <div id="Recepcion_busqueda" hidden="hidden" class="blockUI blockMsg blockPage" style="z-index: 1011; position: fixed; padding: 0px; margin: 0px; width: 30%; top: 40%; left: 35%; text-align: center; color: rgb(0, 0, 0); border: 3px solid rgb(170, 170, 170); background-color: rgb(255, 255, 255); cursor: wait;">
     <h5>
@@ -87,6 +89,21 @@
             <div class="alert alert-info">
                 <p>Listado de microformas.</p>
             </div>
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Busqueda:</legend>
+                <div class="col-sm-3">
+                    <label>Fecha Inicio:</label>
+                    <input class="form-control" id="txtFechaInicio" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha Fin:</label>
+                    <input class="form-control" id="txtFechaFin" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="MicroAlmacenada_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                </div>
+            </fieldset>
             <div class="row">
                 <div class="col-sm-5" style="margin-bottom: 7px;margin-top: 7px">
                     <button id="Microforma_BtnRevision" class="btn btn-blue" type="button" data-toggle='modal'><i class="clip-paste"></i>&nbsp; Revisar Seleccionados</button>
@@ -94,31 +111,6 @@
             </div>
             <div class="row">
                 <div class="col-sm-5" style="padding-right:0px">
-                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
-                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaInicio" style="width: 100%; color: black;">Fecha Inicio: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicio" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaFin" style="width: 100%;">Fecha Fin: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaFin" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
-                                <button id="MicroAlmacenada_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </fieldset>
                     <div class="MicroformaGrabar_Lote_jqGrid">
                         <table id="MicroPendiente_Lote_grilla"></table>
                     </div>
@@ -136,35 +128,25 @@
     <div id="panel_tab_2" class="tab-pane">
         <div class="col-sm-12 inline-container-Group">
             <div class="alert alert-info">
-                <p>Listado de microformas revisados eliminados.</p>
+                <p>Listado de microformas revisados observados.</p>
             </div>
-            <div class="row">
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Busqueda:</legend>
+                <div class="col-sm-3">
+                    <label>Fecha Inicio:</label>
+                    <input class="form-control" id="txtFechaInicioObservado" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha Fin:</label>
+                    <input class="form-control" id="txtFechaFinObservado" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="MicroObservado_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                </div>
+            </fieldset>
+            <div class="row margen-top">
                 <div class="col-sm-4" style="padding-right:0px">
-                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
-                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaInicioObservado" style="width: 100%; color: black;">Fecha Inicio: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicioObservado" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaFinObservado" style="width: 100%;">Fecha Fin: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaFinObservado" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
-                                <button id="MicroObservado_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </fieldset>
                     <div class="Microforma_Lote_jqGrid">
                         <table id="MicroObs_Lote_grilla"></table>
                     </div>
@@ -184,33 +166,23 @@
             <div class="alert alert-info">
                 <p>Listado de microformas revisados eliminados.</p>
             </div>
-            <div class="row">
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Busqueda:</legend>
+                <div class="col-sm-3">
+                    <label>Fecha Inicio:</label>
+                    <input class="form-control" id="txtFechaInicioAnulada" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha Fin:</label>
+                    <input class="form-control" id="txtFechaFinAnulada" type="text" maxlength="10">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="MicroAnulada_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
+                </div>
+            </fieldset>
+            <div class="row margen-top" >
                 <div class="col-sm-4" style="padding-right:0px">
-                    <fieldset style="width:100%; display:block;  margin: 0 2px 10px 2px; padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
-
-                        <legend style="font-size:small;display:block">Criterio de Busqueda</legend>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaInicioObservado" style="width: 100%; color: black;">Fecha Inicio: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaInicioAnulada" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label class="col-sm-15 control-label" for="txtFechaFinObservado" style="width: 100%;">Fecha Fin: </label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" maxlength="10" class="form-control" id="txtFechaFinAnulada" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-offset-4 col-sm-4">
-                                <button id="MicroAnulada_btn_Buscar" class="btn btn-blue" type="button"><i class=" clip clip-search"></i> Buscar</button>
-                            </div>
-                        </div>
-                    </fieldset>
                     <div class="Microforma_Lote_jqGrid">
                         <table id="MicroAnuladas_Lote_grilla"></table>
                     </div>

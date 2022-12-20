@@ -50,6 +50,8 @@ function ControlFinalizadoBuscar() {
         MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.CAlmacenFin, true);
     Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
 }
+
+
 async function Microforma_MicroArchivoGrabar() {
     jConfirm(" ¿ Desea guardar los datos del MicroArchivo ingresado ? ", "Atención", async function (r) {
         if (r) {
@@ -64,7 +66,8 @@ async function Microforma_MicroArchivoGrabar() {
                 TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                 Direccion: $("#MA_DIRECCION").val(),
                 Observacion: $("#MA_OBSERVACION").val(),
-                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                //IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                IdUsuario: parseInt($("#comboUsuario").val()),
                 UsuCreacion: $("#inputHddId_Usuario").val(),
                 IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                 Fecha: $("#MA_FECHA").val(),
@@ -163,7 +166,8 @@ function MicroArchivo_Editar() {
                 TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                 Direccion: $("#MA_DIRECCION").val(),
                 Observacion: $("#MA_OBSERVACION").val(),
-                IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                //IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                IdUsuario: parseInt($("#comboUsuario").val()),
                 UsuCreacion: $("#inputHddId_Usuario").val(),
                 IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                 Fecha: $("#MA_FECHA").val(),

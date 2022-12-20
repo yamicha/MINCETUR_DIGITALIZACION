@@ -132,7 +132,10 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intFlgConforme = drReader.GetOrdinal("FLG_CONFORME");
                             int intNroRevision = drReader.GetOrdinal("NRO_REVISIONES");
                             int intFecGrabacion = drReader.GetOrdinal("STR_FEC_GRABACION");
-
+                            int intUsuGrabacion = drReader.GetOrdinal("USU_CREACION");
+                            int intNroReprocesado = drReader.GetOrdinal("NRO_REPROCESADOS");
+                            int intFlgMicroArchivo = drReader.GetOrdinal("FLG_MICROARCHIVO");
+                            
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -148,6 +151,9 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intNroVolumen)) temp.NRO_VOLUMEN = arrResult[intNroVolumen].ToString();
                                 if (!drReader.IsDBNull(intNroRevision)) temp.NRO_REVISIONES = long.Parse(arrResult[intNroRevision].ToString());
                                 if (!drReader.IsDBNull(intFecGrabacion)) temp.STR_FEC_GRABACION = arrResult[intFecGrabacion].ToString();
+                                if (!drReader.IsDBNull(intUsuGrabacion)) temp.USU_CREACION = arrResult[intUsuGrabacion].ToString();
+                                if (!drReader.IsDBNull(intNroReprocesado)) temp.NRO_REPROCESADOS = arrResult[intNroReprocesado].ToString();
+                                if (!drReader.IsDBNull(intFlgMicroArchivo)) temp.FLG_MICROARCHIVO = arrResult[intFlgMicroArchivo].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();

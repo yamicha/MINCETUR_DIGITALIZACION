@@ -4,6 +4,7 @@
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Fecha.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/MicroformaControl.js")" type="text/javascript"></script>
@@ -22,6 +23,7 @@
             changeFirstDay: false,
             placeholder: "dd/MM/yyyy",
         }).datepicker("setDate", 'now');
+
         $('#btnMicroControlBuscar').click(MicroformaControl_BuscarFecha);
         $('#btnMicroConformeBuscar').click(MicroformaConforme_BuscarFecha);
     });
@@ -44,6 +46,7 @@
 
 <div class="modal fade" id="myModal_Documento_Ver_Imagen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="modal fade" id="myModal_Documento_Grabar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal_Recibir_Doc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">

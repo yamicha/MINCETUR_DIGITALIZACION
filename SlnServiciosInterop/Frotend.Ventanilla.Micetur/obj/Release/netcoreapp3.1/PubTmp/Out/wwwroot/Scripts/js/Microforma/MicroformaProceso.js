@@ -30,7 +30,9 @@ function MicroformaProceso_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _
     var urlsubgrid = BaseUrlApi + "ventanilla/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Grabación', 'idestado', 'FlgConforme'];
+        'Microforma', 'Estado', 'Fecha de Grabación', 'idestado', 'FlgConforme',
+        'Operador Grabación', 'Nro. Reprocesado'
+    ];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false },// 1
@@ -43,7 +45,8 @@ function MicroformaProceso_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _
         { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
-
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false },// 12
+        { name: 'NRO_REPROCESADOS', index: 'NRO_REPROCESADOS', align: 'center', width: 170, hidden: false },// 13
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
     var colModels_2 = [
@@ -98,6 +101,9 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
+        var _STR_FEC_CREACION = $('#txtfechainicioconforme').val();
+        var _STR_FEC_FIN = $('#txtfechafinconforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
@@ -116,6 +122,8 @@ function GetRulesMicroforma() {
     //}
     return rules;
 }
+
+
 
 function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     var _btn = rowObject[4];

@@ -63,10 +63,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Consulta
                             item.DES_PERSONA,
                             item.DES_ASUNTO,
                             item.DES_CLASIF.ToString(),
-                            item.DES_TIP_DOC,
-                            item.DES_OBS,
-                            item.NUM_DOC,
-                            item.NUM_FOLIOS.ToString()
+                            item.DESCRIPCION_ESTADO
                          
                       }
                         }).ToArray();
@@ -114,14 +111,15 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Consulta
 
                         List<Columnas> columnas = new List<Columnas>();
                         columnas.Add(new Columnas { ID_COLUMNA = "ID_EXPE", DESCRIPCION_COLUMNA = "Nro. Expediente", CELDA_INICIO = "A", CELDA_FIN = "A", INT_CELDAS = 1, AUTO_INCREMENTAR = false });
-                        columnas.Add(new Columnas { ID_COLUMNA = "FEC_EXPE_STR", DESCRIPCION_COLUMNA = "Fec. Reg. Exp.", CELDA_INICIO = "B", CELDA_FIN = "B", INT_CELDAS = 1 });
+                        columnas.Add(new Columnas { ID_COLUMNA = "FEC_EXPE_STR", DESCRIPCION_COLUMNA = "Fec. Reg. Expediente", CELDA_INICIO = "B", CELDA_FIN = "B", INT_CELDAS = 1 });
                         columnas.Add(new Columnas { ID_COLUMNA = "DES_PERSONA", DESCRIPCION_COLUMNA = "Solicitante", CELDA_INICIO = "C", CELDA_FIN = "C", INT_CELDAS = 1 });
                         columnas.Add(new Columnas { ID_COLUMNA = "DES_ASUNTO", DESCRIPCION_COLUMNA = "Asunto", CELDA_INICIO = "D", CELDA_FIN = "D", INT_CELDAS = 1 });
                         columnas.Add(new Columnas { ID_COLUMNA = "DES_CLASIF", DESCRIPCION_COLUMNA = "Clasificación", CELDA_INICIO = "E", CELDA_FIN = "F", INT_CELDAS = 1 });
-                        columnas.Add(new Columnas { ID_COLUMNA = "DES_TIP_DOC", DESCRIPCION_COLUMNA = "Tipo Expediente", CELDA_INICIO = "G", CELDA_FIN = "H", INT_CELDAS = 1 });
-                        columnas.Add(new Columnas { ID_COLUMNA = "DES_OBS", DESCRIPCION_COLUMNA = "Observación", CELDA_INICIO = "I", CELDA_FIN = "J", INT_CELDAS = 1 });
-                        columnas.Add(new Columnas { ID_COLUMNA = "NUM_DOC", DESCRIPCION_COLUMNA = "Nro. Documento", CELDA_INICIO = "K", CELDA_FIN = "K", INT_CELDAS = 1 });
-                        columnas.Add(new Columnas { ID_COLUMNA = "NUM_FOLIOS", DESCRIPCION_COLUMNA = "Folios", CELDA_INICIO = "L", CELDA_FIN = "L", INT_CELDAS = 1 });
+                        columnas.Add(new Columnas { ID_COLUMNA = "DESCRIPCION_ESTADO", DESCRIPCION_COLUMNA = "Estado", CELDA_INICIO = "G", CELDA_FIN = "G", INT_CELDAS = 1 });
+                        //columnas.Add(new Columnas { ID_COLUMNA = "DES_TIP_DOC", DESCRIPCION_COLUMNA = "Tipo Expediente", CELDA_INICIO = "G", CELDA_FIN = "H", INT_CELDAS = 1 });
+                        //columnas.Add(new Columnas { ID_COLUMNA = "DES_OBS", DESCRIPCION_COLUMNA = "Observación", CELDA_INICIO = "I", CELDA_FIN = "J", INT_CELDAS = 1 });
+                        //columnas.Add(new Columnas { ID_COLUMNA = "NUM_DOC", DESCRIPCION_COLUMNA = "Nro. Documento", CELDA_INICIO = "K", CELDA_FIN = "K", INT_CELDAS = 1 });
+                        //columnas.Add(new Columnas { ID_COLUMNA = "NUM_FOLIOS", DESCRIPCION_COLUMNA = "Folios", CELDA_INICIO = "L", CELDA_FIN = "L", INT_CELDAS = 1 });
                         //columnas.Add(new Columnas { ID_COLUMNA = "DES_PERSONA", DESCRIPCION_COLUMNA = "Solicitante", CELDA_INICIO = "M", CELDA_FIN = "N", INT_CELDAS = 1 });
 
                         CreateExcelFile.CreateExcelDocument(lista.ToList(), RUTA_ARCHIVO_TEMPORAL, _Titulo, false, "Expedientes", columnas);

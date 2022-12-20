@@ -5,13 +5,25 @@
 <script src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Documento.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/MicroformaProceso.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/Microforma.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/js/Microforma/ControlAlmacenamiento.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/js/Microforma/Usuarios.js")" type="text/javascript"></script>
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script>
     $(document).ready(function () {
         Remove_RemoverClases("liControlAlamcenamiento");
+        $('#txtfechafin,#txtfechainicio, #txtfechainicioconforme, #txtfechafinconforme').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            firstDay: 1,
+            changeFirstDay: false,
+            placeholder: "dd/MM/yyyy",
+        }).datepicker("setDate", 'now');
+        $('#btnControlBuscar').click(ControlBuscar);
+        $('#btnConformeBuscar').click(ControlFinalizadoBuscar);
     });
 
 </script>
@@ -30,7 +42,8 @@
     </h5>
 </div>
 <div class="modal fade" id="myModal_Documento_Ver_Imagen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
-<div class="modal fade" id="myModal_Documento_Grabar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal_Documento_Grabar" tabindex="" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal_Recibir_Doc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <div class="tab-content">
     <ul id="myTab" class="nav nav-tabs tab-bricky">
         <li class="active">
@@ -42,7 +55,7 @@
         <li class="">
             <a data-toggle="tab" href="#panel_tab_2" id="aTabMicroAlamcenFinalizado">
                 <i class="clip-checkmark"></i>
-                Microformas Conformes
+                Microformas Almacenadas
             </a>
         </li>
     </ul>
@@ -52,6 +65,21 @@
             <div class="alert alert-info">
                 <p>Listado de microformas para el control de almacenamiento.</p>
             </div>
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Busqueda:</legend>
+                <div class="col-sm-3">
+                    <label>Fecha inicio :</label>
+                    <input class="form-control" id="txtfechainicio" type="text" maxlength="10" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha fin :</label>
+                    <input class="form-control" id="txtfechafin" type="text" maxlength="10" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="btnControlBuscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                </div>
+            </fieldset>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="MicroformaGrabar_Lote_jqGrid">
@@ -78,6 +106,21 @@
                     <button id="Microforma_BtnMicroArchivo" class="btn btn-blue" type="button" data-toggle='modal'><i class="clip-pencil"></i>&nbsp; Volver Grabar MicroArchivo</button>
                 </div>
             </div>
+            <fieldset style="width:100%; display:block;  margin-left: 2px;margin-right: 2px;padding-top: 0.35em;padding-bottom: 0.625em;padding-left: 0.75em;padding-right: 0.75em;border: 1px groove;">
+                <legend style="font-size:small;display:block">Busqueda:</legend>
+                <div class="col-sm-3">
+                    <label>Fecha inicio :</label>
+                    <input class="form-control" id="txtfechainicioconforme" type="text" maxlength="10" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label>Fecha fin :</label>
+                    <input class="form-control" id="txtfechafinconforme" type="text" maxlength="10" readonly style="background:white">
+                </div>
+                <div class="col-sm-3">
+                    <label></label><br />
+                    <button id="btnConformeBuscar" class="btn btn-blue" type="button"><i class="clip-search"></i>&nbsp Buscar</button>
+                </div>
+            </fieldset>
             <div class="row">
                 <div class="col-sm-4" style="padding-right:0px">
                     <div class="Microforma_Lote_jqGrid">

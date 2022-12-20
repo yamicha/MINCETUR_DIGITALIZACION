@@ -1,0 +1,51 @@
+﻿@model Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models.RecibirModelView
+@{
+    Layout = null;
+}
+<link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
+<link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script defer src="@Url.Content("~/Scripts/js/Recepcion/Adjuntos.js")" type="text/javascript"></script>
+<div class="modal fade" id="MyModalDoc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Adjuntos_ConfigurarGrilla();
+        DocumentoAdj_ConfigurarGrilla(MicroModulo.Grabados);
+        DocumentoAdj_CargarGrilla(@Model.ID_EXPE);
+
+        $('#PESO_ARCHIVO').val('');
+    });
+    $('.modal-lg').draggable({
+        handle: ".modal-header",
+        cursor: "handler"
+    });
+</script>
+
+<div class="modal-lg" style="margin:50px auto">
+    <div class="modal-content" style="width:100%;">
+        <div class="modal-header" style="cursor: move; background-color: #ca2626">
+            <div class="col-sm-14">
+                <button class="close" aria-hidden="true" data-dismiss="modal" type="button">×</button>
+                <h4 class="modal-title"><i class='clip-new-tab'></i>&nbsp; Expediente Nro: @Model.ID_EXPE </h4>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12 inline-container-Group">
+                        <p class="modal-title" style="color: #999; font-size:20px; margin-bottom: 10px; margin-top: -5px">Documentos del Expediente: </p>
+                        <fieldset style="width: 100%;">
+                            <div class="Documento_jqGrid">
+                                <table id="DocumentoAdj_grilla"></table>
+                                <div id="DocumentoAdj_barra"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("HDF_ID_EXPE", Model.ID_EXPE)

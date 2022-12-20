@@ -127,7 +127,9 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.DESC_ESTADO,
                             item.STR_FEC_GRABACION,
                             item.ID_ESTADO.ToString(),
-                            item.FLG_CONFORME
+                            item.FLG_CONFORME,
+                            item.USU_CREACION,
+                            item.NRO_REPROCESADOS
                                 }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);

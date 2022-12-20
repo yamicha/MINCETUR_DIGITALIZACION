@@ -4,9 +4,14 @@
 }
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/js/Microforma/Usuarios.js")" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#MicroformaBtnMicroArchivo').click(function (e) {
+            if ($('#fileActaAlma').prop('files').length == 0) {
+                jAlert("Ingrese Acta de Almacenamiento.", "Atención");
+                return;
+            }
             if ($("#FrmMicroArchivo").valid()) {
                 if ($('#HDF_Accion').val() == "M") {
                     MicroArchivo_Editar();
@@ -26,6 +31,8 @@
         changeFirstDay: false,
         placeholder: "dd/MM/yyyy"
     });
+    Lista_Usuarios();
+    $('#comboUsuario').select2();
 </script>
 @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroArchivo", @class = "form-horizontal" }))
 {
@@ -69,7 +76,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;" })
+                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;background:white;", @readonly = "readonly" })
                                             @Html.ValidationMessageFor(model => model.MA_FECHA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -105,9 +112,16 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
                                         </div>
                                         <div class="col-sm-6">
+                                            <select id="comboUsuario" class="form-control" style="width:100%;">
+                                                <option value="">--Seleccione--</option>
+                                            </select>
+                                            @*@Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })*@
+                                        </div>
+                                        @*<div class="col-sm-6">
                                             @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
-                                        </div>
+                                        </div>*@
                                     </div>
 
                                     <div class="row">

@@ -9,7 +9,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         Adjuntos_ConfigurarGrilla();
-        DocumentoAdj_ConfigurarGrilla();
+        DocumentoAdj_ConfigurarGrilla(MicroModulo.Recepcion);
         DocumentoAdj_CargarGrilla(@Model.ID_EXPE);
         $('#ExpedienteBtnRecibir').click(function () {
             Expediente_Recibir(); 

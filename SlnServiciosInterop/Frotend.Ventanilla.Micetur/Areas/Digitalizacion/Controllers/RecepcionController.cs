@@ -70,6 +70,14 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             return View(modelo);
         }
 
+        [HttpGet, Route("~/Digitalizacion/Recepcion/VerDoc")]
+        public ActionResult VerDoc(long ID_EXPE)
+        {
+            RecibirModelView modelo = new RecibirModelView();
+            modelo.ID_EXPE = ID_EXPE;
+            return View(modelo);
+        }
+
         [HttpGet, Route("~/Digitalizacion/Recepcion/editar-documento")]
         public ActionResult EditarDocumento(long id)
         {

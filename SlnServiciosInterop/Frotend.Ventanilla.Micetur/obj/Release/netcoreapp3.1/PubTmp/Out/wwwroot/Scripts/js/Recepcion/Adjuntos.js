@@ -6,7 +6,21 @@ var DocumentoAdj_barra = "DocumentoAdj_barra";
 
 var Adjunto = new Array();
 var IdAdjunto = 0;
-var files=[]; 
+var files = [];
+
+var MicroModulo = {
+    Recepcion: 0,
+    Grabados: 1,
+    Reprocesar: 2,
+    Control: 3,
+    Conforme: 4,
+    CAlmacen: 5,
+    CAlmacenFin: 6,
+    RevisionPend: 7,
+    RevisionObs: 8,
+    RevisionAnulada: 9,
+}
+
 $(document).ready(function () {
     $('#TIPO_ADJUNTO').change(function () {
         if ($(this).val() == 1) {
@@ -28,6 +42,7 @@ $(document).ready(function () {
 });
 
 function Adjuntos_ConfigurarGrilla() {
+
     $("#" + Adjuntos_grilla).GridUnload();
     var colNames = [
         '', 'Eliminar', 'Adjunto',
@@ -157,14 +172,19 @@ function Adjunto_CargarTemporal() {
 
 /////////////////////////////////// documentos ///////////////////////////
 
-function DocumentoAdj_ConfigurarGrilla() {
+function DocumentoAdj_ConfigurarGrilla(_tab) {
+    _MICROMODULO = _tab;
+    var verBotonEditar = false;
+    if (_MICROMODULO == MicroModulo.Grabados) {
+        verBotonEditar = true;
+    }
     $("#" + DocumentoAdj_grilla).GridUnload();
     var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Observación', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
         { name: 'ID_DOC_CMS', index: 'ID_DOC_CMS', align: 'center', hidden: true, width: 0, },
-        { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionEditar },
+        { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: verBotonEditar, formatter: DocumentoAdj_actionEditar },
         { name: 'VERDOCUMENTO', index: 'VERDOCUMENTO', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionver },
         { name: 'DES_NOM_ABR', index: 'DES_NOM_ABR', align: 'center', width: 200, hidden: false },
         { name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },

@@ -33,5 +33,7 @@ namespace EnServiciosDigitalizacion.Ventanilla.Consulta
         public long CANT_DOC { get; set; }
         public long NUM_SIZE_DOC { get; set; }
         public long NRO_LOTE { get; set; }
+        public string DESCRIPCION_ESTADO { get; set; }
+        
     }
 }

@@ -37,9 +37,10 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         usuCreacion = false;
         nroReprocesado = false;
         url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
-    } else if (_MICROMODULO == MicroModulo.Control) {
-        url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
-    } 
+    }
+    //else if (_MICROMODULO == MicroModulo.Control) {
+    //    url = BaseUrlApi + "archivo-central/microforma/historial-paginado";
+    //} 
 
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
@@ -717,6 +718,6 @@ function GetRulesMicroformaRevisionPeriodica() {
     rules.push({ field: 'CODIGO_SOPORTE', data: POR + ' || ' + _gs_DESC_SPORTE + ' || ' + POR, op: " LIKE " });
     rules.push({ field: 'DESC_ESTADO', data: POR + ' || ' + _gs_DESC_ESTADO + ' || ' + POR, op: " LIKE " });
     //rules.push({ field: 'STR_FEC_CREACION', data: POR + ' || ' + _gs_FEC_CREACION + ' || ' + POR, op: " LIKE " });
-    rules.push({ field: '', data: "V.FEC_CREACION >= TO_DATE('" + _gs_FEC_CREACION + "', 'DD/MM/YYYY') AND V.FEC_CREACION <= TO_dATE('" + _gs_FEC_FIN + "', 'DD/MM/YYYY')", op: " " });
+    rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _gs_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _gs_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     return rules;
 }

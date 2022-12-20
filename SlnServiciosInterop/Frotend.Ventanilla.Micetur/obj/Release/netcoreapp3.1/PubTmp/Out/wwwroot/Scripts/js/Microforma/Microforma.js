@@ -92,6 +92,9 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
+        var _STR_FEC_CREACION = $('#txtfechainicio').val();
+        var _STR_FEC_FIN = $('#txtfechafin').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
@@ -99,6 +102,9 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
+        var _STR_FEC_CREACION = $('#txtfechainicioconforme').val();
+        var _STR_FEC_FIN = $('#txtfechafinconforme').val();
+        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });

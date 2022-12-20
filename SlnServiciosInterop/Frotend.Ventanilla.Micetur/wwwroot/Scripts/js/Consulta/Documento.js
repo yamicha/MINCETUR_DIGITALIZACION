@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     Remove_RemoverClases("liControl");
     Documento_ConfigurarGrilla_Venta("Documento_Grilla", "Documento_Barra", "Documentos");
- 
+    TotalRegistros_Documento("Documento_Grilla");
 });
 function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
     $("#Load_Busqueda").show();
@@ -12,18 +12,19 @@ function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
         var url = BaseUrlApi + 'Ventanilla/DocVentanilla/listado-doc-ventanilla-paginado';
         $("#" + _grilla).GridUnload();
         var colNames = [
-            'N° Exp.', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación','Observación',
-            'Tipo Expediente', 'Número Doc.'
+            'N° Exp.', 'Fec. Reg. Expediente', 'Solicitante', 'Asunto', 'Clasificación', 'Estado'
         ]
         var colModels = [
             { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true }, //1
-            { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false, search: false }, //2
-            { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false}, //3
-            { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false}, //4
-            { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'left', hidden: false, width: 200 },
-            { name: 'DES_OBS', index: 'DES_OBS', align: 'left', hidden: false, width: 200 },
-            { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
-            { name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150, search: false },
+            { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false, width: 200, search: false }, //2
+            { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'center', hidden: false, width: 250, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false}, //3
+            { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'center', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false}, //4
+            { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'center', hidden: false, width: 200 },
+            //{ name: 'DES_OBS', index: 'DES_OBS', align: 'left', hidden: false, width: 200 },
+            //{ name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'left', hidden: false, width: 200 },
+            //{ name: 'NUM_DOC', index: 'NUM_DOC', align: 'left', hidden: false, width: 150, search: false },
+            { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', hidden: false, width: 200, search: false },
+            
             //{ name: 'NUM_FOLIOS', index: 'NUM_FOLIOS', align: 'left', hidden: false, width: 150, search: false },
         ];
         var opciones = {
@@ -49,6 +50,8 @@ function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
         $("#" + _grilla).filterToolbar({ searchOnEnter: true, stringResult: false, defaultSearch: "cn" });
         jqGridResponsive($(".Tabla_jqGrid"));
         $("#" + _grilla + "_barra_left").css('width', '0px');
+        //var registros = jQuery("#" + _grilla).jqGrid('getGridParam', 'records');
+        //$("#" + grillaRecepcionar).jqGrid('footerData', 'set', { ID_EXPE: 'TOTAL DOC:', FEC_EXPE_: registros });
     }, 500);
 }
 function GetRules() {
@@ -84,6 +87,8 @@ function GetRules() {
 
 $("#cons_btn_buscar").click(function (e) {
     Documento_ConfigurarGrilla_Venta("Documento_Grilla", "Documento_Barra", "Documentos");
+    TotalRegistros_Documento("Documento_Grilla");
+
 });
 
 function Documento_Exportar(Rules) {
@@ -106,4 +111,11 @@ function Documento_Exportar(Rules) {
             alert(error);
         }
     });
+}
+
+function TotalRegistros_Documento(grilla) {
+
+    var registros = jQuery("#" + grilla).jqGrid('getGridParam', 'records');
+    $("#" + grilla).jqGrid('footerData', 'set', { ID_EXPE: 'TOTAL DOC:', FEC_EXPE_STR: registros });
+
 }

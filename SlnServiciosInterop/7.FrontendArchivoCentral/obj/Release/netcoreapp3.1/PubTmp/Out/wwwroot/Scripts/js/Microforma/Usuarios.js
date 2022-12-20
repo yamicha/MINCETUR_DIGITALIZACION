@@ -11,8 +11,6 @@
                         let option = $('<option>', { "value": `${v.ID_USUARIO}`, "text": `${v.NOMBRE_USUARIO}` });
                         dataList.append(option);
                     });
-                    debugger;
-                    //dataList.value = 3248;
                     $('#comboUsuario').val($("#inputHddId_Usuario").val());
                 } else {
                     jAlert(auditoria.MensajeSalida, "Atención");

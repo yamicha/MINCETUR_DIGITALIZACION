@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('#txtFechaInicio, #txtFechaFin, #txtFechaInicioObservado, #txtFechaFinObservado, #txtFechaInicioAnulada, #txtFechaFinAnulada').datepicker({
+    $('#txtfechafin, #txtfechainicio').datepicker({
         changeMonth: true,
         changeYear: true,
         dateFormat: "dd/mm/yy",
@@ -8,8 +8,8 @@
         placeholder: "dd/MM/yyyy"
     });
 
-    $('#txtFechaInicio').val(GetFecha());
-    $('#txtFechaFin').val(GetFecha());
+    $('#txtfechafin').val(GetFecha());
+    $('#txtfechainicio').val(GetFecha());
 
 
 });

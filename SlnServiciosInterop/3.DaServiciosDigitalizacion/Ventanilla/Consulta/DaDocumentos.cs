@@ -63,6 +63,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                             int int_ID_TUPA = drReader.GetOrdinal("ID_TUPA");
                             int int_DES_CLASIF = drReader.GetOrdinal("DES_CLASIF");
                             int int_FEC_EXPE = drReader.GetOrdinal("FEC_EXPE");
+                            int int_DESCRIPCION_ESTADO = drReader.GetOrdinal("DESCRIPCION_ESTADO");
                             //int int_NRO_LOTE = drReader.GetOrdinal("NRO_LOTE");
 
                             while (drReader.Read())
@@ -89,6 +90,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                                 if (!drReader.IsDBNull(int_COD_LOG)) temp.COD_LOG = (arrResult[int_COD_LOG].ToString());
                                 if (!drReader.IsDBNull(int_ID_TUPA)) temp.ID_TUPA = long.Parse(arrResult[int_ID_TUPA].ToString());
                                 if (!drReader.IsDBNull(int_DES_CLASIF)) temp.DES_CLASIF = (arrResult[int_DES_CLASIF].ToString());
+                                if (!drReader.IsDBNull(int_DESCRIPCION_ESTADO)) temp.DESCRIPCION_ESTADO = arrResult[int_DESCRIPCION_ESTADO].ToString();
                                 //if (!drReader.IsDBNull(int_NRO_LOTE)) temp.NRO_LOTE = long.Parse(arrResult[int_NRO_LOTE].ToString());
                                 lista.Add(temp);
                             }
@@ -153,6 +155,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                             int int_ID_TUPA = drReader.GetOrdinal("ID_TUPA");
                             int int_DES_CLASIF = drReader.GetOrdinal("DES_CLASIF");
                             int int_FEC_EXPE = drReader.GetOrdinal("FEC_EXPE");
+                            int int_DESCRIPCION_ESTADO = drReader.GetOrdinal("DESCRIPCION_ESTADO");
                             //int int_NRO_LOTE = drReader.GetOrdinal("NRO_LOTE");
 
                             while (drReader.Read())
@@ -178,6 +181,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Consulta
                                 if (!drReader.IsDBNull(int_COD_LOG)) temp.COD_LOG = (arrResult[int_COD_LOG].ToString());
                                 if (!drReader.IsDBNull(int_ID_TUPA)) temp.ID_TUPA = long.Parse(arrResult[int_ID_TUPA].ToString());
                                 if (!drReader.IsDBNull(int_DES_CLASIF)) temp.DES_CLASIF = (arrResult[int_DES_CLASIF].ToString());
+                                if (!drReader.IsDBNull(int_DESCRIPCION_ESTADO)) temp.DESCRIPCION_ESTADO = arrResult[int_DESCRIPCION_ESTADO].ToString();
                                 //if (!drReader.IsDBNull(int_NRO_LOTE)) temp.NRO_LOTE = long.Parse(arrResult[int_NRO_LOTE].ToString());
                                 lista.Add(temp);
                             }

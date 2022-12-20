@@ -170,7 +170,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intUsuModific = drReader.GetOrdinal("USU_MODIFICACION");
                             int intFecModific = drReader.GetOrdinal("STR_FEC_MODIFICACION");
                             int intNroReprocesados = drReader.GetOrdinal("NRO_REPROCESADOS");
-                            
+                            int intNroLote = drReader.GetOrdinal("NRO_LOTE");
 
                             while (drReader.Read())
                             {
@@ -203,6 +203,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intFecCreacion)) temp.STR_FEC_CREACION = arrResult[intFecCreacion].ToString();
                                 if (!drReader.IsDBNull(intUsuModific)) temp.USU_MODIFICACION = arrResult[intUsuModific].ToString();
                                 if (!drReader.IsDBNull(intFecModific)) temp.STR_FEC_MODIFICACION = arrResult[intFecModific].ToString();
+                                if (!drReader.IsDBNull(intNroLote)) temp.NRO_LOTE = arrResult[intNroLote].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();
