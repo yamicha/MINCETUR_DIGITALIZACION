@@ -166,7 +166,7 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     } else if (_MICROMODULO == MicroModulo.CAlmacen) {
         _btn += "<button title='Ingresar Micro Archivo' onclick='Microforma_MantenimientoMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-folder-upload\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.CAlmacenFin) {
-        _btn += "<button title='Ver MicroArchivo' onclick='Microforma_VerMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-paste\" style=\"color:#a01010;font-size:16px\"></i></button>";
+        _btn += "<button title='Ver Microarchivo' onclick='Microforma_VerMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-paste\" style=\"color:#a01010;font-size:16px\"></i></button>";
     }
 
     return _btn;

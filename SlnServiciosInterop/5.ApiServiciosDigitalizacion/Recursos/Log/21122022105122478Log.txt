@@ -1,0 +1,8 @@
+Oracle.ManagedDataAccess.Client.OracleException (0x80004005): Timeout de solicitud de conexión
+   at OracleInternal.ConnectionPool.PoolManager`3.Get(ConnectionString csWithDiffOrNewPwd, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
+   at OracleInternal.ConnectionPool.OraclePoolManager.Get(ConnectionString csWithNewPassword, Boolean bGetForApp, OracleConnection connRefForCriteria, String affinityInstanceName, Boolean bForceMatch)
+   at OracleInternal.ConnectionPool.OracleConnectionDispenser`3.Get(ConnectionString cs, PM conPM, ConnectionString pmCS, SecureString securedPassword, SecureString securedProxyPassword, OracleConnection connRefForCriteria)
+   at Oracle.ManagedDataAccess.Client.OracleConnection.Open()
+   at DaServiciosDigitalizacion.ArchivoCentral.Administracion.DaArea.Area_Listar(enArea entidad, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\3.DaServiciosDigitalizacion\ArchivoCentral\Administracion\DaArea.cs:line 29
+   at NeServiciosDigitalizacion.ArchivoCentral.Administracion.neArea.Area_Listar(enArea entidad, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\4.NeServiciosDigitalizacion\ArchivoCentral\Administracion\neArea.cs:line 18
+   at ApiServiciosDigitalizacion.resource.ArchivoCentral.Administracion.AreaRepositorio.Area_Listar(enArea entidad, enAuditoria& auditoria) in C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\5.ApiServiciosDigitalizacion\resource\ArchivoCentral\Administracion\AreaRepositorio.cs:line 33
