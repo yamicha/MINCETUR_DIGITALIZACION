@@ -56,7 +56,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                                     NameApellidos = Usuario.lstUsuSisRolEntEstorg[0].NomUsu,
                                     IdOficina = 0,
                                     DesOficina = "",
-                                    IdPerfil = 0,
+                                    IdPerfil = int.Parse(Usuario.lstUsuSisRolEntEstorg[0].IdRol),
                                     Modulos = string.Empty
                                 };
                                 enAuditoria auditoriaModulo = await new CssApi().GetApi<enAuditoria>(new ApiParams

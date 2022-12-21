@@ -68,7 +68,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.ID_ESTADO.ToString(),
                             item.FLG_CONFORME,
-                            item.USU_CREACION,
+                            item.STR_FEC_GRABACION,
+                            item.STR_USUARIO_CREACION,
                             item.NRO_REPROCESADOS.ToString()
                                 }
                         }).ToArray();

@@ -58,6 +58,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                             int intNroRevision = drReader.GetOrdinal("NRO_REVISIONES");
                             int intUsuCreacion = drReader.GetOrdinal("USU_CREACION");
                             int intNroReprocesado = drReader.GetOrdinal("NRO_REPROCESADOS");
+                            int intStrFecGrabacion = drReader.GetOrdinal("STR_FEC_GRABACION");
+                            int intStrUsuario = drReader.GetOrdinal("STR_USUARIO_CREACION");
 
                             while (drReader.Read())
                             {
@@ -75,6 +77,8 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                                 if (!drReader.IsDBNull(intNroRevision)) temp.NRO_REVISIONES = long.Parse(arrResult[intNroRevision].ToString());
                                 if (!drReader.IsDBNull(intUsuCreacion)) temp.USU_CREACION = arrResult[intUsuCreacion].ToString();
                                 if (!drReader.IsDBNull(intNroReprocesado)) temp.NRO_REPROCESADOS = long.Parse(arrResult[intNroReprocesado].ToString());
+                                if (!drReader.IsDBNull(intStrFecGrabacion)) temp.STR_FEC_GRABACION = arrResult[intStrFecGrabacion].ToString();
+                                if (!drReader.IsDBNull(intStrUsuario)) temp.STR_USUARIO_CREACION = arrResult[intStrUsuario].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();
