@@ -15,6 +15,7 @@ using EnServiciosDigitalizacion.Models;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
 using Frotend.ArchivoCentral.Micetur.Authorization;
+using EnServiciosDigitalizacion.Enums;
 
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -52,16 +53,44 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/microformas/microforma-ver")]
-        public ActionResult Microforma_Ver(long ID_MICROFORMA)
+        public async Task<ActionResult> Microforma_Ver(long ID_MICROFORMA)
         {
             MicroformaGrabaModelView model = new MicroformaGrabaModelView();
             model.ID_MICROFORMA = ID_MICROFORMA; 
             try
             {
-                model.Lista_TipoMicroArchivo = new List<SelectListItem>();
-                model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
-                model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
-                model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
+                enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
+                {
+                    EndPoint = AppSettings.baseUrlApi,
+                    Url = $"recursivo/dominio/listar/1",
+                    UserAD = AppSettings.UserAD,
+                    PassAD = AppSettings.PassAD,
+                });
+                if (ApiDominio != null)
+                {
+                    if (!ApiDominio.Rechazo)
+                    {
+                        if (ApiDominio.Objeto != null)
+                        {
+                            List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                            if (ListaDominios == null) ListaDominios = new List<enDominio>();
+                            model.Lista_TipoMicroArchivo = ListaDominios
+                              .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.TipoMicroArchivo)
+                             .Select(x => new SelectListItem
+                             {
+                                 Text = x.DESC_ITEM,
+                                 Value = x.COD_ITEM,
+                             }).ToList();
+                            model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+                            //model.Lista_Accion.Insert(0, new SelectListItem { Value = "0", Text = "-- selecione --" });
+                        }
+                    }
+                }
+
+                //model.Lista_TipoMicroArchivo = new List<SelectListItem>();
+                //model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
+                //model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
+                //model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
             }
             catch (Exception ex)
             {
