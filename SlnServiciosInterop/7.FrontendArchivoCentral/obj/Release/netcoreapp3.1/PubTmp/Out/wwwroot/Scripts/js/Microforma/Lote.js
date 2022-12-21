@@ -2,14 +2,15 @@
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote','Área Procedencia', 'Fecha de Creación','Usuario Recepción'];
+        'Lote', 'Área Procedencia', 'Usuario Asignación', 'Fecha Asignación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false, search: true },
         { name: 'AREA_PROCEDENCIA', index: 'AREA_PROCEDENCIA', align: 'center', width: 200, hidden: false, search: false, search: true },
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false, search: true },
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true },
-        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false, search: true }
+        
     ];
     var opciones = {
         GridLocal: true, multiselect: _multiselect, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,

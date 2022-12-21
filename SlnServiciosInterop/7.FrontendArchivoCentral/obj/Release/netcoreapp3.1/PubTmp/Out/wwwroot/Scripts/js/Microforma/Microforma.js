@@ -55,11 +55,12 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 300, hidden: true }, // 5
         { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 7
         { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: fechaCreacion, search: true  }, // 9
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: true, search: true }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
-        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: fechaGrabado, search: true }, // 12
-        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: usuCreacion, search: true }, // 13
+        //{ name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: fechaGrabado, search: true }, // 12
+        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false, search: true }, // 12
+        { name: 'STR_USUARIO_CREACION', index: 'STR_USUARIO_CREACION', align: 'center', width: 250, hidden: false, search: true }, // 13
         { name: 'NRO_REPROCESADOS', index: 'NRO_REPROCESADOS', align: 'center', width: 250, hidden: nroReprocesado, search: true }, // 14
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
@@ -160,12 +161,12 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     } else if (_MICROMODULO == MicroModulo.Control) {
         _btn += "<button title='Ver Microforma' onclick='Microforma_ValidarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-clipboard\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.Reprocesar) {
-        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
+        _btn += "<br/><button title='Reprocesar Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
         _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.CAlmacen) {
         _btn += "<button title='Ingresar Micro Archivo' onclick='Microforma_MantenimientoMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-folder-upload\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.CAlmacenFin) {
-        _btn += "<button title='Ver MicroArchivo' onclick='Microforma_VerMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-paste\" style=\"color:#a01010;font-size:16px\"></i></button>";
+        _btn += "<button title='Ver Microarchivo' onclick='Microforma_VerMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-paste\" style=\"color:#a01010;font-size:16px\"></i></button>";
     }
 
     return _btn;
@@ -269,12 +270,12 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
     $("#" + Microforma_Ver_Obs_grilla).GridUnload();
     var colNames = [
         '1', '2', 'Observación',
-        'Usuario Creación', 'Fecha Observación'];
+        'Usuario Observación', 'Fecha Observación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//3 
         { name: 'OBSERVACION', index: 'OBSERVACION', align: 'center', width: 300, hidden: false, sorttype: 'number', sortable: true },
-        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 120, hidden: false, sortable: true },
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 170, hidden: false, sortable: true },
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {

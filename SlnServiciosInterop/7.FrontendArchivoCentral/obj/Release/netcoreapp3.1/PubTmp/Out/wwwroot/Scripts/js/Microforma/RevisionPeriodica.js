@@ -301,7 +301,7 @@ async function Revision_ReprocesoGrabar() {
                     TipoArchivo: parseInt($("#MA_TIPO_ARCHIVO").val()),
                     Direccion: $("#MA_DIRECCION").val(),
                     Observacion: $("#MA_OBSERVACION").val(),
-                    IdUsuario: parseInt($("#inputHddId_Usuario").val()),
+                    IdUsuario: parseInt($("#comboUsuario").val()),
                     UsuCreacion: $("#inputHddId_Usuario").val(),
                     IdDocAlmacenamiento: parseInt(IdDocAlmacenamiento),
                     Fecha: $("#MA_FECHA").val(),

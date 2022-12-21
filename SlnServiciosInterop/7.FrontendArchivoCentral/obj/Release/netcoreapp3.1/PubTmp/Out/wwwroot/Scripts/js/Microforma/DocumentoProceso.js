@@ -1,31 +1,45 @@
 ﻿
 function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
+    debugger;
     _ID_MODULO = _modulo;
     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
     $("#Recepcion_busqueda").show();
     let showColumnHora = false;
+    let showUsuario = false;
+    let showFecha = false;
+    let columnaUsuario = "Usuario Reproceso";
+    let columnaFecha = "Fecha Reproceso";
+    if (_ID_MODULO == 5) {
+        columnaUsuario = "Digitalizador";
+        showFecha = true;
+    }
     if (_ID_MODULO != 5) showColumnHora = true;
+    if (_ID_MODULO == 7) {
+        showUsuario = true;
+         showFecha = true;
+    }
     setTimeout(() => {
         var url = BaseUrlApi + 'archivo-central/documento/proceso-paginado';
         $("#" + _grilla).GridUnload();
         var colNames = [
-            '1', '2', 'Estado', 'Nro. Lote',
-            'Nombre Documento', 'Fondo', 'Sección', 'Serie', 'Hora Inicio', 'Hora Fin', 'Obervación', 'Usuario de Creación', 'Fecha de Creación'
+            '1', '2', 'Estado', 'Nro. Lote', '',
+            'Nombre Documento', 'Fondo', 'Sección', 'Serie', 'Hora Inicio', 'Hora Fin', 'Obervación', columnaUsuario, columnaFecha
         ]
         var colModels = [
-            { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //1
-            { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true }, //2
-            { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', width: 150, hidden: true, search: false },
-            { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false },
-            { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 300, hidden: false },
+            { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //0
+            { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true }, //1
+            { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', width: 150, hidden: true, search: false }, //2
+            { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false }, //3
+            { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 300, hidden: true }, //4
+            { name: '_NOM_DOCUMENTO', index: '_NOM_DOCUMENTO', align: 'center', width: 300, hidden: false, formatter: DocumentoProceso_actionCodVerProceso, sortable: false }, //13
             { name: 'DES_FONDO', index: 'DES_FONDO', align: 'center', width: 200, hidden: false },
-            { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 200, hidden: false },
-            { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 200, hidden: false },
+            { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 220, hidden: false },
+            { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 220, hidden: false },
             { name: 'HORA_INICIO', index: 'HORA_INICIO', align: 'center', width: 100, hidden: showColumnHora , search:false},
             { name: 'HORA_FIN', index: 'HORA_FIN', align: 'center', width: 100, hidden: showColumnHora, search: false},
-            { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 200, hidden: false },
-            { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 200, hidden: false },
-            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
+            { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 250, hidden: false },
+            { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 200, hidden: showUsuario },
+            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: showFecha },
         ];
         var opciones = {
             GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc',
@@ -99,20 +113,42 @@ function GetRulesProceso() {
 
     if (_ID_MODULO == 5) { // digitilzados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.digitalizados}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 7) { // Aprobados
         let IdEstadoDocumento = $('#comboEstadoDocumento').val(); 
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${IdEstadoDocumento}`, op: "=" });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 9) { //reprocesado
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.reprocesado}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 11) { //fedatario conforme
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.FedatarioConforme}`, op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
+    // modo admin
+    debugger; 
+    const perfilLogin = $('#inputHddCod_perfil').val(); 
+    if ((_ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 11) && (perfilLogin != "DIGI_ADMIN")) {
         rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
+
     return rules;
+}
+
+function DocumentoProceso_actionCodVerProceso(cellvalue, options, rowObject) {
+    var _btn = rowObject[4];
+    if (_ID_MODULO != 2)
+        _btn += " <br/> <button title='Ver Movimientos' onclick='Documento_Ver_Proceso(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen' style=\"color:#a01010;font-size:12px\"><i class=\"clip-stack\"></i> Movimientos</button>";
+    return _btn;
+}
+
+function Documento_Ver_Proceso(CODIGO) {
+    jQuery("#myModal_Documento_Ver_Imagen").html('');
+    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/ver-proceso?ID_DOCUMENTO=" + CODIGO, function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');
+        if (request.status != 200) return;
+    });
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Digitalizacion;
+using EnServiciosDigitalizacion.Enums;
 using Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Models;
 using Frotend.ArchivoCentral.Micetur.Authorization;
 using Frotend.ArchivoCentral.Micetur.Filters;
@@ -30,17 +31,40 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/control-almacenamiento/mantenimiento-microarchivo")]
-        public ActionResult Mantenimiento_MicroArchivo(long ID_MICROFORMA, string Accion)
+        public async Task<ActionResult> Mantenimiento_MicroArchivo(long ID_MICROFORMA, string Accion)
         {
             MicroArchivoModel model = new MicroArchivoModel();
             model.ID_MICROFORMA = ID_MICROFORMA;
             model.Accion = Accion;
             try
             {
-                model.Lista_TipoMicroArchivo = new List<SelectListItem>();
-                model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
-                model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
-                model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
+                enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
+                {
+                    EndPoint = AppSettings.baseUrlApi,
+                    Url = $"recursivo/dominio/listar/1",
+                    UserAD = AppSettings.UserAD,
+                    PassAD = AppSettings.PassAD,
+                });
+                if (ApiDominio != null)
+                {
+                    if (!ApiDominio.Rechazo)
+                    {
+                        if (ApiDominio.Objeto != null)
+                        {
+                            List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                            if (ListaDominios == null) ListaDominios = new List<enDominio>();
+                            model.Lista_TipoMicroArchivo = ListaDominios
+                              .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.TipoMicroArchivo)
+                             .Select(x => new SelectListItem
+                             {
+                                 Text = x.DESC_ITEM,
+                                 Value = x.COD_ITEM,
+                             }).ToList();
+                            model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+                        }
+                    }
+                }
+
                 model.MA_RESPONSABLE = User.GetUserName();
             }
             catch (Exception ex)
@@ -51,15 +75,47 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/control-almacenamiento/Ver-microarchivo")]
-        public ActionResult MicroArchivo_Ver(long ID_MICROFORMA, string Accion)
+        public async Task<ActionResult> MicroArchivo_Ver(long ID_MICROFORMA, string Accion)
         {
             MicroArchivoModel model = new MicroArchivoModel();
             model.ID_MICROFORMA = ID_MICROFORMA;
             model.Accion = Accion;
-            model.Lista_TipoMicroArchivo = new List<SelectListItem>();
-            model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
-            model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
-            model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
+
+            try
+            {
+                enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
+                {
+                    EndPoint = AppSettings.baseUrlApi,
+                    Url = $"recursivo/dominio/listar/1",
+                    UserAD = AppSettings.UserAD,
+                    PassAD = AppSettings.PassAD,
+                });
+                if (ApiDominio != null)
+                {
+                    if (!ApiDominio.Rechazo)
+                    {
+                        if (ApiDominio.Objeto != null)
+                        {
+                            List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                            if (ListaDominios == null) ListaDominios = new List<enDominio>();
+                            model.Lista_TipoMicroArchivo = ListaDominios
+                              .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.TipoMicroArchivo)
+                             .Select(x => new SelectListItem
+                             {
+                                 Text = x.DESC_ITEM,
+                                 Value = x.COD_ITEM,
+                             }).ToList();
+                            model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+                        }
+                    }
+                }
+
+                model.MA_RESPONSABLE = User.GetUserName();
+            }
+            catch (Exception ex)
+            {
+                Log.Guardar(ex.Message.ToString());
+            }
             return View(model);
         }
 

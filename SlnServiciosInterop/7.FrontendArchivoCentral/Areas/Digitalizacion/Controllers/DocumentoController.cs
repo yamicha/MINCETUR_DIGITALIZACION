@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Frotend.ArchivoCentral.Micetur.Authorization;
+using EnServiciosDigitalizacion.Enums;
+
 namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
 {
     [MyAuthorize]
@@ -41,20 +43,49 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
             int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             enAuditoria auditoria = new enAuditoria();
-            modelo.ID_DOCUMENTO = ID_DOCUMENTO; 
-            modelo.Lista_VALIDAR_ID_CONFORME = new List<SelectListItem>();
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(1, new SelectListItem() { Value = "1", Text = "CONFORME" });
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(2, new SelectListItem() { Value = "0", Text = "NO CONFORME" });
-            modelo.VALIDAR_ID_CONFORME = "";
-            modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
-            if (ID_LASER != 0)
-            {
-                string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
-                modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
-                //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
 
+            try
+            {
+                enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
+                {
+                    EndPoint = AppSettings.baseUrlApi,
+                    Url = $"recursivo/dominio/listar/1",
+                    UserAD = AppSettings.UserAD,
+                    PassAD = AppSettings.PassAD,
+                });
+                if (ApiDominio != null)
+                {
+                    if (!ApiDominio.Rechazo)
+                    {
+                        if (ApiDominio.Objeto != null)
+                        {
+                            List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                            if (ListaDominios == null) ListaDominios = new List<enDominio>();
+                            modelo.Lista_VALIDAR_ID_CONFORME = ListaDominios
+                              .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.EvalucionCalidad)
+                             .Select(x => new SelectListItem
+                             {
+                                 Text = x.DESC_ITEM,
+                                 Value = x.COD_ITEM,
+                             }).ToList();
+                            modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+                        }
+                    }
+                }
+                modelo.VALIDAR_ID_CONFORME = "";
+                modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
+                if (ID_LASER != 0)
+                {
+                    string CODLASER_ENCRIPT = await new CssUtil().ClientEncriptarIdLaser(ID_LASER, ID_USUARIO);
+                    modelo.VISOR_LF = string.Format("{0}{1}", AppSettings.RutaVisorLF, CODLASER_ENCRIPT);
+                    //modelo.VISOR_LF = @"\\Repositorio\\archivo_prueba.pdf";
+                }
             }
+            catch (Exception ex)
+            {
+                Log.Guardar(ex.Message.ToString());
+            }
+            
             return View(modelo);
         }
 

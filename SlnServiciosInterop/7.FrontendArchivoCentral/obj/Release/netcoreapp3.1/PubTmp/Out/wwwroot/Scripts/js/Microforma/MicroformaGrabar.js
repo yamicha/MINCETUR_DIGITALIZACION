@@ -34,7 +34,7 @@ $(document).ready(function () {
 function MicroformaLote_ConfigurarGrilla() {
     $("#" + MicroformaGrabar_Lote_grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote', 'Fecha de Creación', 'Usuario Recepción'];
+        'Lote', 'Fecha Asignación', 'Usuario Asignación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
