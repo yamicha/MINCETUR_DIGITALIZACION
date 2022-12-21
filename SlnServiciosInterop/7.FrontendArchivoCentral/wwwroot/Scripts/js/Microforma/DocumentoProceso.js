@@ -103,21 +103,28 @@ function GetRulesProceso() {
 
     if (_ID_MODULO == 5) { // digitilzados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.digitalizados}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 7) { // Aprobados
         let IdEstadoDocumento = $('#comboEstadoDocumento').val(); 
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${IdEstadoDocumento}`, op: "=" });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 9) { //reprocesado
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.reprocesado}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 11) { //fedatario conforme
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.FedatarioConforme}`, op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
+    // modo admin
+    debugger; 
+    const perfilLogin = $('#inputHddCod_perfil').val(); 
+    if ((_ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 11) && (perfilLogin != "DIGI_ADMIN")) {
         rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
+
     return rules;
 }
 

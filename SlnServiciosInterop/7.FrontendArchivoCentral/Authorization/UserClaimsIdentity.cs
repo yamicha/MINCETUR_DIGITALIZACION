@@ -31,5 +31,9 @@ namespace Frotend.ArchivoCentral.Micetur.Authorization
         public static string GetUserModulos(this ClaimsPrincipal claimsPrincipal)
         => claimsPrincipal.FindFirst("Modulos").Value;
 
+        public static string GetUserCodPerfil(this ClaimsPrincipal claimsPrincipal)
+        => claimsPrincipal.FindFirst("CodPerfil").Value;
+
+
     }
 }

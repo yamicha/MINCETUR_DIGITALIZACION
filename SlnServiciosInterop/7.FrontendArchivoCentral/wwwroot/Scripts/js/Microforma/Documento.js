@@ -422,9 +422,12 @@ function GetRules() {
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
         rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
     }
-    if (_ID_MODULO != 1 && _ID_MODULO != 2 && _ID_MODULO != 3 ) {
+    // filtro documento x usuario
+    if (_ID_MODULO == 4|| _ID_MODULO == 8|| _ID_MODULO == 6 || _ID_MODULO == 10  ) {
+        debugger; 
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
+  
     return rules;
 }
 
