@@ -128,7 +128,7 @@ async function Devolver_ComboArea() {
 }
 
 function Pendiente_Buscar_Fecha(fechaInicio, fechaFin) {
-    Lote_CargarGrilla(Devolver_Lote_grilla, "", "0", fechaInicio, fechaFin);
+    Lote_CargarGrilla(Devolver_Lote_grilla, "0", "0", fechaInicio, fechaFin);
 }
 
 /*************************************************** TAB DEVUELTOS *********************************/

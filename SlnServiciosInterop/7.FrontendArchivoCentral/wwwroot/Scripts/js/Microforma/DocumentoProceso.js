@@ -5,15 +5,25 @@ function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
     $("#Recepcion_busqueda").show();
     let showColumnHora = false;
-    let showUsuario = false
+    let showUsuario = false;
+    let showFecha = false;
+    let columnaUsuario = "Usuario Reproceso";
+    let columnaFecha = "Fecha Reproceso";
+    if (_ID_MODULO == 5) {
+        columnaUsuario = "Digitalizador";
+        showFecha = true;
+    }
     if (_ID_MODULO != 5) showColumnHora = true;
-    if (_ID_MODULO == 7) showUsuario = true;
+    if (_ID_MODULO == 7) {
+        showUsuario = true;
+         showFecha = true;
+    }
     setTimeout(() => {
         var url = BaseUrlApi + 'archivo-central/documento/proceso-paginado';
         $("#" + _grilla).GridUnload();
         var colNames = [
             '1', '2', 'Estado', 'Nro. Lote', '',
-            'Nombre Documento', 'Fondo', 'Sección', 'Serie', 'Hora Inicio', 'Hora Fin', 'Obervación', 'Usuario Reproceso', 'Fecha Reproceso'
+            'Nombre Documento', 'Fondo', 'Sección', 'Serie', 'Hora Inicio', 'Hora Fin', 'Obervación', columnaUsuario, columnaFecha
         ]
         var colModels = [
             { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //0
@@ -29,7 +39,7 @@ function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
             { name: 'HORA_FIN', index: 'HORA_FIN', align: 'center', width: 100, hidden: showColumnHora, search: false},
             { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 250, hidden: false },
             { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 200, hidden: showUsuario },
-            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: showUsuario },
+            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: showFecha },
         ];
         var opciones = {
             GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: false, rules: true, sort: 'asc',
