@@ -266,7 +266,7 @@ function MicroArchivo_HistorialConfigurarGrilla(_Grilla, _barra) {
 
     var colNames = [
         '1', '2', 'Acta',
-        'Tipo MicroArchivo', 'Dirección', 'Fecha', 'Hora', 'Responsable', 'Observación', 'Fecha Creación','ID_DOC'];
+        'Tipo MicroArchivo', 'Dirección', 'Fecha', 'Hora', 'Responsable', 'Observación', 'Fecha Reg. Alm.','ID_DOC'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_MICROARCHIVO', index: 'ID_MICROARCHIVO', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//2
