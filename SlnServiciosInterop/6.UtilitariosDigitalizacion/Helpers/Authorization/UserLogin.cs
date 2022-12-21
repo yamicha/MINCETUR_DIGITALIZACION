@@ -13,6 +13,7 @@ namespace Utilitarios.Helpers.Authorization
         public int IdOficina { get; set; }
         public int IdUsuario { get; set; }
         public int IdPerfil { get; set; }
+        public string CodPerfil { get; set; }
         public string DesOficina { get; set; }
         public string DesPerfil { get; set; }
         public string NameApellidos { get; set; }

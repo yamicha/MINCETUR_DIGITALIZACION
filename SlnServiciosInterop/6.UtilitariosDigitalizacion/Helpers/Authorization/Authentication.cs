@@ -22,6 +22,8 @@ namespace Utilitarios.Helpers.Authorization
             identity.AddClaim(new Claim("IdPerfil", user.IdPerfil.ToString()));
             identity.AddClaim(new Claim("IdOficina", user.IdOficina.ToString()));
             identity.AddClaim(new Claim("Modulos", user.Modulos));
+            identity.AddClaim(new Claim("CodPerfil", user.CodPerfil));
+            
             return identity;
         }
 

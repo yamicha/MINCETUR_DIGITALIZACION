@@ -88,16 +88,37 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/revision-periodica/mantenimiento-reprocesar")]
-        public ActionResult Microforma_Reprocesar(long ID_MICROFORMA)
+        public async Task<ActionResult> Microforma_Reprocesar(long ID_MICROFORMA)
         {
             MicroformaGrabaModelView model = new MicroformaGrabaModelView();
             model.ID_MICROFORMA = ID_MICROFORMA;
             try
             {
+                enAuditoria ApiDominio = await new CssApi().GetApi<enAuditoria>(new ApiParams
+                {
+                    EndPoint = AppSettings.baseUrlApi,
+                    Url = $"recursivo/dominio/listar/1",
+                    UserAD = AppSettings.UserAD,
+                    PassAD = AppSettings.PassAD,
+                });
+                if (ApiDominio != null)
+                {
+                    if (ApiDominio.Objeto != null)
+                    {
+                        List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                        model.Lista_TipoMicroArchivo = ListaDominios
+                        .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.TipoMicroArchivo)
+                        .Select(x => new SelectListItem
+                        {
+                            Text = x.DESC_ITEM,
+                            Value = x.COD_ITEM,
+                        }).ToList();
+                    }
+                }
                 model.Lista_TipoMicroArchivo = new List<SelectListItem>();
                 model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
-                model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
-                model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
+                //model.Lista_TipoMicroArchivo.Insert(1, new SelectListItem { Value = "1", Text = "Propio" });
+                //model.Lista_TipoMicroArchivo.Insert(2, new SelectListItem { Value = "2", Text = "Tercerizado" });
             }
             catch (Exception ex)
             {

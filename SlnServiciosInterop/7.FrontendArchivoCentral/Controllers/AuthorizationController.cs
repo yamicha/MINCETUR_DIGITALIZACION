@@ -35,7 +35,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                     string llave = client.traeLlave();
                     if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
                     //int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    int intIdUsu = 3248;
+                    int intIdUsu = 130994;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
@@ -54,10 +54,9 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                                     Codusuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu.ToString(),
                                     IdUsuario = Usuario.lstUsuSisRolEntEstorg[0].IdUsu,
                                     NameApellidos = Usuario.lstUsuSisRolEntEstorg[0].NomUsu,
-                                    IdOficina = 0,
-                                    DesOficina = "",
-                                    IdPerfil = 0,
-                                    Modulos = string.Empty
+                                    CodPerfil = Usuario.lstUsuSisRolEntEstorg[0].IdRol,
+                                    Modulos = string.Empty,
+                                    DesOficina = string.Empty
                                 };
                                 enAuditoria auditoriaModulo = await new CssApi().GetApi<enAuditoria>(new ApiParams
                                 {
