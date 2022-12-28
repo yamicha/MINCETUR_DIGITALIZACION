@@ -2,7 +2,7 @@
 function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
     $("#" + _grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote','Cant. Expedientes','Cant. Adjuntos','Peso Adjuntos', 'Fecha de Creación'];
+        'Lote','Cant. Expedientes','Cant. Adjuntos','Peso Adjuntos', 'Usuario Asignación', 'Fecha Asignación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
@@ -13,7 +13,8 @@ function Lote_ConfigurarGrilla(_grilla, _barra, _multiselect) {
             name: 'PESO_TOTALADJUNTOS', index: 'PESO_TOTALADJUNTOS', align: 'center', width: 120, hidden: false, search: false,
             formatter: (cellvalue, options, rowObject) => { return formatBytes(rowObject.PESO_TOTALADJUNTOS) }
         },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 220, hidden: false, search: true },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 220, hidden: false, search: true }
     ];
     var opciones = {
         GridLocal: true, multiselect: _multiselect, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
@@ -77,7 +78,7 @@ function Lote_CargarGrilla(_grilla, _FLG_DEVOLUCION, _FLG_MICROFORMA, _FECHA_INI
                             CANT_ADJUNTOS: v.CANT_ADJUNTOS,
                             PESO_TOTALADJUNTOS: v.PESO_TOTALADJUNTOS,
                             STR_FEC_CREACION: v.STR_FEC_CREACION,
-                            //USU_CREACION: v.USU_CREACION
+                            USU_CREACION: v.USU_CREACION
                         };
                         jQuery("#" + _grilla).jqGrid('addRowData', x, myData);
                     });

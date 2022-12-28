@@ -33,6 +33,7 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public string CANT_EXPEDIENTES { get; set; }
         public string NRO_REPROCESADOS { get; set; }
         public string FLG_MICROARCHIVO { get; set; }
+        public string STR_USUARIO_CREACION { get; set; }
         public enMicroArchivo MicroArchivo { get; set; }
         
 

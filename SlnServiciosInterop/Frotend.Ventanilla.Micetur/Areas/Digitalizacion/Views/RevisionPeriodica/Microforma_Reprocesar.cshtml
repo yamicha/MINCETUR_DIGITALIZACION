@@ -4,6 +4,7 @@
 }
 <link href="~/assets/css/Microforma/Formato.css" rel="stylesheet" />
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
+<script src="@Url.Content("~/Scripts/js/Microforma/Usuarios.js")" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         Microforma_ReprocesoGetOne(@Model.ID_MICROFORMA);
@@ -23,6 +24,8 @@
     });
     timePicker('MICROFORMA_HORA');
     timePicker('MA_HORA');
+    Lista_Usuarios();
+    $('#comboUsuario').select2();
 </script>
 <style>
     .time-picker {
@@ -165,7 +168,7 @@
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_ID_TIPO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    @*<div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Acta: </label>
                                         </div>
@@ -173,7 +176,7 @@
                                             @Html.TextBoxFor(model => model.MICROFORMA_ACTA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", })
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_ACTA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">N° de Copias: </label>
@@ -269,12 +272,12 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <i class="clip-paste"></i> Detalle MicroArchivo
+                                    <i class="clip-paste"></i> Detalle Microarchivo
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo MicroArchivo:</label>
+                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo Microarchivo:</label>
                                         </div>
                                         <div class="col-sm-6">
                                             @Html.DropDownListFor(model => model.MA_TIPO_ARCHIVO, Model.Lista_TipoMicroArchivo, new { @class = "form-control", })
@@ -317,8 +320,11 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Responsable: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @disabled = "true" })
-                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })
+                                            <select id="comboUsuario" class="form-control" style="width:100%;">
+                                                <option value="">--Seleccione--</option>
+                                            </select>
+                                            @*@Html.TextBoxFor(model => model.MA_RESPONSABLE, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @disabled = "true" })
+                                            @Html.ValidationMessageFor(model => model.MA_RESPONSABLE, string.Empty, new { @class = "cssMessageError" })*@
                                         </div>
                                     </div>
 

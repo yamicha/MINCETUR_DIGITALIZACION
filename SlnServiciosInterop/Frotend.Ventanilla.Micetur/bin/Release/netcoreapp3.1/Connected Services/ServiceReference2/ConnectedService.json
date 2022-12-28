@@ -6,7 +6,7 @@
   },
   "ExtendedData": {
     "inputs": [
-      "http://svcdesa.mincetur.gob.pe:8080/servicioGenerales/docCms/Services/WCFGeneralesDocCmsRegistro.svc?wsdl"
+      "http://svcqa.mincetur.gob.pe/servicioGenerales/docCms/Services/WCFGeneralesDocCmsRegistro.svc?wsdl"
     ],
     "collectionTypes": [
       "System.Array",

@@ -3,7 +3,7 @@
   "Version": "15.0.40203.910",
   "ExtendedData": {
     "inputs": [
-      "http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/WCFSeguridadEncripDesencrip.svc?wsdl"
+      "http://svcqa.mincetur.gob.pe/servicioSeguridad/WCFSeguridadEncripDesencrip.svc?wsdl"
     ],
     "collectionTypes": [
       "System.Array",

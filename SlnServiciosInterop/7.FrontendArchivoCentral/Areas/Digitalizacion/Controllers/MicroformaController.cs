@@ -129,7 +129,7 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
                         {
                             List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
                             if (ListaDominios == null) ListaDominios = new List<enDominio>();
-                            model.Lista_TipoMicroArchivo = ListaDominios
+                            model.Lista_MICROFORMA_ID_CONFORME = ListaDominios
                               .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.EvalucionCalidad)
                              .Select(x => new SelectListItem
                              {

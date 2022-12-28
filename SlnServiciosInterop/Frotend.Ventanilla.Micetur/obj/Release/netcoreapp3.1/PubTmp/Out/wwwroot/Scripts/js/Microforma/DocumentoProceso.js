@@ -4,17 +4,29 @@ function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
     $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
     $("#Load_Busqueda").show();
     let showColumnHora = false;
-    let showObservaciones = true; 
+    let showUsuario = false;
+    let showFecha = false;
+    let showObservaciones = true;
+    let columnaUsuario = "Usuario Reproceso";
+    let columnaFecha = "Fecha Reproceso";
+    if (_ID_MODULO == 5) {
+        columnaUsuario = "Digitalizador";
+        showFecha = true;
+    }
     if (_ID_MODULO != 5) {
         showColumnHora = true;
         showObservaciones = false; 
+    }
+    if (_ID_MODULO == 7) {
+        showUsuario = true;
+        showFecha = true;
     }
     setTimeout(() => {
         var url = BaseUrlApi + 'ventanilla/documento/proceso-paginado';
         $("#" + _grilla).GridUnload();
         var colNames = [
             '1', '2', 'Ver Adjuntos', 'Estado', 'Nro. Lote', 'Digitalizador',
-            'Nro. Expediente', 'Tipo Expediente', 'Asunto', 'Clasificación', 'Hora Inicio', 'Hora Fin', 'Obervación', 'Usuario de Creación', 'Fecha de Creación'
+            'Nro. Expediente', 'Ver Movimiento', 'Tipo Expediente', 'Asunto', 'Clasificación', 'Hora Inicio', 'Hora Fin', 'Obervación', columnaUsuario, columnaFecha
         ]
         //var colModels = [
         //    { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //1
@@ -33,21 +45,22 @@ function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
         //    { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, search: false },
         //];
         var colModels = [
-            { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //1
-            { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true }, //2
-            { name: 'VER_IMAGEN', index: 'VER_IMAGEN', align: 'center', width: 110, hidden: false, formatter: DocumentoProceso_actionVerImagen, search: false, sortable: false }, //4
-            { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', width: 150, hidden: true, search: false },
-            { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false },
-            { name: 'NOMBRE_USUARIO', index: 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //6
+            { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO ', align: 'center', hidden: true, key: true }, //0
+            { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO ', align: 'center', hidden: true }, //1
+            { name: 'VER_IMAGEN', index: 'VER_IMAGEN', align: 'center', width: 110, hidden: false, formatter: DocumentoProceso_actionVerImagen, search: false, sortable: false }, //2
+            { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', width: 150, hidden: true, search: false }, //3
+            { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false }, //4
+            { name: 'NOMBRE_USUARIO', index: 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //5
             { name: 'ID_DOCUMENTO', index: 'ID_DOCUMENTO', align: 'center', width: 150, hidden: false },
+            { name: '_VER_MOVIMIENTO', index: '_VER_MOVIMIENTO', align: 'center', width: 300, hidden: false, formatter: DocumentoProceso_actionCodVerProceso, sortable: false }, //5
             { name: 'DES_TIP_DOC', index: 'DES_TIP_DOC', align: 'center', width: 150, hidden: false },
             { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'center', width: 200, hidden: false },
             { name: 'DES_CLASIF', index: 'DES_CLASIF', align: 'center', width: 200, hidden: false },
             { name: 'HORA_INICIO', index: 'HORA_INICIO', align: 'center', width: 100, hidden: showColumnHora, search: false },
             { name: 'HORA_FIN', index: 'HORA_FIN', align: 'center', width: 100, hidden: showColumnHora, search: false },
             { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 200, hidden: showObservaciones, formatter: DocumentoProceso_actionVerObs },
-            { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 200, hidden: false },
-            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, search: false },
+            { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 200, hidden: showUsuario },
+            { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: showFecha, search: false },
         ];
         
         var opciones = {
@@ -119,19 +132,26 @@ function GetRulesProceso() {
 
     if (_ID_MODULO == 5) { // digitilzados
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.digitalizados}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 7) { // Aprobados
         let IdEstadoDocumento = $('#comboEstadoDocumento').val(); 
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${IdEstadoDocumento}`, op: "=" });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 9) { //reprocesado
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.reprocesado}`, op: " = " });
-        rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 11) { //fedatario conforme
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: `${ESTADO_DOC.FedatarioConforme}`, op: " = " });
+        //rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
+    // modo admin
+    debugger;
+    const perfilLogin = $('#inputHddCod_perfil').val();
+    //DIGI_ADMIN para desarrollo y para QA es SCDDBA_ADMIN_CDA
+    if ((_ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 11) && (perfilLogin != "SCDDBA_ADMIN_CDV")) {
         rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     return rules;
@@ -146,4 +166,19 @@ function DocumentoProceso_actionVerObs(cellvalue, options, rowObject) {
 function DocumentoProceso_actionVerImagen(cellvalue, options, rowObject) {
       let  _btn = "<button title='Ver Imagen' onclick='Documento_VerImagen(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen'> <i class=\"clip-images\" style=\"color:#a01010;font-size:20px\"></i></button>";
     return _btn;
+}
+
+function DocumentoProceso_actionCodVerProceso(cellvalue, options, rowObject) {
+    var _btn = "";//rowObject[4];
+    if (_ID_MODULO != 2)
+        _btn += " <br/> <button title='Ver Movimientos' onclick='Documento_Ver_Proceso(" + rowObject[1] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Ver_Imagen' style=\"color:#a01010;font-size:12px\"><i class=\"clip-stack\"></i> Movimientos</button>";
+    return _btn;
+}
+
+function Documento_Ver_Proceso(CODIGO) {
+    jQuery("#myModal_Documento_Ver_Imagen").html('');
+    jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/ver-proceso?ID_DOCUMENTO=" + CODIGO, function (responseText, textStatus, request) {
+        $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');
+        if (request.status != 200) return;
+    });
 }

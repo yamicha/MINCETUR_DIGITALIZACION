@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    debugger;
     Remove_RemoverClases("liControl");
     Documento_ConfigurarGrilla_Venta("Documento_Grilla", "Documento_Barra", "Documentos");
     TotalRegistros_Documento("Documento_Grilla");
@@ -6,6 +7,7 @@
 function Documento_ConfigurarGrilla_Venta(_grilla, _barra, _titulo) {
     $("#Load_Busqueda").show();
     setTimeout(() => {
+        debugger;
         $(".ui-jqgrid-hdiv").css("overflow-x", "hidden");
         _ID_MODULO = 1;
         _PREFIJO = "";

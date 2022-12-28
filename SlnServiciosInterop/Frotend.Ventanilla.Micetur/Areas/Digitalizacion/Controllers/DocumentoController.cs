@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
+using EnServiciosDigitalizacion.Enums;
 using EnServiciosDigitalizacion.Ventanilla.Digitalizacion;
 using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
 using Frotend.Ventanilla.Micetur.Authorization;
@@ -41,11 +43,35 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             enAuditoria auditoria = new enAuditoria();
             modelo.ID_DOCUMENTO = ID_DOCUMENTO;
             modelo.ID_DOCUMENTO_ASIGNADO = ID_DOCUMENTO_ASIGNADO;
-            modelo.Lista_VALIDAR_ID_CONFORME = new List<SelectListItem>();
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem() { Value = "", Text = "--Seleccione--" });
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(1, new SelectListItem() { Value = "1", Text = "CONFORME" });
-            modelo.Lista_VALIDAR_ID_CONFORME.Insert(2, new SelectListItem() { Value = "0", Text = "NO CONFORME" });
             modelo.VALIDAR_ID_CONFORME = "";
+
+            enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
+            {
+                EndPoint = AppSettings.baseUrlApi,
+                Url = $"recursivo/dominio/listar/1",
+                UserAD = AppSettings.UserAD,
+                PassAD = AppSettings.PassAD,
+            });
+            if (ApiDominio != null)
+            {
+                if (!ApiDominio.Rechazo)
+                {
+                    if (ApiDominio.Objeto != null)
+                    {
+                        List<enDominio> ListaDominios = JsonConvert.DeserializeObject<List<enDominio>>(ApiDominio.Objeto.ToString());
+                        if (ListaDominios == null) ListaDominios = new List<enDominio>();
+                        modelo.Lista_VALIDAR_ID_CONFORME = ListaDominios
+                          .Where(s => s.ID_DOMINIO_PADRE == (long)Dominios.EvalucionCalidad)
+                         .Select(x => new SelectListItem
+                         {
+                             Text = x.DESC_ITEM,
+                             Value = x.COD_ITEM,
+                         }).ToList();
+                        modelo.Lista_VALIDAR_ID_CONFORME.Insert(0, new SelectListItem { Value = "", Text = "-- selecione --" });
+                    }
+                }
+            }
+
             modelo.Lista_VALIDAR_ID_TIPO_OBS = new List<SelectListItem>();
             enAuditoria apiDocumento= await new CssApi().GetApi<enAuditoria>(new ApiParams
             {

@@ -53,7 +53,7 @@ function ControlFinalizadoBuscar() {
 
 
 async function Microforma_MicroArchivoGrabar() {
-    jConfirm(" ¿ Desea guardar los datos del MicroArchivo ingresado ? ", "Atención", async function (r) {
+    jConfirm(" ¿ Desea guardar los datos del Microarchivo ingresado ? ", "Atención", async function (r) {
         if (r) {
             var IdDocAlmacenamiento = 0;
             if ($('#fileActaAlma').prop('files')[0] != undefined) {
@@ -145,7 +145,7 @@ function Microforma_MostrarEditar() {
 }
 
 function MicroArchivo_Editar() {
-    jConfirm(" ¿ Desea guardar los datos del MicroArchivo ingresado ? ", "Atención", async function (r) {
+    jConfirm(" ¿ Desea guardar los datos del Microarchivo ingresado ? ", "Atención", async function (r) {
         if (r) {
             var IdDocAlmacenamiento = 0;
             if ($('#fileActaAlma').prop('files')[0] != undefined) {
@@ -260,7 +260,7 @@ function MicroArchivo_HistorialConfigurarGrilla(_Grilla, _barra) {
 
     var colNames = [
         '1', '2', 'Acta',
-        'Tipo MicroArchivo', 'Dirección', 'Fecha', 'Hora', 'Responsable', 'Observación', 'Fecha Creación','ID_DOC'];
+        'Tipo Microarchivo', 'Dirección', 'Fecha', 'Hora', 'Responsable', 'Observación', 'Fecha Reg. Alm.','ID_DOC'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_MICROARCHIVO', index: 'ID_MICROARCHIVO', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//2
@@ -280,7 +280,7 @@ function MicroArchivo_HistorialConfigurarGrilla(_Grilla, _barra) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
     };
-    SICA.Grilla(_Grilla, _barra, '', '', '', "Historial MicroArchivo", '', '', colNames, colModels, '', opciones);
+    SICA.Grilla(_Grilla, _barra, '', '', '', "Historial Microarchivo", '', '', colNames, colModels, '', opciones);
 }
 
 function MicroArchivo_ActaFormatter(cellvalue, options, rowObject) {

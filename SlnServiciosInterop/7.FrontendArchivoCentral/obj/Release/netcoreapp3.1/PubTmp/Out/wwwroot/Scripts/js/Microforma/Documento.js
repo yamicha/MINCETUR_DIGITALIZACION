@@ -412,19 +412,23 @@ function GetRules() {
     }
     if (_ID_MODULO == 6) { // Aprobar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6)', op: " in " });
+        rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+    }
+    if (_ID_MODULO == 10) { // Fedatario
+        rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 8) { // Reprocesar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
-    }
-    if (_ID_MODULO == 8) { // Reprocesar
-        rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+        if ($('#inputHddCod_perfil').val() != "SCDDBA_ADMIN_CDA") {
+            rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        }
     } 
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
         rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
     }
     // filtro documento x usuario
-    if (_ID_MODULO == 4|| _ID_MODULO == 8|| _ID_MODULO == 6 || _ID_MODULO == 10  ) {
-        debugger; 
+    if (_ID_MODULO == 4) {
+        //|| _ID_MODULO == 8 || _ID_MODULO == 6 || _ID_MODULO == 10
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
   

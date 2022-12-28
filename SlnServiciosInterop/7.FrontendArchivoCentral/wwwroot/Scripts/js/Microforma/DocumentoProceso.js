@@ -31,7 +31,7 @@ function DocumentoProceso_ConfigurarGrilla(_grilla, _barra, _titulo, _modulo) {
             { name: 'DESCRIPCION_ESTADO', index: 'DESCRIPCION_ESTADO', align: 'center', width: 150, hidden: true, search: false }, //2
             { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false }, //3
             { name: 'NOM_DOCUMENTO', index: 'NOM_DOCUMENTO', align: 'center', width: 300, hidden: true }, //4
-            { name: '_NOM_DOCUMENTO', index: '_NOM_DOCUMENTO', align: 'center', width: 300, hidden: false, formatter: DocumentoProceso_actionCodVerProceso, sortable: false }, //13
+            { name: '_NOM_DOCUMENTO', index: '_NOM_DOCUMENTO', align: 'center', width: 300, hidden: false, formatter: DocumentoProceso_actionCodVerProceso, sortable: false }, //5
             { name: 'DES_FONDO', index: 'DES_FONDO', align: 'center', width: 200, hidden: false },
             { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 220, hidden: false },
             { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 220, hidden: false },
@@ -130,8 +130,9 @@ function GetRulesProceso() {
     }
     // modo admin
     debugger; 
-    const perfilLogin = $('#inputHddCod_perfil').val(); 
-    if ((_ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 11) && (perfilLogin != "DIGI_ADMIN")) {
+    const perfilLogin = $('#inputHddCod_perfil').val();
+    //DIGI_ADMIN para desarrollo y para QA es SCDDBA_ADMIN_CDA
+    if ((_ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 11) && (perfilLogin != "SCDDBA_ADMIN_CDA")) {
         rules.push({ field: 'V.ID_USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
 

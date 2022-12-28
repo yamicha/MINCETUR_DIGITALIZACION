@@ -34,8 +34,8 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                     string StrCodDesEncriptado = string.Empty;
                     string llave = client.traeLlave();
                     if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
-                    int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    //int intIdUsu = 130994;
+                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    int intIdUsu = 278561;//3248;//278561;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
@@ -43,7 +43,9 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                             IdSis = AppSettings.AppId,
                             IdUsu = intIdUsu,
                             FlgEst = 1,
-                            Opr = "3",
+                            Opr = "3"
+                            //IdEnt = -1,
+                            //IdSub = -1
                         });
                         if (Usuario != null)
                         {

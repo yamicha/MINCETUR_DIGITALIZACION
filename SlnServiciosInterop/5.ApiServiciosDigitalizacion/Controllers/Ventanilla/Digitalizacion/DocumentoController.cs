@@ -196,6 +196,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.NRO_LOTE,
                             item.NOMBRE_USUARIO,
                             item.ID_DOCUMENTO.ToString(),
+                            null,
                             item.DES_CLASIF,
                             item.DES_TIP_DOC,
                             item.DES_ASUNTO,

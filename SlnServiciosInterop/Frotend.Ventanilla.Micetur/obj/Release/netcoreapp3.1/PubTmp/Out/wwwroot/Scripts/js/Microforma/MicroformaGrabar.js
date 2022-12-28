@@ -42,12 +42,13 @@ function MicroformaPendiente_Buscar() {
 function MicroformaLote_ConfigurarGrilla() {
     $("#" + MicroformaGrabar_Lote_grilla).GridUnload();
     var colNames = ['1', '2',
-        'Lote', 'Fecha de Creación'];
+        'Lote', 'Fecha de Creación', 'Usuario Asignación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_LOTE', index: 'ID_LOTE', align: 'center', width: 1, hidden: true },
         { name: 'NRO_LOTE', index: 'NRO_LOTE', align: 'center', width: 100, hidden: false, search: false },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true },
+        { name: 'USU_CREACION', index: 'USU_CREACION', align: 'center', width: 250, hidden: false, search: true },
     ];
     var opciones = {
         GridLocal: true, multiselect: true, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,

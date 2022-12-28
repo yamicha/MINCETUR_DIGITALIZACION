@@ -13,7 +13,7 @@ namespace SeguridadWsdl
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DatosUsuSisRolEstorg", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.Seguridad.Servici" +
         "oWeb.Models")]
     public partial class DatosUsuSisRolEstorg : object
@@ -156,7 +156,7 @@ namespace SeguridadWsdl
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Resultado", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.Seguridad.Servici" +
         "oWeb.Models")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SeguridadWsdl.ResultadoUsuSisRolEstorg))]
@@ -240,7 +240,7 @@ namespace SeguridadWsdl
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResultadoUsuSisRolEstorg", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.Seguridad.Servici" +
         "oWeb.Models")]
     public partial class ResultadoUsuSisRolEstorg : SeguridadWsdl.Resultado
@@ -263,7 +263,7 @@ namespace SeguridadWsdl
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UsuSisRolEntEstorg", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.Seguridad.Servici" +
         "oWeb.Models")]
     public partial class UsuSisRolEntEstorg : object
@@ -600,7 +600,7 @@ namespace SeguridadWsdl
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SeguridadWsdl.IWCFSeguridadUsuSisRolEntEstorg")]
     public interface IWCFSeguridadUsuSisRolEntEstorg
     {
@@ -614,13 +614,13 @@ namespace SeguridadWsdl
         System.Threading.Tasks.Task<SeguridadWsdl.ResultadoUsuSisRolEstorg> listarUsuSisRolEntEstorgAsync(SeguridadWsdl.DatosUsuSisRolEstorg datos);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IWCFSeguridadUsuSisRolEntEstorgChannel : SeguridadWsdl.IWCFSeguridadUsuSisRolEntEstorg, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class WCFSeguridadUsuSisRolEntEstorgClient : System.ServiceModel.ClientBase<SeguridadWsdl.IWCFSeguridadUsuSisRolEntEstorg>, SeguridadWsdl.IWCFSeguridadUsuSisRolEntEstorg
     {
         
@@ -702,8 +702,8 @@ namespace SeguridadWsdl
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFSeguridadUsuSisRolEntEstorg))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/Services/WCFSeguridadUsuSis" +
-                        "RolEntEstorg.svc");
+                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioSeguridad/Services/WCFSeguridadUsuSisRolEntE" +
+                        "storg.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }

@@ -29,7 +29,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
     var urlsubgrid = BaseUrlApi + "ventanilla/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme'];
+        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme', 'Fecha de Grabación', 'Operador Grabación'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false },// 1
@@ -42,6 +42,8 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
+        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false, search: true }, // 12
+        { name: 'STR_USUARIO_CREACION', index: 'STR_USUARIO_CREACION', align: 'center', width: 250, hidden: false, search: true }, // 13
 
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
@@ -142,7 +144,7 @@ function Microforma_actionVerCodigo(cellvalue, options, rowObject) {
     } else if (_MICROMODULO == MicroModulo.Control) {
         _btn += "<button title='Ver Microforma' onclick='Microforma_ValidarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-clipboard\" style=\"color:##ec971f;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.Reprocesar) {
-        _btn += "<br/><button title='Ver Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
+        _btn += "<br/><button title='Reprocesar Microforma' onclick='Microforma_EditarMicroforma(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-refresh\" style=\"color:;font-size:16px\"></i></button>";
         _btn += "<button title='Ver Observaciones' onclick='Microforma_VerObs(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-bubbles-3\" style=\"color:#a01010;font-size:16px\"></i></button>";
     } else if (_MICROMODULO == MicroModulo.CAlmacen) {
         _btn += "<button title='Ingresar Micro Archivo' onclick='Microforma_MantenimientoMicroArchivo(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Documento_Grabar'> <i class=\"clip-folder-upload\" style=\"color:##ec971f;font-size:16px\"></i></button>";
@@ -251,7 +253,7 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
     $("#" + Microforma_Ver_Obs_grilla).GridUnload();
     var colNames = [
         '1', '2', 'Observación',
-        'Usuario Creación', 'Fecha Observación'];
+        'Usuario Observación', 'Fecha Observación'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },//1
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },//3 

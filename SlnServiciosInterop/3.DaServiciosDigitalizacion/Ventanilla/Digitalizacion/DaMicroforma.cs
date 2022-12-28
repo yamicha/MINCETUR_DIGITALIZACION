@@ -56,7 +56,9 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intIdEstado = drReader.GetOrdinal("ID_ESTADO_MICROFORMA");
                             int intFlgConforme = drReader.GetOrdinal("FLG_CONFORME");
                             int intNroRevision = drReader.GetOrdinal("NRO_REVISIONES");
-                            
+                            int intStrFecGrabacion = drReader.GetOrdinal("STR_FEC_GRABACION");
+                            int intStrUsuario = drReader.GetOrdinal("STR_USUARIO_CREACION");
+
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -71,6 +73,8 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intFlgConforme)) temp.FLG_CONFORME = arrResult[intFlgConforme].ToString();
                                 if (!drReader.IsDBNull(intNroVolumen)) temp.NRO_VOLUMEN = arrResult[intNroVolumen].ToString();
                                 if (!drReader.IsDBNull(intNroRevision)) temp.NRO_REVISIONES = long.Parse(arrResult[intNroRevision].ToString());
+                                if (!drReader.IsDBNull(intStrFecGrabacion)) temp.STR_FEC_GRABACION = arrResult[intStrFecGrabacion].ToString();
+                                if (!drReader.IsDBNull(intStrUsuario)) temp.STR_USUARIO_CREACION = arrResult[intStrUsuario].ToString();
                                 lista.Add(temp);
                             }
                             drReader.Close();

@@ -25,13 +25,14 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         var VER_BOTON_OBS = true;
         var _NRO_REPROCESADOHidden = true;
         var NOMBRE_BOTON_IMAGEN = "";
-        var verLote = true;
+        var verLote = false;
         var url = BaseUrlApi + 'ventanilla/documento/listar-paginado';
         if (_ID_MODULO == 0) {
             _PREFIJO = "Detalle_";
         }
         if (_ID_MODULO == 2) {
             _PREFIJO = "Asignar_";
+            verLote = true;
         } else if (_ID_MODULO == 3) {
             _PREFIJO = "Asignados_";
         } else if (_ID_MODULO == 4) {
@@ -85,7 +86,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         var colNames = [
             '0', '1', '2', '3',
             NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Nro. Lote', 'Digitalizador', 'Nro. Expediente', 'Documento', 'Fec. Reg. Expediente', 'Solicitante', 'Asunto', 'Clasificación',  'Nro. Reprocesados', 'Estado de Expediente', 'Tipo Expediente',
-            'Num. Doc', 'Folios', 'Observación',  'Usuario de Creación', 'Fecha de Creación', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
+            'Num. Doc', 'Folios', 'Observación',  'Usuario Recepción', 'Fecha Recepción', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
         var colModels = [
             //{ name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
             //{ name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
@@ -321,6 +322,7 @@ function GetRulesDoc() {
     _gs_DESCRIPCION_ESTADO = $('#gs_' + _PREFIJO + '_DESCRIPCION_ESTADO').val();
     _gs_NROEXPEDIENTE = $('#gs_' + _PREFIJO + '_ID_DOCUMENTO').val();
     _gs_STR_FEC_EXPEDIENTE = $('#gs_' + _PREFIJO + 'STR_FEC_EXPEDIENTE').val();
+    _gs_NRO_LOTE = jQuery('#gs_' + _PREFIJO + 'NRO_LOTE').val();
     //
     var _DES_CLASIF= _gs_DES_CLASIF == '' || _gs_DES_CLASIF == undefined ? null : "UPPER('" + _gs_DES_CLASIF + "')";
     var _DES_ASUNTO = _gs_DES_ASUNTO == '' || _gs_DES_ASUNTO == undefined ? null : "UPPER('" + _gs_DES_ASUNTO + "')";
@@ -329,8 +331,8 @@ function GetRulesDoc() {
     var _NOMBRE_USUARIO = _gs_NOMBRE_USUARIO == '' || _gs_NOMBRE_USUARIO == undefined ? null : "UPPER('" + _gs_NOMBRE_USUARIO + "')";
     var _DESCRIPCION_ESTADO = _gs_DESCRIPCION_ESTADO == '' || _gs_DESCRIPCION_ESTADO == undefined ? null : "UPPER('" + _gs_DESCRIPCION_ESTADO + "')";
     var _NROEXPEDIENTE = _gs_NROEXPEDIENTE == '' || _gs_NROEXPEDIENTE == undefined ? null : "UPPER('" + _gs_NROEXPEDIENTE + "')";
-    debugger;
     var _STR_FEC_EXPEDIENTE = _gs_STR_FEC_EXPEDIENTE != undefined ? `'${_gs_STR_FEC_EXPEDIENTE}'` : `''`;
+    var _NRO_LOTE = _gs_NRO_LOTE == '' || _gs_NRO_LOTE == undefined ? null : "UPPER('" + _gs_NRO_LOTE + "')";
 
     var POR = "'%'";
     rules = [
@@ -342,13 +344,14 @@ function GetRulesDoc() {
         { field: 'V.ID_DOCUMENTO', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         { field: 'V.STR_FEC_EXPEDIENTE', data: POR + ' || ' + _STR_FEC_EXPEDIENTE + ' || ' + POR, op: " LIKE " },
     ];
+    debugger;
     if (_ID_MODULO == 0) { // detalle
         _ID_LOTE = ((_ID_LOTE == 0) ? -1 : _ID_LOTE); 
           rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
-        //rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
     }
     if (_ID_MODULO != 1) {
         rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
+        rules.push({ field: 'V.NRO_LOTE', data: POR + ' || ' + _NRO_LOTE + ' || ' + POR, op: " LIKE " });
         if (_ID_MODULO != 2)
             rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
     }
@@ -373,14 +376,25 @@ function GetRulesDoc() {
     }
     if (_ID_MODULO == 6) { // Aprobar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6,10)', op: " in " });
+        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
+    debugger;
     if (_ID_MODULO == 8) { // Reprocesar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',8)', op: " in " });
+        if ($('#inputHddCod_perfil').val() != "SCDDBA_ADMIN_CDV") {
+            rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        }
+    }
+    if (_ID_MODULO == 10) { // Fedatario
+        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
         rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });
     }
-    if (_ID_MODULO == 4 || _ID_MODULO == 8) {
+    //if (_ID_MODULO == 4 || _ID_MODULO == 8) {
+    //    rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+    //}
+    if (_ID_MODULO == 4) {
         rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     return rules;
@@ -451,7 +465,7 @@ function Documento_Ver_Proceso_ConfigurarGrilla() {
     var colNames = [
         '1', '2', '3',
         'Proceso', 'Inicio', 'Fin', 'Comentario',
-        'Usuario Creación', 'Fecha Creación'];
+        'Usuario', 'Fecha'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', width: 1, hidden: true, sortable: false, key: true },
         { name: 'ID_DOCUMENTO_PROCESO', index: 'ID_DOCUMENTO_PROCESO', align: 'center', width: 1, hidden: true, sorttype: 'number', sortable: false },

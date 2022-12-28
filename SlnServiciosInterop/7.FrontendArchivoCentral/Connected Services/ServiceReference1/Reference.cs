@@ -11,7 +11,7 @@ namespace ServiceReference1
 {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IWCFSeguridadEncripDesencrip")]
     public interface IWCFSeguridadEncripDesencrip
     {
@@ -35,13 +35,13 @@ namespace ServiceReference1
         System.Threading.Tasks.Task<string> traeLlaveAsync();
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IWCFSeguridadEncripDesencripChannel : ServiceReference1.IWCFSeguridadEncripDesencrip, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class WCFSeguridadEncripDesencripClient : System.ServiceModel.ClientBase<ServiceReference1.IWCFSeguridadEncripDesencrip>, ServiceReference1.IWCFSeguridadEncripDesencrip
     {
         
@@ -143,8 +143,7 @@ namespace ServiceReference1
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFSeguridadEncripDesencrip))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/WCFSeguridadEncripDesencrip" +
-                        ".svc");
+                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioSeguridad/WCFSeguridadEncripDesencrip.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }

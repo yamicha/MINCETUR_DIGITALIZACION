@@ -12,15 +12,7 @@
         $(document).ready(function () {
             Remove_RemoverClases("liRecepcion");
             $('#ID_DIGITALIZADOR, #ID_DIGITALIZADOR2').select2();
-            $('#txtfechafin,#txtfechainicio').datepicker({
-                changeMonth: true,
-                changeYear: true,
-                dateFormat: "dd/mm/yy",
-                firstDay: 1,
-                changeFirstDay: false,
-                placeholder: "dd/MM/yyyy",
-            }).datepicker("setDate", 'now');
-            $('#loteFechaInicio,#loteFechaFin').datepicker({
+            $('#txtfechafin,#txtfechainicio,#loteFechaInicio,#loteFechaFin').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "dd/mm/yy",
@@ -29,8 +21,6 @@
                 placeholder: "dd/MM/yyyy",
             }).datepicker("setDate", 'now');
         });
-
-
 
 </script>
 <style>

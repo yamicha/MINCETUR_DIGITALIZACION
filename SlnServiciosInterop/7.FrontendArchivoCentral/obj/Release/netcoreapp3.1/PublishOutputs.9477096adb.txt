@@ -61,12 +61,8 @@ C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInter
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\imagenes\sin-IMAGEN.jpg
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\avatar-1-small.jpg
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\loading.gif
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\fondo_login.jpg
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\font-Raleway.css
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\grey.png
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\infosecwallpaper.jpg
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\Ministerio-de-Economía-y-Finanzas.png
-C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\login\unnamed.jpg
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\logo-mincetur.png
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\userLogin.png
 C:\Users\Inmortal\Documents\GitHub\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\jqGrid\css\ui.jqgrid.css

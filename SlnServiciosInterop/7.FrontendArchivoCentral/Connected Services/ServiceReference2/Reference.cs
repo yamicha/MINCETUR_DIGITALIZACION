@@ -13,7 +13,7 @@ namespace ServiceReference2
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DocCmsSubir", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
     public partial class DocCmsSubir : object
@@ -231,7 +231,7 @@ namespace ServiceReference2
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Resultado", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
     public partial class Resultado : object
@@ -298,7 +298,7 @@ namespace ServiceReference2
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.IWCFGeneralesDocCmsRegistro")]
     public interface IWCFGeneralesDocCmsRegistro
     {
@@ -310,13 +310,13 @@ namespace ServiceReference2
         System.Threading.Tasks.Task<ServiceReference2.Resultado> insertarAsync(ServiceReference2.DocCmsSubir model);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IWCFGeneralesDocCmsRegistroChannel : ServiceReference2.IWCFGeneralesDocCmsRegistro, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class WCFGeneralesDocCmsRegistroClient : System.ServiceModel.ClientBase<ServiceReference2.IWCFGeneralesDocCmsRegistro>, ServiceReference2.IWCFGeneralesDocCmsRegistro
     {
         
@@ -398,8 +398,8 @@ namespace ServiceReference2
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFGeneralesDocCmsRegistro))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioGenerales/docCms/Services/WCFGenerale" +
-                        "sDocCmsRegistro.svc");
+                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioGenerales/docCms/Services/WCFGeneralesDocCms" +
+                        "Registro.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }
