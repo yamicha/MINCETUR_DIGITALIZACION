@@ -21,13 +21,22 @@ namespace Utilitarios.Helpers
         {
             using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
             {
-                cliente.DefaultRequestHeaders.Clear();
-                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                cliente.BaseAddress = new Uri(param.EndPoint);
-                var response = await cliente.GetAsync(param.Url);
-                var json_respuesta = await response.Content.ReadAsStringAsync();
-                var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-                return entidad;
+                try
+                {
+                    cliente.DefaultRequestHeaders.Clear();
+                    cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    cliente.BaseAddress = new Uri(param.EndPoint);
+                    var response = await cliente.GetAsync(param.Url);
+                    var json_respuesta = await response.Content.ReadAsStringAsync();
+                    var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+                    return entidad;
+                }
+                catch (Exception ex )
+                {
+
+                    throw ex;
+                }
+            
             }
         }
 

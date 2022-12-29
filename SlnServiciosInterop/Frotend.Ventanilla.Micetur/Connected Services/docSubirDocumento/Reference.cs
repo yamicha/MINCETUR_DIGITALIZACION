@@ -13,7 +13,7 @@ namespace docSubirDocumento
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DocCmsSubir", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
     public partial class DocCmsSubir : object
@@ -231,7 +231,7 @@ namespace docSubirDocumento
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Resultado", Namespace="http://schemas.datacontract.org/2004/07/Mincetur.Administracion.GeneralesUtil.Ser" +
         "vicioWebDocCms.Models")]
     public partial class Resultado : object
@@ -298,22 +298,25 @@ namespace docSubirDocumento
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="docSubirDocumento.IWCFGeneralesDocCmsRegistro")]
     public interface IWCFGeneralesDocCmsRegistro
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertar", ReplyAction="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertarResponse")]
+        docSubirDocumento.Resultado insertar(docSubirDocumento.DocCmsSubir model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertar", ReplyAction="http://tempuri.org/IWCFGeneralesDocCmsRegistro/insertarResponse")]
         System.Threading.Tasks.Task<docSubirDocumento.Resultado> insertarAsync(docSubirDocumento.DocCmsSubir model);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IWCFGeneralesDocCmsRegistroChannel : docSubirDocumento.IWCFGeneralesDocCmsRegistro, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class WCFGeneralesDocCmsRegistroClient : System.ServiceModel.ClientBase<docSubirDocumento.IWCFGeneralesDocCmsRegistro>, docSubirDocumento.IWCFGeneralesDocCmsRegistro
     {
         
@@ -357,6 +360,11 @@ namespace docSubirDocumento
         {
         }
         
+        public docSubirDocumento.Resultado insertar(docSubirDocumento.DocCmsSubir model)
+        {
+            return base.Channel.insertar(model);
+        }
+        
         public System.Threading.Tasks.Task<docSubirDocumento.Resultado> insertarAsync(docSubirDocumento.DocCmsSubir model)
         {
             return base.Channel.insertarAsync(model);
@@ -390,8 +398,8 @@ namespace docSubirDocumento
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFGeneralesDocCmsRegistro))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioGenerales/docCms/Services/WCFGenerale" +
-                        "sDocCmsRegistro.svc");
+                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioGenerales/docCms/Services/WCFGeneralesDocCms" +
+                        "Registro.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }

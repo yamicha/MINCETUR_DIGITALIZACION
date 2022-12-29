@@ -1,6 +1,4 @@
-﻿{
-  "ProviderId": "Microsoft.VisualStudio.ConnectedService.Wcf",
-  "Version": "15.0.40203.910",
+{
   "ExtendedData": {
     "inputs": [
       "http://svcqa.mincetur.gob.pe/servicioGenerales/docCms/Services/WCFGeneralesDocCmsRegistro.svc?wsdl"
@@ -12,6 +10,7 @@
     "namespaceMappings": [
       "*, docSubirDocumento"
     ],
+    "sync": true,
     "targetFramework": "netcoreapp3.1",
     "typeReuseMode": "None"
   }
