@@ -319,19 +319,24 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
         public void Ejecutar_Query(string _Query, ref enAuditoria auditoria)
         {
             auditoria.Limpiar();
+            OracleCommand cmd = new OracleCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDAVALID_CARGA");
+            cmd.Parameters.Add("X_QUERY", _Query);
+            cmd.Parameters.Add(new OracleParameter("X_RESULT", OracleDbType.Varchar2,100)).Direction = System.Data.ParameterDirection.Output;
             using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
             {
                 cn.Open();
-                OracleCommand cmd = new OracleCommand(_Query, cn);
                 try
                 {
-                    string InId = cmd.ExecuteScalar().ToString();
-                    if (!string.IsNullOrEmpty(InId))
+                    cmd.Connection = cn;
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
                     {
-                        long ID_DOCUMENTO = 0;
-                        long.TryParse(InId, out ID_DOCUMENTO);
+                        string ID_DOCUMENTO =  cmd.Parameters["X_RESULT"].Value.ToString();
                         auditoria.Objeto = ID_DOCUMENTO;
+
                     }
+                    //--------------------------------
                 }
                 catch (Exception ex)
                 {
@@ -343,6 +348,30 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
                     if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
                 }
             }
+            //using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            //{
+            //    cn.Open();
+            //    OracleCommand cmd = new OracleCommand(_Query, cn);
+            //    try
+            //    {
+            //        string InId = cmd.ExecuteScalar().ToString();
+            //        if (!string.IsNullOrEmpty(InId))
+            //        {
+            //            long ID_DOCUMENTO = 0;
+            //            long.TryParse(InId, out ID_DOCUMENTO);
+            //            auditoria.Objeto = ID_DOCUMENTO;
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        auditoria.Error(ex);
+            //    }
+            //    finally
+            //    {
+            //        if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+            //        if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+            //    }
+            //}
         }
         public void Carga_Validar(long ID_CONTROL_CARGA, long ID_TABLA, ref enAuditoria auditoria)
         {

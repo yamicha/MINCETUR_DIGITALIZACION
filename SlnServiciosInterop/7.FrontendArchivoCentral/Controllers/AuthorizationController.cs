@@ -33,9 +33,10 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 {
                     string StrCodDesEncriptado = string.Empty;
                     string llave = client.traeLlave();
-                    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(cod, llave);
-                    int intIdUsu = int.Parse(StrCodDesEncriptado);
-                   // int intIdUsu = 278561;//3248;//278561;
+                   string StrCodEncriptado = HttpContext.Request.Query["Cod"].ToString();
+                   if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(StrCodEncriptado, llave);
+                     int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    //int intIdUsu = 3248;//278561;//3248;//278561;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg

@@ -33,10 +33,12 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                 using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
                 {
                     string StrCodDesEncriptado = string.Empty;
+                    string StrCodDesEncriptxado = string.Empty;
                     string llave = client.traeLlaveAsync().Result;
                     if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAESAsync(cod, llave).Result;
-                    int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    //int intIdUsu = 278561;//3248 230940;
+                    //if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptxado = client.encriptarAES("278561", llave);
+                    //int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    int intIdUsu = 278561;//3248 230940;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg

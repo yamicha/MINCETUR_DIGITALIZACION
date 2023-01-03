@@ -1,1 +1,0 @@
-One or more errors occurred. (No había ningún punto de conexión escuchando en http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/WCFSeguridadEncripDesencrip.svc que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información.)

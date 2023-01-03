@@ -19,40 +19,69 @@ namespace Utilitarios.Helpers
     {
         public async Task<T> GetApi<T>(ApiParams param) where T : class
         {
-            using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
+            var entidad = JsonConvert.DeserializeObject<T>("");
+            try
             {
-                try
+                using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
                 {
                     cliente.DefaultRequestHeaders.Clear();
                     cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     cliente.BaseAddress = new Uri(param.EndPoint);
                     var response = await cliente.GetAsync(param.Url);
                     var json_respuesta = await response.Content.ReadAsStringAsync();
-                    var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-                    return entidad;
+                     entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+                 
                 }
-                catch (Exception ex )
-                {
-
-                    throw ex;
-                }
-            
             }
+            catch (Exception)
+            {
+
+                using (var cliente = new HttpClient(new HttpClientHandler { }))
+                {
+                    cliente.DefaultRequestHeaders.Clear();
+                    cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    cliente.BaseAddress = new Uri(param.EndPoint);
+                    var response = await cliente.GetAsync(param.Url);
+                    var json_respuesta = await response.Content.ReadAsStringAsync();
+                    entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+
+                }
+            }
+            return entidad;
         }
 
 
         public async Task<T> PostApi<T>(ApiParams param) where T : class
         {
-            using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
+            var entidad= JsonConvert.DeserializeObject<T>("");
+            try
             {
-                cliente.BaseAddress = new Uri(param.EndPoint);
-                var content = new StringContent(JsonConvert.SerializeObject(param.parametros), Encoding.UTF8, "application/json");
-                var response = await cliente.PostAsync(param.Url, content);
-                var json_respuesta = await response.Content.ReadAsStringAsync();
+                using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
+                {
+                    cliente.BaseAddress = new Uri(param.EndPoint);
+                    var content = new StringContent(JsonConvert.SerializeObject(param.parametros), Encoding.UTF8, "application/json");
+                    var response = await cliente.PostAsync(param.Url, content);
+                    var json_respuesta = await response.Content.ReadAsStringAsync();
 
-                var entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
-                return entidad;
+                     entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+        
+                }
             }
+            catch (Exception)
+            {
+
+                using (var cliente = new HttpClient(new HttpClientHandler { }))
+                {
+                    cliente.BaseAddress = new Uri(param.EndPoint);
+                    var content = new StringContent(JsonConvert.SerializeObject(param.parametros), Encoding.UTF8, "application/json");
+                    var response = await cliente.PostAsync(param.Url, content);
+                    var json_respuesta = await response.Content.ReadAsStringAsync();
+
+                    entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
+
+                }
+            }
+            return entidad;
         }
 
     }
