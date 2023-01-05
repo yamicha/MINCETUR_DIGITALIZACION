@@ -24,14 +24,54 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             auditoria.Limpiar();
             try
             {
-                foreach (string ff in col)
-                {
-                    if (ff != null)
+				for (int i = 0; i < dt.Rows.Count; i++)
+				{
+                    using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
                     {
-                        OracleBulkCopyColumnMapping mapMumber = new OracleBulkCopyColumnMapping(ff, ff);
-                        bulkCopy.ColumnMappings.Add(mapMumber);
+                        cn.Open();
+                        OracleDataReader dr = null;
+                        var commantext = string.Format("{0}.{1}", AppSettingsHelper.PackCargaCons, "PRC_CDAINSERT_TEMP_INSERTAR");
+                        OracleCommand cmd = new OracleCommand(commantext, cn);
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new OracleParameter("X_ID_CONTROL_CARGA", OracleDbType.Varchar2)).Value = dt.Rows[i]["ID_CONTROL_CARGA"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_NUM_LINEA", OracleDbType.Varchar2)).Value = dt.Rows[i]["NUM_LINEA"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_ID_FONDO", OracleDbType.Varchar2)).Value = dt.Rows[i]["ID_FONDO"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_ID_SECCION", OracleDbType.Varchar2)).Value = dt.Rows[i]["ID_SECCION"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_ID_SERIE", OracleDbType.Varchar2)).Value = dt.Rows[i]["ID_SERIE"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_NOM_DOCUMENTO", OracleDbType.Varchar2)).Value = dt.Rows[i]["NOM_DOCUMENTO"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_DES_DOCUMENTO", OracleDbType.Varchar2)).Value = dt.Rows[i]["DES_DOCUMENTO"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_ANIO", OracleDbType.Varchar2)).Value = dt.Rows[i]["ANIO"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_FOLIOS", OracleDbType.Varchar2)).Value = dt.Rows[i]["FOLIOS"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_IMAGEN", OracleDbType.Varchar2)).Value = dt.Rows[i]["IMAGEN"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_OBS", OracleDbType.Varchar2)).Value = dt.Rows[i]["OBS"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = dt.Rows[i]["USU_CREA"].ToString();
+                        cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = dt.Rows[i]["IP_CREA"].ToString();
+                        //cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                        //cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IP_CREACION;
+                        cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
+                        cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
+                        try
+                        {
+                            dr = cmd.ExecuteReader();
+                            string PO_VALIDO = cmd.Parameters["X_VALIDO"].Value.ToString();
+                            string PO_MENSAJE = cmd.Parameters["X_MENSAJE"].Value.ToString();
+                            if (PO_VALIDO == "0")
+                                auditoria.Rechazar(PO_MENSAJE);
+                        }
+                        catch (Exception ex)
+                        {
+                            auditoria.Error(ex);
+                        }
+                        finally
+                        {
+                            if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                            if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                        }
                     }
                 }
+
+
+
 
                 //using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
                 //{
