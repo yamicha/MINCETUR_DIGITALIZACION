@@ -21,6 +21,7 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
         }
         public void Registrar_Carga(string COD_TABLA_TEMPORAL, DataTable dt, string[] col, ref enAuditoria auditoria)
         {
+            //AQUI MODIFIQUE
             auditoria.Limpiar();
             try
             {
