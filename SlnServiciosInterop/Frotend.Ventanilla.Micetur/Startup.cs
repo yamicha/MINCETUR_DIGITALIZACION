@@ -25,7 +25,7 @@ namespace Frotend.Ventanilla.Micetur
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddHttpContextAccessor();
+            //services.AddHttpContextAccessor();
             // seguridad
             services.AddSession(options =>
             {
@@ -62,7 +62,7 @@ namespace Frotend.Ventanilla.Micetur
 
 
             // app.UseCors(Microsoft.Owin.CorsOptions.AllowAll);
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

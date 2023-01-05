@@ -22,5 +22,6 @@ namespace Frotend.ArchivoCentral.Micetur
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

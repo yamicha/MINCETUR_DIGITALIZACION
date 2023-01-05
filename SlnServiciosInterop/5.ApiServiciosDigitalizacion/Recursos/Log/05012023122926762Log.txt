@@ -1,0 +1,1 @@
+ORA-39826: No se ha podido resolver la carga de la ruta de acceso directa de vista o sinónimo (SCDUSER.CDA4DOCUMENTO).

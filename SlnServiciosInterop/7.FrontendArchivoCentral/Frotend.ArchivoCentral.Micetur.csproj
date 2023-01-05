@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Frotend.ArchivoCentral.Micetur</RootNamespace>
     <UserSecretsId>2825fdfe-1589-4064-b3e9-e591b6f16dc4</UserSecretsId>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>

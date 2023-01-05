@@ -32,11 +32,13 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                 using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
                 {
                     string StrCodDesEncriptado = string.Empty;
+                    string StrCodDesEncriptado_ = string.Empty;
                     string llave = client.traeLlave();
                    string StrCodEncriptado = HttpContext.Request.Query["Cod"].ToString();
                    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado = client.desencriptarAES(StrCodEncriptado, llave);
-                     int intIdUsu = int.Parse(StrCodDesEncriptado);
-                    //int intIdUsu = 3248;//278561;//3248;//278561;
+                    if (!string.IsNullOrEmpty(llave)) StrCodDesEncriptado_ = client.encriptarAES("130994", llave);
+                    //  int intIdUsu = int.Parse(StrCodDesEncriptado);
+                    int intIdUsu = 278561;//278561;//3248;//278561;
                     using (WCFSeguridadUsuSisRolEntEstorgClient Seguridad = new WCFSeguridadUsuSisRolEntEstorgClient())
                     {
                         ResultadoUsuSisRolEstorg Usuario = Seguridad.listarUsuSisRolEntEstorg(new DatosUsuSisRolEstorg
@@ -50,6 +52,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
                         });
                         if (Usuario != null)
                         {
+                            
                             if (Usuario.lstUsuSisRolEntEstorg != null)
                             {
                                 userlogin = new UserLogin
@@ -123,6 +126,7 @@ namespace Frotend.ArchivoCentral.Micetur.Controllers
         [MyAuthorize]
         public IActionResult SignOut()
         {
+            
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect(AppSettings.UrlIntranet);
         }

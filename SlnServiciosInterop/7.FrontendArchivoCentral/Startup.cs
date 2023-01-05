@@ -8,7 +8,7 @@ using Utilitarios.Helpers.Authorization;
 using System;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http;
 
 namespace Frotend.ArchivoCentral.Micetur
 {
@@ -39,13 +39,13 @@ namespace Frotend.ArchivoCentral.Micetur
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
             {
-                config.LoginPath = new PathString("/authorization/signin");
+                config.LoginPath = "/authorization/signin";
                 config.AccessDeniedPath = "/Authorization/AccesoDenegado";
                 config.Cookie.Name = "CookMinceturSISAR";
             });
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false).AddSessionStateTempDataProvider();
-
+            services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,26 +54,18 @@ namespace Frotend.ArchivoCentral.Micetur
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseHsts();
             }
             else
             {
                 app.UseExceptionHandler("/Authorization/Error");
                 app.UseHsts();
             }
-
-
-           // app.UseCors(Microsoft.Owin.CorsOptions.AllowAll);
-             //app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseAuthentication();
-
-            app.UseAuthorization(); 
-
             app.UseSession();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -24,25 +24,34 @@ namespace DaServiciosDigitalizacion.Archivo_Central.Carga
             auditoria.Limpiar();
             try
             {
-                using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+                foreach (string ff in col)
                 {
-                    cn.Open();
-                    using (var bulkCopy = new OracleBulkCopy(cn, OracleBulkCopyOptions.Default)) //
+                    if (ff != null)
                     {
-                        bulkCopy.DestinationTableName = COD_TABLA_TEMPORAL;
-                        // set the destination table name  
-                        foreach (string ff in col)
-                        {
-                            if (ff != null)
-                            {
-                                OracleBulkCopyColumnMapping mapMumber = new OracleBulkCopyColumnMapping(ff, ff);
-                                bulkCopy.ColumnMappings.Add(mapMumber);
-                            }
-                        }
-                        bulkCopy.BulkCopyTimeout = 1200;
-                        bulkCopy.WriteToServer(dt);
+                        OracleBulkCopyColumnMapping mapMumber = new OracleBulkCopyColumnMapping(ff, ff);
+                        bulkCopy.ColumnMappings.Add(mapMumber);
                     }
                 }
+
+                //using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+                //{
+                //    cn.Open();
+                //    using (var bulkCopy = new OracleBulkCopy(cn, OracleBulkCopyOptions.Default)) //
+                //    {
+                //        bulkCopy.DestinationTableName = "SCDDBA.CDA4DOCUMENTO";// + COD_TABLA_TEMPORAL;
+                //        // set the destination table name  
+                //        foreach (string ff in col)
+                //        {
+                //            if (ff != null)
+                //            {
+                //                OracleBulkCopyColumnMapping mapMumber = new OracleBulkCopyColumnMapping(ff, ff);
+                //                bulkCopy.ColumnMappings.Add(mapMumber);
+                //            }
+                //        }
+                //        bulkCopy.BulkCopyTimeout = 1200;
+                //        bulkCopy.WriteToServer(dt);
+                //    }
+                //}
             }
             catch (Exception ex)
             {

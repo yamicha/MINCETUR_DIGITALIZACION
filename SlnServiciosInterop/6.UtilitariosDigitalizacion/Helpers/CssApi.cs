@@ -22,7 +22,7 @@ namespace Utilitarios.Helpers
             var entidad = JsonConvert.DeserializeObject<T>("");
             try
             {
-                using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
+                using (var cliente = new HttpClient(new HttpClientHandler { /*Credentials = new NetworkCredential(param.UserAD, param.PassAD)*/ }))
                 {
                     cliente.DefaultRequestHeaders.Clear();
                     cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -33,19 +33,20 @@ namespace Utilitarios.Helpers
                  
                 }
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
-
-                using (var cliente = new HttpClient(new HttpClientHandler { }))
-                {
-                    cliente.DefaultRequestHeaders.Clear();
-                    cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var ex_ = ex.ToString();
+                // using (var cliente = new HttpClient(new HttpClientHandler { }))
+                //  {
+                HttpClient cliente = new HttpClient();
+                   // cliente.DefaultRequestHeaders.Clear();
+                   // cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     cliente.BaseAddress = new Uri(param.EndPoint);
                     var response = await cliente.GetAsync(param.Url);
                     var json_respuesta = await response.Content.ReadAsStringAsync();
                     entidad = JsonConvert.DeserializeObject<T>(json_respuesta);
 
-                }
+               // }
             }
             return entidad;
         }
