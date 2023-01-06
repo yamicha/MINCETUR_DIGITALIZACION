@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://svcqa.mincetur.gob.pe/servicioSeguridad/Services/WCFSeguridadUsuSisRolEntEstorg.svc?wsdl"
+      "http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/Services/WCFSeguridadUsuSisRolEntEstorg.svc?wsdl"
     ],
     "collectionTypes": [
       "System.Array",

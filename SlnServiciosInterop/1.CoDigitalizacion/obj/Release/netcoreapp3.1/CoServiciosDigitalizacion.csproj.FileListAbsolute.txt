@@ -26,3 +26,4 @@ E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Release\netcoreapp3.1\CoServiciosDigitalizacion.csproj.CoreCompileInputs.cache
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Release\netcoreapp3.1\CoServiciosDigitalizacion.dll
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Release\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\1.CoDigitalizacion\obj\Release\netcoreapp3.1\CoServiciosDigitalizacion.csproj.AssemblyReference.cache

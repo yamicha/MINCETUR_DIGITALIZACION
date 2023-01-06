@@ -22,7 +22,7 @@ namespace Utilitarios.Helpers
             var entidad = JsonConvert.DeserializeObject<T>("");
             try
             {
-                using (var cliente = new HttpClient(new HttpClientHandler { /*Credentials = new NetworkCredential(param.UserAD, param.PassAD)*/ }))
+                using (var cliente = new HttpClient(new HttpClientHandler { Credentials = new NetworkCredential(param.UserAD, param.PassAD) }))
                 {
                     cliente.DefaultRequestHeaders.Clear();
                     cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

@@ -38,12 +38,12 @@ namespace Frotend.ArchivoCentral.Micetur.Areas.Digitalizacion.Controllers
         }
 
         [HttpGet, Route("~/Digitalizacion/documento/validar-imagen")]
-        public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO,long ID_LASER)
+        public async Task<ActionResult> Documento_Validar_Imagen(long ID_DOCUMENTO, long ID_LASER)
         {
             int ID_USUARIO = int.Parse(User.GetUserId());
             DocumentoValidarModelView modelo = new DocumentoValidarModelView();
             enAuditoria auditoria = new enAuditoria();
-
+            modelo.ID_DOCUMENTO = ID_DOCUMENTO;
             try
             {
                 enAuditoria ApiDominio = await new Utilitarios.Helpers.CssApi().GetApi<enAuditoria>(new Utilitarios.Helpers.ApiParams
