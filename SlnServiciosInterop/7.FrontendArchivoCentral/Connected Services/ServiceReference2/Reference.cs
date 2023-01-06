@@ -398,8 +398,8 @@ namespace ServiceReference2
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFGeneralesDocCmsRegistro))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioGenerales/docCms/Services/WCFGeneralesDocCms" +
-                        "Registro.svc");
+                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioGenerales/docCms/Services/WCFGenerale" +
+                        "sDocCmsRegistro.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }

@@ -702,8 +702,8 @@ namespace SeguridadWsdl
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IWCFSeguridadUsuSisRolEntEstorg))
             {
-                return new System.ServiceModel.EndpointAddress("http://svcqa.mincetur.gob.pe/servicioSeguridad/Services/WCFSeguridadUsuSisRolEntE" +
-                        "storg.svc");
+                return new System.ServiceModel.EndpointAddress("http://svcdesa.mincetur.gob.pe:8080/servicioSeguridad/Services/WCFSeguridadUsuSis" +
+                        "RolEntEstorg.svc");
             }
             throw new System.InvalidOperationException(string.Format("No se pudo encontrar un punto de conexión con el nombre \"{0}\".", endpointConfiguration));
         }
