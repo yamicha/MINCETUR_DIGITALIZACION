@@ -271,7 +271,6 @@ function Documento_Ver_Proceso(CODIGO) {
 }
 
 function Documento_ValidarImagen(CODIGO, ID_LASER) {
-    alert(CODIGO);
     jQuery("#myModal_Documento_Ver_Imagen").html('');
     jQuery("#myModal_Documento_Ver_Imagen").load(baseUrl + "Digitalizacion/documento/validar-imagen?ID_DOCUMENTO=" + CODIGO + "&ID_LASER=" + ID_LASER, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Documento_Ver_Imagen');

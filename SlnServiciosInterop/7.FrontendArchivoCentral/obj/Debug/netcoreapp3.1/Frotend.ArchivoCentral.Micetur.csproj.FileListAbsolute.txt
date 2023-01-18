@@ -947,16 +947,6 @@ E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Administracion\Views\Area\Mantenimiento.cshtml.g.cs
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Administracion\Views\Operador\Index.cshtml.g.cs
 E:\APLICACIONES\LINKSOFT_PROYECT\App_Mincetur_Digitalizacion\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Razor\Areas\Administracion\Views\Operador\Mantenimiento.cshtml.g.cs
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csproj.AssemblyReference.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.AssemblyInfoInputs.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.AssemblyInfo.cs
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csproj.CoreCompileInputs.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cs
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.dll
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Connected Services\SeguridadWsdl\ConnectedService.json
@@ -1123,6 +1113,14 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\Utilitarios.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csproj.AssemblyReference.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.AssemblyInfoInputs.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.AssemblyInfo.cs
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csproj.CoreCompileInputs.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorAssemblyInfo.cs
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.ArchivoCentral.Micetur.StaticWebAssets.Manifest.cache
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\staticwebassets\Frotend.ArchivoCentral.Micetur.StaticWebAssets.xml
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\scopedcss\bundle\Frotend.ArchivoCentral.Micetur.styles.css
@@ -1184,4 +1182,6 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.RazorTargetAssemblyInfo.cs
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.Views.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.csproj.CopyComplete
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.dll
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Debug\netcoreapp3.1\Frotend.ArchivoCentral.Micetur.genruntimeconfig.cache

@@ -650,10 +650,10 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\staticwebassets\ApiServiciosDigitalizacion.StaticWebAssets.Manifest.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\staticwebassets\ApiServiciosDigitalizacion.StaticWebAssets.xml
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\scopedcss\bundle\ApiServiciosDigitalizacion.styles.css
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.RazorTargetAssemblyInfo.cache
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.csproj.CopyComplete
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.dll
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\ApiServiciosDigitalizacion.genruntimeconfig.cache
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\staticwebassets\ApiServiciosDigitalizacion.StaticWebAssets.xml
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\5.ApiServiciosDigitalizacion\obj\Debug\netcoreapp3.1\scopedcss\bundle\ApiServiciosDigitalizacion.styles.css

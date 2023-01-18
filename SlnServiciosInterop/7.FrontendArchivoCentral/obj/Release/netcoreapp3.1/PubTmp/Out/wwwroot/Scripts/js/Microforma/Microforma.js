@@ -622,7 +622,7 @@ function MicroformaRevisionPeriodica_ConfigurarGrilla(_Grilla, _Barra, _GrillaDo
     var urlsubgrid = BaseUrlApi + "archivo-central/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
     var colNames = ['0', 'Opciones', 'Volumen', 'Revisiones', '2', '3',
-        'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme'];
+        'Microforma', 'Estado', 'Fecha de Grabación', 'idestado', 'FlgConforme'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
         { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, search: false, sortable: false },// 1
@@ -630,9 +630,9 @@ function MicroformaRevisionPeriodica_ConfigurarGrilla(_Grilla, _Barra, _GrillaDo
         { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden, search: false }, // 3
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 4
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 300, hidden: true }, // 5
-        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 7
-        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 8
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: false }, // 9
+        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 250, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false }, // 6
+        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden }, // 7
+        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false, search: false }, // 8
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
 
