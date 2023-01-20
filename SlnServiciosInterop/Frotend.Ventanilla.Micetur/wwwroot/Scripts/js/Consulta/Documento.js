@@ -82,7 +82,8 @@ function GetRules() {
         { field: 'V.DES_PERSONA', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
         { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_EXPE', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
-        { field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        //{ field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        { field: "TO_DATE(V.FEC_EXPE," + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
     ];
     return rules;
 }

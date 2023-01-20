@@ -54,7 +54,7 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
 }
 function Documento_actionRecibir(cellvalue, options, rowObject) {
     var _btn = "";
-    _btn = "<button title='Ver Imagen' onclick='Documento_Recibir(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Recibir_Doc'> <i class=\"clip-folder-plus\" style=\"color:#a01010;font-size:20px\"></i></button>";
+    _btn = "<button title='Ver Imagen' onclick='Documento_RecibirExpediente(" + rowObject[0] + ");' class=\"btn btn-link\" type=\"button\" data-toggle=\"modal\" style=\"text-decoration: none !important;cursor: pointer;\" data-target='#myModal_Recibir_Doc'> <i class=\"clip-folder-plus\" style=\"color:#a01010;font-size:20px\"></i></button>";
     return _btn;
 }
 function Documento_actionVerDoc(cellvalue, options, rowObject) {
@@ -66,7 +66,7 @@ function Documento_actionVerDoc(cellvalue, options, rowObject) {
     }
     return _btn;
 }
-function Documento_Recibir(CODIGO) {
+function Documento_RecibirExpediente(CODIGO) {
     jQuery("#myModal_Recibir_Doc").html('');
     jQuery("#myModal_Recibir_Doc").load(baseUrl + "Digitalizacion/Recepcion/RecibirDoc?ID_EXPE=" + CODIGO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Recibir_Doc');
@@ -98,7 +98,8 @@ function GetRules() {
         { field: 'V.DES_PERSONA', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
         { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_EXPE', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
-        { field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        //{ field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        { field: "TO_DATE(V.FEC_EXPE," + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
     ];
     return rules;
 }
