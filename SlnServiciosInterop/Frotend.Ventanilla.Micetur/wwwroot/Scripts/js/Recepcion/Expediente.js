@@ -99,7 +99,8 @@ function GetRules() {
         { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_EXPE', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         //{ field: "TO_DATE(TO_CHAR(V.FEC_EXPE," + FORM + "), " + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
-        { field: "TO_DATE(V.FEC_EXPE," + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        //{ field: "TO_DATE(V.FEC_EXPE," + FORM + ")", data: "TO_DATE('" + FECHA_INICIO + "', " + FORM + ")" + a + "TO_DATE('" + FECHA_FIN + "', " + FORM + ")", op: " between " },
+        { field: "TO_NUMBER(TO_CHAR(TO_DATE(V.FEC_EXPE," + FORM + "),'j'))", data: "TO_NUMBER(TO_CHAR(TO_DATE('" + FECHA_INICIO + "', " + FORM + "),'j'))" + a + "TO_NUMBER(TO_CHAR(TO_DATE('" + FECHA_FIN + "', " + FORM + "),'j'))", op: " between " },
     ];
     return rules;
 }
