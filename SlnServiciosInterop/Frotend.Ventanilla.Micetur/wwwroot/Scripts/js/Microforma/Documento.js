@@ -125,7 +125,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             { name: _PREFIJO + 'NRO_LOTE', index: _PREFIJO + 'NRO_LOTE', align: 'center', width: 180, hidden: verLote, editable: true, sortable: false }, //6
             { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //6
             { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //7
-            { name: 'VERIFICAR', index: _PREFIJO +  'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionVer, search: false },
+            { name: 'VERIFICAR', index: _PREFIJO + 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionVer, search: false, sortable: false },
             { name: _PREFIJO + 'STR_FEC_EXPEDIENTE', index: _PREFIJO + 'STR_FEC_EXPEDIENTE ', align: 'center', width: 150, hidden: false, editable: true, sortable: false, search: true },// 8
             //{ name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 8
             { name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 9
@@ -340,7 +340,7 @@ function GetRulesDoc() {
         { field: 'V.DES_ASUNTO', data: POR + ' || ' + _DES_ASUNTO + ' || ' + POR, op: " LIKE " },
         { field: 'V.DES_PERSONA', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
         { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " },
+        //{ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_DOCUMENTO', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         { field: 'V.STR_FEC_EXPEDIENTE', data: POR + ' || ' + _STR_FEC_EXPEDIENTE + ' || ' + POR, op: " LIKE " },
     ];
@@ -350,10 +350,11 @@ function GetRulesDoc() {
           rules.push({ field: 'V.ID_LOTE', data: 'NVL(' + _ID_LOTE + ',V.ID_LOTE)', op: " = " });
     }
     if (_ID_MODULO != 1) {
-        rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
-        rules.push({ field: 'V.NRO_LOTE', data: POR + ' || ' + _NRO_LOTE + ' || ' + POR, op: " LIKE " });
-        if (_ID_MODULO != 2)
+        rules.push({ field: 'UPPER(V.DESCRIPCION_ESTADO)', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
+        if (_ID_MODULO != 2) {
+            rules.push({ field: 'V.NRO_LOTE', data: POR + ' || ' + _NRO_LOTE + ' || ' + POR, op: " LIKE " });
             rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
+        }
     }
     if (_ID_MODULO == 2 || _ID_MODULO == 4 || _ID_MODULO == 5 || _ID_MODULO == 7 || _ID_MODULO == 9 || _ID_MODULO == 10 || _ID_MODULO == 11 || _ID_MODULO == 13) {
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: 'NVL(' + _ID_ESTADO_DOCUMENTO + ',V.ID_ESTADO_DOCUMENTO)', op: " = " });

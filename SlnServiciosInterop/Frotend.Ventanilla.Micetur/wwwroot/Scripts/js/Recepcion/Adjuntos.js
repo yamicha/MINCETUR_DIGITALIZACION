@@ -126,7 +126,7 @@ function ValidarArchivoTemporal(input) {
                 if (!valido)
                     jAlert("Solo se permite documentos en formato " + extensionValid, 'Atención');
                 else
-                    jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
+                    jAlert("El archivo que va a adjuntar no puede superar los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
 
                 return false;
             } else {
@@ -179,7 +179,7 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         verBotonEditar = true;
     }
     $("#" + DocumentoAdj_grilla).GridUnload();
-    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Observación', 'Peso', 'Extensión'];
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
@@ -187,7 +187,7 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: verBotonEditar, formatter: DocumentoAdj_actionEditar },
         { name: 'VERDOCUMENTO', index: 'VERDOCUMENTO', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionver },
         { name: 'DES_NOM_ABR', index: 'DES_NOM_ABR', align: 'center', width: 200, hidden: false },
-        { name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
+        //{ name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
         { name: 'NUM_SIZE_ARCHIVO', index: 'NUM_SIZE_ARCHIVO', align: 'center', width: 100, hidden: false, editable: true },
         { name: 'EXTENSION', index: 'EXTENSION', align: 'center', width: 100, hidden: false, editable: true, },
     ];

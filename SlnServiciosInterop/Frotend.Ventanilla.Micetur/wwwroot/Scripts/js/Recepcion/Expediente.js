@@ -16,7 +16,7 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     var url = BaseUrlApi + 'ventanilla/DocRecepcion/listado-doc-ventanilla-pendiente';
     $("#" + Expediente_Grilla).GridUnload();
     var colNames = [
-        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Expediente', 'Número Doc.', 'Folios', 'Usuario'
+        'N° Exp.', 'Recibir', 'Fec. Reg. Exp.', 'Solicitante', 'Asunto', 'Clasificación', 'Tipo Doc.', 'Observaciones', 'Folios', 'Usuario'
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true, search:true }, //1
