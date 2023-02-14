@@ -26,6 +26,9 @@ function MicroformaProceso_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _
         EstadoHidden = true;
         OpcionesHidden = false;
     }
+    if (_MICROMODULO == MicroModulo.Grabados) {
+        OpcionesHidden = false;
+    }
     var url = BaseUrlApi + "ventanilla/microforma/listadoProceso-paginado";
     var urlsubgrid = BaseUrlApi + "ventanilla/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
@@ -59,7 +62,7 @@ function MicroformaProceso_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _
         selectRowFunc: function (rowkey) {
             if (rowkey == undefined) _ID_LOTE = 0;
             _ID_LOTE = parseInt(rowkey);
-            Documento_Detalle_buscar(_GrillaDocumento, _BarraDocumento);
+            Documento_Detalle_buscar(_GrillaDocumento, _BarraDocumento, 2);
         }
     }
     var opciones = {

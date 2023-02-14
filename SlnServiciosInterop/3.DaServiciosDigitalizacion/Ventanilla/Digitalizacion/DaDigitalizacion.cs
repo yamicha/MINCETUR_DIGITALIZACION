@@ -141,6 +141,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_HORA_INICIO", OracleDbType.Varchar2)).Value = entidad.HORA_INICIO;
                 cmd.Parameters.Add(new OracleParameter("X_HORA_FIN", OracleDbType.Varchar2)).Value = entidad.HORA_FIN;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.USU_CREACION;
+                cmd.Parameters.Add(new OracleParameter("X_EXP_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.EXP_OBSERVACION;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
@@ -252,6 +253,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.IdTipoObservacion;
                 cmd.Parameters.Add(new OracleParameter("X_COMENTARIO", OracleDbType.Varchar2)).Value = entidad.Comentario;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
@@ -289,6 +291,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.IdTipoObservacion;
                 cmd.Parameters.Add(new OracleParameter("X_COMENTARIO", OracleDbType.Varchar2)).Value = entidad.Comentario;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try

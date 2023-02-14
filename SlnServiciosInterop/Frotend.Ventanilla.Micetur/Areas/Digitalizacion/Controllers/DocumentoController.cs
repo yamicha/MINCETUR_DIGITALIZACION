@@ -95,6 +95,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                         modelo.NUM_FOLIOS = Documento.NUM_FOLIOS;
                         modelo.DES_CLASIF = Documento.DES_CLASIF;
                         modelo.DES_PERSONA = Documento.DES_PERSONA;
+                        modelo.EXP_OBSERVACION = Documento.EXP_OBSERVACION;
                         //modelo.
                     }
                 }

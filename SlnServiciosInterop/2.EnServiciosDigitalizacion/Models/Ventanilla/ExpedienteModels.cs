@@ -10,6 +10,6 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public int UsuCrea { get; set; }
         public string IpCrea { get; set; }
         public List<AdjuntoModels> ListaAdjuntos { get; set; }
-
+        public string ExpObservacion { get; set; }
     }
 }

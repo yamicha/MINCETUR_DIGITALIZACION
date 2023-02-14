@@ -1,7 +1,9 @@
 ﻿var Tamanio_Valido = 20971520;
 var MiTamanioReal = $("#Div_MasterPage").height() - 200;
 
-
+function ActualizarPesoArchivo(peso) {
+    Tamanio_Valido = peso;
+}
 
 function Ver_Leyenda(Modal_Ver_Leyenda) {
     jQuery(Modal_Ver_Leyenda).html('');

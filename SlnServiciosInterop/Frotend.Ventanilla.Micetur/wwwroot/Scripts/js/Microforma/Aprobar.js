@@ -1,5 +1,6 @@
 ﻿var Aprobar_grilla = 'Aprobar_grilla';
 var Aprobar_barra = 'Aprobar_barra';
+var ControlCalidad_ListaDocumentos = new Array();
 
 $(document).ready(function () {
     Aprobar_buscar();
@@ -7,10 +8,28 @@ $(document).ready(function () {
 
 jQuery('#aTabAprobar').click(function (e) {
     Aprobar_buscar();
+    $('#ControlCalidad_btn_Conforme').click(function () {
+        var rowKey = $("#" + Aprobar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+        if (rowKey != null) {
+            if (rowKey.length > 0) {
+                ControlCalidad_ConformeMasivo();
+            }
+            else {
+                jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+            }
+        }
+        else {
+            jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+        }
+    });
+});
+
+jQuery('#aTabAprobar').click(function (e) {
+    Aprobar_buscar();
 });
 
 function Aprobar_buscar() {
-    Documento_ConfigurarGrilla(Aprobar_grilla, Aprobar_barra, "Listado de documentos digitalizados", false, 6); 
+    Documento_ConfigurarGrilla(Aprobar_grilla, Aprobar_barra, "Listado de documentos digitalizados", true, 6); 
 }
 
 function Aprobar_Cerrar() {
@@ -75,4 +94,47 @@ function Aprobar_Evaluar() {
             });
         }
     });
-} 
+}
+
+
+
+function ControlCalidad_ConformeMasivo() {
+    jConfirm(" ¿ Desea dar CONFORME a los documentos seleccionados ? ", "Atención", function (r) {
+        if (r) {
+            ControlCalidad_ListaDocumentos = new Array();
+            var rowKey = $("#" + Aprobar_grilla).jqGrid('getGridParam', 'selarrrow'); //
+            for (var i = 0; i < rowKey.length; i++) {
+                var data = jQuery("#" + Aprobar_grilla).jqGrid('getRowData', rowKey[i]);
+                var itemDoc = {
+                    FlgConforme: 1,// conforme
+                    IdDocumento: parseInt(data.Control_Calidad_ID_DOCUMENTO),
+                    IdDocumentoAsignado: parseInt(data.Control_Calidad_ID_DOCUMENTO_ASIGNADO),
+                    UsuCreacion: $('#inputHddId_Usuario').val(),
+                    IdTipoObservacion: 0
+                };
+                ControlCalidad_ListaDocumentos.push(itemDoc);
+            }
+            var itemx = {
+                LisIdDocumento: ControlCalidad_ListaDocumentos,
+            }
+            var url = "ventanilla/digitalizacion/control-calidad-masivo";
+            API.Fetch("POST", url, itemx, function (auditoria) {
+                if (auditoria != null && auditoria != "") {
+                    if (auditoria.EjecucionProceso) {
+                        if (!auditoria.Rechazo) {
+                            jOkas("Documento evaluado correctamente", "Atención");
+                            Aprobar_Cerrar();
+                        } else {
+                            jAlert(auditoria.MensajeSalida, "Atención");
+                        }
+                        Aprobar_buscar();
+                    } else {
+                        jAlert(auditoria.MensajeSalida, "Atención");
+                    }
+                } else {
+                    jAlert("No se encontraron registros", "Atención");
+                }
+            });
+        }
+    });
+}

@@ -16,8 +16,10 @@
 <script>
     var extensionValid =@AppSettings.FileValid
     var IdLaserMin = @AppSettings.MinIdLaser;
+    var pesoArchivo =@AppSettings.FilePeso
     $(document).ready(function () {
         Remove_RemoverClases("liReproceso");
+        ActualizarPesoArchivo(pesoArchivo);
         $('#txtfechafin,#txtfechainicio').datepicker({
             changeMonth: true,
             changeYear: true,

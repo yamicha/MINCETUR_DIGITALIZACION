@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VDlck6l2D4QyvntnLMlh7CavaxKT+959pjXE233K046n9OQWoWxCdij/LnFvI7lcW6LRK0SZj4Bzkox+NZcadg==",
+  "dgSpecHash": "6X5kjhCLTBYmgh+lvlxLfTupP2qEUcubXGGkPwfjicW6zgvCumncbH+eQe9bqFXALznV7XO4B2Xy3x/c8o2c8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\5.ApiServiciosDigitalizacion\\ApiServiciosDigitalizacion.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.httpoverrides\\2.2.0\\microsoft.aspnetcore.httpoverrides.2.2.0.nupkg.sha512",
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\2.2.0\\microsoft.aspnetcore.jsonpatch.2.2.0.nupkg.sha512",
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.localization\\2.2.0\\microsoft.aspnetcore.localization.2.2.0.nupkg.sha512",
     "C:\\Users\\Inmortal\\.nuget\\packages\\microsoft.aspnetcore.mvc\\2.2.0\\microsoft.aspnetcore.mvc.2.2.0.nupkg.sha512",

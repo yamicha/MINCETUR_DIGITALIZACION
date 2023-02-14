@@ -281,6 +281,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Recepcion
                 cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdExpediente;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Int64)).Value = entidad.UsuCrea;
                 cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCrea;
+                cmd.Parameters.Add(new OracleParameter("X_EXP_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.ExpObservacion;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try

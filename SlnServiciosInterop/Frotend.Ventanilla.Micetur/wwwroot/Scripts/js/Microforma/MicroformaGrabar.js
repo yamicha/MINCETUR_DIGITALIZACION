@@ -14,7 +14,7 @@ $(document).ready(function () {
     MicroformaLote_ConfigurarGrilla();
     Lote_CargarGrilla(MicroformaGrabar_Lote_grilla, "", "0", fechaInicio, fechaFin);
     //MicroformaGrabar_buscar();
-    Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra);
+    Documento_Detalle_buscar(MicroformaGrabar_grilla, MicroformaGrabar_barra, 1);
 
     jQuery('#MicroformaGrabar_btn_Nuevo').click(function (e) {
         var rowKey = $("#" + MicroformaGrabar_Lote_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados

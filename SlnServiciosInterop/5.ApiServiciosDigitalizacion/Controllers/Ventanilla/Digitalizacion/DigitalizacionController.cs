@@ -119,6 +119,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                         //HORA_INICIO = entidad.HoraInicio,
                         //HORA_FIN = entidad.HoraFIn,
                         USU_CREACION = entidad.UsuCreacion,
+                        EXP_OBSERVACION = entidad.ExpeObservacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -179,6 +180,12 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             enAuditoria auditoria = new enAuditoria();
             try
             {
+                string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                if (ClientIP == "::1")
+                {
+                    ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                }
+                entidad.IpCreacion = ClientIP;
                 if (entidad.FlgConforme == 1)
                 {
                     entidad.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme;
@@ -213,6 +220,55 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
         }
 
         [HttpPost]
+        [Route("control-calidad-masivo")]
+        public IActionResult Documento_Digitalizado_validar_masivo([FromBody] DocumentoValidarModel entidad)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            try
+            {
+                using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
+                {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    if (entidad.LisIdDocumento.Count() > 0)
+                    {
+                        foreach (DocumentoValidarModel item in entidad.LisIdDocumento)
+                        {
+                            item.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme;
+                            item.IpCreacion = ClientIP;
+                            //item.FlgConforme = 1; 
+                            repositorio.Documento_Digitalizado_Validar(item, ref auditoria);
+                            if (auditoria.Rechazo)
+                                break;
+                        }
+                    }
+                    if (!auditoria.EjecucionProceso)
+                    {
+                        string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                        auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                    }
+                    else
+                    {
+                        if (!auditoria.Rechazo)
+                            auditoria.Code = (int)HttpStatusCode.Created;
+                        else
+                            auditoria.Code = (int)HttpStatusCode.OK;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                auditoria.Error(ex);
+                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+            }
+            return StatusCode(auditoria.Code, auditoria);
+        }
+
+        [HttpPost]
         [Route("digitalizado-fedatario-validar")]
         public IActionResult Documento_Digitalizado_Fedatario([FromBody] DocumentoValidarModel entidad)
         {
@@ -221,6 +277,12 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             {
                 using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    entidad.IpCreacion = ClientIP;
                     if (entidad.FlgConforme == 1)
                         entidad.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;
                     else
@@ -259,12 +321,18 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
             {
                 using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
 
                     if (entidad.LisIdDocumento.Count() > 0)
                     {
                         foreach (DocumentoValidarModel item in entidad.LisIdDocumento)
                         {
                             item.IdEstadoDocumento = (long)EstadoDocumento.FedatarioConforme;
+                            item.IpCreacion = ClientIP;
                             //item.FlgConforme = 1; 
                             repositorio.Documento_Fedatario_Validar(item, ref auditoria);
                             if (auditoria.Rechazo)

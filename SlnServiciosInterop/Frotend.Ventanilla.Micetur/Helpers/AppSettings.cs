@@ -14,6 +14,7 @@ namespace Frotend.Ventanilla.Micetur.Helpers
         public static string UserAD => GetAppSetting("UserAD");
         public static string PassAD => GetAppSetting("PassAD");
         public static string FileValid => GetAppSetting("FileValid");
+        public static string FilePeso => GetAppSetting("FilePeso");
 
         private static string GetAppSetting(string key)
         {

@@ -21,13 +21,13 @@ $(document).ready(function () {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
         Microforma_ConfigurarGrilla(MicroControl_Lote_grilla, MicroControl_Lote_barra, MicroControl_grilla, MicroControl_barra, MicroModulo.Control);
-        Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra);
+        Documento_Detalle_buscar(MicroControl_grilla, MicroControl_barra, 4);
     });
     jQuery('#aTabMicroformaFinalizado').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
         Microforma_ConfigurarGrilla(MicroFin_Lote_grilla, MicroFin_Lote_barra, MicroFin_grilla, MicroFin_barra, MicroModulo.Conforme);
-        Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra);
+        Documento_Detalle_buscar(MicroFin_grilla, MicroFin_barra, 5);
     });
 
 });

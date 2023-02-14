@@ -16,6 +16,8 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public string UsuCreacion { get; set; }
         public string TipoPrueba { get; set; }
         public string FecRevision { get; set; }
+        public string IpCreacion { get; set; }
+        
         public List<MicroEvaluarModel> ListaIdsMicroforma { get; set; }
     
         

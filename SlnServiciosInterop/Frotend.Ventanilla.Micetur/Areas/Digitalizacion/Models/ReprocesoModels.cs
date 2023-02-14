@@ -33,6 +33,9 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "[Peso] es obligatorio")]
         public int EDIT_PESO_ARCHIVO { get; set; }
+
+        [DataType(DataType.Text)]
+        public string EXP_OBSERVACION { get; set; }
     }
 
 }

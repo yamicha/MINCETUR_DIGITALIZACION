@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Administracion;
 using EnServiciosDigitalizacion.Models.Ventanilla;
+using EnServiciosDigitalizacion.Ventanilla.Digitalizacion;
 using Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models;
 using Frotend.Ventanilla.Micetur.Authorization;
 using Frotend.Ventanilla.Micetur.Controllers;
@@ -145,6 +146,44 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             return Json(auditoria);
         }
 
+        [HttpGet, Route("~/Digitalizacion/Recepcion/expediente-documento")]
+        public async Task<ActionResult> ExpedienteVerDocumentoCompleto(long ID_EXPE)
+        {
+            int ID_USUARIO = int.Parse(User.GetUserId());
+            DocumentoValidarModelView modelo = new DocumentoValidarModelView();
+            enAuditoria auditoria = new enAuditoria();
+            modelo.ID_DOCUMENTO = ID_EXPE;
+            modelo.VALIDAR_ID_CONFORME = "";
+
+            enAuditoria apiDocumento = await new CssApi().GetApi<enAuditoria>(new ApiParams
+            {
+                EndPoint = AppSettings.baseUrlApi,
+                Url = $"ventanilla/documento/get-documento/{ID_EXPE}",
+                UserAD = AppSettings.UserAD,
+                PassAD = AppSettings.PassAD
+            });
+            if (apiDocumento != null)
+            {
+                if (!apiDocumento.Rechazo)
+                {
+                    if (apiDocumento.Objeto != null)
+                    {
+                        enDocumento Documento = JsonConvert.DeserializeObject<enDocumento>(apiDocumento.Objeto.ToString());
+                        if (Documento == null) Documento = new enDocumento();
+                        modelo.DES_TIP_DOC = Documento.DES_TIP_DOC;
+                        modelo.DES_ASUNTO = Documento.DES_ASUNTO;
+                        modelo.DES_OBS = Documento.DES_OBS;
+                        modelo.NUM_DOC = Documento.NUM_DOC;
+                        modelo.NUM_FOLIOS = Documento.NUM_FOLIOS;
+                        modelo.DES_CLASIF = Documento.DES_CLASIF;
+                        modelo.DES_PERSONA = Documento.DES_PERSONA;
+                        modelo.EXP_OBSERVACION = Documento.EXP_OBSERVACION;
+                        //modelo.
+                    }
+                }
+            }
+            return View(modelo);
+        }
 
     }
 }

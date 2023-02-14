@@ -9,22 +9,10 @@
     $(document).ready(function () {
         DocumentoAdjuntos_ConfigurarGrilla("Edit");
         DocumentoAdjuntos_CargarGrilla(@Model.ID_DOCUMENTO);
+        $('#FLG_LINK').val(0);
+        CambioEstadoArchivo(0)
         $('#FLG_LINK').change(function () {
-            let inputFile = $('#ControlFile');
-            let inputName = $('#NOMBRE_ARCHIVO');
-            let inputPeso = $('#PESO_ARCHIVO');
-            let inputEx = $('#EXTENSION');
-            if ($(this).val() == 0) {
-                inputFile.show('slow');
-                inputName.prop('disabled', true);
-                inputPeso.prop('disabled', true);
-                inputEx.prop('disabled', true);
-            } else {
-                inputFile.hide();
-                inputName.prop('disabled', false);
-                inputPeso.prop('disabled', false);
-                inputEx.prop('disabled', false);
-            }
+            CambioEstadoArchivo($(this).val())
         });
         $('#BtnAgregarAdjunto').click(function () {
             DocumentoAdjunto_Insertar(); 
@@ -37,7 +25,31 @@
         handle: ".modal-header",
         cursor: "handler"
     });
-
+    function CambioEstadoArchivo(opcion) {
+        let inputFile = $('#ControlFile');
+        let inputName = $('#NOMBRE_ARCHIVO');
+        let inputPeso = $('#PESO_ARCHIVO');
+        let inputEx = $('#EXTENSION');
+        if (opcion == 0) {
+            inputFile.show('slow');
+            inputName.prop('disabled', true);
+            inputPeso.prop('disabled', true);
+            inputEx.prop('disabled', true);
+        } else {
+            inputFile.hide();
+            inputName.prop('disabled', false);
+            inputPeso.prop('disabled', false);
+            inputEx.prop('disabled', false);
+        }
+    }
+    function ConvertirMayusculaPrimeraLetra(idInput) {
+        var texto = document.getElementById(idInput).value;
+        var primeraLetra = texto.substring(0, 1);
+        var restoTexto = texto.substring(1);
+        primeraLetra = primeraLetra.toUpperCase();
+        restoTexto = restoTexto.toLowerCase();
+        document.getElementById(idInput).value = primeraLetra + restoTexto;
+    }
 </script>
 <style>
     .input-group {
@@ -147,9 +159,16 @@
                                     </div>
                                 </div>
 
-                                <div class="Documento_jqGrid">
+                                <div class="Documento_jqGrid" style="margin-bottom:20px;">
                                     <table id="DocumentoAdjunto_grilla"></table>
                                     <div id="DocumentoAdjunto_barra"></div>
+                                </div>
+                                <div class="col-sm-12 inline-container-Group">
+                                    <p class="modal-title" style="color: #999; font-size:15px; margin-bottom: 10px; margin-top: -5px">Observación del Expediente: </p>
+                                    <fieldset style="width: 100%;">
+                                        @Html.TextAreaFor(model => model.EXP_OBSERVACION, new { @class = "form-control", @maxlength = "3000", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id), CountCharactersControlTxt(this.id,'ControlCalidad_lbl1', 3000)" })
+                                    </fieldset>
+                                    <label id="ControlCalidad_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
                                 </div>
                             </div>
                         </div>

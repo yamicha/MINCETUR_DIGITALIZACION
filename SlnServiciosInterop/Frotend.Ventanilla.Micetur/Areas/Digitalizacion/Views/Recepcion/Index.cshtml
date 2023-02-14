@@ -7,9 +7,12 @@
 <link href="~/assets/css/Microforma/Modals.css" rel="stylesheet" />
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="@Url.Content("~/assets/Switch_Toggle.css")" />
+<script src="@Url.Content("~/Scripts/js/Microforma/DocumentoAdjunto.js")" type="text/javascript"></script>
 <script>
     var extensionValid =@AppSettings.FileValid
+        var pesoArchivo =@AppSettings.FilePeso
         $(document).ready(function () {
+            ActualizarPesoArchivo(pesoArchivo);
             Remove_RemoverClases("liRecepcion");
             $('#ID_DIGITALIZADOR, #ID_DIGITALIZADOR2').select2();
             $('#txtfechafin,#txtfechainicio,#loteFechaInicio,#loteFechaFin').datepicker({

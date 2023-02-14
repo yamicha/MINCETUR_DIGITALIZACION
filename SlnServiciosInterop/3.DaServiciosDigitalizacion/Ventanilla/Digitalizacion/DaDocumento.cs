@@ -610,7 +610,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intNumdoc = drReader.GetOrdinal("NUM_DOC");
                             int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
                             int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
-
+                            int intExpObservacion = drReader.GetOrdinal("EXP_OBSERVACION");
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);
@@ -628,7 +628,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                                 if (!drReader.IsDBNull(intNumdoc)) temp.NUM_DOC = arrResult[intNumdoc].ToString();
                                 if (!drReader.IsDBNull(intDesClasif)) temp.DES_CLASIF = arrResult[intDesClasif].ToString();
                                 if (!drReader.IsDBNull(intDescPersona)) temp.DES_PERSONA = arrResult[intDescPersona].ToString();
-
+                                if (!drReader.IsDBNull(intExpObservacion)) temp.EXP_OBSERVACION = arrResult[intExpObservacion].ToString();
                             }
                             drReader.Close();
                         }

@@ -26,14 +26,8 @@
             alert(e.Message);
         }
     }
-    function ConvertirMayusculaPrimeraLetra(idInput) {
-        var texto = document.getElementById(idInput).value;
-        var primeraLetra = texto.substring(0, 1);
-        var restoTexto = texto.substring(1);
-        primeraLetra = primeraLetra.toUpperCase();
-        restoTexto = restoTexto.toLowerCase();
-        document.getElementById(idInput).value = primeraLetra + restoTexto;
-    }
+
+
     jQuery('#Documento_Validar_btn_Evaluar').click(function (e) {
         Aprobar_Evaluar();
     });
@@ -50,10 +44,6 @@
         handle: ".modal-header",
         cursor: "handler"
     });
-    jQuery('.Documento_Validar_btn_Cerrar').click(function (e) {
-        $('#myModal_Documento_Ver_Imagen').modal('hide');
-        jQuery("#myModal_Documento_Ver_Imagen").html('');
-    });
 </script>
 @{
     var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
@@ -66,8 +56,8 @@
         <div class="modal-content">
             <div class="modal-header" style="cursor: move; background-color: #ca2626">
                 <div class="col-sm-14">
-                    <button class="close Documento_Validar_btn_Cerrar" aria-hidden="true" data-dismiss="modal" type="button">× </button>
-                    <h4 class="modal-title"><i class='clip-pictures'></i>&nbsp; Validar Expediente Digitalizado </h4>
+                    <button class="close" aria-hidden="true" data-dismiss="modal" type="button">× </button>
+                    <h4 class="modal-title"><i class='clip-pictures'></i>&nbsp; Expediente </h4>
                 </div>
             </div>
             <div class="modal-body">
@@ -109,69 +99,30 @@
                                     </tbody>
                                 </table>
 
-                                <div class="Documento_jqGrid" style="margin-bottom: 10px;">
+                                <div class="Documento_jqGrid">
                                     <table id="DocumentoAdjunto_grilla"></table>
                                     <div id="DocumentoAdjunto_barra"></div>
                                 </div>
-
-                                <div class="col-sm-12 inline-container-Group">
-                                    <p class="modal-title" style="color: #999; font-size:17px; margin-bottom: 10px; margin-top: -5px">Observación del Expediente: </p>
-                                    <fieldset style="width: 100%;">
-                                        <textarea class="form-control" id="TxtObservacion" maxlength="3000" readonly>@Model.EXP_OBSERVACION</textarea>
-                                    </fieldset>
-                                </div>
                             </div>
                             <div class="col-sm-12 inline-container-Group">
-                                <p class="modal-title" style="color: #999; font-size: 15px; margin-bottom: 5px; margin-top: -5px">Evaluar: </p>
+                                <p class="modal-title" style="color: #999; font-size:20px; margin-bottom: 10px; margin-top: -5px">Observación del Expediente: </p>
                                 <fieldset style="width: 100%;">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Conforme ?</label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(model => model.VALIDAR_ID_CONFORME, Model.Lista_VALIDAR_ID_CONFORME, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="row" id="Validar_Div_IDTIPO">
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Tipo:</label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            @Html.DropDownListFor(model => model.VALIDAR_ID_TIPO_OBS, Model.Lista_VALIDAR_ID_TIPO_OBS, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            @Html.TextAreaFor(model => model.VALIDAR_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Documento_Validar_lbl4', 3000), ConvertirMayusculaPrimeraLetra(this.id)" })
-                                            <label id="Documento_Validar_lbl4" style="width: 100%" class="Formato" runat="server" text=""></label>
-                                        </div>
-                                    </div>
-                                    @*<div class="row">
-                                            <div class="col-sm-2">
-                                                <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Digitalizador:</label>
-                                            </div>
-                                            <div class="col-sm-10">
-                                                @Html.TextBoxFor(model => model.VALIDAR_NOMBRE_DIGITALIZADOR, new { @class = "form-control", @maxlength = "100", @style = "width:100%", @readonly = "true" })
-                                            </div>
-                                        </div>*@
+                                    <textarea class="form-control" id="TxtObservacion" maxlength="3000" readonly>@Model.EXP_OBSERVACION</textarea>
                                 </fieldset>
                             </div>
                         </div>
                     </div>
                 </fieldset>
                 <div class="modal-footer">
-                    <button type="button" id="Documento_Validar_btn_Evaluar" class="btn btn-blue"><i class="fa fa-save"></i> Grabar Evaluación</button>
-                    <button type="button" class="btn btn-light-grey Documento_Validar_btn_Cerrar" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
+                    <button type="button" class="btn btn-light-grey" data-dismiss="modal"><i class="clip-close-4"></i> Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
     @Html.Hidden("hd_Documento_Validar_ID_DOCUMENTO", Model.ID_DOCUMENTO)
-    @Html.Hidden("hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO", Model.ID_DOCUMENTO_ASIGNADO)
+    @*@Html.Hidden("hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO", Model.ID_DOCUMENTO_ASIGNADO)*@
 }
+
 
 
 

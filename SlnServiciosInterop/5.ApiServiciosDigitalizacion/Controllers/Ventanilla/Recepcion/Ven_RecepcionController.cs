@@ -152,7 +152,13 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Recepcion
             {
                 using (RecepcionRepositorio repositorio = new RecepcionRepositorio(_ConfigurationManager))
                 {
-                     repositorio.Expediente_Insertar(entidad, ref auditoria);
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    entidad.IpCrea = ClientIP;
+                    repositorio.Expediente_Insertar(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);

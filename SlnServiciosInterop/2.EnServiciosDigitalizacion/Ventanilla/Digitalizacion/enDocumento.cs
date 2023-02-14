@@ -28,7 +28,7 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public string DES_PERSONA { get; set; }
         public string NRO_LOTE { get; set; }
         public string STR_FEC_EXPEDIENTE { get; set; }
-
+        public string EXP_OBSERVACION { get; set; }
         public List<enDocumento> ListaDocumento { get; set; }
     }
 }

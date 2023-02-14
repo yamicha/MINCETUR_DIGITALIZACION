@@ -131,14 +131,23 @@ function GetRulesMicroforma() {
     if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicio').val();
+        var _STR_FEC_FIN = $('#txtfechafin').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionObs) { // revision Obs 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='0')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioobservado').val();
+        var _STR_FEC_FIN = $('#txtfechafinobservado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionAnulada) { // revision anulada 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='1')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioanulado').val();
+        var _STR_FEC_FIN = $('#txtfechafinanulado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
 
     _gs_NRO_VOL = $('#gs_NRO_VOLUMEN').val() != undefined ? `'${$('#gs_NRO_VOLUMEN').val()}'` : `''`;

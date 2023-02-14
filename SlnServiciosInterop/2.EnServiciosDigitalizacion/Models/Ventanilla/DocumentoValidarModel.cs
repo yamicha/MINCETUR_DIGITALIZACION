@@ -13,7 +13,7 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public long IdTipoObservacion { get; set; }
         public string Comentario { get; set; }
         public string UsuCreacion { get; set; }
-
+        public string IpCreacion { get; set; }
         public List<DocumentoValidarModel> LisIdDocumento { get; set; }
 
     }

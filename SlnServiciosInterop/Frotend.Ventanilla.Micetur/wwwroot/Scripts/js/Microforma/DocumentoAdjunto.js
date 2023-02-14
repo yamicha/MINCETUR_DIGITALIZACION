@@ -42,7 +42,7 @@ function DocumentoAdjunto_actionDocumento(cellvalue, options, rowObject) {
 function DocumentoAdjunto_actionver(cellvalue, options, rowObject) {
     let Btn
     if (rowObject.FLG_LINK == 0) {
-        Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-file-pdf\" style=\"color:#e40613;font-size:17px\"></i></button>";
+        Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-search-2\" style=\"color:#e40613;font-size:17px\"></i></button>";
     } else {
         Btn = "-";
     }
@@ -104,6 +104,7 @@ function DocumentoAdjuntos_ProcesarFile(input) {
     if (file != undefined) {
         var PesodeArchivo = parseFloat(file.size);
         var ext = input.files[0].name.split('.').pop();
+        ext = ext.toLowerCase();
         let nombre = input.files[0].name;
         if (nombre.length > 100) {
             jAlert("El nombre del documento es muy largo", 'Atención');
@@ -119,12 +120,24 @@ function DocumentoAdjuntos_ProcesarFile(input) {
                 if (!valido)
                     jAlert("Solo se permite documentos en formato " + extensionValid, 'Atención');
                 else
-                    jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
+                    jAlert("El archivo que va a adjuntar no puede superar los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
+                    //jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
                 return false;
             } else {
-                inputPeso.val(file.size);
-                inputName.val(file.name.split('.')[0]);
-                inputEx.val(`.${file.name.split('.')[1]}`);
+                var sumaPeso = 0;
+                var rowKey = jQuery("#" + DocumentoAdjunto_grilla).getDataIDs();
+                for (var i = 0; i < rowKey.length; i++) {
+                    var data = jQuery("#" + DocumentoAdjunto_grilla).jqGrid('getRowData', rowKey[i]);
+                    sumaPeso += parseFloat(data.NUM_SIZE_ARCHIVO);
+                }
+                sumaPeso += PesodeArchivo;
+                if (sumaPeso > Tamanio_Valido) {
+                    jAlert("El archivo que ha ingresado y el resto, supera los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
+                } else {
+                    inputPeso.val(file.size);
+                    inputName.val(file.name.split('.')[0]);
+                    inputEx.val(`.${file.name.split('.')[1]}`);
+                }
             }
         }
     }

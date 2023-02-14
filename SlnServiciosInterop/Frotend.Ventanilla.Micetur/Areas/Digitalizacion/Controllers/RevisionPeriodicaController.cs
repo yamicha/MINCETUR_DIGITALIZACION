@@ -115,7 +115,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                         }).ToList();
                     }
                 }
-                model.Lista_TipoMicroArchivo = new List<SelectListItem>();
+                //model.Lista_TipoMicroArchivo = new List<SelectListItem>();
                 model.Lista_TipoMicroArchivo.Insert(0, new SelectListItem { Value = "", Text = "-- Seleccione --" });
             }
             catch (Exception ex)

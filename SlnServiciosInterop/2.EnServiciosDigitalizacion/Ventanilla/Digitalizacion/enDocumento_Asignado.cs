@@ -17,7 +17,7 @@ namespace EnServiciosDigitalizacion.Ventanilla.Digitalizacion
         public string HORA_INICIO { get; set; }
         public string HORA_FIN { get; set; }
         public long ID_LASERFICHE { get; set; }
-        
+        public string EXP_OBSERVACION { get; set; }
         public List<enDocumento> ListaDocumento  { get; set; }
 }
 }

@@ -23,6 +23,6 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Models
         public long NUM_FOLIOS { get; set; }
         public string DES_CLASIF { get; set; }
         public string DES_PERSONA { get; set; }
-
+        public string EXP_OBSERVACION { get; set; }
     }
 }

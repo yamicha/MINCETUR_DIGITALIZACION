@@ -79,13 +79,14 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             null,
                             item.DES_TIP_DOC,
                             item.NUM_DOC,
-                            item.NUM_FOLIOS.ToString(),
+                            //item.NUM_FOLIOS.ToString(),
                             item.DES_OBS,
                             item.USU_CREACION,
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
-                            item.PESO_ADJ.ToString()
+                            item.PESO_ADJ.ToString(),
+                            item.ID_ESTADO_DOCUMENTO.ToString()
 
                       }
                         }).ToArray();
@@ -197,9 +198,11 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                             item.NOMBRE_USUARIO,
                             item.ID_DOCUMENTO.ToString(),
                             null,
-                            item.DES_CLASIF,
+                            null,
+                            item.OBSERVACION,
                             item.DES_TIP_DOC,
                             item.DES_ASUNTO,
+                            item.DES_CLASIF,
                             item.HORA_INICIO,
                             item.HORA_FIN,
                             item.OBSERVACION,
@@ -400,6 +403,11 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                 {
                     using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                     {
+                        string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                        if (ClientIP == "::1")
+                        {
+                            ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                        }
                         repositorio.Documento_AsignacionInsertar(new enDocumento
                         {
                             ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
@@ -408,7 +416,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                                 ID_USUARIO = x.IdUsuario
                             }).ToList(),
                             USU_CREACION = entidad.UsuCreacion,
-                            IP_CREACION = entidad.IpCreacion,
+                            IP_CREACION = ClientIP,
                             FLG_DIGITALIZAR = entidad.FlgDigitalizar
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
@@ -450,6 +458,11 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                 {
                     using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                     {
+                        string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                        if (ClientIP == "::1")
+                        {
+                            ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                        }
                         repositorio.Documento_AsignacionActualizar(new enDocumento
                         {
                             ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
@@ -459,7 +472,7 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                                 ID_USUARIO = x.IdUsuario
                             }).ToList(),
                             USU_MODIFICACION = entidad.UsuModificacion,
-                            IP_MODIFICACION = entidad.IpModificacion,
+                            IP_MODIFICACION = ClientIP,
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
                         {

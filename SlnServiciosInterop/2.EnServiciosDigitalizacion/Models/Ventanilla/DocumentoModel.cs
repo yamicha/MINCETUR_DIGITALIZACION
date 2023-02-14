@@ -20,5 +20,6 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public string FlgDigitalizar { get; set; }
         public string HoraInicio { get; set; }
         public string HoraFIn { get; set; }
+        public string ExpeObservacion { get; set; }
     }
 }
