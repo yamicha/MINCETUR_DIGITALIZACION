@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 using ApiServiciosDigitalizacion.resource.ArchivoCentral.Carga;
 using EnServiciosDigitalizacion;
 using EnServiciosDigitalizacion.ArchivoCentral.Carga;
@@ -32,9 +33,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Carga
             enAuditoria auditoria = new enAuditoria();
             if (fileArchivo != null)
             {
+                string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                if (ClientIP == "::1")
+                {
+                    ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                }
+
                 long ID_USUARIO = IdUsuario;
                 string USU_CREACION = UsuCreacion;
-                string IP_CREACION = IPUser.ObtenerIP();
+                string IP_CREACION = ClientIP;
                 long ID_TABLA = IdTabla;
                 string MENSAJE_ERROR = "";
                 bool VALIDO = true;

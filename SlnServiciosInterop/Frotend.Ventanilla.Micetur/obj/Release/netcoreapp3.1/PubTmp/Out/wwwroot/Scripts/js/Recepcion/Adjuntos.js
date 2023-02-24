@@ -22,24 +22,30 @@ var MicroModulo = {
 }
 
 $(document).ready(function () {
+    $('#TIPO_ADJUNTO').val(0);
+    TipoAdjuntoCambio(0);
     $('#TIPO_ADJUNTO').change(function () {
-        if ($(this).val() == 1) {
-            $('#ControlFile').hide();
-            $('#NOMBRE_ARCHIVO').prop("disabled", false);
-            $('#PESO_ARCHIVO').prop("disabled", false);
-            $('#EXTENSION').prop("disabled", false);
-        } else {
-            $('#ControlFile').show('slow');
-            $('#NOMBRE_ARCHIVO').prop("disabled", true);
-            $('#PESO_ARCHIVO').prop("disabled", true);
-            $('#EXTENSION').prop("disabled", true);
-        }
+        TipoAdjuntoCambio($(this).val());
     });
 
     $('#BtnAgregarAdjunto').click(function () {
         Adjunto_Agregar();
     });
 });
+
+function TipoAdjuntoCambio(opcion) {
+    if (opcion == 1) {
+        $('#ControlFile').hide();
+        $('#NOMBRE_ARCHIVO').prop("disabled", false);
+        $('#PESO_ARCHIVO').prop("disabled", false);
+        $('#EXTENSION').prop("disabled", false);
+    } else {
+        $('#ControlFile').show('slow');
+        $('#NOMBRE_ARCHIVO').prop("disabled", true);
+        $('#PESO_ARCHIVO').prop("disabled", true);
+        $('#EXTENSION').prop("disabled", true);
+    }
+}
 
 function Adjuntos_ConfigurarGrilla() {
 
@@ -126,15 +132,26 @@ function ValidarArchivoTemporal(input) {
                 if (!valido)
                     jAlert("Solo se permite documentos en formato " + extensionValid, 'Atención');
                 else
-                    jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
+                    jAlert("El archivo que va a adjuntar no puede superar los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
 
                 return false;
             } else {
-                //Adjunto_CargarTemporal();
-                files.push(file);
-                $('#NOMBRE_ARCHIVO').val(file.name);
-                $('#PESO_ARCHIVO').val(file.size);
-                $('#EXTENSION').val(file.name.split('.')[1]); 
+                var sumaPeso = 0;
+                var rowKey = jQuery("#" + Adjuntos_grilla).getDataIDs();
+                for (var i = 0; i < rowKey.length; i++) {
+                    var data = jQuery("#" + Adjuntos_grilla).jqGrid('getRowData', rowKey[i]);
+                    sumaPeso += parseFloat(data.PESO_ARCHIVO);
+                }
+                sumaPeso += PesodeArchivo;
+                if (sumaPeso > Tamanio_Valido) {
+                    jAlert("El archivo que ha ingresado y el resto, supera los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
+                } else {
+                    //Adjunto_CargarTemporal();
+                    files.push(file);
+                    $('#NOMBRE_ARCHIVO').val(file.name);
+                    $('#PESO_ARCHIVO').val(file.size);
+                    $('#EXTENSION').val(file.name.split('.')[1]);
+                }
             }
         }
     }
@@ -179,7 +196,7 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         verBotonEditar = true;
     }
     $("#" + DocumentoAdj_grilla).GridUnload();
-    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Observación', 'Peso', 'Extensión'];
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Peso', 'Extensión'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
@@ -187,7 +204,7 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         { name: 'EDITAR', index: 'EDITAR', align: 'center', width: 90, hidden: verBotonEditar, formatter: DocumentoAdj_actionEditar },
         { name: 'VERDOCUMENTO', index: 'VERDOCUMENTO', align: 'center', width: 90, hidden: false, formatter: DocumentoAdj_actionver },
         { name: 'DES_NOM_ABR', index: 'DES_NOM_ABR', align: 'center', width: 200, hidden: false },
-        { name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
+        //{ name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
         { name: 'NUM_SIZE_ARCHIVO', index: 'NUM_SIZE_ARCHIVO', align: 'center', width: 100, hidden: false, editable: true },
         { name: 'EXTENSION', index: 'EXTENSION', align: 'center', width: 100, hidden: false, editable: true, },
     ];
@@ -221,7 +238,7 @@ function DocumentoAdj_Editar() {
     }
 }
 function DocumentoAdj_actionver(cellvalue, options, rowObject) {
-    var Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-file-pdf\" style=\"color:#e40613;font-size:17px\"></i></button>";
+    var Btn = "<button title=\"ver\" onclick='DownloadFile(" + rowObject.ID_DOC_CMS + ");' class=\"btn btn-link\" type=\"button\" style=\"text-decoration: none !important;\"><i class=\"clip-search-2\" style=\"color:#e40613;font-size:17px\"></i></button>";
     return Btn;
 }
 function DocumentoAdj_CargarGrilla(ID_EXPE) {

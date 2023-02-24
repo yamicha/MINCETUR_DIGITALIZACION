@@ -91,10 +91,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (ObservacionRepositorio repositorio = new ObservacionRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Observacion_Insertar(new enObservacion
                     {
                         DESC_OBSERVACION = entidad.DescObservacion,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -130,12 +135,17 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (ObservacionRepositorio repositorio = new ObservacionRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Observacion_Actualizar(new enObservacion
                     {
                         ID_OBSERVACION = id,
                         DESC_OBSERVACION = entidad.DescObservacion,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = IPUser.ObtenerIP()
+                        IP_MODIFICACION = ClientIP
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -167,11 +177,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (ObservacionRepositorio repositorio = new ObservacionRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Observacion_Estado(new enObservacion
                     {
                         ID_OBSERVACION = entidad.IdObservacion,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

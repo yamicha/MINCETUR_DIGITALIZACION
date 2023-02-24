@@ -16,5 +16,6 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public long IdArchivo { get; set; }
         public string UsuCreacion { get; set; }
         public long IdDocumento { get; set; }
+        public string DocPrincipal { get; set; }
     }
 }

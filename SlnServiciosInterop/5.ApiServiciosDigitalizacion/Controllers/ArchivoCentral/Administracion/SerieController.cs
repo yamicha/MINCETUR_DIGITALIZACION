@@ -96,12 +96,17 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SerieRepositorio repositorio = new SerieRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Serie_Insertar(new enSerie
                     {
                         ID_SECCION = (long)entidad.IdSeccion,
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -132,6 +137,11 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SerieRepositorio repositorio = new SerieRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Serie_Actualizar(new enSerie
                     {
                         ID_SERIE = id,
@@ -139,7 +149,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
                         COD_SERIE = entidad.DescCodSerie,
                         DES_SERIE = entidad.DescSerie,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = IPUser.ObtenerIP()
+                        IP_MODIFICACION = ClientIP
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -171,11 +181,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SerieRepositorio repositorio = new SerieRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Serie_Estado(new enSerie
                     {
                         ID_SERIE = entidad.IdSerie,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

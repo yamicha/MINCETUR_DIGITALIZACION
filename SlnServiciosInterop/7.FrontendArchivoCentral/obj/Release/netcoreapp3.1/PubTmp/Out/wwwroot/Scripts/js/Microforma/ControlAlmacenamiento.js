@@ -43,12 +43,12 @@ $(document).ready(function () {
 
 function ControlBuscar() {
     Microforma_ConfigurarGrilla(MicroAlmacen_Lote_grilla, MicroAlmacen_Lote_barra, MicroAlmacen_grilla, MicroAlmacen_barra, MicroModulo.CAlmacen);
-    Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra);
+    Documento_Detalle_buscar(MicroAlmacen_grilla, MicroAlmacen_barra, 6);
 }
 function ControlFinalizadoBuscar() {
     Microforma_ConfigurarGrilla(MicroAlmacenFin_Lote_grilla, MicroAlmacenFin_Lote_barra,
         MicroAlmacenFin_grilla, MicroAlmacenFin_barra, MicroModulo.CAlmacenFin, true);
-    Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra);
+    Documento_Detalle_buscar(MicroAlmacenFin_grilla, MicroAlmacenFin_barra, 7);
 }
 
 //function MicroformaAlmacenamiento_BuscarFecha() {
@@ -281,7 +281,7 @@ function MicroArchivo_HistorialConfigurarGrilla(_Grilla, _barra) {
         { name: 'ID_DOC_CONFORMIDAD', index: 'ID_DOC_CONFORMIDAD', align: 'center', width: 150, hidden: true, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }

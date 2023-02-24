@@ -331,6 +331,13 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+
+                    }
+                    entidad.IpCreacion = ClientIP;
                     repositorio.Microforma_Reprocesar(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -421,6 +428,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
 
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    entidad.IpCreacion = ClientIP;
                     repositorio.Microforma_Evaluar(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -454,6 +467,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    entidad.IpCreacion = ClientIP;
                     repositorio.Microforma_MicroArchivo(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -538,6 +557,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 {
                     if (entidad.ListaIdsMicroforma.Count() > 0)
                     {
+                        string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                        if (ClientIP == "::1")
+                        {
+                            ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                        }
+                        entidad.IpCreacion = ClientIP;
                         foreach (MicroEvaluarModel item in entidad.ListaIdsMicroforma)
                         {
                             entidad.IdMicroforma = item.IdMicroforma;
@@ -610,6 +635,12 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (MicroformaRepositorio repositorio = new MicroformaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
+                    entidad.IpCreacion = ClientIP;
                     repositorio.Microforma_RevisionReprocesar(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {

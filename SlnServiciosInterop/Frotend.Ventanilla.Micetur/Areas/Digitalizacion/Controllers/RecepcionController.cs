@@ -18,6 +18,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Utilitarios.Helpers;
+using System.Web;
+using System.Net;
+using subir = docSubirDocumento;
+using ServiceReference1;
 
 namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
 {
@@ -96,6 +100,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             {
                 entidad.ListaAdjuntos = new List<AdjuntoModels>();
                 entidad.ListaAdjuntos = JsonConvert.DeserializeObject<List<AdjuntoModels>>(ListaAdj);
+                List<AdjuntoModels> listaDocPrincipal = entidad.ListaAdjuntos.Where(x => x.DocPrincipal == "1").ToList();
                 if (files != null && files.Count > 0)
                 {
                     foreach (var file in files)
@@ -122,6 +127,35 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                                     });
                                 }
                             }
+                        }
+                    }
+                }
+                string _url = "";
+                byte[] document = null;
+                foreach (var item in listaDocPrincipal)
+                {
+                    using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
+                    {
+                        string llave = await client.traeLlaveAsync();
+                        string tex = "{ IdDocCms:" + item.IdArchivo + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
+                        string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
+                        var urlVisorLF = AppSettings.UrlApiDownload;
+                        _url = urlVisorLF + DOC + "&descarga=false";
+                    }
+                    using (WebClient client = new WebClient())
+                    {
+                        document = await client.DownloadDataTaskAsync(_url);
+                    }
+                    auditoria = new Proxy().UploadFileService(
+                                         entidad.IdExpediente,
+                                         item.NombreArchivo,
+                                         int.Parse(User.GetUserId()), document);
+                    if (auditoria.EjecucionProceso)
+                    {
+                        if (auditoria.Objeto != null)
+                        {
+                            entidad.ListaAdjuntos.Where(x => x.NombreArchivo == item.NombreArchivo).ToList().ForEach(d => d.IdArchivo = long.Parse(auditoria.Objeto.ToString()));
+
                         }
                     }
                 }
@@ -183,6 +217,70 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                 }
             }
             return View(modelo);
+        }
+
+
+        [HttpPost, Route("~/Digitalizacion/Recepcion/expediente-guardarLF")]
+        public async Task<ActionResult> ExpeditenteLFGuardar(long ID_DOC)
+        {
+            enAuditoria auditoria = new enAuditoria();
+            auditoria.Limpiar();
+            string _url = "";
+            byte[] document = null;
+            try
+            {
+                using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
+                {
+                    string llave = await client.traeLlaveAsync();
+                    string tex = "{ IdDocCms:" + ID_DOC + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
+                    string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
+                    var urlVisorLF = AppSettings.UrlApiDownload;
+                    _url = urlVisorLF + DOC + "&descarga=false";
+                }
+                using (WebClient client = new WebClient())
+                {
+                    document = await client.DownloadDataTaskAsync(_url);
+                }
+                //   using (var ms = new MemoryStream())
+                // {
+                // document.CopyTo(ms);
+                var archivo = document.ToArray();
+                string nombre_archivo = ID_DOC.ToString();
+                int usuario = int.Parse(User.GetUserId());
+                using (subir.WCFGeneralesDocCmsRegistroClient proxy = new subir.WCFGeneralesDocCmsRegistroClient())
+                {
+                    subir.DocCmsSubir datos = new subir.DocCmsSubir();
+                    subir.Resultado respuesta = new subir.Resultado();
+                    datos.IdSis = AppSettings.AppId;
+                    datos.DesNomAbr = nombre_archivo;
+                    datos.DesRuta = "VV/" + DateTime.Now.Year.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + ID_DOC.ToString();
+                    datos.Archivo = document;
+                    datos.IdUsu = usuario;
+                    datos.IdDocCms = -1;
+                    datos.FlgPin = 0;
+                    datos.IdDoc = -1;
+                    datos.FlgDoc = 0;
+                    datos.FlgCms = 1;
+                    datos.IpAcceso = Request.HttpContext.Connection.RemoteIpAddress.ToString();
+                    datos.Dato = string.Empty;
+                    respuesta = proxy.insertarAsync(datos).Result;
+                    if (!string.IsNullOrEmpty(respuesta.Valor))
+                    {
+                        auditoria.Objeto = respuesta.Valor;
+                    }
+                    else
+                    {
+                        auditoria.Rechazar(respuesta.DesError);
+                    }
+                }
+                //  }
+            }
+            catch (Exception ex)
+            {
+                Css_Log.Guardar(ex.Message.ToString());
+                auditoria.Error(ex);
+            }
+            return Json(auditoria);
         }
 
     }

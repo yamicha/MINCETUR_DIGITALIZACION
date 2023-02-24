@@ -20,7 +20,7 @@ function Documento_ConfigurarGrilla_Vent_Pen() {
     ]
     var colModels = [
         { name: 'ID_EXPE', index: 'ID_EXPE', align: 'center', hidden: false, key: true, search:true }, //1
-        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir, search: false },//2
+        { name: 'VERIFICAR', index: 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionRecibir, search: false, sortable: false  },//2
         { name: 'FEC_EXPE_STR', index: 'FEC_EXPE_STR', align: 'center', hidden: false, search: false, sortable: false }, //3
         { name: 'DES_PERSONA', index: 'DES_PERSONA', align: 'left', hidden: false, width: 200, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: false }, //4
         { name: 'DES_ASUNTO', index: 'DES_ASUNTO', align: 'left', hidden: false, width: 300, cellattr: function (rowId, tv, rawObject, cm, rdata) { return 'style="white-space: normal;"' }, search: true }, //5
@@ -124,7 +124,8 @@ function Expediente_Recibir() {
                     Extension: x.EXTENSION,
                     PesoArchivo: parseInt(x.PESO_ARCHIVO),
                     CodigoArchivo: x.CODIGO_ARCHIVO,
-                    FlgLink: parseInt(x.FLG_ARCHIVO)
+                    FlgLink: parseInt(x.FLG_ARCHIVO),
+                    DocPrincipal: "0"
                 }
             });
             ListaDocumento.forEach(function (itemdoc) {
@@ -136,7 +137,8 @@ function Expediente_Recibir() {
                     NombreArchivo: itemdoc.DES_NOM_ABR,
                     Extension: itemdoc.EXTENSION,
                     PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
-                    FlgLink: 0
+                    FlgLink: 0,
+                    DocPrincipal: "1"
                 });
             });
             // enviar todos los archivos
@@ -171,6 +173,22 @@ function Expediente_Recibir() {
                         }
                     }
                 });
+        }
+    });
+}
+
+function fn_Guardar_LF(idDocumento, idExpediente) {
+    var url = baseUrl + 'Digitalizacion/Recepcion/expediente-guardarLF?ID_DOC=' + idDocumento;
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: null,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        contentType: !1,
+        processData: !1,
+        success: function (p) {
+
         }
     });
 }

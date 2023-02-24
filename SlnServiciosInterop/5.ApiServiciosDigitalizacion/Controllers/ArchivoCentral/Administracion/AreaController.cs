@@ -91,11 +91,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (AreaRepositorio repositorio = new AreaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Area_Insertar(new enArea
                     {
                         DES_AREA = entidad.DescArea,
                         SIGLA = entidad.Sigla,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -131,13 +136,18 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (AreaRepositorio repositorio = new AreaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Area_Actualizar(new enArea
                     {
                         ID_AREA = id,
                         DES_AREA = entidad.DescArea,
                         SIGLA = entidad.Sigla,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = IPUser.ObtenerIP()
+                        IP_MODIFICACION = ClientIP
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -169,11 +179,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (AreaRepositorio repositorio = new AreaRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Area_Estado(new enArea
                     {
                         ID_AREA = entidad.IdArea,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

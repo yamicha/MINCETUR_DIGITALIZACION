@@ -17,5 +17,6 @@ namespace EnServiciosDigitalizacion.Models
         public List<DevolucionModel> ListaIdsLotes { get; set; }
 
         public DateTime FecDevolucion { get; set; }
+        public string IpCreacion { get; set; }
     }
 }

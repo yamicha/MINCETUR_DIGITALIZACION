@@ -55,17 +55,17 @@ $(document).ready(function () {
 function RevisionPendienteBuscar() {
     MicroformaRevisionPeriodica_ConfigurarGrilla(MicroPendiente_Lote_grilla, MicroPendiente_Lote_barra,
         MicroPendiente_grilla, MicroPendiente_barra, MicroModulo.RevisionPend, true);
-    Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra);
+    Documento_Detalle_buscar(MicroPendiente_grilla, MicroPendiente_barra, 8);
 }
 function RevisionObservadoBuscar() {
     MicroformaRevisionPeriodica_ConfigurarGrilla(MicroObs_Lote_grilla, MicroObs_Lote_barra,
         MicroObs_grilla, MicroObs_barra, MicroModulo.RevisionObs, false);
-    Documento_Detalle_buscar(MicroObs_grilla, MicroObs_barra);
+    Documento_Detalle_buscar(MicroObs_grilla, MicroObs_barra, 9);
 }
 function RevisionAnuladasBuscar() {
     MicroformaRevisionPeriodica_ConfigurarGrilla(MicroAnuladas_Lote_grilla, MicroAnuladas_Lote_barra,
         MicroAnuladas_grilla, MicroAnuladas_barra, MicroModulo.RevisionAnulada, false);
-    Documento_Detalle_buscar(MicroAnuladas_grilla, MicroAnuladas_barra);
+    Documento_Detalle_buscar(MicroAnuladas_grilla, MicroAnuladas_barra, 10);
 }
 
 function Revision_MostrarEvaluar() {

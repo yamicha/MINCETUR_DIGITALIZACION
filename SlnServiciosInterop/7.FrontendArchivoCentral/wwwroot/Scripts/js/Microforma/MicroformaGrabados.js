@@ -17,14 +17,14 @@ $(document).ready(function () {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
         Microforma_ConfigurarGrilla(Microforma_Lote_grilla, Microforma_Lote_barra, Microforma_grilla, Microforma_barra, MicroModulo.Grabados);
-        Documento_Detalle_buscar(Microforma_grilla, Microforma_barra);
+        Documento_Detalle_buscar(Microforma_grilla, Microforma_barra, 2);
     });
 
     jQuery('#aTabMicroReprocesar').click(function (e) {
         _ID_MODULO = 0;
         _ID_LOTE = 0;
         Microforma_ConfigurarGrilla(MicroformaRepro_Lote_grilla, MicroformaRepro_Lote_barra, MicroformaRepro_grilla, MicroformaRepro_barra, MicroModulo.Reprocesar);
-        Documento_Detalle_buscar(MicroformaRepro_grilla, MicroformaRepro_barra);
+        Documento_Detalle_buscar(MicroformaRepro_grilla, MicroformaRepro_barra, 3);
     });
 });
 

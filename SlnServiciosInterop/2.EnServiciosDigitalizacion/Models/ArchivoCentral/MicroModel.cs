@@ -26,7 +26,8 @@ namespace EnServiciosDigitalizacion.Models
         public List<MicroModel> ListaIdsLotes { get; set; }
         public string UsuCreacion { get; set; }
         public string UsuModificacion { get; set; }
-
+        public string IpCreacion { get; set; }
+        
         public MicroArchivoModels MicroArchivo { get; set; }
     }
 }

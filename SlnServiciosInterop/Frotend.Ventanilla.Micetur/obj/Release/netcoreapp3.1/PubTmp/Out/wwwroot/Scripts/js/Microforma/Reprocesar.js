@@ -158,7 +158,8 @@ function Reprocesar_Finalizar() {
                 var item = {
                     IdDocumento: parseInt(Reprocesar_ListaDocumentos[0].IdDocumento),
                     IdDocumentoAsignado: parseInt(Reprocesar_ListaDocumentos[0].IdDocumentoAsignado),
-                    UsuCreacion: $('#inputHddId_Usuario').val()
+                    UsuCreacion: $('#inputHddId_Usuario').val(),
+                    ExpeObservacion: $('#EXP_OBSERVACION').val()
                 }
                 var url = "ventanilla/digitalizacion/reprocesar-documento";
                 API.Fetch("POST", url, item, function (auditoria) {

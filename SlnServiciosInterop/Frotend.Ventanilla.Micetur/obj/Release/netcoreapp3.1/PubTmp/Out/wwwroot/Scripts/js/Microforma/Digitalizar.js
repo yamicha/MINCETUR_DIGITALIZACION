@@ -53,7 +53,7 @@ jQuery('#Digitalizar_Check_Finalizar').change(function (e) {
 });
 
 function Digitalizar_buscar() {
-    Documento_ConfigurarGrilla(Digitalizar_grilla, Digitalizar_barra, "Listado de documentos asignados faaa", true, 4);
+    Documento_ConfigurarGrilla(Digitalizar_grilla, Digitalizar_barra, "Listado de documentos asignados", true, 4);
 }
 
 function Digitalizar_Iniciar() {

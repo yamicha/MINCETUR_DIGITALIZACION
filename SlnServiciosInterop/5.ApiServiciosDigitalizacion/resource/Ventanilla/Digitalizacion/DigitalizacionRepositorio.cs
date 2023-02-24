@@ -63,8 +63,11 @@ namespace ApiServiciosDigitalizacion.resource.Ventanilla.Digitalizacion
             _rule.Documento_Devolver(entidad, ref auditoria);
         }
 
+        public List<enScdDigiUtil> Documento_DigitalizarUniformeSTD(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            return _rule.Documento_DigitalizarUniformeSTD(entidad, ref auditoria);
+        }
 
-        
         public void Dispose()
         {
             GC.SuppressFinalize(this);

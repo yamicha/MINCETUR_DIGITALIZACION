@@ -610,7 +610,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                             int intNumdoc = drReader.GetOrdinal("NUM_DOC");
                             int intDesClasif = drReader.GetOrdinal("DES_CLASIF");
                             int intDescPersona = drReader.GetOrdinal("DES_PERSONA");
-                            int intExpObservacion = drReader.GetOrdinal("EXP_OBSERVACION");
+                            int intExpObservacion = drReader.GetOrdinal("DES_EXP_OBSERVACION");
                             while (drReader.Read())
                             {
                                 drReader.GetValues(arrResult);

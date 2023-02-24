@@ -8,20 +8,22 @@ $(document).ready(function () {
 
 jQuery('#aTabAprobar').click(function (e) {
     Aprobar_buscar();
-    $('#ControlCalidad_btn_Conforme').click(function () {
-        var rowKey = $("#" + Aprobar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
-        if (rowKey != null) {
-            if (rowKey.length > 0) {
-                ControlCalidad_ConformeMasivo();
-            }
-            else {
-                jAlert("Debe seleccionar por lo menos un documento.", "Atención");
-            }
+    
+});
+
+$('#ControlCalidad_btn_Conforme').click(function () {
+    var rowKey = $("#" + Aprobar_grilla).jqGrid('getGridParam', 'selarrrow'); // solo los q estan seleccionados
+    if (rowKey != null) {
+        if (rowKey.length > 0) {
+            ControlCalidad_ConformeMasivo();
         }
         else {
             jAlert("Debe seleccionar por lo menos un documento.", "Atención");
         }
-    });
+    }
+    else {
+        jAlert("Debe seleccionar por lo menos un documento.", "Atención");
+    }
 });
 
 jQuery('#aTabAprobar').click(function (e) {

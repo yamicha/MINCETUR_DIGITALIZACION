@@ -195,19 +195,39 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
 
                 using (DigitalizacionRepositorio repositorio = new DigitalizacionRepositorio(_ConfigurationManager))
                 {
-                    repositorio.Documento_Digitalizado_Validar(entidad, ref auditoria);
+                    var resultado = repositorio.Documento_DigitalizarUniformeSTD(entidad, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
                         string CodigoLog = Log.Guardar(auditoria.ErrorLog);
                         auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
                     }
-                    else
+                    if (!auditoria.Rechazo)
                     {
-                        if (!auditoria.Rechazo)
-                            auditoria.Code = (int)HttpStatusCode.Created;
-                        else
-                            auditoria.Code = (int)HttpStatusCode.OK;
+                        if (resultado[0].ID_TIPO == 0 || resultado[0].ID_TIPO == 2)
+                        {
+                            repositorio.Documento_Digitalizado_Validar(entidad, ref auditoria);
+                            if (!auditoria.EjecucionProceso)
+                            {
+                                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                            }
+                            else
+                            {
+                                if (!auditoria.Rechazo)
+                                    auditoria.Code = (int)HttpStatusCode.Created;
+                                else
+                                    auditoria.Code = (int)HttpStatusCode.OK;
+                            }
+                        }
+                        else if (resultado[0].ID_TIPO == 1)
+                        {
+                            string CodigoLog = Log.Guardar("Error en el proc PRC_SCDDIGIUTIL_CDV2DOCUMENTO_ADJ al actualizar los adjuntos " + resultado[0].DES_ERROR);
+                            auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                            auditoria.Rechazo = true;
+                        }
                     }
+                    else
+                        auditoria.Code = (int)HttpStatusCode.OK;
                 }
             }
             catch (Exception ex)
@@ -239,10 +259,32 @@ namespace ApiServiciosDigitalizacion.Controllers.Ventanilla.Digitalizacion
                         {
                             item.IdEstadoDocumento = (long)EstadoDocumento.CalidadConforme;
                             item.IpCreacion = ClientIP;
-                            //item.FlgConforme = 1; 
-                            repositorio.Documento_Digitalizado_Validar(item, ref auditoria);
-                            if (auditoria.Rechazo)
-                                break;
+
+                            //item.FlgConforme = 1;
+                            var resultado = repositorio.Documento_DigitalizarUniformeSTD(item, ref auditoria);
+                            if (!auditoria.EjecucionProceso)
+                            {
+                                string CodigoLog = Log.Guardar(auditoria.ErrorLog);
+                                auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                            }
+                            if (!auditoria.Rechazo)
+                            {
+                                if (resultado[0].ID_TIPO == 0 || resultado[0].ID_TIPO == 2)
+                                {
+                                    repositorio.Documento_Digitalizado_Validar(item, ref auditoria);
+                                    if (auditoria.Rechazo)
+                                        break;
+
+                                }
+                                else if (resultado[0].ID_TIPO == 1)
+                                {
+                                    string CodigoLog = Log.Guardar("Error en el proc PRC_SCDDIGIUTIL_CDV2DOCUMENTO_ADJ al actualizar los adjuntos " + resultado[0].DES_ERROR);
+                                    auditoria.MensajeSalida = Log.Mensaje(CodigoLog);
+                                    auditoria.Rechazo = true;
+                                    break;
+                                }
+                            }
+
                         }
                     }
                     if (!auditoria.EjecucionProceso)

@@ -58,10 +58,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (OperadorRepositorio repositorio = new OperadorRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Operador_Insertar(new enOperador
                     {
                         ID_USUARIO = entidad.IdUsuario,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -96,11 +101,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (OperadorRepositorio repositorio = new OperadorRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Operador_Estado(new enOperador
                     {
                         ID_USUARIO = entidad.IdUsuario,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

@@ -25,6 +25,7 @@ namespace Utilitarios.Helpers
         public static string PackSeguridad => GetAppSetting("PackSeguridad");
         public static string PackAdmConsVentanilla => GetAppSetting("PackAdmConsVentanilla");
         public static string PackAdmManVentanilla => GetAppSetting("PackAdmManVentanilla");
+        public static string PackInsdbaDigiUtil => GetAppSetting("PackInsdbaDigiUtil");
 
         private static string GetAppSetting(string key)
         {

@@ -288,7 +288,7 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -410,7 +410,7 @@ function Microforma_ProcesoConfigurarGrilla(_Grilla, _barra) {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false,
         search: false, sort: 'asc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
@@ -488,7 +488,7 @@ function Revision_ConfigurarGrilla(_Grilla, _Barra) {
 
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }

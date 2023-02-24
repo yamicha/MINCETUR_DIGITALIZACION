@@ -13,6 +13,7 @@ namespace EnServiciosDigitalizacion.Models
         public string UsuCreacion { get; set; }
         public List<MicroEvaluarModel> ListaIdsMicroforma { get; set; }
         public long IdDocConformidad { get; set; }
+        public string IpCreacion { get; set; }
         
 
     }

@@ -21,6 +21,9 @@ namespace ApiServiciosDigitalizacion.Models.ArchivoCentral.Administracion
 
         [DataMember(Name = "strUsuarioModificacion", Order = 5)]
         public string UsuModificacion { get; set; }
+
+        [DataMember(Name = "strIpCreacion", Order = 5)]
+        public string IpCreacion { get; set; }
     }
 
 }

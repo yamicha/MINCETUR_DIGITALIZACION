@@ -13,11 +13,11 @@ var Documento_Ver_Proceso_barra = "Documento_Ver_Proceso_barra";
 // _id_tab - Leyenda :
 // 2 : Asignar
 // 3 : Asignados
-function Documento_Detalle_buscar(_Grilla, _Barra) {
-    Documento_ConfigurarGrilla(_Grilla, _Barra, "Listado de documentos", false, 0);
+function Documento_Detalle_buscar(_Grilla, _Barra, _OpcionTab) {
+    Documento_ConfigurarGrilla(_Grilla, _Barra, "Listado de documentos", false, 0, _OpcionTab);
 }
 
-function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_tab) {
+function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_tab, _microformaTab) {
     $("#Load_Busqueda").show();
     setTimeout(() => {
         _ID_MODULO = _id_tab;
@@ -26,13 +26,36 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         var _NRO_REPROCESADOHidden = true;
         var NOMBRE_BOTON_IMAGEN = "";
         var verLote = false;
+        var verDigitalizador = true;
+        var verDocumentos = false;
         var url = BaseUrlApi + 'ventanilla/documento/listar-paginado';
         if (_ID_MODULO == 0) {
-            _PREFIJO = "Detalle_";
+            if (_microformaTab == 1) {
+                _PREFIJO = "Detalle1_";
+            } else if (_microformaTab == 2) {
+                _PREFIJO = "Detalle2_";
+            } else if (_microformaTab == 3) {
+                _PREFIJO = "Detalle3_";
+            } else if (_microformaTab == 4) {
+                _PREFIJO = "Detalle4_";
+            } else if (_microformaTab == 5) {
+                _PREFIJO = "Detalle5_";
+            } else if (_microformaTab == 6) {
+                _PREFIJO = "Detalle6_";
+            } else if (_microformaTab == 7) {
+                _PREFIJO = "Detalle7_";
+            } else if (_microformaTab == 8) {
+                _PREFIJO = "Detalle8_";
+            } else if (_microformaTab == 9) {
+                _PREFIJO = "Detalle9_";
+            } else if (_microformaTab == 10) {
+                _PREFIJO = "Detalle10_";
+            }
         }
         if (_ID_MODULO == 2) {
             _PREFIJO = "Asignar_";
             verLote = true;
+            verDigitalizador = false;
         } else if (_ID_MODULO == 3) {
             _PREFIJO = "Asignados_";
         } else if (_ID_MODULO == 4) {
@@ -45,6 +68,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             _PREFIJO = "Control_Calidad_";
             NOMBRE_BOTON_IMAGEN = 'Validar';
             _NRO_REPROCESADOHidden = false;
+            verDocumentos = true;
             VER_BOTON_IMAGEN = false;
         } else if (_ID_MODULO == 7) {
             _PREFIJO = "Aprobados_";
@@ -63,11 +87,12 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         } else if (_ID_MODULO == 10) {
             _PREFIJO = "Fedatar_";
             NOMBRE_BOTON_IMAGEN = 'Validar';
+            verDocumentos = true;
             VER_BOTON_IMAGEN = false;
         } else if (_ID_MODULO == 11) {
             _PREFIJO = "Fedatados_";
             NOMBRE_BOTON_IMAGEN = 'Ver Adjuntos';
-            VER_BOTON_IMAGEN = false;
+            VER_BOTON_IMAGEN = true;
             verLote = false;
         } else if (_ID_MODULO == 12) {
             _PREFIJO = "MicroformaGrabar_";
@@ -86,7 +111,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
         var colNames = [
             '0', '1', '2', '3',
             NOMBRE_BOTON_IMAGEN, 'Ver Obs', 'Nro. Lote', 'Digitalizador', 'Nro. Expediente', 'Documento', 'Fec. Reg. Expediente', 'Solicitante', 'Asunto', 'Clasificación',  'Nro. Reprocesados', 'Estado de Expediente', 'Tipo Expediente',
-            'Num. Doc', 'Folios', 'Observación',  'Usuario Recepción', 'Fecha Recepción', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos']
+            'Num. Doc', 'Observación', 'Usuario Recepción', 'Fecha Recepción', 'Usuario de Modificación', 'Fecha de Modificación', 'Peso Adjuntos', 'Id estado valor']
         var colModels = [
             //{ name: _PREFIJO + 'ID_DOCUMENTO', index: _PREFIJO + 'ID_DOCUMENTO ', align: 'center', hidden: true, key: true }, //0
             //{ name: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO', index: _PREFIJO + 'ID_DOCUMENTO_ASIGNADO ', align: 'center', hidden: true, key: true }, //1
@@ -123,21 +148,21 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             { name: _PREFIJO + 'VER_IMAGEN', index: _PREFIJO + 'VER_IMAGEN', align: 'center', width: 110, hidden: VER_BOTON_IMAGEN, formatter: Documento_actionVerImagen, search: false, sortable: false }, //4
             { name: _PREFIJO + 'VER_OBS', index: _PREFIJO + 'VER_OBS', align: 'center', width: 110, hidden: VER_BOTON_OBS, formatter: Documento_actionVerObs, search: false, sortable: false }, //5
             { name: _PREFIJO + 'NRO_LOTE', index: _PREFIJO + 'NRO_LOTE', align: 'center', width: 180, hidden: verLote, editable: true, sortable: false }, //6
-            { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false }, //6
-            { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //7
-            { name: 'VERIFICAR', index: _PREFIJO + 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionVer, search: false, sortable: false },
-            { name: _PREFIJO + 'STR_FEC_EXPEDIENTE', index: _PREFIJO + 'STR_FEC_EXPEDIENTE ', align: 'center', width: 150, hidden: false, editable: true, sortable: false, search: true },// 8
+            { name: _PREFIJO + 'NOMBRE_USUARIO', index: _PREFIJO + 'NOMBRE_USUARIO', align: 'center', width: 180, hidden: false, editable: true, sortable: false, search: verDigitalizador }, //7
+            { name: _PREFIJO + '_ID_DOCUMENTO', index: _PREFIJO + '_ID_DOCUMENTO', align: 'center', width: 150, hidden: false, formatter: Documento_actionCodVerProceso, sortable: false }, //8
+            { name: 'VERIFICAR', index: _PREFIJO + 'VERIFICAR', align: 'center', width: 110, formatter: Documento_actionVer, search: false, sortable: false, hidden: verDocumentos }, //9
+            { name: _PREFIJO + 'STR_FEC_EXPEDIENTE', index: _PREFIJO + 'STR_FEC_EXPEDIENTE ', align: 'center', width: 150, hidden: false, editable: true, sortable: false, search: true },// 10
             //{ name: _PREFIJO + 'STR_FEC_CREACION', index: _PREFIJO + 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, sortable: false, sortable: false, search: false },// 8
             { name: _PREFIJO + 'DES_PERSONA', index: _PREFIJO + 'DES_PERSONA ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 9
             { name: _PREFIJO + 'DES_ASUNTO', index: _PREFIJO + 'DES_ASUNTO ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 10
             { name: _PREFIJO + 'DES_CLASIF', index: _PREFIJO + 'DES_CLASIF ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 11
 
             
-            { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false }, //12
+            { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false, search: false }, //12
             { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //13
             { name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 14
             { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 15
-            { name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false, search: false },// 16
+            //{ name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false, search: false },// 16
             { name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 17
             
 
@@ -146,6 +171,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             { name: _PREFIJO + 'USU_MODIFICACION', index: _PREFIJO + 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true, sortable: false, sortable: false },// 20
             { name: _PREFIJO + 'STR_FEC_MODIFICACION', index: _PREFIJO + 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true, sortable: false, sortable: false },// 21
             { name: _PREFIJO + 'PESO_ADJ', index: _PREFIJO + 'PESO_ADJ ', align: 'center', width: 150, hidden: true, sortable: false },// 22
+            { name: 'Detalle_ID_ESTADO_DOCUMENTO', index: 'Detalle_ID_ESTADO_DOCUMENTO ', align: 'center', hidden: true }, //2
         ];
         var opciones = {
             GridLocal: false, nuevo: false, editar: false, eliminar: false, search: false, multiselect: _multiselect, rules: true, exportar: true, exportar: true,
@@ -224,7 +250,7 @@ function Documento_actionVer(cellvalue, options, rowObject) {
 
 function Documento_Recibir(CODIGO) {
     jQuery("#myModal_Recibir_Doc").html('');
-    jQuery("#myModal_Recibir_Doc").load(baseUrl + "Digitalizacion/Recepcion/VerDoc?ID_EXPE=" + CODIGO, function (responseText, textStatus, request) {
+    jQuery("#myModal_Recibir_Doc").load(baseUrl + "Digitalizacion/Recepcion/expediente-documento?ID_EXPE=" + CODIGO, function (responseText, textStatus, request) {
         $.validator.unobtrusive.parse('#myModal_Recibir_Doc');
         if (request.status != 200) return;
     });
@@ -303,7 +329,7 @@ function GetRulesDoc() {
         _ID_CONTROL_CARGA = null;
         _ID_ESTADO_DOCUMENTO = 9;
     }
-    _gs_NOMBRE_USUARIO = jQuery('#gs_' + _PREFIJO + 'NOMBRE_USUARIO').val();
+
     _gs_DESCRIPCION_ESTADO = "";
     _gs_COD_DOCUMENTO = "";
     if (_ID_MODULO != 1) {
@@ -323,6 +349,9 @@ function GetRulesDoc() {
     _gs_NROEXPEDIENTE = $('#gs_' + _PREFIJO + '_ID_DOCUMENTO').val();
     _gs_STR_FEC_EXPEDIENTE = $('#gs_' + _PREFIJO + 'STR_FEC_EXPEDIENTE').val();
     _gs_NRO_LOTE = jQuery('#gs_' + _PREFIJO + 'NRO_LOTE').val();
+    _gs_NUM_DOC = jQuery('#gs_' + _PREFIJO + 'NUM_DOC').val();
+    _gs_DES_OBS = jQuery('#gs_' + _PREFIJO + 'DES_OBS').val();
+    _gs_USU_CREACION = jQuery('#gs_' + _PREFIJO + 'USU_CREACION').val();
     //
     var _DES_CLASIF= _gs_DES_CLASIF == '' || _gs_DES_CLASIF == undefined ? null : "UPPER('" + _gs_DES_CLASIF + "')";
     var _DES_ASUNTO = _gs_DES_ASUNTO == '' || _gs_DES_ASUNTO == undefined ? null : "UPPER('" + _gs_DES_ASUNTO + "')";
@@ -333,16 +362,22 @@ function GetRulesDoc() {
     var _NROEXPEDIENTE = _gs_NROEXPEDIENTE == '' || _gs_NROEXPEDIENTE == undefined ? null : "UPPER('" + _gs_NROEXPEDIENTE + "')";
     var _STR_FEC_EXPEDIENTE = _gs_STR_FEC_EXPEDIENTE != undefined ? `'${_gs_STR_FEC_EXPEDIENTE}'` : `''`;
     var _NRO_LOTE = _gs_NRO_LOTE == '' || _gs_NRO_LOTE == undefined ? null : "UPPER('" + _gs_NRO_LOTE + "')";
+    var _NUM_DOC = _gs_NUM_DOC == '' || _gs_NUM_DOC == undefined ? null : "UPPER('" + _gs_NUM_DOC + "')";
+    var _DES_OBS = _gs_DES_OBS == '' || _gs_DES_OBS == undefined ? null : "UPPER('" + _gs_DES_OBS + "')";
+    var _USU_CREACION = _gs_USU_CREACION == '' || _gs_USU_CREACION == undefined ? null : "UPPER('" + _gs_USU_CREACION + "')";
 
     var POR = "'%'";
     rules = [
-        { field: 'V.DES_CLASIF', data: POR + ' || ' + _DES_CLASIF + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DES_ASUNTO', data: POR + ' || ' + _DES_ASUNTO + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DES_PERSONA', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DES_TIP_DOC', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_CLASIF)', data: POR + ' || ' + _DES_CLASIF + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_ASUNTO)', data: POR + ' || ' + _DES_ASUNTO + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_PERSONA)', data: POR + ' || ' + _DES_DES_PERSONA + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_TIP_DOC)', data: POR + ' || ' + _DES_TIP_DOC + ' || ' + POR, op: " LIKE " },
         //{ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_DOCUMENTO', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         { field: 'V.STR_FEC_EXPEDIENTE', data: POR + ' || ' + _STR_FEC_EXPEDIENTE + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.NUM_DOC)', data: POR + ' || ' + _NUM_DOC + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_OBS)', data: POR + ' || ' + _DES_OBS + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.USU_CREACION)', data: POR + ' || ' + _USU_CREACION + ' || ' + POR, op: " LIKE " },
     ];
     debugger;
     if (_ID_MODULO == 0) { // detalle
@@ -453,7 +488,7 @@ function Documento_Ver_Obs_ConfigurarGrilla() {
         //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 120, hidden: false, sortable: true }
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -482,7 +517,7 @@ function Documento_Ver_Proceso_ConfigurarGrilla() {
         //{ name: 'IP_CREACION', index: 'IP_CREACION', align: 'center', width: 120, hidden: false, sortable: true }
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }

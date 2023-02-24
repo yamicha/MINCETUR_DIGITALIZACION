@@ -15,6 +15,8 @@ namespace EnServiciosDigitalizacion.Models
         public string Usucreacion { get; set; }
         public string Hora { get; set; }
         public string Fecha { get; set; }
+        public string IpCreacion { get; set; }
+        
         public  List<MicroArchivoModels> ListaIdsMicroforma { get; set; }
 
     }

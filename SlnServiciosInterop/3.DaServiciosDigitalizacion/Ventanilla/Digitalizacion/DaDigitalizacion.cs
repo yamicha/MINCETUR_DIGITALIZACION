@@ -395,9 +395,66 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                     if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
                 }
             }
-        }      
+        }
 
+        public List<enScdDigiUtil> Documento_DigitalizarUniformeSTD(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            auditoria.Limpiar();
+            using (OracleConnection cn = new OracleConnection(base.CadenaConexion))
+            {
+                cn.Open();
+                List<enScdDigiUtil> lista = new List<enScdDigiUtil>();
+                OracleDataReader dr = null;
+                OracleCommand cmd = new OracleCommand(string.Format("{0}.{1}", AppSettingsHelper.PackInsdbaDigiUtil, "PRC_SCDDIGIUTIL_CDV2DOCUMENTO_ADJ"), cn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdDocumento;
+                cmd.Parameters.Add(new OracleParameter("X_DATO", OracleDbType.Varchar2)).Value = DBNull.Value;
+                cmd.Parameters.Add(new OracleParameter("X_ID_USU", OracleDbType.Int64)).Value = Int64.Parse(entidad.UsuCreacion);
+                cmd.Parameters.Add(new OracleParameter("X_ID_SIS", OracleDbType.Int64)).Value = 313;
+                cmd.Parameters.Add(new OracleParameter("X_IP_ACCESO", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_OPR", OracleDbType.Varchar2)).Value = "M";
+                cmd.Parameters.Add("X_ERROR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);
+                try
+                {
+                    using (OracleDataReader drReader = cmd.ExecuteReader())
+                    {
+                        object[] arrResult = null;
+                        if (drReader.HasRows)
+                        {
+                            enScdDigiUtil temp = null;
+                            arrResult = new object[drReader.FieldCount];
+                            int intID_TIPO = drReader.GetOrdinal("ID_TIPO");
+                            int intID_ERROR = drReader.GetOrdinal("ID_ERROR");
+                            int intDES_ERROR = drReader.GetOrdinal("DES_ERROR");
+                            int intVALOR = drReader.GetOrdinal("VALOR");
 
+                            while (drReader.Read())
+                            {
+                                drReader.GetValues(arrResult);
+                                temp = new enScdDigiUtil();
+
+                                if (!drReader.IsDBNull(intID_TIPO)) temp.ID_TIPO = long.Parse(arrResult[intID_TIPO].ToString());
+                                if (!drReader.IsDBNull(intID_ERROR)) temp.ID_ERROR = long.Parse(arrResult[intID_ERROR].ToString());
+                                if (!drReader.IsDBNull(intDES_ERROR)) temp.DES_ERROR = arrResult[intDES_ERROR].ToString();
+                                if (!drReader.IsDBNull(intVALOR)) temp.VALOR = arrResult[intVALOR].ToString();
+                                lista.Add(temp);
+                            }
+                            drReader.Close();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    auditoria.Error(ex);
+                }
+                finally
+                {
+                    if (cn.State != System.Data.ConnectionState.Closed) cn.Close();
+                    if (cn.State == System.Data.ConnectionState.Closed) cn.Dispose();
+                }
+                return lista;
+            }
+        }
 
     }
 }

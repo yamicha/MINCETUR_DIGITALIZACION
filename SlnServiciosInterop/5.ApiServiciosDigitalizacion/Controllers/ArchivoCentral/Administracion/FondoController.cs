@@ -92,10 +92,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (FondoRepositorio repositorio = new FondoRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Fondo_Insertar(new enFondo
                     {
                         DESC_FONDO = entidad.DescFondo,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -131,12 +136,17 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (FondoRepositorio repositorio = new FondoRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Fondo_Actualizar(new enFondo
                     {
                         ID_FONDO = id,
                         DESC_FONDO = entidad.DescFondo,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = IPUser.ObtenerIP()
+                        IP_MODIFICACION = ClientIP
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -168,11 +178,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (FondoRepositorio repositorio = new FondoRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Fondo_Estado(new enFondo
                     {
                         ID_FONDO = entidad.IdFondo,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

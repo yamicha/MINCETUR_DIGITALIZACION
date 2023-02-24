@@ -91,10 +91,15 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SoporteRepositorio repositorio = new SoporteRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Soporte_Insertar(new enSoporte
                     {
                         DESC_SOPORTE = entidad.DescSoporte,
-                        IP_CREACION = IPUser.ObtenerIP(),
+                        IP_CREACION = ClientIP,
                         USU_CREACION = entidad.UsuCreacion
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
@@ -130,12 +135,17 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SoporteRepositorio repositorio = new SoporteRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Soporte_Actualizar(new enSoporte
                     {
                         ID_SOPORTE = id,
                         DESC_SOPORTE = entidad.DescSoporte,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = IPUser.ObtenerIP()
+                        IP_MODIFICACION = ClientIP
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -167,11 +177,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Administracion
             {
                 using (SoporteRepositorio repositorio = new SoporteRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Soporte_Estado(new enSoporte
                     {
                         ID_SOPORTE = entidad.IdSoporte,
                         FLG_ESTADO = entidad.FlgEstado,
-                        IP_MODIFICACION = IPUser.ObtenerIP(),
+                        IP_MODIFICACION = ClientIP,
                         USU_MODIFICACION = entidad.UsuModificacion
                     }, ref auditoria); ;
                     if (!auditoria.EjecucionProceso)

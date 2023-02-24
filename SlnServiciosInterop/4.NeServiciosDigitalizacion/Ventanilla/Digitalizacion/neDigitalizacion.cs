@@ -54,5 +54,10 @@ namespace NeServiciosDigitalizacion.Ventanilla.Digitalizacion
             _objDa.Documento_Devolver(entidad, ref auditoria);
         }
 
+        public List<enScdDigiUtil> Documento_DigitalizarUniformeSTD(DocumentoValidarModel entidad, ref enAuditoria auditoria)
+        {
+            return _objDa.Documento_DigitalizarUniformeSTD(entidad, ref auditoria);
+        }
+
     }
 }

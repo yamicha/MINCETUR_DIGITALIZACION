@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Inmortal\Desktop\compilado rest</_PublishTargetUrl>
-    <History>True|2023-01-17T14:15:45.3228610Z;True|2023-01-12T14:30:43.3817658-05:00;True|2022-12-29T16:47:48.0875408-05:00;True|2022-12-28T18:04:55.4059442-05:00;False|2022-12-28T18:03:50.4421856-05:00;True|2022-12-28T18:00:43.8010050-05:00;True|2022-12-28T17:12:02.1005457-05:00;</History>
+    <History>True|2023-02-24T00:53:09.0375748Z;True|2023-02-22T14:08:52.5663687-05:00;True|2023-02-22T11:15:57.9792802-05:00;True|2023-01-17T09:15:45.3228610-05:00;True|2023-01-12T14:30:43.3817658-05:00;True|2022-12-29T16:47:48.0875408-05:00;True|2022-12-28T18:04:55.4059442-05:00;False|2022-12-28T18:03:50.4421856-05:00;True|2022-12-28T18:00:43.8010050-05:00;True|2022-12-28T17:12:02.1005457-05:00;</History>
   </PropertyGroup>
 </Project>

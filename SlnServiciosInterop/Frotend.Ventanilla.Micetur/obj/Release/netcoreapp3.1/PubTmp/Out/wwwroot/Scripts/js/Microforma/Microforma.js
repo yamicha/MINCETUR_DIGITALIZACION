@@ -25,6 +25,27 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         EstadoHidden = true;
         OpcionesHidden = false;
     }
+    //if (_MICROMODULO == MicroModulo.Reprocesar || _MICROMODULO == MicroModulo.Control || _MICROMODULO == MicroModulo.Conforme ||
+    //    _MICROMODULO == MicroModulo.CAlmacen || _MICROMODULO == MicroModulo.CAlmacenFin) {
+    //    OpcionesHidden = false;
+    //}
+    if (_MICROMODULO == MicroModulo.Reprocesar) {
+        OpcionesHidden = false;
+        DocumentoTab = 3;
+    } else if (_MICROMODULO == MicroModulo.Control) {
+        OpcionesHidden = false;
+        DocumentoTab = 4;
+    } else if (_MICROMODULO == MicroModulo.Conforme) {
+        OpcionesHidden = false;
+        DocumentoTab = 5;
+    } else if (_MICROMODULO == MicroModulo.CAlmacen) {
+        OpcionesHidden = false;
+        DocumentoTab = 6;
+    } else if (_MICROMODULO == MicroModulo.CAlmacenFin) {
+        OpcionesHidden = false;
+        DocumentoTab = 7;
+    }
+
     var url = BaseUrlApi + "ventanilla/microforma/listado-paginado";
     var urlsubgrid = BaseUrlApi + "ventanilla/microforma/lote-microforma";
     $("#" + _Grilla).GridUnload();
@@ -32,18 +53,18 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         'Microforma', 'Estado', 'Fecha de Creación', 'idestado', 'FlgConforme', 'Fecha de Grabación', 'Operador Grabación'];
     var colModels = [
         { name: 'ID_MICROFORMA', index: 'ID_MICROFORMA', align: 'center', hidden: true, width: 1, key: true }, // 0
-        { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false },// 1
-        { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 180, hidden: false, search: true  },// 2
-        { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden }, // 3
+        { name: 'OPCIONES', index: 'OPCIONES', align: 'center', width: 80, hidden: OpcionesHidden, formatter: Microforma_OpcionesFormatter, sortable: false, search: false  },// 1
+        { name: 'NRO_VOLUMEN', index: 'NRO_VOLUMEN', align: 'center', width: 180, hidden: false, search: false  },// 2
+        { name: 'NRO_REVISIONES', index: 'NRO_REVISIONES', align: 'center', width: 80, hidden: OpcionesHidden, search: false }, // 3
         { name: 'CODIGO_SOPORTE', index: 'CODIGO_SOPORTE', align: 'center', width: 1, hidden: true }, // 4
         { name: 'DESC_SOPORTE', index: 'DESC_SOPORTE', align: 'center', width: 200, hidden: true }, // 5
-        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false, search: true }, // 7
-        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden, search: true }, // 8
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: false, search: true }, // 9
+        { name: 'DESC_SOPORTE_X', index: 'DESC_SOPORTE_X', align: 'center', width: 200, hidden: false, formatter: Microforma_actionVerCodigo, sortable: false, search: false }, // 7
+        { name: 'DESC_ESTADO', index: 'DESC_ESTADO', align: 'center', width: 150, hidden: EstadoHidden, search: false }, // 8
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION', align: 'center', width: 250, hidden: true, search: false }, // 9
         { name: 'ID_ESTADO', index: 'ID_ESTADO', align: 'center', width: 250, hidden: true }, // 10
         { name: 'FLG_CONFORME', index: 'FLG_CONFORME', align: 'center', width: 250, hidden: true },// 11
-        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false, search: true }, // 12
-        { name: 'STR_USUARIO_CREACION', index: 'STR_USUARIO_CREACION', align: 'center', width: 250, hidden: false, search: true }, // 13
+        { name: 'STR_FEC_GRABACION', index: 'STR_FEC_GRABACION', align: 'center', width: 250, hidden: false, search: false }, // 12
+        { name: 'STR_USUARIO_CREACION', index: 'STR_USUARIO_CREACION', align: 'center', width: 250, hidden: false, search: false }, // 13
 
     ];
     var colNames_2 = ['ID', 'Lote', 'Fecha de Creación'];
@@ -57,7 +78,7 @@ function Microforma_ConfigurarGrilla(_Grilla, _Barra, _GrillaDocumento, _BarraDo
         selectRowFunc: function (rowkey) {
             if (rowkey == undefined) _ID_LOTE = 0;
             _ID_LOTE = parseInt(rowkey);
-            Documento_Detalle_buscar(_GrillaDocumento, _BarraDocumento);
+            Documento_Detalle_buscar(_GrillaDocumento, _BarraDocumento, 3);
         }
     }
     var opciones = {
@@ -83,41 +104,50 @@ function GetRulesMicroforma() {
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
         var _STR_FEC_CREACION = $('#txtfechainicio').val();
         var _STR_FEC_FIN = $('#txtfechafin').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         var _STR_FEC_CREACION = $('#txtfechainiciocontrol').val();
         var _STR_FEC_FIN = $('#txtfechafincontrol').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
-    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
+    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
         var _STR_FEC_CREACION = $('#txtfechainicio').val();
         var _STR_FEC_FIN = $('#txtfechafin').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
     }
-    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
+    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen 6
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
         var _STR_FEC_CREACION = $('#txtfechainicioconforme').val();
         var _STR_FEC_FIN = $('#txtfechafinconforme').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     } if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicio').val();
+        var _STR_FEC_FIN = $('#txtfechafin').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionObs) { // revision Obs 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='0')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioobservado').val();
+        var _STR_FEC_FIN = $('#txtfechafinobservado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionAnulada) { // revision anulada 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='1')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioanulado').val();
+        var _STR_FEC_FIN = $('#txtfechafinanulado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     //} if (_MICROMODULO == MicroModulo.RevisionFin) { // control almacen
     //    rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
@@ -164,14 +194,31 @@ function Microforma_OpcionesFormatter(cellvalue, options, rowObject) {
     if (_MICROMODULO == MicroModulo.RevisionObs)
         _btnReprocesar = "<li><a onclick=\"Microforma_MostrarReprocesar(" + rowObject[0] + ");\" href='#'  data-toggle=\"modal\" data-target=\"#myModalNuevo\"  > <i class=\"clip-spinner-4\" style=\"color:#16A941;\"></i> Reprocesar Microforma</a></li>";
 
+    //_btn += "<div class=\"dropdown\" title=\"Opciones\"> " +
+    //    " <button class=\"btn-link dropdown-toggle\" type =\"button\" data-toggle=\"dropdown\" style=\"text-decoration: none !important;\"> <i class=\"clip-list\" style=\"color:#212529;font-size:17px\"></i>" +
+    //    "<span class=\"caret\" style=\"color:#212529;\" ></span></button>" +
+    //    " <ul class=\"dropdown-menu\">" +
+    //    "<li><a onclick=\"Microforma_VerRevisiones(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-stack\" style=\"color:#448aff;\"></i> Ver Revisiones</a></li>" +
+    //    "<li><a onclick=\"Microforma_VerProceso(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-tree\" style=\"color:#448aff;\"></i> Ver Movimientos</a></li>" +
+    //    "<li><a onclick=\"Microforma_VerMicroforma(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModal_Documento_Grabar\" > <i class=\"clip-vynil\" style=\"color:#a01010;\"></i> Ver Microforma</a></li>" +
+    //    _btnDevolver +
+    //    _btnReprocesar +
+    //    "</ul>" +
+    //    "</div >";
+
     _btn += "<div class=\"dropdown\" title=\"Opciones\"> " +
         " <button class=\"btn-link dropdown-toggle\" type =\"button\" data-toggle=\"dropdown\" style=\"text-decoration: none !important;\"> <i class=\"clip-list\" style=\"color:#212529;font-size:17px\"></i>" +
         "<span class=\"caret\" style=\"color:#212529;\" ></span></button>" +
-        " <ul class=\"dropdown-menu\">" +
-        "<li><a onclick=\"Microforma_VerRevisiones(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-stack\" style=\"color:#448aff;\"></i> Ver Revisiones</a></li>" +
-        "<li><a onclick=\"Microforma_VerProceso(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-tree\" style=\"color:#448aff;\"></i> Ver Movimientos</a></li>" +
-        "<li><a onclick=\"Microforma_VerMicroforma(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModal_Documento_Grabar\" > <i class=\"clip-vynil\" style=\"color:#a01010;\"></i> Ver Microforma</a></li>" +
-        _btnDevolver +
+        " <ul class=\"dropdown-menu\">";
+    if (_MICROMODULO == MicroModulo.Reprocesar || _MICROMODULO == MicroModulo.Control || _MICROMODULO == MicroModulo.Conforme ||
+        _MICROMODULO == MicroModulo.Grabados || _MICROMODULO == MicroModulo.CAlmacen || _MICROMODULO == MicroModulo.CAlmacenFin) {
+        _btn += "<li><a onclick=\"Microforma_VerProceso(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-tree\" style=\"color:#448aff;\"></i> Ver Movimientos</a></li>";
+    } else {
+        _btn += "<li><a onclick=\"Microforma_VerRevisiones(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-stack\" style=\"color:#448aff;\"></i> Ver Revisiones</a></li>" +
+            "<li><a onclick=\"Microforma_VerProceso(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModalNuevo\" > <i class=\"clip-tree\" style=\"color:#448aff;\"></i> Ver Movimientos</a></li>" +
+            "<li><a onclick=\"Microforma_VerMicroforma(" + rowObject[0] + ");\" data-toggle=\"modal\" data-target=\"#myModal_Documento_Grabar\" > <i class=\"clip-vynil\" style=\"color:#a01010;\"></i> Ver Microforma</a></li>";
+    }
+    _btn += _btnDevolver +
         _btnReprocesar +
         "</ul>" +
         "</div >";
@@ -262,7 +309,7 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -462,7 +509,7 @@ function Revision_ConfigurarGrilla(_Grilla, _Barra) {
 
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }

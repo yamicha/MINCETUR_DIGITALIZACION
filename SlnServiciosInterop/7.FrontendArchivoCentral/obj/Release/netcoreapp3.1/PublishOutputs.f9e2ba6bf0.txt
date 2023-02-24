@@ -56,8 +56,6 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Icons\fonts\untitled-font-1.ttf
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Icons\fonts\untitled-font-1.woff
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\Icons\styles.css
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\imagenes\Fondo_MINEM.png
-C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\imagenes\Logo_Ingemmet.png
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\imagenes\sin-IMAGEN.jpg
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\avatar-1-small.jpg
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\7.FrontendArchivoCentral\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\assets\images\loading.gif

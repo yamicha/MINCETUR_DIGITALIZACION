@@ -154,7 +154,8 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             item.STR_FEC_CREACION,
                             item.USU_MODIFICACION,
                             item.STR_FEC_MODIFICACION,
-                           item.ID_LASERFICHE.ToString()
+                           item.ID_LASERFICHE.ToString(),
+                           item.ID_ESTADO_DOCUMENTO.ToString()
                       }
                         }).ToArray();
                         return StatusCode(auditoria.Code, generic.Value);
@@ -332,11 +333,16 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
             {
                 using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                 {
+                    string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                    if (ClientIP == "::1")
+                    {
+                        ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                    }
                     repositorio.Documento_Grabar(new enDocumento
                     {
                         ID_CONTROL_CARGA = entidad.IdControlCarga,
                         USU_MODIFICACION = entidad.UsuModificacion,
-                        IP_MODIFICACION = entidad.IpModificacion,
+                        IP_MODIFICACION = ClientIP,
                     }, ref auditoria);
                     if (!auditoria.EjecucionProceso)
                     {
@@ -372,6 +378,11 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 {
                     using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                     {
+                        string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                        if (ClientIP == "::1")
+                        {
+                            ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                        }
                         repositorio.Documento_AsignacionInsertar(new enDocumento
                         {
                             ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
@@ -381,7 +392,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                             }).ToList(),
                             ID_AREA_PROCEDENCIA = entidad.IdAreaProcedencia,
                             USU_CREACION = entidad.UsuCreacion,
-                            IP_CREACION = entidad.IpCreacion,
+                            IP_CREACION = ClientIP,
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
                         {
@@ -422,6 +433,11 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                 {
                     using (DocumentoRepositorio repositorio = new DocumentoRepositorio(_ConfigurationManager))
                     {
+                        string ClientIP = Response.HttpContext.Connection.RemoteIpAddress.ToString();
+                        if (ClientIP == "::1")
+                        {
+                            ClientIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
+                        }
                         repositorio.Documento_AsignacionActualizar(new enDocumento
                         {
                             ListaDocumento = entidad.ListaIdsDocumento.Select(x => new enDocumento()
@@ -431,7 +447,7 @@ namespace ApiServiciosDigitalizacion.Controllers.ArchivoCentral.Digitalizacion
                                 ID_USUARIO = x.IdUsuario
                             }).ToList(),
                             USU_MODIFICACION = entidad.UsuModificacion,
-                            IP_MODIFICACION = entidad.IpModificacion,
+                            IP_MODIFICACION = ClientIP,
                         }, ref auditoria);
                         if (!auditoria.EjecucionProceso)
                         {

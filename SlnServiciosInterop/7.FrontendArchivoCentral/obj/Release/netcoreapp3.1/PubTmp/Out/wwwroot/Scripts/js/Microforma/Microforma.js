@@ -100,45 +100,54 @@ function GetRulesMicroforma() {
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1,4)', op: " in " });
         var _STR_FEC_CREACION = $('#txtFechaInicio').val();
         var _STR_FEC_FIN = $('#txtFechaFin').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.Conforme) { // conformes
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
         var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
-    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacen
+    if (_MICROMODULO == MicroModulo.CAlmacen) { // control almacenamiento 5
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '0', op: " = " });
         var _STR_FEC_CREACION = $('#txtFechaInicio').val();
         var _STR_FEC_FIN = $('#txtFechaFin').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
-    if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados
+    if (_MICROMODULO == MicroModulo.Grabados) { // cmicro grabados 1
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(1)', op: " in " });
         var _STR_FEC_CREACION = $('#txtFechaInicioGrabada').val();
         var _STR_FEC_FIN = $('#txtFechaFinGrabada').val();
         rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
-    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen
+    if (_MICROMODULO == MicroModulo.CAlmacenFin) { // control almacen 6
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(2,5)', op: " in " });
         rules.push({ field: 'FLG_MICROARCHIVO', data: '1', op: " = " });
         var _STR_FEC_CREACION = $('#txtFechaInicioConforme').val();
         var _STR_FEC_FIN = $('#txtFechaFinConforme').val();
-        rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionPend) { // revision pendiente
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='1' OR FLG_CONFORME IS NULL)`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicio').val();
+        var _STR_FEC_FIN = $('#txtfechafin').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionObs) { // revision Obs 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='0')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioobservado').val();
+        var _STR_FEC_FIN = $('#txtfechafinobservado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
     if (_MICROMODULO == MicroModulo.RevisionAnulada) { // revision anulada 
         rules.push({ field: 'ID_ESTADO_MICROFORMA', data: '(5)', op: " in " });
         rules.push({ field: '', data: `(FLG_CONFORME ='0' AND FLG_ANULADO ='1')`, op: "" });
+        var _STR_FEC_CREACION = $('#txtfechainicioanulado').val();
+        var _STR_FEC_FIN = $('#txtfechafinanulado').val();
+        rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _STR_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _STR_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     }
 
     _gs_NRO_VOL = $('#gs_NRO_VOLUMEN').val() != undefined ? `'${$('#gs_NRO_VOLUMEN').val()}'` : `''`;
@@ -279,7 +288,7 @@ function Microforma_Ver_Obs_ConfigurarGrilla() {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false,
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -401,7 +410,7 @@ function Microforma_ProcesoConfigurarGrilla(_Grilla, _barra) {
         { name: 'FEC_CREACION', index: 'FEC_CREACION', align: 'center', width: 150, hidden: false, sortable: true },
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false,
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false,
         search: false, sort: 'asc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
@@ -479,7 +488,7 @@ function Revision_ConfigurarGrilla(_Grilla, _Barra) {
 
     ];
     var opciones = {
-        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: true, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
+        GridLocal: true, multiselect: false, CellEdit: false, leyenda: true, exportar: false, Editar: false, nuevo: false, eliminar: false, search: false, sort: 'desc',
         exportarExcel: function (_grilla_base) {
             //ExportJQGridDataToExcel(_grilla_base, "Derivados.xlsx");
         }
@@ -719,6 +728,6 @@ function GetRulesMicroformaRevisionPeriodica() {
     rules.push({ field: 'CODIGO_SOPORTE', data: POR + ' || ' + _gs_DESC_SPORTE + ' || ' + POR, op: " LIKE " });
     rules.push({ field: 'DESC_ESTADO', data: POR + ' || ' + _gs_DESC_ESTADO + ' || ' + POR, op: " LIKE " });
     //rules.push({ field: 'STR_FEC_CREACION', data: POR + ' || ' + _gs_FEC_CREACION + ' || ' + POR, op: " LIKE " });
-    rules.push({ field: '', data: "V.FEC_CREACION >= TRUNC(TO_DATE('" + _gs_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FEC_CREACION < TRUNC(TO_dATE('" + _gs_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
+    rules.push({ field: '', data: "V.FECHA >= TRUNC(TO_DATE('" + _gs_FEC_CREACION + "', 'DD/MM/YYYY')) AND V.FECHA < TRUNC(TO_dATE('" + _gs_FEC_FIN + "', 'DD/MM/YYYY'))+1", op: " " });
     return rules;
 }

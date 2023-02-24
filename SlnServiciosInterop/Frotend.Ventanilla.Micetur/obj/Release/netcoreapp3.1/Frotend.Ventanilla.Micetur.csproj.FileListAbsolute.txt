@@ -944,3 +944,4 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\F
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\Frotend.Ventanilla.Micetur.dll
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\Frotend.Ventanilla.Micetur.pdb
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\Frotend.Ventanilla.Micetur.genruntimeconfig.cache
+C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\Frotend.Ventanilla.Micetur\obj\Release\netcoreapp3.1\Razor\Areas\Digitalizacion\Views\Recepcion\ExpedienteVerDocumentoCompleto.cshtml.g.cs
