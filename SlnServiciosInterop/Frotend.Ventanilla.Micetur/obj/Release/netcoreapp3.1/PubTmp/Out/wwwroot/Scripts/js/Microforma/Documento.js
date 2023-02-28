@@ -161,7 +161,7 @@ function Documento_ConfigurarGrilla(_grilla, _barra, _titulo, _multiselect, _id_
             { name: _PREFIJO + 'NRO_REPROCESADOS', index: _PREFIJO + 'NRO_REPROCESADOS', align: 'center', width: 150, hidden: _NRO_REPROCESADOHidden, editable: true, sortable: false, search: false }, //12
             { name: _PREFIJO + '_DESCRIPCION_ESTADO', index: _PREFIJO + '_DESCRIPCION_ESTADO', align: 'center', width: 180, hidden: false, formatter: Documento_actionEstadoVerObs, sortable: false }, //13
             { name: _PREFIJO + 'DES_TIP_DOC', index: _PREFIJO + 'DES_TIP_DOC ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 14
-            { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false },// 15
+            { name: _PREFIJO + 'NUM_DOC', index: _PREFIJO + 'NUM_DOC ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false, search: false },// 15
             //{ name: _PREFIJO + 'NUM_FOLIOS', index: _PREFIJO + 'NUM_FOLIOS ', align: 'center', width: 100, hidden: false, sortable: false, sortable: false, search: false },// 16
             { name: _PREFIJO + 'DES_OBS', index: _PREFIJO + 'DES_OBS ', align: 'center', width: 200, hidden: false, sortable: false, sortable: false },// 17
             
@@ -362,7 +362,7 @@ function GetRulesDoc() {
     var _NROEXPEDIENTE = _gs_NROEXPEDIENTE == '' || _gs_NROEXPEDIENTE == undefined ? null : "UPPER('" + _gs_NROEXPEDIENTE + "')";
     var _STR_FEC_EXPEDIENTE = _gs_STR_FEC_EXPEDIENTE != undefined ? `'${_gs_STR_FEC_EXPEDIENTE}'` : `''`;
     var _NRO_LOTE = _gs_NRO_LOTE == '' || _gs_NRO_LOTE == undefined ? null : "UPPER('" + _gs_NRO_LOTE + "')";
-    var _NUM_DOC = _gs_NUM_DOC == '' || _gs_NUM_DOC == undefined ? null : "UPPER('" + _gs_NUM_DOC + "')";
+  //  var _NUM_DOC = _gs_NUM_DOC == '' || _gs_NUM_DOC == undefined ? null : "UPPER('" + _gs_NUM_DOC + "')";
     var _DES_OBS = _gs_DES_OBS == '' || _gs_DES_OBS == undefined ? null : "UPPER('" + _gs_DES_OBS + "')";
     var _USU_CREACION = _gs_USU_CREACION == '' || _gs_USU_CREACION == undefined ? null : "UPPER('" + _gs_USU_CREACION + "')";
 
@@ -375,7 +375,7 @@ function GetRulesDoc() {
         //{ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " },
         { field: 'V.ID_DOCUMENTO', data: POR + ' || ' + _NROEXPEDIENTE + ' || ' + POR, op: " LIKE " },
         { field: 'V.STR_FEC_EXPEDIENTE', data: POR + ' || ' + _STR_FEC_EXPEDIENTE + ' || ' + POR, op: " LIKE " },
-        { field: 'UPPER(V.NUM_DOC)', data: POR + ' || ' + _NUM_DOC + ' || ' + POR, op: " LIKE " },
+      //  { field: 'UPPER(V.NUM_DOC)', data: POR + ' || ' + _NUM_DOC + ' || ' + POR, op: " LIKE " },
         { field: 'UPPER(V.DES_OBS)', data: POR + ' || ' + _DES_OBS + ' || ' + POR, op: " LIKE " },
         { field: 'UPPER(V.USU_CREACION)', data: POR + ' || ' + _USU_CREACION + ' || ' + POR, op: " LIKE " },
     ];

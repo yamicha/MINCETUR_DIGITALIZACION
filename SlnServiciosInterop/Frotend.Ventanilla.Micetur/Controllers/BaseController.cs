@@ -132,7 +132,8 @@ namespace Frotend.Ventanilla.Micetur.Controllers
                     string llave = await client.traeLlaveAsync();
                     string tex = "{ IdDocCms:" + ID_DOC + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
                     string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
-                    var urlVisorLF = AppSettings.UrlApiDownload;
+                   var urlVisorLF = AppSettings.UrlApiDownload;
+                   // var urlVisorLF = AppSettings.RutaVisorLF;
                     auditoria.Objeto = urlVisorLF + DOC + "&descarga=false";
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,7 +23,7 @@ using System.Web;
 using System.Net;
 using subir = docSubirDocumento;
 using ServiceReference1;
-
+using System.Net.Http;
 namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
 {
     [MyAuthorize]
@@ -142,9 +143,13 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                         var urlVisorLF = AppSettings.UrlApiDownload;
                         _url = urlVisorLF + DOC + "&descarga=false";
                     }
-                    using (WebClient client = new WebClient())
+                    // document = Encoding.ASCII.GetBytes(_url);
+                    using (var client = new HttpClient())
                     {
-                        document = await client.DownloadDataTaskAsync(_url);
+                        using (var response = await client.GetAsync(_url))
+                        {
+                           document = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+                        }
                     }
                     auditoria = new Proxy().UploadFileService(
                                          entidad.IdExpediente,

@@ -72,3 +72,17 @@ C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.CopyComplete
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.dll
 C:\Users\Inmortal\Documents\GitHub\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.pdb
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\Utilitarios.deps.json
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\Utilitarios.dll
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\Utilitarios.pdb
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.dll
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.dll
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\EnServiciosDigitalizacion.pdb
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Debug\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.AssemblyReference.cache
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.AssemblyInfoInputs.cache
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.AssemblyInfo.cs
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.CoreCompileInputs.cache
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.csproj.CopyComplete
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.dll
+D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Debug\netcoreapp3.1\Utilitarios.pdb
