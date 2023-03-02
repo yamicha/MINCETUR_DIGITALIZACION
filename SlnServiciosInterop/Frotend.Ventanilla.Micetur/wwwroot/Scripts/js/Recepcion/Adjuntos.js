@@ -7,6 +7,7 @@ var DocumentoAdj_barra = "DocumentoAdj_barra";
 var Adjunto = new Array();
 var IdAdjunto = 0;
 var files = [];
+var filesDocPrincipal = [];
 
 var MicroModulo = {
     Recepcion: 0,
@@ -137,14 +138,9 @@ function ValidarArchivoTemporal(input) {
                 return false;
             } else {
                 var sumaPeso = 0;
-                var rowKey = jQuery("#" + Adjuntos_grilla).getDataIDs();
-                for (var i = 0; i < rowKey.length; i++) {
-                    var data = jQuery("#" + Adjuntos_grilla).jqGrid('getRowData', rowKey[i]);
-                    sumaPeso += parseFloat(data.PESO_ARCHIVO);
-                }
-                sumaPeso += PesodeArchivo;
+                sumaPeso = SumaPesoAnexos() + SumaPesoDocPrincipal() + PesodeArchivo;
                 if (sumaPeso > Tamanio_Valido) {
-                    jAlert("El archivo que ha ingresado y el resto, supera los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
+                    jAlert("El total de archivos supera los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso, ingresar otro archivo de menos peso", 'Atención');
                 } else {
                     //Adjunto_CargarTemporal();
                     files.push(file);
@@ -152,6 +148,94 @@ function ValidarArchivoTemporal(input) {
                     $('#PESO_ARCHIVO').val(file.size);
                     $('#EXTENSION').val(file.name.split('.')[1]);
                 }
+            }
+        }
+    }
+}
+
+function SumaPesoAnexos() {
+    var sumaPeso = 0;
+    var rowKey = jQuery("#" + Adjuntos_grilla).getDataIDs();
+    for (var i = 0; i < rowKey.length; i++) {
+        var data = jQuery("#" + Adjuntos_grilla).jqGrid('getRowData', rowKey[i]);
+        sumaPeso += parseFloat(data.PESO_ARCHIVO);
+    }
+    return sumaPeso;
+}
+
+function SumaPesoDocPrincipal() {
+    var sumaPeso = 0;
+    var rowKey = jQuery("#" + DocumentoAdj_grilla).getDataIDs();
+    for (var i = 0; i < rowKey.length; i++) {
+        var data = jQuery("#" + DocumentoAdj_grilla).jqGrid('getRowData', rowKey[i]);
+        sumaPeso += parseFloat(data.NUM_SIZE_ARCHIVO);
+    }
+    return sumaPeso;
+}
+
+function ValidarArchivoPrincipalTemporal(input) {
+    var file = input.files[0];
+    var nombre = "";
+    if (file != undefined) {
+        var PesodeArchivo = parseFloat(file.size);
+        var ext = input.files[0].name.split('.').pop();
+        nombre = input.files[0].name;
+        if (nombre.length > 100) {
+            jAlert("El nombre del documento es muy largo", 'Atención');
+            $(this).val('');
+            return false;
+        }
+        else {
+            var valido = false;
+            if (extensionValid.test(`${ext}`))
+                valido = true;
+            if (PesodeArchivo > Tamanio_Valido || !valido) {
+                $(this).val('');
+                if (!valido)
+                    jAlert("Solo se permite documentos en formato " + extensionValid, 'Atención');
+                else
+                    jAlert("El archivo que va a adjuntar no puede superar los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso", 'Atención');
+
+                return false;
+            } else {
+                debugger;
+                //var rowKey = $("#" + Adjuntos_grilla).jqGrid('getGridParam', 'selarrrow');
+                //var data = jQuery("#" + Aprobar_grilla).jqGrid('getRowData', rowKey[0]);
+                //if (nombre != data.DES_NOM_ABR) {
+                //    jAlert("Adjunte el archivo correspondiente", 'Atención');
+                //} else {
+                //    if (filesDocPrincipal.length > 0) {
+                //        if (filesDocPrincipal.indexOf(nombre) != -1) {
+                //            return false;
+                //        } else {
+                //            filesDocPrincipal.push(file);
+                //        }
+
+                //    } else {
+                //        filesDocPrincipal.push(file);
+                //    }
+                //}
+                if ($("#EXTENSION").val().toLowerCase() == "." + ext.toLowerCase()) {
+                    var sumaPeso = 0;
+                    sumaPeso = SumaPesoAnexos() + SumaPesoDocPrincipal() - parseFloat($('#PESO_ARCHIVO').val());
+                    sumaPeso += PesodeArchivo;
+                    if (sumaPeso > Tamanio_Valido) {
+                        jAlert("El total de archivos supera los " + Tamanio_Valido / 1024 / 1024 + "Mb de peso, ingresar otro archivo de menos peso", 'Atención');
+                    } else {
+                        $('#PESO_ARCHIVO').val(file.size);
+                        filesDocPrincipal.push(file);
+                        var rowKey = parseInt($('#HDF_ID_DOC').val());
+                        jQuery("#" + DocumentoAdj_grilla).jqGrid('setRowData', rowKey, { "NUEVO_DOCUMENTO": nombre});
+                        jQuery("#" + DocumentoAdj_grilla).jqGrid('setRowData', rowKey, { "ESTADO_CARGADO": "CARGADO" });
+                        jQuery("#" + DocumentoAdj_grilla).jqGrid('setRowData', rowKey, { "FLG_CARGADO": "1" });
+                        jQuery("#" + DocumentoAdj_grilla).trigger("reloadGrid");
+                    }
+                    
+                } else {
+                    jAlert("Adjunte el archivo correspondiente", 'Atención');
+                }
+                
+
             }
         }
     }
@@ -196,7 +280,7 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         verBotonEditar = true;
     }
     $("#" + DocumentoAdj_grilla).GridUnload();
-    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Peso', 'Extensión'];
+    var colNames = ['Codigo', 'ID_DOC', 'ID_LASER', 'Editar', 'Ver', 'Archivo', 'Peso', 'Extensión', 'Documento Cargado', 'Estado Cargado','Flg_Cargado'];
     var colModels = [
         { name: 'CODIGO', index: 'CODIGO', align: 'center', hidden: true, width: 1, key: true },
         { name: 'ID_DOC', index: 'ID_DOC', align: 'center', hidden: true, width: 0 },
@@ -207,6 +291,10 @@ function DocumentoAdj_ConfigurarGrilla(_tab) {
         //{ name: 'DES_OBS', index: 'DES_OBS', align: 'center', width: 200, hidden: false },
         { name: 'NUM_SIZE_ARCHIVO', index: 'NUM_SIZE_ARCHIVO', align: 'center', width: 100, hidden: false, editable: true },
         { name: 'EXTENSION', index: 'EXTENSION', align: 'center', width: 100, hidden: false, editable: true, },
+        { name: 'NUEVO_DOCUMENTO', index: 'NUEVO_DOCUMENTO', align: 'center', width: 150, hidden: false, editable: true, },
+        { name: 'ESTADO_CARGADO', index: 'ESTADO_CARGADO', align: 'center', width: 150, hidden: false, editable: true, },
+        { name: 'FLG_CARGADO', index: 'FLG_CARGADO', align: 'center', width: 100, hidden: true, editable: true, },
+        
     ];
     var opciones = {
         GridLocal: true, multiselect: false, CellEdit: true, Editar: false, nuevo: false, eliminar: false, sort: 'desc', footerrow: false,
@@ -235,6 +323,7 @@ function DocumentoAdj_Editar() {
         $("#" + DocumentoAdj_grilla).jqGrid('setCell', rowKey, 'EXTENSION', $('#EXTENSION').val());
         jQuery("#" + DocumentoAdj_grilla).trigger("reloadGrid");
         $('#MyModalDoc').modal('hide');
+        $('#MyModalDoc').html('');
     }
 }
 function DocumentoAdj_actionver(cellvalue, options, rowObject) {

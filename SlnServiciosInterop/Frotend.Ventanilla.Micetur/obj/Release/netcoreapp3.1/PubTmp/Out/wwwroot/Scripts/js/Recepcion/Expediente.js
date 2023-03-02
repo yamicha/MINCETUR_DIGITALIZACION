@@ -108,73 +108,97 @@ function GetRules() {
     ];
     return rules;
 }
+
 function Expediente_Recibir() {
     let ListaAdjuntos;
     var ListaGridAdjunto = $("#" + Adjuntos_grilla).getRowData();
     var ListaDocumento = $("#" + DocumentoAdj_grilla).getRowData();
-    jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
-        if (r) {
-            fetchload.init();
-            var data = new FormData();
-            ListaAdjuntos = ListaGridAdjunto.filter(x => x.FLG_ARCHIVO == 1); //links
-            ListaAdjuntos = ListaAdjuntos.map(function (x) {
-                return {
-                    FlgTipo: 1,
-                    NombreArchivo: x.NOMBRE_ARCHIVO,
-                    Extension: x.EXTENSION,
-                    PesoArchivo: parseInt(x.PESO_ARCHIVO),
-                    CodigoArchivo: x.CODIGO_ARCHIVO,
-                    FlgLink: parseInt(x.FLG_ARCHIVO),
-                    DocPrincipal: "0"
-                }
-            });
-            ListaDocumento.forEach(function (itemdoc) {
-                ListaAdjuntos.push({
-                    IdExpediente: 0,
-                    IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
-                    IdDocumento: parseInt(itemdoc.ID_DOC),
-                    FlgTipo: 2,
-                    NombreArchivo: itemdoc.DES_NOM_ABR,
-                    Extension: itemdoc.EXTENSION,
-                    PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
-                    FlgLink: 0,
-                    DocPrincipal: "1"
+    var exito = "0";
+
+    ListaDocumento.forEach(function (itemdoc) {
+        if (itemdoc.FLG_CARGADO == "1") {
+            exito = "1";
+        } else {
+            exito = "0";
+        }
+    });
+
+    if (exito == "1") {
+        jConfirm("¿Desea recibir este expediente ?", "Atención", function (r) {
+            if (r) {
+                fetchload.init();
+                var data = new FormData();
+                ListaAdjuntos = ListaGridAdjunto.filter(x => x.FLG_ARCHIVO == 1); //links
+                ListaAdjuntos = ListaAdjuntos.map(function (x) {
+                    return {
+                        FlgTipo: 1,
+                        NombreArchivo: x.NOMBRE_ARCHIVO,
+                        Extension: x.EXTENSION,
+                        PesoArchivo: parseInt(x.PESO_ARCHIVO),
+                        CodigoArchivo: x.CODIGO_ARCHIVO,
+                        FlgLink: parseInt(x.FLG_ARCHIVO),
+                        DocPrincipal: "0"
+                    }
                 });
-            });
-            // enviar todos los archivos
-            for (var i = 0; i < files.length; i++) {
-                data.append("files", files[i]);
-            }
-            data.append("IdExpediente", parseInt($('#HDF_ID_EXPE').val()));
-            data.append("UsuCrea", parseInt($('#inputHddId_Usuario').val()));
-            data.append("ExpObservacion", $('#TxtObservacion').val());
-            data.append("ListaAdj", JSON.stringify(ListaAdjuntos));
-            var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
-            fetch(url, {
-                method: 'POST', //
-                body: data, // 
-            }).then(res => res.json())
-                .catch(error => { fetchload.close(); alert(error) })
-                .then(auditoria => {
-                    fetchload.close();
-                    if (auditoria != null && auditoria != "") {
-                        if (auditoria.ejecucionProceso) {
-                            if (!auditoria.rechazo) {
-                                $('#myModal_Recibir_Doc').modal('hide');
-                                Documento_ConfigurarGrilla_Vent_Pen();
-                                jAlert("Expediente recibido corrrectamente", "Proceso");
+                ListaDocumento.forEach(function (itemdoc) {
+                    ListaAdjuntos.push({
+                        IdExpediente: 0,
+                        IdArchivo: parseInt(itemdoc.ID_DOC_CMS),
+                        IdDocumento: parseInt(itemdoc.ID_DOC),
+                        FlgTipo: 2,
+                        //NombreArchivo: itemdoc.DES_NOM_ABR,
+                        NombreArchivo: itemdoc.NUEVO_DOCUMENTO,
+                        Extension: itemdoc.EXTENSION,
+                        PesoArchivo: parseInt(itemdoc.NUM_SIZE_ARCHIVO),
+                        FlgLink: 0,
+                        DocPrincipal: "1"
+                    });
+                });
+                debugger;
+                // enviar todos los archivos
+                for (var i = 0; i < files.length; i++) {
+                    data.append("files", files[i]);
+                }
+                //DOCUMENTO PRINCIPAL
+                for (var i = 0; i < filesDocPrincipal.length; i++) {
+                    data.append("files", filesDocPrincipal[i]);
+                }
+                debugger;
+                data.append("IdExpediente", parseInt($('#HDF_ID_EXPE').val()));
+                data.append("UsuCrea", parseInt($('#inputHddId_Usuario').val()));
+                data.append("ExpObservacion", $('#TxtObservacion').val());
+                data.append("ListaAdj", JSON.stringify(ListaAdjuntos));
+                var url = baseUrl + 'Digitalizacion/Recepcion/recibir-expediente';
+                fetch(url, {
+                    method: 'POST', //
+                    body: data, // 
+                }).then(res => res.json())
+                    .catch(error => { fetchload.close(); alert(error) })
+                    .then(auditoria => {
+                        fetchload.close();
+                        if (auditoria != null && auditoria != "") {
+                            if (auditoria.ejecucionProceso) {
+                                if (!auditoria.rechazo) {
+                                    $('#myModal_Recibir_Doc').modal('hide');
+                                    Documento_ConfigurarGrilla_Vent_Pen();
+                                    jAlert("Expediente recibido corrrectamente", "Proceso");
+                                } else {
+                                    $('#myModal_Recibir_Doc').modal('hide');
+                                    jAlert(auditoria.mensajeSalida, "Atención");
+                                }
                             } else {
                                 $('#myModal_Recibir_Doc').modal('hide');
                                 jAlert(auditoria.mensajeSalida, "Atención");
                             }
-                        } else {
-                            $('#myModal_Recibir_Doc').modal('hide');
-                            jAlert(auditoria.mensajeSalida, "Atención");
                         }
-                    }
-                });
-        }
-    });
+                    });
+            }
+        });
+    } else {
+        jAlert("Debe adjuntar todos los documentos del expediente", "Atención");
+    }
+
+    
 }
 
 function fn_Guardar_LF(idDocumento, idExpediente) {

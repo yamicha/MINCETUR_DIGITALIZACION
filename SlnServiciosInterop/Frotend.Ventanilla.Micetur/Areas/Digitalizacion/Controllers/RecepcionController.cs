@@ -92,6 +92,99 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
             return View(modelo);
         }
 
+        //[HttpPost, Route("~/Digitalizacion/Recepcion/recibir-expediente")]
+        //public async Task<ActionResult> ExpedienteRecibir(List<IFormFile> files, ExpedienteModels entidad, string ListaAdj)
+        //{
+        //    enAuditoria auditoria = new enAuditoria();
+        //    auditoria.Limpiar();
+        //    try
+        //    {
+        //        entidad.ListaAdjuntos = new List<AdjuntoModels>();
+        //        entidad.ListaAdjuntos = JsonConvert.DeserializeObject<List<AdjuntoModels>>(ListaAdj);
+        //        List<AdjuntoModels> listaDocPrincipal = entidad.ListaAdjuntos.Where(x => x.DocPrincipal == "1").ToList();
+        //        if (files != null && files.Count > 0)
+        //        {
+        //            foreach (var file in files)
+        //            {
+        //                using (var ms = new MemoryStream())
+        //                {
+        //                    file.CopyTo(ms);
+        //                    var archivo = ms.ToArray();
+        //                    auditoria = new Proxy().UploadFileService(
+        //                                 entidad.IdExpediente,
+        //                                 file.FileName,
+        //                                 int.Parse(User.GetUserId()), archivo);
+        //                    if (auditoria.EjecucionProceso)
+        //                    {
+        //                        if (auditoria.Objeto != null)
+        //                        {
+        //                            entidad.ListaAdjuntos.Add(new AdjuntoModels
+        //                            {
+        //                                IdArchivo = Convert.ToInt64(auditoria.Objeto),
+        //                                NombreArchivo = file.FileName,
+        //                                PesoArchivo = (int)file.Length,
+        //                                Extension = System.IO.Path.GetExtension(file.FileName),
+        //                                FlgTipo = 1
+        //                            });
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        string _url = "";
+        //        byte[] document = null;
+        //        foreach (var item in listaDocPrincipal)
+        //        {
+        //            using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
+        //            {
+        //                string llave = await client.traeLlaveAsync();
+        //                string tex = "{ IdDocCms:" + item.IdArchivo + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
+        //                string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
+        //                var urlVisorLF = AppSettings.UrlApiDownload;
+        //                _url = urlVisorLF + DOC + "&descarga=false";
+        //            }
+        //            // document = Encoding.ASCII.GetBytes(_url);
+        //            using (var client = new HttpClient())
+        //            {
+        //                using (var response = await client.GetAsync(_url))
+        //                {
+        //                   document = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+        //                }
+        //            }
+        //            auditoria = new Proxy().UploadFileService(
+        //                                 entidad.IdExpediente,
+        //                                 item.NombreArchivo,
+        //                                 int.Parse(User.GetUserId()), document);
+        //            if (auditoria.EjecucionProceso)
+        //            {
+        //                if (auditoria.Objeto != null)
+        //                {
+        //                    entidad.ListaAdjuntos.Where(x => x.NombreArchivo == item.NombreArchivo).ToList().ForEach(d => d.IdArchivo = long.Parse(auditoria.Objeto.ToString()));
+
+        //                }
+        //            }
+        //        }
+        //        enAuditoria ApiExpedienteInser = await new CssApi().PostApi<enAuditoria>(new ApiParams
+        //        {
+        //            EndPoint = AppSettings.baseUrlApi,
+        //            Url = $"ventanilla/DocRecepcion/recibir-expediente",
+        //            UserAD = AppSettings.UserAD,
+        //            PassAD = AppSettings.PassAD,
+        //            parametros = entidad
+        //        });
+        //        if (ApiExpedienteInser != null)
+        //            auditoria = ApiExpedienteInser;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        auditoria.Error(ex);
+        //        string codigo = Css_Log.Guardar(ex.Message.ToString());
+        //        auditoria.MensajeSalida = codigo;
+        //    }
+
+        //    return Json(auditoria);
+        //}
+
         [HttpPost, Route("~/Digitalizacion/Recepcion/recibir-expediente")]
         public async Task<ActionResult> ExpedienteRecibir(List<IFormFile> files, ExpedienteModels entidad, string ListaAdj)
         {
@@ -102,6 +195,7 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                 entidad.ListaAdjuntos = new List<AdjuntoModels>();
                 entidad.ListaAdjuntos = JsonConvert.DeserializeObject<List<AdjuntoModels>>(ListaAdj);
                 List<AdjuntoModels> listaDocPrincipal = entidad.ListaAdjuntos.Where(x => x.DocPrincipal == "1").ToList();
+                bool esPrincipal = false;
                 if (files != null && files.Count > 0)
                 {
                     foreach (var file in files)
@@ -118,52 +212,62 @@ namespace Frotend.Ventanilla.Micetur.Areas.Digitalizacion.Controllers
                             {
                                 if (auditoria.Objeto != null)
                                 {
-                                    entidad.ListaAdjuntos.Add(new AdjuntoModels
+                                    foreach (var item in entidad.ListaAdjuntos)
                                     {
-                                        IdArchivo = Convert.ToInt64(auditoria.Objeto),
-                                        NombreArchivo = file.FileName,
-                                        PesoArchivo = (int)file.Length,
-                                        Extension = System.IO.Path.GetExtension(file.FileName),
-                                        FlgTipo = 1
-                                    });
+                                        if (file.FileName == item.NombreArchivo && item.DocPrincipal == "1")
+                                        {
+                                            item.IdArchivo = Convert.ToInt64(auditoria.Objeto);
+                                            esPrincipal = true;
+                                            break;
+                                        }
+                                    }
+
+									if (!esPrincipal)
+									{
+                                        entidad.ListaAdjuntos.Add(new AdjuntoModels
+                                        {
+                                            IdArchivo = Convert.ToInt64(auditoria.Objeto),
+                                            NombreArchivo = file.FileName,
+                                            PesoArchivo = (int)file.Length,
+                                            Extension = System.IO.Path.GetExtension(file.FileName),
+                                            FlgTipo = 1
+                                        });
+                                    }
+                                    
                                 }
                             }
                         }
                     }
                 }
-                string _url = "";
-                byte[] document = null;
-                foreach (var item in listaDocPrincipal)
-                {
-                    using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
-                    {
-                        string llave = await client.traeLlaveAsync();
-                        string tex = "{ IdDocCms:" + item.IdArchivo + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
-                        string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
-                        var urlVisorLF = AppSettings.UrlApiDownload;
-                        _url = urlVisorLF + DOC + "&descarga=false";
-                    }
-                    // document = Encoding.ASCII.GetBytes(_url);
-                    using (var client = new HttpClient())
-                    {
-                        using (var response = await client.GetAsync(_url))
-                        {
-                           document = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                        }
-                    }
-                    auditoria = new Proxy().UploadFileService(
-                                         entidad.IdExpediente,
-                                         item.NombreArchivo,
-                                         int.Parse(User.GetUserId()), document);
-                    if (auditoria.EjecucionProceso)
-                    {
-                        if (auditoria.Objeto != null)
-                        {
-                            entidad.ListaAdjuntos.Where(x => x.NombreArchivo == item.NombreArchivo).ToList().ForEach(d => d.IdArchivo = long.Parse(auditoria.Objeto.ToString()));
+                //string _url = "";
+                //byte[] document = null;
+                //foreach (var item in listaDocPrincipal)
+                //{
+                //    using (WCFSeguridadEncripDesencripClient client = new WCFSeguridadEncripDesencripClient())
+                //    {
+                //        string llave = await client.traeLlaveAsync();
+                //        string tex = "{ IdDocCms:" + item.IdArchivo + ", IdUsu:" + User.GetUserId() + ", IdSis:" + AppSettings.AppId + "}";
+                //        string DOC = HttpUtility.UrlEncode(await client.encriptarAESAsync(tex, llave));
+                //        var urlVisorLF = AppSettings.UrlApiDownload;
+                //        _url = urlVisorLF + DOC + "&descarga=false";
+                //    }
+                //    using (WebClient client = new WebClient())
+                //    {
+                //        document = await client.DownloadDataTaskAsync(_url);
+                //    }
+                //    auditoria = new Proxy().UploadFileService(
+                //                         entidad.IdExpediente,
+                //                         item.NombreArchivo,
+                //                         int.Parse(User.GetUserId()), document);
+                //    if (auditoria.EjecucionProceso)
+                //    {
+                //        if (auditoria.Objeto != null)
+                //        {
+                //            entidad.ListaAdjuntos.Where(x => x.NombreArchivo == item.NombreArchivo).ToList().ForEach(d => d.IdArchivo = long.Parse(auditoria.Objeto.ToString()));
 
-                        }
-                    }
-                }
+                //        }
+                //    }
+                //}
                 enAuditoria ApiExpedienteInser = await new CssApi().PostApi<enAuditoria>(new ApiParams
                 {
                     EndPoint = AppSettings.baseUrlApi,
