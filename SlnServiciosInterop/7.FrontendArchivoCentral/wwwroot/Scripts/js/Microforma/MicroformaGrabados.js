@@ -78,6 +78,7 @@ async function Microforma_Editar() {
                         if (!auditoria.Rechazo) {
                             _ID_LOTE = 0;
                             Microforma_CargarGrilla(MicroformaRepro_Lote_grilla, MicroEstado.Observado);
+                            Documento_Detalle_buscar(MicroformaRepro_grilla, MicroformaRepro_barra, 3);
                             jOkas("Microforma reprocesada correctamente.", "Atención");
                             MicroformaGrabar_Cerrar();
                         } else {

@@ -26,7 +26,7 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'ID_FONDO', index: 'ID_FONDO ', align: 'center', hidden: true }, //3
         { name: 'ID_SECCION', index: 'ID_SECCION ', align: 'center', hidden: true }, //4
         { name: 'ID_SERIE', index: 'ID_SERIE ', align: 'center', hidden: true }, //5
-        { name: 'NRO_LINEA', index: 'NRO_LINEA ', align: 'center', width: 150, hidden: false }, //6
+        { name: 'NRO_LINEA', index: 'NRO_LINEA ', align: 'center', width: 150, hidden: false, search: false }, //6
         { name: 'DES_FONDO', index: 'DES_FONDO', align: 'center', width: 200, hidden: false },
         { name: 'DES_LARGA_SECCION', index: 'DES_LARGA_SECCION', align: 'center', width: 150, hidden: false },
         { name: 'DES_SERIE', index: 'DES_SERIE', align: 'center', width: 150, hidden: false },
@@ -34,10 +34,10 @@ function Documento_Temporal_ConfigurarGrilla(_grilla, _barra, _titulo) {
         { name: 'DESCRIPCION', index: 'DESCRIPCION', align: 'center', width: 200, hidden: false },
         { name: 'ANIO', index: 'ANIO', align: 'center', width: 80, hidden: false },
         { name: 'FOLIOS', index: 'FOLIOS', align: 'center', width: 100, hidden: false },
-        { name: 'IMAGEN', index: 'IMAGEN', align: 'center', width: 100, hidden: false },
+        { name: 'IMAGEN', index: 'IMAGEN', align: 'center', width: 100, hidden: false, search: false },
         { name: 'OBSERVACION', index: 'OBSERVACION ', align: 'center', width: 300, hidden: false },
-        { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 140, hidden: false },
-        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false },
+        { name: 'USU_CREACION', index: 'USU_CREACION ', align: 'center', width: 140, hidden: false, search: false },
+        { name: 'STR_FEC_CREACION', index: 'STR_FEC_CREACION ', align: 'center', width: 150, hidden: false, search: false },
         { name: 'USU_MODIFICACION', index: 'USU_MODIFICACION ', align: 'center', width: 160, hidden: true },
         { name: 'STR_FEC_MODIFICACION', index: 'STR_FEC_MODIFICACION ', align: 'center', width: 150, hidden: true },
         { name: 'FLG_REPETIDO', index: 'FLG_REPETIDO ', align: 'center', width: 150, hidden: true },
@@ -393,15 +393,15 @@ function GetRules() {
 
     rules = [
         { field: 'V.ID_CONTROL_CARGA', data: 'NVL(' + _ID_CONTROL_CARGA + ',V.ID_CONTROL_CARGA)', op: " = " },
-        { field: 'V.DES_FONDO', data: POR + ' || ' + _DESC_FONDO + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DES_LARGA_SECCION', data: POR + ' || ' + _DESC_LARGA_SECCION + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DES_SERIE', data: POR + ' || ' + _DESC_SERIE + ' || ' + POR, op: " LIKE " },
-        { field: 'V.NOM_DOCUMENTO', data: POR + ' || ' + _NOM_DOCUMENTO + ' || ' + POR, op: " LIKE " },
-        { field: 'V.DESCRIPCION', data: POR + ' || ' + _DESCRIPCION + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_FONDO)', data: POR + ' || ' + _DESC_FONDO + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_LARGA_SECCION)', data: POR + ' || ' + _DESC_LARGA_SECCION + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DES_SERIE)', data: POR + ' || ' + _DESC_SERIE + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.NOM_DOCUMENTO)', data: POR + ' || ' + _NOM_DOCUMENTO + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.DESCRIPCION)', data: POR + ' || ' + _DESCRIPCION + ' || ' + POR, op: " LIKE " },
         //{ field: 'V.ANIO', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
         { field: 'TO_CHAR(V.ANIO)', data: 'NVL(' + _ANIO + ',V.ANIO)', op: " = " },
         { field: 'V.FOLIOS', data: POR + ' || ' + __FOLIOS + ' || ' + POR, op: " LIKE " },
-        { field: 'V.OBSERVACION', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
+        { field: 'UPPER(V.OBSERVACION)', data: POR + ' || ' + _OBSERVACION + ' || ' + POR, op: " LIKE " },
     ];
 
     if (_ID_MODULO != 1) {

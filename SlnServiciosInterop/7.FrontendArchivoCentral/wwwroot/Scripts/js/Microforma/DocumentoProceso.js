@@ -81,7 +81,7 @@ function GetRulesProceso() {
     _gs_DESC_FONDO = jQuery('#gs_' + 'DES_FONDO').val();
     _gs_DESC_LARGA_SECCION = jQuery('#gs_' + 'DES_LARGA_SECCION').val();
     _gs_DESC_SERIE = jQuery('#gs_'+ 'DES_SERIE').val();
-    _gs_NOM_DOCUMENTO = jQuery('#gs_' + 'NOM_DOCUMENTO').val();
+    _gs_NOM_DOCUMENTO = jQuery('#gs_' + '_NOM_DOCUMENTO').val();
     _gs_OBSERVACION = jQuery('#gs_' + 'OBSERVACION').val();
     _gs_USU_CREACION = jQuery('#gs_' + 'USU_CREACION').val();
     _gs_STR_FEC_CREACION = jQuery('#gs_' + 'STR_FEC_CREACION').val();

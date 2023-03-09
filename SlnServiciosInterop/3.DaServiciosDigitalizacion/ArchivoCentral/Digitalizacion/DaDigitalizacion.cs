@@ -286,6 +286,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_ID_TIPO_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.IdTipoObservacion;
                 cmd.Parameters.Add(new OracleParameter("X_COMENTARIO", OracleDbType.Varchar2)).Value = entidad.Comentario;
                 cmd.Parameters.Add(new OracleParameter("X_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.UsuCreacion;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try
