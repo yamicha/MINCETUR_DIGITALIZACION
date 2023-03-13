@@ -992,6 +992,7 @@ namespace DaServiciosDigitalizacion.ArchivoCentral.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_MA_HORA", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Hora;
                 cmd.Parameters.Add(new OracleParameter("X_MA_OBSERVACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Observacion;
                 cmd.Parameters.Add(new OracleParameter("X_MA_USU_CREACION", OracleDbType.Varchar2)).Value = entidad.MicroArchivo.Usucreacion;
+                cmd.Parameters.Add(new OracleParameter("X_IP_CREACION", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
                 cmd.Parameters.Add(new OracleParameter("X_VALIDO", OracleDbType.Int32)).Direction = System.Data.ParameterDirection.Output;
                 cmd.Parameters.Add(new OracleParameter("X_MENSAJE", OracleDbType.Varchar2, 200)).Direction = System.Data.ParameterDirection.Output;
                 try

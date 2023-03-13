@@ -49,6 +49,14 @@
 
         }
     });
+    function ConvertirMayusculaPrimeraLetra(idInput) {
+        var texto = document.getElementById(idInput).value;
+        var primeraLetra = texto.substring(0, 1);
+        var restoTexto = texto.substring(1);
+        primeraLetra = primeraLetra.toUpperCase();
+        restoTexto = restoTexto.toLowerCase();
+        document.getElementById(idInput).value = primeraLetra + restoTexto;
+    }
 </script>
 
 @using (Html.BeginForm("", "", new { @area = "" }, FormMethod.Post, false, new { @id = "FrmMicroformaGrabar", @class = "form-horizontal" }))
@@ -195,7 +203,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
+                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000), ConvertirMayusculaPrimeraLetra(this.id)" })
                                             <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
                                         </div>
                                     </div>

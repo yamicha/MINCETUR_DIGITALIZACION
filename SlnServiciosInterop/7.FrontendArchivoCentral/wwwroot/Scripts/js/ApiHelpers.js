@@ -102,7 +102,7 @@ function ProcesarArchivo(input, filename) {
             if (PesodeArchivo > Tamanio_Valido || !valido) {
                 $(this).val('');
                 if (!valido)
-                    jAlert("Solo se permite documentos en formato PDF(.pdf", 'Atención');
+                    jAlert("Solo se permite documentos en formato PDF(.pdf)", 'Atención');
                 else
                     jAlert("La cantidad de el archivo que va adjuntar no pueden pesar más de " + Tamanio_Valido / 1024 / 1024 + "Mb", 'Atención');
 

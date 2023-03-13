@@ -62,6 +62,15 @@
         cursor: "handler"
     });
 
+    function ConvertirMayusculaPrimeraLetra(idInput) {
+        var texto = document.getElementById(idInput).value;
+        var primeraLetra = texto.substring(0, 1);
+        var restoTexto = texto.substring(1);
+        primeraLetra = primeraLetra.toUpperCase();
+        restoTexto = restoTexto.toLowerCase();
+        document.getElementById(idInput).value = primeraLetra + restoTexto;
+    }
+
 </script>
 @{
     var htmlLarge = new Dictionary<string, object> { { "style", "width:300px; font-family:verdana; font-size:.8em" } };
@@ -180,7 +189,7 @@
                                                     <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                                 </div>
                                                 <div class="col-sm-10">
-                                                    @Html.TextAreaFor(model => model.VALIDAR_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;text-transform: uppercase;", onkeyup = "CountCharactersControlTxt(this.id,'Documento_Validar_lbl4', 3000)" })
+                                                    @Html.TextAreaFor(model => model.VALIDAR_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Documento_Validar_lbl4', 3000), ConvertirMayusculaPrimeraLetra(this.id)" })
                                                     <label id="Documento_Validar_lbl4" style="width: 100%" class="Formato" runat="server" text=""></label>
                                                 </div>
                                             </div>
