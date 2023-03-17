@@ -166,7 +166,7 @@
                                 <div class="col-sm-12 inline-container-Group">
                                     <p class="modal-title" style="color: #999; font-size:15px; margin-bottom: 10px; margin-top: -5px">Observación del Expediente: </p>
                                     <fieldset style="width: 100%;">
-                                        @Html.TextAreaFor(model => model.EXP_OBSERVACION, new { @class = "form-control", @maxlength = "3000", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id), CountCharactersControlTxt(this.id,'ControlCalidad_lbl1', 3000)" })
+                                        @Html.TextAreaFor(model => model.EXP_OBSERVACION, new { @class = "form-control", @maxlength = "3000", onkeyup = "CountCharactersControlTxt(this.id,'ControlCalidad_lbl1', 3000)" })
                                     </fieldset>
                                     <label id="ControlCalidad_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
                                 </div>

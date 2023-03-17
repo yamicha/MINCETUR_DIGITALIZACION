@@ -123,7 +123,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-sm-12">
                                                 <label for="form-field-1">Observación: </label>
-                                                @Html.TextAreaFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "1000", @style = "width:100%", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                                @Html.TextAreaFor(model => model.OBSERVACION, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
                                                 @Html.ValidationMessageFor(model => model.OBSERVACION, string.Empty, new { @class = "cssMessageError" })
                                             </div>
                                         </div>

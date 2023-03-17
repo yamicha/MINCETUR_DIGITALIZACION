@@ -229,6 +229,7 @@ function ValidarArchivoPrincipalTemporal(input) {
                         jQuery("#" + DocumentoAdj_grilla).jqGrid('setRowData', rowKey, { "ESTADO_CARGADO": "CARGADO" });
                         jQuery("#" + DocumentoAdj_grilla).jqGrid('setRowData', rowKey, { "FLG_CARGADO": "1" });
                         jQuery("#" + DocumentoAdj_grilla).trigger("reloadGrid");
+                        jAlert("Archivo cargado correctamente ", 'Atención');
                     }
                     
                 } else {

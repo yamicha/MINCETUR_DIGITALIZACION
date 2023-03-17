@@ -116,7 +116,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Código de medio de soporte: </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextBoxFor(model => model.MICROFORMA_CODIGO_SOPORTE, new { @class = "form-control", @maxlength = "100", @style = "width:100%" })
                                             @Html.ValidationMessageFor(model => model.MICROFORMA_CODIGO_SOPORTE, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

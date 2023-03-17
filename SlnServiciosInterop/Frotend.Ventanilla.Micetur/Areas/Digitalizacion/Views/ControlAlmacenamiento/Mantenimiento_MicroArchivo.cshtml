@@ -75,7 +75,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Dirección: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;" })
                                             @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

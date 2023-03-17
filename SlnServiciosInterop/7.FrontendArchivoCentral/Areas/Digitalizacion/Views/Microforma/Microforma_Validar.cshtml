@@ -179,7 +179,7 @@
                                                     <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                                    @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, new { @class = "form-control", @maxlength = "1000", @style = "width:100%" })
                                                     @Html.ValidationMessageFor(model => model.MICROFORMA_OBSERVACION_EVALUAR, string.Empty, new { @class = "cssMessageError" })
                                                 </div>
                                                 <div class="col-sm-12" id="Adv_Conforme" style="display:none;">

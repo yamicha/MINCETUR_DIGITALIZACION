@@ -209,7 +209,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;" })
                                         </div>
                                     </div>
                                     <div class="row" style="margin-bottom:3px;">
@@ -342,7 +342,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;", onkeyup = "ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;" })
                                             @Html.ValidationMessageFor(model => model.MA_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

@@ -203,7 +203,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Comentario:</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000), ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextAreaFor(model => model.MICROFORMA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
                                             <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
                                         </div>
                                     </div>
