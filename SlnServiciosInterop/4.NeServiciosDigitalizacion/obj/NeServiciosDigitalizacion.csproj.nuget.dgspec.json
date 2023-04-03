@@ -1,27 +1,34 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj": {}
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
         "projectName": "CoServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,36 +61,43 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
         "projectName": "EnServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               }
             }
           }
@@ -112,42 +126,49 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
         "projectName": "DaServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
               }
             }
           }
@@ -182,45 +203,52 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj": {
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj",
+        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj",
         "projectName": "NeServiciosDigitalizacion",
-        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\NeServiciosDigitalizacion.csproj",
+        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\4.NeServiciosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\1.CoDigitalizacion\\CoServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\3.DaServiciosDigitalizacion\\DaServiciosDigitalizacion.csproj"
               },
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj"
               }
             }
           }
@@ -249,36 +277,43 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
+    "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "projectUniqueName": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
         "projectName": "Utilitarios",
-        "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
+        "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\Utilitarios.csproj",
+        "packagesPath": "C:\\Users\\Inmortal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\6.UtilitariosDigitalizacion\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Inmortal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
-                "projectPath": "C:\\Users\\USER\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
+              "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj": {
+                "projectPath": "C:\\Users\\Inmortal\\Documents\\GitHub\\MINCETUR_DIGITALIZACION\\SlnServiciosInterop\\2.EnServiciosDigitalizacion\\EnServiciosDigitalizacion.csproj"
               }
             }
           }
@@ -357,7 +392,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -84,7 +84,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Fecha: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;background:white;", @readonly = "readonly" })
+                                            @Html.TextBoxFor(model => model.MA_FECHA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;background:white;", @readonly = "readonly" })
                                             @Html.ValidationMessageFor(model => model.MA_FECHA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -93,7 +93,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Hora: </label>
                                         </div>
                                         <div class="col-sm-6">
-                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", @placeholder = "HH:mm:ss" })
+                                            @Html.TextBoxFor(model => model.MA_HORA, new { @class = "form-control", @maxlength = "100", @style = "width:100%;", @placeholder = "HH:mm:ss" })
                                             @Html.ValidationMessageFor(model => model.MA_HORA, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                                             <label class="col-sm-15 control-label" for="form-field-1" style="width: 100%; color: black;">Observación:</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000), ConvertirMayusculaPrimeraLetra(this.id)" })
+                                            @Html.TextAreaFor(model => model.MA_OBSERVACION, new { @class = "form-control", @maxlength = "3000", @style = "height:90px;resize: none;", onkeyup = "CountCharactersControlTxt(this.id,'Microforma_Grabar_lbl1', 3000)" })
                                             <label id="Microforma_Grabar_lbl1" style="width: 100%" class="Formato" runat="server" text=""></label>
                                             @Html.ValidationMessageFor(model => model.MA_OBSERVACION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
