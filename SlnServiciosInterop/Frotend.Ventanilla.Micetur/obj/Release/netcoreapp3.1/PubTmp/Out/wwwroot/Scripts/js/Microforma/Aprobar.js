@@ -70,7 +70,8 @@ function Aprobar_Evaluar() {
                 IdTipoObservacion: ID_TIPO_OBS,
                 IdDocumento: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO").val()),
                 IdDocumentoAsignado: parseInt($("#hd_Documento_Validar_ID_DOCUMENTO_ASIGNADO").val()),
-                UsuCreacion: $('#inputHddId_Usuario').val()
+                UsuCreacion: $('#inputHddId_Usuario').val(),
+                IdSistema: idSis
             }
             //Aprobar_ListaDocumentos.push(itemx);
             //var item = {
@@ -112,7 +113,8 @@ function ControlCalidad_ConformeMasivo() {
                     IdDocumento: parseInt(data.Control_Calidad_ID_DOCUMENTO),
                     IdDocumentoAsignado: parseInt(data.Control_Calidad_ID_DOCUMENTO_ASIGNADO),
                     UsuCreacion: $('#inputHddId_Usuario').val(),
-                    IdTipoObservacion: 0
+                    IdTipoObservacion: 0,
+                    IdSistema: idSis
                 };
                 ControlCalidad_ListaDocumentos.push(itemDoc);
             }

@@ -410,7 +410,7 @@ namespace DaServiciosDigitalizacion.Ventanilla.Digitalizacion
                 cmd.Parameters.Add(new OracleParameter("X_ID_EXPE", OracleDbType.Int64)).Value = entidad.IdDocumento;
                 cmd.Parameters.Add(new OracleParameter("X_DATO", OracleDbType.Varchar2)).Value = DBNull.Value;
                 cmd.Parameters.Add(new OracleParameter("X_ID_USU", OracleDbType.Int64)).Value = Int64.Parse(entidad.UsuCreacion);
-                cmd.Parameters.Add(new OracleParameter("X_ID_SIS", OracleDbType.Int64)).Value = 313;
+                cmd.Parameters.Add(new OracleParameter("X_ID_SIS", OracleDbType.Int64)).Value = entidad.IdSistema;
                 cmd.Parameters.Add(new OracleParameter("X_IP_ACCESO", OracleDbType.Varchar2)).Value = entidad.IpCreacion;
                 cmd.Parameters.Add(new OracleParameter("X_OPR", OracleDbType.Varchar2)).Value = "M";
                 cmd.Parameters.Add("X_ERROR", OracleDbType.RefCursor, System.Data.ParameterDirection.Output);

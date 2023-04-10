@@ -1,0 +1,58 @@
+//GLOBAL 
+ host: 200.62.224.194
+ usuario: linksoft
+pass: L1nkS0ft2022
+
+IP: 200.62.224.194
+USER: linksoft
+Clave: L1nkS0ft2022
+
+
+db
+user
+SCDDBA
+pass
+SCDDBA
+
+VMINCETURDESA03
+
+172.16.32.7  qa ftp
+
+desarrollo
+IP:172.16.31.15 PUERTO: 21
+USER: linksoft
+Clave: L1nkS0ft2022
+
+
+
+oracle
+VMINCETURDESA03=
+  (DESCRIPTION=
+    (ADDRESS=(PROTOCOL=TCP)(HOST=172.16.31.20)(PORT=1523))
+    (CONNECT_DATA=
+      (SID=desa3)
+    )
+  )
+
+
+https://drive.google.com/drive/folders/1ORHrAUCJH_Wmuwr1ZXAvEJvGj5MgPMW-  archivo central doc para qa
+https://drive.google.com/drive/folders/1O7mq6TtiwulwGEMUkfcKeBQc6x7_jzYu VENTANILLA PARA QA
+
+https://drive.google.com/drive/folders/1MdLrGYVRs3HDHwHlSVZKYLcImFRQegfU aqui todo
+
+CERDENCIAL PAR ASEGURIDAD LOS MODULOS
+SGADBA
+SGADBA
+VDESA03
+
+CREDENCIAL PARA DESARROLLO ARCHIVO Y VV
+SCDDBA
+SCDDBA
+VDESA03
+
+WEB QA 
+http://intranetqa.mincetur.gob.pe
+w-mincetur\gesfiles     Soporte100
+
+WEB DESARROLLO
+http://intranetdesa.mincetur.gob.pe:8080/sisgesdigarch/

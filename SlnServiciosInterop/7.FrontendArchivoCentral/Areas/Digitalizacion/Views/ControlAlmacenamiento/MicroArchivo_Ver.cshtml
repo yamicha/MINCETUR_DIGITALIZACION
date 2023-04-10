@@ -37,7 +37,7 @@
 
                                         <div class="form-group col-sm-6">
                                             <label for="form-field-1">Dirección: </label>
-                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;text-transform: uppercase;", disabled = "true" })
+                                            @Html.TextBoxFor(model => model.MA_DIRECCION, new { @class = "form-control", @maxlength = "100", @style = "width:100%;", disabled = "true" })
                                             @Html.ValidationMessageFor(model => model.MA_DIRECCION, string.Empty, new { @class = "cssMessageError" })
                                         </div>
                                     </div>

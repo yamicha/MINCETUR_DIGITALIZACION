@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Control Calidad";
 }
+@using Frotend.Ventanilla.Micetur.Helpers
 <link href="~/assets/css/Grilla.css" rel="stylesheet" />
 <script defer src="@Url.Content("~/Scripts/js/Remove.js")" type="text/javascript"></script>
 <script defer src="@Url.Content("~/Scripts/js/Microforma/Documento_Color.js")" type="text/javascript"></script>
@@ -13,7 +14,7 @@
 
 <link href="~/assets/css/Leyenda.css" rel="stylesheet" />
 <script defer>
-
+    var idSis = @AppSettings.AppId;
     $(document).ready(function () {
         Remove_RemoverClases("liControlCalidad");
 

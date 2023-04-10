@@ -412,7 +412,7 @@ function GetRulesDoc() {
     }
     if (_ID_MODULO == 6) { // Aprobar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6,10)', op: " in " });
-        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     debugger;
     if (_ID_MODULO == 8) { // Reprocesar
@@ -422,7 +422,7 @@ function GetRulesDoc() {
         }
     }
     if (_ID_MODULO == 10) { // Fedatario
-        rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.ID_USUARIO', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 1 || _ID_MODULO == 2) {
         rules.push({ field: 'V.USU_CREACION', data: `${$('#inputHddId_Usuario').val()}`, op: " = " });

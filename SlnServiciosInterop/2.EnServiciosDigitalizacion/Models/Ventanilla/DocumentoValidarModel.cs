@@ -15,6 +15,6 @@ namespace EnServiciosDigitalizacion.Models.Ventanilla
         public string UsuCreacion { get; set; }
         public string IpCreacion { get; set; }
         public List<DocumentoValidarModel> LisIdDocumento { get; set; }
-
+        public int IdSistema { get; set; }
     }
 }
