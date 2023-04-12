@@ -113,12 +113,14 @@ function ValidarExtension(extension) {
 }
 
 function ValidarArchivoTemporal(input) {
+    debugger;
     var file = input.files[0];
     var nombre = "";
     if (file != undefined) {
         var PesodeArchivo = parseFloat(file.size);
-        var ext = input.files[0].name.split('.').pop();
         nombre = input.files[0].name;
+        var c = nombre.substring(nombre.length - 5);
+        var ext = c.slice((c.lastIndexOf(".") - 1) + 2);
         if (nombre.length > 100) {
             jAlert("El nombre del documento es muy largo", 'Atención');
             $(this).val('');
@@ -146,7 +148,7 @@ function ValidarArchivoTemporal(input) {
                     files.push(file);
                     $('#NOMBRE_ARCHIVO').val(file.name);
                     $('#PESO_ARCHIVO').val(file.size);
-                    $('#EXTENSION').val(file.name.split('.')[1]);
+                    $('#EXTENSION').val(ext);
                 }
             }
         }
@@ -178,8 +180,10 @@ function ValidarArchivoPrincipalTemporal(input) {
     var nombre = "";
     if (file != undefined) {
         var PesodeArchivo = parseFloat(file.size);
-        var ext = input.files[0].name.split('.').pop();
+        //var ext = input.files[0].name.split('.').pop();
         nombre = input.files[0].name;
+        var c = nombre.substring(nombre.length - 5);
+        var ext = c.slice((c.lastIndexOf(".") - 1) + 2);
         if (nombre.length > 100) {
             jAlert("El nombre del documento es muy largo", 'Atención');
             $(this).val('');

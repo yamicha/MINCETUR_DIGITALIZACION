@@ -71,3 +71,18 @@ D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServicios
 D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.csproj.CopyComplete
 D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.dll
 D:\1.APLICACIONES\7.MINCETUR_DIGITALIZACION\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.pdb
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\Utilitarios.deps.json
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\Utilitarios.dll
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\Utilitarios.pdb
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\CoServiciosDigitalizacion.dll
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\EnServiciosDigitalizacion.dll
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\EnServiciosDigitalizacion.pdb
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\bin\Release\netcoreapp3.1\CoServiciosDigitalizacion.pdb
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.csproj.AssemblyReference.cache
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.GeneratedMSBuildEditorConfig.editorconfig
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.AssemblyInfoInputs.cache
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.AssemblyInfo.cs
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.csproj.CoreCompileInputs.cache
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.csproj.CopyComplete
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.dll
+E:\APLICACIONES\MINCETUR - PROYECTO DIGITALIZACIÓN\PROYECTO\2023\MINCETUR_DIGITALIZACION\SlnServiciosInterop\6.UtilitariosDigitalizacion\obj\Release\netcoreapp3.1\Utilitarios.pdb

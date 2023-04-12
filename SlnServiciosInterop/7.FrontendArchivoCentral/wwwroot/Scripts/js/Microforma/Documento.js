@@ -435,7 +435,7 @@ function GetRules() {
     }
     if (_ID_MODULO == 6) { // Aprobar
         rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data: '(' + _ID_ESTADO_DOCUMENTO + ',6)', op: " in " });
-        rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
+        //rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
     }
     if (_ID_MODULO == 10) { // Fedatario
         rules.push({ field: 'V.USU_CREACION', data: $("#inputHddId_Usuario").val(), op: " = " });
@@ -899,7 +899,7 @@ function GetRulesCalidad() {
     if (_ID_MODULO != 1) {
         //rules.push({ field: 'V.DESCRIPCION_ESTADO', data: POR + ' || ' + _DESCRIPCION_ESTADO + ' || ' + POR, op: " LIKE " });
         //rules.push({ field: 'V.ID_ESTADO_DOCUMENTO', data:  _ID_ESTADO, op: " = " });
-        if (_ID_MODULO != 2)
+        if (_ID_MODULO != 2 )
             rules.push({ field: 'UPPER(V.NOMBRE_USUARIO)', data: POR + ' || ' + _NOMBRE_USUARIO + ' || ' + POR, op: " LIKE " });
     }
     if (_ID_MODULO == 0) { // detalle
